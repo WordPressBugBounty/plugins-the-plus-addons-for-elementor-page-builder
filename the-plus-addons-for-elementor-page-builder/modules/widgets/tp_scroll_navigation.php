@@ -38,6 +38,13 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 	}
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Title.
 	 *
 	 * @since 1.0.0
@@ -75,6 +82,17 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'Scroll Navigation', 'Scroll Menu', ' Sticky Navigation', 'Sticky Menu', 'Fixed Navigation', 'Fixed Menu', 'Anchor Menu', ' Anchor Navigation', 'Smooth Scroll', 'One Page Navigation' );
+	}
+
+	/**
+	 * Get Widget Custom Help Url.
+	 *
+	 * @version 5.4.2
+	 */
+	public function get_custom_help_url() {
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**
@@ -621,7 +639,6 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 					'scroll_navigation_style'          => 'style-1',
 					'scroll_nav_icon_background_style' => 'yes',
 				),
-				'separator' => 'after',
 			)
 		);
 		$this->add_responsive_control(
@@ -952,7 +969,6 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .theplus-scroll-navigation' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_responsive_control(

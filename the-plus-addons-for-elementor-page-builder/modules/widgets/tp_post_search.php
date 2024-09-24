@@ -36,6 +36,13 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	}
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Title.
 	 *
 	 * @since 1.0.1
@@ -73,6 +80,17 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'Post search bar', 'search bar', 'post search', 'search widget', 'post widget', 'elementor search bar', 'elementor search widget', 'search bar', 'search widget', 'search', 'post search widget', 'post search', 'search addon', 'search elementor addon' );
+	}
+
+	/**
+	 * Get Widget Custom Help Url.
+	 *
+	 * @version 5.4.2
+	 */
+	public function get_custom_help_url() {
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**

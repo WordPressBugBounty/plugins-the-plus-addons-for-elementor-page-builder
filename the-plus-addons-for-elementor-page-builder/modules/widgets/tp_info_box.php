@@ -29,6 +29,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	public $tp_doc = L_THEPLUS_TPDOC;
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Name.
 	 *
 	 * @since 1.0.0
@@ -85,9 +92,9 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$doc_url = $this->tp_doc . 'info-box';
+		$help_url = $this->tp_help;
 
-		return esc_url( $doc_url );
+		return esc_url( $help_url );
 	}
 
 	/**
@@ -1936,8 +1943,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label'     => esc_html__( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon:before,
-					{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon i:before' => 'color: {{VALUE}};background: transparent;-webkit-background-clip: unset;-webkit-text-fill-color: initial;',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon:before, {{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon i:before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
 				),
 				'condition' => array(
 					'icon_color_option' => 'solid',

@@ -37,6 +37,13 @@ class L_ThePlus_Post_Navigation extends Widget_Base {
 	public $tp_doc = L_THEPLUS_TPDOC;
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Name
 	 *
 	 * @since 5.0.0
@@ -93,9 +100,9 @@ class L_ThePlus_Post_Navigation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$doc_url = $this->tp_doc . 'add-post-next-previous-button-in-elementor-blog-post';
+		$help_url = $this->tp_help;
 
-		return esc_url( $doc_url );
+		return esc_url( $help_url );
 	}
 
 	/**

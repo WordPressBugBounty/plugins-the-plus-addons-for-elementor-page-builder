@@ -33,6 +33,13 @@ class L_ThePlus_Syntax_Highlighter extends Widget_Base {
 	public $tp_doc = L_THEPLUS_TPDOC;
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Name.
 	 *
 	 * @since 1.0.0
@@ -83,8 +90,9 @@ class L_ThePlus_Syntax_Highlighter extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		$DocUrl = $this->tp_doc . 'syntax-highlighter';
-		return esc_url( $DocUrl );
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**

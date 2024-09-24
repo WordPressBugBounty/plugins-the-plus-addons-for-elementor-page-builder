@@ -34,6 +34,13 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 	}
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Title.
 	 *
 	 * @since 1.0.0
@@ -75,6 +82,17 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'Smooth Scroll', 'Scroll Widget', 'Elementor Scroll', 'Scroll Animation', 'Smooth Scrolling', 'Scroll Effect', 'Elementor Smooth Scroll', 'Scroll Widget for Elementor', 'Scroll Animation for Elementor', 'Smooth Scrolling for Elementor', 'Elementor Scroll Effect' );
+	}
+
+	/**
+	 * Get Widget Custom Help Url.
+	 *
+	 * @version 5.4.2
+	 */
+	public function get_custom_help_url() {
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**
@@ -154,7 +172,7 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 		$this->start_controls_section(
 			'content_pulse_section',
 			array(
-				'label' => esc_html__( 'Pulse ratio of "tail" to "acceleration', 'tpebl' ),
+				'label' => esc_html__( 'Pulse ratio of "Tail" to "Acceleration" ', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);

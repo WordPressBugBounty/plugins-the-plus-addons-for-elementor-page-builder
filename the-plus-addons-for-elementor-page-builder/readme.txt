@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 5.6.9
+Stable tag: 5.6.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,6 +382,15 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 5.6.10 =
+Update : Widgets Need Help Button Links Update
+Update : Info Box : Icon color Improvement
+Improvement : Scroll Navigation : UI Improvement
+Improvement : Smooth Scroll : UI Improvement
+Improvement : Page Scroll : UI Improvement
+Fix : Minor Bug Fixes & performance Improvements
+Fix : Minor Bug Fixes & performance Improvements
 
 = 5.6.9 =
 Update : Code Improved For Better Performance and Security

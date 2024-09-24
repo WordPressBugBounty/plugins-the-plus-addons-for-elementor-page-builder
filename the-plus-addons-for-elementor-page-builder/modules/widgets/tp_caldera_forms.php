@@ -36,6 +36,13 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	}
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Title.
 	 *
 	 * @since 1.0.0
@@ -69,6 +76,17 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'Caldera Forms', 'Form builder', 'Form creator', 'Contact form', 'WordPress form', 'Form plugin', 'Form widget', 'Form generator', 'Drag and drop form', 'Form element', 'Elementor form', 'Plus Addons form', 'Caldera form widget' );
+	}
+
+	/**
+	 * Get Widget Custom Help Url.
+	 *
+	 * @version 5.4.2
+	 */
+	public function get_custom_help_url() {
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**

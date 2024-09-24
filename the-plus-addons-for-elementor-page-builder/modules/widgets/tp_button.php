@@ -28,6 +28,13 @@ class L_ThePlus_Button extends Widget_Base {
 	public $tp_doc = L_THEPLUS_TPDOC;
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Name.
 	 *
 	 * @since 1.0.0
@@ -73,7 +80,7 @@ class L_ThePlus_Button extends Widget_Base {
 	}
 
 	public function get_custom_help_url() {
-		$doc_url = $this->tp_doc . 'button';
+		$doc_url = $this->tp_help;
 
 		return esc_url( $doc_url );
 	}

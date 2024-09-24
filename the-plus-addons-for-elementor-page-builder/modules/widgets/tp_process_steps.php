@@ -41,6 +41,13 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	}
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Title.
 	 *
 	 * @since 3.0.0
@@ -78,6 +85,17 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'Process', 'Steps', 'Procedure', 'Method', 'Workflow', 'Sequence', 'Order', 'Stages', 'Phases', 'Actions', 'Tasks', 'Activities', 'Operation', 'Protocol', 'Technique', 'Approach', 'System', 'Plan', 'Strategy', 'Path', 'Route', 'Formula', 'Algorithm', 'Blueprint', 'Roadmap' );
+	}
+
+	/**
+	 * Get Widget Custom Help Url.
+	 *
+	 * @version 5.4.2
+	 */
+	public function get_custom_help_url() {
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**

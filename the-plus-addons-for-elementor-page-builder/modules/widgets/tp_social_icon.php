@@ -35,6 +35,13 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 	}
 
 	/**
+	 * Helpdesk Link For Need help.
+	 *
+	 * @var tp_help of the class.
+	 */
+	public $tp_help = L_THEPLUS_HELP;
+
+	/**
 	 * Get Widget Title.
 	 *
 	 * @since 1.0.1
@@ -72,6 +79,17 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'social', 'icon', 'social icon' );
+	}
+
+	/**
+	 * Get Widget Custom Help Url.
+	 *
+	 * @version 5.4.2
+	 */
+	public function get_custom_help_url() {
+		$help_url = $this->tp_help;
+
+		return esc_url( $help_url );
 	}
 
 	/**
