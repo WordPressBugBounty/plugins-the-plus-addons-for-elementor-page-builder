@@ -87,7 +87,7 @@ echo '<div class="theplus-panel-welcome-page">';
 				echo '<div class="theplus-sec-subtitle">'.esc_html__('Notable additions made to The Plus Addons for Elementor.','tpebl').'</div>';
 				echo '<div class="theplus-sec-border"></div>';
 				echo '<div class="theplus-changelog-list">';
-					echo '<div class="changelog-date">September 24 , 2024 <span class="changelog-version">Lite Version 5.6.10</span></div>';
+					echo '<div class="changelog-date">October 01 , 2024 <span class="changelog-version">Lite Version 5.6.11</span></div>';
 					echo '<ul class="changelog-list">';
 						echo '<li>'.esc_html__('Update : Code Improved For Better Performance and Security', 'tpebl').'</li>';
 						echo '<li>'.esc_html__('Fix : Minor Bug Fixes & Performance Improvements', 'tpebl').'</li>';
@@ -97,7 +97,7 @@ echo '<div class="theplus-panel-welcome-page">';
 
 				echo '<div class="theplus-sec-border" style="width:100%;height:1px;background:#DBDBDB;"></div>';
 				echo '<div class="theplus-changelog-list">';
-					echo '<div class="changelog-date">September 24 , 2024 <span class="changelog-version">Pro Version 5.6.5</span></div>';
+					echo '<div class="changelog-date">October 01 , 2024 <span class="changelog-version">Pro Version 5.6.6</span></div>';
 						echo '<ul class="changelog-list">';
 							echo '<li>'.esc_html__('Add : Hotspot : Add Option for the Pin/Repeater Title', 'tpebl').'</li>';
 							echo '<li>'.esc_html__('Add : Woo Thank You : Add Option for the Margin, Padding, Border option in Billing & Shipping Details', 'tpebl').'</li>';

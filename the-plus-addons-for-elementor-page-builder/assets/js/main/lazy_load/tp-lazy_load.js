@@ -47,6 +47,8 @@ function tp_lazy_load(){
 		e.classList.remove('tp-lazy-loading');
 		e.classList.add('tp-lazy-loaded');
 		delete e.dataset.srcset;
+
+		e.nextSibling.style.position = 'absolute';
 	};
 	
 	lz = new LazyLoad({

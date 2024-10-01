@@ -1741,6 +1741,25 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'mobile_menu_border_main',
+			array(
+				'label'      => esc_html__( 'Border Bottom Size', 'theplus' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 10,
+						'step' => 1,
+					),
+				),
+				'separator'  => array( 'before', 'after' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .plus-navigation-wrap .plus-mobile-menu .navbar-nav li a' => 'border-width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		); 
 		$this->start_controls_tabs( 'tab_toggle_nav_style' );
 		$this->start_controls_tab(
 			'tab_toggle_nav_normal',
