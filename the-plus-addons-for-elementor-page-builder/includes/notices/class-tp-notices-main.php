@@ -127,19 +127,19 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 				// include L_THEPLUS_PATH . 'includes/notices/class-tp-tpag-install-notice.php';
 			// }.
 
-			if ( current_user_can( 'manage_options' ) ) {
-				$current_user_id = get_current_user_id();
-				$meta_value = get_user_meta( $current_user_id, 'elementor_introduction', true );
+			// if ( current_user_can( 'manage_options' ) ) {
+			// 	$current_user_id = get_current_user_id();
+			// 	$meta_value = get_user_meta( $current_user_id, 'elementor_introduction', true );
 
-				$ai_get_started_announcement = ( ! empty( $meta_value ) && ! empty( $meta_value['ai-get-started-announcement'] ) ) ? $meta_value['ai-get-started-announcement'] : 0;
+			// 	$ai_get_started_announcement = ( ! empty( $meta_value ) && ! empty( $meta_value['ai-get-started-announcement'] ) ) ? $meta_value['ai-get-started-announcement'] : 0;
 
-				if( '0' != $ai_get_started_announcement ){
-					$option_eop = get_option( 'tp_editor_onbording_popup' );
-					if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
-						include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
-					}
-				}
-			}
+			// 	if( '0' != $ai_get_started_announcement ){
+			// 		$option_eop = get_option( 'tp_editor_onbording_popup' );
+			// 		if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
+			// 			include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
+			// 		}
+			// 	}
+			// }
 
 			if ( current_user_can( 'install_plugins' ) && current_user_can( 'manage_options' ) && $this->tp_check_plugin_status() ) {
 

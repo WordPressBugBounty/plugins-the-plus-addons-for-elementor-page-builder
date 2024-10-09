@@ -1480,7 +1480,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 						}
 
 						?>
-						
+
 					</<?php echo l_theplus_validate_html_tag( $title_tag ); ?>>  
 
 					<?php if ( 'content' === $content_source && ! empty( $tab_content ) || ( 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) ) { ?>
@@ -1491,24 +1491,29 @@ class L_ThePlus_Accordion extends Widget_Base {
 								echo '<div class="plus-content-editor">' . $this->parse_text_editor( $tab_content ) . '</div>';
 							}
 
-							if ( \Elementor\Plugin::$instance->editor->is_edit_mode() && 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) {
-								if ( ! empty( $item['backend_preview_template'] ) && 'yes' === $item['backend_preview_template'] ) {
-									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
-								} else {
-									$get_template_name = '';
-									$get_template_id   = $item['content_template'];
-									if ( ! empty( $templates ) && ! empty( $get_template_id ) ) {
-										foreach ( $templates as $value ) {
-											if ( $value['template_id'] == $get_template_id ) {
-												$get_template_name = $value['title'];
+							$content_template = isset( $item['content_template'] ) ? intval( $item['content_template'] ) : 0;
+							if ( current_user_can( 'read_post', $content_template ) ) {
+								if ( \Elementor\Plugin::$instance->editor->is_edit_mode() && 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) {
+									if ( ! empty( $item['backend_preview_template'] ) && 'yes' === $item['backend_preview_template'] ) {
+										echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+									} else {
+										$get_template_name = '';
+										$get_template_id   = $item['content_template'];
+										if ( ! empty( $templates ) && ! empty( $get_template_id ) ) {
+											foreach ( $templates as $value ) {
+												if ( $value['template_id'] == $get_template_id ) {
+													$get_template_name = $value['title'];
+												}
 											}
 										}
+	
+										echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
 									}
-
-									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
+								} elseif ( 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) {
+									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
 								}
-							} elseif ( 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) {
-								echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+							}else{
+								echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Unauthorized Access</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 							}
 
 							?>
