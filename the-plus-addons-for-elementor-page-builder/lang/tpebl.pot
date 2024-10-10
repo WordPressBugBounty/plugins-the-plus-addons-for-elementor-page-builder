@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-23 15:23+0530\n"
+"POT-Creation-Date: 2024-10-10 12:12+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2153,7 +2153,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:1098
 #: modules/widgets/tp_navigation_menu_lite.php:1431
 #: modules/widgets/tp_navigation_menu_lite.php:1540
-#: modules/widgets/tp_navigation_menu_lite.php:2088
+#: modules/widgets/tp_navigation_menu_lite.php:2107
 #: modules/widgets/tp_number_counter.php:322
 #: modules/widgets/tp_number_counter.php:468
 #: modules/widgets/tp_post_meta.php:483 modules/widgets/tp_post_meta.php:985
@@ -3748,9 +3748,9 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:517
 #: modules/widgets/tp_navigation_menu_lite.php:1053
 #: modules/widgets/tp_navigation_menu_lite.php:1551
-#: modules/widgets/tp_navigation_menu_lite.php:1748
-#: modules/widgets/tp_navigation_menu_lite.php:1831
-#: modules/widgets/tp_navigation_menu_lite.php:1982
+#: modules/widgets/tp_navigation_menu_lite.php:1767
+#: modules/widgets/tp_navigation_menu_lite.php:1850
+#: modules/widgets/tp_navigation_menu_lite.php:2001
 #: modules/widgets/tp_ninja_form.php:321 modules/widgets/tp_ninja_form.php:451
 #: modules/widgets/tp_ninja_form.php:542 modules/widgets/tp_ninja_form.php:629
 #: modules/widgets/tp_ninja_form.php:736 modules/widgets/tp_ninja_form.php:810
@@ -3995,8 +3995,8 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:537
 #: modules/widgets/tp_navigation_menu_lite.php:594
 #: modules/widgets/tp_navigation_menu_lite.php:651
-#: modules/widgets/tp_navigation_menu_lite.php:1754
-#: modules/widgets/tp_navigation_menu_lite.php:1772
+#: modules/widgets/tp_navigation_menu_lite.php:1773
+#: modules/widgets/tp_navigation_menu_lite.php:1791
 #: modules/widgets/tp_ninja_form.php:1381
 #: modules/widgets/tp_number_counter.php:553
 #: modules/widgets/tp_number_counter.php:1013
@@ -4860,9 +4860,9 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:2325 modules/widgets/tp_info_box.php:2351
 #: modules/widgets/tp_info_box.php:2472 modules/widgets/tp_info_box.php:2494
 #: modules/widgets/tp_info_box.php:2561 modules/widgets/tp_info_box.php:2587
-#: modules/widgets/tp_navigation_menu_lite.php:2211
-#: modules/widgets/tp_navigation_menu_lite.php:2235
-#: modules/widgets/tp_navigation_menu_lite.php:2259
+#: modules/widgets/tp_navigation_menu_lite.php:2230
+#: modules/widgets/tp_navigation_menu_lite.php:2254
+#: modules/widgets/tp_navigation_menu_lite.php:2278
 #: modules/widgets/tp_number_counter.php:367
 #: modules/widgets/tp_number_counter.php:381
 #: modules/widgets/tp_number_counter.php:443
@@ -5095,9 +5095,9 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:833
 #: modules/widgets/tp_navigation_menu_lite.php:1086
 #: modules/widgets/tp_navigation_menu_lite.php:1419
-#: modules/widgets/tp_navigation_menu_lite.php:2202
-#: modules/widgets/tp_navigation_menu_lite.php:2226
-#: modules/widgets/tp_navigation_menu_lite.php:2250
+#: modules/widgets/tp_navigation_menu_lite.php:2221
+#: modules/widgets/tp_navigation_menu_lite.php:2245
+#: modules/widgets/tp_navigation_menu_lite.php:2269
 #: modules/widgets/tp_ninja_form.php:398 modules/widgets/tp_ninja_form.php:692
 #: modules/widgets/tp_ninja_form.php:950
 #: modules/widgets/tp_ninja_form.php:1200
@@ -5209,9 +5209,9 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:834
 #: modules/widgets/tp_navigation_menu_lite.php:1087
 #: modules/widgets/tp_navigation_menu_lite.php:1420
-#: modules/widgets/tp_navigation_menu_lite.php:2203
-#: modules/widgets/tp_navigation_menu_lite.php:2227
-#: modules/widgets/tp_navigation_menu_lite.php:2251
+#: modules/widgets/tp_navigation_menu_lite.php:2222
+#: modules/widgets/tp_navigation_menu_lite.php:2246
+#: modules/widgets/tp_navigation_menu_lite.php:2270
 #: modules/widgets/tp_ninja_form.php:399 modules/widgets/tp_ninja_form.php:693
 #: modules/widgets/tp_ninja_form.php:951
 #: modules/widgets/tp_ninja_form.php:1201
@@ -5459,8 +5459,8 @@ msgstr ""
 #: modules/widgets/tp_accordion.php:439 modules/widgets/tp_accordion.php:694
 #: modules/widgets/tp_navigation_menu_lite.php:1288
 #: modules/widgets/tp_navigation_menu_lite.php:1659
-#: modules/widgets/tp_navigation_menu_lite.php:1883
-#: modules/widgets/tp_navigation_menu_lite.php:2034
+#: modules/widgets/tp_navigation_menu_lite.php:1902
+#: modules/widgets/tp_navigation_menu_lite.php:2053
 #: modules/widgets/tp_tabs_tours.php:521 modules/widgets/tp_tabs_tours.php:932
 msgid "Active Color"
 msgstr ""
@@ -5529,8 +5529,8 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:236 modules/widgets/tp_messagebox.php:362
 #: modules/widgets/tp_navigation_menu_lite.php:994
 #: modules/widgets/tp_navigation_menu_lite.php:1382
-#: modules/widgets/tp_navigation_menu_lite.php:1794
-#: modules/widgets/tp_navigation_menu_lite.php:1945
+#: modules/widgets/tp_navigation_menu_lite.php:1813
+#: modules/widgets/tp_navigation_menu_lite.php:1964
 #: modules/widgets/tp_number_counter.php:980
 #: modules/widgets/tp_number_counter.php:1366
 #: modules/widgets/tp_page_scroll.php:863
@@ -5821,9 +5821,9 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:631
 #: modules/widgets/tp_navigation_menu_lite.php:1282
 #: modules/widgets/tp_navigation_menu_lite.php:1653
-#: modules/widgets/tp_navigation_menu_lite.php:1766
-#: modules/widgets/tp_navigation_menu_lite.php:1877
-#: modules/widgets/tp_navigation_menu_lite.php:2028
+#: modules/widgets/tp_navigation_menu_lite.php:1785
+#: modules/widgets/tp_navigation_menu_lite.php:1896
+#: modules/widgets/tp_navigation_menu_lite.php:2047
 #: modules/widgets/tp_page_scroll.php:820 modules/widgets/tp_switcher.php:642
 #: modules/widgets/tp_switcher.php:880 modules/widgets/tp_switcher.php:1158
 #: modules/widgets/tp_switcher.php:1360 modules/widgets/tp_tabs_tours.php:907
@@ -5876,8 +5876,8 @@ msgstr ""
 #: modules/widgets/tp_gravity_form.php:2452
 #: modules/widgets/tp_navigation_menu_lite.php:1020
 #: modules/widgets/tp_navigation_menu_lite.php:1518
-#: modules/widgets/tp_navigation_menu_lite.php:1812
-#: modules/widgets/tp_navigation_menu_lite.php:1963
+#: modules/widgets/tp_navigation_menu_lite.php:1831
+#: modules/widgets/tp_navigation_menu_lite.php:1982
 #: modules/widgets/tp_ninja_form.php:279 modules/widgets/tp_ninja_form.php:588
 #: modules/widgets/tp_ninja_form.php:1114
 #: modules/widgets/tp_ninja_form.php:1358
@@ -6081,8 +6081,8 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:1673
 #: modules/widgets/tp_navigation_menu_lite.php:1129
 #: modules/widgets/tp_navigation_menu_lite.php:1462
-#: modules/widgets/tp_navigation_menu_lite.php:2097
-#: modules/widgets/tp_navigation_menu_lite.php:2175
+#: modules/widgets/tp_navigation_menu_lite.php:2116
+#: modules/widgets/tp_navigation_menu_lite.php:2194
 #: modules/widgets/tp_ninja_form.php:426 modules/widgets/tp_ninja_form.php:715
 #: modules/widgets/tp_ninja_form.php:975
 #: modules/widgets/tp_ninja_form.php:1224
@@ -6173,8 +6173,8 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:2085
 #: modules/widgets/tp_navigation_menu_lite.php:1115
 #: modules/widgets/tp_navigation_menu_lite.php:1448
-#: modules/widgets/tp_navigation_menu_lite.php:1924
-#: modules/widgets/tp_navigation_menu_lite.php:2147
+#: modules/widgets/tp_navigation_menu_lite.php:1943
+#: modules/widgets/tp_navigation_menu_lite.php:2166
 #: modules/widgets/tp_ninja_form.php:457 modules/widgets/tp_ninja_form.php:498
 #: modules/widgets/tp_ninja_form.php:742 modules/widgets/tp_ninja_form.php:774
 #: modules/widgets/tp_ninja_form.php:996
@@ -6593,8 +6593,8 @@ msgstr ""
 #: modules/widgets/tp_blockquote.php:2110 modules/widgets/tp_flip_box.php:1727
 #: modules/widgets/tp_header_extras.php:844
 #: modules/widgets/tp_info_box.php:1273 modules/widgets/tp_info_box.php:1440
-#: modules/widgets/tp_navigation_menu_lite.php:1859
-#: modules/widgets/tp_navigation_menu_lite.php:2010
+#: modules/widgets/tp_navigation_menu_lite.php:1878
+#: modules/widgets/tp_navigation_menu_lite.php:2029
 #: modules/widgets/tp_number_counter.php:1729
 #: modules/widgets/tp_number_counter.php:1848
 #: modules/widgets/tp_pricing_table.php:2501
@@ -6885,14 +6885,20 @@ msgstr ""
 msgid "Out Animation Duration"
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1508
+#: modules/widgets/tp_accordion.php:1510 modules/widgets/tp_accordion.php:1516
 msgid "Note :"
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1508
+#: modules/widgets/tp_accordion.php:1510
 msgid ""
 "We have turn off visibility of template in the backend due to performance "
 "improvements. This will be visible perfectly on the frontend."
+msgstr ""
+
+#: modules/widgets/tp_accordion.php:1516
+msgid ""
+"You need to upgrade your permissions to Editor or Administrator level to "
+"update this option."
 msgstr ""
 
 #: modules/widgets/tp_adv_text_block.php:119
@@ -7612,8 +7618,8 @@ msgstr ""
 #: modules/widgets/tp_gravity_form.php:2464
 #: modules/widgets/tp_heading_title.php:367
 #: modules/widgets/tp_hovercard.php:492
-#: modules/widgets/tp_navigation_menu_lite.php:1801
-#: modules/widgets/tp_navigation_menu_lite.php:1952
+#: modules/widgets/tp_navigation_menu_lite.php:1820
+#: modules/widgets/tp_navigation_menu_lite.php:1971
 #: modules/widgets/tp_ninja_form.php:299 modules/widgets/tp_ninja_form.php:600
 #: modules/widgets/tp_ninja_form.php:1126
 #: modules/widgets/tp_ninja_form.php:1369
@@ -7907,8 +7913,8 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:656
 #: modules/widgets/tp_navigation_menu_lite.php:1070
 #: modules/widgets/tp_navigation_menu_lite.php:1568
-#: modules/widgets/tp_navigation_menu_lite.php:1848
-#: modules/widgets/tp_navigation_menu_lite.php:1999
+#: modules/widgets/tp_navigation_menu_lite.php:1867
+#: modules/widgets/tp_navigation_menu_lite.php:2018
 #: modules/widgets/tp_number_counter.php:533
 #: modules/widgets/tp_post_meta.php:546 modules/widgets/tp_post_meta.php:585
 #: modules/widgets/tp_post_meta.php:1098 modules/widgets/tp_post_meta.php:1137
@@ -8120,7 +8126,7 @@ msgstr ""
 #: modules/widgets/tp_header_extras.php:2688
 #: modules/widgets/tp_info_box.php:2506
 #: modules/widgets/tp_navigation_menu_lite.php:790
-#: modules/widgets/tp_navigation_menu_lite.php:2077
+#: modules/widgets/tp_navigation_menu_lite.php:2096
 #: modules/widgets/tp_number_counter.php:1928
 #: modules/widgets/tp_page_scroll.php:200
 #: modules/widgets/tp_post_title.php:206
@@ -8331,7 +8337,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:867
 #: modules/widgets/tp_navigation_menu_lite.php:1044
 #: modules/widgets/tp_navigation_menu_lite.php:1541
-#: modules/widgets/tp_navigation_menu_lite.php:2089
+#: modules/widgets/tp_navigation_menu_lite.php:2108
 #: modules/widgets/tp_post_author.php:131 modules/widgets/tp_post_meta.php:762
 #: modules/widgets/tp_post_navigation.php:131
 #: modules/widgets/tp_pricing_table.php:128
@@ -8739,7 +8745,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:465
 #: modules/widgets/tp_navigation_menu_lite.php:781
 #: modules/widgets/tp_navigation_menu_lite.php:1542
-#: modules/widgets/tp_navigation_menu_lite.php:2090
+#: modules/widgets/tp_navigation_menu_lite.php:2109
 #: modules/widgets/tp_post_author.php:132 modules/widgets/tp_post_meta.php:763
 #: modules/widgets/tp_post_navigation.php:132
 #: modules/widgets/tp_pricing_table.php:473
@@ -8958,7 +8964,7 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:1044 modules/widgets/tp_flip_box.php:1689
 #: modules/widgets/tp_info_box.php:1766 modules/widgets/tp_info_box.php:2279
 #: modules/widgets/tp_navigation_menu_lite.php:1224
-#: modules/widgets/tp_navigation_menu_lite.php:2161
+#: modules/widgets/tp_navigation_menu_lite.php:2180
 #: modules/widgets/tp_number_counter.php:896
 #: modules/widgets/tp_pricing_table.php:1318
 #: modules/widgets/tp_pricing_table.php:2259
@@ -12309,8 +12315,8 @@ msgstr ""
 
 #: modules/widgets/tp_navigation_menu_lite.php:1059
 #: modules/widgets/tp_navigation_menu_lite.php:1557
-#: modules/widgets/tp_navigation_menu_lite.php:1837
-#: modules/widgets/tp_navigation_menu_lite.php:1988
+#: modules/widgets/tp_navigation_menu_lite.php:1856
+#: modules/widgets/tp_navigation_menu_lite.php:2007
 msgid "Normal Color"
 msgstr ""
 
@@ -12347,8 +12353,8 @@ msgstr ""
 
 #: modules/widgets/tp_navigation_menu_lite.php:1338
 #: modules/widgets/tp_navigation_menu_lite.php:1686
-#: modules/widgets/tp_navigation_menu_lite.php:1905
-#: modules/widgets/tp_navigation_menu_lite.php:2056
+#: modules/widgets/tp_navigation_menu_lite.php:1924
+#: modules/widgets/tp_navigation_menu_lite.php:2075
 msgid "Active Background Options"
 msgstr ""
 
@@ -12373,8 +12379,8 @@ msgid "Sub Menu Indicator Style"
 msgstr ""
 
 #: modules/widgets/tp_navigation_menu_lite.php:1670
-#: modules/widgets/tp_navigation_menu_lite.php:1894
-#: modules/widgets/tp_navigation_menu_lite.php:2045
+#: modules/widgets/tp_navigation_menu_lite.php:1913
+#: modules/widgets/tp_navigation_menu_lite.php:2064
 msgid "Active Icon Color"
 msgstr ""
 
@@ -12390,35 +12396,39 @@ msgstr ""
 msgid "Toggle Height"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:1785
+#: modules/widgets/tp_navigation_menu_lite.php:1747
+msgid "Border Bottom Size"
+msgstr ""
+
+#: modules/widgets/tp_navigation_menu_lite.php:1804
 msgid "Mobile Main Menu Style"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:1936
+#: modules/widgets/tp_navigation_menu_lite.php:1955
 msgid "Mobile Sub Menu Style"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2084
+#: modules/widgets/tp_navigation_menu_lite.php:2103
 msgid "Main Menu Hover Effects"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2122
+#: modules/widgets/tp_navigation_menu_lite.php:2141
 msgid "Alignment Border Adjust"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2200
+#: modules/widgets/tp_navigation_menu_lite.php:2219
 msgid "On Hover Inverse Effect Main Menu"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2224
+#: modules/widgets/tp_navigation_menu_lite.php:2243
 msgid "On Hover Inverse Effect Sub Menu"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2248
+#: modules/widgets/tp_navigation_menu_lite.php:2267
 msgid "Main Menu Last Open Sub-menu Left"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2482
+#: modules/widgets/tp_navigation_menu_lite.php:2501
 msgid "icon_img"
 msgstr ""
 

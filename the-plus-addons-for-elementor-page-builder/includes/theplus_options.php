@@ -79,7 +79,7 @@ class L_Theplus_Elementor_Plugin_Options
 		
 		add_action( 'init', array( $this,'tp_ele_pro_default_wid_save') );
 
-		$this->call_widget_banner_notice();
+		// $this->call_widget_banner_notice();
     }
 
 	public function tp_ele_pro_default_wid_save(){
