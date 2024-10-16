@@ -73,7 +73,7 @@ if ( ! class_exists( 'Tp_load_more' ) ) {
 				ob_end_clean();
 			}
 
-			$load_attr = L_tp_check_decrypt_key( $load_attr );
+			$load_attr = L_tp_plus_simple_decrypt( $load_attr, 'dy' );
 			$load_attr = json_decode( $load_attr, true );
 			if ( ! is_array( $load_attr ) ) {
 				ob_get_contents();

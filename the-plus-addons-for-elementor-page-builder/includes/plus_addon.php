@@ -272,17 +272,6 @@ function l_theplus_loading_bg_image($postid=''){
 } 
 
 /**
- * Check dycrypt Key
- * 
- * @since 5.5.4
- * @version 5.5.4
- */
-function L_tp_check_decrypt_key($key){   	 
-	$decrypted = L_tp_plus_simple_decrypt( $key, 'dy' );
-	return $decrypted;
-}
-
-/**
  * Simple decrypt function
  * 
  * @since 5.5.4
@@ -301,10 +290,9 @@ function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
 	$key = hash( 'sha256', $secret_key );
 	$iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
 
-	if( $action == 'ey' ) {
+	if ( $action == 'ey' ) {
 		$output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-	}
-	else if( $action == 'dy' ){
+	} else if ( $action == 'dy' ){
 		$output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
 	}
 
@@ -353,26 +341,6 @@ function L_theplus_load_metro_style_layout($columns='1',$metro_column='3',$metro
 		}
 	}
 	return $i;
-}
-
-if(!function_exists('plus_simple_crypt')){
-	function plus_simple_crypt( $string, $action = 'dy' ) {
-	    $secret_key = 'PO$_key';
-	    $secret_iv = 'PO$_iv';
-	    $output = false;
-	    $encrypt_method = "AES-128-CBC";
-	    $key = hash( 'sha256', $secret_key );
-	    $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
-	 
-	    if( $action == 'ey' ) {
-	        $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-	    }
-	    else if( $action == 'dy' ){
-	        $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
-	    }
-	 
-	    return $output;
-	}
 }
 
 add_action('elementor/widgets/register', function($widgets_manager){

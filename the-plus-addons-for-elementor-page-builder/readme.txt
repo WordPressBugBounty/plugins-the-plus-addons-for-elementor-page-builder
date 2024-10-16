@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 5.6.13
+Stable tag: 5.6.14
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -15,7 +15,7 @@ The Plus Addons for Elementor is the powerful extension for [Elementor Website B
 
 One Elementor Addon to replace multiple WordPress Plugins. Packed with <strong>[Blog Website Builder](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [WooCommerce Store Builder](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Mega Menu for Elementor](https://theplusaddons.com/widgets/mega-menu/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Grid Builder for Elementor](https://theplusaddons.com/grid-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Popup Builder for Elementor](https://theplusaddons.com/widgets/popup-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Header Builder for Elementor](https://theplusaddons.com/plus-builder/#header-builder-wgts?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) and more.</strong>
 
- <strong> [ VIEW ALL ELEMENTOR WIDGETS DEMO](https://theplusaddons.com/elementor-widgets?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+<strong> [ VIEW ALL ELEMENTOR WIDGETS DEMO](https://theplusaddons.com/elementor-widgets?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 --
 
@@ -382,6 +382,12 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 5.6.14 =
+Improvement : Unnecessary code removed for better performance.
+Improvement : Code improved for better performance and security.
+Fix : Accordion : Security Patch Conflict With Logout User
+Fix : Minor Bug Fixes & performance Improvements
 
 = 5.6.13 =
 Fix : Minor Bug Fixes & performance Improvements
