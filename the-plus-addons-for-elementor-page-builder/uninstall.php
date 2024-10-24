@@ -14,3 +14,13 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // delete_option('default_plus_options');
+// delete_option('tp-rateus-notice');
+// delete_option('tpae_backend_cache');
+
+// delete_option('theplus_options');
+// delete_option('post_type_options');
+// delete_option('theplus_styling_data');
+// delete_option('tpae_onbording_end');
+
+
+// delete_option('on_first_load_cache');

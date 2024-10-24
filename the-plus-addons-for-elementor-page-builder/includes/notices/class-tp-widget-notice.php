@@ -68,6 +68,7 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 			// add_action( 'admin_notices', array( $this, 'tp_widget_banner_notice' ) );
 			add_action( 'wp_ajax_wb_dismiss_notice', array( $this, 'tp_widget_dismiss_notice' ) );
 			add_action( 'admin_notices', array( $this, 'l_theplus_elementor_cache_notice' ) );
+			add_action( 'admin_notices', array( $this, 'tpae_dashboard_notice' ) );
 		}
 
 		/**
@@ -138,6 +139,17 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 		public function l_theplus_elementor_cache_notice(){
 			if ( is_admin() && defined( 'THEPLUS_VERSION' ) && version_compare( THEPLUS_VERSION, '5.5.3', '<' ) ) {
 				echo '<div class="notice notice-error tp-update-notice is-dismissible"><p>' . esc_html__( 'This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 5.5.3 Install Latest version Now.', 'tpebl' ) . '</p></div>';
+			}
+		}
+
+		/**
+		 * Version Update Notice
+		 *
+		 * @since 6.0.0
+		 */
+		public function tpae_dashboard_notice(){
+			if ( defined( 'THEPLUS_VERSION' ) && version_compare( THEPLUS_VERSION, '6.0.0', '<' ) ) {
+				echo '<div class="notice notice-error tp-update-notice is-dismissible"><p>' . esc_html__( 'This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 6.0.0 Install Latest version Now.', 'tpebl' ) . '</p></div>';
 			}
 		}
 

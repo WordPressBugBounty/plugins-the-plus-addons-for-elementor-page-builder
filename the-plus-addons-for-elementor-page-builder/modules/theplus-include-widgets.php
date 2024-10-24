@@ -1,9 +1,19 @@
 <?php
+/**
+ * The file store Database Default Entry
+ *
+ * @link       https://posimyth.com/
+ * @since      5.6.7
+ *
+ * @package    the-plus-addons-for-elementor-page-builder
+ */
+
 namespace TheplusAddons;
 
-if (!defined('ABSPATH')) {
-    exit;
-} // Exit if accessed directly
+/**Exit if accessed directly.*/
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 
@@ -12,7 +22,6 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 	 */
 	class L_Theplus_Widgets_Include {
 		
-		
 		/**
 		 * A reference to an instance of this class.
 		 *
@@ -20,47 +29,52 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 		 * @var   object
 		 */
 		private static $instance = null;
-		
+
 		/**
-		 * Check if processing elementor widget
+		 * Returns the instance.
 		 *
-		 * @var boolean
+		 * @since  1.0.0
+		 * @return object
 		 */
-		 /**
-		 * Localize data array
-		 *
-		 * @var array
-		 */
-		public $localize_data = array();
-		
+		public static function get_instance( $shortcodes = array() ) {
+
+			// If the single instance hasn't been set, set it now.
+			if ( null == self::$instance ) {
+				self::$instance = new self( $shortcodes );
+			}
+			return self::$instance;
+		}
+
 		/**
 		 * ThePlus_Load constructor.
 		 */
-		private function __construct() {
+		public function __construct() {
 			
 			$this->required_fiels();
 			l_theplus_generator()->init();
 			l_theplus_library();
+
 			if(!defined('THEPLUS_VERSION')){
 				$this->init();
 				l_theplus_wpml_translate();
 			}
 		}
+
 		/**
 		 * Initalize integration hooks
 		 *
 		 * @return void
 		 */
 		public function init() {
-			add_action( 'elementor/widgets/register', array($this, 'add_widgets' ) );	
+			add_action( 'elementor/widgets/register', array($this, 'add_widgets' ) );
 		}
-		
+
 		/**
 		* Widget Include required files
 		*
+		* @since 6.0.0
 		*/
-		public function required_fiels()
-		{	
+		public function required_fiels() {	
 			require_once L_THEPLUS_PATH.'modules/enqueue/plus-widgets-manager.php';
 			require_once L_THEPLUS_PATH.'modules/enqueue/plus-library.php';
 			require_once L_THEPLUS_PATH.'modules/enqueue/plus-generator.php';
@@ -69,6 +83,7 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 				require_once L_THEPLUS_PATH.'modules/enqueue/plus-wpml.php';
 			}
 		}
+
 		/**
 		 * Add new controls.
 		 *
@@ -94,6 +109,7 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 				'tp_dark_mode' => '\TheplusAddons\Widgets\L_ThePlus_Dark_Mode',
 				'tp_dynamic_categories' => '\TheplusAddons\Widgets\L_ThePlus_Dynamic_Categories',
 				'tp_everest_form' => '\TheplusAddons\Widgets\L_ThePlus_Everest_form',
+				'tp_plus_form' => '\TheplusAddons\Widgets\L_ThePlus_Form_Widget',
 				'tp_flip_box' => '\TheplusAddons\Widgets\L_ThePlus_Flip_Box',
 				'tp_gallery_listout' => '\TheplusAddons\Widgets\L_ThePlus_Gallery_ListOut',
 				'tp_gravity_form' => '\TheplusAddons\Widgets\L_ThePlus_Gravity_Form',
@@ -165,29 +181,7 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 
 			return true;
 		}
-		/**
-		 * Returns the instance.
-		 *
-		 * @since  1.0.0
-		 * @return object
-		 */
-		public static function get_instance( $shortcodes = array() ) {
-
-			// If the single instance hasn't been set, set it now.
-			if ( null == self::$instance ) {
-				self::$instance = new self( $shortcodes );
-			}
-			return self::$instance;
-		}
 	}
 
-}
-
-/**
- * Returns instance of L_Theplus_Widgets_Include
- *
- * @return object
- */
-function l_theplus_widgets_include() {
-	return L_Theplus_Widgets_Include::get_instance();
+	L_Theplus_Widgets_Include::get_instance();
 }

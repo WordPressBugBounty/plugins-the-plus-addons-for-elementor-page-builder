@@ -135,6 +135,28 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'style-2' => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
 					'style-3' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
 					'style-4' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
+					'smart-loop-builder' => esc_html__( 'Smart Loop Builder - Beta', 'tpebl' ),
+				),
+			)
+		);
+		$this->add_control(
+			'smart_loop_builder_note_doc',
+			array(
+				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-custom-elementor-post-loop-skin-with-smart-loop-builder/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => array(
+					'style' => array( 'smart-loop-builder' ),
+				),
+			)
+		);
+		$this->add_control(
+			'smart_loop_builder_note',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => '<p class="tp-controller-notice"><i>Note : This is first version of Smart Loop Builder, We will have more dynamic options, ACF support and release in more listing widgets coming up next..</i></p>',
+				'label_block' => true,
+				'condition'   => array(
+					'style' => array( 'smart-loop-builder' ),
 				),
 			)
 		);
@@ -147,7 +169,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
-					'style!' => array( 'style-1' ),
+					'style!' => array( 'style-1','smart-loop-builder' ),
 				),
 			)
 		);
@@ -209,84 +231,46 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
-			'content_source_section',
+			'smart_loop_builder_section',
 			array(
-				'label' => esc_html__( 'Content Source', 'tpebl' ),
+				'label' => esc_html__( 'Smart Loop Builder (Beta)', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
-		);
-		$this->add_control(
-			'post_category',
-			array(
-				'type'        => Controls_Manager::SELECT2,
-				'label'       => esc_html__( 'Select Category', 'tpebl' ),
-				'default'     => '',
-				'label_block' => true,
-				'multiple'    => true,
-				'options'     => l_theplus_get_categories(),
-			)
-		);
-		$this->add_control(
-			'post_tags',
-			array(
-				'type'        => Controls_Manager::SELECT2,
-				'label'       => esc_html__( 'Select Tags', 'tpebl' ),
-				'default'     => '',
-				'label_block' => true,
-				'multiple'    => true,
-				'options'     => l_theplus_get_tags(),
-			)
-		);
-		$this->add_control(
-			'display_posts',
-			array(
-				'label'   => esc_html__( 'Maximum Posts Display', 'tpebl' ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 1,
-				'max'     => 200,
-				'step'    => 1,
-				'default' => 8,
-			)
-		);
-		$this->add_control(
-			'post_offset',
-			array(
-				'label'   => wp_kses_post( "Offset Posts <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "hide-recent-blog-post-from-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 0,
-				'max'     => 50,
-				'step'    => 1,
-				'default' => '',
-			)
-		);
-		$this->add_control(
-			'post_offset_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : Hide posts from the beginning of listing.</i></p>',
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
-			'post_order_by',
-			array(
-				'label'   => wp_kses_post( "Order By <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-recent-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'date',
-				'options' => l_theplus_orderby_arr(),
-			)
-		);
-		$this->add_control(
-			'post_order',
-			array(
-				'label'   => esc_html__( 'Order', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'DESC',
-				'options' => l_theplus_order_arr(),
+				'condition'   => array(
+					'style' => array( 'smart-loop-builder' ),
+				),
 			)
 		);
 
+		$this->add_control(
+			'smart-loop-builder-button',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-wd_type="tp-blog-listout">Ready Presets</a>',
+				// 'content_classes' => 'tp-preset-editor-btn',
+				'label_block'     => true,
+			)
+		);
+		$this->add_control(
+			'content_html',
+			[
+				'label' => esc_html__( 'HTML', 'tpebl' ),
+				'type' => Controls_Manager::CODE,
+				'language' => 'html',
+				'separator' => 'before',
+				'rows' => 10,
+			]
+		);
+		$this->add_control(
+			'content_css',
+			[
+				'label' => esc_html__( 'CSS', 'tpebl' ),
+				'type' => Controls_Manager::CODE,
+				'language' => 'css',
+				'rows' => 10,
+			]
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -398,6 +382,85 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
+			)
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'content_source_section',
+			array(
+				'label' => esc_html__( 'Content Source', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'post_category',
+			array(
+				'type'        => Controls_Manager::SELECT2,
+				'label'       => esc_html__( 'Select Category', 'tpebl' ),
+				'default'     => '',
+				'label_block' => true,
+				'multiple'    => true,
+				'options'     => l_theplus_get_categories(),
+			)
+		);
+		$this->add_control(
+			'post_tags',
+			array(
+				'type'        => Controls_Manager::SELECT2,
+				'label'       => esc_html__( 'Select Tags', 'tpebl' ),
+				'default'     => '',
+				'label_block' => true,
+				'multiple'    => true,
+				'options'     => l_theplus_get_tags(),
+			)
+		);
+		$this->add_control(
+			'display_posts',
+			array(
+				'label'   => esc_html__( 'Maximum Posts Display', 'tpebl' ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 1,
+				'max'     => 200,
+				'step'    => 1,
+				'default' => 8,
+			)
+		);
+		$this->add_control(
+			'post_offset',
+			array(
+				'label'   => wp_kses_post( "Offset Posts <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "hide-recent-blog-post-from-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 0,
+				'max'     => 50,
+				'step'    => 1,
+				'default' => '',
+			)
+		);
+		$this->add_control(
+			'post_offset_Note',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => '<p class="tp-controller-notice"><i>Note : Hide posts from the beginning of listing.</i></p>',
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'post_order_by',
+			array(
+				'label'   => wp_kses_post( "Order By <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-recent-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'date',
+				'options' => l_theplus_orderby_arr(),
+			)
+		);
+		$this->add_control(
+			'post_order',
+			array(
+				'label'   => esc_html__( 'Order', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'DESC',
+				'options' => l_theplus_order_arr(),
 			)
 		);
 		$this->end_controls_section();
@@ -1017,7 +1080,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span',
+				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span,
+				               {{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_post_meta_style' );
@@ -1034,7 +1098,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span,{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span,
+					{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span a,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1052,7 +1118,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-meta-info span,{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-meta-info span a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-meta-info span,
+					{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-meta-info span a,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag:hover' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1098,7 +1166,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-title,{{WRAPPER}} .blog-list .post-inner-loop .post-title a',
+				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-title,
+				              {{WRAPPER}} .blog-list .post-inner-loop .post-title a,
+							  {{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title',
 			)
 		);
 		$this->add_responsive_control(
@@ -1108,7 +1178,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-title,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -1119,7 +1190,11 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-1 .post-title, {{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-2 .post-title, {{WRAPPER}} .blog-list.blog-style-3 h3.post-title, {{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-4 .post-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-1 .post-title, 
+					{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-2 .post-title, 
+					{{WRAPPER}} .blog-list.blog-style-3 h3.post-title, 
+					{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-4 .post-title,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -1137,7 +1212,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .post-title,{{WRAPPER}} .blog-list .post-inner-loop .post-title a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-title,
+					{{WRAPPER}} .blog-list .post-inner-loop .post-title a,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1155,7 +1232,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title,{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title a' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title,
+					{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title a,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title:hover' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1181,7 +1260,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .entry-content,{{WRAPPER}} .blog-list .post-inner-loop .entry-content p',
+				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .entry-content,
+				{{WRAPPER}} .blog-list .post-inner-loop .entry-content p,
+				{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description',
 			)
 		);
 		/* Content Background Padding Start */
@@ -1203,7 +1284,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .blog-list-content .entry-content p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .blog-list-content .entry-content p,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -1222,7 +1304,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .entry-content,{{WRAPPER}} .blog-list .post-inner-loop .entry-content p' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .blog-list .post-inner-loop .entry-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .entry-content p,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1240,7 +1324,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .entry-content,{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .entry-content p' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .entry-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .entry-content p,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description:hover' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1267,7 +1353,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'name'     => 'contnet_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .post-content-bottom',
+				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .post-content-bottom,
+				{{WRAPPER}} .blog-list .tpae-preset-content',
 			)
 		);
 		$this->end_controls_tab();
@@ -1282,7 +1369,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'name'     => 'content_hover_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content:hover .post-content-bottom',
+				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content:hover .post-content-bottom,
+				{{WRAPPER}} .blog-list .tpae-preset-content:hover',
 			)
 		);
 		$this->end_controls_tab();
@@ -1294,6 +1382,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label' => esc_html__( 'Featured Image', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'style!' => 'smart-loop-builder',
+				),
 			)
 		);
 		$this->add_control(
@@ -1354,7 +1445,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
 					'style!' => array( 'style-1', 'style-4' ),
@@ -1379,7 +1471,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'default'   => 'solid',
 				'options'   => L_theplus_get_border_style(),
 				'selectors' => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content' => 'border-style: {{VALUE}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-style: {{VALUE}};',
 				),
 				'condition' => array(
 					'box_border' => 'yes',
@@ -1399,7 +1492,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'left'   => 1,
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
 					'box_border' => 'yes',
@@ -1423,7 +1517,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
 					'box_border' => 'yes',
@@ -1447,7 +1542,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
 					'box_border' => 'yes',
@@ -1468,7 +1564,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'name'     => 'box_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content',
+				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog',
 			)
 		);
 		$this->end_controls_tab();
@@ -1483,7 +1580,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'name'     => 'box_active_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover',
+				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover,
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover',
 			)
 		);
 		$this->end_controls_tab();
@@ -1510,7 +1608,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'content_shadow',
-				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content',
+				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content,
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog',
 			)
 		);
 		$this->end_controls_tab();
@@ -1524,7 +1623,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'content_hover_shadow',
-				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content:hover',
+				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content:hover,
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover',
 			)
 		);
 		$this->end_controls_tab();
@@ -1776,7 +1876,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @version 5.5.4
 	 */
 	protected function render() {
-
+		
 		$settings   = $this->get_settings_for_display();
 		$query_args = $this->get_query_args();
 		$query      = new \WP_Query( $query_args );
@@ -1784,7 +1884,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$style     = ! empty( $settings['style'] ) ? $settings['style'] : 'style-1';
 		$layout    = ! empty( $settings['layout'] ) ? $settings['layout'] : 'grid';
 		$post_tags = ! empty( $settings['post_tags'] ) ? $settings['post_tags'] : '';
-
+		
 		$post_title_tag = ! empty( $settings['post_title_tag'] ) ? $settings['post_title_tag'] : 'h3';
 		$post_category  = ! empty( $settings['post_category'] ) ? $settings['post_category'] : '';
 
@@ -1892,14 +1992,27 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 
 		if ( ! $query->have_posts() ) {
 			$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Posts not found', 'tpebl' ) . '</h3>';
-		} elseif ( 'style-1' === $style ) {
+		} elseif ( 'style-1' === $style || 'smart-loop-builder' === $style) {
 
+			if( 'smart-loop-builder' === $style ){
+				$style_custom = !empty($settings['content_css']) ? $settings['content_css'] : '';
+				$html_custom = !empty($settings['content_html']) ? $settings['content_html'] : '';
+
+				if( !empty( $style_custom ) ){
+					echo '<style>' . $style_custom . '</style>';
+				}
+
+				if ( empty( $html_custom ) ) {
+					$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please enter values in both HTML & CSS to enable the Smart Loop Builder feature. If you don’t want to write your own, choose from Ready Presets.', 'tpebl' ) . '</h3>';
+				}
+			}	
+			
 			$output .= '<div id="pt-plus-blog-post-list" class="blog-list ' . esc_attr( $uid ) . ' ' . $data_class . ' ' . esc_attr( $animated_class ) . '" ' . $layout_attr . ' ' . $data_attr . ' ' . $animation_attr . ' data-enable-isotope="1">';
 
 			$output .= '<div id="' . esc_attr( $uid ) . '" class="tp-row post-inner-loop ' . esc_attr( $uid ) . ' ">';
 
 			while ( $query->have_posts() ) {
-
+				
 				$query->the_post();
 				$post = $query->post;
 
@@ -1911,10 +2024,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				}
 
 				$output .= '<div class="grid-item metro-item' . esc_attr( $ij ) . ' ' . $desktop_class . ' ' . $tablet_class . ' ' . $mobile_class . ' ' . esc_attr( $animated_columns ) . '">';
-
+				
 				if ( ! empty( $style ) ) {
 					ob_start();
-					include L_THEPLUS_WSTYLES . 'blog/blog-style-1.php';
+					include L_THEPLUS_WSTYLES . 'blog/blog-' . sanitize_file_name( $style ) . '.php';
 					$output .= ob_get_contents();
 					ob_end_clean();
 				}

@@ -1,0 +1,18 @@
+.tp-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.tp-form-field{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.tp-required-asterisk{
+    color:red;
+}
+
+.tp-form-message{
+    width: 100%;
+}

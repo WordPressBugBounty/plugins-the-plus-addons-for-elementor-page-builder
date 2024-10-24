@@ -72,6 +72,11 @@ h3.theplus-posts-not-found {
 }
 
 @media (max-width: 767px) {
+	.elementor-element.elementor-element-edit-mode.elementor-hidden-mobile {
+		opacity: 0.5;
+	}
+
+	/* Elementor Update ( Remove ) - 3.25 */
 	.elementor-element.elementor-element-edit-mode.elementor-hidden-phone {
 		opacity: 0.5;
 	}

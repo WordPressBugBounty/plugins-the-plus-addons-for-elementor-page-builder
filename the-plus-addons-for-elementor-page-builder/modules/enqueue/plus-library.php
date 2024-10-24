@@ -48,6 +48,7 @@ Class L_Plus_Library {
 			'tp_dark_mode' => 'tp-dark-mode',
 			'tp_dynamic_categories' => 'tp-dynamic-categories',
 			'tp_everest_form' => 'tp-everest-form',
+			'tp_plus_form' => 'tp-plus-form',
 			'tp_flip_box' => 'tp-flip-box',
 			'tp_gallery_listout' => 'tp-gallery-listout',
 			'tp_gravity_form' => 'tp-gravityt-form',			

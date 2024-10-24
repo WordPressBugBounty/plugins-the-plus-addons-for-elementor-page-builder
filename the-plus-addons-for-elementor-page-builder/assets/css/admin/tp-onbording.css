@@ -10,7 +10,7 @@
     right: 0;
     bottom: 0;
     backdrop-filter: blur(4px);
-    z-index: 99
+    z-index: 999
 }
 
 .tpae-boarding-pop:after {

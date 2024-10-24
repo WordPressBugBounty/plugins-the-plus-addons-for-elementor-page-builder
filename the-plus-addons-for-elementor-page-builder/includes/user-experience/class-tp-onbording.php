@@ -91,7 +91,8 @@ if ( ! class_exists( 'Tp_Onbording' ) ) {
 		 * @return bool True if the current screen is for managing plugins, otherwise false.
 		 */
 		private function tp_plugins_screen() {
-			$pages = array( 'toplevel_page_theplus_welcome_page', 'theplus-settings_page_theplus_options', 'theplus-settings_page_post_type_options', 'theplus-settings_page_theplus_import_data', 'theplus-settings_page_theplus_api_connection_data', 'theplus-settings_page_theplus_performance', 'theplus-settings_page_theplus_styling_data', 'theplus-settings_page_theplus_purchase_code', 'theplus-settings_page_theplus_white_label' );
+
+			$pages = array( 'toplevel_page_theplus_welcome_page' );
 
 			return in_array( get_current_screen()->id, $pages, true );
 		}

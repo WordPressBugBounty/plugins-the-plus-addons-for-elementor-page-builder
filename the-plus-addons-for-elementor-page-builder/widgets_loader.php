@@ -164,8 +164,6 @@ final class L_Theplus_Element_Load {
 		theplus_core_cp_lite()->init();
 
 		$this->include_widgets();
-
-		l_theplus_widgets_include();
 	}
 
 	/**
@@ -189,10 +187,12 @@ final class L_Theplus_Element_Load {
 	public function tp_manage_files() {
 
 		require_once L_THEPLUS_PATH . 'includes/admin/tpae_hooks/class-tpae-hooks.php';
-		do_action( 'tpae_db_widget_default' );
+		do_action( 'tpae_db_default' );
 
 		include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-main.php';
 		include L_THEPLUS_PATH . 'includes/user-experience/class-tp-user-experience-main.php';
+		include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-main.php';
+		include L_THEPLUS_PATH . 'includes/preset/class-tpae-preset.php';
 
 		// Front or Elementor Editor
 		require_once L_THEPLUS_PATH . 'includes/tp-lazy-function.php';
@@ -221,12 +221,6 @@ final class L_Theplus_Element_Load {
 
 		// Include some backend files.
 		add_action( 'admin_enqueue_scripts', array( $this, 'theplus_elementor_admin_css' ) );
-
-		if ( is_admin() && current_user_can( 'manage_options' ) ) {
-			add_action( 'wp_ajax_tp_get_elementor_pages', array( $this, 'tp_get_elementor_pages' ) );
-			add_action( 'wp_ajax_tp_check_elements_status_scan', array( $this, 'tp_check_elements_status_scan' ) );
-			add_action( 'wp_ajax_tp_disable_elements_status_scan', array( $this, 'tp_disable_elements_status_scan' ) );
-		}
 	}
 
 	/**
@@ -238,21 +232,11 @@ final class L_Theplus_Element_Load {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-
-		if ( ! class_exists( 'CMB2' ) ) {
-			require_once L_THEPLUS_INCLUDES_URL . 'plus-options/metabox/init.php';
-		}
-
+		
 		require_once L_THEPLUS_INCLUDES_URL . 'plus_addon.php';
 		require_once L_THEPLUS_PATH . 'modules/widgets-feature/class-tp-widgets-feature-main.php';
 
-		if ( file_exists( L_THEPLUS_INCLUDES_URL . 'plus-options/metabox/init.php' ) ) {
-			require_once L_THEPLUS_INCLUDES_URL . 'plus-options/includes.php';
-		}
-
 		require L_THEPLUS_PATH . 'modules/theplus-core-cp.php';
-
-		require L_THEPLUS_INCLUDES_URL . 'theplus_options.php';
 
 		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			require L_THEPLUS_PATH . 'modules/theplus-integration.php';
@@ -269,7 +253,7 @@ final class L_Theplus_Element_Load {
 	 * This method is responsible for including the required files related to widgets.
 	 * It ensures that the necessary files for widgets are loaded.
 	 *
-	 * @since 5.6.9
+	 * @since 1.0.0
 	 */
 	public function include_widgets() {
 		require_once L_THEPLUS_PATH . 'modules/theplus-include-widgets.php';
@@ -308,9 +292,6 @@ final class L_Theplus_Element_Load {
 	 */
 	public function theplus_elementor_admin_css() {
 
-		wp_enqueue_script( 'jquery-ui-dialog' );
-		wp_enqueue_style( 'wp-jquery-ui-dialog' );
-
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_script( 'theplus-admin-js', L_THEPLUS_ASSETS_URL . 'js/admin/theplus-admin.js', array(), L_THEPLUS_VERSION, false );
 
@@ -337,176 +318,6 @@ final class L_Theplus_Element_Load {
 		$mimes['svgz'] = 'image/svg+xml';
 
 		return $mimes;
-	}
-
-	/**
-	 * Get all pages
-	 *
-	 * @since 1.0.0
-	 */
-	public function tp_get_elementor_pages() {
-		$security = ! empty( $_REQUEST['security'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['security'] ) ) : '';
-
-		if ( ! wp_verify_nonce( $security, 'theplus-addons' ) ) {
-			wp_send_json_error( esc_html__( 'Invalid security', 'tpebl' ) );
-		}
-
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( esc_html__( 'Invalid User', 'tpebl' ) );
-		}
-
-		global $wpdb;
-
-		$post_ids = $wpdb->get_col( 'SELECT `post_id` FROM `' . $wpdb->postmeta . '`WHERE `meta_key` = \'_elementor_version\';' );
-
-		$tp_widgets_list = '';
-
-		$page = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-
-		if ( 'tpewidpage' === $page ) {
-			$theplus_options = get_option( 'theplus_options' );
-			if ( ! empty( $theplus_options ) && isset( $theplus_options['check_elements'] ) ) {
-				$tp_widgets_list = $theplus_options['check_elements'];
-			}
-		}
-
-		if ( empty( $post_ids ) ) {
-			wp_send_json_error( esc_html__( 'Empty post list.', 'tpebl' ) );
-		}
-
-		$scan_post_ids = array();
-		$countwidgets  = array();
-		foreach ( $post_ids as $post_id ) {
-			if ( 'revision' === get_post_type( $post_id ) ) {
-				continue;
-			}
-
-			$get_widgets = $this->tp_check_elements_status_scan( $post_id, $tp_widgets_list );
-
-			$scan_post_ids[ $post_id ] = $get_widgets;
-			if ( ! empty( $get_widgets ) ) {
-				foreach ( $get_widgets as $value ) {
-					if ( ! empty( $value ) && in_array( $value, $tp_widgets_list ) ) {
-						$countwidgets[ $value ] = ( isset( $countwidgets[ $value ] ) ? absint( $countwidgets[ $value ] ) : 0 ) + 1;
-					}
-				}
-			}
-		}
-
-		$output = array();
-		$val1   = count( $tp_widgets_list );
-		$val2   = count( $countwidgets );
-		$val3   = $val1 - $val2;
-
-		$output['message'] = '* ' . $val3 . ' Unused Widgets Found!';
-		$output['widgets'] = $countwidgets;
-
-		wp_send_json_success( $output );
-	}
-
-	/**
-	 * Check Elements Status for Scanning
-	 *
-	 * This function is responsible for checking the status of elements during a scanning process.
-	 * It takes a post ID and a list of The Plus Addons widgets, then performs the necessary checks.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int   $post_id         Optional. The post ID to check elements status for.
-	 * @param array $tp_widgets_list Optional. The list of The Plus Addons widgets.
-	 */
-	public function tp_check_elements_status_scan( $post_id = '', $tp_widgets_list = '' ) {
-
-		$security = ! empty( $_REQUEST['security'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['security'] ) ) : '';
-
-		if ( ! wp_verify_nonce( $security, 'theplus-addons' ) ) {
-			wp_send_json_error( esc_html__( 'Invalid security', 'tpebl' ) );
-		}
-
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( esc_html__( 'Invalid User', 'tpebl' ) );
-		}
-
-		if ( ! empty( $post_id ) ) {
-			$meta_data = \Elementor\Plugin::$instance->documents->get( $post_id );
-
-			if ( is_object( $meta_data ) ) {
-				$meta_data = $meta_data->get_elements_data();
-			}
-
-			if ( empty( $meta_data ) ) {
-				return '';
-			}
-
-			$to_return = array();
-
-			\Elementor\Plugin::$instance->db->iterate_data(
-				$meta_data,
-				function ( $element ) use ( $tp_widgets_list, &$to_return ) {
-					$page = ! empty( $_GET['page'] ) ? wp_unslash( $_GET['page'] ) : '';
-
-					if ( 'tpewidpage' === $page ) {
-						if ( ! empty( $element['widgetType'] ) && array_key_exists( str_replace( '-', '_', $element['widgetType'] ), array_flip( $tp_widgets_list ) ) ) {
-							$to_return[] = str_replace( '-', '_', $element['widgetType'] );
-						}
-					}
-				}
-			);
-		}
-
-		return array_values( $to_return );
-	}
-
-	/**
-	 * Disable The Plus Addons Elements Status Scan
-	 *
-	 * This function is responsible for handling requests to disable The Plus Addons elements
-	 * based on the scanned data provided in the request.
-	 *
-	 * @since 1.0.0
-	 */
-	public function tp_disable_elements_status_scan() {
-
-		$security = ! empty( $_REQUEST['security'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['security'] ) ) : '';
-
-		if ( ! wp_verify_nonce( $security, 'theplus-addons' ) ) {
-			wp_send_json_error( esc_html__( 'Invalid security', 'tpebl' ) );
-		}
-
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( esc_html__( 'Invalid User', 'tpebl' ) );
-		}
-
-		$message = '';
-
-		$sacaneddatapass = ! empty( $_GET['SacanedDataPass'] ) ? wp_unslash( $_GET['SacanedDataPass'] ) : '';
-		if ( isset( $sacaneddatapass ) && ! empty( $sacaneddatapass ) ) {
-			$tp_widgets_list = '';
-
-			$page = ! empty( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-			if ( 'tpewidpage' === $page ) {
-				$theplus_options = get_option( 'theplus_options' );
-
-				if ( ! empty( $theplus_options ) && isset( $theplus_options['check_elements'] ) ) {
-					$tp_widgets_list = $theplus_options['check_elements'];
-
-					$val1 = count( $tp_widgets_list );
-					$val2 = count( $sacaneddatapass );
-					$val3 = $val1 - $val2;
-
-					$theplus_options['check_elements'] = array_keys( $sacaneddatapass );
-
-					update_option( 'theplus_options', $theplus_options, null, 'no' );
-
-					l_theplus_library()->remove_backend_dir_files();
-					$message = 'We have scanned your site and disabled ' . $val3 . ' unused The Plus Addons widgets.';
-				}
-			}
-		}
-
-		wp_send_json_success( $message );
-
-		exit;
 	}
 
 	/**
@@ -541,7 +352,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-essential',
 			array(
-				'title' => esc_html__( 'PlusEssential', 'tpebl' ),
+				'title' => esc_html__( 'Plus Essential', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -549,7 +360,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-listing',
 			array(
-				'title' => esc_html__( 'PlusListing', 'tpebl' ),
+				'title' => esc_html__( 'Plus Listing', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -557,7 +368,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-creatives',
 			array(
-				'title' => esc_html__( 'PlusCreatives', 'tpebl' ),
+				'title' => esc_html__( 'Plus Creatives', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -565,7 +376,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-tabbed',
 			array(
-				'title' => esc_html__( 'PlusTabbed', 'tpebl' ),
+				'title' => esc_html__( 'Plus Tabbed', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -573,7 +384,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-adapted',
 			array(
-				'title' => esc_html__( 'PlusAdapted', 'tpebl' ),
+				'title' => esc_html__( 'Plus Adapted', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -581,7 +392,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-header',
 			array(
-				'title' => esc_html__( 'PlusHeader', 'tpebl' ),
+				'title' => esc_html__( 'Plus Header', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -589,7 +400,15 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-builder',
 			array(
-				'title' => esc_html__( 'PlusBuilder', 'tpebl' ),
+				'title' => esc_html__( 'Plus Builder', 'tpebl' ),
+				'icon'  => 'fa fa-plug',
+			),
+			1
+		);
+		$elementor->elements_manager->add_category(
+			'plus-social',
+			array(
+				'title' => esc_html__( 'Plus Social', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -597,15 +416,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-woo-builder',
 			array(
-				'title' => esc_html__( 'PlusWooBuilder', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-search-filter',
-			array(
-				'title' => esc_html__( 'PlusSearchFilters', 'tpebl' ),
+				'title' => esc_html__( 'Plus WooCommerce', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1
@@ -613,7 +424,7 @@ final class L_Theplus_Element_Load {
 		$elementor->elements_manager->add_category(
 			'plus-depreciated',
 			array(
-				'title' => esc_html__( 'PlusDepreciated', 'tpebl' ),
+				'title' => esc_html__( 'Plus Depreciated', 'tpebl' ),
 				'icon'  => 'fa fa-plug',
 			),
 			1

@@ -31,50 +31,6 @@ function l_theplus_validate_html_tag( $check_tag ) {
 	return in_array( strtolower( $check_tag ), l_theplus_html_tag_check() ) ? $check_tag : 'div';
 }
 
-function theplus_free_purchase_code_content(){
-	echo '<div class="tp-pro-note-title"><p style="margin-bottom:40px;font-weight: bolder;">Activate Licence to get access of our Pro Widgets, Features and Design Templates.</p></div>
-		<div style="text-align:center;"><img style="width:auto;height:300px;" src="' . esc_url(L_THEPLUS_URL . 'assets/images/panel/plus-design.png') . '" alt="'.esc_attr__('Activate','tpebl').'" class="panel-plus-activate" /></div>
-		<div style="display: flex;flex-direction: column;align-items: center;"> 
-			<div class="tp-pro-note-step">
-				<span>STEP I : </span>
-				<span>
-					<a href="https://theplusaddons.com/pricing/" target="_blank" rel="noopener noreferrer"> 
-						Buy Pro Plugin from our Website 
-						<svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L7.5 7L1.5 12" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</span>
-			</div>
-			<div class="tp-pro-note-step">
-				<span>STEP II : </span>
-				<span>
-					<a href="https://store.posimyth.com/dashboard/" target="_blank" rel="noopener noreferrer"> 
-						Download Pro Plugin from Dashboard. 
-						<svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L7.5 7L1.5 12" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
-				</span>
-			</div>
-			<div class="tp-pro-note-step">
-				<span>STEP III : </span>
-				<span>
-					<a href="https://theplusaddons.com/docs/how-to-activate-the-plus-addons-for-elementor/" target="_blank" rel="noopener noreferrer"> 
-						Insert key and Activate Licence.
-						<svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.5 1.5L7.5 7L1.5 12" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a> 
-				</span>
-			</div>
-		</div>';
-}
-add_action('theplus_free_pro_purchase_code', 'theplus_free_purchase_code_content');
-
-function theplus_free_white_label_content(){
-	echo '<div class="tp-pro-note-title"><p style="margin-bottom:50px;">White Label our plugin and setup client\'s branding all around. You can update name, description, Icon and even hide the menu from dashboard. Get our pro version to have access of this feature.</p></div>
-		<div style="text-align:center;">
-			<img style="width:55%;" src="' . esc_url(L_THEPLUS_URL . 'assets/images/panel/white-lable.png') . '" alt="'.esc_attr__('White Lable','tpebl').'" class="panel-plus-white-lable" />
-		</div>
-	<div class="tp-pro-note-link"><a href="https://theplusaddons.com/free-vs-pro-compare/" target="_blank" rel="noopener noreferrer">Compare Free vs Pro</a></div>';
-}
-add_action('theplus_free_pro_white_label', 'theplus_free_white_label_content');
-/*panel start*/
 
 /* WOOCOMMERCE Mini Cart */
 function l_theplus_woocomerce_ajax_cart_update($fragments) {
@@ -269,7 +225,7 @@ function l_theplus_loading_bg_image($postid=''){
 	}else{
 	return $content_image;
 	}
-} 
+}
 
 /**
  * Simple decrypt function
@@ -290,9 +246,10 @@ function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
 	$key = hash( 'sha256', $secret_key );
 	$iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
 
-	if ( $action == 'ey' ) {
+	if( $action == 'ey' ) {
 		$output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-	} else if ( $action == 'dy' ){
+	}
+	else if( $action == 'dy' ){
 		$output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
 	}
 
@@ -776,6 +733,16 @@ function l_registered_widgets(){
 				],
 			],
 		],
+		'tp-plus-form' => [
+			'dependency' => [
+				'css' => [					
+					L_THEPLUS_PATH . DIRECTORY_SEPARATOR .'assets/css/main/plus-form/plus-form-widget.min.css',
+				],
+				'js' => [
+					L_THEPLUS_PATH . DIRECTORY_SEPARATOR .'assets/js/main/plus-form/plus-form-widget.min.js',
+				],
+			],
+		],
 		'tp-smooth-scroll' => [
 			'dependency' => [
 				'js' => [					
@@ -800,7 +767,7 @@ function l_registered_widgets(){
 					L_THEPLUS_PATH . DIRECTORY_SEPARATOR .'assets/css/main/info-box/plus-infobox-style.css',
 				],
 			],
-		],		
+		],	
 		'tp-gallery-listout' => array(
 			'dependency' => array(
 				'css' => array(

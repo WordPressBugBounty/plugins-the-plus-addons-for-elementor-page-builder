@@ -86,7 +86,7 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 
 			/**Upgrade PRO link.*/
 			if ( ! defined( 'THEPLUS_VERSION' ) ) {
-				$pro_link = sprintf( '<a href="%s" target="_blank" style="color: #cc0000;font-weight: 700;" rel="noopener noreferrer">%s</a>', esc_url( 'https://theplusaddons.com/pricing/' ), __( 'Upgrade PRO', 'tpebl' ) );
+				$pro_link = sprintf( '<a href="%s" target="_blank" style="color: #cc0000;font-weight: 700;" rel="noopener noreferrer">%s</a>', esc_url( 'https://theplusaddons.com/pricing?utm_source=wpbackend&utm_medium=dashboard&utm_campaign=plussettings' ), __( 'Upgrade PRO', 'tpebl' ) );
 				$links    = (array) $links;
 				$links[]  = $pro_link;
 			}

@@ -645,7 +645,7 @@ function theplus_pro_ver_notice(){
 		<div class="tp-pf-info">Go with our pro version to use all our widgets & features with It\'s fullest potential. Pro version will improve your elementor work flow drastically.</div>
 		<div class="tp-pf-links">
 			<a class="tp-pf-links-buy" href="https://theplusaddons.com/pricing/" target="_blank">Buy Pro</a>
-			<a class="tp-pf-links-compare" href="https://theplusaddons.com/free-vs-pro-compare/" target="_blank">Free VS Pro</a>
+			<a class="tp-pf-links-compare" href="https://theplusaddons.com/free-vs-pro" target="_blank">Free VS Pro</a>
 		</div>	
 	</div>';
 }
@@ -656,7 +656,7 @@ function theplus_pro_ver_group_control_notice(){
 		<div class="tp-pf-info">Go with our pro version to use all our widgets & features with It\'s fullest potential. Pro version will improve your elementor work flow drastically.</div>
 		<div class="tp-pf-links">
 			<a class="tp-pf-links-buy" href="https://theplusaddons.com/pricing/" target="_blank">Buy Pro</a>
-			<a class="tp-pf-links-compare" href="https://theplusaddons.com/free-vs-pro-compare/" target="_blank">Free VS Pro</a>
+			<a class="tp-pf-links-compare" href="https://theplusaddons.com/free-vs-pro" target="_blank">Free VS Pro</a>
 		</div>	
 	</div>';
 }

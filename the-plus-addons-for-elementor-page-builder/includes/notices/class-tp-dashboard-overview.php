@@ -103,7 +103,7 @@ if ( ! class_exists( 'Tp_Dashboard_Overview' ) ) {
 			/**
 			 * Register Dashboard Widgets.
 			 */
-
+			$this->tp_call_api_dashboard_overview();
 			add_action( 'wp_dashboard_setup', array( $this, 'tp_dashbord_overview_manage' ) );
 		}
 
@@ -282,7 +282,8 @@ if ( ! class_exists( 'Tp_Dashboard_Overview' ) ) {
 		 */
 		public function tp_call_api_dashboard_overview() {
 			$data = get_transient( $this->transient_key );
-			if ( false === $data ) {
+			
+			if ( false === $data || empty( $data ) ) {
 				$u_r_l      = wp_remote_get( $this->api_overview );
 				$statuscode = wp_remote_retrieve_response_code( $u_r_l );
 				$getdataone = wp_remote_retrieve_body( $u_r_l );

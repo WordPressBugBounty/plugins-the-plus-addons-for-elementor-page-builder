@@ -69,7 +69,7 @@ class L_ThePlus_Social_Embed extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-essential' );
+		return array( 'plus-social' );
 	}
 
 	/**

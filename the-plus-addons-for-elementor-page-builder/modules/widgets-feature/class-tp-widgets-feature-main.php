@@ -62,6 +62,11 @@ if ( ! class_exists( 'TP_Widgets_Feature_Main' ) ) {
 			$elements = l_theplus_get_option( 'general', 'check_elements' );
 
 			if ( ! empty( $elements ) ) {
+
+				if( in_array( 'tp_plus_form', $elements ) ){
+					require_once L_THEPLUS_PATH . "modules/widgets-feature/class-tp-form-handler.php";
+				}
+
 				foreach ( $elements as $key => $value ) {
 					if( 'tp_blog_listout' === $value ) {
 						require_once L_THEPLUS_PATH . "modules/widgets-feature/class-tp-load-more.php";
