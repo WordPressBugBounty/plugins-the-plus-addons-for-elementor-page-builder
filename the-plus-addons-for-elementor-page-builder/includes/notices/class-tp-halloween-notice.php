@@ -93,7 +93,7 @@ if ( ! class_exists( 'TP_Halloween_Notice' ) ) {
 								<h3 style="margin-top:10px;margin-bottom:7px;">' . esc_html__( 'Best Time to Upgrade to The Plus Addons for Elementor PRO – Up to 30% OFF!', 'tpebl' ) . '</h3>
 								<p> ' . esc_html__( 'Our Halloween Sale is live! Upgrade this season and get up to 30% OFF on the pro version.', 'tpebl' ) . ' </p>
 								<p style="display: flex;column-gap: 12px;">  <span> • ' . esc_html__( '1,000+ Elementor Templates', 'tpebl' ) . '</span>  <span> • ' . esc_html__( '120+ Elementor Widgets', 'tpebl' ) . '</span>  <span> • ' . esc_html__( 'Trusted by 100K+ Users', 'tpebl' ) . '</span> </p>
-								<a href="' . esc_url( 'https://theplusaddons.com/pricing?utm_source=wpbackend&utm_medium=dashboard&utm_campaign=plussettings' ) . '" class="button" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Claim Your Offer', 'tpebl' ) . '</a>
+								<a href="' . esc_url( 'https://theplusaddons.com/pricing?utm_source=wpbackend&utm_medium=admin&utm_campaign=pluginpage' ) . '" class="button" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Claim Your Offer', 'tpebl' ) . '</a>
 							</div>
 						</div>
 					</div>';
@@ -101,23 +101,22 @@ if ( ! class_exists( 'TP_Halloween_Notice' ) ) {
 			}
 			?>
 			<script>
-                jQuery(document).ready(function($) {
-                    jQuery('.tpae-plugin-halloween .notice-dismiss').on('click', function(e) {
-                        jQuery.ajax({
-                        	url: ajaxurl,
-                        	type: 'POST',
-                        	data: {
-                        		action: 'tpae_halloween_dismiss_notice',
-                        		security: "<?php echo esc_html( $nonce ); ?>",
-                        		type: 'tpae_halloween_notice',
-                        	},
-                        	success: function(response) {
-                        		jQuery('.tpae-plugin-halloween').hide();
-                        	}
-                        });
+                jQuery(document).on('click', '.tpae-plugin-halloween .notice-dismiss', function(e) {
+                    e.preventDefault();
+					
+                    jQuery.ajax({
+                        url: ajaxurl,
+                        type: 'POST',
+                        data: {
+                            action: 'tpae_halloween_dismiss_notice',
+                            security: "<?php echo esc_html( $nonce ); ?>",
+                        },
+                        success: function(response) {
+                            jQuery('.tpae-plugin-halloween').hide();
+                        }
                     });
-				});
-			</script>
+                });
+            </script>
 			<?php
 		}
 
@@ -128,23 +127,22 @@ if ( ! class_exists( 'TP_Halloween_Notice' ) ) {
 		 */
 		public function tpae_halloween_dismiss_notice() {
 			$get_security = ! empty( $_POST['security'] ) ? sanitize_text_field( wp_unslash( $_POST['security'] ) ) : '';
-
-			if ( ! isset( $get_security ) || empty( $get_security ) || ! wp_verify_nonce( $get_security, 'tpae-halloween-notice' ) ) {
-				die( 'Security checked!' );
+		
+			if ( ! $get_security || ! wp_verify_nonce( $get_security, 'tpae-halloween-notice' ) ) {
+				wp_send_json_error( 'Security check failed!' );
 			}
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_send_json_error( __( 'You are not allowed to do this action', 'tpebl' ) );
+				wp_send_json_error( __( 'You are not allowed to perform this action', 'tpebl' ) );
 			}
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
-			if ( 'tpae_halloween_notice' === $get_type ) {
-				update_user_meta( '1', 'tpae_halloween_notice_dismissed', true );
-			}
-
+			update_option( 'tpae_halloween_notice_dismissed', true );
+		
 			wp_send_json_success();
 		}
+		
 	}
 
 	TP_Halloween_Notice::instance();

@@ -99,7 +99,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		 */
 		public function tpae_add_dashboard_menu() {
 
-			$setting_name = esc_html__( 'ThePlus Addons', 'tpebl' );
+			$setting_name = esc_html__( 'The Plus Addons', 'tpebl' );
 			if ( defined( 'THEPLUS_VERSION' ) ) {
 				$options = get_option( 'theplus_white_label' );
 
