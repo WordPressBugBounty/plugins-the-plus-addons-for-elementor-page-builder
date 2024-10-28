@@ -118,7 +118,7 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-widget-notice.php';
 				}
 
-				include L_THEPLUS_PATH . 'includes/notices/class-tp-dashboard-overview.php';
+				// include L_THEPLUS_PATH . 'includes/notices/class-tp-dashboard-overview.php';
 
 				/**Remove Key In Databash*/
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-remove.php';
