@@ -72,7 +72,14 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 				$theplus_options['extras_elements'] = array();
 
 				add_option( 'theplus_options', $theplus_options, '', 'on' );
-			}
+			}else{
+				if ( ! is_array( $default_load['check_elements'] ) || ! is_array( $default_load['extras_elements'] ) ) {
+					$theplus_options['check_elements'] = is_array( $default_load['check_elements'] ) ? $default_load['check_elements'] : array();
+					$theplus_options['extras_elements'] = is_array( $default_load['extras_elements'] ) ? $default_load['extras_elements'] : array();
+
+					update_option( 'theplus_options', $theplus_options, '', 'on' );
+				}
+            }
 
 			// Get Listing Data.
 			$get_listing_data = get_option( 'post_type_options' );

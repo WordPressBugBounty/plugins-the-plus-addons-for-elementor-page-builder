@@ -76,7 +76,7 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 		public function tp_settings_pro_link( $links ) {
 
 			/**Settings link.*/
-			$setting_link = sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'admin.php?page=theplus_options' ) ), __( 'Settings', 'tpebl' ) );
+			$setting_link = sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'admin.php?page=theplus_welcome_page' ) ), __( 'Settings', 'tpebl' ) );
 			$links[]      = $setting_link;
 			
 			/**Need Help.*/

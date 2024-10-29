@@ -134,12 +134,12 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 
 				$ai_get_started_announcement = ( ! empty( $meta_value ) && ! empty( $meta_value['ai-get-started-announcement'] ) ) ? $meta_value['ai-get-started-announcement'] : 0;
 
-				if( '0' != $ai_get_started_announcement ){
-					$option_eop = get_option( 'tp_editor_onbording_popup' );
-					if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
-						include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
-					}
-				}
+				// if( '0' != $ai_get_started_announcement ){
+					// $option_eop = get_option( 'tp_editor_onbording_popup' );
+					// if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
+						// include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
+				// 	}
+				// }
 
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
 			}
