@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.3
+Stable tag: 6.0.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,6 +382,18 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.0.4 =
+Add : New Widget : Form 
+Add : Navigation Menu Lite : Mobile menu toggle bottom space option added
+Add : Post Content : CSS Improvement
+Update : Carousel Anything : Security Patch ( Low security )
+Update : Navigation Menu : Security Patch ( Low security )
+Update : Page Scroll : Security Patch ( Low security )
+Update : Switcher : Security Patch ( Low security )
+Update : Tabs/tours : Security Patch ( Low security )
+Update : Video Player : Language Compability
+Fix : Minor Bug Fixes & performance Improvements 
 
 = 6.0.3 =
 Update: Dashboard : White Label Condition Improvement

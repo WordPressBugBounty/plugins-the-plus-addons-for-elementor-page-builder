@@ -1013,9 +1013,16 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 
 						$full_page_anchors[] = $slideid;
 
-						$full_page_content     .= '<div class="section">';
-							$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates );
-						$full_page_content     .= '</div>';
+						$full_page_content .= '<div class="section">';
+
+							$template_status = get_post_status( $elem_templates );
+							if( 'publish' === $template_status ) {
+								$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates );
+							} else {
+								$full_page_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+							}
+
+						$full_page_content .= '</div>';
 
 						++$i;
 					}

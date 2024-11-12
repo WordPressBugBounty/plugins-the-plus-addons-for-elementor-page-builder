@@ -109,7 +109,7 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 				'tp_dark_mode' => '\TheplusAddons\Widgets\L_ThePlus_Dark_Mode',
 				'tp_dynamic_categories' => '\TheplusAddons\Widgets\L_ThePlus_Dynamic_Categories',
 				'tp_everest_form' => '\TheplusAddons\Widgets\L_ThePlus_Everest_form',
-				'tp_plus_form' => '\TheplusAddons\Widgets\L_ThePlus_Form_Widget',
+				'tp_plus_form' => '\TheplusAddons\Widgets\L_ThePlus_Plus_Form',
 				'tp_flip_box' => '\TheplusAddons\Widgets\L_ThePlus_Flip_Box',
 				'tp_gallery_listout' => '\TheplusAddons\Widgets\L_ThePlus_Gallery_ListOut',
 				'tp_gravity_form' => '\TheplusAddons\Widgets\L_ThePlus_Gravity_Form',

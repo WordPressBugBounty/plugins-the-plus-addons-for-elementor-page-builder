@@ -230,8 +230,7 @@ function l_theplus_loading_bg_image($postid=''){
 /**
  * Simple decrypt function
  * 
- * @since 5.5.4
- * @version 5.5.4
+ * @since 6.0.4
  */
 function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
 	// you may change these values to your own

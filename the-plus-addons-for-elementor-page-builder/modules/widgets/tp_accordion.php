@@ -5,7 +5,7 @@
  * Author: Theplus
  * Author URI: https://posimyth.com
  *
- * @package ThePlus
+ * @package the-plus-addons-for-elementor-page-builder
  */
 
 namespace TheplusAddons\Widgets;
@@ -1324,6 +1324,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->end_controls_section();
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**
@@ -1501,7 +1502,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 									if( 'publish' === $template_status ){
 										echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
 									}else{
-										echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Unauthorized Access</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+										echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 									}
 								} else {
 									$get_template_name = '';
@@ -1520,7 +1521,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 								if( 'publish' === $template_status ){
 									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
 								}else{
-									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Unauthorized Access</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 								}
 							}
 

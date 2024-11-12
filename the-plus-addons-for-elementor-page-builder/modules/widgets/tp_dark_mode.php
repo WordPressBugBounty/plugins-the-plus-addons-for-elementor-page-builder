@@ -906,6 +906,7 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		$this->end_controls_section();
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**

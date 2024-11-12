@@ -1867,6 +1867,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->end_controls_section();
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**
@@ -1884,7 +1885,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$style     = ! empty( $settings['style'] ) ? $settings['style'] : 'style-1';
 		$layout    = ! empty( $settings['layout'] ) ? $settings['layout'] : 'grid';
 		$post_tags = ! empty( $settings['post_tags'] ) ? $settings['post_tags'] : '';
-		
+		$content_html  = ! empty( $settings['content_html'] ) ? $settings['content_html'] : '';
+
 		$post_title_tag = ! empty( $settings['post_title_tag'] ) ? $settings['post_title_tag'] : 'h3';
 		$post_category  = ! empty( $settings['post_category'] ) ? $settings['post_category'] : '';
 
@@ -2093,6 +2095,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'display_post'        => esc_attr( $settings['display_posts'] ),
 					'animated_columns'    => esc_attr( $animated_columns ),
 					'post_load_more'      => esc_attr( $settings['load_more_post'] ),
+					'content_html'        => $content_html,
 
 					'display_post_meta'   => $display_post_meta,
 					'post_meta_tag_style' => $post_meta_tag_style,

@@ -3,26 +3,26 @@
  * The file that defines the core plugin class
  *
  * @link       https://posimyth.com/
- * @since      5.4.2
+ * @since      6.0.4
  *
  * @package    ThePlus
  */
 
 if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 
-    /**
+	/**
 	 * Handles form submission and email sending functionality.
 	 */
 	class Tp_Form_Handler {
 
-        /**
+		/**
 		 * Instance of the class.
 		 *
 		 * @var Tp_Form_Handler
 		 */
 		private static $instance;
 
-        /**
+		/**
 		 * Get the singleton instance of the class.
 		 *
 		 * @return Tp_Form_Handler
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 			return self::$instance;
 		}
 
-        /**
+		/**
 		 * Constructor to add necessary actions.
 		 */
 		public function __construct() {
@@ -42,13 +42,32 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 			add_action( 'wp_ajax_nopriv_tpae_form_submission', array( $this, 'tpae_form_submission' ) );
 		}
 
-        /**
+		/**
 		 * Handle form submission and process email sending.
 		 */
 		public function tpae_form_submission() {
 			$result['success'] = 0;
 
-			$nonce = isset( $_POST['security'] ) ? sanitize_text_field( wp_unslash( $_POST['security'] ) ) : '';
+			ob_start();
+
+			$email_data = isset( $_POST['email_data'] ) ? wp_unslash( $_POST['email_data'] ) : '';
+			if ( empty( $email_data ) ) {
+				ob_get_contents();
+				exit;
+				ob_end_clean();
+			}
+
+			$email_data = L_tp_plus_simple_decrypt( sanitize_text_field( $email_data ), 'dy' );
+			$email_data = json_decode( $email_data, true );
+			if ( ! is_array( $email_data ) ) {
+				ob_get_contents();
+				exit;
+				ob_end_clean();
+			}
+
+			$security_nonce = $email_data['nonce'];
+
+			$nonce = isset( $security_nonce ) ? sanitize_text_field( wp_unslash( $security_nonce ) ) : '';
 			if ( ! wp_verify_nonce( $nonce, 'tp-form-nonce' ) ) {
 				$result['message'] = 'Nonce verification failed.';
 				wp_send_json( $result );
@@ -76,48 +95,36 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 				}
 			}
 
-			$recaptcha_response = isset( $form_data['recaptcha_response'] ) ? sanitize_text_field( $form_data['recaptcha_response'] ) : '';
-			if ( ! empty( $recaptcha_response ) ) {
-				$recaptcha_secret_key = isset( $_POST['secretKey'] ) ? sanitize_text_field( wp_unslash( $_POST['secretKey'] ) ) : '';
-				$response             = wp_remote_post(
-					'https://www.google.com/recaptcha/api/siteverify',
-					array(
-						'body' => array(
-							'secret'   => $recaptcha_secret_key,
-							'response' => $recaptcha_response,
-						),
-					)
-				);
+			$redirection = ! empty( $email_data['redirection'] ) ? $email_data['redirection'] : null;
 
-				if ( is_wp_error( $response ) || ! json_decode( wp_remote_retrieve_body( $response ), true )['success'] ) {
-					$result['message'] = 'reCAPTCHA verification failed.';
-					wp_send_json( $result );
-				}
-			}
-
-			$email_data_json = isset( $_POST['email_data'] ) ? wp_unslash( $_POST['email_data'] ) : '';
-			$email_data      = json_decode( $email_data_json, true );
+			$redirection_url         = isset( $redirection['url'] ) ? $redirection['url'] : '';
+			$is_external_redirection = isset( $redirection['is_external'] ) ? $redirection['is_external'] : false;
 
 			$email_sent = false;
 
 			$email_subject = ! empty( $email_data['email_subject'] ) ? sanitize_text_field( $email_data['email_subject'] ) : '';
 
 			if ( ! empty( $email_data ) && ! empty( $email_subject ) ) {
-				$email_settings = $this->prepare_email_settings( $email_data, $form_data, $form_fields );
-				$email_sent     = $this->send_email( $email_settings );
+				$email_settings = $this->tpae_prepare_email_settings( $email_data, $form_data, $form_fields );
+				$email_sent     = $this->tpae_send_email( $email_settings );
 			}
 
 			$result = array(
 				'success' => 1,
 				'data'    => array(
-					'email_sent' => $email_sent,
+					'email_sent'  => $email_sent,
+					'redirection' => array(
+						'url'         => $redirection_url,
+						'is_external' => $is_external_redirection,
+					),
 				),
 				'message' => 'Email sent successfully.',
 			);
+
 			wp_send_json( $result );
 		}
 
-        /**
+		/**
 		 * Send email using wp_mail.
 		 *
 		 * @param array $email_data Array of email data.
@@ -125,7 +132,7 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 		 * @param array $form_fields Array of form fields.
 		 * @return bool Whether the email was sent successfully.
 		 */
-		private function prepare_email_settings( $email_data, $form_data, $form_fields ) {
+		private function tpae_prepare_email_settings( $email_data, $form_data, $form_fields ) {
 			$email_to        = ! empty( $email_data['email_to'] ) ? sanitize_email( $email_data['email_to'] ) : get_option( 'admin_email' );
 			$email_subject   = ! empty( $email_data['email_subject'] ) ? sanitize_text_field( $email_data['email_subject'] ) : 'New Form Submission';
 			$email_from      = ! empty( $email_data['email_from'] ) ? sanitize_email( $email_data['email_from'] ) : 'no-reply@example.com';
@@ -133,12 +140,13 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 			$email_reply_to  = ! empty( $email_data['email_reply_to'] ) ? sanitize_email( $email_data['email_reply_to'] ) : '';
 			$email_cc        = ! empty( $email_data['email_cc'] ) ? sanitize_email( $email_data['email_cc'] ) : '';
 			$email_bcc       = ! empty( $email_data['email_bcc'] ) ? sanitize_email( $email_data['email_bcc'] ) : '';
+			$email_heading   = ! empty( $email_data['email_heading'] ) ? sanitize_text_field( $email_data['email_heading'] ) : '';
 
 			$email_message = isset( $email_data['email_message'] ) && ! empty( $email_data['email_message'] )
 				? sanitize_text_field( $email_data['email_message'] )
 				: 'all-fields';
 
-			$email_message_content = $this->build_email_message( $form_data, $form_fields, $email_message );
+			$email_message_content = $this->tpae_build_email_message( $form_data, $form_fields, $email_message, $email_heading );
 
 			return array(
 				'email_to'        => $email_to,
@@ -149,60 +157,62 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 				'email_reply_to'  => $email_reply_to,
 				'email_cc'        => $email_cc,
 				'email_bcc'       => $email_bcc,
+				'email_heading'   => $email_heading,
 			);
 		}
 
-		private function build_email_message( $form_data, $form_fields, $shortcode = 'all-fields' ) {
-			if ( empty( $shortcode ) ) {
-				$shortcode = 'all-fields';
-			}
 
-			$message = '<h2>New Form Submission</h2>';
+		/**
+		 * Process Email Message: creates email message text
+		 *
+		 * @param array $form_data The form fields array.
+		 * @param array $form_fields The form data array.
+		 * @param array $email_message The form data array.
+		 * @param array $email_heading The form data array.
+		 */
+		private function tpae_build_email_message( $form_data, $form_fields, $email_message, $email_heading ) {
+			$email_message = strtolower( trim( $email_message ) );
 
-			if ( strtolower( $shortcode ) === 'all-fields' ) {
+			if ( '[all-values]' === $email_message ) {
+				$email_message = ! empty( $email_heading ) ? '<h2>' . esc_html( $email_heading ) . '</h2>' : '';
 				foreach ( $form_fields as $field ) {
-					if ( isset( $field['field_value'] ) && ! empty( $field['field_value'] ) ) {
-						$message .= '<p>' . wp_kses_post( $field['field_value'] ) . '</p>';
+					if ( isset( $field['field_id'] ) && isset( $field['field_value'] ) && ! empty( $field['field_value'] ) ) {
+						$field_label    = isset( $field['field_id'] ) ? $field['field_id'] : $field['field_id'];
+						$email_message .= '<p>' . wp_kses_post( $field['field_value'] ) . '</p>';
 					}
 				}
-			} else {
-				preg_match( '/field_id="([^"]+)"/', $shortcode, $matches );
-				$field_id_from_shortcode = isset( $matches[1] ) ? $matches[1] : '';
+			}
 
-				if ( empty( $field_id_from_shortcode ) ) {
-					$message .= '<p><strong>Error:</strong> Invalid shortcode format. No field ID found.</p>';
-				} else {
-					$matched_field_value = '';
+			$email_message = preg_replace_callback(
+				"/\[value_id=(\"|')([^\"']+)(\"|')\]/",
+				function ( $matches ) use ( $form_fields ) {
+					$field_id_from_shortcode = $matches[2];
+
 					foreach ( $form_fields as $field ) {
-
-						if ( isset( $field['field_id'] ) && strpos( $field['field_id'], $field_id_from_shortcode ) !== false ) {
-							$matched_field_value = wp_kses_post( $field['field_value'] );
-							$message            .= "<p><strong>{$field['field_id']}:</strong> $matched_field_value</p>";
-							break;
-						} elseif ( isset( $field['field_name'] ) && strpos( $field['field_name'], $field_id_from_shortcode ) !== false ) {
-							$matched_field_value = wp_kses_post( $field['field_value'] );
-							$message            .= "<p><strong>{$field['field_name']}:</strong> $matched_field_value</p>";
-							break;
+						if ( ( isset( $field['field_id'] ) && $field['field_id'] === $field_id_from_shortcode ) ||
+							( isset( $field['field_name'] ) && strpos( $field['field_name'], $field_id_from_shortcode ) !== false ) ) {
+							return wp_kses_post( $field['field_value'] );
 						}
 					}
 
-					if ( empty( $matched_field_value ) ) {
-						$message .= "<p><strong>Error:</strong> No valid data found for field ID '$field_id_from_shortcode'.</p>";
-					}
-				}
-			}
+					return "[form_id=\"$field_id_from_shortcode\"]";
+				},
+				$email_message
+			);
 
-			if ( empty( $message ) ) {
-				$message = '<p><strong>Error:</strong> No valid form data available.</p>';
-			}
-
-			return $message;
+			return $email_message;
 		}
 
-		private function send_email( $mail_conf ) {
+		/**
+		 * Send Email Messafe : Includes Email Configurations
+		 *
+		 * @param array $mail_conf The tpae_send_email array.
+		 */
+		private function tpae_send_email( $mail_conf ) {
 			$to      = $mail_conf['email_to'];
 			$subject = $mail_conf['email_subject'];
 			$message = $mail_conf['email_message'];
+
 			$headers = array(
 				'From: ' . $mail_conf['email_from_name'] . ' <' . $mail_conf['email_from'] . '>',
 				'Reply-To: ' . $mail_conf['email_reply_to'],

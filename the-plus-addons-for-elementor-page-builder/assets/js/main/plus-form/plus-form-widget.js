@@ -1,112 +1,86 @@
-(function($) {
+(function ($) {
     "use strict";
-    const WidgetFormHandler = function($scope, $) {
-        const container = $scope[0].querySelector('.tp-form-container');
-        const form = container.querySelector('.tp-form');
+    var WidgetFormHandler = function ($scope, $) {
+        var container = $scope[0].querySelector('.tpae-form-container');
+        var form = container.querySelector('.tpae-form');
 
-        if (!container) {
-            console.error('Container not found');
-            return;
-        }
+        var formdata = container.dataset.formdata ? JSON.parse(container.dataset.formdata) : {};
+        var requiredMask = formdata.Required_mask;
+        var emailData = container?.dataset?.emaildata ? JSON.parse(container.dataset.emaildata) : {};
 
-        const formdata = container.dataset.formdata ? JSON.parse(container.dataset.formdata) : {};
-        const requiredMask = formdata.Required_mask;
-        const emailData = container?.dataset?.emaildata ? JSON.parse(container.dataset.emaildata) : {};
-        const basicData = container?.dataset?.basic ? JSON.parse(container.dataset.basic) : {};
-        const redirect_url = emailData?.redirection || '';
-
-        // Show/hide required asterisks
-        const requiredAsterisks = container.querySelectorAll('.tp-required-asterisk');
-        requiredAsterisks.forEach(asterisk => {
+        var requiredAsterisks = container.querySelectorAll('.tpae-required-asterisk');
+        requiredAsterisks.forEach(function (asterisk) {
             asterisk.style.display = requiredMask === 'hide-asterisks' ? 'none' : 'inline';
         });
 
-        const recaptchaExists = form.querySelector('.g-recaptcha-response') !== null;
-        const recaptchaSiteKey = basicData?.recaptcha_site_key || '';
-        const invalidForm = formdata.invalid_form || "Invalid form submission.";
-        const successMessage = formdata.success_message || "Your message has been sent successfully.";
-        const formError = formdata.form_error || "There was an error with the form submission.";
-        const requiredFieldsError = formdata.required_fields || "Please fill in the required fields.";
-        const serverError = formdata.server_error || "Server error, please try again later.";
+        var invalidForm = formdata.invalid_form || "Invalid form submission.";
+        var successMessage = formdata.success_message || "Your message has been sent successfully.";
+        var formError = formdata.form_error || "There was an error with the form submission.";
+        var requiredFieldsError = formdata.required_fields || "Please fill in the required fields.";
+        var serverError = formdata.server_error || "Server error, please try again later.";
+        var isSubmitting = false;
 
-        let isSubmitting = false;
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevent default form submission right away
-            
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
             if (isSubmitting) return;
+
             isSubmitting = true;
             clearMessages();
-
-            let isValid = true;
-            const formData = {};
-            const formFields = [];
-
-            form.querySelectorAll('.tp-form-field').forEach(function(field) {
-                const input = field.querySelector('input, textarea');
-                const label = field.querySelector('label') ? field.querySelector('label').textContent.trim() : '';
-
+            var isValid = true;
+            var formData = {};
+            var formFields = [];
+            form.querySelectorAll('.tpae-form-field').forEach(function (field) {
+                var input = field.querySelector('input, textarea');
+                var label = field.querySelector('label') ? field.querySelector('label').textContent.trim() : '';
+                                
                 if (input) {
-                    const inputValue = input.value.trim();
-                    const inputID = input.getAttribute('id') || ''; // Get input ID
-                    const inputName = input.getAttribute('name') || ''; // Get input name
-                    
+                    var inputValue = input.value.trim();
+                    var inputID = input.getAttribute('id') || '';
+                    var inputName = input.getAttribute('name') || '';
                     formFields.push({
                         field_id: inputID,
                         field_name: inputName,
                         field_value: inputValue
                     });
-
                     if (input.required && inputValue === '') {
                         isValid = false;
-                        displayMessage(requiredFieldsError.replace('%field%', label), 'error');
+                        showFieldError(input, requiredFieldsError.replace('%field%', label));
                     }
+                    formData[input.name || label || input.id] = inputValue;
 
-                    formData[label || (input.name || input.id)] = inputValue;
                 }
             });
-
             if (!isValid) {
                 displayMessage(invalidForm, 'error');
                 isSubmitting = false;
-                return false;  // Stop execution and prevent default action
+                return false;
             }
 
-            // Handle reCAPTCHA
-            if (recaptchaExists) {
-                grecaptcha.ready(function() {
-                    grecaptcha.execute(recaptchaSiteKey, { action: 'submit' }).then(function(token) {
-                        formData['Recaptcha response'] = token;
-                        submitForm(formData, formFields);
-                    });
-                });
-            } else {
-                submitForm(formData, formFields);
-            }
+            submitForm(formData, formFields);
         });
 
-        const submitForm = (formData, formFields) => {            
+        var submitForm = function (formData, formFields) {
             $.ajax({
                 url: theplus_ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tpae_form_submission',
                     form_data: JSON.stringify(formData),
-                    email_data: JSON.stringify(emailData),
+                    email_data: emailData,
                     form_fields: JSON.stringify(formFields),
-                    secretKey: basicData.recaptcha_secret_key,
-                    security: basicData.nonce
+                    security: emailData.nonce
                 },
-                success: function(response) {
+                success: function (response) {
                     if (response?.success) {
                         if (response?.data?.email_sent) {
                             displayMessage(successMessage, 'success');
                             form.reset();
-                            if (emailData.redirection && emailData.redirection.url) {
-                                if (emailData.redirection.is_external) {
-                                    window.open(emailData.redirection.url, '_blank', 'noopener,noreferrer');
+                            var redirection_data = response?.data?.redirection;
+                            if (redirection_data && redirection_data.url) {
+                                if (redirection_data.is_external) {
+                                    window.open(redirection_data.url, '_blank', 'noopener,noreferrer');
                                 } else {
-                                    window.location.href = emailData.redirection.url;
+                                    window.location.href = redirection_data.url;
                                 }
                             }
                         } else {
@@ -116,26 +90,44 @@
                         displayMessage(formError.replace('%error%', response?.data?.message), 'error');
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     displayMessage(serverError.replace('%error%', error), 'error');
                 },
-                complete: function() {
+                complete: function () {
                     isSubmitting = false;
                 }
             });
-
-            return false;  // Return false at the end to prevent form refresh
+            return false;
         };
 
-        const clearMessages = () => {
-            const messages = form.querySelectorAll('.tp-form-message');
-            messages.forEach(message => message.remove());
+        var showFieldError = function (input, message) {
+            clearFieldError(input); 
+            var errorSpan = document.createElement('span');
+            errorSpan.className = 'tpae-field-error';
+            errorSpan.style.color = 'red';
+            errorSpan.textContent = message;
+            input.parentElement.appendChild(errorSpan);
         };
 
-        const displayMessage = (message, type = 'success') => {
+        var clearFieldError = function (input) {
+            var existingError = input.parentElement.querySelector('.tpae-field-error');
+            if (existingError) existingError.remove();
+        };
+
+        var clearMessages = function () {
+            form.querySelectorAll('.tpae-form-messages').forEach(function (message) {
+                message.remove();
+            });
+            form.querySelectorAll('.tpae-field-error').forEach(function (error) {
+                error.remove();
+            });
+        };
+
+        var displayMessage = function (message, type) {
+            type = type || 'success';
             clearMessages();
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `tp-form-message ${type}`;
+            var messageDiv = document.createElement('div');
+            messageDiv.className = 'tpae-form-message ' + type;
             messageDiv.style.color = type === 'success' ? 'green' : 'red';
             messageDiv.textContent = message;
             form.appendChild(messageDiv);
@@ -145,5 +137,4 @@
     window.addEventListener('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/tp-plus-form.default', WidgetFormHandler);
     });
-
 })(jQuery);

@@ -92,6 +92,9 @@
           reason_key: reason_key,
           reason_tp_found_a_better_plugin: formData.get('reason_tp_found_a_better_plugin'),
           reason_tp_other: formData.get('reason_tp_other'),
+          cur_datetime: formData.get('cur_datetime'),
+          user_email: formData.get('user_email'),
+          tpae_version: formData.get('tpae_version'),
           nonce: formData.get('nonce'),
         },
         beforeSend: function () {

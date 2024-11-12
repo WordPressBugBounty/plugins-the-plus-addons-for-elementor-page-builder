@@ -1627,11 +1627,20 @@ class L_ThePlus_Switcher extends Widget_Base {
 				$switcher .= '<div class="content-1">' . wp_kses_post( $content_a_desc ) . '</div>';
 			}
 
-			if ( 'template' === $content_a_source && 'manually' === $content_template_type && ! empty( $content_template_id ) ) {
-				$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ) );
-			} elseif ( 'template' === $content_a_source && ! empty( $content_a_template ) ) {
-				$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_a_template );
-			}
+			$template_a_status = get_post_status( $content_a_template );
+				if ( 'template' === $content_a_source && 'manually' === $content_template_type && ! empty( $content_template_id ) ) {
+					if( 'publish' === $template_a_status ) {
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ) );
+					} else {
+						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+					}
+				} elseif ( 'template' === $content_a_source && ! empty( $content_a_template ) ) {
+					if( 'publish' === $template_a_status ) {
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_a_template );
+					} else {
+						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+					}
+				}
 
 			$switcher .= '</div>';
 
@@ -1641,11 +1650,20 @@ class L_ThePlus_Switcher extends Widget_Base {
 				$switcher .= '<div class="content-2">' . wp_kses_post( $content_b_desc ) . '</div>';
 			}
 
-			if ( 'template' === $content_b_source && 'manually' === $content_b_template_type && ! empty( $content_b_template_id ) ) {
-				$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_b_template_id, 24, -2 ) );
-			} elseif ( 'template' === $content_b_source ) {
-				$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
-			}
+			$template_b_status = get_post_status( $content_b_template );
+				if ( 'template' === $content_b_source && 'manually' === $content_b_template_type && ! empty( $content_b_template_id ) ) {
+					if( 'publish' === $template_b_status ) {
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_b_template_id, 24, -2 ) );
+					} else {
+						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+					}
+				} elseif ( 'template' === $content_b_source ) {
+					if( 'publish' === $template_b_status ) {
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
+					} else {
+						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+					}
+				}
 
 				$switcher .= '</div>';
 

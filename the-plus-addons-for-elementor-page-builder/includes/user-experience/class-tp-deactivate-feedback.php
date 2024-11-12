@@ -198,6 +198,12 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 			$site_url = home_url();
 			$security = wp_create_nonce( 'tp-deactivate-feedback' );
 
+			$current_datetime = date('Y-m-d H:i:s');
+			$current_user = wp_get_current_user();
+			$user_email   = $current_user->user_email; 
+			$tpae_version = L_THEPLUS_VERSION;
+
+
 			?>
 
 			<div id="tp-feedback-dialog-wrapper">
@@ -238,6 +244,9 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 				<form id="tp-feedback-dialog-form" method="post">
 					<input type="hidden" name="site_url" value="<?php echo esc_url( $site_url ); ?>" />
 					<input type="hidden" name="nonce" value="<?php echo esc_attr( $security ); ?>" />
+					<input type="hidden" name="cur_datetime" value="<?php echo esc_attr( $current_datetime ); ?>" />
+					<input type="hidden" name="user_email" value="<?php echo esc_attr( $user_email ); ?>" />
+					<input type="hidden" name="tpae_version" value="<?php echo esc_attr( $tpae_version ); ?>" />
 
 					<div id="tp-feedback-dialog-form-caption">
 						<?php echo esc_html__( " If you have a moment, please let us know why you're deactivating The Plus Addons for Elementor :", 'tpebl' ); ?>
@@ -289,12 +298,20 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 
 			$reason_tp_found_a_better_plugin = ! empty( $_POST['reason_tp_found_a_better_plugin'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_tp_found_a_better_plugin'] ) ) : '';
 
+			$cur_datetime = ! empty( $_POST['cur_datetime'] ) ? sanitize_text_field( wp_unslash( $_POST['cur_datetime'] ) ) : '';
+			$user_email   = ! empty( $_POST['user_email'] ) ? sanitize_text_field( wp_unslash( $_POST['user_email'] ) ) : '';
+			$tpae_version = ! empty( $_POST['tpae_version'] ) ? sanitize_text_field( wp_unslash( $_POST['tpae_version'] ) ) : '';
+
 			$api_params = array(
 				'site_url'                        => $site_url,
 				'reason_key'                      => $reason_key,
 				'reason_tp_other'                 => $reason_tp_other,
 
 				'reason_tp_found_a_better_plugin' => $reason_tp_found_a_better_plugin,
+
+				'cur_datetime' => $cur_datetime,
+				'user_email'   => $user_email,
+				'tpae_version' => $tpae_version,
 			);
 
 			$response = wp_remote_post(

@@ -1741,6 +1741,28 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'toggle_menu_gap',
+			array(
+				'label'      => __( 'Toggle Bottom Space', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 200,
+						'step' => 1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => '',
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .plus-navigation-wrap .plus-mobile-menu-content' => 'margin-top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);		
 		$this->add_responsive_control(
 			'mobile_menu_border_main',
 			array(
@@ -2287,6 +2309,7 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		);
 		$this->end_controls_section();
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**
@@ -2416,8 +2439,17 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						}
 						?>
 						<?php
-						if ( 'template-menu' === $menu_content && ! empty( $settings['mobile_navbar_template'] ) ) {
-							echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $settings['mobile_navbar_template'] ) . '</div>';
+
+						$mobile_navbar_template = ! empty( $settings['mobile_navbar_template'] ) ? $settings['mobile_navbar_template'] : '';
+
+						$template_status = get_post_status( $mobile_navbar_template );
+
+						if ( 'template-menu' === $menu_content && ! empty( $mobile_navbar_template ) ) {
+							if( 'publish' === $template_status ) {
+								echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $mobile_navbar_template ) . '</div>';
+							} else {
+								echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+							}
 						}
 						?>
 					</div>
@@ -2570,7 +2602,12 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					if ( empty( $sett ) || empty( $item['moblieMmenu'] && $item['moblieMmenu'] == 'no' ) ) {
 						$start_Li .= '<div class="plus-megamenu-content">';
 						if ( ( $item['blockTemp'] ) && $item['blockTemp'] != '0' ) {
-							$start_Li .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['blockTemp'] ) . '</div>';
+							$template_status = get_post_status( $item['blockTemp'] );
+							if( 'publish' === $template_status ) {
+								$start_Li .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['blockTemp'] ) . '</div>';
+							} else {
+								$start_Li .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+							}
 						}
 						$start_Li .= '</div>';
 					}

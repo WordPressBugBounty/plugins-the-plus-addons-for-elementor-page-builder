@@ -952,6 +952,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		/*carousel option*/
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**
@@ -1059,10 +1060,18 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 					<div <?php echo $this->get_render_attribute_string( $tab_content_setting_key ); ?>>
 						<div class="slide-content-inner">
 							<?php
-							if ( ( ! empty( $item['content_template_type'] ) && 'manually' === $item['content_template_type'] ) && ! empty( $item['content_template_id'] ) ) {
-								echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
-							} elseif ( ! empty( $item['content_template'] ) ) {
-								echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+
+							$content_template = isset( $item['content_template'] ) ? intval( $item['content_template'] ) : 0;
+							$template_status  = get_post_status( $content_template );
+
+							if( 'publish' === $template_status ){
+								if ( ( ! empty( $item['content_template_type'] ) && 'manually' === $item['content_template_type'] ) && ! empty( $item['content_template_id'] ) ) {
+									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+								} elseif ( ! empty( $item['content_template'] ) ) {
+									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+								}
+							} else {
+								echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 							}
 							?>
 													

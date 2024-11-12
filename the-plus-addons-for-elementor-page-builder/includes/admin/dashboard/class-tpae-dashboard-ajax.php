@@ -174,6 +174,11 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					'status'      => '',
 					'plugin_slug' => 'nexter-extension/nexter-extension.php',
 				),
+				array(
+					'name'        => 'envato-elements',
+					'status'      => '',
+					'plugin_slug' => 'envato-elements/envato-elements.php',
+				),
 			);
 
 			$plugin_details = $this->tpae_check_plugins_depends( $plugins );
@@ -597,7 +602,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 			$rv = $this->tpae_prev_version();
 			if ( empty( $current_ver ) || ! in_array( $current_ver, $rv ) ) {
-				$response = $this->tpae_set_response( false, 'Invalid nonce.', 'Try selecting another version.' );
+				return $this->tpae_set_response( false, 'Invalid nonce.', 'Try selecting another version.' );
 			}
 
 			$plugin_slug = basename( L_THEPLUS_PNAME, '.php' );
@@ -638,7 +643,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this_pluginName ),
 				'plugin' => $this_pluginName,
 				'nonce'  => 'upgrade-plugin_' . $this_pluginName,
-				'title'  => '<img src="' . $logo_url . '" alt="theplus-logo"><div class="theplus-rb-subtitle">' . esc_html__( 'Rollback to Previous Version', 'tpebl' ) . '</div>',
+				'title'  => '<img src="' . esc_url( $logo_url ) . '" alt="theplus-logo"><div class="theplus-rb-subtitle">' . esc_html__( 'Rollback to Previous Version', 'tpebl' ) . '</div>',
 			);
 
 			$upgrader_plugin = new \Plugin_Upgrader( new \Plugin_Upgrader_Skin( $args ) );

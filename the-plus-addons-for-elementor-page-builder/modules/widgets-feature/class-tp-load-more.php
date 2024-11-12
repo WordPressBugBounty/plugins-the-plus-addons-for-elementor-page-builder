@@ -142,6 +142,10 @@ if ( ! class_exists( 'Tp_load_more' ) ) {
 			$title_desc_word_break = isset( $load_attr['title_desc_word_break'] ) ? wp_unslash( $load_attr['title_desc_word_break'] ) : '';
 			$display_post_category = isset( $load_attr['display_post_category'] ) ? wp_unslash( $load_attr['display_post_category'] ) : '';
 
+			if ( 'blogs' === $post_load ) {
+                $content_html = isset( $load_attr['content_html'] ) ? wp_unslash( $load_attr['content_html'] ) : '';
+            }
+
 			$desktop_class = '';
 			$tablet_class  = '';
 			$mobile_class  = '';

@@ -2021,6 +2021,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		$this->end_controls_section();
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**
@@ -2207,23 +2208,41 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 			if ( 'content' === $con_sors && ! empty( $tab_con ) ) {
 				$tab_content .= '<div class="plus-content-editor">' . $this->parse_text_editor( $tab_con ) . '</div>';
 			}
+
+			$content_template = isset( $item['content_template'] ) ? intval( $item['content_template'] ) : 0;
+
 			if ( ( ! empty( $item['content_source'] ) && 'page_template' === $item['content_source'] ) && ( ! empty( $item['content_template_type'] ) && 'manually' === $item['content_template_type'] ) && ! empty( $item['content_template_id'] ) ) {
 				if ( \Elementor\Plugin::$instance->editor->is_edit_mode() && 'page_template' === $item['content_source'] && ! empty( $item['content_template_id'] ) ) {
 					if ( ! empty( $item['backend_preview_template'] ) && 'yes' === $item['backend_preview_template'] ) {
-						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+						$template_status = get_post_status( $content_template );
+						if( 'publish' === $template_status ) {
+							$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+						} else {
+							$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+						}
 					} else {
 						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $item['content_template_id'] ) . '"</b></div><div class="preview-temp-notice-desc"><b>Note :</b> We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.</div></div>';
 					}
 				} elseif ( 'page_template' === $item['content_source'] && ! empty( $item['content_template_id'] ) ) {
 
-					$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+					$template_status = get_post_status( $content_template );
+					if( 'publish' === $template_status ) {
+						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+					} else {
+						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+					}
 				}
-			} elseif ( \Elementor\Plugin::$instance->editor->is_edit_mode() && 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) {
+			} elseif ( \Elementor\Plugin::$instance->editor->is_edit_mode() && 'page_template' === $item['content_source'] && ! empty( $content_template ) ) {
 				if ( ! empty( $item['backend_preview_template'] ) && 'yes' === $item['backend_preview_template'] ) {
-					$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+					$template_status = get_post_status( $content_template );
+					if( 'publish' === $template_status ) {
+						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+					} else {
+						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+					}
 				} else {
 					$get_template_name = '';
-					$get_template_id   = $item['content_template'];
+					$get_template_id   = $content_template;
 					if ( ! empty( $templates ) && ! empty( $get_template_id ) ) {
 						foreach ( $templates as $value ) {
 							if ( $value['template_id'] === $get_template_id ) {
@@ -2234,9 +2253,14 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 
 					$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>Note :</b> We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.</div></div>';
 				}
-			} elseif ( 'page_template' === $item['content_source'] && ! empty( $item['content_template'] ) ) {
+			} elseif ( 'page_template' === $item['content_source'] && ! empty( $content_template ) ) {
 
-				$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+				$template_status = get_post_status( $content_template );
+				if( 'publish' === $template_status ) {
+					$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+				} else {
+					$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+				}
 			}
 				$tab_content .= '</div>';
 				endforeach;
