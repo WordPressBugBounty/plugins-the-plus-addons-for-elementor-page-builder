@@ -542,7 +542,7 @@ a.plus-menu-icon-thumbnail.button.change-icon {
 
 /**Docs link Section*/
 .tp-docs-link{
-    color: #515962 !important;
+    color: var(--e-a-color-txt-accent);
 }
 .tp-docs-link:hover{
     color: #2563eb !important;

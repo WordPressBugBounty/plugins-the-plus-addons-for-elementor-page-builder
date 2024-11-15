@@ -66,7 +66,7 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_categories() {
-		return array( 'plus-adapted' );
+		return array( 'plus-forms' );
 	}
 
 	/**

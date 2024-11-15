@@ -281,7 +281,7 @@
 
 /** docs link section */
 .tp-docs-link{
-    color: #BABFCD !important;
+    color: var(--e-a-color-txt-accent);
 }
 .tp-docs-link:hover{
     color: #2563eb !important;

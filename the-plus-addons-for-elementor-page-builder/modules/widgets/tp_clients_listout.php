@@ -1140,7 +1140,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$query_args = $this->get_query_args();
 		$query      = new \WP_Query( $query_args );
 
-		$clients_name     = l_theplus_client_post_name();
+		$clients_name     = $this->l_theplus_client_post_name();
 		$clients_taxonomy = $this->tpae_get_post_cat();
 
 		$style  = ! empty( $settings['style'] ) ? $settings['style'] : 'style-1';
@@ -1328,7 +1328,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$category = array();
 
-		$clients_name     = l_theplus_client_post_name();
+		$clients_name     = $this->l_theplus_client_post_name();
 		$clients_taxonomy = $this->tpae_get_post_cat();
 
 		$terms = get_terms(
@@ -1452,5 +1452,34 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Get post-type name
+	 *
+	 * @since 6.0.5
+	 */
+	public function l_theplus_client_post_name() {
+		$post_type_options = get_option( 'post_type_options' );
+		$client_post_type  = ! empty( $post_type_options['client_post_type'] ) ? $post_type_options['client_post_type'] : '';
+
+		$post_name = 'theplus_clients';
+
+		if( isset( $client_post_type ) && ! empty( $client_post_type ) ) {
+			if ( 'themes' === $client_post_type ) {
+				$post_name = l_theplus_get_option( 'post_type', 'client_theme_name' );
+			} elseif ( 'plugin' === $client_post_type ) {
+				$get_name = l_theplus_get_option( 'post_type', 'client_plugin_name' );
+				if( isset( $get_name ) && ! empty( $get_name ) ) {
+					$post_name = l_theplus_get_option( 'post_type', 'client_plugin_name' );
+				}
+			} elseif ( 'themes_pro' === $client_post_type ) {
+				$post_name = 'clients';
+			}
+		} else {
+			$post_name = 'theplus_clients';
+		}
+
+		return $post_name;
 	}
 }

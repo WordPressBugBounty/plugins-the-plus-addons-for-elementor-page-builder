@@ -2175,7 +2175,7 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 	protected function render() {
 		$settings      = $this->get_settings_for_display();
 		$query         = $this->get_query_args();
-		$post_name     = l_theplus_testimonial_post_name();
+		$post_name     = $this->l_theplus_testimonial_post_name();
 		$taxonomy_name = $this->tpae_get_post_cat();
 
 		$style          = ! empty( $settings['style'] ) ? $settings['style'] : '';
@@ -2374,7 +2374,7 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 	 */
 	protected function get_query_args() {
 		$settings      = $this->get_settings_for_display();
-		$post_name     = l_theplus_testimonial_post_name();
+		$post_name     = $this->l_theplus_testimonial_post_name();
 		$taxonomy_name = $this->tpae_get_post_cat();
 		$terms         = get_terms(
 			array(
@@ -2550,5 +2550,34 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Get post-type name
+	 *
+	 * @since 6.0.5
+	 */
+	public function l_theplus_testimonial_post_name() {
+		$post_type_options = get_option( 'post_type_options' );
+		$testi_post_type   = ! empty( $post_type_options['testimonial_post_type'] ) ? $post_type_options['testimonial_post_type'] : '';
+
+		$post_name = 'theplus_testimonial';
+
+		if ( isset( $testi_post_type ) && ! empty( $testi_post_type ) ) {
+			if ( 'themes' === $testi_post_type ) {
+				$post_name = l_theplus_get_option( 'post_type', 'testimonial_theme_name' );
+			} elseif ( 'plugin' === $testi_post_type ) {
+				$get_name = l_theplus_get_option( 'post_type', 'testimonial_plugin_name' );
+				if ( isset( $get_name ) && ! empty( $get_name ) ) {
+					$post_name = l_theplus_get_option( 'post_type', 'testimonial_plugin_name' );
+				}
+			} elseif ( 'themes_pro' === $testi_post_type ) {
+				$post_name = 'testimonial';
+			}
+		} else {
+			$post_name = 'theplus_testimonial';
+		}
+
+		return $post_name;
 	}
 }

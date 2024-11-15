@@ -79,7 +79,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-adapted' );
+		return array( 'plus-forms' );
 	}
 
 	/**

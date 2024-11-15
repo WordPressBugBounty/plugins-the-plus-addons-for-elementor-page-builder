@@ -75,7 +75,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	 * @since   6.0.4
 	 */
 	public function get_categories() {
-		return array( 'plus-listing' );
+		return array( 'plus-forms' );
 	}
 
 	/**

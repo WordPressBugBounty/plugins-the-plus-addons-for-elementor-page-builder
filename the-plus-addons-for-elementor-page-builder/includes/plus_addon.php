@@ -79,66 +79,6 @@ function l_theplus_get_option($options_type,$field){
 	return $values;
 }
 
-function l_theplus_testimonial_post_name(){
-	$post_type_options=get_option( 'post_type_options' );
-	$testi_post_type=!empty($post_type_options['testimonial_post_type']) ? $post_type_options['testimonial_post_type'] : '';
-	$post_name='theplus_testimonial';
-	if(isset($testi_post_type) && !empty($testi_post_type)){
-		if($testi_post_type=='themes'){
-			$post_name=l_theplus_get_option('post_type','testimonial_theme_name');
-		}elseif($testi_post_type=='plugin'){
-			$get_name=l_theplus_get_option('post_type','testimonial_plugin_name');
-			if(isset($get_name) && !empty($get_name)){
-				$post_name=l_theplus_get_option('post_type','testimonial_plugin_name');
-			}
-		}elseif($testi_post_type=='themes_pro'){
-			$post_name='testimonial';
-		}
-	}else{
-		$post_name='theplus_testimonial';
-	}
-	return $post_name;
-}
-function l_theplus_client_post_name(){
-	$post_type_options=get_option( 'post_type_options' );
-	$client_post_type=!empty($post_type_options['client_post_type']) ? $post_type_options['client_post_type'] : '';
-	$post_name='theplus_clients';
-	if(isset($client_post_type) && !empty($client_post_type)){
-		if($client_post_type=='themes'){
-			$post_name=l_theplus_get_option('post_type','client_theme_name');
-		}elseif($client_post_type=='plugin'){
-			$get_name=l_theplus_get_option('post_type','client_plugin_name');
-			if(isset($get_name) && !empty($get_name)){
-				$post_name=l_theplus_get_option('post_type','client_plugin_name');
-			}
-		}elseif($client_post_type=='themes_pro'){
-			$post_name='clients';
-		}
-	}else{
-		$post_name='theplus_clients';
-	}
-	return $post_name;
-}
-function l_theplus_team_member_post_name(){
-	$post_type_options=get_option( 'post_type_options' );
-	$team_post_type=!empty($post_type_options['team_member_post_type']) ? $post_type_options['team_member_post_type'] : '';
-	$post_name='theplus_team_member';
-	if(isset($team_post_type) && !empty($team_post_type)){
-		if($team_post_type=='themes'){
-			$post_name=l_theplus_get_option('post_type','team_member_theme_name');
-		}elseif($team_post_type=='plugin'){
-			$get_name=l_theplus_get_option('post_type','team_member_plugin_name');
-			if(isset($get_name) && !empty($get_name)){
-				$post_name=l_theplus_get_option('post_type','team_member_plugin_name');
-			}
-		}elseif($team_post_type=='themes_pro'){
-			$post_name='team_member';
-		}
-	}else{
-		$post_name='theplus_team_member';
-	}
-	return $post_name;
-}
 function l_theplus_styling_option(){ 
 	$theplus_styling_data=get_option( 'theplus_styling_data' );
 	

@@ -1618,7 +1618,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		$style      = ! empty( $settings['style'] ) ? $settings['style'] : 'style-1';
 		$layout     = ! empty( $settings['layout'] ) ? $settings['layout'] : '';
 
-		$team_name     = l_theplus_team_member_post_name();
+		$team_name     = $this->l_theplus_team_member_post_name();
 		$team_taxonomy = $this->tpae_get_post_cat();
 
 		$display_thumbnail = ! empty( $settings['display_thumbnail'] ) ? $settings['display_thumbnail'] : '';
@@ -1807,7 +1807,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 	 */
 	protected function get_query_args() {
 		$settings  = $this->get_settings_for_display();
-		$team_name = l_theplus_team_member_post_name();
+		$team_name = $this->l_theplus_team_member_post_name();
 
 		$team_taxonomy = $this->tpae_get_post_cat();
 
@@ -2063,5 +2063,34 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Get post-type name
+	 *
+	 * @since 6.0.5
+	 */
+	public function l_theplus_team_member_post_name() {
+		$post_type_options = get_option( 'post_type_options' );
+		$team_post_type    = ! empty( $post_type_options['team_member_post_type'] ) ? $post_type_options['team_member_post_type'] : '';
+
+		$post_name = 'theplus_team_member';
+
+		if ( isset( $team_post_type ) && ! empty( $team_post_type ) ) {
+			if ( 'themes' === $team_post_type ) {
+				$post_name = l_theplus_get_option( 'post_type', 'team_member_theme_name' );
+			} elseif ( 'plugin' === $team_post_type ) {
+				$get_name = l_theplus_get_option( 'post_type', 'team_member_plugin_name' );
+				if ( isset( $get_name ) && ! empty( $get_name ) ) {
+					$post_name = l_theplus_get_option( 'post_type', 'team_member_plugin_name' );
+				}
+			} elseif ( 'themes_pro' === $team_post_type ) {
+				$post_name = 'team_member';
+			}
+		} else {
+			$post_name = 'theplus_team_member';
+		}
+
+		return $post_name;
 	}
 }

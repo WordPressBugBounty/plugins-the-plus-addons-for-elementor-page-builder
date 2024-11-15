@@ -111,6 +111,12 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 		 */
 		public function tp_notices_manage() {
 			
+			$envato_plugins = array(
+				'name'        => 'envato-elements',
+				'status'      => '',
+				'plugin_slug' => 'envato-elements/envato-elements.php',
+			);
+
 			if ( is_admin() && current_user_can( 'manage_options' ) ) {
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-plugin-page.php';
 
@@ -123,7 +129,6 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 				/**Remove Key In Databash*/
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-remove.php';
 			}
-
 			// if ( is_admin() && current_user_can( 'install_plugins' ) ) {.
 				// include L_THEPLUS_PATH . 'includes/notices/class-tp-tpag-install-notice.php';
 			// }.
@@ -134,12 +139,16 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 
 				$ai_get_started_announcement = ( ! empty( $meta_value ) && ! empty( $meta_value['ai-get-started-announcement'] ) ) ? $meta_value['ai-get-started-announcement'] : 0;
 
-				// if( '0' != $ai_get_started_announcement ){
-					// $option_eop = get_option( 'tp_editor_onbording_popup' );
-					// if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
-						// include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
-				// 	}
-				// }
+				if( '0' != $ai_get_started_announcement ){
+					$envato_details = $this->tpae_check_plugins_depends( $envato_plugins );
+
+					if( !empty( $envato_details[0]['status'] ) && 'unavailable' == $envato_details[0]['status'] ){
+						$option_eop = get_option( 'tp_editor_onbording_popup' );
+						if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
+							include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
+						}
+					}
+				}
 
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
 			}
@@ -180,6 +189,39 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 *
+		 * It is Use for Check Plugin Dependency of template.
+		 *
+		 * @since 6.0.0
+		 */
+		public function tpae_check_plugins_depends( $plugin ) {
+			$update_plugin = array();
+
+			if ( ! function_exists( 'get_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+			
+			$all_plugins = get_plugins();
+
+			$pluginslug = ! empty( $plugin['plugin_slug'] ) ? sanitize_text_field( wp_unslash( $plugin['plugin_slug'] ) ) : '';
+
+			if ( ! is_plugin_active( $pluginslug ) ) {
+				if ( ! isset( $all_plugins[ $pluginslug ] ) ) {
+						$plugin['status'] = 'unavailable';
+				} else {
+					$plugin['status'] = 'inactive';
+				}
+
+				$update_plugin[] = $plugin;
+			} elseif ( is_plugin_active( $pluginslug ) ) {
+				$plugin['status'] = 'active';
+				$update_plugin[]  = $plugin;
+			}
+
+			return $update_plugin;
 		}
 
 		/**

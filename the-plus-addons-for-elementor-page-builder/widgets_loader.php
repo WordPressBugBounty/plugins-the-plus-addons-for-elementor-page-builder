@@ -342,93 +342,37 @@ final class L_Theplus_Element_Load {
 	 * This method is responsible for adding a custom category to the Elementor Page Builder
 	 * for PlusEssential elements.
 	 *
-	 * @since 1.0.0
+	 * @since 6.0.5
 	 */
 	public function add_elementor_category() {
 
 		$elementor = \Elementor\Plugin::$instance;
 
-		// Add elementor category.
-		$elementor->elements_manager->add_category(
-			'plus-essential',
-			array(
-				'title' => esc_html__( 'Plus Essential', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-listing',
-			array(
-				'title' => esc_html__( 'Plus Listing', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-creatives',
-			array(
-				'title' => esc_html__( 'Plus Creatives', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-tabbed',
-			array(
-				'title' => esc_html__( 'Plus Tabbed', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-adapted',
-			array(
-				'title' => esc_html__( 'Plus Adapted', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-header',
-			array(
-				'title' => esc_html__( 'Plus Header', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-builder',
-			array(
-				'title' => esc_html__( 'Plus Builder', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-social',
-			array(
-				'title' => esc_html__( 'Plus Social', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-woo-builder',
-			array(
-				'title' => esc_html__( 'Plus WooCommerce', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
-		$elementor->elements_manager->add_category(
-			'plus-depreciated',
-			array(
-				'title' => esc_html__( 'Plus Depreciated', 'tpebl' ),
-				'icon'  => 'fa fa-plug',
-			),
-			1
-		);
+		$plus_categories = array(
+            'plus-essential'   => array( 'title' => 'Plus Essential', 'icon'  => 'fa fa-plug' ),
+            'plus-listing'     => array( 'title' => 'Plus Listing', 'icon'  => 'fa fa-plug' ),
+            'plus-creatives'   => array( 'title' => 'Plus Creatives', 'icon'  => 'fa fa-plug' ),
+            'plus-forms'   	   => array( 'title' => 'Plus Forms', 'icon'  => 'fa fa-plug' ),
+            'plus-tabbed'      => array( 'title' => 'Plus Tabbed', 'icon'  => 'fa fa-plug' ),
+            'plus-adapted'     => array( 'title' => 'Plus Adapted', 'icon'  => 'fa fa-plug' ),
+            'plus-header'      => array( 'title' => 'Plus Header', 'icon'  => 'fa fa-plug' ),
+            'plus-builder'     => array( 'title' => 'Plus Builder', 'icon'  => 'fa fa-plug' ),
+            'plus-social'      => array( 'title' => 'Plus Social', 'icon'  => 'fa fa-plug' ),
+            'plus-woo-builder' => array( 'title' => 'Plus WooCommerce', 'icon'  => 'fa fa-plug' ),
+            'plus-depreciated' => array( 'title' => 'Plus Depreciated', 'icon'  => 'fa fa-plug' ),
+        );
+
+        foreach ( $plus_categories as $index => $plus_widgets ) {
+            $elementor->elements_manager->add_category(
+                $index,
+                array(
+                    'title' => esc_html__( $plus_widgets['title'], 'tpebl' ),
+                    'icon'  => $plus_widgets['icon'],
+                ),
+                1
+            );
+        }
+
 	}
 }
 

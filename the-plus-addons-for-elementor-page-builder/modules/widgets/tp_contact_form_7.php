@@ -76,7 +76,7 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-adapted' );
+		return array( 'plus-forms' );
 	}
 
 	/**
