@@ -290,7 +290,7 @@ final class L_Theplus_Element_Load {
 	 *
 	 * @since 1.0.0
 	 */
-	public function theplus_elementor_admin_css() {
+	public function theplus_elementor_admin_css( $hook ) {
 
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_script( 'theplus-admin-js', L_THEPLUS_ASSETS_URL . 'js/admin/theplus-admin.js', array(), L_THEPLUS_VERSION, false );
@@ -299,7 +299,10 @@ final class L_Theplus_Element_Load {
 		var theplus_ajax_post_url = "' . admin_url( 'admin-post.php' ) . '";
         var theplus_nonce = "' . wp_create_nonce( 'theplus-addons' ) . '";';
 
-		echo wp_print_inline_script_tag( $js_inline );
+		if( 'widgets.php' !== $hook ){
+			echo wp_print_inline_script_tag( $js_inline );
+		}
+
 	}
 
 	/**

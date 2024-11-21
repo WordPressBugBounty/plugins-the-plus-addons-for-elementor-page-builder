@@ -81,10 +81,24 @@ class L_ThePlus_Block_Quote extends Widget_Base {
 		return array( 'Quotes', 'Quote box', 'Quote widget', 'Testimonials', 'Testimonial box', 'Testimonial widget', 'Customer reviews', 'Review box', 'Review widget', 'Feedback box', 'Feedback widget', 'Comment box', 'Comment widget', 'Opinion box', 'Opinion widget', 'Recommendation box', 'Recommendation widget', 'Rating box', 'Rating box' );
 	}
 
+	/**
+	 * Show need help URL for user.
+	 *
+	 * @since 6.0.6
+	 */
 	public function get_custom_help_url() {
 		$help_url = $this->tp_help;
 
 		return esc_url( $help_url );
+	}
+
+	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
 	}
 
 	/**

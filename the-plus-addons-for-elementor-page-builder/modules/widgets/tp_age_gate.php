@@ -82,10 +82,24 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		return array( 'Age Gate', 'Age Verification', 'Age Restriction', 'Age Confirmation', 'Age Check', 'Age Limit', 'Age Requirement' );
 	}
 
+	/**
+	 * Show need help URL for user.
+	 *
+	 * @since 6.0.6
+	 */
 	public function get_custom_help_url() {
 		$help_url = $this->tp_help;
 
 		return esc_url( $help_url );
+	}
+
+	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
 	}
 
 	/**

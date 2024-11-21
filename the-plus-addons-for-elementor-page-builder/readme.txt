@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.5
+Stable tag: 6.0.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,8 +308,6 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Custom CSS(Section & Column) for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#custom-css?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-Best Alternative for Essential Addons, Happy Addons, Royal Addons, Premium Addons, ElementsKit, Powerpack Addon.
-
 ###🔍 OUR PRODUCTS
 <strong>[🥇 The Plus Blocks for Gutenberg](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
 
@@ -382,6 +380,29 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.0.6 =
+Add : Form Widget : Select field
+Add : Form Widget : Date field
+Add : Form Widget : Time field
+Update : TP Text Block  : Compatibility for Widget Output Caching for TTFB
+Update : Age gate  : Compatibility for Widget Output Caching for TTFB
+Update : Blockquote  : Compatibility for Widget Output Caching for TTFB
+Update : Contact form 7  : Compatibility for Widget Output Caching for TTFB
+Update : Dark Mode  : Compatibility for Widget Output Caching for TTFB
+Update : Everest Form  : Compatibility for Widget Output Caching for TTFB
+Update : Gravity Form  : Compatibility for Widget Output Caching for TTFB
+Update : Heading Animation  : Compatibility for Widget Output Caching for TTFB
+Update : Hovercard   : Compatibility for Widget Output Caching for TTFB
+Update : Meeting Scheduler  : Compatibility for Widget Output Caching for TTFB
+Update : Message Box  : Compatibility for Widget Output Caching for TTFB
+Update : Ninja Form : Compatibility for Widget Output Caching for TTFB
+Update : Form Widget : Compatibility for Widget Output Caching for TTFB
+Update : Progress Bar : Compatibility for Widget Output Caching for TTFB
+Update : Smooth Scroll : Compatibility for Widget Output Caching for TTFB
+Update : Syntax Highlighter : Compatibility for Widget Output Caching for TTFB
+Update : WP Form : Compatibility for Widget Output Caching for TTFB
+Fix : Minor Bug Fixes & performance Improvements
 
 = 6.0.5 =
 Improvement : Client Listing : File Structure

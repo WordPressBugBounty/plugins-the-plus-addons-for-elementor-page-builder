@@ -82,10 +82,24 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		return array( 'Dark mode', 'Night mode', 'Dark theme', 'Night theme', 'Dark widget', 'Night widget', 'Elementor dark mode', 'Elementor night mode' );
 	}
 
+	/**
+	 * Show need help URL for user.
+	 *
+	 * @since 6.0.6
+	 */
 	public function get_custom_help_url() {
 		$help_url = $this->tp_help;
 
 		return esc_url( $help_url );
+	}
+
+	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
 	}
 
 	/**

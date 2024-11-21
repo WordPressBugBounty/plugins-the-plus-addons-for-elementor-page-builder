@@ -89,10 +89,24 @@ class L_ThePlus_Syntax_Highlighter extends Widget_Base {
 		return array( 'Syntax Highlighter', 'code highlighter', 'code syntax', 'code editor', 'code formatting', 'code styling', 'code display', 'code snippet', 'code block' );
 	}
 
+	/**
+	 * Show need help URL for user.
+	 *
+	 * @since 6.0.6
+	 */
 	public function get_custom_help_url() {
 		$help_url = $this->tp_help;
 
 		return esc_url( $help_url );
+	}
+
+	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
 	}
 
 	/**

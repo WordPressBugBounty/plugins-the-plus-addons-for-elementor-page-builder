@@ -45,7 +45,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	/**
 	 * Get Widget Name.
 	 *
-	 * @since   6.0.4
+	 * @since 6.0.4
 	 */
 	public function get_name() {
 		return 'tp-plus-form';
@@ -54,7 +54,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	/**
 	 * Get Widget Title.
 	 *
-	 * @since   6.0.4
+	 * @since 6.0.4
 	 */
 	public function get_title() {
 		return esc_html__( 'Form', 'tpebl' );
@@ -63,7 +63,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	/**
 	 * Get Widget Icon.
 	 *
-	 * @since   6.0.4
+	 * @since 6.0.4
 	 */
 	public function get_icon() {
 		return 'fa fa-plus-form theplus_backend_icon';
@@ -72,7 +72,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	/**
 	 * Get Widget categories.
 	 *
-	 * @since   6.0.4
+	 * @since 6.0.4
 	 */
 	public function get_categories() {
 		return array( 'plus-forms' );
@@ -81,7 +81,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	/**
 	 * Get Widget keywords.
 	 *
-	 * @since   6.0.4
+	 * @since 6.0.4
 	 */
 	public function get_keywords() {
 		return array( 'Forms' );
@@ -90,12 +90,21 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	/**
 	 * Get Widget categories.
 	 *
-	 * @since   6.0.4
+	 * @since 6.0.4
 	 */
 	public function get_custom_help_url() {
 		$help_url = $this->tp_help;
 
 		return esc_url( $help_url );
+	}
+
+	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
 	}
 
 	/**
@@ -153,6 +162,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'number'   => esc_html__( 'Number', 'tpebl' ),
 					'hidden'   => esc_html__( 'Hidden', 'tpebl' ),
 					'honeypot' => esc_html__( 'HoneyPot', 'tpebl' ),
+					'dropdown' => esc_html__( 'Dropdown', 'tpebl' ),
+					'date'     => esc_html__( 'Date', 'tpebl' ),
+					'time'     => esc_html__( 'Time', 'tpebl' ),
 				),
 				'label_block' => false,
 			)
@@ -170,7 +182,18 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'active' => false,
 				),
 				'condition'   => array(
-					'form_fields' => array( 'text', 'textarea', 'email', 'number' ),
+					'form_fields' => array( 'text', 'textarea', 'email', 'number', 'dropdown', 'date', 'time' ),
+				),
+			)
+		);
+		$repeater->add_control(
+			'dropdown_options',
+			array(
+				'label'       => esc_html__( 'Dropdown Options', 'tpebl' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'description' => esc_html__( 'Enter each option on a new line.', 'tpebl' ),
+				'condition'   => array(
+					'form_fields' => 'dropdown',
 				),
 			)
 		);
@@ -202,7 +225,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'label_off' => esc_html__( 'No', 'tpebl' ),
 				'separator' => 'after',
 				'condition' => array(
-					'form_fields' => array( 'text', 'textarea', 'email', 'number' ),
+					'form_fields' => array( 'text', 'textarea', 'email', 'number', 'dropdown', 'date', 'time' ),
 				),
 			)
 		);
@@ -224,7 +247,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'unit' => '%',
 				),
 				'condition'  => array(
-					'form_fields' => array( 'text', 'textarea', 'email', 'number' ),
+					'form_fields' => array( 'text', 'textarea', 'email', 'number', 'dropdown', 'date', 'time' ),
 				),
 			)
 		);
@@ -285,7 +308,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'active' => false,
 				),
 				'condition'   => array(
-					'form_fields' => array( 'text', 'textarea', 'email', 'number' ),
+					'form_fields' => array( 'text', 'textarea', 'email', 'number', 'dropdown', 'date', 'time' ),
 				),
 			)
 		);
@@ -303,7 +326,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'active' => false,
 				),
 				'condition'   => array(
-					'form_fields' => array( 'text', 'textarea', 'email', 'number' ),
+					'form_fields' => array( 'text', 'textarea', 'email', 'number', 'dropdown', 'date', 'time' ),
 				),
 			)
 		);
@@ -341,7 +364,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				),
 				'placeholder' => esc_html__( 'Shortcode', 'tpebl' ),
 				'condition'   => array(
-					'form_fields' => array( 'text', 'textarea', 'email', 'number' ),
+					'form_fields' => array( 'text', 'textarea', 'email', 'number', 'dropdown', 'date', 'time' ),
 				),
 				'ai'          => array(
 					'active' => false,
@@ -1978,6 +2001,18 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				$form_markup .= '<input type="hidden" name="hidden" />';
 			} elseif ( 'honeypot' === $tab_field_type ) {
 				$form_markup .= '<input class="tpae-honey" type="text" name="honeypot" />';
+			} elseif ( 'dropdown' === $tab_field_type ) {
+				$options = ! empty( $tab['dropdown_options'] ) ? explode( "\n", $tab['dropdown_options'] ) : array();
+				$form_markup .= '<select name="' . esc_attr( $tab_id ) . '" id="' . esc_attr( $tab_id ) . '" class="' . esc_attr( $tab_input_size ) . '" ' . $tab_required . '>';
+				foreach ( $options as $option ) {
+					$option_value = trim( $option );
+					$form_markup .= '<option value="' . esc_attr( $option_value ) . '">' . esc_html( $option_value ) . '</option>';
+				}
+				$form_markup .= '</select>';
+			} elseif ( 'date' === $tab_field_type ) {
+				$form_markup .= '<input type="date" name="' . esc_attr( $tab_id ) . '" id="' . esc_attr( $tab_id ) . '" placeholder="' . esc_attr( $tab_placeholder ) . '" ' . $tab_required . ' class="' . esc_attr( $tab_input_size ) . '" value="' . esc_attr( $tab_default ) . '" aria-description="' . esc_attr( $tab_ad ) . '"/>';
+			} elseif ( 'time' === $tab_field_type ) {
+				$form_markup .= '<input type="time" name="' . esc_attr( $tab_id ) . '" id="' . esc_attr( $tab_id ) . '" placeholder="' . esc_attr( $tab_placeholder ) . '" ' . $tab_required . ' class="' . esc_attr( $tab_input_size ) . '" value="' . esc_attr( $tab_default ) . '" aria-description="' . esc_attr( $tab_ad ) . '"/>';
 			}
 
 			$form_markup .= '</div>';

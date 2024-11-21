@@ -55,7 +55,7 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_title() {
-		return esc_html__( 'TP Text Block', 'tpebl' );
+		return esc_html__( 'Text Block', 'tpebl' );
 	}
 
 	/**
@@ -94,6 +94,15 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 		$help_url = $this->tp_help;
 
 		return esc_url( $help_url );
+	}
+
+	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
 	}
 
 	/**

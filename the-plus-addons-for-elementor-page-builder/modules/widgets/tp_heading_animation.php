@@ -92,6 +92,15 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.0.6
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Register controls.
 	 *
 	 * @since 1.0.0
