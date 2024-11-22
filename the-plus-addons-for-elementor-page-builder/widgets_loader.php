@@ -77,6 +77,7 @@ final class L_Theplus_Element_Load {
 		register_activation_hook( L_THEPLUS_FILE, array( __CLASS__, 'tp_f_activation' ) );
 		register_deactivation_hook( L_THEPLUS_FILE, array( __CLASS__, 'tp_f_deactivation' ) );
 
+		add_action( 'init', array( $this, 'tp_i18n' ) );
 		add_action( 'plugins_loaded', array( $this, 'tp_f_plugin_loaded' ) );
 	}
 
@@ -147,8 +148,6 @@ final class L_Theplus_Element_Load {
 	 */
 	public function tp_f_plugin_loaded() {
 
-		$this->tp_f_load_textdomain();
-
 		// Register class automatically.
 		$this->tp_manage_files();
 
@@ -172,8 +171,8 @@ final class L_Theplus_Element_Load {
 	 *
 	 * @since 5.6.6
 	 */
-	public function tp_f_load_textdomain() {
-		load_plugin_textdomain( 'tpebl', false, L_THEPLUS_PNAME . '/lang' );
+	public function tp_i18n() {
+		load_plugin_textdomain( 'tpebl', false, L_THEPLUS_PNAME . '/languages' );
 	}
 
 	/**
