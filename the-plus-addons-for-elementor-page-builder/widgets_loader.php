@@ -294,14 +294,14 @@ final class L_Theplus_Element_Load {
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_script( 'theplus-admin-js', L_THEPLUS_ASSETS_URL . 'js/admin/theplus-admin.js', array(), L_THEPLUS_VERSION, false );
 
-		$js_inline = 'var theplus_ajax_url = "' . admin_url( 'admin-ajax.php' ) . '";
-		var theplus_ajax_post_url = "' . admin_url( 'admin-post.php' ) . '";
-        var theplus_nonce = "' . wp_create_nonce( 'theplus-addons' ) . '";';
+		$script_handle = 'theplus-inline-script'; // Ensure this handle is unique
+		$js_inline1 = 'var theplus_ajax_url = "' . admin_url("admin-ajax.php") . '";
+		var theplus_ajax_post_url = "' . admin_url("admin-post.php") . '";
+		var theplus_nonce = "' . wp_create_nonce("theplus-addons") . '";';
 
-		if( 'widgets.php' !== $hook ){
-			echo wp_print_inline_script_tag( $js_inline );
-		}
-
+		wp_register_script( $script_handle, '' );
+		wp_enqueue_script( $script_handle );
+		wp_add_inline_script( $script_handle, $js_inline1 );
 	}
 
 	/**

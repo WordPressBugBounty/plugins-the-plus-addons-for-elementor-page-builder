@@ -129,40 +129,44 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 				/**Remove Key In Databash*/
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-remove.php';
 			}
+
+			// if ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) {
+				include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
+			// }
+
 			// if ( is_admin() && current_user_can( 'install_plugins' ) ) {.
 				// include L_THEPLUS_PATH . 'includes/notices/class-tp-tpag-install-notice.php';
 			// }.
 
-			if ( current_user_can( 'manage_options' ) ) {
-				$current_user_id = get_current_user_id();
-				$meta_value = get_user_meta( $current_user_id, 'elementor_introduction', true );
+			// $envato_details = $this->tpae_check_plugins_depends( $envato_plugins );
+			// if ( current_user_can( 'manage_options' ) ) {
+			// 	$current_user_id = get_current_user_id();
+			// 	$meta_value = get_user_meta( $current_user_id, 'elementor_introduction', true );
 
-				$ai_get_started_announcement = ( ! empty( $meta_value ) && ! empty( $meta_value['ai-get-started-announcement'] ) ) ? $meta_value['ai-get-started-announcement'] : 0;
+			// 	$ai_get_started_announcement = ( ! empty( $meta_value ) && ! empty( $meta_value['ai-get-started-announcement'] ) ) ? $meta_value['ai-get-started-announcement'] : 0;
 
-				if( '0' != $ai_get_started_announcement ){
-					$envato_details = $this->tpae_check_plugins_depends( $envato_plugins );
+			// 	if( '0' != $ai_get_started_announcement ){
+			// 		if( !empty( $envato_details[0]['status'] ) && 'unavailable' == $envato_details[0]['status'] ){
+			// 			$option_eop = get_option( 'tp_editor_onbording_popup' );
+			// 			if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
+			// 				include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
+			// 			}
+			// 		}
+			// 	}
+			// }
 
-					if( !empty( $envato_details[0]['status'] ) && 'unavailable' == $envato_details[0]['status'] ){
-						$option_eop = get_option( 'tp_editor_onbording_popup' );
-						if ( empty( $option_eop ) || 'yes' !== $option_eop ) {	
-							include L_THEPLUS_PATH . 'includes/notices/class-tp-editor-onbording.php';
-						}
-					}
-				}
+			// if ( current_user_can( 'install_plugins' ) && current_user_can( 'manage_options' ) && $this->tp_check_plugin_status() ) {
 
-				include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
-			}
+			// 	if ( empty( $this->whitelabel ) || 'on' !== $this->hidden_label ) {
+			// 		$option_value = get_option( 'tp_wdkit_preview_popup' );
 
-			if ( current_user_can( 'install_plugins' ) && current_user_can( 'manage_options' ) && $this->tp_check_plugin_status() ) {
-
-				if ( empty( $this->whitelabel ) || 'on' !== $this->hidden_label ) {
-					$option_value = get_option( 'tp_wdkit_preview_popup' );
-
-					if ( empty( $option_value ) || 'yes' !== $option_value ) {
-						include L_THEPLUS_PATH . 'includes/notices/class-tp-wdkit-preview-popup.php';
-					}
-				}
-			}
+			// 		if ( empty( $option_value ) || 'yes' !== $option_value ) {
+			// 			if( !empty( $envato_details[0]['status'] ) && 'unavailable' == $envato_details[0]['status'] ){
+			// 				include L_THEPLUS_PATH . 'includes/notices/class-tp-wdkit-preview-popup.php';
+			// 			}
+			// 		}
+			// 	}
+			// }
 		}
 
 		/**

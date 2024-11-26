@@ -5,30 +5,11 @@ global $theplus_options,$post_type_options;
 		
 add_image_size( 'tp-image-grid', 700, 700, true);
 
-// Check Html Tag
-function l_theplus_html_tag_check(){
-	return [ 'div',
-		'h1',
-		'h2',
-		'h3',
-		'h4',
-		'h5',
-		'h6',
-		'a',
-		'span',
-		'p',
-		'header',
-		'footer',
-		'article',
-		'aside',
-		'main',
-		'nav',		
-		'section',		
-	];
-}		
-
 function l_theplus_validate_html_tag( $check_tag ) {
-	return in_array( strtolower( $check_tag ), l_theplus_html_tag_check() ) ? $check_tag : 'div';
+
+	$tags = [ 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'span', 'p', 'header', 'footer', 'article', 'aside', 'main', 'nav', 'section' ];
+
+	return in_array( strtolower( $check_tag ), $tags ) ? $check_tag : 'div';
 }
 
 
@@ -78,27 +59,6 @@ function l_theplus_get_option($options_type,$field){
 	}
 	return $values;
 }
-
-function l_theplus_styling_option(){ 
-	$theplus_styling_data=get_option( 'theplus_styling_data' );
-	
-	$css_rules=$js_rules='';
-	if(!empty($theplus_styling_data['theplus_custom_css_editor'])){
-		$css_rules .='<style>';	
-			$theplus_custom_css_editor=$theplus_styling_data['theplus_custom_css_editor'];
-			$css_rules .=$theplus_custom_css_editor;
-		$css_rules .='</style>';
-	}	
-	echo $css_rules;
-	
-	if(!empty($theplus_styling_data['theplus_custom_js_editor'])){		
-			$theplus_custom_js_editor=$theplus_styling_data['theplus_custom_js_editor'];
-			$js_rules =$theplus_custom_js_editor;
-			echo wp_print_inline_script_tag($js_rules);
-	}
-	
-}
-add_action('wp_head', 'l_theplus_styling_option');
 
 function l_theplus_excerpt($limit) {
 	$limit = !empty($limit) ? (int) $limit : 0;
@@ -187,8 +147,7 @@ function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
 
 	if( $action == 'ey' ) {
 		$output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-	}
-	else if( $action == 'dy' ){
+	}else if( $action == 'dy' ){
 		$output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
 	}
 

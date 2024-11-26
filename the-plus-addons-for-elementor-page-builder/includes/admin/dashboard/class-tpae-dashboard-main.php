@@ -62,6 +62,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Main' ) ) {
 
 			include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-meta.php';
 			include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-listing.php';
+			include L_THEPLUS_PATH . 'includes/admin/extra-option/class-tpae-custom-code.php';
 		}
 	}
 

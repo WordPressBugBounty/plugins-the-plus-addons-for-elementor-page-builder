@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.7
+Stable tag: 6.0.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,12 +308,11 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Custom CSS(Section & Column) for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#custom-css?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-Best Alternative for Essential Addons, Happy Addons, Royal Addons, Premium Addons, ElementsKit, Powerpack Addon.
 
 ###🔍 OUR PRODUCTS
 <strong>[🥇 The Plus Blocks for Gutenberg](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
 
-<strong>[🥇 NexterWP Theme](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter Theme for Elementor. Which Replaces 22+ WordPress Plugin - [Best Elementor Hello Theme Alternative.](https://theplusaddons.com/blog/best-hello-elementor-theme-alternatives/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+<strong>[🥇 NexterWP Theme](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter Theme for Elementor. Which Replaces 22+ WordPress Plugin.
 
 <strong>[🥇 UiChemy - Figma to Elementor Convertor](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Convert your Figma Templates In Live Elementor Website using our [FREE Figma Plugin.](https://www.figma.com/community/plugin/1265873702834050352/)
 
@@ -382,6 +381,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.0.8 =
+Fix : Minor Bug Fixes & performance Improvements
 
 = 6.0.7 =
 Fix : Textdomain Compatibility with WordPress 6.7.0
