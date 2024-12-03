@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Adv_Text_Block
+ * Class ThePlus_Adv_Text_Block
  */
-class L_ThePlus_Adv_Text_Block extends Widget_Base {
+class ThePlus_Adv_Text_Block extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -32,13 +32,6 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 	 * @var TpDoc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -91,7 +84,11 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -103,6 +100,28 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
+	}
+
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
 	}
 
 	/**
@@ -157,15 +176,6 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 				),
 				'devices'      => array( 'desktop', 'tablet', 'mobile' ),
 				'prefix_class' => 'text-%s',
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'extra_section',
-			array(
-				'label' => esc_html__( 'Extra', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
 		$this->add_control(
@@ -263,157 +273,21 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'In Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
 	 * Limit Words.
 	 *
 	 * @since 1.0.0
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 * @param string $text The input string to limit words in.
 	 * @param int    $limit The maximum number of words to allow in the string.
 	 */
@@ -427,27 +301,26 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 	 * Render Progress Bar Written in PHP and HTML.
 	 *
 	 * @since 1.0.0
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 */
 	protected function render() {
 		$settings     = $this->get_settings_for_display();
+
+		/*--OnScroll View Animation ---*/
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
+
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			/*--Plus Extra ---*/
+			$PlusExtra_Class = 'plus-adv-text-widget';
+			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
+		}
+
 		$limit_on     = ! empty( $settings['display_count_by'] ) ? $settings['display_count_by'] : 'char';
 		$dis_count    = ! empty( $settings['display_count'] ) ? $settings['display_count'] : '';
 		$content_desc = ! empty( $settings['content_description'] ) ? ( $settings['content_description'] ) : '';
 
 		$dots  = ! empty( $settings['display_3_dots'] ) ? $settings['display_3_dots'] : '';
 		$count = ! empty( $settings['display_count_input'] ) ? $settings['display_count_input'] : '';
-
-		$ani_effects  = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : 'no-animation';
-		$ani_delay    = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-
-		$due_speed   = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_effects = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : 'no-animation';
-		$ani_o_delay = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-
-		$ani_o_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$o_due_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
 
 		if ( 'yes' === $dis_count && ! empty( $count ) ) {
 
@@ -468,28 +341,6 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 			$description = $content_desc;
 		}
 
-		if ( 'no-animation' === $ani_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $ani_effects ) . '" data-animate-delay="' . esc_attr( $ani_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animate_duration = $due_speed;
-				$animation_attr  .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effects ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effects ) . '" data-animate-out-delay="' . esc_attr( $ani_o_delay ) . '"';
-				if ( 'yes' === $ani_o_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $o_due_speed ) . '"';
-				}
-			}
-		}
-
 		$text_block = '<div class="pt-plus-text-block-wrapper" >';
 
 			$text_block .= '<div class="text_block_parallax">';
@@ -504,7 +355,11 @@ class L_ThePlus_Adv_Text_Block extends Widget_Base {
 
 		$text_block .= '</div>';
 
-		echo $text_block;
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			echo $before_content . $text_block . $after_content;
+		} else {
+			echo $text_block;
+		}
 
 	}
 }

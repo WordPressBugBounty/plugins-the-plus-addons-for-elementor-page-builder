@@ -311,19 +311,6 @@ function l_theplus_get_style_list($max=4,$none='') {
     return $options;
 }
 
-function l_theplus_get_style_list_custom($max=4,$none='') {
-	$options=array();
-	if($none=='yes'){
-		$options[ 'none' ] = 'None';
-	}
-	for( $i=1;$i<=$max;$i++) {
-		$options[ 'style-'.$i ] = 'Style '.$i;
-	}
-	$options[ 'custom' ] = esc_html__('Custom Skin','tpebl');
-	
-    return $options;
-}
-
 function l_theplus_get_numbers()
 {
 	$options=array();	
@@ -351,15 +338,6 @@ function l_theplus_get_border_style()
 		'inset' => esc_html__( 'Inset','tpebl' ),
 		'outset' => esc_html__( 'Outset','tpebl' ),
 		'ridge' => esc_html__( 'Ridge', 'tpebl' ),
-    );
-}
-function l_theplus_get_list_layout_style()
-{
-    return array(
-        'grid'  => esc_html__( 'Grid', 'tpebl' ),
-		'masonry' => esc_html__( 'Masonry', 'tpebl' ),
-		'metro' => esc_html__( 'Metro', 'tpebl' ),
-		'carousel' => esc_html__( 'Carousel', 'tpebl' ),
     );
 }
 function l_theplus_get_columns_list()

@@ -26,18 +26,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Post_Title.
+ * Class ThePlus_Post_Title.
  */
-class L_ThePlus_Syntax_Highlighter extends Widget_Base {
+class ThePlus_Syntax_Highlighter extends Widget_Base {
 
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -90,12 +83,17 @@ class L_ThePlus_Syntax_Highlighter extends Widget_Base {
 	}
 
 	/**
-	 * Show need help URL for user.
+	 * Get Custom url.
 	 *
-	 * @since 6.0.6
+	 * @since 1.0.0
+	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -109,6 +107,28 @@ class L_ThePlus_Syntax_Highlighter extends Widget_Base {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -1006,8 +1026,12 @@ class L_ThePlus_Syntax_Highlighter extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**

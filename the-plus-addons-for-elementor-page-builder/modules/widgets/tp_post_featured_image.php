@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Featured_Image
+ * Class ThePlus_Featured_Image
  */
-class L_ThePlus_Featured_Image extends Widget_Base {
+class ThePlus_Featured_Image extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -33,13 +33,6 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 	 * @var TpDoc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -98,11 +91,37 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Get Widget Custom Help Url.
 	 *
@@ -159,9 +178,9 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 					'medium_large' => esc_html__( 'Medium Large', 'tpebl' ),
 					'large'        => esc_html__( 'Large', 'tpebl' ),
 				),
-				'condition' => array(
-					'pfi_type' => 'pfi-background',
-				),
+				// 'condition' => array(
+				// 	'pfi_type' => 'pfi-background',
+				// ),
 			)
 		);
 		$this->add_responsive_control(
@@ -181,9 +200,9 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .tp-featured-image img' => 'max-width: {{SIZE}}{{UNIT}};',
 				),
-				'condition'   => array(
-					'pfi_type' => 'pfi-background',
-				),
+				// 'condition'   => array(
+				// 	'pfi_type' => 'pfi-background',
+				// ),
 			)
 		);
 		$this->add_responsive_control(
@@ -209,9 +228,9 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}}' => 'text-align: {{VALUE}};',
 				),
-				'condition' => array(
-					'pfi_type' => 'pfi-background',
-				),
+				// 'condition' => array(
+				// 	'pfi_type' => 'pfi-background',
+				// ),
 				'separator' => 'before',
 			)
 		);
@@ -399,8 +418,12 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -413,58 +436,91 @@ class L_ThePlus_Featured_Image extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+		
+		$post    = get_queried_object();
+		$post_id = get_the_ID();
+		$bg_in   = ! empty( $settings['bg_in'] ) ? $settings['bg_in'] : 'tp-fibg-section';
 
-		$post_id    = get_the_ID();
-		$post       = get_queried_object();
 		$image_size = ! empty( $settings['imageSize'] ) ? $settings['imageSize'] : 'full';
-		$type       = ! empty( $settings['pfi_type'] ) ? $settings['pfi_type'] : 'pfi-default';
-		$img_posi   = ! empty( $settings['pfi_bg_image_position'] ) ? $settings['pfi_bg_image_position'] : 'center center';
-		$img_rep    = ! empty( $settings['pfi_bg_img_repeat'] ) ? $settings['pfi_bg_img_repeat'] : 'repeat';
-		$img_size   = ! empty( $settings['pfi_bg_image_size'] ) ? $settings['pfi_bg_image_size'] : 'cover';
-		$img_attach = ! empty( $settings['pfi_bg_img_attach'] ) ? $settings['pfi_bg_img_attach'] : 'scroll';
+		$pfi_type   = ! empty( $settings['pfi_type'] ) ? $settings['pfi_type'] : 'pfi-default';
+
+		$pfi_bg_img_repeat = ! empty( $settings['pfi_bg_img_repeat'] ) ? $settings['pfi_bg_img_repeat'] : 'repeat';
+		$pfi_bg_image_size = ! empty( $settings['pfi_bg_image_size'] ) ? $settings['pfi_bg_image_size'] : 'cover';
+		$pfi_bg_img_attach = ! empty( $settings['pfi_bg_img_attach'] ) ? $settings['pfi_bg_img_attach'] : 'scroll';
+
+		$pfi_bg_image_position = ! empty( $settings['pfi_bg_image_position'] ) ? $settings['pfi_bg_image_position'] : 'center center';
+
+		$iabg    = '';
+		$bg_data = '';
+
+		$lazyclass  = '';
+		$css_rules1 = '';
 
 		$image_content = '';
-		$css_rules1    = '';
-		$iabg          = '';
-		$bg_in         = '';
 
-		if ( has_post_thumbnail( $post_id ) ) {
-			$image_content = get_the_post_thumbnail_url( $post_id, $image_size );
+		if ( 'pfi-background' === $pfi_type ) {
+			if ( has_post_thumbnail( $post_id ) ) {
+				$image_content = get_the_post_thumbnail_url( $post_id, $image_size );
+			} else {
+				$image_content = L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg';
+			}
+
+			if ( tp_has_lazyload() ) {
+				$lazyclass = ' lazy-background';
+			}
+		} elseif ( has_post_thumbnail( $post_id ) ) {
+			$image_content = tp_get_image_rander( $post_id, $image_size, array( 'class' => 'tp-featured-img' ), 'post' );
 		} else {
-			$image_content = L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg';
+			$image_content = '<img src="' . L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg" alt="' . get_the_title() . '" class="tp-featured-img" />';
 		}
 
-		if ( 'pfi-background' === $type ) {
-			$iabg  = ' tp-feature-image-as-bg';
-			$bg_in = ' data-tp-fi-bg-type="' . esc_attr( $settings['bg_in'] ) . '" ';
+		// if ( has_post_thumbnail( $post_id ) ) {
+		// 	// $image_content = get_the_post_thumbnail_url( $post_id, $image_size );
+		// 	$image_content = tp_get_image_rander( $post_id, $image_size, array( 'class' => 'tp-featured-img' ), 'post' );
+
+		// } else {
+		// 	// $image_content = L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg';
+		// 	$image_content = '<img src="' . THEPLUS_URL . '/assets/images/tp-placeholder.jpg" alt="' . get_the_title() . '" class="tp-featured-img" />';
+		// }
+
+		if ( 'pfi-background' === $pfi_type ) {
+			$iabg    = ' tp-feature-image-as-bg';
+			$bg_data = ' data-tp-fi-bg-type="' . esc_attr( $bg_in ) . '" ';
 		}
-		$output = '<div class="tp-post-image ' . esc_attr( $iabg ) . '" ' . $bg_in . '>';
+		$output = '<div class="tp-post-image ' . esc_attr( $iabg ) . '" ' . $bg_data . '>';
 
-		if ( 'pfi-background' === $type ) {
-			if ( ! empty( $img_posi ) ) {
-				$css_rules1 .= ' background-position: ' . esc_attr( $img_posi ) . ';';
+		if ( 'pfi-background' === $pfi_type ) {
+			if ( ! empty( $pfi_bg_image_position ) ) {
+				$css_rules1 .= ' background-position: ' . esc_attr( $pfi_bg_image_position ) . ';';
 			}
 
-			if ( ! empty( $img_rep ) ) {
-				$css_rules1 .= ' background-repeat: ' . esc_attr( $img_rep ) . ';';
+			if ( ! empty( $pfi_bg_img_repeat ) ) {
+				$css_rules1 .= ' background-repeat: ' . esc_attr( $pfi_bg_img_repeat ) . ';';
 			}
-			if ( ! empty( $img_size ) ) {
-				$css_rules1 .= ' -webkit-background-size: ' . esc_attr( $img_size ) . ';-moz-background-size: ' . esc_attr( $img_size ) . ';-o-background-size: ' . esc_attr( $img_size ) . ';background-size: ' . esc_attr( $img_size ) . ';';
+
+			if ( ! empty( $pfi_bg_image_size ) ) {
+				$css_rules1 .= ' -webkit-background-size: ' . esc_attr( $pfi_bg_image_size ) . ';-moz-background-size: ' . esc_attr( $pfi_bg_image_size ) . ';-o-background-size: ' . esc_attr( $pfi_bg_image_size ) . ';background-size: ' . esc_attr( $pfi_bg_image_size ) . ';';
 			}
-			if ( ! empty( $img_attach ) ) {
-				$css_rules1 .= ' background-attachment: ' . esc_attr( $img_attach ) . ';';
+
+			if ( ! empty( $pfi_bg_img_attach ) ) {
+				$css_rules1 .= ' background-attachment: ' . esc_attr( $pfi_bg_img_attach ) . ';';
 			}
-			$output .= '<div class="tp-featured-image"
-							style="background:url(' . esc_url( $image_content ) . ');' . $css_rules1 . '">';
-			$output .= '</div>';
+
+			$output .= '<div class="tp-featured-image ' . esc_attr( $lazyclass ) . '" style="background:url(' . esc_url( $image_content ) . ');' . $css_rules1 . '"></div>';
 		} else {
 			$output .= '<div class="tp-featured-image">';
-			$output .= '<a href="' . esc_url( get_the_permalink() ) . '">';
-			$output .= '<img src="' . esc_url( $image_content ) . '" alt="' . get_the_title() . '" class="tp-featured-img" />';
-			$output .= '</a>';
+				
+				$output .= '<a href="' . esc_url( get_the_permalink() ) . '">';
+					
+					$output .= $image_content;
+				
+				$output .= '</a>';
+			
 			$output .= '</div>';
 		}
+
 		$output .= '</div>';
+
 		echo $output;
 	}
 }

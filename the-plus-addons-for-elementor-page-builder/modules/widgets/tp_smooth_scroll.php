@@ -12,15 +12,18 @@ namespace TheplusAddons\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Utils;
+use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Border;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Class L_ThePlus_Smooth_Scroll
+ * Class ThePlus_Smooth_Scroll
  */
-class L_ThePlus_Smooth_Scroll extends Widget_Base {
+class ThePlus_Smooth_Scroll extends Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -32,13 +35,6 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 	public function get_name() {
 		return 'tp-smooth-scroll';
 	}
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Title.
@@ -90,7 +86,11 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -98,12 +98,34 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 	/**
 	 * It is use for widget add in catch or not.
 	 *
-	 * @since 6.0.6
+	 * @since 6.1.0
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -385,6 +407,13 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -397,8 +426,8 @@ class L_ThePlus_Smooth_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	protected function render() {
-
 		$settings  = $this->get_settings_for_display();
+
 		$step_size = ! empty( $settings['stepSize']['size'] ) ? $settings['stepSize']['size'] : 100;
 		$pl_algo   = ! empty( $settings['pulseAlgorithm'] ) ? $settings['pulseAlgorithm'] : '';
 

@@ -12,6 +12,7 @@ namespace TheplusAddons\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Utils;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Background;
@@ -25,9 +26,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Post_Content
+ * Class ThePlus_Post_Content
  */
-class L_ThePlus_Post_Content extends Widget_Base {
+class ThePlus_Post_Content extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -39,13 +40,6 @@ class L_ThePlus_Post_Content extends Widget_Base {
 	 * @var TpDoc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -99,7 +93,7 @@ class L_ThePlus_Post_Content extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Protected Content', 'Password Protected Content', 'Content Protection', 'Secure Content', 'Restricted Content' );
+		return array( 'Protected Content', 'Password Protected Content', 'Content Protection', 'Secure Content', 'Restricted Content', 'Post Content', 'Content', 'Blog Post', 'Article Content', 'Page Content', 'Text Content', 'Elementor Post Content' );
 	}
 
 	/**
@@ -110,11 +104,37 @@ class L_ThePlus_Post_Content extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -338,12 +358,16 @@ class L_ThePlus_Post_Content extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
-	 * Render Progress Bar
+	 * Render Post Content
 	 *
 	 * Written in PHP and HTML.
 	 *
@@ -351,7 +375,7 @@ class L_ThePlus_Post_Content extends Widget_Base {
 	 *
 	 * @version 5.4.2
 	 *
-	 * @param array|bool $wrapper An optional wrapper for the progress bar.
+	 * @param bool $wrapper Whether to wrap the rendered content in a wrapper. Default is false.
 	 */
 	protected function render( $wrapper = false ) {
 		$settings          = $this->get_settings_for_display();
@@ -367,7 +391,8 @@ class L_ThePlus_Post_Content extends Widget_Base {
 				if ( strtolower( 'WordPress' ) === strtolower( $post_content_editor_type ) ) {
 
 					static $views_ids = array();
-					$post_id          = get_the_ID();
+
+					$post_id = get_the_ID();
 					if ( ! isset( $post_id ) ) {
 						return '';
 					}
@@ -412,8 +437,9 @@ class L_ThePlus_Post_Content extends Widget_Base {
 					}
 
 					$posts[ $post->ID ] = true;
-					$editor             = L_Theplus_Element_Load::elementor()->editor;
-					$editmode           = $editor->is_edit_mode();
+
+					$editor   = L_Theplus_Element_Load::elementor()->editor;
+					$editmode = $editor->is_edit_mode();
 
 					if ( L_Theplus_Element_Load::elementor()->preview->is_preview_mode( $post->ID ) ) {
 						$content = L_Theplus_Element_Load::elementor()->preview->builder_wrapper( '' );
@@ -460,7 +486,7 @@ class L_ThePlus_Post_Content extends Widget_Base {
 					}
 					L_Theplus_Element_Load::elementor()->editor->set_edit_mode( $editmode );
 
-					if ( $wrapper ) {
+					if ( ! empty( $wrapper ) ) {
 						echo '<div class="tp-post-content">' . balanceTags( $content, true ) . '</div>';
 					} else {
 						echo $content;

@@ -22,9 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Gravity_Form
+ * Class ThePlus_Gravity_Form
  */
-class L_ThePlus_Gravity_Form extends Widget_Base {
+class ThePlus_Gravity_Form extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -34,13 +34,6 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -99,7 +92,11 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -113,6 +110,28 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -509,7 +528,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 		$this->add_control(
 			'consent_color',
 			array(
-				'label'     => esc_html__( 'consent', 'tpebl' ),
+				'label'     => esc_html__( 'Consent', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield_consent_label' => 'color: {{VALUE}}',
@@ -553,7 +572,6 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield .ginput_container input[type="text"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield .ginput_container select,{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="email"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="tel"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="url"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_responsive_control(
@@ -821,7 +839,6 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield .ginput_container textarea' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_responsive_control(
@@ -2493,7 +2510,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .gform_wrapper .validation_message,{{WRAPPER}} .gform_wrapper div.validation_error' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .gform_wrapper .gfield_error input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .gform_wrapper .gfield_error textarea' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .gform_wrapper .gfield_error input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), {{WRAPPER}} .gform_wrapper .gfield_error textarea,  {{WRAPPER}} .gform_wrapper .gfield_error' => 'border-color: {{VALUE}};',
 
 					'{{WRAPPER}} .gform_wrapper div.validation_error' => 'border-top-color: {{VALUE}}; border-bottom-color: {{VALUE}};',
 				),
@@ -2586,150 +2603,14 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'In Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -2741,43 +2622,24 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 	public function render() {
 		$settings = $this->get_settings_for_display();
 
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
+		/*--OnScroll View Animation ---*/
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$out_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-
-		$out_effect = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay  = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_speed  = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
+		if ( defined( 'L_THEPLUS_VERSION' ) && defined( 'THEPLUS_VERSION' ) ) {
+			/*--Plus Extra ---*/
+			$PlusExtra_Class = '';
+			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
 		$output  = '<div class="pt_plus_gravity_form ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 		$output .= do_shortcode( $this->get_shortcode() );
 		$output .= '</div>';
 
-		echo $output;
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			echo $before_content . $output . $after_content;
+		} else {
+			echo $output;
+		}
 	}
 
 	/**
@@ -2794,7 +2656,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 
 		$compatibillty = ! empty( $settings['select'] ) ? $settings['select'] : 'gf_default';
 
-		if ( '0' === $gra_form && 'gf_default' === $compatibillty ) {
+		if ( empty( $gra_form ) && 'gf_default' === $compatibillty ) {
 			return '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please select Gravity Form', 'tpebl' ) . '</h3>';
 		}
 
@@ -2802,7 +2664,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 			return '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please select Download Monitor Form', 'tpebl' ) . '</h3>';
 		}
 
-		if ( ( ! empty( $compatibillty ) && 'gf_dmp' === $settings['select'] ) && ! empty( $gra_form_dm ) ) {
+		if ( ( 'gf_dmp' === $compatibillty ) && ! empty( $gra_form_dm ) ) {
 			$attributes = array(
 				'id' => $gra_form_dm,
 			);
@@ -2818,7 +2680,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 		$this->add_render_attribute( 'shortcode', $attributes );
 
 		$shortcode = array();
-		if ( ( ! empty( $settings['select'] ) && 'gf_dmp' === $settings['select'] ) && ! empty( $gra_form_dm ) ) {
+		if ( ( ! empty( $compatibillty ) && 'gf_dmp' === $compatibillty ) && ! empty( $gra_form_dm ) ) {
 			$shortcode[] = sprintf( '[dlm_gf_form download_id = ' . esc_attr( $gra_form_dm ) . ']', $this->get_render_attribute_string( 'shortcode' ) );
 		} else {
 			$shortcode[] = sprintf( '[gravityform %s]', $this->get_render_attribute_string( 'shortcode' ) );
@@ -2835,8 +2697,9 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 	 */
 	function l_theplus_gravity_form() {
 		if ( class_exists( 'GFCommon' ) ) {
-			$gravity_forms = \RGFormsModel::get_forms( null, 'title' );
-			$g_form_options = ['0' => esc_html__( 'Select Form', 'tpebl' )];
+			$gravity_forms  = \RGFormsModel::get_forms( null, 'title' );
+			$g_form_options = array( '0' => esc_html__( 'Select Form', 'tpebl' ) );
+
 
 			if ( ! empty( $gravity_forms ) && ! is_wp_error( $gravity_forms ) ) {
 				foreach ( $gravity_forms as $form ) {   
@@ -2844,7 +2707,7 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 				}
 			}
 		} else {
-			$g_form_options = ['0' => esc_html__( 'Form Not Found!', 'tpebl' ) ];
+			$g_form_options = array( '0' => esc_html__( 'No Gravity Forms Found!', 'tpebl' ) );
 		}
 
 		return $g_form_options;
@@ -2858,15 +2721,16 @@ class L_ThePlus_Gravity_Form extends Widget_Base {
 	 */
 	function l_theplus_gravity_form_using_dm() {
 		$gf_dm = array();
+		$gf_dm = array( '0' => esc_html__( 'Select Form', 'tpebl' ) );
+		
 		$gf_dm_form = get_posts('post_type="dlm_download"&numberposts=-1');
-		$gf_dm = ['0' => esc_html__( 'Select Form', 'tpebl' )];
 
-		if ( !empty($gf_dm_form) ) {
-			foreach ($gf_dm_form as $gfdmform) {
-				$gf_dm[$gfdmform->ID] = $gfdmform->post_title;
+		if ( !empty( $gf_dm_form ) ) {
+			foreach ( $gf_dm_form as $gfdmform ) {
+				$gf_dm[ $gfdmform->ID ] = $gfdmform->post_title;
 			}
 		} else {
-			$gf_dm[0] = esc_html__('No forms found', 'tpebl');
+			$gf_dm[0] = esc_html__( 'No forms found', 'tpebl' );
 		}
 
 		return $gf_dm;

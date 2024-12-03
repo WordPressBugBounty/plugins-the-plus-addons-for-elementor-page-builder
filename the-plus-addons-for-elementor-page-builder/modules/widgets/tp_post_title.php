@@ -23,9 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Post_Title
+ * Class ThePlus_Post_Title
  */
-class L_ThePlus_Post_Title extends Widget_Base {
+class ThePlus_Post_Title extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -36,13 +36,6 @@ class L_ThePlus_Post_Title extends Widget_Base {
 	 * @var tp_doc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -101,11 +94,37 @@ class L_ThePlus_Post_Title extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -176,7 +195,7 @@ class L_ThePlus_Post_Title extends Widget_Base {
 		$this->add_responsive_control(
 			'alignment',
 			array(
-				'label'     => esc_html__( 'Alignment', 'tpebl' ),
+				'label'     => esc_html__( 'Box Alignment', 'tpebl' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'flex-start',
 				'options'   => array(
@@ -197,6 +216,35 @@ class L_ThePlus_Post_Title extends Widget_Base {
 					'{{WRAPPER}} .tp-post-title' => 'justify-content: {{VALUE}};',
 				),
 				'separator' => 'before',
+			)
+		);
+		$this->add_responsive_control(
+			'textAlignment',
+			array(
+				'label'     => esc_html__( 'Text Alignment', 'tpebl' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'default'   => 'left',
+				'options'   => array(
+					'left'    => array(
+						'title' => esc_html__( 'Left', 'tpebl' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center'  => array(
+						'title' => esc_html__( 'Center', 'tpebl' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'right'   => array(
+						'title' => esc_html__( 'Right', 'tpebl' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+					'justify' => array(
+						'title' => esc_html__( 'Justify', 'tpebl' ),
+						'icon'  => 'eicon-text-align-justify',
+					),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .tp-post-title' => 'text-align: {{VALUE}};',
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -253,35 +301,6 @@ class L_ThePlus_Post_Title extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
-			'textAlignment',
-			array(
-				'label'     => esc_html__( 'Text Alignment', 'tpebl' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'default'   => 'left',
-				'options'   => array(
-					'left'    => array(
-						'title' => esc_html__( 'Left', 'tpebl' ),
-						'icon'  => 'eicon-text-align-left',
-					),
-					'center'  => array(
-						'title' => esc_html__( 'Center', 'tpebl' ),
-						'icon'  => 'eicon-text-align-center',
-					),
-					'right'   => array(
-						'title' => esc_html__( 'Right', 'tpebl' ),
-						'icon'  => 'eicon-text-align-right',
-					),
-					'justify' => array(
-						'title' => esc_html__( 'Justify', 'tpebl' ),
-						'icon'  => 'eicon-text-align-justify',
-					),
-				),
-				'selectors' => array(
-					'{{WRAPPER}} .tp-post-title' => 'text-align: {{VALUE}};',
-				),
-			)
-		);
-		$this->add_responsive_control(
 			'padding',
 			array(
 				'label'      => esc_html__( 'Padding', 'tpebl' ),
@@ -289,6 +308,17 @@ class L_ThePlus_Post_Title extends Widget_Base {
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .tp-post-title a,{{WRAPPER}} .tp-post-title .tp-entry-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tp-post-title a,{{WRAPPER}} .tp-post-title .tp-entry-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -442,6 +472,17 @@ class L_ThePlus_Post_Title extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .tp-post-title .tp-post-title-prepost' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
+			)
+		);
+		$this->add_responsive_control(
+			'prepostmargin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tp-post-title .tp-post-title-prepost' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 				'separator'  => 'after',
 			)
 		);
@@ -542,12 +583,16 @@ class L_ThePlus_Post_Title extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
-	 * Render
+	 * Render Post title
 	 *
 	 * Written in PHP and HTML.
 	 *
@@ -558,13 +603,15 @@ class L_ThePlus_Post_Title extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		$post_id  = get_the_ID();
 
-		$titletag         = ( ! empty( $settings['titleTag'] ) ) ? $settings['titleTag'] : 'h3';
-		$title_link       = ( ! empty( $settings['titleLink'] ) ) ? $settings['titleLink'] : 'no';
-		$limit_count_type = ( ! empty( $settings['limitCountType'] ) ) ? $settings['limitCountType'] : '';
-		$text_limit       = ( ! empty( $settings['titleLimit'] ) ) ? $settings['titleLimit'] : '';
-		$titleprefix      = ( ! empty( $settings['titleprefix'] ) ) ? $settings['titleprefix'] : '';
-		$titlepostfix     = ( ! empty( $settings['titlepostfix'] ) ) ? $settings['titlepostfix'] : '';
-		$posttype         = ! empty( $settings['posttype'] ) ? $settings['posttype'] : '';
+		$posttype   = ! empty( $settings['posttype'] ) ? $settings['posttype'] : 'singlepage';
+		$titletag   = ! empty( $settings['titleTag'] ) ? $settings['titleTag'] : 'h3';
+		$title_link = ! empty( $settings['titleLink'] ) ? $settings['titleLink'] : 'no';
+		$text_limit = ! empty( $settings['titleLimit'] ) ? $settings['titleLimit'] : '';
+
+		$titleprefix  = ! empty( $settings['titleprefix'] ) ? $settings['titleprefix'] : '';
+		$titlepostfix = ! empty( $settings['titlepostfix'] ) ? $settings['titlepostfix'] : '';
+
+		$limit_count_type = ! empty( $settings['limitCountType'] ) ? $settings['limitCountType'] : '';
 
 		if ( 'archivepage' === $posttype ) {
 			add_filter(
@@ -610,20 +657,30 @@ class L_ThePlus_Post_Title extends Widget_Base {
 		}
 
 		$output = '<div class="tp-post-title">';
-		if ( ! empty( $titleprefix ) ) {
-			$output .= '<span class="tp-post-title-prepost tp-prefix">' . esc_html( $titleprefix ) . '</span>';
-		}
+
+		$lz1 = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['boxBg_image'], $settings['boxBgHover_image'] ) : '';
+
+		$lz2 = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['prepostboxBg_image'] ) : '';
+
 		if ( 'yes' === $title_link ) {
-			$output .= '<a href="' . get_the_permalink() . '" >';
+			$output .= '<a class="' . esc_attr( $lz1 ) . '" href="' . get_the_permalink() . '" >';
 		}
-			$output             .= '<' . l_theplus_validate_html_tag( $titletag ) . ' class="tp-entry-title">';
-						$output .= $title;
-			$output             .= '</' . l_theplus_validate_html_tag( $titletag ) . '>';
+
+			$output .= '<' . l_theplus_validate_html_tag( $titletag ) . ' class="tp-entry-title ' . esc_attr( $lz1 ) . '">';
+
+				if ( ! empty( $titleprefix ) ) {
+					$output .= '<span class="tp-post-title-prepost tp-prefix ' . esc_attr( $lz2 ) . ' ">' . wp_kses_post( $titleprefix ) . '</span>';
+				}
+					$output .= $title;
+
+				if ( ! empty( $titlepostfix ) ) {
+					$output .= '<span class="tp-post-title-prepost tp-postfix">' . esc_html( $titlepostfix ) . '</span>';
+				}
+
+			$output .= '</' . l_theplus_validate_html_tag( $titletag ) . '>';
+		
 		if ( 'yes' === $title_link ) {
 			$output .= '</a>';
-		}
-		if ( ! empty( $titlepostfix ) ) {
-			$output .= '<span class="tp-post-title-prepost tp-postfix">' . esc_html( $titlepostfix ) . '</span>';
 		}
 		$output .= '</div>';
 

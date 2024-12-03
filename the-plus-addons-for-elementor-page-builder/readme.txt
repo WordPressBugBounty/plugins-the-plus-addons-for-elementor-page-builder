@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.0.8
+Stable tag: 6.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -381,6 +381,27 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.1.0 =
+Add : New Widget : Breadcrumb Bar widget
+Improvement : Accordion : Compatibility for Widget Output Caching for TTFB
+Improvement : Carousel Anything : Compatibility for Widget Output Caching for TTFB
+Improvement : Countdown : Compatibility for Widget Output Caching for TTFB
+Improvement : Flip Box : Compatibility for Widget Output Caching for TTFB
+Improvement : Header Meta Content : Compatibility for Widget Output Caching for TTFB
+Improvement : Info Box : Compatibility for Widget Output Caching for TTFB
+Improvement : Number Counter : Compatibility for Widget Output Caching for TTFB
+Improvement : Page Scroll : Compatibility for Widget Output Caching for TTFB
+Improvement : Pricing Table : Compatibility for Widget Output Caching for TTFB
+Improvement : Process Steps : Compatibility for Widget Output Caching for TTFB
+Improvement : Scroll Navigation : Compatibility for Widget Output Caching for TTFB
+Improvement : Social Icon : Compatibility for Widget Output Caching for TTFB
+Improvement : Stylish List : Compatibility for Widget Output Caching for TTFB
+Improvement : Switcher : Compatibility for Widget Output Caching for TTFB
+Improvement : Table : Compatibility for Widget Output Caching for TTFB
+Improvement : Tabs/Tours : Compatibility for Widget Output Caching for TTFB
+Fix : Table : Security Patch ( Low security )
+Fix : Minor Bug Fixes & performance Improvements
 
 = 6.0.8 =
 Fix : Minor Bug Fixes & performance Improvements

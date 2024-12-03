@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget Name: TP Navigation Menu
+ * Widget Name: TP Navigation Menu Lite
  * Description: Style of header navigation bar menu
  * Author: theplus
  * Author URI: https://posimyth.com
@@ -25,9 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Navigation_Menu_Lite
+ * Class ThePlus_Navigation_Menu_Lite
  */
-class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
+class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -38,13 +38,6 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 	 * @var tp_doc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -90,10 +83,14 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 	 * Get Widget custom url.
 	 *
 	 * @since 1.0.1
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -108,6 +105,28 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		return array( 'menu', 'navigation', 'header', 'menu bar', 'nav' );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -1766,7 +1785,7 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_responsive_control(
 			'mobile_menu_border_main',
 			array(
-				'label'      => esc_html__( 'Border Bottom Size', 'theplus' ),
+				'label'      => esc_html__( 'Border Bottom Size', 'tpebl' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -2235,81 +2254,14 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'main_menu_hover_inverse',
-			array(
-				'label'     => __( 'On Hover Inverse Effect Main Menu', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'tpebl' ),
-				'label_off' => __( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'main_menu_hover_inverse_pro',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'main_menu_hover_inverse' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'sub_menu_hover_inverse',
-			array(
-				'label'     => __( 'On Hover Inverse Effect Sub Menu', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'tpebl' ),
-				'label_off' => __( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'sub_menu_hover_inverse_pro',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'sub_menu_hover_inverse' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'main_menu_last_open_sub_menu',
-			array(
-				'label'     => __( 'Main Menu Last Open Sub-menu Left', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'tpebl' ),
-				'label_off' => __( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'main_menu_last_open_sub_menu_pro',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'main_menu_last_open_sub_menu' => 'yes',
-				),
-			)
-		);
 		$this->end_controls_section();
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -2485,8 +2437,11 @@ class L_ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 		$CustomMenu = '';
 		$stylecss   = '';
+
+		
+
 		if ( ! empty( $settings['ItemMenu'] ) ) {
-			$CustomMenu .= '<ul class="nav navbar-nav ' . ( $settings['main_menu_hover_style'] == 'style-1' ? 'menu-hover-style-1' : ( $settings['main_menu_hover_style'] == 'style-2' ? 'menu-hover-style-2' : '' ) ) . ' ' . ( ( $settings['main_menu_hover_inverse'] == 'yes' ) ? 'hover-inverse-effect' : '' ) . ' ' . ( ( $settings['sub_menu_hover_inverse'] == 'yes' ) ? 'submenu-hover-inverse-effect' : '' ) . '  ' . ( ( $settings['main_menu_last_open_sub_menu'] == 'yes' ) ? ' open-sub-menu-left' : '' ) . ' ">';
+			$CustomMenu .= '<ul class="nav navbar-nav ' . ( $settings['main_menu_hover_style'] == 'style-1' ? 'menu-hover-style-1' : ( $settings['main_menu_hover_style'] == 'style-2' ? 'menu-hover-style-2' : '' ) ) . ' ">';
 
 			$menuArray = $settings['ItemMenu'];
 

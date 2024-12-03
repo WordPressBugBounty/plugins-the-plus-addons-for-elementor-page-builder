@@ -308,6 +308,15 @@ class Plus_Widgets_Manager {
 				$this->transient_widgets[] = $this->tpebl_layout_listing( $options );
 			}
 
+			if ( 'tp-breadcrumbs-bar' == $widget_name ) {
+				$breadcrumbs_style = ! empty( $options['breadcrumbs_style'] ) ? $options['breadcrumbs_style'] : 'style_1';
+
+				if ( ! empty( $breadcrumbs_style ) ) {
+					$this->transient_widgets[] = 'tp-breadcrumbs-bar-' . $breadcrumbs_style;
+					$this->transient_widgets[] = 'tp-breadcrumbs-bar';
+				}
+			} 
+
 			if ( 'tp-clients-listout' === $widget_name ) {
 				$this->transient_widgets[] = $this->tpebl_layout_listing( $options );
 			}

@@ -24,18 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Age_Gate
+ * Class ThePlus_Age_Gate
  */
-class L_ThePlus_Age_Gate extends Widget_Base {
+class ThePlus_Age_Gate extends Widget_Base {
 
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -82,13 +75,12 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		return array( 'Age Gate', 'Age Verification', 'Age Restriction', 'Age Confirmation', 'Age Check', 'Age Limit', 'Age Requirement' );
 	}
 
-	/**
-	 * Show need help URL for user.
-	 *
-	 * @since 6.0.6
-	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -102,6 +94,28 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -154,7 +168,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 			'tempNotice',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>To view your Age gate design in the backend Elementor editor, you can enable the backend preview. To avoid full screen disruption during normal page edits, please keep it disabled.</i></p>',
+				'raw'         => '<p class="tp-controller-notice"><i>Keep this disabled, If you do not want that to load on editor page. Either It will highjack your whole page.</i></p>',
 				'label_block' => true,
 			)
 		);
@@ -224,6 +238,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 				'label_on'  => esc_html__( 'On', 'tpebl' ),
 				'label_off' => esc_html__( 'Off', 'tpebl' ),
 				'default'   => 'yes',
+				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -619,6 +634,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 				'label_on'  => esc_html__( 'On', 'tpebl' ),
 				'label_off' => esc_html__( 'Off', 'tpebl' ),
 				'default'   => '',
+				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -658,6 +674,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 				'label_on'  => esc_html__( 'On', 'tpebl' ),
 				'label_off' => esc_html__( 'Off', 'tpebl' ),
 				'default'   => 'yes',
+				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -1261,6 +1278,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 					'{{WRAPPER}} .tp-agegate-boxes .tp-agegate-method .age_vms .age_vmb,
 					{{WRAPPER}} .tp-agegate-boxes .tp-agegate-method .age_verify_method_btnsubmit,
 					{{WRAPPER}} .tp-agegate-boxes .tp-agegate-method .tp-age-btn-yes' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .tp-agegate-boxes .tp-agegate-method .tp-age-btn-yes svg' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -1325,6 +1343,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 					'{{WRAPPER}} .tp-agegate-boxes:hover .tp-agegate-method .age_vms .age_vmb,
 					{{WRAPPER}} .tp-agegate-boxes:hover .tp-agegate-method .age_verify_method_btnsubmit,
 					{{WRAPPER}} .tp-agegate-boxes:hover .tp-agegate-method .tp-age-btn-yes' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .tp-agegate-boxes:hover .tp-agegate-method .tp-age-btn-yes svg' => 'fill : {{VALUE}};',
 				),
 			)
 		);
@@ -2095,7 +2114,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'box_position',
 			array(
-				'label'     => esc_html__( 'Position', 'tpebl' ),
+				'label'     => esc_html__( 'Box Position', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'On', 'tpebl' ),
 				'label_off' => esc_html__( 'Off', 'tpebl' ),
@@ -2186,7 +2205,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		$this->add_responsive_control(
 			'box_width',
 			array(
-				'label'      => esc_html__( 'Width', 'tpebl' ),
+				'label'      => esc_html__( 'Box Width', 'tpebl' ),
 				'type'       => Controls_Manager::SLIDER,
 				'separator'  => 'before',
 				'size_units' => array( 'px', '%' ),
@@ -2214,7 +2233,7 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		$this->add_responsive_control(
 			'box_height',
 			array(
-				'label'      => esc_html__( 'Height', 'tpebl' ),
+				'label'      => esc_html__( 'Box Height', 'tpebl' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'range'      => array(
@@ -2331,8 +2350,12 @@ class L_ThePlus_Age_Gate extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**

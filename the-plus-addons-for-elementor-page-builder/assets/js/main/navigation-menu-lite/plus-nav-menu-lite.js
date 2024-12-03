@@ -119,7 +119,7 @@ function theplus_ele_menu_clicking(){
 	var WidgetHeaderNavigation = function($scope, $) {
 		var $plus_navigation = $scope.find('.plus-navigation-wrap');
         if($(".mobile-plus-toggle-menu", $scope).length > 0){
-			$(".mobile-plus-toggle-menu").click(function() {
+			$(".mobile-plus-toggle-menu", $scope).click(function() {
 				var target = $(this).data("target");
 				$(this).toggleClass("plus-collapsed");
 				if ($(target +'.collapse:not(".in")').length) {

@@ -325,6 +325,27 @@ function l_registered_widgets(){
 				],
 			],
 		],
+		'tp-breadcrumbs-bar' => [
+			'dependency' => [
+				'css' => [					
+					L_THEPLUS_PATH . DIRECTORY_SEPARATOR . 'assets/css/main/breadcrumbs-bar/plus-breadcrumbs-bar.css',
+				],				
+			],
+		],
+		'tp-breadcrumbs-bar-style_1' => [
+			'dependency' => [
+				'css' => [					
+					L_THEPLUS_PATH . DIRECTORY_SEPARATOR . 'assets/css/main/breadcrumbs-bar/plus-bb-style1.css',
+				],				
+			],
+		],
+		'tp-breadcrumbs-bar-style_2' => [
+			'dependency' => [
+				'css' => [					
+					L_THEPLUS_PATH . DIRECTORY_SEPARATOR . 'assets/css/main/breadcrumbs-bar/plus-bb-style2.css',
+				],				
+			],
+		], 
 		'tp-button' => array(
 			'dependency' => array(
 				'css' => array(

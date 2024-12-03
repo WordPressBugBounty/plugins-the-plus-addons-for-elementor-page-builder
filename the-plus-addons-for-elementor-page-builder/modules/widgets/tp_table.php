@@ -109,6 +109,37 @@ class L_ThePlus_Data_Table extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.1.0
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+	
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
+	/**
 	 * Register controls.
 	 *
 	 * @since 1.4.0
@@ -958,7 +989,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'default'   => esc_html__( 'Search', 'tpebl' ),
 				'dynamic'   => array(
-					'active' => true,
+					'active' => false,
 				),
 				'condition' => array(
 					'searchable' => 'yes',
@@ -2718,6 +2749,9 @@ class L_ThePlus_Data_Table extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
 	/**
@@ -2738,7 +2772,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 		$showEntries = ! empty( $settings['show_entries'] ) ? $settings['show_entries'] : '';
 
 		$tableSelection  = ! empty( $settings['table_selection'] ) ? $settings['table_selection'] : '';
-		$searchableLabel = ! empty( $settings['searchable_label'] ) ? $settings['searchable_label'] : '';
+		$searchableLabel = ! empty( $settings['searchable_label'] ) ? sanitize_text_field( $settings['searchable_label'] ) : '';
 
 		$cell_align_head_desktop = ! empty( $settings['cell_align_head_normal'] ) ? $settings['cell_align_head_normal'] : '';
 		$cell_align_head_tablet  = ! empty( $settings['cell_align_head_normal_tablet'] ) ? $settings['cell_align_head_normal_tablet'] : '';
@@ -3331,4 +3365,16 @@ class L_ThePlus_Data_Table extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	protected function content_template() {}
+
+	/**
+	 * Prevent JS senitizer
+	 * 
+	 * */
+
+	 public function tpae_senitize_js_input( $input ) {
+
+		$input = preg_replace('/(on|hr)\w+=/', '', $input);
+
+		return $input;
+	}
 }

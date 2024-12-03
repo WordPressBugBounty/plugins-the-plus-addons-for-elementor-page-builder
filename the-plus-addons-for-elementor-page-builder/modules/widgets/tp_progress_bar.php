@@ -24,9 +24,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Progress_Bar
+ * Class ThePlus_Progress_Bar
  */
-class L_ThePlus_Progress_Bar extends Widget_Base {
+class ThePlus_Progress_Bar extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -34,13 +34,6 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 	 * @var tp_doc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -79,7 +72,11 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -114,6 +111,28 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -317,6 +336,7 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 					''      => esc_html__( 'None', 'tpebl' ),
 					'icon'  => esc_html__( 'Icon', 'tpebl' ),
 					'image' => esc_html__( 'Image', 'tpebl' ),
+					'lottie' => esc_html__( 'Lottie', 'tpebl' ),
 				),
 			)
 		);
@@ -348,6 +368,9 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 			array(
 				'name'      => 'select_image_thumbnail',
 				'default'   => 'full',
+				'condition' => array( 
+					'image_icon' => 'image' 
+				),
 			)
 		);
 		$this->add_control(
@@ -357,8 +380,8 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'font_awesome',
 				'options'   => array(
-					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
-					'icon_mind'    => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
+					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
+					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
 				),
 				'condition' => array(
 					'image_icon' => 'icon',
@@ -378,16 +401,17 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'icons_mind_options',
+			'icon_fontawesome_5',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
+				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => array(
+					'value'   => 'fas fa-university',
+					'library' => 'solid',
+				),
+				'condition' => array(
 					'image_icon' => 'icon',
-					'type'       => 'icon_mind',
+					'type'       => 'font_awesome_5',
 				),
 			)
 		);
@@ -404,6 +428,15 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 				'condition' => array(
 					'image_icon' => array( 'icon', 'image', 'svg' ),
 				),
+			)
+		);
+		$this->add_control(
+			'lottieUrl',
+			array(
+				'label'       => esc_html__( 'Lottie URL', 'tpebl' ),
+				'type'        => Controls_Manager::URL,
+				'placeholder' => esc_html__( 'https://www.demo-link.com', 'tpebl' ),
+				'condition'   => array( 'image_icon' => 'lottie' ),
 			)
 		);
 		$this->end_controls_section();
@@ -435,6 +468,7 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 					'unit' => '%',
 					'size' => 0.6,
 				),
+				'dynamic'    => array( 'active' => true ),
 				'condition'  => array(
 					'main_style' => array( 'pie_chart' ),
 				),
@@ -460,6 +494,7 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 					'unit' => 'px',
 					'size' => 200,
 				),
+				'dynamic'     => array( 'active' => true ),
 				'selectors'   => array(
 					'{{WRAPPER}} .pt-plus-circle' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
 				),
@@ -525,7 +560,7 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 					),
 					'gradient' => array(
 						'title' => esc_html__( 'Gradient', 'tpebl' ),
-						'icon'  => 'fa fa-barcode',
+						'icon'  => 'eicon-barcode',
 					),
 				),
 				'condition'   => array(
@@ -622,6 +657,7 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} span.progress_bar-title,
 					{{WRAPPER}} .progress_bar-media.large .prog-title.prog-icon.large .progres-ims,
+					{{WRAPPER}} .progress_bar-media.large .prog-title.prog-icon.large .progress_bar-title,
 					{{WRAPPER}} .tp-progress-bar span.progress_bar-title' => 'margin-left: {{SIZE}}{{UNIT}};',
 				),
 				'condition'  => array(
@@ -700,13 +736,16 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .pt-plus-pie_chart.style-3 .pie_chart .counter-number ' => 'margin-top: {{SIZE}}{{UNIT}};',
 				),
+				'condition'  => array(
+					'pie_chart_style' => array( 'style_3' ),
+				),
 			)
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_number_pre_pos_styling',
 			array(
-				'label' => esc_html__( 'Number Prefix/Postfix Style', 'tpebl' ),
+				'label' => esc_html__( 'Number Prefix/Postfix', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -748,10 +787,11 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 				),
 				'selectors' => array(
 					'{{WRAPPER}} span.progres-ims' => 'color: {{VALUE}}',
+					'{{WRAPPER}} span.progres-ims svg' => 'fill: {{VALUE}}',
 				),
 			)
 		);
-		$this->add_control(
+		$this->add_responsive_control(
 			'icon_size',
 			array(
 				'label'      => esc_html__( 'Icon Size', 'tpebl' ),
@@ -769,6 +809,7 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .progress_bar .prog-title.prog-icon span.progres-ims,{{WRAPPER}} .pt-plus-circle .pianumber-css .progres-ims,{{WRAPPER}} .pt-plus-pie_chart .pie_chart .progres-ims' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .progress_bar .prog-title.prog-icon span.progres-ims svg,{{WRAPPER}} .pt-plus-circle .pianumber-css .progres-ims svg,{{WRAPPER}} .pt-plus-pie_chart .pie_chart .progres-ims svg' => 'width:{{SIZE}}{{UNIT}};height:{{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -814,6 +855,109 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_lottie_styling',
+			array(
+				'label'     => esc_html__( 'Lottie', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array( 'image_icon' => 'lottie' ),
+			)
+		);
+		$this->add_control(
+			'lottiedisplay',
+			array(
+				'type'    => Controls_Manager::SELECT,
+				'label'   => esc_html__( 'Display', 'tpebl' ),
+				'default' => 'inline-block',
+				'options' => array(
+					'block'        => esc_html__( 'Block', 'tpebl' ),
+					'inline-block' => esc_html__( 'Inline Block', 'tpebl' ),
+					'flex'         => esc_html__( 'Flex', 'tpebl' ),
+					'inline-flex'  => esc_html__( 'Inline Flex', 'tpebl' ),
+					'initial'      => esc_html__( 'Initial', 'tpebl' ),
+					'inherit'      => esc_html__( 'Inherit', 'tpebl' ),
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'lottieWidth',
+			array(
+				'label'   => esc_html__( 'Width', 'tpebl' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range'   => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 700,
+						'step' => 1,
+					),
+				),
+				'default' => array(
+					'unit' => 'px',
+					'size' => 25,
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'lottieHeight',
+			array(
+				'label'   => esc_html__( 'Height', 'tpebl' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range'   => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 700,
+						'step' => 1,
+					),
+				),
+				'default' => array(
+					'unit' => 'px',
+					'size' => 25,
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'lottieSpeed',
+			array(
+				'label'   => esc_html__( 'Speed', 'tpebl' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range'   => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 10,
+						'step' => 1,
+					),
+				),
+				'default' => array(
+					'unit' => 'px',
+					'size' => 1,
+				),
+			)
+		);
+		$this->add_control(
+			'lottieLoop',
+			array(
+				'label'     => esc_html__( 'Loop Animation', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
+				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'default'   => 'yes',
+				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'lottiehover',
+			array(
+				'label'     => esc_html__( 'Hover Animation', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
+				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'default'   => 'no',
+				'separator' => 'before',
+			)
+		);
+		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_progress_bar_styling',
 			array(
@@ -883,150 +1027,15 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'In Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
-		
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -1040,81 +1049,62 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration      = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_effect        = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay         = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration      = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed         = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-		$progress_width    = ! empty( $settings['value_width']['size'] ) ? $settings['value_width']['size'] . '%' : '59%';
+		/*--OnScroll View Animation ---*/
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			/*--Plus Extra ---*/
+			$PlusExtra_Class = '';
+			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
-		$main_style       = ! empty( $settings['main_style'] ) ? $settings['main_style'] : '';
-		$pie_chart_style  = ! empty( $settings['pie_chart_style'] ) ? $settings['pie_chart_style'] : '';
+		$progress_width    = ! empty( $settings['value_width']['size'] ) ? $settings['value_width']['size'] . '%' : '';
+
+		$main_style       = ! empty( $settings['main_style'] ) ? $settings['main_style'] : 'progressbar';
+		$pie_chart_style  = ! empty( $settings['pie_chart_style'] ) ? $settings['pie_chart_style'] : 'style_1';
 		$pie_border_style = ! empty( $settings['pie_border_style'] ) ? $settings['pie_border_style'] : '';
 		$pie_empty_color  = ! empty( $settings['pie_empty_color'] ) ? $settings['pie_empty_color'] : '#8072fc';
 
 		$progress_empty_color = ! empty( $settings['progress_empty_color'] ) ? $settings['progress_empty_color'] : '#8072fc';
-		$progressbar_style    = ! empty( $settings['progressbar_style'] ) ? $settings['progressbar_style'] : '';
-		$progress_bar_size    = ! empty( $settings['progress_bar_size'] ) ? $settings['progress_bar_size'] : '';
+
+		$progressbar_style = ! empty( $settings['progressbar_style'] ) ? $settings['progressbar_style'] : 'style_1';
+		$progress_bar_size = ! empty( $settings['progress_bar_size'] ) ? $settings['progress_bar_size'] : 'small';
 
 		$pie_size   = ! empty( $settings['pie_size']['size'] ) ? $settings['pie_size']['size'] : 200;
 		$title      = ! empty( $settings['title'] ) ? $settings['title'] : '';
 		$subtitle   = ! empty( $settings['sub_title'] ) ? $settings['sub_title'] : '';
 		$image_icon = ! empty( $settings['image_icon'] ) ? $settings['image_icon'] : '';
+
+		$icon_p     = ! empty( $settings['icon_postition'] ) ? $settings['icon_postition'] : 'before';
 		$select_img = ! empty( $settings['select_image']['url'] ) ? $settings['select_image']['url'] : '';
 		$select_id  = ! empty( $settings['select_image']['id'] ) ? $settings['select_image']['id'] : '';
 		$icon_type  = ! empty( $settings['type'] ) ? $settings['type'] : '';
-		$icon_p     = ! empty( $settings['icon_postition'] ) ? $settings['icon_postition'] : '';
-		$sym_pois   = ! empty( $settings['symbol_position'] ) ? $settings['symbol_position'] : '';
 		$num        = ! empty( $settings['number'] ) ? $settings['number'] : '';
 		$pi_fill    = ! empty( $settings['pie_fill'] ) ? $settings['pie_fill'] : '';
 
 		$title_content = '';
 
 		if ( ! empty( $title ) ) {
-			$title_content = '<span class="progress_bar-title"> ' . esc_html( $title ) . ' </span>';
+			$title_content = '<span class="progress_bar-title"> ' . wp_kses_post( $title ) . ' </span>';
 		}
 
 		$subtitle_content = '';
 
 		if ( ! empty( $subtitle ) ) {
-			$subtitle_content = '<div class="progress_bar-sub_title"> ' . esc_html( $subtitle ) . ' </div>';
+			$subtitle_content = '<div class="progress_bar-sub_title"> ' . wp_kses_post( $subtitle ) . ' </div>';
 
 		}
 
 		if ( ! empty( $pie_size ) ) {
 			$inner_width  = ' style="';
-			$inner_width .= 'width: ' . esc_attr( $pie_size ) . 'px;';
-			$inner_width .= 'height: ' . esc_attr( $pie_size ) . 'px;';
+
+				$inner_width .= 'width: ' . esc_attr( $pie_size ) . 'px;';
+				$inner_width .= 'height: ' . esc_attr( $pie_size ) . 'px;';
+
 			$inner_width .= '"';
 		}
 
 		$progress_bar_img = '';
-
 		if ( 'image' === $image_icon && ! empty( $select_img ) ) {
 			$image_id = $select_id;
 			$img_src  = tp_get_image_rander( $image_id, $settings['select_image_thumbnail_size'], array( 'class' => 'progress_bar-img' ) );
@@ -1122,14 +1112,60 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 			$progress_bar_img = '<span class="progres-ims">' . $img_src . '</span>';
 		}
 
+		$icons = '';
 		if ( 'icon' === $image_icon ) {
 			if ( 'font_awesome' === $icon_type ) {
 				$icons = $settings['icon_fontawesome'];
-			} else {
-				$icons = '';
+			} elseif ( 'font_awesome_5' === $icon_type ) {
+				ob_start();
+				\Elementor\Icons_Manager::render_icon( $settings['icon_fontawesome_5'], array( 'aria-hidden' => 'true' ) );
+				$icons = ob_get_contents();
+				ob_end_clean();
 			}
 
-			$progress_bar_img = '<span class="progres-ims"><i class=" ' . esc_attr( $icons ) . '"></i></span>';
+			if ( 'font_awesome_5' === $icon_type && ! empty( $settings['icon_fontawesome_5'] ) ) {
+				$progress_bar_img = '<span class="progres-ims"><span>' . $icons . '</span></span>';
+			} else {
+				$progress_bar_img = '<span class="progres-ims"><i class=" ' . esc_attr( $icons ) . '"></i></span>';
+			}
+		}
+
+		if ( 'lottie' === $image_icon ) {
+			$ext = pathinfo( $settings['lottieUrl']['url'], PATHINFO_EXTENSION );
+
+			if ( 'json' !== $ext ) {
+				$icons = '<h3 class="theplus-posts-not-found">' . esc_html__( 'Opps!! Please Enter Only JSON File Extension.', 'tpebl' ) . '</h3>';
+			} else {
+				$lottiedisplay = isset( $settings['lottiedisplay'] ) ? $settings['lottiedisplay'] : 'inline-block';
+				$lottie_width  = isset( $settings['lottieWidth']['size'] ) ? $settings['lottieWidth']['size'] : 25;
+				$lottie_height = isset( $settings['lottieHeight']['size'] ) ? $settings['lottieHeight']['size'] : 25;
+				$lottie_speed  = isset( $settings['lottieSpeed']['size'] ) ? $settings['lottieSpeed']['size'] : 1;
+				$lottie_loop   = isset( $settings['lottieLoop'] ) ? $settings['lottieLoop'] : '';
+				$lottiehover   = isset( $settings['lottiehover'] ) ? $settings['lottiehover'] : 'no';
+
+				$lottie_loop_value = '';
+
+				if ( 'yes' === $lottie_loop ) {
+					$lottie_loop_value = 'loop';
+				}
+
+				$$lottie_anim = 'autoplay';
+				if ( 'yes' === $lottiehover ) {
+					$$lottie_anim = 'hover';
+				}
+
+				$icons = '<lottie-player src="' . esc_url( $settings['lottieUrl']['url'] ) . '" style="display: ' . esc_attr( $lottiedisplay ) . '; width: ' . esc_attr( $lottie_width ) . 'px; height: ' . esc_attr( $lottie_height ) . 'px;" ' . esc_attr( $lottie_loop_value ) . '  speed="' . esc_attr( $lottie_speed ) . '" ' . esc_attr( $$lottie_anim ) . '></lottie-player>';
+			}
+
+			$progress_bar_img = '<span class="progres-ims"><span>' . $icons . '</span></span>';
+		}
+
+		if ( 'lottie' === $image_icon ) {
+			if ( 'after' === $icon_postition ) {
+				$icon_text = $title_content . $icons . $subtitle_content;
+			} elseif ( 'before' === $icon_postition ) {
+				$icon_text = $icons . $title_content . $subtitle_content;
+			}
 		}
 
 		if ( 'after' === $icon_p ) {
@@ -1141,13 +1177,15 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 		$sym = ! empty( $settings['symbol'] ) ? $settings['symbol'] : '';
 
 		if ( ! empty( $sym ) ) {
+			$sym_pois = ! empty( $settings['symbol_position'] ) ? $settings['symbol_position'] : '';
+
 			if ( 'after' === $sym_pois ) {
-				$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . esc_attr( $num ) . '">' . esc_html( $num ) . '</span><span class="theserivce-milestone-symbol">' . esc_html( $sym ) . '</span>';
+				$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . esc_attr( $num ) . '">' . wp_kses_post( $num ) . '</span><span class="theserivce-milestone-symbol">' . wp_kses_post( $sym ) . '</span>';
 			} elseif ( 'before' === $sym_pois ) {
-				$symbol2 = '<span class="theserivce-milestone-symbol">' . esc_html( $sym ) . '</span><span class="theserivce-milestone-number" data-counterup-nums="' . esc_attr( $num ) . '">' . esc_html( $num ) . '</span>';
+				$symbol2 = '<span class="theserivce-milestone-symbol">' . wp_kses_post( $sym ) . '</span><span class="theserivce-milestone-number" data-counterup-nums="' . esc_attr( $num ) . '">' . wp_kses_post( $num ) . '</span>';
 			}
 		} else {
-			$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . esc_attr( $num ) . '">' . esc_html( $num ) . '</span>';
+			$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . wp_kses_post( $num ) . '">' . esc_html( $num ) . '</span>';
 		}
 
 		if ( 'gradient' === $pi_fill ) {
@@ -1184,6 +1222,8 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 
 		if ( 'progressbar' === $main_style ) {
 			$icon_bg = tp_bg_lazyLoad( $settings['progress_filled_color_image'] );
+
+			$lz1 = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['progress_filled_color_image'] ) : '';
 
 			if ( 'style_1' === $progressbar_style ) {
 				if ( 'large' !== $progress_bar_size ) {
@@ -1248,25 +1288,28 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 			$data_empty_fill = 'transparent';
 		}
 
-		$pie_size     = ! empty( $settings['pie_value']['size'] ) ? $settings['pie_value']['size'] : '';
-		$pie_val      = ! empty( $settings['pie_size']['size'] ) ? $settings['pie_size']['size'] : '';
+		$pie_size = ! empty( $settings['pie_value']['size'] ) ? $settings['pie_value']['size'] : '';
+		$pie_val  = ! empty( $settings['pie_size']['size'] ) ? $settings['pie_size']['size'] : '';
+
 		$pie_thikness = ! empty( $settings['pie_thickness']['size'] ) ? $settings['pie_thickness']['size'] : '';
 
 		if ( 'pie_chart' === $main_style ) {
-				$progress_bar .= '<div class="pt-plus-piechart ' . esc_attr( $pie_border_after ) . ' pie-' . esc_attr( $pie_chart_style ) . '"  ' . $data_fill_color . ' data-emptyfill="' . $data_empty_fill . '" data-value="' . esc_attr( $pie_size ) . '"  data-size="' . esc_attr( $pie_val ) . '" data-thickness="' . esc_attr( $pie_thikness ) . '"  data-animation-start-value="0"  data-reverse="false">';
+				$progress_bar .= '<div class="pt-plus-piechart ' . esc_attr( $pie_border_after ) . ' pie-' . esc_attr( $pie_chart_style ) . '"  ' . $data_fill_color . ' data-emptyfill="' . esc_attr( $data_empty_fill ) . '" data-value="' . esc_attr( $pie_size ) . '"  data-size="' . esc_attr( $pie_val ) . '" data-thickness="' . esc_attr( $pie_thikness ) . '"  data-animation-start-value="0"  data-reverse="false">';
 
-				$progress_bar .= '<div class="pt-plus-circle" ' . $inner_width . '>';
+					$progress_bar .= '<div class="pt-plus-circle" ' . $inner_width . '>';
 
-				$progress_bar .= '<div class="pianumber-css" >';
+						$progress_bar .= '<div class="pianumber-css" >';
 
-			if ( 'style_3' !== $pie_chart_style ) {
-				$progress_bar .= $number_markup;
-			} else {
-				$progress_bar .= $progress_bar_img;
-			}
+						if ( 'style_3' !== $pie_chart_style ) {
+							$progress_bar .= $number_markup;
+						} else {
+							$progress_bar .= $progress_bar_img;
+						}
 
-			$progress_bar .= '</div>';
-			$progress_bar .= '</div>';
+						$progress_bar .= '</div>';
+
+				$progress_bar .= '</div>';
+
 			$progress_bar .= '</div>';
 
 			if ( 'style_1' === $pie_chart_style ) {
@@ -1362,6 +1405,10 @@ class L_ThePlus_Progress_Bar extends Widget_Base {
 
 		$progress_bar .= wp_print_inline_script_tag( $inline_js_script );
 
-		echo $progress_bar;
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			echo $before_content . $progress_bar . $after_content;
+		} else {
+			echo $progress_bar;
+		}
 	}
 }

@@ -85,13 +85,13 @@ if ( ! class_exists( 'TP_Halloween_Notice' ) ) {
 			}
 
 			if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-				if ( ! get_option( 'tpae_bfsale_notice_dismissed' ) ) {
+				if ( ! get_option( 'tpae_cmsale_notice_dismissed' ) ) {
 					echo '<div class="notice tpae-notice-show tpae-plugin-halloween is-dismissible" style="margin-left:0px;border-left: 4px solid #8072fc;">
 						<div class="inline tpae-plugin-halloween-halloween" style="display: flex;column-gap: 12px;align-items: center;padding: 15px 10px;position: relative;    margin-left: 0px;">
-							<img style="max-width: 120px;max-height: 120px;" src="' . esc_url( L_THEPLUS_URL . '/assets/images/bf_sale.png' ) . '" />
+							<img style="max-width: 120px;max-height: 120px;" src="' . esc_url( L_THEPLUS_URL . '/assets/images/cm-sale.png' ) . '" />
 							<div style="margin: 0 10px; color: #000">  
 								<h3 style="margin: 10px 0px 7px;">' . esc_html__( 'Best Time to Upgrade to The Plus Addons for Elementor PRO – Upto 40% OFF!', 'tpebl' ) . '</h3>
-								<p> ' . esc_html__( 'Our Black Friday Sale is live! Upgrade this season and get upto 40% OFF on the pro version.', 'tpebl' ) . ' </p>
+								<p> ' . esc_html__( 'Our Cyber Monday Sale is live! Upgrade this season and get upto 40% OFF on the pro version.', 'tpebl' ) . ' </p>
 								<p style="display: flex;column-gap: 12px;">  <span> • ' . esc_html__( '1,000+ Elementor Templates', 'tpebl' ) . '</span>  <span> • ' . esc_html__( '120+ Elementor Widgets', 'tpebl' ) . '</span>  <span> • ' . esc_html__( 'Trusted by 100K+ Users', 'tpebl' ) . '</span> </p>
 								<a href="' . esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=admin&utm_campaign=pluginpage' ) . '" class="button" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Claim Your Offer', 'tpebl' ) . '</a>
 							</div>
@@ -138,7 +138,7 @@ if ( ! class_exists( 'TP_Halloween_Notice' ) ) {
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
-			update_option( 'tpae_bfsale_notice_dismissed', true );
+			update_option( 'tpae_cmsale_notice_dismissed', true );
 		
 			wp_send_json_success();
 		}

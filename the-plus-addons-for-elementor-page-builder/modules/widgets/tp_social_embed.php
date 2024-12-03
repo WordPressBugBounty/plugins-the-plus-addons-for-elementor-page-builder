@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Social_Embed
+ * Class ThePlus_Social_Embed
  */
-class L_ThePlus_Social_Embed extends Widget_Base {
+class ThePlus_Social_Embed extends Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -34,13 +34,6 @@ class L_ThePlus_Social_Embed extends Widget_Base {
 	public function get_name() {
 		return 'tp-social-embed';
 	}
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Title.
@@ -85,14 +78,40 @@ class L_ThePlus_Social_Embed extends Widget_Base {
 	/**
 	 * Get Widget Custom Help Url.
 	 *
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -3015,6 +3034,13 @@ class L_ThePlus_Social_Embed extends Widget_Base {
 		);
 		$this->end_controls_section();
 		/*Embed Options Style End*/
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -3027,316 +3053,297 @@ class L_ThePlus_Social_Embed extends Widget_Base {
 
 		$settings   = $this->get_settings_for_display();
 		$uid_sembed = uniqid( 'tp-sembed' );
-		$embed_type = ! empty( $settings['EmbedType'] ) ? $settings['EmbedType'] : 'facebook';
+		$EmbedType  = ! empty( $settings['EmbedType'] ) ? $settings['EmbedType'] : 'facebook';
 
 		$output  = '';
 		$lz2     = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['SocialBg_image'] ) : '';
 		$output .= '<div class="tp-widget-' . esc_attr( $uid_sembed ) . ' tp-social-embed ' . $lz2 . '">';
-		if ( 'vimeo' === $embed_type || 'youtube' === $embed_type ) {
-			$ex_width  = ! empty( $settings['ExWidth']['size'] ) ? $settings['ExWidth']['size'] : 640;
-			$ex_height = ! empty( $settings['ExHeight']['size'] ) ? $settings['ExHeight']['size'] : 360;
+		if ( $EmbedType == 'vimeo' || $EmbedType == 'youtube' ) {
+			$ExWidth  = ! empty( $settings['ExWidth']['size'] ) ? $settings['ExWidth']['size'] : 640;
+			$ExHeight = ! empty( $settings['ExHeight']['size'] ) ? $settings['ExHeight']['size'] : 360;
 		}
-		if ( 'facebook' === $embed_type ) {
-			$f_type   = ! empty( $settings['Type'] ) ? $settings['Type'] : '';
-			$size_btn = ! empty( $settings['SizeLB'] ) ? $settings['SizeLB'] : '';
-			if ( 'comments' === $f_type ) {
-				$comment_type = ! empty( $settings['CommentType'] ) ? $settings['CommentType'] : 'viewcomment';
-				if ( 'viewcomment' === $comment_type ) {
-					$comment_url = ! empty( $settings['CommentURL'] ) && ! empty( $settings['CommentURL']['url'] ) ? urlencode( $settings['CommentURL']['url'] ) : '';
-					$fb_wdcmt    = ! empty( $settings['wdCmt']['size'] ) ? $settings['wdCmt']['size'] : 560;
-					$fbh_gcmt    = ! empty( $settings['HgCmt']['size'] ) ? $settings['HgCmt']['size'] : 300;
-					$pcomentct   = ! empty( 'yes' === $settings['PcomentcT'] ) ? true : false;
-					if ( ! empty( $comment_url ) ) {
-						$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/comment_embed.php?href=' . esc_attr( $comment_url ) . '&include_parent=' . esc_attr( $pcomentct ) . '&width=' . esc_attr( $fb_wdcmt ) . '&height=' . esc_attr( $fbh_gcmt ) . '&appId=" width="' . esc_attr( $fb_wdcmt ) . '" height="' . esc_attr( $fbh_gcmt ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>';
+		if ( $EmbedType == 'facebook' ) {
+			$Type    = ! empty( $settings['Type'] ) ? $settings['Type'] : '';
+			$SizeBtn = ! empty( $settings['SizeLB'] ) ? $settings['SizeLB'] : '';
+			if ( $Type == 'comments' ) {
+				$CommentType = ! empty( $settings['CommentType'] ) ? $settings['CommentType'] : 'viewcomment';
+				if ( $CommentType == 'viewcomment' ) {
+					$CommentURL = ! empty( $settings['CommentURL'] ) && ! empty( $settings['CommentURL']['url'] ) ? urlencode( $settings['CommentURL']['url'] ) : '';
+					$FBwdCmt    = ! empty( $settings['wdCmt']['size'] ) ? $settings['wdCmt']['size'] : 560;
+					$FBHgCmt    = ! empty( $settings['HgCmt']['size'] ) ? $settings['HgCmt']['size'] : 300;
+					$PcomentcT  = ! empty( $settings['PcomentcT'] == 'yes' ) ? true : false;
+					if ( $CommentURL ) {
+						$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/comment_embed.php?href=' . esc_attr( $CommentURL ) . '&include_parent=' . esc_attr( $PcomentcT ) . '&width=' . esc_attr( $FBwdCmt ) . '&height=' . esc_attr( $FBHgCmt ) . '&appId=" width="' . esc_attr( $FBwdCmt ) . '" height="' . esc_attr( $FBHgCmt ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>';
 					} else {
 						$output .= 'URL Empty';
 					}
-				} elseif ( 'onlypost' === $comment_type ) {
-					$fb_comments_add = ! empty( $settings['CommentAddURL'] ) && ! empty( $settings['CommentAddURL']['url'] ) ? $settings['CommentAddURL']['url'] : '';
-					$target_c        = ! empty( $settings['TargetC'] ) ? $settings['TargetC'] : 'custom';
-					if ( 'currentpage' === $target_c ) {
-						$url_fc  = ! empty( $settings['URLFC'] ) ? $settings['URLFC'] : 'plain';
+				} elseif ( $CommentType == 'onlypost' ) {
+					$FBCommentAdd = ! empty( $settings['CommentAddURL'] ) && ! empty( $settings['CommentAddURL']['url'] ) ? $settings['CommentAddURL']['url'] : '';
+					$TargetC      = ! empty( $settings['TargetC'] ) ? $settings['TargetC'] : 'custom';
+					if ( $TargetC == 'currentpage' ) {
+						$URLFC   = ! empty( $settings['URLFC'] ) ? $settings['URLFC'] : 'plain';
 						$post_id = get_the_ID();
-						if ( 'plain' === $url_fc ) {
-							$plain_url = get_permalink( $post_id );
-							$output   .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $plain_url ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
-						} elseif ( 'pretty' === $url_fc ) {
-							$pretty_url = add_query_arg( 'p', $post_id, home_url() );
-							$output    .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $pretty_url ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
+						if ( $URLFC == 'plain' ) {
+							$PlainURL = get_permalink( $post_id );
+							$output  .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $PlainURL ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
+						} elseif ( $URLFC == 'pretty' ) {
+							$PrettyURL = add_query_arg( 'p', $post_id, home_url() );
+							$output   .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $PrettyURL ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
 						}
 					} else {
-						$output .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $fb_comments_add ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
+						$output .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $FBCommentAdd ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
 					}
-
 					$output .= '<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>';
 				}
 			}
-			if ( 'posts' === $f_type ) {
-				$post_url = ! empty( $settings['PostURL'] ) && ! empty( $settings['PostURL']['url'] ) ? $settings['PostURL']['url'] : '';
-				$wd_post  = ! empty( $settings['wdPost']['size'] ) ? $settings['wdPost']['size'] : 500;
-				$hg_post  = ! empty( $settings['HgPost']['size'] ) ? $settings['HgPost']['size'] : 560;
-				$full_pt  = ! empty( 'yes' === $settings['FullPT'] ) ? true : false;
-				$output  .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/post.php?href=' . esc_url( $post_url ) . '&show_text=' . esc_attr( $full_pt ) . '&width=' . esc_attr( $wd_post ) . '&height=' . esc_attr( $hg_post ) . '&appId=" width="' . esc_attr( $wd_post ) . '" height="' . esc_attr( $hg_post ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>';
+			if ( $Type == 'posts' ) {
+				$PostURL = ! empty( $settings['PostURL'] ) && ! empty( $settings['PostURL']['url'] ) ? $settings['PostURL']['url'] : '';
+				$wdPost  = ! empty( $settings['wdPost']['size'] ) ? $settings['wdPost']['size'] : 500;
+				$HgPost  = ! empty( $settings['HgPost']['size'] ) ? $settings['HgPost']['size'] : 560;
+				$FullPT  = ! empty( $settings['FullPT'] == 'yes' ) ? true : false;
+				$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/post.php?href=' . esc_url( $PostURL ) . '&show_text=' . esc_attr( $FullPT ) . '&width=' . esc_attr( $wdPost ) . '&height=' . esc_attr( $HgPost ) . '&appId=" width="' . esc_attr( $wdPost ) . '" height="' . esc_attr( $HgPost ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>';
 			}
-			if ( 'videos' === $f_type ) {
-				$videos_url  = ! empty( $settings['VideosURL'] ) && ! empty( $settings['VideosURL']['url'] ) ? $settings['VideosURL']['url'] : '';
-				$wd_video    = ! empty( $settings['wdVideo']['size'] ) ? $settings['wdVideo']['size'] : 500;
-				$hg_video    = ! empty( $settings['HgVideo']['size'] ) ? $settings['HgVideo']['size'] : 560;
-				$caption_vt  = ! empty( 'yes' === $settings['CaptionVT'] ) ? true : false;
-				$autoplay_vt = ! empty( 'yes' === $settings['AutoplayVT'] ) ? true : false;
-				$full_video  = '';
-				$full_vt     = ! empty( $settings['FullVT'] ) ? $settings['FullVT'] : '';
-				if ( 'yes' === $full_vt ) {
-					$full_video = 'allowFullScreen';
+			if ( $Type == 'videos' ) {
+				$VideosURL  = ! empty( $settings['VideosURL'] ) && ! empty( $settings['VideosURL']['url'] ) ? $settings['VideosURL']['url'] : '';
+				$wdVideo    = ! empty( $settings['wdVideo']['size'] ) ? $settings['wdVideo']['size'] : 500;
+				$HgVideo    = ! empty( $settings['HgVideo']['size'] ) ? $settings['HgVideo']['size'] : 560;
+				$CaptionVT  = ! empty( $settings['CaptionVT'] == 'yes' ) ? true : false;
+				$AutoplayVT = ! empty( $settings['AutoplayVT'] == 'yes' ) ? true : false;
+				$FullVideo  = '';
+				if ( isset( $settings['FullVT'] ) && $settings['FullVT'] == 'yes' ) {
+					$FullVideo = 'allowFullScreen';
 				}
-				$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/video.php?href=' . esc_url( $videos_url ) . '&show_text=' . esc_attr( $caption_vt ) . '&width=' . esc_attr( $wd_video ) . '&height=' . esc_attr( $hg_video ) . '&autoplay=' . esc_attr( $autoplay_vt ) . '&appId=" width="' . esc_attr( $wd_video ) . '" height="' . esc_attr( $hg_video ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ' . $full_video . ' ></iframe>';
+				$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/video.php?href=' . esc_url( $VideosURL ) . '&show_text=' . esc_attr( $CaptionVT ) . '&width=' . esc_attr( $wdVideo ) . '&height=' . esc_attr( $HgVideo ) . '&autoplay=' . esc_attr( $AutoplayVT ) . '&appId=" width="' . esc_attr( $wdVideo ) . '" height="' . esc_attr( $HgVideo ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ' . $FullVideo . ' ></iframe>';
 			}
-			if ( 'likebutton' === $f_type ) {
-				$fb_likebtn   = ! empty( $settings['likeBtnUrl'] ) && ! empty( $settings['likeBtnUrl']['url'] ) ? $settings['likeBtnUrl']['url'] : '';
-				$face_btn     = ! empty( $settings['FacesLBT'] ) ? $settings['FacesLBT'] : '';
-				$faces_lbt    = ! empty( 'yes' === $face_btn ) ? true : false;
-				$fbh_glike    = ! empty( $settings['HgLikeBtn']['size'] ) ? $settings['HgLikeBtn']['size'] : 70;
-				$fbwd_like    = ! empty( $settings['wdLikeBtn']['size'] ) ? $settings['wdLikeBtn']['size'] : 350;
-				$share_button = ! empty( $settings['SBtnLB'] ) ? $settings['SBtnLB'] : '';
-				$sbtn_lb      = ! empty( 'yes' === $share_button ) ? true : false;
-				$traget_like  = ! empty( $settings['TargetLike'] ) ? $settings['TargetLike'] : '';
-				if ( 'currentpage' === $traget_like ) {
-					$fmt_urlib = ! empty( $settings['FmtURLlb'] ) ? $settings['FmtURLlb'] : 'plain';
-					$post_id   = get_the_ID();
-					if ( 'plain' === $fmt_urlib ) {
-						$plain_lurl = get_permalink( $post_id );
-						$output    .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/like.php?href=' . esc_url( $plain_lurl ) . '&layout=' . esc_attr( $settings['BtnStyleLB'] ) . '&action=' . esc_attr( $settings['TypeLB'] ) . '&size=' . esc_attr( $size_btn ) . '&share=' . esc_attr( $sbtn_lb ) . '&height=' . esc_attr( $fbh_glike ) . '&show_faces=' . esc_attr( $faces_lbt ) . '&colorscheme=' . esc_attr( $settings['ColorSLB'] ) . '&width=' . esc_attr( $fbwd_like ) . '&appId=" width="' . esc_attr( $fbwd_like ) . '" height="' . esc_attr( $fbh_glike ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
-					} elseif ( 'pretty' === $fmt_urlib ) {
-						$pretty_lurl = add_query_arg( 'p', $post_id, home_url() );
-						$output     .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/like.php?href=' . esc_url( $pretty_lurl ) . '&layout=' . esc_attr( $settings['BtnStyleLB'] ) . '&action=' . esc_attr( $settings['TypeLB'] ) . '&size=' . esc_attr( $size_btn ) . '&share=' . esc_attr( $sbtn_lb ) . '&height=' . esc_attr( $fbh_glike ) . '&show_faces=' . esc_attr( $faces_lbt ) . '&colorscheme=' . esc_attr( $settings['ColorSLB'] ) . '&width=' . esc_attr( $fbwd_like ) . '&appId=" width="' . esc_attr( $fbwd_like ) . '" height="' . esc_attr( $fbh_glike ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
+			if ( $Type == 'likebutton' ) {
+				$FBLikeBtn = ! empty( $settings['likeBtnUrl'] ) && ! empty( $settings['likeBtnUrl']['url'] ) ? $settings['likeBtnUrl']['url'] : '';
+				$FacesLBT  = ! empty( $settings['FacesLBT'] == 'yes' ) ? true : false;
+				$FBHgLike  = ! empty( $settings['HgLikeBtn']['size'] ) ? $settings['HgLikeBtn']['size'] : 70;
+				$FBwdLike  = ! empty( $settings['wdLikeBtn']['size'] ) ? $settings['wdLikeBtn']['size'] : 350;
+				$SBtnLB    = ! empty( $settings['SBtnLB'] == 'yes' ) ? true : false;
+				if ( $settings['TargetLike'] == 'currentpage' ) {
+					$FmtURLlb = ! empty( $settings['FmtURLlb'] ) ? $settings['FmtURLlb'] : 'plain';
+					$post_id  = get_the_ID();
+					if ( $FmtURLlb == 'plain' ) {
+						$PlainLURL = get_permalink( $post_id );
+						$output   .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/like.php?href=' . esc_url( $PlainLURL ) . '&layout=' . esc_attr( $settings['BtnStyleLB'] ) . '&action=' . esc_attr( $settings['TypeLB'] ) . '&size=' . esc_attr( $SizeBtn ) . '&share=' . esc_attr( $SBtnLB ) . '&height=' . esc_attr( $FBHgLike ) . '&show_faces=' . esc_attr( $FacesLBT ) . '&colorscheme=' . esc_attr( $settings['ColorSLB'] ) . '&width=' . esc_attr( $FBwdLike ) . '&appId=" width="' . esc_attr( $FBwdLike ) . '" height="' . esc_attr( $FBHgLike ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
+					} elseif ( $FmtURLlb == 'pretty' ) {
+						$PrettyLURL = add_query_arg( 'p', $post_id, home_url() );
+						$output    .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/like.php?href=' . esc_url( $PrettyLURL ) . '&layout=' . esc_attr( $settings['BtnStyleLB'] ) . '&action=' . esc_attr( $settings['TypeLB'] ) . '&size=' . esc_attr( $SizeBtn ) . '&share=' . esc_attr( $SBtnLB ) . '&height=' . esc_attr( $FBHgLike ) . '&show_faces=' . esc_attr( $FacesLBT ) . '&colorscheme=' . esc_attr( $settings['ColorSLB'] ) . '&width=' . esc_attr( $FBwdLike ) . '&appId=" width="' . esc_attr( $FBwdLike ) . '" height="' . esc_attr( $FBHgLike ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
 					}
 				} else {
-					$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/like.php?href=' . esc_url( $fb_likebtn ) . '&layout=' . esc_attr( $settings['BtnStyleLB'] ) . '&action=' . esc_attr( $settings['TypeLB'] ) . '&size=' . esc_attr( $size_btn ) . '&share=' . esc_attr( $sbtn_lb ) . '&height=' . esc_attr( $fbh_glike ) . '&show_faces=' . esc_attr( $faces_lbt ) . '&colorscheme=' . esc_attr( $settings['ColorSLB'] ) . '&width=' . esc_attr( $fbwd_like ) . '&appId=" width="' . esc_attr( $fbwd_like ) . '" height="' . esc_attr( $fbh_glike ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
+					$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/like.php?href=' . esc_url( $FBLikeBtn ) . '&layout=' . esc_attr( $settings['BtnStyleLB'] ) . '&action=' . esc_attr( $settings['TypeLB'] ) . '&size=' . esc_attr( $SizeBtn ) . '&share=' . esc_attr( $SBtnLB ) . '&height=' . esc_attr( $FBHgLike ) . '&show_faces=' . esc_attr( $FacesLBT ) . '&colorscheme=' . esc_attr( $settings['ColorSLB'] ) . '&width=' . esc_attr( $FBwdLike ) . '&appId=" width="' . esc_attr( $FBwdLike ) . '" height="' . esc_attr( $FBHgLike ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
 				}
 			}
-			if ( 'page' === $f_type ) {
-				$urlp    = ! empty( $settings['URLP'] ) && ! empty( $settings['URLP']['url'] ) ? $settings['URLP']['url'] : '';
-				$wd_page = ! empty( $settings['wdPage']['size'] ) ? $settings['wdPage']['size'] : 340;
-				$hg_page = ! empty( $settings['HgPage']['size'] ) ? $settings['HgPage']['size'] : 500;
+			if ( $Type == 'page' ) {
+				$URLP    = ! empty( $settings['URLP'] ) && ! empty( $settings['URLP']['url'] ) ? $settings['URLP']['url'] : '';
+				$wdPage  = ! empty( $settings['wdPage']['size'] ) ? $settings['wdPage']['size'] : 340;
+				$HgPage  = ! empty( $settings['HgPage']['size'] ) ? $settings['HgPage']['size'] : 500;
+				$smallHP = ! empty( $settings['smallHP'] == 'yes' ) ? true : false;
 
-				$small_header = ! empty( $settings['smallHP'] ) ? $settings['smallHP'] : '';
-
-				$small_hp = ! empty( 'yes' === $small_header ) ? true : false;
-				$cover_p  = true;
-				$cover_p  = ! empty( $settings['CoverP'] ) ? $settings['CoverP'] : '';
-
-				if ( 'yes' === $cover_p ) {
-					$cover_p = false;
+				$CoverP = true;
+				if ( ! empty( $settings['CoverP'] ) && $settings['CoverP'] === 'yes' ) {
+					$CoverP = false;
 				}
 
-				$show_frd  = ! empty( $settings['ProfileP'] ) ? $settings['ProfileP'] : '';
-				$profile_p = ! empty( 'yes' === $show_frd ) ? true : false;
+				$ProfileP = ! empty( $settings['ProfileP'] == 'yes' ) ? true : false;
 
-				$cus_vta_btn = ! empty( $settings['CTABTN'] ) ? $settings['CTABTN'] : '';
-
-				$ctabtn  = ! empty( 'yes' === $cus_vta_btn ) ? true : false;
-				$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/page.php?href=' . esc_url( $urlp ) . '&tabs=' . esc_attr( $settings['LayoutP'] ) . '&width=' . esc_attr( $wd_page ) . '&height=' . esc_attr( $hg_page ) . '&small_header=' . esc_attr( $small_hp ) . '&hide_cover=' . esc_attr( $cover_p ) . '&show-facepile=' . esc_attr( $profile_p ) . '&hide_cta=' . esc_attr( $ctabtn ) . '&lazy=true&adapt_container_width=true&appId=" width="' . esc_attr( $wd_page ) . '" height="' . esc_attr( $hg_page ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>';
+				$CTABTN  = ! empty( $settings['CTABTN'] == 'yes' ) ? true : false;
+				$output .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/page.php?href=' . esc_url( $URLP ) . '&tabs=' . esc_attr( $settings['LayoutP'] ) . '&width=' . esc_attr( $wdPage ) . '&height=' . esc_attr( $HgPage ) . '&small_header=' . esc_attr( $smallHP ) . '&hide_cover=' . esc_attr( $CoverP ) . '&show-facepile=' . esc_attr( $ProfileP ) . '&hide_cta=' . esc_attr( $CTABTN ) . '&lazy=true&adapt_container_width=true&appId=" width="' . esc_attr( $wdPage ) . '" height="' . esc_attr( $HgPage ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media" ></iframe>';
 			}
-			if ( 'save' === $f_type ) {
-				$save_url = ! empty( $settings['SaveURL'] ) && ! empty( $settings['SaveURL']['url'] ) ? $settings['SaveURL']['url'] : '';
+			if ( $Type == 'save' ) {
+				$SaveURL = ! empty( $settings['SaveURL'] ) && ! empty( $settings['SaveURL']['url'] ) ? $settings['SaveURL']['url'] : '';
 
-				$output .= '<div class="fb-save" data-uri="' . esc_url( $save_url ) . '" data-size="' . esc_attr( $size_btn ) . '"></div>';
+				$output .= '<div class="fb-save" data-uri="' . esc_url( $SaveURL ) . '" data-size="' . esc_attr( $SizeBtn ) . '"></div>';
 				$output .= '<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>';
 			}
-			if ( 'share' === $f_type ) {
-				$share_url = ! empty( $settings['ShareURL'] ) && ! empty( $settings['ShareURL']['url'] ) ? $settings['ShareURL']['url'] : '';
-				$share_hbt = ! empty( $settings['HgShareBtn']['size'] ) ? $settings['HgShareBtn']['size'] : 50;
-				$share_wbt = ! empty( $settings['wdShareBtn']['size'] ) ? $settings['wdShareBtn']['size'] : 96;
-				$output   .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/share_button.php?href=' . esc_url( $share_url ) . '&layout=' . esc_attr( $settings['ShareBTN'] ) . '&size=' . esc_attr( $size_btn ) . '&width=' . esc_attr( $share_wbt ) . '&height=' . esc_attr( $share_hbt ) . '&appId=" width="' . esc_attr( $share_wbt ) . '" height="' . esc_attr( $share_hbt ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
+			if ( $Type == 'share' ) {
+				$ShareURL = ! empty( $settings['ShareURL'] ) && ! empty( $settings['ShareURL']['url'] ) ? $settings['ShareURL']['url'] : '';
+				$ShareHbt = ! empty( $settings['HgShareBtn']['size'] ) ? $settings['HgShareBtn']['size'] : 50;
+				$ShareWbt = ! empty( $settings['wdShareBtn']['size'] ) ? $settings['wdShareBtn']['size'] : 96;
+				$output  .= '<iframe class="tp-fb-iframe" src="https://www.facebook.com/plugins/share_button.php?href=' . esc_url( $ShareURL ) . '&layout=' . esc_attr( $settings['ShareBTN'] ) . '&size=' . esc_attr( $SizeBtn ) . '&width=' . esc_attr( $ShareWbt ) . '&height=' . esc_attr( $ShareHbt ) . '&appId=" width="' . esc_attr( $ShareWbt ) . '" height="' . esc_attr( $ShareHbt ) . '" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>';
 			}
-		} elseif ( 'twitter' === $embed_type ) {
-			$tweet_type = ! empty( $settings['TweetType'] ) ? $settings['TweetType'] : 'timelines';
-			$tw_name    = ! empty( $settings['Twname'] ) ? $settings['Twname'] : '';
-			$dark_mode  = ! empty( $settings['TwColor'] ) ? $settings['TwColor'] : '';
-			$tw_color   = ! empty( 'yes' === $dark_mode ) ? 'dark' : 'light';
-			$tw_width   = ! empty( $settings['Twwidth']['size'] ) ? $settings['Twwidth']['size'] : '';
-			$twitconver = ! empty( $settings['Twconver'] ) ? $settings['Twconver'] : '';
-			$tw_conver  = ! empty( 'yes' === $twitconver ) ? 'none' : '';
-			$tw_msg     = ! empty( $settings['TwMsg'] ) ? $settings['TwMsg'] : '';
-			if ( 'Tweets' === $tweet_type ) {
-				$tw_repeater = ! empty( $settings['TwRepeater'] ) ? $settings['TwRepeater'] : array();
-				$twit_card   = ! empty( $settings['TwCards'] ) ? $settings['TwCards'] : '';
-				$tw_cards    = ! empty( 'yes' === $twit_card ) ? 'hidden' : '';
-				$tw_align    = ! empty( $settings['Twalign'] ) ? $settings['Twalign'] : 'center';
-
-				foreach ( $tw_repeater as $index => $tweet ) {
-					$tw_url      = ! empty( $tweet['TweetURl'] ) && ! empty( $tweet['TweetURl']['url'] ) ? $tweet['TweetURl']['url'] : '';
-					$tw_massage  = ! empty( $tweet['TwMassage'] ) ? $tweet['TwMassage'] : '';
-					$output     .= '<blockquote class="twitter-tweet" data-theme="' . esc_attr( $tw_color ) . '" data-width="' . esc_attr( $tw_width ) . '" data-cards="' . esc_attr( $tw_cards ) . '" data-align="' . esc_attr( $tw_align ) . '" data-conversation="' . esc_attr( $tw_conver ) . '" >';
-						$output .= '<p lang="en" dir="ltr">' . wp_kses_post( $tw_massage ) . '</p>';
-						$output .= '<a href="' . esc_attr( $tw_url ) . '"></a>';
+		} elseif ( $EmbedType == 'twitter' ) {
+			$TweetType = ! empty( $settings['TweetType'] ) ? $settings['TweetType'] : 'timelines';
+			$Twname    = ! empty( $settings['Twname'] ) ? $settings['Twname'] : '';
+			$TwColor   = ! empty( $settings['TwColor'] == 'yes' ) ? 'dark' : 'light';
+			$Twwidth   = ! empty( $settings['Twwidth']['size'] ) ? $settings['Twwidth']['size'] : '';
+			$Twconver  = ! empty( $settings['Twconver'] == 'yes' ) ? 'none' : '';
+			$TwMsg     = ! empty( $settings['TwMsg'] ) ? $settings['TwMsg'] : '';
+			if ( $TweetType == 'Tweets' ) {
+				$TwRepeater = ! empty( $settings['TwRepeater'] ) ? $settings['TwRepeater'] : array();
+				$TwCards    = ! empty( $settings['TwCards'] == 'yes' ) ? 'hidden' : '';
+				$TwAlign    = ! empty( $settings['Twalign'] ) ? $settings['Twalign'] : 'center';
+				foreach ( $TwRepeater as $index => $Tweet ) {
+					$TwURl       = ! empty( $Tweet['TweetURl'] ) && ! empty( $Tweet['TweetURl']['url'] ) ? $Tweet['TweetURl']['url'] : '';
+					$TwMassage   = ! empty( $Tweet['TwMassage'] ) ? $Tweet['TwMassage'] : '';
+					$output     .= '<blockquote class="twitter-tweet" data-theme="' . esc_attr( $TwColor ) . '" data-width="' . esc_attr( $Twwidth ) . '" data-cards="' . esc_attr( $TwCards ) . '" data-align="' . esc_attr( $TwAlign ) . '" data-conversation="' . esc_attr( $Twconver ) . '" >';
+						$output .= '<p lang="en" dir="ltr">' . wp_kses_post( $TwMassage ) . '</p>';
+						$output .= '<a href="' . esc_attr( $TwURl ) . '"></a>';
 					$output     .= '</blockquote>';
 				}
 			}
-			if ( 'timelines' === $tweet_type ) {
-				$tw_url     = '';
-				$tw_class   = 'twitter-timeline';
-				$tw_guides  = ! empty( $settings['TwGuides'] ) ? $settings['TwGuides'] : 'Profile';
-				$tw_brcr    = ! empty( $settings['TwBrCr'] ) ? $settings['TwBrCr'] : '';
-				$tw_limit   = ! empty( $settings['Twlimit']['size'] ) ? $settings['Twlimit']['size'] : '';
-				$tw_style   = ! empty( $settings['Twstyle'] ) ? $settings['Twstyle'] : 'linear';
-				$tw_design  = ! empty( $settings['TwDesign'] ) ? $settings['TwDesign'] : array();
-				$tw_height  = ( 'linear' === $tw_style ) ? $settings['Twheight']['size'] : '';
-				$design_btn = array();
-				if ( is_array( $tw_design ) ) {
-					foreach ( $tw_design as $value ) {
-						$design_btn[] = $value;
+			if ( $TweetType == 'timelines' ) {
+				$TwURl     = '';
+				$Twclass   = 'twitter-timeline';
+				$TwGuides  = ! empty( $settings['TwGuides'] ) ? $settings['TwGuides'] : 'Profile';
+				$TwBrCr    = ! empty( $settings['TwBrCr'] ) ? $settings['TwBrCr'] : '';
+				$Twlimit   = ! empty( $settings['Twlimit']['size'] ) ? $settings['Twlimit']['size'] : '';
+				$Twstyle   = ! empty( $settings['Twstyle'] ) ? $settings['Twstyle'] : 'linear';
+				$TwDesign  = ! empty( $settings['TwDesign'] ) ? $settings['TwDesign'] : array();
+				$Twheight  = ( $Twstyle == 'linear' ) ? $settings['Twheight']['size'] : '';
+				$DesignBTN = array();
+				if ( is_array( $TwDesign ) ) {
+					foreach ( $TwDesign as $value ) {
+						$DesignBTN[] = $value;
 					}
 				}
-				$tw_design = wp_json_encode( $design_btn );
-				if ( 'Profile' === $tw_guides ) {
-					$tw_url = 'https://twitter.com/' . esc_attr( $tw_name );
-				} elseif ( 'List' === $tw_guides ) {
-					$tw_url = ! empty( $settings['Twlisturl'] ) && ! empty( $settings['Twlisturl']['url'] ) ? $settings['Twlisturl']['url'] : '';
-				} elseif ( 'Likes' === $tw_guides ) {
-					$tw_url = 'https://twitter.com/' . esc_attr( $tw_name ) . '/likes';
-				} elseif ( 'Collection' === $tw_guides ) {
-					$tw_class = 'twitter-grid';
-					$tw_url   = ! empty( $settings['TwCollection'] ) && ! empty( $settings['TwCollection']['url'] ) ? $settings['TwCollection']['url'] : '';
+				$TwDesign = json_encode( $DesignBTN );
+				if ( $TwGuides == 'Profile' ) {
+					$TwURl = 'https://twitter.com/' . esc_attr( $Twname );
+				} elseif ( $TwGuides == 'List' ) {
+					$TwURl = ! empty( $settings['Twlisturl'] ) && ! empty( $settings['Twlisturl']['url'] ) ? $settings['Twlisturl']['url'] : '';
+				} elseif ( $TwGuides == 'Likes' ) {
+					$TwURl = 'https://twitter.com/' . esc_attr( $Twname ) . '/likes';
+				} elseif ( $TwGuides == 'Collection' ) {
+					$Twclass = 'twitter-grid';
+					$TwURl   = ! empty( $settings['TwCollection'] ) && ! empty( $settings['TwCollection']['url'] ) ? $settings['TwCollection']['url'] : '';
 				}
-				$output .= '<a class="' . esc_attr( $tw_class ) . '" href="' . esc_url( $tw_url ) . '" data-width="' . esc_attr( $tw_width ) . '" data-height="' . esc_attr( $tw_height ) . '" data-theme="' . esc_attr( $tw_color ) . '" data-chrome="' . esc_attr( $tw_design ) . '" data-border-color="' . esc_attr( $tw_brcr ) . '" data-tweet-limit="' . esc_attr( $tw_limit ) . '" data-aria-polite="" >' . wp_kses_post( $tw_msg ) . '</a>';
+				$output .= '<a class="' . esc_attr( $Twclass ) . '" href="' . esc_url( $TwURl ) . '" data-width="' . esc_attr( $Twwidth ) . '" data-height="' . esc_attr( $Twheight ) . '" data-theme="' . esc_attr( $TwColor ) . '" data-chrome="' . esc_attr( $TwDesign ) . '" data-border-color="' . esc_attr( $TwBrCr ) . '" data-tweet-limit="' . esc_attr( $Twlimit ) . '" data-aria-polite="" >' . wp_kses_post( $TwMsg ) . '</a>';
 			}
-			if ( 'buttons' === $tweet_type ) {
-				$tw_button  = ! empty( $settings['Twbutton'] ) ? $settings['Twbutton'] : 'follow';
-				$tw_btnsize = ! empty( $settings['TwBtnSize'] ) ? $settings['TwBtnSize'] : '';
-				$tw_tweetid = ! empty( $settings['TwTweetId'] ) ? $settings['TwTweetId'] : '';
-				$tw_icon    = ! empty( $settings['TwIcon'] ) ? $settings['TwIcon'] : '';
-				$twicon     = ! empty( 'yes' === $tw_icon ) ? '' : '<i class="fab fa-twitter"></i>';
-				$lz1        = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['TwBtnBg_image'], $settings['TwBtnBgH_image'] ) : '';
-				if ( 'Tweets' === $tw_button ) {
-					$tw_via       = ! empty( $settings['TwVia'] ) ? $settings['TwVia'] : '';
-					$tw_text_btn  = ! empty( $settings['TwTextBtn'] ) ? $settings['TwTextBtn'] : '';
-					$tw_hashtags  = ! empty( $settings['TwHashtags'] ) ? $settings['TwHashtags'] : '';
-					$tw_tweet_url = ! empty( $settings['TwTweetUrl'] ) && ! empty( $settings['TwTweetUrl']['url'] ) ? $settings['TwTweetUrl']['url'] : '';
-					$output      .= '<a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="' . esc_attr( $tw_btnsize ) . '" data-text="' . esc_attr( $tw_text_btn ) . '" data-url="' . esc_url( $tw_tweet_url ) . '" data-via="' . esc_attr( $tw_via ) . '" data-hashtags="' . esc_attr( $tw_hashtags ) . '" >' . wp_kses_post( $tw_msg ) . '</a></br>';
-				} elseif ( 'follow' === $tw_button ) {
-					$tw_count      = ! empty( $settings['TwCount'] ) ? $settings['TwCount'] : 'false';
-					$twiter_dicon  = ! empty( $settings['TwHideUname'] ) ? $settings['TwHideUname'] : '';
-					$tw_hide_uname = ! empty( 'yes' === $twiter_dicon ) ? 'false' : $settings['TwHideUname'];
-					$output       .= '<a class="twitter-follow-button" href="https://twitter.com/' . esc_attr( $tw_name ) . '" data-size="' . esc_attr( $tw_btnsize ) . '" data-show-screen-name="' . esc_attr( $tw_hide_uname ) . '" data-show-count="' . esc_attr( $tw_count ) . '" >' . wp_kses_post( $tw_msg ) . '</a></br>';
-				} elseif ( 'Message' === $tw_button ) {
-					$tw_rid        = ! empty( $settings['TwRId'] ) ? $settings['TwRId'] : '';
-					$tw_message    = ! empty( $settings['TwMessage'] ) ? $settings['TwMessage'] : '';
-					$tw_hide_uname = ! empty( $settings['TwHideUname'] ) ? '@' : '';
-					$output       .= '<a class="twitter-dm-button" href="https://twitter.com/messages/compose?recipient_id=' . esc_attr( $tw_rid ) . '" data-text="' . esc_attr( $tw_message ) . '" data-size="' . esc_attr( $tw_btnsize ) . '" data-screen-name="' . esc_attr( $tw_hide_uname . $tw_name ) . '">' . wp_kses_post( $tw_msg ) . '</a>';
-				} elseif ( 'like' === $tw_button ) {
-					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/like?tweet_id=' . esc_attr( $tw_tweetid ) . '" >' . wp_kses_post( $twicon . ' ' . $settings['likeBtn'] ) . '</a>';
-				} elseif ( 'Reply' === $tw_button ) {
-					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/tweet?in_reply_to=' . esc_attr( $tw_tweetid ) . '">' . wp_kses_post( $twicon . ' ' . $settings['ReplyBtn'] ) . '</a>';
-				} elseif ( 'Retweet' === $tw_button ) {
-					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/retweet?tweet_id=' . esc_attr( $tw_tweetid ) . '">' . wp_kses_post( $twicon . ' ' . $settings['RetweetBtn'] ) . '</a>';
+			if ( $TweetType == 'buttons' ) {
+				$Twbutton  = ! empty( $settings['Twbutton'] ) ? $settings['Twbutton'] : 'follow';
+				$TwBtnSize = ! empty( $settings['TwBtnSize'] ) ? $settings['TwBtnSize'] : '';
+				$TwTweetId = ! empty( $settings['TwTweetId'] ) ? $settings['TwTweetId'] : '';
+				$Twicon    = ! empty( $settings['TwIcon'] == 'yes' ) ? '' : '<i class="fab fa-twitter"></i>';
+
+				$lz1 = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['TwBtnBg_image'], $settings['TwBtnBgH_image'] ) : '';
+				if ( $Twbutton == 'Tweets' ) {
+					$TwVia      = ! empty( $settings['TwVia'] ) ? $settings['TwVia'] : '';
+					$TwTextBtn  = ! empty( $settings['TwTextBtn'] ) ? $settings['TwTextBtn'] : '';
+					$TwHashtags = ! empty( $settings['TwHashtags'] ) ? $settings['TwHashtags'] : '';
+					$TwTweetUrl = ! empty( $settings['TwTweetUrl'] ) && ! empty( $settings['TwTweetUrl']['url'] ) ? $settings['TwTweetUrl']['url'] : '';
+					$output    .= '<a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="' . esc_attr( $TwBtnSize ) . '" data-text="' . esc_attr( $TwTextBtn ) . '" data-url="' . esc_url( $TwTweetUrl ) . '" data-via="' . esc_attr( $TwVia ) . '" data-hashtags="' . esc_attr( $TwHashtags ) . '" >' . wp_kses_post( $TwMsg ) . '</a></br>';
+				} elseif ( $Twbutton == 'follow' ) {
+					$TwCount     = ! empty( $settings['TwCount'] ) ? $settings['TwCount'] : 'false';
+					$TwHideUname = ! empty( $settings['TwHideUname'] == 'yes' ) ? 'false' : $settings['TwHideUname'];
+					$output     .= '<a class="twitter-follow-button" href="https://twitter.com/' . esc_attr( $Twname ) . '" data-size="' . esc_attr( $TwBtnSize ) . '" data-show-screen-name="' . esc_attr( $TwHideUname ) . '" data-show-count="' . esc_attr( $TwCount ) . '" >' . wp_kses_post( $TwMsg ) . '</a></br>';
+				} elseif ( $Twbutton == 'Message' ) {
+					$TwRId       = ! empty( $settings['TwRId'] ) ? $settings['TwRId'] : '';
+					$TwMessage   = ! empty( $settings['TwMessage'] ) ? $settings['TwMessage'] : '';
+					$TwHideUname = ! empty( $settings['TwHideUname'] ) ? '@' : '';
+					$output     .= '<a class="twitter-dm-button" href="https://twitter.com/messages/compose?recipient_id=' . esc_attr( $TwRId ) . '" data-text="' . esc_attr( $TwMessage ) . '" data-size="' . esc_attr( $TwBtnSize ) . '" data-screen-name="' . esc_attr( $TwHideUname . $Twname ) . '">' . wp_kses_post( $TwMsg ) . '</a>';
+				} elseif ( $Twbutton == 'like' ) {
+					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/like?tweet_id=' . esc_attr( $TwTweetId ) . '" >' . wp_kses_post( $Twicon . ' ' . $settings['likeBtn'] ) . '</a>';
+				} elseif ( $Twbutton == 'Reply' ) {
+					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/tweet?in_reply_to=' . esc_attr( $TwTweetId ) . '">' . wp_kses_post( $Twicon . ' ' . $settings['ReplyBtn'] ) . '</a>';
+				} elseif ( $Twbutton == 'Retweet' ) {
+					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/retweet?tweet_id=' . esc_attr( $TwTweetId ) . '">' . wp_kses_post( $Twicon . ' ' . $settings['RetweetBtn'] ) . '</a>';
 				}
 			}
 			$output .= '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
-		} elseif ( 'vimeo' === $embed_type ) {
-			$v_mid     = ! empty( $settings['ViId'] ) ? $settings['ViId'] : '';
-			$vm_stime  = ! empty( $settings['VmStime'] ) ? $settings['VmStime'] : '';
-			$vm_color  = ! empty( $settings['VmColor'] ) ? ltrim( $settings['VmColor'], '#' ) : 'ffffff';
-			$vm_select = ! empty( $settings['ViOption'] ) ? $settings['ViOption'] : array();
-			$vm_all    = array();
-			if ( is_array( $vm_select ) ) {
-				foreach ( $vm_select as $value ) {
-					$vm_all[] = $value;
+		} elseif ( $EmbedType == 'vimeo' ) {
+			$VmId     = ! empty( $settings['ViId'] ) ? $settings['ViId'] : '';
+			$VmStime  = ! empty( $settings['VmStime'] ) ? $settings['VmStime'] : '';
+			$VmColor  = ! empty( $settings['VmColor'] ) ? ltrim( $settings['VmColor'], '#' ) : 'ffffff';
+			$VmSelect = ! empty( $settings['ViOption'] ) ? $settings['ViOption'] : array();
+			$VmALL    = array();
+			if ( is_array( $VmSelect ) ) {
+				foreach ( $VmSelect as $value ) {
+					$VmALL[] = $value;
 				}
 			}
-			$vm_full_screen  = ( in_array( 'fullscreen', $vm_all ) ) ? 'webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="true"' : '';
-			$vm_auto_play    = ( in_array( 'autoplay', $vm_all ) ) ? 1 : 0;
-			$vm_loop         = ( in_array( 'loop', $vm_all ) ) ? 1 : 0;
-			$vm_muted        = ( in_array( 'muted', $vm_all ) ) ? 1 : 0;
-			$vm_auto_pause   = ( in_array( 'autopause', $vm_all ) ) ? 1 : 0;
-			$vm_background   = ( in_array( 'background', $vm_all ) ) ? 1 : 0;
-			$vm_byline       = ( in_array( 'byline', $vm_all ) ) ? 1 : 0;
-			$vm_speed        = ( in_array( 'speed', $vm_all ) ) ? 1 : 0;
-			$vm_title        = ( in_array( 'title', $vm_all ) ) ? 1 : 0;
-			$vm_portrait     = ( in_array( 'portrait', $vm_all ) ) ? 1 : 0;
-			$vm_play_sinline = ( in_array( 'playsinline', $vm_all ) ) ? 1 : 0;
-			$vm_dnt          = ( in_array( 'dnt', $vm_all ) ) ? 1 : 0;
-			$vm_pip          = ( in_array( 'pip', $vm_all ) ) ? 1 : 0;
-			$vm_transparent  = ( in_array( 'transparent', $vm_all ) ) ? 1 : 0;
-			$output         .= '<iframe class="tp-frame-set" src="https://player.vimeo.com/video/' . esc_attr( $v_mid ) . '?autoplay=' . esc_attr( $vm_auto_play ) . '&loop=' . esc_attr( $vm_loop ) . '&muted=' . esc_attr( $vm_muted ) . '&autopause=' . esc_attr( $vm_auto_pause ) . '&background=' . esc_attr( $vm_background ) . '&byline=' . esc_attr( $vm_byline ) . '&playsinline=' . esc_attr( $vm_play_sinline ) . '&speed=' . esc_attr( $vm_speed ) . '&title=' . esc_attr( $vm_title ) . '&portrait=' . esc_attr( $vm_portrait ) . '&dnt=' . esc_attr( $vm_dnt ) . '&pip=' . esc_attr( $vm_pip ) . '&transparent=' . esc_attr( $vm_transparent ) . '&color=' . esc_attr( $vm_color ) . '&#t=' . esc_attr( $vm_stime ) . '" width="' . esc_attr( $ex_width ) . '" height="' . esc_attr( $ex_height ) . '" frameborder="0" ' . esc_attr( $vm_full_screen ) . ' ></iframe>';
-		} elseif ( 'instagram' === $embed_type ) {
-			$ig_type    = ! empty( $settings['IGType'] ) ? $settings['IGType'] : 'posts';
-			$igig       = ! empty( $settings['IGId'] ) ? $settings['IGId'] : 'CGAvnLcA3zb';
-			$ig_cap     = '';
-			$igcaptions = ! empty( $settings['IGCaptione'] ) ? $settings['IGCaptione'] : '';
-			if ( 'yes' !== $igcaptions ) {
-				$ig_cap = 'data-instgrm-captioned';
+			$Vm_FullScreen  = ( in_array( 'fullscreen', $VmALL ) ) ? 'webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="true"' : '';
+			$Vm_AutoPlay    = ( in_array( 'autoplay', $VmALL ) ) ? 1 : 0;
+			$Vm_loop        = ( in_array( 'loop', $VmALL ) ) ? 1 : 0;
+			$Vm_Muted       = ( in_array( 'muted', $VmALL ) ) ? 1 : 0;
+			$Vm_AutoPause   = ( in_array( 'autopause', $VmALL ) ) ? 1 : 0;
+			$Vm_BackGround  = ( in_array( 'background', $VmALL ) ) ? 1 : 0;
+			$Vm_Byline      = ( in_array( 'byline', $VmALL ) ) ? 1 : 0;
+			$Vm_Speed       = ( in_array( 'speed', $VmALL ) ) ? 1 : 0;
+			$Vm_Title       = ( in_array( 'title', $VmALL ) ) ? 1 : 0;
+			$Vm_Portrait    = ( in_array( 'portrait', $VmALL ) ) ? 1 : 0;
+			$Vm_PlaySinline = ( in_array( 'playsinline', $VmALL ) ) ? 1 : 0;
+			$Vm_Dnt         = ( in_array( 'dnt', $VmALL ) ) ? 1 : 0;
+			$Vm_PiP         = ( in_array( 'pip', $VmALL ) ) ? 1 : 0;
+			$Vm_transparent = ( in_array( 'transparent', $VmALL ) ) ? 1 : 0;
+			$output        .= '<iframe class="tp-frame-set" src="https://player.vimeo.com/video/' . esc_attr( $VmId ) . '?autoplay=' . esc_attr( $Vm_AutoPlay ) . '&loop=' . esc_attr( $Vm_loop ) . '&muted=' . esc_attr( $Vm_Muted ) . '&autopause=' . esc_attr( $Vm_AutoPause ) . '&background=' . esc_attr( $Vm_BackGround ) . '&byline=' . esc_attr( $Vm_Byline ) . '&playsinline=' . esc_attr( $Vm_PlaySinline ) . '&speed=' . esc_attr( $Vm_Speed ) . '&title=' . esc_attr( $Vm_Title ) . '&portrait=' . esc_attr( $Vm_Portrait ) . '&dnt=' . esc_attr( $Vm_Dnt ) . '&pip=' . esc_attr( $Vm_PiP ) . '&transparent=' . esc_attr( $Vm_transparent ) . '&color=' . esc_attr( $VmColor ) . '&#t=' . esc_attr( $VmStime ) . '" width="' . esc_attr( $ExWidth ) . '" height="' . esc_attr( $ExHeight ) . '" frameborder="0" ' . esc_attr( $Vm_FullScreen ) . ' ></iframe>';
+		} elseif ( $EmbedType == 'instagram' ) {
+			$IGType = ! empty( $settings['IGType'] ) ? $settings['IGType'] : 'posts';
+			$IGId   = ! empty( $settings['IGId'] ) ? $settings['IGId'] : 'CGAvnLcA3zb';
+			$IGCap  = '';
+			if ( isset( $settings['IGCaptione'] ) && $settings['IGCaptione'] != 'yes' ) {
+				$IGCap = 'data-instgrm-captioned';
 			}
-			if ( 'posts' === $ig_type ) {
-				$ig_id = 'p/' . $igig;
-			} elseif ( 'reels' === $ig_type ) {
-				$ig_id = 'reel/' . $igig;
-			} elseif ( 'igtv' === $ig_type ) {
-				$ig_id = 'tv/' . $igig;
+			if ( $IGType == 'posts' ) {
+				$IG_id = 'p/' . $IGId;
+			} elseif ( $IGType == 'reels' ) {
+				$IG_id = 'reel/' . $IGId;
+			} elseif ( $IGType == 'igtv' ) {
+				$IG_id = 'tv/' . $IGId;
 			}
-			$output .= '<blockquote class="instagram-media" ' . esc_attr( $ig_cap ) . ' data-instgrm-version="13" data-instgrm-permalink="https://www.instagram.com/' . esc_attr( $ig_id ) . '/?utm_source=ig_embed"></blockquote><script async src="//www.instagram.com/embed.js"></script>';
-		} elseif ( 'youtube' === $embed_type ) {
-			$yt_type     = ! empty( $settings['YtType'] ) ? $settings['YtType'] : 'YtSV';
-			$yt_option   = ! empty( $settings['YtOption'] ) ? $settings['YtOption'] : array();
-			$yt_stime    = ! empty( $settings['YtSTime'] ) ? $settings['YtSTime'] : '';
-			$yt_etime    = ! empty( $settings['YtETime'] ) ? $settings['YtETime'] : '';
-			$yt_language = ! empty( $settings['Ytlanguage'] ) ? $settings['Ytlanguage'] : '';
-			$yt_select   = array();
-			if ( is_array( $yt_option ) ) {
-				foreach ( $yt_option as $value ) {
-					$yt_select[] = $value;
+			$output .= '<blockquote class="instagram-media" ' . esc_attr( $IGCap ) . ' data-instgrm-version="13" data-instgrm-permalink="https://www.instagram.com/' . esc_attr( $IG_id ) . '/?utm_source=ig_embed"></blockquote><script async src="//www.instagram.com/embed.js"></script>';
+		} elseif ( $EmbedType == 'youtube' ) {
+			$YtType     = ! empty( $settings['YtType'] ) ? $settings['YtType'] : 'YtSV';
+			$YtOption   = ! empty( $settings['YtOption'] ) ? $settings['YtOption'] : array();
+			$YtSTime    = ! empty( $settings['YtSTime'] ) ? $settings['YtSTime'] : '';
+			$YtETime    = ! empty( $settings['YtETime'] ) ? $settings['YtETime'] : '';
+			$Ytlanguage = ! empty( $settings['Ytlanguage'] ) ? $settings['Ytlanguage'] : '';
+			$YtSelect   = array();
+			if ( is_array( $YtOption ) ) {
+				foreach ( $YtOption as $value ) {
+					$YtSelect[] = $value;
 				}
 			}
-
-			$yt_loop           = ( in_array( 'loop', $yt_select ) ) ? 1 : 0;
-			$yt_fs             = ( in_array( 'fs', $yt_select ) ) ? 1 : 0;
-			$yt_autoplay       = ( in_array( 'autoplay', $yt_select ) ) ? 1 : 0;
-			$yt_muted          = ( in_array( 'mute', $yt_select ) ) ? 1 : 0;
-			$yt_controls       = ( in_array( 'controls', $yt_select ) ) ? 1 : 0;
-			$yt_disablekb      = ( in_array( 'disablekb', $yt_select ) ) ? 1 : 0;
-			$yt_modestbranding = ( in_array( 'modestbranding', $yt_select ) ) ? 1 : 0;
-			$yt_playsinline    = ( in_array( 'playsinline', $yt_select ) ) ? 1 : 0;
-			$yt_rel            = ( in_array( 'rel', $yt_select ) ) ? 1 : 0;
-			$yt_parameters     = 'autoplay=' . esc_attr( $yt_autoplay ) . '&mute=' . esc_attr( $yt_muted ) . '&controls=' . esc_attr( $yt_controls ) . '&disablekb=' . esc_attr( $yt_disablekb ) . '&fs=' . esc_attr( $yt_fs ) . '&modestbranding=' . esc_attr( $yt_modestbranding ) . '&loop=' . esc_attr( $yt_loop ) . '&rel=' . esc_attr( $yt_rel ) . '&playsinline=' . esc_attr( $yt_playsinline ) . '&start=' . esc_attr( $yt_stime ) . '&end=' . esc_attr( $yt_etime ) . '&hl=' . esc_attr( $yt_language );
-			if ( 'YtSV' === $yt_type ) {
-				$yt_videoid = ! empty( $settings['YtVideoId'] ) ? $settings['YtVideoId'] : '';
-				$yt_src     = 'https://www.youtube.com/embed/' . esc_attr( $yt_videoid ) . '?playlist=' . esc_attr( $yt_videoid ) . '&' . esc_attr( $yt_parameters );
-			} elseif ( 'YtPlayV' === $yt_type ) {
-				$yt_play_listid = ! empty( $settings['YtPlaylistId'] ) ? $settings['YtPlaylistId'] : '';
-				$yt_src         = 'https://www.youtube.com/embed?listType=playlist&list=' . esc_attr( $yt_play_listid ) . '&' . esc_attr( $yt_parameters );
-			} elseif ( 'YtuserV' === $yt_type ) {
-				$yt_username = ! empty( $settings['YtUsername'] ) ? $settings['YtUsername'] : '';
-				$yt_src      = 'https://www.youtube.com/embed?listType=user_uploads&list=' . esc_attr( $yt_username ) . '&' . esc_attr( $yt_parameters );
+			$Yt_loop           = ( in_array( 'loop', $YtSelect ) ) ? 1 : 0;
+			$Yt_fs             = ( in_array( 'fs', $YtSelect ) ) ? 1 : 0;
+			$Yt_autoplay       = ( in_array( 'autoplay', $YtSelect ) ) ? 1 : 0;
+			$Yt_muted          = ( in_array( 'mute', $YtSelect ) ) ? 1 : 0;
+			$Yt_controls       = ( in_array( 'controls', $YtSelect ) ) ? 1 : 0;
+			$Yt_disablekb      = ( in_array( 'disablekb', $YtSelect ) ) ? 1 : 0;
+			$Yt_modestbranding = ( in_array( 'modestbranding', $YtSelect ) ) ? 1 : 0;
+			$Yt_playsinline    = ( in_array( 'playsinline', $YtSelect ) ) ? 1 : 0;
+			$Yt_rel            = ( in_array( 'rel', $YtSelect ) ) ? 1 : 0;
+			$YT_Parameters     = 'autoplay=' . esc_attr( $Yt_autoplay ) . '&mute=' . esc_attr( $Yt_muted ) . '&controls=' . esc_attr( $Yt_controls ) . '&disablekb=' . esc_attr( $Yt_disablekb ) . '&fs=' . esc_attr( $Yt_fs ) . '&modestbranding=' . esc_attr( $Yt_modestbranding ) . '&loop=' . esc_attr( $Yt_loop ) . '&rel=' . esc_attr( $Yt_rel ) . '&playsinline=' . esc_attr( $Yt_playsinline ) . '&start=' . esc_attr( $YtSTime ) . '&end=' . esc_attr( $YtETime ) . '&hl=' . esc_attr( $Ytlanguage );
+			if ( $YtType == 'YtSV' ) {
+				$YtVideoId = ! empty( $settings['YtVideoId'] ) ? $settings['YtVideoId'] : '';
+				$YtSrc     = 'https://www.youtube.com/embed/' . esc_attr( $YtVideoId ) . '?playlist=' . esc_attr( $YtVideoId ) . '&' . esc_attr( $YT_Parameters );
+			} elseif ( $YtType == 'YtPlayV' ) {
+				$YtPlaylistId = ! empty( $settings['YtPlaylistId'] ) ? $settings['YtPlaylistId'] : '';
+				$YtSrc        = 'https://www.youtube.com/embed?listType=playlist&list=' . esc_attr( $YtPlaylistId ) . '&' . esc_attr( $YT_Parameters );
+			} elseif ( $YtType == 'YtuserV' ) {
+				$YtUsername = ! empty( $settings['YtUsername'] ) ? $settings['YtUsername'] : '';
+				$YtSrc      = 'https://www.youtube.com/embed?listType=user_uploads&list=' . esc_attr( $YtUsername ) . '&' . esc_attr( $YT_Parameters );
 			}
-			$output .= '<iframe class="tp-frame-set" width="' . esc_attr( $ex_width ) . '" height="' . esc_attr( $ex_height ) . '" src="' . esc_attr( $yt_src ) . '" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-		} elseif ( 'googlemap' === $embed_type ) {
-			$map_accesstoken = ! empty( $settings['Mapaccesstoken'] ) ? $settings['Mapaccesstoken'] : 'default';
-			$gsearch_text    = ! empty( $settings['GSearchText'] ) ? $settings['GSearchText'] : 'Goa+India';
-			$map_zoom        = ( ! empty( $settings['MapZoom'] ) && ! empty( $settings['MapZoom']['size'] ) ) ? (int) $settings['MapZoom']['size'] : 1;
+			$output .= '<iframe class="tp-frame-set" width="' . esc_attr( $ExWidth ) . '" height="' . esc_attr( $ExHeight ) . '" src="' . esc_attr( $YtSrc ) . '" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+		} elseif ( $EmbedType == 'googlemap' ) {
+			$Mapaccesstoken = ! empty( $settings['Mapaccesstoken'] ) ? $settings['Mapaccesstoken'] : 'default';
+			$GSearchText    = ! empty( $settings['GSearchText'] ) ? $settings['GSearchText'] : 'Goa+India';
+			$MapZoom        = ( ! empty( $settings['MapZoom'] ) && ! empty( $settings['MapZoom']['size'] ) ) ? (int) $settings['MapZoom']['size'] : 1;
 
-			if ( 'default' === $map_accesstoken ) {
-				$output .= '<iframe src="https://maps.google.com/maps?q=' . esc_attr( $gsearch_text ) . '&z=' . esc_attr( $map_zoom ) . '&output=embed"  loading="lazy" allowfullscreen frameborder="0" scrolling="no"></iframe>';
-			} elseif ( 'accesstoken' === $map_accesstoken ) {
-				$ga_ccesstoken = ! empty( $settings['GAccesstoken'] ) ? $settings['GAccesstoken'] : '';
-				$gmap_modes    = ! empty( $settings['GMapModes'] ) ? $settings['GMapModes'] : 'search';
-				$map_views     = ! empty( $settings['MapViews'] ) ? $settings['MapViews'] : 'roadmap';
+			if ( $Mapaccesstoken == 'default' ) {
+				$output .= '<iframe src="https://maps.google.com/maps?q=' . esc_attr( $GSearchText ) . '&z=' . esc_attr( $MapZoom ) . '&output=embed"  loading="lazy" allowfullscreen frameborder="0" scrolling="no"></iframe>';
+			} elseif ( $Mapaccesstoken == 'accesstoken' ) {
+				$GAccesstoken = ! empty( $settings['GAccesstoken'] ) ? $settings['GAccesstoken'] : '';
+				$GMapModes    = ! empty( $settings['GMapModes'] ) ? $settings['GMapModes'] : 'search';
+				$MapViews     = ! empty( $settings['MapViews'] ) ? $settings['MapViews'] : 'roadmap';
 
-				if ( 'place' === $gmap_modes ) {
-					$output .= '<iframe src="https://www.google.com/maps/embed/v1/place?key=' . esc_attr( $ga_ccesstoken ) . '&q=' . esc_attr( $gsearch_text ) . '&zoom=' . esc_attr( $map_zoom ) . '&maptype=' . esc_attr( $map_views ) . '&language=En"   loading="lazy" allowfullscreen></iframe>';
-				} elseif ( 'directions' === $gmap_modes ) {
-					$gorigin       = ! empty( $settings['GOrigin'] ) ? '&origin=' . $settings['GOrigin'] : '&origin=""';
-					$g_destination = ! empty( $settings['GDestination'] ) ? '&destination=' . $settings['GDestination'] : '&destination=""';
-					$gwaypoints    = ! empty( $settings['GWaypoints'] ) ? '&waypoints=' . $settings['GWaypoints'] : '';
-					$gtravel_mode  = ! empty( $settings['GTravelMode'] ) ? $settings['GTravelMode'] : 'GTravelMode';
-					$gavoid        = ! empty( $settings['Gavoid'] ) ? '&avoid=' . implode( '|', $settings['Gavoid'] ) : '';
+				if ( $GMapModes == 'place' ) {
+					$output .= '<iframe src="https://www.google.com/maps/embed/v1/place?key=' . esc_attr( $GAccesstoken ) . '&q=' . esc_attr( $GSearchText ) . '&zoom=' . esc_attr( $MapZoom ) . '&maptype=' . esc_attr( $MapViews ) . '&language=En"   loading="lazy" allowfullscreen></iframe>';
+				} elseif ( $GMapModes == 'directions' ) {
+					$GOrigin      = ! empty( $settings['GOrigin'] ) ? '&origin=' . $settings['GOrigin'] : '&origin=""';
+					$GDestination = ! empty( $settings['GDestination'] ) ? '&destination=' . $settings['GDestination'] : '&destination=""';
+					$GWaypoints   = ! empty( $settings['GWaypoints'] ) ? '&waypoints=' . $settings['GWaypoints'] : '';
+					$GTravelMode  = ! empty( $settings['GTravelMode'] ) ? $settings['GTravelMode'] : 'GTravelMode';
+					$Gavoid       = ! empty( $settings['Gavoid'] ) ? '&avoid=' . implode( '|', $settings['Gavoid'] ) : '';
 
-					$output .= '<iframe src="https://www.google.com/maps/embed/v1/directions?key=' . esc_attr( $ga_ccesstoken ) . esc_attr( $gorigin ) . esc_attr( $g_destination ) . esc_attr( $gwaypoints ) . esc_attr( $gavoid ) . '&mode=' . esc_attr( $gtravel_mode ) . '&zoom=' . esc_attr( $map_zoom ) . '&maptype=' . esc_attr( $map_views ) . '&language=En"  loading="lazy" allowfullscreen ></iframe>';
-				} elseif ( 'streetview' === $gmap_modes ) {
-					$gstreetview_text = ! empty( $settings['GstreetviewText'] ) ? $settings['GstreetviewText'] : '';
+					$output .= '<iframe src="https://www.google.com/maps/embed/v1/directions?key=' . esc_attr( $GAccesstoken ) . esc_attr( $GOrigin ) . esc_attr( $GDestination ) . esc_attr( $GWaypoints ) . esc_attr( $Gavoid ) . '&mode=' . esc_attr( $GTravelMode ) . '&zoom=' . esc_attr( $MapZoom ) . '&maptype=' . esc_attr( $MapViews ) . '&language=En"  loading="lazy" allowfullscreen ></iframe>';
+				} elseif ( $GMapModes == 'streetview' ) {
+					$GstreetviewText = ! empty( $settings['GstreetviewText'] ) ? $settings['GstreetviewText'] : '';
 
-					$output .= '<iframe src="https://www.google.com/maps/embed/v1/streetview?key=' . esc_attr( $ga_ccesstoken ) . '&location=' . esc_attr( $gstreetview_text ) . '&heading=210&pitch=10&fov=90"  loading="lazy" allowfullscreen></iframe>';
-				} elseif ( 'search' === $gmap_modes ) {
-					$output .= '<iframe src="https://www.google.com/maps/embed/v1/search?key=' . esc_attr( $ga_ccesstoken ) . '&q=' . esc_attr( $gsearch_text ) . '&zoom=' . esc_attr( $map_zoom ) . '&maptype=' . esc_attr( $map_views ) . '&language=En"  loading="lazy" allowfullscreen ></iframe>';
+					$output .= '<iframe src="https://www.google.com/maps/embed/v1/streetview?key=' . esc_attr( $GAccesstoken ) . '&location=' . esc_attr( $GstreetviewText ) . '&heading=210&pitch=10&fov=90"  loading="lazy" allowfullscreen></iframe>';
+				} elseif ( $GMapModes == 'search' ) {
+					$output .= '<iframe src="https://www.google.com/maps/embed/v1/search?key=' . esc_attr( $GAccesstoken ) . '&q=' . esc_attr( $GSearchText ) . '&zoom=' . esc_attr( $MapZoom ) . '&maptype=' . esc_attr( $MapViews ) . '&language=En"  loading="lazy" allowfullscreen ></iframe>';
 				}
 			}
 		}

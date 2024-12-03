@@ -12,29 +12,26 @@ namespace TheplusAddons\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Utils;
 use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+
+use TheplusAddons\L_Theplus_Element_Load;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Class L_ThePlus_MessageBox
+ * Class ThePlus_MessageBox
  */
-class L_ThePlus_MessageBox extends Widget_Base {
+class ThePlus_MessageBox extends Widget_Base {
 
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -87,25 +84,43 @@ class L_ThePlus_MessageBox extends Widget_Base {
 	}
 
 	/**
-	 * Show need help URL for user.
+	 * Get Custom help url.
 	 *
-	 * @since 6.0.6
+	 * @since 1.0.0
+	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
 	/**
-	 * It is use for widget add in catch or not.
+	 * It is use for adds.
 	 *
-	 * @since 6.0.6
+	 * @since 6.1.0
 	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
+	public function get_upsale_data() {
+		$val = false;
 
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -1045,8 +1060,12 @@ class L_ThePlus_MessageBox extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -1064,8 +1083,8 @@ class L_ThePlus_MessageBox extends Widget_Base {
 		$icon_name  = ! empty( $settings['IconName'] ) ? $settings['IconName'] : 'fa fa-exclamation';
 		$desc_text  = ! empty( $settings['descText'] ) ? $settings['descText'] : '';
 
-		$icon    = ! empty( $settings['icon'] ) ? $settings['icon'] : '';
-		$dismiss = ! empty( $settings['dismiss'] ) ? $settings['dismiss'] : '';
+		$icon    = ! empty( $settings['icon'] ) ? $settings['icon'] : 'yes';
+		$dismiss = ! empty( $settings['dismiss'] ) ? $settings['dismiss'] : 'yes';
 		$title   = ! empty( $settings['Title'] ) ? $settings['Title'] : '';
 
 		$description  = ! empty( $settings['Description'] ) ? $settings['Description'] : '';
@@ -1106,7 +1125,7 @@ class L_ThePlus_MessageBox extends Widget_Base {
 
 		$get_title = '';
 		if ( ! empty( $title ) ) {
-			$get_title .= '<div class="msg-title " >' . esc_html( $title ) . '</div>';
+			$get_title .= '<div class="msg-title " >' . wp_kses_post( $title ) . '</div>';
 		}
 
 		$get_desc = '';

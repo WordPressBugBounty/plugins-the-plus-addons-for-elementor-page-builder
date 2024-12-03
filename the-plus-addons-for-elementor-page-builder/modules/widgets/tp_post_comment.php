@@ -23,9 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Post_Comment
+ * Class ThePlus_Post_Comment
  */
-class L_ThePlus_Post_Comment extends Widget_Base {
+class ThePlus_Post_Comment extends Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -36,13 +36,6 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 	public function get_name() {
 		return 'tp-post-comment';
 	}
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Title.
@@ -87,14 +80,40 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 	/**
 	 * Get Widget Custom Help Url.
 	 *
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Get Widget Custom Help Url.
 	 *
@@ -148,6 +167,25 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'type'    => Controls_Manager::TEXT,
 				'label'   => esc_html__( 'Cancel Reply Text', 'tpebl' ),
 				'default' => esc_html__( 'Cancel Reply', 'tpebl' ),
+			)
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'content_extraoption',
+			array(
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'cmtcount',
+			array(
+				'label'     => esc_html__( 'Comment Count', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'yes',
+				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
+				'label_off' => esc_html__( 'Disable', 'tpebl' ),
 			)
 		);
 		$this->end_controls_section();
@@ -284,7 +322,7 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn .url',
+				'selector' => '{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn .url,{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_cmnt_list_style' );
@@ -301,7 +339,7 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn .url' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn .url,{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn' => 'color: {{VALUE}}',
 				),
 				'separator' => 'after',
 			)
@@ -320,7 +358,7 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn .url:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn .url:hover,{{WRAPPER}} .tp-post-comment .comment-author.vcard .fn:hover' => 'color: {{VALUE}}',
 				),
 				'separator' => 'after',
 			)
@@ -717,7 +755,7 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .tp-post-comment #respond #commentform label' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-post-comment #respond #commentform label, {{WRAPPER}} .tp-post-comment #respond.comment-respond h3#reply-title' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -729,7 +767,7 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector'  => '{{WRAPPER}} .tp-post-comment #respond #commentform label',
+				'selector'  => '{{WRAPPER}} .tp-post-comment #respond #commentform label, {{WRAPPER}} .tp-post-comment #respond.comment-respond h3#reply-title',
 				'separator' => 'after',
 			)
 		);
@@ -740,9 +778,35 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .tp-post-comment #commentform #author,{{WRAPPER}} .tp-post-comment #commentform #email,{{WRAPPER}} .tp-post-comment #commentform #url,{{WRAPPER}} .tp-post-comment form.comment-form textarea#comment' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tp-post-comment #commentform #author,
+					 {{WRAPPER}} .tp-post-comment #commentform #email,
+					 {{WRAPPER}} .tp-post-comment #commentform #url,
+					 {{WRAPPER}} .tp-post-comment form.comment-form textarea#comment' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_control(
+			'textColor',
+			array(
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .tp-post-comment #comments .logged-in-as , #comments .logged-in-as, #comments .logged-in-as a' => 'color: {{VALUE}}',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'      => 'textTypo',
+				'label'     => esc_html__( 'Text Typography', 'tpebl' ),
+				'global'    => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
+				'selector'  => '{{WRAPPER}} .tp-post-comment #comments .logged-in-as , #comments .logged-in-as, #comments .logged-in-as a',
+				'separator' => 'after',
 			)
 		);
 		$this->add_group_control(
@@ -1021,6 +1085,17 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .tp-post-comment #commentform #submit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
+			)
+		);
+		$this->add_responsive_control(
+			'btnmargin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tp-post-comment #commentform #submit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 				'separator'  => 'after',
 			)
 		);
@@ -1169,6 +1244,13 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		$this->end_controls_section();
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -1178,27 +1260,41 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	protected function render() {
-		$settings     = $this->get_settings_for_display();
-		$post_id      = get_queried_object_id();
-		$post         = get_queried_object();
-		$uid_pscmnt   = uniqid( 'tp-comment' );
+		$settings = $this->get_settings_for_display();
+
+		$post    = get_queried_object();
+		$post_id = get_queried_object_id();
+		$comment = get_comments( $post );
+
 		$comment_args = $this->tp_comment_args();
-		$comment      = get_comments( $post );
-		$list_args    = array(
+
+		$uid_pscmnt = uniqid( 'tp-comment' );
+		$list_args  = array(
 			'style'       => 'ul',
 			'short_ping'  => true,
 			'avatar_size' => 100,
 			'page'        => $post_id,
 		);
 
+		$count = ! empty( $settings['cmtcount'] ) ? $settings['cmtcount'] : '';
+
+		$cmtcount = 0;
+		if ( ! empty( $count ) ) {
+			$cmtcount = get_comments_number( $post_id );
+		}
+
 		ob_start();
 			echo '<div class="tp-post-comment tp-widget-' . esc_attr( $uid_pscmnt ) . '">';
 				echo '<div id="comments" class="comments-area">';
 		if ( get_comments_number( $post_id ) > 0 ) {
 			echo '<ul class="comment-list">';
-			echo '<li>';
-			echo '<div class="comment-section-title">' . esc_html__( 'Comment', 'tpebl' ) . ' (' . esc_html( get_comments_number( $post_id ) ) . ')</div>';
-			echo '<li>';
+				echo '<li>';
+			if ( ! empty( $cmtcount ) ) {
+					echo '<div class="comment-section-title">' . esc_html__( 'Comment', 'tpebl' ) . ' (' . esc_html( $cmtcount ) . ')</div>';
+			} else {
+					echo '<div class="comment-section-title">' . esc_html__( 'Comment', 'tpebl' ) . '</div>';
+			}
+				echo '<li>';
 			wp_list_comments( $list_args, $comment );
 			echo '</ul>';
 		}
@@ -1219,15 +1315,18 @@ class L_ThePlus_Post_Comment extends Widget_Base {
 	public function tp_comment_args() {
 		$settings = $this->get_settings_for_display();
 
-		$post_title      = ! empty( $settings['PostTitle'] ) ? $settings['PostTitle'] : '';
-		$btn_title       = ! empty( $settings['BtnTitle'] ) ? $settings['BtnTitle'] : '';
-		$placeholder_txt = ! empty( $settings['PlaceholderTxt'] ) ? $settings['PlaceholderTxt'] : '';
-		$leave_txt       = ! empty( $settings['LeaveTxt'] ) ? $settings['LeaveTxt'] : '';
-		$cancel_txt      = ! empty( $settings['CancelTxt'] ) ? $settings['CancelTxt'] : '';
+		$post_title = ! empty( $settings['PostTitle'] ) ? $settings['PostTitle'] : '';
+		$btn_title  = ! empty( $settings['BtnTitle'] ) ? $settings['BtnTitle'] : '';
+		$leave_txt  = ! empty( $settings['LeaveTxt'] ) ? $settings['LeaveTxt'] : '';
+		$cancel_txt = ! empty( $settings['CancelTxt'] ) ? $settings['CancelTxt'] : '';
 
-		$user          = wp_get_current_user();
+		$placeholder_txt = ! empty( $settings['PlaceholderTxt'] ) ? $settings['PlaceholderTxt'] : '';
+
+		$user = wp_get_current_user();
+
 		$user_identity = $user->exists() ? $user->display_name : '';
-		$args          = array(
+
+		$args = array(
 			'id_form'              => 'commentform',
 			'class_form'           => 'comment-form',
 			'id_submit'            => 'submit',

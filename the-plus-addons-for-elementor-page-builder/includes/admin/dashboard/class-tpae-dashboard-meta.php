@@ -95,7 +95,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		/**
 		 * Dashboard Build File loaded.
 		 *
-		 * @since 6.0.0
+		 * @since 6.1.0
 		 */
 		public function tpae_add_dashboard_menu() {
 
@@ -103,7 +103,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 			if ( defined( 'THEPLUS_VERSION' ) ) {
 				$options = get_option( 'theplus_white_label' );
 
-				$setting_name = ! empty( $options['tp_plugin_name'] ) ? $options['tp_plugin_name'] : __( 'ThePlus Addons', 'tpebl' );
+				$setting_name = ! empty( $options['tp_plugin_name'] ) ? $options['tp_plugin_name'] : __( 'The Plus Addons', 'tpebl' );
 			}
 
 			add_menu_page( $setting_name, $setting_name, 'manage_options', 'theplus_welcome_page', array( $this, 'tpae_admin_page_display' ), 'dashicons-plus-settings', 67.1 );

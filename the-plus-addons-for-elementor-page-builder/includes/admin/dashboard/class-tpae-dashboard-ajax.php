@@ -174,11 +174,11 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					'status'      => '',
 					'plugin_slug' => 'nexter-extension/nexter-extension.php',
 				),
-				array(
-					'name'        => 'envato-elements',
-					'status'      => '',
-					'plugin_slug' => 'envato-elements/envato-elements.php',
-				),
+				// array(
+				// 	'name'        => 'envato-elements',
+				// 	'status'      => '',
+				// 	'plugin_slug' => 'envato-elements/envato-elements.php',
+				// ),
 			);
 
 			$plugin_details = $this->tpae_check_plugins_depends( $plugins );
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$tpae_pro = defined( 'THEPLUS_VERSION' ) ? 1 : 0;
 
 			$get_whats_new      = get_transient( 'tp_dashboard_overview' );
-			$get_active_widgets = $this->tpae_get_elements_status_scan();
+			// $get_active_widgets = $this->tpae_get_elements_status_scan();
 
 			$user_info = array(
 				'user_image'   => $user_image,
@@ -199,7 +199,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'user_name'    => $user->display_name,
 				'tpae_pro'     => $tpae_pro,
 				'whatsnew'     => $get_whats_new,
-				'used_widgets' => $get_active_widgets,
+				// 'used_widgets' => $get_active_widgets,
 				'success'      => true,
 			);
 

@@ -23,9 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Post_Author
+ * Class ThePlus_Post_Author
  */
-class L_ThePlus_Post_Author extends Widget_Base {
+class ThePlus_Post_Author extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -36,13 +36,6 @@ class L_ThePlus_Post_Author extends Widget_Base {
 	 * @var tp_doc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -98,14 +91,40 @@ class L_ThePlus_Post_Author extends Widget_Base {
 	 * Get Widget Custom Help Url.
 	 *
 	 * @since 1.0.1
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -590,6 +609,28 @@ class L_ThePlus_Post_Author extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .tp-author-details ul.author-social li a' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
+				'condition'   => array(
+					'ShowSocial' => 'yes',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'socialIconGap',
+			array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Offset', 'tpebl' ),
+				'size_units'  => array( 'px', 'em' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 150,
+						'step' => 1,
+					),
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .tp-author-details ul.author-social li' => 'margin-right: {{SIZE}}{{UNIT}};',
+				),
 				'separator'   => 'after',
 				'condition'   => array(
 					'ShowSocial' => 'yes',
@@ -760,8 +801,12 @@ class L_ThePlus_Post_Author extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 		
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -795,13 +840,13 @@ class L_ThePlus_Post_Author extends Widget_Base {
 			$author_page_url = get_author_posts_url( $post->post_author );
 			$avatar_url      = get_avatar_url( $post->post_author );
 			$author_bio      = get_the_author_meta( 'user_description', $post->post_author );
-			if ( $show_name ) {
+			if ( ! empty( $show_name ) ) {
 				$author_name = get_the_author_meta( 'display_name', $post->post_author );
-				$outputname .= '<a href="' . esc_url( $author_page_url ) . '" class="author-name tp-author-trans" rel="' . esc_attr__( 'author', 'tpebl' ) . '" >' . $author_name . '</a>';
+				$outputname .= '<a href="' . esc_url( $author_page_url ) . '" class="author-name tp-author-trans" rel="' . esc_attr__( 'author', 'tpebl' ) . '" >' . esc_html( $author_name ) . '</a>';
 			}
 			if ( ! empty( $show_role ) ) {
 				global $authordata;
-				$author_roles = $authordata->roles;
+				$author_roles = ! empty( $authordata->roles ) ? $authordata->roles : array();
 				$author_role  = array_shift( $author_roles );
 				$outputrole  .= '<span class="tp-author-role">' . esc_html( $settings['roleLabel'] ) . $author_role . '</span>';
 			}
@@ -809,7 +854,7 @@ class L_ThePlus_Post_Author extends Widget_Base {
 				$outputavatar .= '<a href="' . esc_url( $author_page_url ) . '" rel="' . esc_attr__( 'author', 'tpebl' ) . '" class="author-avatar tp-author-trans"><img src="' . esc_url( $avatar_url ) . '" /></a>';
 			}
 			if ( ! empty( $show_bio ) ) {
-				$outputbio .= '<div class="author-bio tp-author-trans" >' . wp_kses_post( $author_bio ) . '</div>';
+				$outputbio .= '<div class="author-bio tp-author-trans" >' . esc_html( $author_bio ) . '</div>';
 			}
 			if ( ! empty( $show_social ) ) {
 				$author_website   = get_the_author_meta( 'user_url', $post->post_author );
@@ -842,8 +887,10 @@ class L_ThePlus_Post_Author extends Widget_Base {
 			}
 		}
 		$output      = '<div class="tp-post-author-info">';
-			$ll_bg   = tp_bg_lazyLoad( $settings['boxBg_image'], $settings['boxBgHover_image'] );
-			$output .= '<div class="tp-author-details ' . esc_attr( $style ) . ' ' . $ll_bg . '">';
+			/* $ll_bg   = tp_bg_lazyLoad( $settings['boxBg_image'], $settings['boxBgHover_image'] );
+			$output .= '<div class="tp-author-details ' . esc_attr( $style ) . ' ' . $ll_bg . '">'; */
+
+			$output .= '<div class="tp-author-details ' . esc_attr( $style ) . ' ">';
 		if ( ! empty( $show_avatar ) ) {
 			$output .= $outputavatar;
 		}

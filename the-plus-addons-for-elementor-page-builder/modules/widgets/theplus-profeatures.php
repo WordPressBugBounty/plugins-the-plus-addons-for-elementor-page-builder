@@ -29,7 +29,7 @@ $this->add_control(
 	'tpebl_offer_tag',
 	array(
 		'type' => Controls_Manager::RAW_HTML,
-		'raw'  => wp_kses_post( "<div class='tpae-offer-tag'><span>BLACK FRIDAY SALE IS LIVE - UPTO 40% OFF</span></div>" ),
+		'raw'  => wp_kses_post( "<div class='tpae-offer-tag'><span>CYBER MONDAY SALE IS LIVE - UPTO 40% OFF</span></div>" ),
 	)
 );
 $this->add_control(

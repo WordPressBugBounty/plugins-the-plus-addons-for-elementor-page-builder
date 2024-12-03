@@ -24,18 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Dark_Mode
+ * Class ThePlus_Dark_Mode
  */
-class L_ThePlus_Dark_Mode extends Widget_Base {
+class ThePlus_Dark_Mode extends Widget_Base {
 
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -82,13 +75,18 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		return array( 'Dark mode', 'Night mode', 'Dark theme', 'Night theme', 'Dark widget', 'Night widget', 'Elementor dark mode', 'Elementor night mode' );
 	}
 
+	
 	/**
 	 * Show need help URL for user.
 	 *
-	 * @since 6.0.6
+	 * @since 6.1.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -102,6 +100,28 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -270,6 +290,7 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 			array(
 				'type'      => Controls_Manager::SLIDER,
 				'label'     => esc_html__( 'Bottom', 'tpebl' ),
+				'size_units' => array( 'px', '%' ),
 				'default'   => array(
 					'unit' => 'px',
 					'size' => 32,
@@ -346,7 +367,7 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		$this->start_controls_section(
 			'content_extra_option',
 			array(
-				'label' => esc_html__( 'Extra Option', 'tpebl' ),
+				'label' => esc_html__( 'Extra Options', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -435,7 +456,7 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		$this->start_controls_section(
 			'section_switcher_st2_styling',
 			array(
-				'label'     => esc_html__( 'Switcher Style', 'tpebl' ),
+				'label'     => esc_html__( 'Switcher', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'dm_style' => 'tp_dm_style1',
@@ -583,132 +604,9 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_switcher_text_styling',
-			array(
-				'label'     => esc_html__( 'Switcher Text Style', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
-					'dm_style!' => 'tp_dm_style1',
-				),
-			)
-		);
-		$this->start_controls_tabs( 'tabs_s_b_a_style' );
-		$this->start_controls_tab(
-			'tab_s_b_a_before',
-			array(
-				'label' => esc_html__( 'Before', 'tpebl' ),
-			)
-		);
-		$this->add_control(
-			'switcher_before_text',
-			array(
-				'label'       => esc_html__( 'Switcher Before Text', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'default'     => __( 'Normal', 'tpebl' ),
-				'placeholder' => esc_html__( 'Before Text', 'tpebl' ),
-				'selectors'   => array(
-					'.tp_dm_style2 .darkmode-toggle:before' => ' content:"{{VALUE}}";',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'switcher_before_text_offset',
-			array(
-				'type'       => Controls_Manager::SLIDER,
-				'label'      => esc_html__( 'Offset', 'tpebl' ),
-				'size_units' => array( 'px' ),
-				'range'      => array(
-					'px' => array(
-						'min'  => -200,
-						'max'  => 0,
-						'step' => 1,
-					),
-				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => -65,
-				),
-				'separator'  => 'before',
-				'selectors'  => array(
-					'.tp_dm_style2 .darkmode-toggle:before' => 'left: {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
-		$this->end_controls_tab();
-		$this->start_controls_tab(
-			'tab_s_b_a_after',
-			array(
-				'label' => esc_html__( 'After', 'tpebl' ),
-			)
-		);
-		$this->add_control(
-			'switcher_after_text',
-			array(
-				'label'       => esc_html__( 'Switcher After Text', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'default'     => __( 'Dark', 'tpebl' ),
-				'placeholder' => esc_html__( 'After Text', 'tpebl' ),
-				'selectors'   => array(
-					'.tp_dm_style2 .darkmode-toggle:after' => ' content:"{{VALUE}}";',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'switcher_after_text_offset',
-			array(
-				'type'       => Controls_Manager::SLIDER,
-				'label'      => esc_html__( 'Offset', 'tpebl' ),
-				'size_units' => array( 'px' ),
-				'range'      => array(
-					'px' => array(
-						'min'  => -200,
-						'max'  => 0,
-						'step' => 1,
-					),
-				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => -45,
-				),
-				'separator'  => 'before',
-				'selectors'  => array(
-					'.tp_dm_style2 .darkmode-toggle:after' => 'right: {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
-		$this->end_controls_tab();
-		$this->end_controls_tabs();
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'      => 'switcher_b_a_text_typ',
-				'selector'  => '.tp_dm_style2 .darkmode-toggle:before,.tp_dm_style2 .darkmode-toggle:after',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'switcher_b_a_text_typ_color',
-			array(
-				'label'     => esc_html__( 'Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'.tp_dm_style2 .darkmode-toggle:before,.tp_dm_style2 .darkmode-toggle:after' => 'color: {{VALUE}};',
-				),
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
 			'section_switcher_styling',
 			array(
-				'label'     => esc_html__( 'Switcher Style', 'tpebl' ),
+				'label'     => esc_html__( 'Switcher', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'dm_style!' => 'tp_dm_style1',
@@ -911,7 +809,6 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 				'selectors' => array(
 					'.tp_dm_style2 .darkmode-toggle .tp-dark-mode-checkbox:focus + .tp-dark-mode-slider' => 'box-shadow:0 0 1px {{VALUE}};',
 				),
-				'separator' => 'before',
 			)
 		);
 		$this->end_controls_tab();
@@ -919,8 +816,134 @@ class L_ThePlus_Dark_Mode extends Widget_Base {
 
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		
+		$this->start_controls_section(
+			'section_switcher_text_styling',
+			array(
+				'label'     => esc_html__( 'Switcher Text', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'dm_style!' => 'tp_dm_style1',
+				),
+			)
+		);
+		$this->start_controls_tabs( 'tabs_s_b_a_style' );
+		$this->start_controls_tab(
+			'tab_s_b_a_before',
+			array(
+				'label' => esc_html__( 'Before', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'switcher_before_text',
+			array(
+				'label'       => esc_html__( 'Switcher Before Text', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => __( 'Normal', 'tpebl' ),
+				'placeholder' => esc_html__( 'Before Text', 'tpebl' ),
+				'selectors'   => array(
+					'.tp_dm_style2 .darkmode-toggle:before' => ' content:"{{VALUE}}";',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'switcher_before_text_offset',
+			array(
+				'type'       => Controls_Manager::SLIDER,
+				'label'      => esc_html__( 'Offset', 'tpebl' ),
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -200,
+						'max'  => 0,
+						'step' => 1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => -65,
+				),
+				'selectors'  => array(
+					'.tp_dm_style2 .darkmode-toggle:before' => 'left: {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_s_b_a_after',
+			array(
+				'label' => esc_html__( 'After', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'switcher_after_text',
+			array(
+				'label'       => esc_html__( 'Switcher After Text', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => __( 'Dark', 'tpebl' ),
+				'placeholder' => esc_html__( 'After Text', 'tpebl' ),
+				'selectors'   => array(
+					'.tp_dm_style2 .darkmode-toggle:after' => ' content:"{{VALUE}}";',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'switcher_after_text_offset',
+			array(
+				'type'       => Controls_Manager::SLIDER,
+				'label'      => esc_html__( 'Offset', 'tpebl' ),
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -200,
+						'max'  => 0,
+						'step' => 1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => -45,
+				),
+				'selectors'  => array(
+					'.tp_dm_style2 .darkmode-toggle:after' => 'right: {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'      => 'switcher_b_a_text_typ',
+				'selector'  => '.tp_dm_style2 .darkmode-toggle:before,.tp_dm_style2 .darkmode-toggle:after',
+				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'switcher_b_a_text_typ_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'.tp_dm_style2 .darkmode-toggle:before,.tp_dm_style2 .darkmode-toggle:after' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->end_controls_section();
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**

@@ -287,21 +287,20 @@ final class L_Theplus_Element_Load {
 	 * It includes jQuery UI Dialog, Theplus Elementor Admin CSS, and a custom admin JavaScript file.
 	 * Additionally, it sets up inline JavaScript variables for AJAX functionality.
 	 *
-	 * @since 1.0.0
+	 * @since 6.1.0
 	 */
 	public function theplus_elementor_admin_css( $hook ) {
 
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_script( 'theplus-admin-js', L_THEPLUS_ASSETS_URL . 'js/admin/theplus-admin.js', array(), L_THEPLUS_VERSION, false );
 
-		$script_handle = 'theplus-inline-script'; // Ensure this handle is unique
-		$js_inline1 = 'var theplus_ajax_url = "' . admin_url("admin-ajax.php") . '";
-		var theplus_ajax_post_url = "' . admin_url("admin-post.php") . '";
-		var theplus_nonce = "' . wp_create_nonce("theplus-addons") . '";';
+		$script_handle = 'theplus-admin-js';
 
-		wp_register_script( $script_handle, '' );
-		wp_enqueue_script( $script_handle );
-		wp_add_inline_script( $script_handle, $js_inline1 );
+		$js_inline = 'var theplus_ajax_url = "' . esc_url(admin_url("admin-ajax.php")) . '";
+        var theplus_ajax_post_url = "' . esc_url(admin_url("admin-post.php")) . '";
+        var theplus_nonce = "' . esc_js(wp_create_nonce("theplus-addons")) . '";';
+
+		wp_add_inline_script( $script_handle, $js_inline );
 	}
 
 	/**

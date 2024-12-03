@@ -23,9 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Post_Meta
+ * Class ThePlus_Post_Meta
  */
-class L_ThePlus_Post_Meta extends Widget_Base {
+class ThePlus_Post_Meta extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -33,13 +33,6 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 	 * @var tp_doc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -95,14 +88,40 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 	 * Get Widget categories.
 	 *
 	 * @since 1.0.1
-	 * @version 5.4.2
+	 * @version 6.1.0
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -685,7 +704,7 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 		$this->add_responsive_control(
 			'tab_category_svg_icon',
 			array(
-				'label'       => esc_html__( 'Svg Icon Size', 'tpebl' ),
+				'label'       => esc_html__( 'Icon Size', 'tpebl' ),
 				'type'        => Controls_Manager::SLIDER,
 				'size_units'  => array( 'px', 'em' ),
 				'range'       => array(
@@ -698,6 +717,7 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 				'render_type' => 'ui',
 				'selectors'   => array(
 					'{{WRAPPER}} .tp-post-meta-info .tp-meta-category .tp-meta-category-label svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .tp-meta-category-label i' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -744,6 +764,7 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .tp-meta-category a:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-post-meta-info .tp-meta-category:hover .tp-meta-category-label svg' => 'fill: {{VALUE}}',
 				),
 				'condition' => array(
 					'showCategory' => 'yes',
@@ -1544,8 +1565,12 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 		
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -1557,30 +1582,35 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$post_id           = get_queried_object_id();
-		$post              = get_queried_object();
-		$show_date         = ! empty( $settings['showDate'] ) ? $settings['showDate'] : false;
-		$show_category     = ! empty( $settings['showCategory'] ) ? $settings['showCategory'] : false;
-		$show_author       = ! empty( $settings['showAuthor'] ) ? $settings['showAuthor'] : false;
-		$show_comment      = ! empty( $settings['showComment'] ) ? $settings['showComment'] : false;
-		$meta_layout       = ! empty( $settings['metaLayout'] ) ? $settings['metaLayout'] : 'layout-1';
-		$meta_layout_class = 'tp-meta-' . $meta_layout;
+		$post    = get_queried_object();
+		$post_id = get_queried_object_id();
 
-		$output               = '<div class="tp-post-meta-info ' . esc_attr( $meta_layout_class ) . '" >';
-			$output          .= '<div class="tp-post-meta-info-inner">';
+		$show_date   = ! empty( $settings['showDate'] ) ? $settings['showDate'] : false;
+		$show_author = ! empty( $settings['showAuthor'] ) ? $settings['showAuthor'] : false;
+		$meta_layout = ! empty( $settings['metaLayout'] ) ? $settings['metaLayout'] : 'layout-1';
+		$date_prefix = ! empty( $settings['datePrefix'] ) ? $settings['datePrefix'] : '';
+
+		$show_comment  = ! empty( $settings['showComment'] ) ? $settings['showComment'] : false;
+		$show_category = ! empty( $settings['showCategory'] ) ? $settings['showCategory'] : false;
+
+		$meta_layout_class = 'tp-meta-' . esc_attr( $meta_layout );
+
+		$output = '<div class="tp-post-meta-info ' . esc_attr( $meta_layout_class ) . '" >';
+
+			$output .= '<div class="tp-post-meta-info-inner">';
+
 				$loop_content = $settings['metaSort'];
 		if ( ! empty( $loop_content ) ) {
 				$index = 0;
 			foreach ( $loop_content as $index => $item ) {
-				$sortfield = ! empty( $item['sortfield'] ) ? $item['sortfield'] : '';
+				$sortfield = ! empty( $item['sortfield'] ) ? $item['sortfield'] : 'date';
 				if ( 'date' === $sortfield ) {
 
 					if ( $show_date ) {
 						$date_icon = '';
-						if ( ! empty( $settings['dateIcon'] ) && $settings['dateIcon'] ) {
+						if ( ! empty( $settings['dateIcon'] ) && 'none' !== $settings['dateIcon'] ) {
 							$date_icon = '<i class="' . esc_attr( $settings['dateIcon'] ) . '"></i>';
 						}
-
 						$date_type = ! empty( $item['date_type'] ) ? $item['date_type'] : 'post_published';
 
 						$date_mtype = '';
@@ -1589,17 +1619,21 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 						} else {
 							$date_mtype = get_the_date();
 						}
-						$output .= '<span class="tp-meta-date" ><span class="tp-meta-date-label tp-meta-label" >' . esc_html( $settings['datePrefix'] ) . '</span><a class="tp-meta-value" href="' . esc_url( get_the_permalink() ) . '">' . $date_icon . esc_html( $date_mtype ) . '</a></span>';
+						$output .= '<span class="tp-meta-date" ><span class="tp-meta-date-label tp-meta-label" >' . esc_html( $date_prefix ) . '</span><a class="tp-meta-value" href="' . esc_url( get_the_permalink() ) . '">' . $date_icon . esc_html( $date_mtype ) . '</a></span>';
 					}
 				}
 
 				$category_taxonomies = 'category';
 
 				if ( 'category' === $sortfield ) {
-
 					if ( 'yes' === $show_category ) {
-						$cate_prefix      = '';
+						$cate_prefix = '';
+						$cate_style  = ! empty( $settings['cateStyle'] ) ? $settings['cateStyle'] : 'style-1';
+
+						$cate_display_no  = ! empty( $settings['cateDisplayNo'] ) ? $settings['cateDisplayNo'] : 5;
 						$cate_prefix_type = ! empty( $settings['catePrefixType'] ) ? $settings['catePrefixType'] : 'pttext';
+
+						$category_taxonomies = ! empty( $item['category_taxonomies'] ) ? $item['category_taxonomies'] : 'category';
 
 						if ( 'pttext' === $cate_prefix_type ) {
 							$cate_prefix = $settings['catePrefix'];
@@ -1610,18 +1644,16 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 							ob_end_clean();
 						}
 
-						$cate_display = $settings['cateDisplayNo'];
-
-						$cate_style = ! empty( $settings['cateStyle'] ) ? $settings['cateStyle'] : 'style-1';
-
-						$category_taxonomies = ! empty( $item['category_taxonomies'] ) ? $item['category_taxonomies'] : 'category';
-
 						$txtlode = ! empty( $item['category_taxonomies_load'] ) ? $item['category_taxonomies_load'] : '';
 
 						if ( 'bypost' === $txtlode ) {
 								$cat_txt = ! empty( $item['category_taxonomies_load_cat_tag'] ) ? $item['category_taxonomies_load_cat_tag'] : '';
 							if ( 'tptag' === $cat_txt ) {
 								$terms = get_the_tags( $post_id );
+							} elseif ( ! empty( get_post_type() ) && 'product' === get_post_type() && ! empty( $category_taxonomies ) && 'product_tag' === $category_taxonomies ) {
+								$terms = get_terms( $settings['post_taxonomies'] );
+							} elseif ( ! empty( get_post_type() ) && 'post' !== get_post_type() && ! empty( $category_taxonomies ) && 'category' !== $category_taxonomies ) {
+								$terms = get_the_terms( $post_id, $category_taxonomies );
 							} else {
 								$terms = get_the_category( $post_id );
 							}
@@ -1640,7 +1672,7 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 						if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 							$i = 1;
 							foreach ( $terms as $term ) {
-								if ( $cate_display >= $i ) {
+								if ( $cate_display_no >= $i ) {
 									// Translators: %s is the name of the term.
 									$category_list .= '<a class="tp-meta-value" href="' . esc_url( get_term_link( $term ) ) . '" alt="' . esc_attr( sprintf( __( '%s', 'tpebl' ), $term->name ) ) . '">' . $term->name . '</a>';
 								}
@@ -1648,7 +1680,11 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 							}
 						}
 
-						$output .= '<span class="tp-meta-category ' . esc_attr( $cate_style ) . '" ><span class="tp-meta-category-label tp-meta-label">' . $cate_prefix . '</span><span class="tp-meta-category-list">' . $category_list . '</span></span>';
+						$output .= '<span class="tp-meta-category ' . esc_attr( $cate_style ) . '" >';
+						if ( ! empty( $cate_prefix ) ) {
+							$output .= '<span class="tp-meta-category-label tp-meta-label">' . $cate_prefix . '</span>';
+						}
+						$output .= '<span class="tp-meta-category-list">' . $category_list . '</span></span>';
 					}
 				}
 				if ( 'author' === $sortfield ) {
@@ -1672,9 +1708,12 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 				}
 
 				if ( 'comments' === $sortfield ) {
-					if ( $show_comment ) {
-						$comment_prefix = $settings['commentPrefix'];
+					if ( ! empty( $show_comment ) )  {
+						$count = 0;
+
 						$comment_icon   = '';
+						$comment_prefix = ! empty( $settings['commentPrefix'] ) ? $settings['commentPrefix'] : '';
+						$comments_count = wp_count_comments( $post_id );
 
 						$post_ic = ! empty( $settings['commentIcon'] ) ? $settings['commentIcon'] : '';
 
@@ -1682,9 +1721,6 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 							$comment_icon = '<i class="' . $post_ic . '"></i>';
 						}
 
-						$comments_count = wp_count_comments( $post_id );
-
-						$count = 0;
 						if ( ! empty( $comments_count ) ) {
 							$count = $comments_count->total_comments;
 						}
@@ -1701,7 +1737,8 @@ class L_ThePlus_Post_Meta extends Widget_Base {
 			}
 		}
 			$output .= '</div>';
-		$output     .= '</div>';
+
+		$output .= '</div>';
 		echo $output;
 	}
 }

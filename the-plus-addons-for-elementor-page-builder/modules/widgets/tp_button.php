@@ -49,7 +49,7 @@ class L_ThePlus_Button extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_title() {
-		return esc_html__( 'TP Button', 'tpebl' );
+		return esc_html__( 'Button', 'tpebl' );
 	}
 
 	/**
@@ -1053,85 +1053,15 @@ class L_ThePlus_Button extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'plus_animation_effect',
+			'plus_continuous_animation_options',
 			array(
-				'label'       => esc_html__( 'Animation Effect', 'tpebl' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'pulse',
-				'options'     => array(
-					'pulse'    => esc_html__( 'Pulse', 'tpebl' ),
-					'floating' => esc_html__( 'Floating', 'tpebl' ),
-					'tossing'  => esc_html__( 'Tossing', 'tpebl' ),
-					'rotating' => esc_html__( 'Rotating', 'tpebl' ),
-				),
-				'render_type' => 'template',
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
 				'condition'   => array(
-					'plus_continuous_animation' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'plus_animation_hover',
-			array(
-				'label'       => esc_html__( 'Hover Animation', 'tpebl' ),
-				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
-				'label_off'   => esc_html__( 'No', 'tpebl' ),
-				'render_type' => 'template',
-				'condition'   => array(
-					'plus_continuous_animation' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'plus_animation_duration',
-			array(
-				'label'      => esc_html__( 'Duration Time', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => 's',
-				'range'      => array(
-					's' => array(
-						'min'  => 0.5,
-						'max'  => 50,
-						'step' => 0.1,
-					),
-				),
-				'default'    => array(
-					'unit' => 's',
-					'size' => 2.5,
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt-plus-button-wrapper .animted-content-inner' => 'animation-duration: {{SIZE}}{{UNIT}};-webkit-animation-duration: {{SIZE}}{{UNIT}};',
-				),
-				'condition'  => array(
-					'plus_continuous_animation' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'plus_transform_origin',
-			array(
-				'label'       => esc_html__( 'Transform Origin', 'tpebl' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'center center',
-				'options'     => array(
-					'top left'      => esc_html__( 'Top Left', 'tpebl' ),
-					'top center"'   => esc_html__( 'Top Center', 'tpebl' ),
-					'top right'     => esc_html__( 'Top Right', 'tpebl' ),
-					'center left'   => esc_html__( 'Center Left', 'tpebl' ),
-					'center center' => esc_html__( 'Center Center', 'tpebl' ),
-					'center right'  => esc_html__( 'Center Right', 'tpebl' ),
-					'bottom left'   => esc_html__( 'Bottom Left', 'tpebl' ),
-					'bottom center' => esc_html__( 'Bottom Center', 'tpebl' ),
-					'bottom right'  => esc_html__( 'Bottom Right', 'tpebl' ),
-				),
-				'selectors'   => array(
-					'{{WRAPPER}} .pt-plus-button-wrapper .animted-content-inner' => '-webkit-transform-origin: {{VALUE}};-moz-transform-origin: {{VALUE}};-ms-transform-origin: {{VALUE}};-o-transform-origin: {{VALUE}};transform-origin: {{VALUE}};',
-				),
-				'render_type' => 'template',
-				'condition'   => array(
-					'plus_continuous_animation' => 'yes',
-					'plus_animation_effect'     => 'rotating',
+					'plus_continuous_animation' => array( 'yes' ),
 				),
 			)
 		);
@@ -1194,148 +1124,7 @@ class L_ThePlus_Button extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'Choose Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
-
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
@@ -1352,6 +1141,10 @@ class L_ThePlus_Button extends Widget_Base {
 	protected function render() {
 
 		$settings    = $this->get_settings_for_display();
+
+		/*--OnScroll View Animation ---*/
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
+
 		$hover_class = '';
 		$hover_attr  = '';
 		$data_class  = '';
@@ -1379,14 +1172,6 @@ class L_ThePlus_Button extends Widget_Base {
 		$hover_ani = ! empty( $settings['plus_animation_hover'] ) ? $settings['plus_animation_hover'] : '';
 		$plus_ani  = ! empty( $settings['plus_animation_effect'] ) ? $settings['plus_animation_effect'] : 'pulse';
 
-		$out_default_ani   = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$ani_duration      = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_ani_effects   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_ani_delay     = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_ani_speed     = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
 		$custom_attributes = ! empty( $settings['custom_attributes'] ) ? $settings['custom_attributes'] : '';
 
 		$button_custom_attributes = ! empty( $settings['button_custom_attributes'] ) ? $settings['button_custom_attributes'] : '';
@@ -1507,25 +1292,6 @@ class L_ThePlus_Button extends Widget_Base {
 			$continuous_animation = $animation_class . $plus_ani;
 		}
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-			if ( 'no-animation' !== $out_ani_effects ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_ani_effects ) . '" data-animate-out-delay="' . esc_attr( $out_ani_delay ) . '"';
-				if ( 'yes' === $out_default_ani ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_ani_speed ) . '"';
-				}
-			}
-		}
 		$uid_button = uniqid( 'button' );
 
 		$cst_att = '';

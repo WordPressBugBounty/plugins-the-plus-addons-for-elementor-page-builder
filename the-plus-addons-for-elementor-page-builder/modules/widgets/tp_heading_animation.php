@@ -19,9 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class L_ThePlus_Heading_Animation
+ * Class ThePlus_Heading_Animation
  */
-class L_ThePlus_Heading_Animation extends Widget_Base {
+class ThePlus_Heading_Animation extends Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -32,13 +32,6 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 	public function get_name() {
 		return 'tp-heading-animation';
 	}
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Title.
@@ -86,7 +79,11 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -100,6 +97,28 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 		return false;
 	}
 
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
+	}
+	
 	/**
 	 * Register controls.
 	 *
@@ -305,147 +324,15 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'Choose Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
+
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -459,50 +346,25 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 	protected function render() {
 
 		$settings    = $this->get_settings_for_display();
+
 		$anim_styles = ! empty( $settings['anim_styles'] ) ? $settings['anim_styles'] : 'style-1';
-		$prefix      = ! empty( $settings['prefix'] ) ? $settings['prefix'] : '';
-		$postfix     = ! empty( $settings['postfix'] ) ? $settings['postfix'] : '';
-		$ani_title   = ! empty( $settings['ani_title'] ) ? $settings['ani_title'] : '';
-		$title_tag   = ! empty( $settings['ani_title_tag'] ) ? $settings['ani_title_tag'] : 'h1';
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
+		$prefix    = ! empty( $settings['prefix'] ) ? $settings['prefix'] : '';
+		$postfix   = ! empty( $settings['postfix'] ) ? $settings['postfix'] : '';
+		$ani_title = ! empty( $settings['ani_title'] ) ? $settings['ani_title'] : '';
+		$title_tag = ! empty( $settings['ani_title_tag'] ) ? $settings['ani_title_tag'] : 'h1';
 
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$out_ani      = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay    = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-		$ani_bg       = ! empty( $settings['ani_bg_color'] ) ? $settings['ani_bg_color'] : '';
-		$font_color   = ! empty( $settings['ani_color'] ) ? $settings['ani_color'] : '';
+		/*--OnScroll View Animation ---*/
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
+		
+		$heading_animation_back = 'style="';
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_ani ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_ani ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
-
-			$heading_animation_back = 'style="';
-
+		$ani_bg = ! empty( $settings['ani_bg_color'] ) ? $settings['ani_bg_color'] : '';
+		
 		if ( ! empty( $ani_bg ) ) {
 			$heading_animation_back .= 'background: ' . esc_attr( $ani_bg ) . ';';
 		}
+
 		$heading_animation_back .= '"';
 
 		$order   = array( "\r\n", "\n", "\r", '<br/>', '<br>' );
@@ -515,8 +377,16 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 		$count_lines = count( $lines );
 
 		$background_css = '';
+
+		$font_color   = ! empty( $settings['ani_color'] ) ? $settings['ani_color'] : '';
+
 		if ( ! empty( $font_color ) ) {
 			$background_css .= 'background-color: ' . esc_attr( $font_color ) . ';';
+		}
+
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			$PlusExtra_Class = '';
+			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
 		$uid = uniqid( 'heading-animation' );
@@ -525,8 +395,9 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 
 		if ( 'style-1' === $anim_styles ) {
 			$heading_animation .= '<' . l_theplus_validate_html_tag( $title_tag ) . ' class="pt-plus-cd-headline letters type" >';
+
 			if ( ! empty( $prefix ) ) {
-				$heading_animation .= '<span >' . $prefix . ' </span>';
+				$heading_animation .= '<span >' . wp_kses_post( $prefix ) . ' </span>';
 			}
 
 			if ( ! empty( $ani_title ) ) {
@@ -535,9 +406,7 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 				$i = 0;
 				foreach ( $lines as $line ) {
 					if ( 0 === $i ) {
-
 						$heading_animation .= '<b  class="is-visible"> ' . wp_strip_all_tags( $line ) . '</b>';
-
 					} else {
 						$heading_animation .= '<b> ' . wp_strip_all_tags( $line ) . '</b>';
 					}
@@ -545,26 +414,30 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 				}
 
 				$strings = '[';
+
 				foreach ( $lines as $key => $line ) {
 					$strings .= trim( htmlspecialchars_decode( wp_strip_all_tags( $line ) ) );
 					if ( ( $count_lines - 1 ) !== $key ) {
 						$strings .= ',';
 					}
 				}
-				$strings           .= ']';
+
+				$strings .= ']';
+
 				$heading_animation .= '</span>';
 			}
-
 			if ( ! empty( $postfix ) ) {
-				$heading_animation .= '<span > ' . esc_html( $postfix ) . ' </span>';
+				$heading_animation .= '<span > ' . wp_kses_post( $postfix ) . ' </span>';
 			}
 
 			$heading_animation .= '</' . l_theplus_validate_html_tag( $title_tag ) . '>';
 		}
+
 		if ( 'style-2' === $anim_styles ) {
 			$heading_animation .= '<' . l_theplus_validate_html_tag( $title_tag ) . ' class="pt-plus-cd-headline rotate-1" >';
+
 			if ( ! empty( $prefix ) ) {
-				$heading_animation .= '<span >' . esc_html( $prefix ) . ' </span>';
+				$heading_animation .= '<span >' . wp_kses_post( $prefix ) . ' </span>';
 			}
 
 			if ( ! empty( $ani_title ) ) {
@@ -573,14 +446,14 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 				$i = 0;
 				foreach ( $lines as $line ) {
 					if ( 0 === $i ) {
-
 						$heading_animation .= '<b  class="is-visible"> ' . wp_strip_all_tags( $line ) . '</b>';
-
 					} else {
 						$heading_animation .= '<b> ' . wp_strip_all_tags( $line ) . '</b>';
 					}
+
 					++$i;
 				}
+
 				$strings = '[';
 				foreach ( $lines as $key => $line ) {
 					$strings .= trim( htmlspecialchars_decode( wp_strip_all_tags( $line ) ) );
@@ -588,16 +461,19 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 						$strings .= ',';
 					}
 				}
-				$strings           .= ']';
+
+				$strings .= ']';
+
 				$heading_animation .= '</span>';
 			}
 
 			if ( ! empty( $postfix ) ) {
-				$heading_animation .= '<span > ' . esc_html( $postfix ) . ' </span>';
+				$heading_animation .= '<span > ' . wp_kses_post( $postfix ) . ' </span>';
 			}
 
 			$heading_animation .= '</' . l_theplus_validate_html_tag( $title_tag ) . '>';
 		}
+
 		if ( 'style-3' === $anim_styles ) {
 			$heading_animation .= '<' . l_theplus_validate_html_tag( $title_tag ) . ' class="pt-plus-cd-headline zoom" >';
 			if ( ! empty( $prefix ) ) {
@@ -610,9 +486,7 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 				$i = 0;
 				foreach ( $lines as $line ) {
 					if ( 0 === $i ) {
-
 						$heading_animation .= ' <b  class="is-visible ">' . wp_strip_all_tags( $line ) . '</b>';
-
 					} else {
 						$heading_animation .= ' <b>' . wp_strip_all_tags( $line ) . '</b>';
 					}
@@ -631,25 +505,26 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 			}
 
 			if ( ! empty( $postfix ) ) {
-				$heading_animation .= '<span > ' . esc_html( $postfix ) . ' </span>';
+				$heading_animation .= '<span > ' . wp_kses_post( $postfix ) . ' </span>';
 			}
 
 			$heading_animation .= '</' . l_theplus_validate_html_tag( $title_tag ) . '>';
 		}
+
 		if ( 'style-4' === $anim_styles ) {
 			$heading_animation .= '<' . l_theplus_validate_html_tag( $title_tag ) . ' class="pt-plus-cd-headline loading-bar " >';
+
 			if ( ! empty( $prefix ) ) {
 				$heading_animation .= '<span >' . esc_html( $prefix ) . ' </span>';
 			}
+
 			if ( ! empty( $ani_title ) ) {
 				$heading_animation .= '<span class="cd-words-wrapper">';
 
 				$i = 0;
 				foreach ( $lines as $line ) {
 					if ( 0 === $i ) {
-
 						$heading_animation .= ' <b class="is-visible ">' . wp_strip_all_tags( $line ) . '</b>';
-
 					} else {
 						$heading_animation .= ' <b>' . wp_strip_all_tags( $line ) . '</b>';
 					}
@@ -663,18 +538,22 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 						$strings .= ',';
 					}
 				}
-				$strings           .= ']';
+
+				$strings .= ']';
+
 				$heading_animation .= '</span>';
 			}
 
 			if ( ! empty( $postfix ) ) {
-				$heading_animation .= '<span > ' . esc_html( $postfix ) . '</span>';
+				$heading_animation .= '<span > ' . wp_kses_post( $postfix ) . '</span>';
 			}
 
 			$heading_animation .= '</' . l_theplus_validate_html_tag( $title_tag ) . '>';
 		}
+
 		if ( 'style-5' === $anim_styles ) {
 			$heading_animation .= '<' . l_theplus_validate_html_tag( $title_tag ) . ' class="pt-plus-cd-headline push" >';
+
 			if ( ! empty( $prefix ) ) {
 				$heading_animation .= '<span >' . esc_html( $prefix ) . ' </span>';
 			}
@@ -685,9 +564,7 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 				$i = 0;
 				foreach ( $lines as $line ) {
 					if ( 0 === $i ) {
-
 						$heading_animation .= '<b  class="is-visible "> ' . wp_strip_all_tags( $line ) . '</b>';
-
 					} else {
 						$heading_animation .= '<b> ' . wp_strip_all_tags( $line ) . '</b>';
 					}
@@ -701,18 +578,22 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 						$strings .= ',';
 					}
 				}
-				$strings           .= ']';
+
+				$strings .= ']';
+
 				$heading_animation .= '</span>';
 			}
 
 			if ( ! empty( $postfix ) ) {
-				$heading_animation .= '<span > ' . esc_html( $postfix ) . ' </span>';
+				$heading_animation .= '<span > ' . wp_kses_post( $postfix ) . ' </span>';
 			}
 
 			$heading_animation .= '</' . l_theplus_validate_html_tag( $title_tag ) . '>';
 		}
+
 		if ( 'style-6' === $anim_styles ) {
 			$heading_animation .= '<' . l_theplus_validate_html_tag( $title_tag ) . ' class="pt-plus-cd-headline letters scale" >';
+
 			if ( ! empty( $prefix ) ) {
 				$heading_animation .= '<span >' . esc_html( $prefix ) . ' </span>';
 			}
@@ -723,7 +604,6 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 				foreach ( $lines as $line ) {
 					if ( 0 === $i ) {
 						$heading_animation .= '<b  class="is-visible ">' . wp_strip_all_tags( $line ) . '</b>';
-
 					} else {
 						$heading_animation .= '<b>' . wp_strip_all_tags( $line ) . '</b>';
 					}
@@ -737,12 +617,14 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 						$strings .= ',';
 					}
 				}
-				$strings           .= ']';
+
+				$strings .= ']';
+
 				$heading_animation .= '</span>';
 			}
 
 			if ( ! empty( $postfix ) ) {
-				$heading_animation .= '<span > ' . esc_html( $postfix ) . ' </span>';
+				$heading_animation .= '<span > ' . wp_kses_post( $postfix ) . ' </span>';
 			}
 
 			$heading_animation .= '</' . l_theplus_validate_html_tag( $title_tag ) . '>';
@@ -753,6 +635,11 @@ class L_ThePlus_Heading_Animation extends Widget_Base {
 		$css_rule     .= '<style>';
 			$css_rule .= '.' . esc_js( $uid ) . ' .pt-plus-cd-headline.loading-bar .cd-words-wrapper::after{' . esc_js( $background_css ) . '}';
 		$css_rule     .= '</style>';
-		echo $css_rule . $heading_animation;
+
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			echo $css_rule . $before_content . $heading_animation . $after_content;
+		} else {
+			echo $css_rule . $heading_animation;
+		}
 	}
 }

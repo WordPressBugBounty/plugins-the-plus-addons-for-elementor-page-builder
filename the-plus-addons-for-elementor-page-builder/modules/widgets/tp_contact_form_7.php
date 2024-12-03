@@ -12,18 +12,22 @@ namespace TheplusAddons\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Utils;
 use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Class L_ThePlus_Contact_Form_7
+ * Class ThePlus_Contact_Form_7
  */
-class L_ThePlus_Contact_Form_7 extends Widget_Base {
+class ThePlus_Contact_Form_7 extends Widget_Base {
 
 	/**
 	 * Document Link For Need help.
@@ -31,13 +35,6 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @var tp_doc of the class.
 	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -96,7 +93,11 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			$help_url = L_THEPLUS_HELP;
+		} else {
+			$help_url = THEPLUS_HELP;
+		}
 
 		return esc_url( $help_url );
 	}
@@ -108,6 +109,28 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
+	}
+
+	/**
+	 * It is use for adds.
+	 *
+	 * @since 6.1.0
+	 */
+	public function get_upsale_data() {
+		$val = false;
+
+		if( ! defined( 'THEPLUS_VERSION' ) ) {
+			$val = true;
+		}
+
+		return [
+			'condition' => $val,
+			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
+		];
 	}
 
 	/**
@@ -825,12 +848,12 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 		$this->add_control(
 			'icon_position',
 			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Check Box Position', 'tpebl' ),
-				'default'   => 'after',
-				'options'   => array(
-					'before'  => esc_html__( 'Before', 'tpebl' ),
-					'after' => esc_html__( 'After', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'label'   => esc_html__( 'Check Box Position', 'tpebl' ),
+				'default' => 'after',
+				'options' => array(
+					'before' => esc_html__( 'Before', 'tpebl' ),
+					'after'  => esc_html__( 'After', 'tpebl' ),
 				),
 			)
 		);
@@ -1105,6 +1128,7 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap.your-file.cf7-style-file' => 'min-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap .input__file_btn' => 'min-height: {{SIZE}}{{UNIT}};display:inline-flex;align-items:center;',
 				),
 			)
 		);
@@ -1168,7 +1192,6 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap.cf7-style-file' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_control(
@@ -1179,7 +1202,7 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 				'options'     => array(
 					'block' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
-						'icon'  => 'fa fa-arrows-v',
+						'icon'  => 'eicon-text-align-justify',
 					),
 				),
 				'default'     => 'center',
@@ -2017,6 +2040,88 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'section_ajaxres_styling',
+			array(
+				'label' => esc_html__( 'Ajax Response', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'ajaxres_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .wpcf7-response-output' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'ajaxres_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .wpcf7-response-output' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'ajaxres_typography',
+				'selector' => '{{WRAPPER}} .wpcf7-response-output',
+			)
+		);
+		$this->add_control(
+			'ajaxres_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .wpcf7-response-output' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'ajaxres_bg',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .wpcf7-response-output',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'ajaxres_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .wpcf7-response-output',
+			)
+		);
+		$this->add_responsive_control(
+			'ajaxres_br',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .wpcf7-response-output' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'ajaxres_shadow',
+				'selector' => '{{WRAPPER}} .wpcf7-response-output',
+			)
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'section_extra_option_styling',
 			array(
 				'label' => esc_html__( 'Extra Option', 'tpebl' ),
@@ -2081,150 +2186,14 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'Choose Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
+		} else {
+			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
+		}
 	}
 
 	/**
@@ -2235,6 +2204,16 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 */
 	public function render() {
 		$settings   = $this->get_settings_for_display();
+
+		/*--OnScroll View Animation ---*/
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
+
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			/*--Plus Extra ---*/
+			$PlusExtra_Class = '';
+			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
+		}
+
 		$form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';
 
 		$outer_field_class = ! empty( $settings['outer_field_class'] ) ? $settings['outer_field_class'] : '';
@@ -2245,43 +2224,18 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
         $icon_position = !empty($settings['icon_position']) ? $settings['icon_position'] : 'after';
 
 		$content_align   = ' text-' . ( ! empty( $settings['content_align'] ) ? $settings['content_align'] : '' );
-		$animation_delay = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration    = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
 
-		$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_ani_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-
-		$ani_out_effect = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_ani_delay  = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_ani_speed  = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $ani_out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $ani_out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_ani_delay ) . '"';
-
-				if ( 'yes' === $out_ani_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_ani_speed ) . '"';
-				}
-			}
-		}
-
-		$output      = '<div class="theplus-contact-form ' . esc_attr( $form_style ) . ' plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
+		$output = '<div class="theplus-contact-form ' . esc_attr( $form_style ) . ' plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
+			
 			$output .= do_shortcode( $this->get_shortcode() );
-		$output     .= '</div>';
 
-		echo $output;
+		$output .= '</div>';
+
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			echo $before_content . $output . $after_content;
+		} else {
+			echo $output;
+		}
 	}
 
 	/**
@@ -2291,14 +2245,17 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	private function get_shortcode() {
-		$settings     = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
+
 		$contact_form = ! empty( $settings['contact_form'] ) ? $settings['contact_form'] : 'none';
 
 		if ( 'none' === $contact_form ) {
 			return '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please select a Contact Form From Setting.', 'tpebl' ) . '</h3>';
 		}
 
-		$attributes = array( 'id' => $contact_form );
+		$attributes = array(
+			'id' => $contact_form,
+		);
 
 		$this->add_render_attribute( 'form_shortcode', $attributes );
 
@@ -2315,23 +2272,23 @@ class L_ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.5.2
 	 */
 	private function l_theplus_get_contact_form_post() {
-		$ContactForms = [];
+		$ContactForms = array();
 
-		$cf7 = get_posts('post_type="wpcf7_contact_form"&numberposts=-1');
+		$cf7 = get_posts( 'post_type="wpcf7_contact_form"&numberposts=-1' );
 	
-		if ( !empty($cf7) ) {
-			$ContactForms['none'] = esc_html__('No Forms Selected', 'tpebl');
+		if ( ! empty( $cf7 ) ) {
+			$ContactForms['none'] = esc_html__( 'No Forms Selected', 'tpebl' );
 	
-			foreach ($cf7 as $cform) {
-				$GetId = !empty($cform->ID) ? $cform->ID : '';
-				$GetTitle = !empty($cform->post_title) ? $cform->post_title : '';
+			foreach ( $cf7 as $cform ) {
+				$GetId    = ! empty( $cform->ID ) ? $cform->ID : '';
+				$GetTitle = ! empty( $cform->post_title ) ? $cform->post_title : '';
 	
-				if( !empty($GetId) ){
-					$ContactForms[$GetId] = $GetTitle;
+				if ( ! empty( $GetId ) ) {
+					$ContactForms[ $GetId ] = $GetTitle;
 				}
 			}
 		} else {
-			$ContactForms['none'] = esc_html__('No contact forms found', 'tpebl');
+			$ContactForms['none'] = esc_html__( 'No contact forms found', 'tpebl' );
 		}
 	
 		return $ContactForms;
