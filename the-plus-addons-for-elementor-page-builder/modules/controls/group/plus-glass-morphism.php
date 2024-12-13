@@ -87,7 +87,7 @@ class L_Theplus_Glass_Morphism extends Elementor\Widget_Base {
 					'size' => 0,
 				],
 				'selectors' => [
-					'{{WRAPPER}} > .elementor-container,{{WRAPPER}} > .elementor-column-wrap,{{WRAPPER}} > .elementor-widget-wrap,{{WRAPPER}} > .elementor-widget-container,{{WRAPPER}}.e-container > div,{{WRAPPER}}.e-con > div' => '-webkit-backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;',
+					'{{WRAPPER}}, {{WRAPPER}} > .elementor-container,{{WRAPPER}} > .elementor-widget-wrap,{{WRAPPER}}.e-container > div,{{WRAPPER}}.e-con > div' => '-webkit-backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;',
 				 ],
 				 'condition' => [
 					'scwbf_options' => 'yes',

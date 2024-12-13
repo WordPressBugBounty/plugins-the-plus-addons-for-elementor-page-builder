@@ -5,7 +5,7 @@
  * Author: Theplus
  * Author URI: https://posimyth.com
  *
- * @package ThePlus
+ * @package the-plus-addons-for-elementor-page-builder
  */
 
 namespace TheplusAddons\Widgets;
@@ -110,20 +110,20 @@ class ThePlus_Post_Navigation extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Register controls
 	 *
@@ -1024,7 +1024,11 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'label'     => esc_html__( 'Attachment', 'tpebl' ),
 				'default'   => 'fixed',
-				'options'   => l_theplus_get_image_attachment_options(),
+				'options'   => array(
+					''       => esc_html__( 'Default', 'tpebl' ),
+					'scroll' => esc_html__( 'Scroll', 'tpebl' ),
+					'fixed'  => esc_html__( 'Fixed', 'tpebl' ),
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .tp-post-navigation.tp-nav-trans.tp-nav-style-3 .tp-post-nav-hover-con' => 'background-attachment: {{VALUE}} !important;',
 				),

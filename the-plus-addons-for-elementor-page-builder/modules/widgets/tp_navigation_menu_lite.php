@@ -323,7 +323,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				),
 			)
 		);
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'megaMwid',
 			array(
 				'label'      => esc_html__( 'Container Width', 'tpebl' ),

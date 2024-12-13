@@ -279,7 +279,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 					<div class="tp-learn-more-about">
 						<?php if ( false === $plugin_status['installed'] ) { ?>
 							<a class="tp-wdesign-install" href="#">
-								<span class="theplus-enable-text"><?php echo esc_html( 'Enable Templates' ); ?></span>
+								<span class="theplus-enable-text"><?php echo esc_html__( 'Enable Templates', 'tpebl' ); ?></span>
 								<div class="tp-wkit-publish-loader">
 									<div class="tp-wb-loader-circle"></div>
 								</div>

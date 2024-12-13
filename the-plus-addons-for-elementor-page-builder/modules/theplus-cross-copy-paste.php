@@ -1,11 +1,13 @@
 <?php
 namespace TheplusAddons;
+
 use Elementor\Utils;
 use Elementor\Controls_Stack;
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
 /*
  * Cross Domain Copy Paste Theplus
  */
@@ -31,14 +33,14 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 		public function init() {
 			add_action( 'wp_ajax_plus_cross_cp_import', array( $this, 'cross_copy_paste_media_import' ) );
 		}
-		
+
 		/**
 		 * Cross copy paste media import
 		 *
 		 * @since  5.0.6
 		 */
 		public static function cross_copy_paste_media_import() {
-			
+
 			check_ajax_referer( 'plus_cross_cp_import', 'nonce' );
 
 			if ( ! current_user_can( 'edit_posts' ) ) {
@@ -49,33 +51,32 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 			}
 
 			$media_import = isset( $_POST['copy_content'] ) ? wp_unslash( $_POST['copy_content'] ) : '';
-			
+
 			if ( empty( $media_import ) ) {
 				wp_send_json_error( __( 'Empty Content.', 'tpebl' ) );
 			}
 
-			$media_import = array( json_decode( $media_import, true ) ); 
+			$media_import = array( json_decode( $media_import, true ) );
 			$media_import = self::tp_elements_id_change( $media_import );
 			$media_import = self::tp_import_media_copy_content( $media_import );
 
 			wp_send_json_success( $media_import );
 		}
-		
+
 		/**
 		 * Replace media items.
 		 *
 		 * @since  5.0.6
 		 */
 		protected static function tp_elements_id_change( $media_import ) {
-		
+
 			return \Elementor\Plugin::instance()->db->iterate_data(
 				$media_import,
-				function( $element ) {
+				function ( $element ) {
 					$element['id'] = Utils::generate_random_string();
 					return $element;
 				}
 			);
-			
 		}
 
 		/**
@@ -84,10 +85,10 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 		 * @since  5.0.6
 		 */
 		protected static function tp_import_media_copy_content( $media_import ) {
-		
+
 			return \Elementor\Plugin::instance()->db->iterate_data(
 				$media_import,
-				function( $element_data ) {
+				function ( $element_data ) {
 					$elements = \Elementor\Plugin::instance()->elements_manager->create_element_instance( $element_data );
 
 					if ( ! $elements ) {
@@ -97,7 +98,6 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 					return self::element_copy_content_import_start( $elements );
 				}
 			);
-			
 		}
 
 		/**
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 		 */
 		protected static function element_copy_content_import_start( Controls_Stack $element ) {
 			$get_element_instance = $element->get_data();
-			$tp_mi_on_fun = 'on_import';
+			$tp_mi_on_fun         = 'on_import';
 
 			if ( method_exists( $element, $tp_mi_on_fun ) ) {
 				$get_element_instance = $element->{$tp_mi_on_fun}( $get_element_instance );
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 
 			foreach ( $element->get_controls() as $get_control ) {
 				$control_type = \Elementor\Plugin::instance()->controls_manager->get_control( $get_control['type'] );
-				$control_name  = $get_control['name'];
+				$control_name = $get_control['name'];
 
 				if ( ! $control_type ) {
 					return $get_element_instance;
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 
 			return $get_element_instance;
 		}
-		
+
 		/**
 		 * Returns the instance.
 		 *
@@ -136,7 +136,7 @@ if ( ! class_exists( 'Theplus_Cross_Copy_Paste_Lite' ) ) {
 		 * @return object
 		 */
 		public static function get_instance( $shortcodes = array() ) {
-			
+
 			if ( null == self::$instance ) {
 				self::$instance = new self( $shortcodes );
 			}

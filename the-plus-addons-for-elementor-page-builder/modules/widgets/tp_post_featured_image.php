@@ -5,7 +5,7 @@
  * Author: Theplus
  * Author URI: https://posimyth.com
  *
- * @package ThePlus
+ * @package the-plus-addons-for-elementor-page-builder
  */
 
 namespace TheplusAddons\Widgets;
@@ -108,20 +108,20 @@ class ThePlus_Featured_Image extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Get Widget Custom Help Url.
 	 *
@@ -168,10 +168,10 @@ class ThePlus_Featured_Image extends Widget_Base {
 		$this->add_control(
 			'imageSize',
 			array(
-				'label'     => esc_html__( 'Image Size', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'full',
-				'options'   => array(
+				'label'   => esc_html__( 'Image Size', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'full',
+				'options' => array(
 					'full'         => esc_html__( 'Full', 'tpebl' ),
 					'thumbnail'    => esc_html__( 'Thumbnail', 'tpebl' ),
 					'medium'       => esc_html__( 'Medium', 'tpebl' ),
@@ -179,7 +179,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 					'large'        => esc_html__( 'Large', 'tpebl' ),
 				),
 				// 'condition' => array(
-				// 	'pfi_type' => 'pfi-background',
+				// 'pfi_type' => 'pfi-background',
 				// ),
 			)
 		);
@@ -201,7 +201,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 					'{{WRAPPER}} .tp-featured-image img' => 'max-width: {{SIZE}}{{UNIT}};',
 				),
 				// 'condition'   => array(
-				// 	'pfi_type' => 'pfi-background',
+				// 'pfi_type' => 'pfi-background',
 				// ),
 			)
 		);
@@ -229,7 +229,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 					'{{WRAPPER}}' => 'text-align: {{VALUE}};',
 				),
 				// 'condition' => array(
-				// 	'pfi_type' => 'pfi-background',
+				// 'pfi_type' => 'pfi-background',
 				// ),
 				'separator' => 'before',
 			)
@@ -299,7 +299,11 @@ class ThePlus_Featured_Image extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'label'   => esc_html__( 'Attachment', 'tpebl' ),
 				'default' => 'scroll',
-				'options' => l_theplus_get_image_attachment_options(),
+				'options' => array(
+					''       => esc_html__( 'Default', 'tpebl' ),
+					'scroll' => esc_html__( 'Scroll', 'tpebl' ),
+					'fixed'  => esc_html__( 'Fixed', 'tpebl' ),
+				),
 			)
 		);
 		$this->add_control(
@@ -436,7 +440,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		
+
 		$post    = get_queried_object();
 		$post_id = get_the_ID();
 		$bg_in   = ! empty( $settings['bg_in'] ) ? $settings['bg_in'] : 'tp-fibg-section';
@@ -475,12 +479,12 @@ class ThePlus_Featured_Image extends Widget_Base {
 		}
 
 		// if ( has_post_thumbnail( $post_id ) ) {
-		// 	// $image_content = get_the_post_thumbnail_url( $post_id, $image_size );
-		// 	$image_content = tp_get_image_rander( $post_id, $image_size, array( 'class' => 'tp-featured-img' ), 'post' );
+		// $image_content = get_the_post_thumbnail_url( $post_id, $image_size );
+		// $image_content = tp_get_image_rander( $post_id, $image_size, array( 'class' => 'tp-featured-img' ), 'post' );
 
 		// } else {
-		// 	// $image_content = L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg';
-		// 	$image_content = '<img src="' . THEPLUS_URL . '/assets/images/tp-placeholder.jpg" alt="' . get_the_title() . '" class="tp-featured-img" />';
+		// $image_content = L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg';
+		// $image_content = '<img src="' . THEPLUS_URL . '/assets/images/tp-placeholder.jpg" alt="' . get_the_title() . '" class="tp-featured-img" />';
 		// }
 
 		if ( 'pfi-background' === $pfi_type ) {
@@ -509,13 +513,13 @@ class ThePlus_Featured_Image extends Widget_Base {
 			$output .= '<div class="tp-featured-image ' . esc_attr( $lazyclass ) . '" style="background:url(' . esc_url( $image_content ) . ');' . $css_rules1 . '"></div>';
 		} else {
 			$output .= '<div class="tp-featured-image">';
-				
+
 				$output .= '<a href="' . esc_url( get_the_permalink() ) . '">';
-					
+
 					$output .= $image_content;
-				
+
 				$output .= '</a>';
-			
+
 			$output .= '</div>';
 		}
 

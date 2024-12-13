@@ -21,7 +21,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // delete_option('post_type_options');
 // delete_option('theplus_styling_data');
 // delete_option('tpae_onbording_end');
+// delete_option('on_first_load_cache');
+
 // delete_option('tpae_halloween_notice_dismissed');
 // delete_option('tpae_bfsale_notice_dismissed');
-
-// delete_option('on_first_load_cache');
+// delete_option('tpae_cmsale_notice_dismissed');

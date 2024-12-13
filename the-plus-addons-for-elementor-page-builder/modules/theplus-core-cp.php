@@ -1,5 +1,6 @@
 <?php
 namespace TheplusAddons;
+
 use Elementor\Utils;
 
 if ( ! defined( 'WPINC' ) ) {
@@ -26,23 +27,24 @@ if ( ! class_exists( 'Theplus_Core_Cp_Lite' ) ) {
 		 * @return void
 		 */
 		public function init() {
-			$plus_extras=l_theplus_get_option('general','extras_elements');
-			if(!empty($plus_extras) && in_array('plus_cross_cp',$plus_extras)){
+			$plus_extras = l_theplus_get_option( 'general', 'extras_elements' );
+
+			if ( ! empty( $plus_extras ) && in_array( 'plus_cross_cp', $plus_extras ) ) {
 				add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_editor_cp_scripts' ), 98 );
 				require_once L_THEPLUS_PATH . 'modules/theplus-cross-copy-paste.php';
 			}
 		}
-		
-		
+
 		/**
 		 * Load required js on before enqueue widget JS.
 		 *
 		 * @since 5.0.6
 		 */
 		public function enqueue_editor_cp_scripts() {
+
 			wp_enqueue_script(
 				'plus-xdstorage-cp',
-				L_THEPLUS_ASSETS_URL .'js/extra/xdlocalstorage.js',
+				L_THEPLUS_ASSETS_URL . 'js/extra/xdlocalstorage.js',
 				null,
 				L_THEPLUS_VERSION,
 				true
@@ -50,13 +52,14 @@ if ( ! class_exists( 'Theplus_Core_Cp_Lite' ) ) {
 
 			wp_enqueue_script(
 				'plus-cross-cp',
-				L_THEPLUS_ASSETS_URL .'js/main/cross-cp/plus-cross-cp.js',
+				L_THEPLUS_ASSETS_URL . 'js/main/cross-cp/plus-cross-cp.js',
 				array( 'jquery', 'elementor-editor', 'plus-xdstorage-cp' ),
 				L_THEPLUS_VERSION,
 				true
 			);
+
 			wp_localize_script(
-			'jquery',
+				'jquery',
 				'theplus_cross_cp',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -69,13 +72,13 @@ if ( ! class_exists( 'Theplus_Core_Cp_Lite' ) ) {
 		 * Returns the instance.
 		 *
 		 * @since  5.0.6
-		 * @return object
 		 */
 		public static function get_instance( $shortcodes = array() ) {
-			
+
 			if ( null == self::$instance ) {
 				self::$instance = new self( $shortcodes );
 			}
+
 			return self::$instance;
 		}
 	}

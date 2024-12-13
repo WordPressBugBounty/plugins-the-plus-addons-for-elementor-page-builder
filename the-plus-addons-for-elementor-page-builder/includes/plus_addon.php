@@ -1,21 +1,30 @@
-<?php 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
-	
-global $theplus_options,$post_type_options;
-		
-add_image_size( 'tp-image-grid', 700, 700, true);
+<?php
+/**
+ * Plus Addons.
+ *
+ * @link       https://posimyth.com/
+ * @since      6.1.1
+ *
+ * @package    the-plus-addons-for-elementor-page-builder
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+global $theplus_options, $post_type_options;
+
+add_image_size( 'tp-image-grid', 700, 700, true );
 
 function l_theplus_validate_html_tag( $check_tag ) {
 
-	$tags = [ 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'span', 'p', 'header', 'footer', 'article', 'aside', 'main', 'nav', 'section' ];
+	$tags = array( 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'span', 'p', 'header', 'footer', 'article', 'aside', 'main', 'nav', 'section' );
 
 	return in_array( strtolower( $check_tag ), $tags ) ? $check_tag : 'div';
 }
 
-
 /* WOOCOMMERCE Mini Cart */
-function l_theplus_woocomerce_ajax_cart_update($fragments) {
-	if(class_exists('woocommerce')) {		
+function l_theplus_woocomerce_ajax_cart_update( $fragments ) {
+	if ( class_exists( 'woocommerce' ) ) {
 		ob_start();
 		?>			
 			
@@ -25,129 +34,121 @@ function l_theplus_woocomerce_ajax_cart_update($fragments) {
 		return $fragments;
 	}
 }
-add_filter('woocommerce_add_to_cart_fragments', 'l_theplus_woocomerce_ajax_cart_update',10,3);
+add_filter( 'woocommerce_add_to_cart_fragments', 'l_theplus_woocomerce_ajax_cart_update', 10, 3 );
 
-function l_theplus_get_thumb_url(){
-	return L_THEPLUS_ASSETS_URL .'images/placeholder-grid.jpg';
+function l_theplus_get_thumb_url() {
+	return L_THEPLUS_ASSETS_URL . 'images/placeholder-grid.jpg';
 }
 
 class L_Theplus_MetaBox {
-	
-	public static function get($name) {
+
+	public static function get( $name ) {
 		global $post;
-		
-		if (isset($post) && !empty($post->ID)) {
-			return get_post_meta($post->ID, $name, true);
+
+		if ( isset( $post ) && ! empty( $post->ID ) ) {
+			return get_post_meta( $post->ID, $name, true );
 		}
-		
+
 		return false;
 	}
 }
-function l_theplus_get_option($options_type,$field){
-	$theplus_options=get_option( 'theplus_options' );
-	$post_type_options=get_option( 'post_type_options' );
-	$values='';
-	if($options_type=='general'){
-		if(isset($theplus_options[$field]) && !empty($theplus_options[$field])){
-			$values=$theplus_options[$field];
+function l_theplus_get_option( $options_type, $field ) {
+	$theplus_options   = get_option( 'theplus_options' );
+	$post_type_options = get_option( 'post_type_options' );
+	$values            = '';
+	if ( $options_type == 'general' ) {
+		if ( isset( $theplus_options[ $field ] ) && ! empty( $theplus_options[ $field ] ) ) {
+			$values = $theplus_options[ $field ];
 		}
 	}
-	if($options_type=='post_type'){
-		if(isset($post_type_options[$field]) && !empty($post_type_options[$field])){
-			$values=$post_type_options[$field];
+	if ( $options_type == 'post_type' ) {
+		if ( isset( $post_type_options[ $field ] ) && ! empty( $post_type_options[ $field ] ) ) {
+			$values = $post_type_options[ $field ];
 		}
 	}
 	return $values;
 }
 
-function l_theplus_excerpt($limit) {
-	$limit = !empty($limit) ? (int) $limit : 0;
+function l_theplus_excerpt( $limit ) {
+	$limit = ! empty( $limit ) ? (int) $limit : 0;
 
-	if(method_exists('WPBMap', 'addAllMappedShortcodes')) {
+	if ( method_exists( 'WPBMap', 'addAllMappedShortcodes' ) ) {
 		WPBMap::addAllMappedShortcodes();
 	}
-		global $post;
-		$excerpt = explode(' ', get_the_excerpt(), $limit);
-		if (count($excerpt)>=$limit) {
-			array_pop($excerpt);
-			$excerpt = implode(" ",$excerpt).'...';
-		} else {
-			$excerpt = implode(" ",$excerpt);
-		}	
-		$excerpt = preg_replace('`[[^]]*]`','',$excerpt);
-	
+
+	global $post;
+	$excerpt = explode( ' ', get_the_excerpt(), $limit );
+	if ( count( $excerpt ) >= $limit ) {
+		array_pop( $excerpt );
+		$excerpt = implode( ' ', $excerpt ) . '...';
+	} else {
+		$excerpt = implode( ' ', $excerpt );
+	}
+
+	$excerpt = preg_replace( '`[[^]]*]`', '', $excerpt );
+
 	return $excerpt;
 }
-function l_theplus_get_title($limit) {
-	if(method_exists('WPBMap', 'addAllMappedShortcodes')) {
-		WPBMap::addAllMappedShortcodes();
-	}
-		global $post;
-		$title = explode(' ', get_the_title(), $limit);
-		if (count($title)>=$limit) {
-			array_pop($title);
-			$title = implode(" ",$title).'...';
-		} else {
-			$title = implode(" ",$title);
-		}	
-		$title = preg_replace('`[[^]]*]`','',$title);
-	
-	return $title;
-}
-function l_theplus_loading_image_grid($postid='',$type=''){
+
+function l_theplus_loading_image_grid( $postid = '', $type = '' ) {
 	global $post;
-	$content_image='';
-	if($type!='background'){		
-		$image_url=L_THEPLUS_ASSETS_URL .'images/placeholder-grid.jpg';
-		$content_image='<img width="600" height="600" loading="lazy" src="'.esc_url($image_url).'" alt="'.esc_attr(get_the_title()).'"/>';
-		
+	$content_image = '';
+	if ( $type != 'background' ) {
+		$image_url     = L_THEPLUS_ASSETS_URL . 'images/placeholder-grid.jpg';
+		$content_image = '<img width="600" height="600" loading="lazy" src="' . esc_url( $image_url ) . '" alt="' . esc_attr( get_the_title() ) . '"/>';
+
 		return $content_image;
-	
-	}elseif($type=='background'){
-	
-		$image_url=L_THEPLUS_ASSETS_URL .'images/placeholder-grid.jpg';
-		$data_src='style="background-image:url('.esc_url($image_url).');" ';
-		
+
+	} elseif ( $type == 'background' ) {
+
+		$image_url = L_THEPLUS_ASSETS_URL . 'images/placeholder-grid.jpg';
+		$data_src  = 'style="background-image:url(' . esc_url( $image_url ) . ');" ';
+
 		return $data_src;
-		
+
 	}
 }
-function l_theplus_loading_bg_image($postid=''){
+function l_theplus_loading_bg_image( $postid = '' ) {
 	global $post;
-	$content_image='';
-	if(!empty($postid)){
-		$featured_image=get_the_post_thumbnail_url($postid,'full');
-		if(empty($featured_image)){
-			$featured_image=l_theplus_get_thumb_url();
+
+	$content_image = '';
+
+	if ( ! empty( $postid ) ) {
+
+		$featured_image = get_the_post_thumbnail_url( $postid, 'full' );
+		if ( empty( $featured_image ) ) {
+			$featured_image = l_theplus_get_thumb_url();
 		}
-		$content_image='style="background-image:url('.esc_url($featured_image).');"';
+
+		$content_image = 'style="background-image:url(' . esc_url( $featured_image ) . ');"';
+
 		return $content_image;
-	}else{
-	return $content_image;
+	} else {
+		return $content_image;
 	}
 }
 
 /**
  * Simple decrypt function
- * 
+ *
  * @since 6.0.4
  */
 function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
 	// you may change these values to your own
-	$tppk=get_option( 'theplus_purchase_code' );
-	$generated = !empty(get_option( 'tp_key_random_generate' )) ? get_option( 'tp_key_random_generate' ) : 'PO$_key';
-	
-	$secret_key = ( isset($tppk['tp_api_key']) && !empty($tppk['tp_api_key']) ) ? $tppk['tp_api_key'] : $generated;
-	$secret_iv = 'PO$_iv';
+	$tppk      = get_option( 'theplus_purchase_code' );
+	$generated = ! empty( get_option( 'tp_key_random_generate' ) ) ? get_option( 'tp_key_random_generate' ) : 'PO$_key';
 
-	$output = false;
-	$encrypt_method = "AES-128-CBC";
-	$key = hash( 'sha256', $secret_key );
-	$iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
+	$secret_key = ( isset( $tppk['tp_api_key'] ) && ! empty( $tppk['tp_api_key'] ) ) ? $tppk['tp_api_key'] : $generated;
+	$secret_iv  = 'PO$_iv';
 
-	if( $action == 'ey' ) {
+	$output         = false;
+	$encrypt_method = 'AES-128-CBC';
+	$key            = hash( 'sha256', $secret_key );
+	$iv             = substr( hash( 'sha256', $secret_iv ), 0, 16 );
+
+	if ( $action == 'ey' ) {
 		$output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-	}else if( $action == 'dy' ){
+	} elseif ( $action == 'dy' ) {
 		$output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
 	}
 
@@ -156,55 +157,60 @@ function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
 
 /**
  * Metro layout for ajax load
- * 
- * @since 5.5.4
- * @version 5.5.4
+ *
+ * @since 6.1.1
  */
-function L_theplus_load_metro_style_layout($columns='1',$metro_column='3',$metro_style='style-1'){
-	$i=($columns!='') ? $columns : 1;
-	if(!empty($metro_column)){
-		//style-3
-		if($metro_column=='3' && $metro_style=='style-1'){
-			$i=($i<=10) ? $i : ($i%10);			
+function L_theplus_load_metro_style_layout( $columns = '1', $metro_column = '3', $metro_style = 'style-1' ) {
+	$i = ! empty( $columns ) ? $columns : 1;
+
+	if ( ! empty( $metro_column ) ) {
+		// style-3
+		if ( $metro_column == '3' && 'style-1' === $metro_style ) {
+			$i = ( $i <= 10 ) ? $i : ( $i % 10 );
 		}
-		if($metro_column=='3' && $metro_style=='style-2'){
-			$i=($i<=9) ? $i : ($i%9);			
+		if ( $metro_column == '3' && 'style-2' === $metro_style ) {
+			$i = ( $i <= 9 ) ? $i : ( $i % 9 );
 		}
-		if($metro_column=='3' && $metro_style=='style-3'){
-			$i=($i<=15) ? $i : ($i%15);			
+		if ( $metro_column == '3' && 'style-3' === $metro_style ) {
+			$i = ( $i <= 15 ) ? $i : ( $i % 15 );
 		}
-		if($metro_column=='3' && $metro_style=='style-4'){
-			$i=($i<=8) ? $i : ($i%8);			
+		if ( $metro_column == '3' && 'style-4' === $metro_style ) {
+			$i = ( $i <= 8 ) ? $i : ( $i % 8 );
 		}
-		//style-4
-		if($metro_column=='4' && $metro_style=='style-1'){
-			$i=($i<=12) ? $i : ($i%12);			
+		// style-4
+		if ( $metro_column == '4' && 'style-1' === $metro_style ) {
+			$i = ( $i <= 12 ) ? $i : ( $i % 12 );
 		}
-		if($metro_column=='4' && $metro_style=='style-2'){
-			$i=($i<=14) ? $i : ($i%14);			
+		if ( $metro_column == '4' && 'style-2' === $metro_style ) {
+			$i = ( $i <= 14 ) ? $i : ( $i % 14 );
 		}
-		if($metro_column=='4' && $metro_style=='style-3'){
-			$i=($i<=12) ? $i : ($i%12);			
+		if ( $metro_column == '4' && 'style-3' === $metro_style ) {
+			$i = ( $i <= 12 ) ? $i : ( $i % 12 );
 		}
-		//style-5
-		if($metro_column=='5' && $metro_style=='style-1'){
-			$i=($i<=18) ? $i : ($i%18);			
+		// style-5
+		if ( $metro_column == '5' && 'style-1' === $metro_style ) {
+			$i = ( $i <= 18 ) ? $i : ( $i % 18 );
 		}
-		//style-6
-		if($metro_column=='6' && $metro_style=='style-1'){
-			$i=($i<=16) ? $i : ($i%16);			
+		// style-6
+		if ( $metro_column == '6' && 'style-1' === $metro_style ) {
+			$i = ( $i <= 16 ) ? $i : ( $i % 16 );
 		}
 	}
+
 	return $i;
 }
 
-add_action('elementor/widgets/register', function($widgets_manager){
-  $elementor_widget_blacklist = [ 'plus-elementor-widget', ];
+add_action(
+	'elementor/widgets/register',
+	function ( $widgets_manager ) {
+		$elementor_widget_blacklist = array( 'plus-elementor-widget' );
 
-  foreach($elementor_widget_blacklist as $widget_name){
-    $widgets_manager->unregister($widget_name);
-  }
-}, 15);
+		foreach ( $elementor_widget_blacklist as $widget_name ) {
+			$widgets_manager->unregister( $widget_name );
+		}
+	},
+	15
+);
 
 /**
  * Registered widgets.

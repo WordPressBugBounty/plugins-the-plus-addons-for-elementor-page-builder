@@ -307,7 +307,7 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : This is just for style 4.',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_control(
@@ -2469,34 +2469,43 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 
 		$desktop_column = ! empty( $settings['slider_desktop_column'] ) ? $settings['slider_desktop_column'] : '1';
 
-			$data_slider .= ' data-slide_speed="' . esc_attr( $settings['slide_speed']['size'] ) . '"';
+		$data_slider .= ' data-slide_speed="' . esc_attr( $settings['slide_speed']['size'] ) . '"';
 
-			$data_slider .= ' data-slider_desktop_column="' . esc_attr( $desktop_column ) . '"';
-			$data_slider .= ' data-steps_slide="1"';
+		$data_slider .= ' data-slider_desktop_column="' . esc_attr( $desktop_column ) . '"';
+		$data_slider .= ' data-steps_slide="1"';
 
-			$slider_draggable = ( 'yes' === $draggable_on ) ? 'true' : 'false';
-			$data_slider     .= ' data-slider_draggable="' . esc_attr( $slider_draggable ) . '"';
-			$slider_infinite  = ( 'yes' === $infinite_mode ) ? 'true' : 'false';
-			$data_slider     .= ' data-slider_infinite="' . esc_attr( $slider_infinite ) . '"';
+		$slider_draggable = ( 'yes' === $draggable_on ) ? 'true' : 'false';
+		$data_slider     .= ' data-slider_draggable="' . esc_attr( $slider_draggable ) . '"';
+		$slider_infinite  = ( 'yes' === $infinite_mode ) ? 'true' : 'false';
+		$data_slider     .= ' data-slider_infinite="' . esc_attr( $slider_infinite ) . '"';
 
-			$slider_adaptive_height = ( 'yes' === $slider_height ) ? 'true' : 'false';
+		$slider_adaptive_height = ( 'yes' === $slider_height ) ? 'true' : 'false';
 
-			$data_slider    .= ' data-slider_adaptive_height="' . esc_attr( $slider_adaptive_height ) . '"';
-			$slider_autoplay = ( 'yes' === $autoplay ) ? 'true' : 'false';
+		$data_slider    .= ' data-slider_adaptive_height="' . esc_attr( $slider_adaptive_height ) . '"';
+		$slider_autoplay = ( 'yes' === $autoplay ) ? 'true' : 'false';
 
-			$data_slider .= ' data-slider_autoplay="' . esc_attr( $slider_autoplay ) . '"';
-			$data_slider .= ' data-autoplay_speed="' . esc_attr( ! empty( $settings['autoplay_speed']['size'] ) ? $settings['autoplay_speed']['size'] : 3000 ) . '"';
+		$data_slider .= ' data-slider_autoplay="' . esc_attr( $slider_autoplay ) . '"';
+		$data_slider .= ' data-autoplay_speed="' . esc_attr( ! empty( $settings['autoplay_speed']['size'] ) ? $settings['autoplay_speed']['size'] : 3000 ) . '"';
 
-			$slider_dots  = ( 'yes' === $slider_on ) ? 'true' : 'false';
-			$data_slider .= ' data-slider_dots="' . esc_attr( $slider_dots ) . '"';
-			$data_slider .= ' data-slider_dots_style="slick-dots ' . esc_attr( $settings['slider_dots_style'] ) . '"';
+		$slider_dots  = ( 'yes' === $slider_on ) ? 'true' : 'false';
+		$data_slider .= ' data-slider_dots="' . esc_attr( $slider_dots ) . '"';
+		$data_slider .= ' data-slider_dots_style="slick-dots ' . esc_attr( $settings['slider_dots_style'] ) . '"';
 
-			$slider_arrows = ( 'yes' === $arrow_on ) ? 'true' : 'false';
-			$data_slider  .= ' data-slider_arrows="' . esc_attr( $slider_arrows ) . '"';
-			$data_slider  .= ' data-slider_arrows_style="' . esc_attr( $settings['slider_arrows_style'] ) . '" ';
+		$slider_arrows = ( 'yes' === $arrow_on ) ? 'true' : 'false';
+		$data_slider  .= ' data-slider_arrows="' . esc_attr( $slider_arrows ) . '"';
+		$data_slider  .= ' data-slider_arrows_style="' . esc_attr( $settings['slider_arrows_style'] ) . '" ';
+
+		if( !empty( $settings['arrow_icon_color'] ) ){
 			$data_slider  .= ' data-arrow_icon_color="' . esc_attr( $settings['arrow_icon_color'] ) . '" ';
+		}
+
+		if( !empty( $settings['arrow_hover_bg_color'] ) ){
 			$data_slider  .= ' data-arrow_hover_bg_color="' . esc_attr( $settings['arrow_hover_bg_color'] ) . '" ';
+		}
+
+		if( !empty( $settings['arrow_hover_icon_color'] ) ){
 			$data_slider  .= ' data-arrow_hover_icon_color="' . esc_attr( $settings['arrow_hover_icon_color'] ) . '" ';
+		}
 
 		return $data_slider;
 	}

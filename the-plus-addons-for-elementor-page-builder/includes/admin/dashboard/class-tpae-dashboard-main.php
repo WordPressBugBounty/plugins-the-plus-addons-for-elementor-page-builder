@@ -56,6 +56,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Main' ) ) {
 		 */
 		public function tpae_dashboard_main() {
 
+			require_once L_THEPLUS_PATH . 'includes/admin/dashboard/class-wdk-widget-api.php';
+
 			if( is_admin() && is_user_logged_in() && current_user_can( 'manage_options' ) ){
 				include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-ajax.php';
 			}
@@ -63,6 +65,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Main' ) ) {
 			include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-meta.php';
 			include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-listing.php';
 			include L_THEPLUS_PATH . 'includes/admin/extra-option/class-tpae-custom-code.php';
+
 		}
 	}
 

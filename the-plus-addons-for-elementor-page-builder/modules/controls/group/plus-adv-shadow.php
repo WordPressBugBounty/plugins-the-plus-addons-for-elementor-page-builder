@@ -936,7 +936,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 					$i++;
 				}
 
-				$bs_normal .= '.elementor-element.elementor-element-'.$id.$bs_class.',.elementor-element.e-container.elementor-element-'.$id.$bs_class.',.elementor-element.e-con.elementor-element-'.$id.$bs_class.',.elementor-element.elementor-element-'.$id.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$bs_class.',.elementor-element.elementor-element-'.$id.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$bs_class.',.elementor-element.elementor-element-'.$id.'> .elementor-widget-container '.$bs_class.'{ '.$bstrans.'box-shadow : '.$bcss.' }';
+				$bs_normal .= '.elementor-element.elementor-element-'.$id.$bs_class.',.elementor-element.e-container.elementor-element-'.$id.$bs_class.',.elementor-element.e-con.elementor-element-'.$id.$bs_class.',.elementor-element.elementor-element-'.$id.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$bs_class.',.elementor-element.elementor-element-'.$id.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$bs_class.',.elementor-element.elementor-element-'.$id.' '.$bs_class.'{ '.$bstrans.'box-shadow : '.$bcss.' }';
 
 			}
 
@@ -968,7 +968,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 					$ih++;
 				}
 
-				$bs_hover .= '.elementor-element.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-container.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-con.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-container.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-con.elementor-element-'.$idhover.$bs_class.',.elementor-element.elementor-element-'.$idhover.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$bs_class.',.elementor-element.elementor-element-'.$idhover.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$bs_class.',.elementor-element.elementor-element-'.$idhover.'> .elementor-widget-container '.$bs_class.'{ '.$bstransh.'box-shadow : '.$bcss_h.' }';
+				$bs_hover .= '.elementor-element.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-container.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-con.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-container.elementor-element-'.$idhover.$bs_class.',.elementor-element.e-con.elementor-element-'.$idhover.$bs_class.',.elementor-element.elementor-element-'.$idhover.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$bs_class.',.elementor-element.elementor-element-'.$idhover.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$bs_class.',.elementor-element.elementor-element-'.$idhover.' '.$bs_class.'{ '.$bstransh.'box-shadow : '.$bcss_h.' }';
 
 			}
 			if(!empty($bs_normal) || !empty($bs_hover)){
@@ -1007,7 +1007,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 					$j++;
 				}
 
-				$ts_normal .= '.elementor-element.elementor-element-'.$id.$ts_class.',.elementor-element.e-container.elementor-element-'.$id.$ts_class.',.elementor-element.e-con.elementor-element-'.$id.$ts_class.',.elementor-element.elementor-element-'.$id.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ts_class.',.elementor-element.elementor-element-'.$id.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ts_class.',.elementor-element.elementor-element-'.$id.'> .elementor-widget-container '.$ts_class.'{ '.$tstrans.'text-shadow : '.$tcss.' }';
+				$ts_normal .= '.elementor-element.elementor-element-'.$id.$ts_class.',.elementor-element.e-container.elementor-element-'.$id.$ts_class.',.elementor-element.e-con.elementor-element-'.$id.$ts_class.',.elementor-element.elementor-element-'.$id.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ts_class.',.elementor-element.elementor-element-'.$id.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ts_class.',.elementor-element.elementor-element-'.$id.' '.$ts_class.'{ '.$tstrans.'text-shadow : '.$tcss.' }';
 			}
 
 			if(isset($adv_shadow_textshadow_h_s) && $adv_shadow_textshadow_h_s=='yes' && !empty($as_ts_lists_h)) {
@@ -1034,7 +1034,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 					$jh++;
 				}
 
-				$ts_hover .= '.elementor-element.elementor-element-'.$idhover.$ts_class.',.elementor-element.e-container.elementor-element-'.$idhover.$ts_class.',.elementor-element.e-con.elementor-element-'.$idhover.$ts_class.',.elementor-element.elementor-element-'.$idhover.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ts_class.',.elementor-element.elementor-element-'.$idhover.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ts_class.',.elementor-element.elementor-element-'.$idhover.'> .elementor-widget-container '.$ts_class.'{ '.$tstransh.'text-shadow : '.$tcss_h.' }';
+				$ts_hover .= '.elementor-element.elementor-element-'.$idhover.$ts_class.',.elementor-element.e-container.elementor-element-'.$idhover.$ts_class.',.elementor-element.e-con.elementor-element-'.$idhover.$ts_class.',.elementor-element.elementor-element-'.$idhover.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ts_class.',.elementor-element.elementor-element-'.$idhover.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ts_class.',.elementor-element.elementor-element-'.$idhover.' '.$ts_class.'{ '.$tstransh.'text-shadow : '.$tcss_h.' }';
 
 			}
 			if(!empty($ts_normal) || !empty($ts_hover)){
@@ -1069,7 +1069,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 					$k++;
 				}
 
-				$ds_normal .= '.elementor-element.elementor-element-'.$id.$ds_class.',.elementor-element.e-container.elementor-element-'.$id.$ds_class.',.elementor-element.e-con.elementor-element-'.$id.$ds_class.',.elementor-element.elementor-element-'.$id.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ds_class.',.elementor-element.elementor-element-'.$id.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ds_class.',.elementor-element.elementor-element-'.$id.'> .elementor-widget-container '.$ds_class.'{ '.$dstrans.'filter : '.$dcss.' }';
+				$ds_normal .= '.elementor-element.elementor-element-'.$id.$ds_class.',.elementor-element.e-container.elementor-element-'.$id.$ds_class.',.elementor-element.e-con.elementor-element-'.$id.$ds_class.',.elementor-element.elementor-element-'.$id.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ds_class.',.elementor-element.elementor-element-'.$id.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ds_class.',.elementor-element.elementor-element-'.$id.' '.$ds_class.'{ '.$dstrans.'filter : '.$dcss.' }';
 			}
 
 			if(isset($adv_shadow_dropshadow_h_s) && $adv_shadow_dropshadow_h_s=='yes' && !empty($as_ds_lists_h)) {
@@ -1092,7 +1092,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 					$kh++;
 				}
 
-				$ds_hover .= '.elementor-element.elementor-element-'.$idhover.$ds_class.',.elementor-element.e-container.elementor-element-'.$idhover.$ds_class.',.elementor-element.e-con.elementor-element-'.$idhover.$ds_class.',.elementor-element.elementor-element-'.$idhover.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ds_class.',.elementor-element.elementor-element-'.$idhover.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ds_class.',.elementor-element.elementor-element-'.$idhover.'> .elementor-widget-container '.$ds_class.'{ '.$dstransh.'filter : '.$dcss_h.' }';
+				$ds_hover .= '.elementor-element.elementor-element-'.$idhover.$ds_class.',.elementor-element.e-container.elementor-element-'.$idhover.$ds_class.',.elementor-element.e-con.elementor-element-'.$idhover.$ds_class.',.elementor-element.elementor-element-'.$idhover.':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '.$ds_class.',.elementor-element.elementor-element-'.$idhover.' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '.$ds_class.',.elementor-element.elementor-element-'.$idhover.' '.$ds_class.'{ '.$dstransh.'filter : '.$dcss_h.' }';
 
 			}
 			if(!empty($ds_normal) || !empty($ds_hover)){

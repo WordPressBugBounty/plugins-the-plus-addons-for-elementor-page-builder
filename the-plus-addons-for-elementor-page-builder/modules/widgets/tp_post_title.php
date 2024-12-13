@@ -260,7 +260,7 @@ class ThePlus_Post_Title extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Link', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'yes',
+				'default'   => 'no',
 				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
 			)

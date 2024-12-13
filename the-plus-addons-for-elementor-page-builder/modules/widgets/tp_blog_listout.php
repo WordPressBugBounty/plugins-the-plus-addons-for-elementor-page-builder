@@ -5,7 +5,7 @@
  * Author: Theplus
  * Author URI: https://posimyth.com
  *
- * @package ThePlus
+ * @package the-plus-addons-for-elementor-page-builder
  */
 
 namespace TheplusAddons\Widgets;
@@ -41,7 +41,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @var tp_help of the class.
 	 */
 	public $tp_help = L_THEPLUS_HELP;
-		
+
 	/**
 	 * Get Widget Name.
 	 *
@@ -116,20 +116,20 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -153,10 +153,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => array(
-					'style-1' => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2' => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
-					'style-3' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
-					'style-4' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
+					'style-1'            => esc_html__( 'Style 1', 'tpebl' ),
+					'style-2'            => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
+					'style-3'            => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+					'style-4'            => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
 					'smart-loop-builder' => esc_html__( 'Smart Loop Builder - Beta', 'tpebl' ),
 				),
 			)
@@ -191,7 +191,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
-					'style!' => array( 'style-1','smart-loop-builder' ),
+					'style!' => array( 'style-1', 'smart-loop-builder' ),
 				),
 			)
 		);
@@ -257,9 +257,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'smart_loop_builder_section',
 			array(
-				'label' => esc_html__( 'Smart Loop Builder (Beta)', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-				'condition'   => array(
+				'label'     => esc_html__( 'Smart Loop Builder (Beta)', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
 					'style' => array( 'smart-loop-builder' ),
 				),
 			)
@@ -268,30 +268,30 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'smart-loop-builder-button',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-wd_type="tp-blog-listout">Ready Presets</a>',
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => '<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-wd_type="tp-blog-listout">Ready Presets</a>',
 				// 'content_classes' => 'tp-preset-editor-btn',
-				'label_block'     => true,
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'content_html',
-			[
-				'label' => esc_html__( 'HTML', 'tpebl' ),
-				'type' => Controls_Manager::CODE,
-				'language' => 'html',
+			array(
+				'label'     => esc_html__( 'HTML', 'tpebl' ),
+				'type'      => Controls_Manager::CODE,
+				'language'  => 'html',
 				'separator' => 'before',
-				'rows' => 10,
-			]
+				'rows'      => 10,
+			)
 		);
 		$this->add_control(
 			'content_css',
-			[
-				'label' => esc_html__( 'CSS', 'tpebl' ),
-				'type' => Controls_Manager::CODE,
+			array(
+				'label'    => esc_html__( 'CSS', 'tpebl' ),
+				'type'     => Controls_Manager::CODE,
 				'language' => 'css',
-				'rows' => 10,
-			]
+				'rows'     => 10,
+			)
 		);
 		$this->end_controls_section();
 
@@ -423,7 +423,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'default'     => '',
 				'label_block' => true,
 				'multiple'    => true,
-				'options'     => l_theplus_get_categories(),
+				'options'     => $this->l_theplus_get_categories(),
 			)
 		);
 		$this->add_control(
@@ -1402,8 +1402,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'section_post_image_style',
 			array(
-				'label' => esc_html__( 'Featured Image', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Featured Image', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'style!' => 'smart-loop-builder',
 				),
@@ -1898,16 +1898,16 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @since 1.0.0
 	 * @version 5.5.4
 	 */
-	protected function render() {
-		
+	public function render() {
+
 		$settings   = $this->get_settings_for_display();
 		$query_args = $this->get_query_args();
 		$query      = new \WP_Query( $query_args );
 
-		$style     = ! empty( $settings['style'] ) ? $settings['style'] : 'style-1';
-		$layout    = ! empty( $settings['layout'] ) ? $settings['layout'] : 'grid';
-		$post_tags = ! empty( $settings['post_tags'] ) ? $settings['post_tags'] : '';
-		$content_html  = ! empty( $settings['content_html'] ) ? $settings['content_html'] : '';
+		$style        = ! empty( $settings['style'] ) ? $settings['style'] : 'style-1';
+		$layout       = ! empty( $settings['layout'] ) ? $settings['layout'] : 'grid';
+		$post_tags    = ! empty( $settings['post_tags'] ) ? $settings['post_tags'] : '';
+		$content_html = ! empty( $settings['content_html'] ) ? $settings['content_html'] : '';
 
 		$post_title_tag = ! empty( $settings['post_title_tag'] ) ? $settings['post_title_tag'] : 'h3';
 		$post_category  = ! empty( $settings['post_category'] ) ? $settings['post_category'] : '';
@@ -2016,27 +2016,27 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 
 		if ( ! $query->have_posts() ) {
 			$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Posts not found', 'tpebl' ) . '</h3>';
-		} elseif ( 'style-1' === $style || 'smart-loop-builder' === $style) {
+		} elseif ( 'style-1' === $style || 'smart-loop-builder' === $style ) {
 
-			if( 'smart-loop-builder' === $style ){
-				$style_custom = !empty($settings['content_css']) ? $settings['content_css'] : '';
-				$html_custom = !empty($settings['content_html']) ? $settings['content_html'] : '';
+			if ( 'smart-loop-builder' === $style ) {
+				$style_custom = ! empty( $settings['content_css'] ) ? $settings['content_css'] : '';
+				$html_custom  = ! empty( $settings['content_html'] ) ? $settings['content_html'] : '';
 
-				if( !empty( $style_custom ) ){
+				if ( ! empty( $style_custom ) ) {
 					echo '<style>' . $style_custom . '</style>';
 				}
 
 				if ( empty( $html_custom ) ) {
 					$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please enter values in both HTML & CSS to enable the Smart Loop Builder feature. If you don’t want to write your own, choose from Ready Presets.', 'tpebl' ) . '</h3>';
 				}
-			}	
-			
+			}
+
 			$output .= '<div id="pt-plus-blog-post-list" class="blog-list ' . esc_attr( $uid ) . ' ' . $data_class . ' ' . esc_attr( $animated_class ) . '" ' . $layout_attr . ' ' . $data_attr . ' ' . $animation_attr . ' data-enable-isotope="1">';
 
 			$output .= '<div id="' . esc_attr( $uid ) . '" class="tp-row post-inner-loop ' . esc_attr( $uid ) . ' ">';
 
 			while ( $query->have_posts() ) {
-				
+
 				$query->the_post();
 				$post = $query->post;
 
@@ -2048,7 +2048,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				}
 
 				$output .= '<div class="grid-item metro-item' . esc_attr( $ij ) . ' ' . $desktop_class . ' ' . $tablet_class . ' ' . $mobile_class . ' ' . esc_attr( $animated_columns ) . '">';
-				
+
 				if ( ! empty( $style ) ) {
 					ob_start();
 					include L_THEPLUS_WSTYLES . 'blog/blog-' . sanitize_file_name( $style ) . '.php';
@@ -2077,15 +2077,17 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 
 			if ( $query->found_posts != '' ) {
 				$total_posts   = $query->found_posts;
-				$post_offset   = ( $settings['post_offset'] != '' ) ? $settings['post_offset'] : 0;
-				$display_posts = ( $settings['display_posts'] != '' ) ? $settings['display_posts'] : 0;
+				$post_offset   = ! empty( $settings['post_offset'] ) ? $settings['post_offset'] : 0;
+				$display_posts = ! empty( $settings['display_posts'] ) ? $settings['display_posts'] : 0;
 				$offset_posts  = intval( $display_posts + $post_offset );
 				$total_posts   = intval( $total_posts - $offset_posts );
+
 				if ( $total_posts != 0 && $settings['load_more_post'] != 0 ) {
-					$load_page = ceil( intval($total_posts) / intval($settings['load_more_post']) );
+					$load_page = ceil( intval( $total_posts ) / intval( $settings['load_more_post'] ) );
 				} else {
 					$load_page = 1;
 				}
+
 				$load_page = $load_page + 1;
 			} else {
 				$load_page = 1;
@@ -2095,7 +2097,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			$tp_loading_text   = ! empty( $settings['tp_loading_text'] ) ? $settings['tp_loading_text'] : 'Loading...';
 
 			$data_loadkey = '';
-			if ( ( $settings['post_extra_option'] == 'load_more' || $settings['post_extra_option'] == 'lazy_load' ) && $layout != 'carousel' ) {
+			if ( ( 'load_more' == $settings['post_extra_option'] || 'lazy_load' == $settings['post_extra_option'] ) && 'carousel' != $layout ) {
 				$postattr = array(
 					'load'                => 'blogs',
 					'post_type'           => 'post',
@@ -2152,7 +2154,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @since 1.0.0
 	 * @version 5.4.2
 	 */
-	protected function get_query_args() {
+	public function get_query_args() {
 		$settings  = $this->get_settings_for_display();
 		$post_tags = ! empty( $settings['post_tags'] ) ? $settings['post_tags'] : '';
 
@@ -2197,5 +2199,21 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$query_args['paged'] = $paged_custom;
 
 		return $query_args;
+	}
+
+	/**
+	 * Fetch post data Written in PHP and HTML.
+	 *
+	 * @version 6.1.1
+	 */
+	public function l_theplus_get_categories() {
+
+		$categories = get_categories();
+
+		if ( empty( $categories ) || ! is_array( $categories ) ) {
+			return array();
+		}
+
+		return wp_list_pluck( $categories, 'name', 'term_id' );
 	}
 }

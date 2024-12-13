@@ -49,21 +49,20 @@ class Plus_Widgets_Manager {
 
 	/**
 	 * Carousel dots style
-	 * 
+	 *
 	 * @since 5.5.4
 	 * @version 5.5.4
 	 * @param string $options The option of the widgets.
-	 * 
 	 */
 	public function tp_carousel_dots( $options ) {
-		$sliderDots = isset( $options['slider_dots'] ) ? $options['slider_dots'] : 'yes';
+		$sliderDots         = isset( $options['slider_dots'] ) ? $options['slider_dots'] : 'yes';
 		$tablet_slider_dots = isset( $options['tablet_slider_dots'] ) ? $options['tablet_slider_dots'] : 'yes';
 		$mobile_slider_dots = isset( $options['mobile_slider_dots'] ) ? $options['mobile_slider_dots'] : 'yes';
-		
+
 		if ( 'yes' === $sliderDots ) {
-			
+
 			$slider_dots_style = ! empty( $options['slider_dots_style'] ) ? $options['slider_dots_style'] : 'style-1';
-			
+
 			$this->transient_widgets[] = 'tp-carousel-' . $slider_dots_style;
 			$this->transient_widgets[] = 'tp-carousel-style';
 		}
@@ -85,20 +84,18 @@ class Plus_Widgets_Manager {
 
 	/**
 	 * Carousel arrows style
-	 * 
+	 *
 	 * @since 5.5.4
 	 * @version 5.5.4
 	 * @param string $options The option of the widgets.
-	 * 
 	 */
-	public function tp_carousel_arrow( $options ){
+	public function tp_carousel_arrow( $options ) {
 
 		$show_arrows = isset( $options['slider_arrows'] ) ? $options['slider_arrows'] : 'no';
 
-		$tablet_show_arrows  = isset( $options['tablet_slider_arrows'] ) ? $options['tablet_slider_arrows'] : 'no';
-		$mobile_show_arrows  = isset( $options['mobile_slider_arrows'] ) ? $options['mobile_slider_arrows'] : 'no';
+		$tablet_show_arrows = isset( $options['tablet_slider_arrows'] ) ? $options['tablet_slider_arrows'] : 'no';
+		$mobile_show_arrows = isset( $options['mobile_slider_arrows'] ) ? $options['mobile_slider_arrows'] : 'no';
 
-		
 		if ( 'yes' === $show_arrows ) {
 
 			$slider_arrows_style = ! empty( $options['slider_arrows_style'] ) ? $options['slider_arrows_style'] : 'style-1';
@@ -184,7 +181,7 @@ class Plus_Widgets_Manager {
 
 		if ( 'grid' === $layout || 'masonry' === $layout ) {
 			return 'plus-listing-masonry';
-		} elseif ( 'metro' === $layout) {
+		} elseif ( 'metro' === $layout ) {
 			return 'plus-listing-metro';
 		}
 	}
@@ -249,7 +246,7 @@ class Plus_Widgets_Manager {
 	 * Button Style
 	 *
 	 * @since 5.4.2
-	 * 
+	 *
 	 * @param array $button_style Array of btn style.
 	 */
 	public function tp_button_style( $button_style ) {
@@ -257,7 +254,7 @@ class Plus_Widgets_Manager {
 		$this->transient_widgets[] = 'tp-button';
 	}
 
-	 /**
+	/**
 	 * Check Widgets Options
 	 *
 	 * @since 2.0.2
@@ -266,13 +263,13 @@ class Plus_Widgets_Manager {
 	 * @param array  $options Array of options for the widget.
 	 * @param string $widget_name Name of the widget being checked.
 	 */
-	 
-	 public function plus_widgets_options( $options = '', $widget_name = '' ) {
-		
+
+	public function plus_widgets_options( $options = '', $widget_name = '' ) {
+
 		if ( ! empty( $options['seh_switch'] ) && 'yes' === $options['seh_switch'] ) {
 			$this->transient_widgets[] = 'plus-equal-height';
 		}
-		
+
 		if ( tp_has_lazyload() && ! in_array( 'plus-lazyLoad', $this->transient_widgets ) ) {
 			$this->transient_widgets[] = 'plus-lazyLoad';
 		}
@@ -283,8 +280,8 @@ class Plus_Widgets_Manager {
 
 		if ( ! empty( $widget_name ) ) {
 
-			if( 'tp-heading-title' === $widget_name || 'tp-button' === $widget_name || 'tp-contact-form-7' === $widget_name || 'tp-post-search' === $widget_name || 'tp-flip-box' === $widget_name || 'tp-info-box' === $widget_name || 'tp-navigation-menu-lite' === $widget_name || 'tp-tabs-tours' === $widget_name || 'tp-social-icon' === $widget_name ){
-				$this->transient_widgets[] = "plus-alignmnet-effect";
+			if ( 'tp-heading-title' === $widget_name || 'tp-button' === $widget_name || 'tp-contact-form-7' === $widget_name || 'tp-post-search' === $widget_name || 'tp-flip-box' === $widget_name || 'tp-info-box' === $widget_name || 'tp-navigation-menu-lite' === $widget_name || 'tp-tabs-tours' === $widget_name || 'tp-social-icon' === $widget_name ) {
+				$this->transient_widgets[] = 'plus-alignmnet-effect';
 			}
 
 			if ( 'tp-button' === $widget_name ) {
@@ -315,7 +312,7 @@ class Plus_Widgets_Manager {
 					$this->transient_widgets[] = 'tp-breadcrumbs-bar-' . $breadcrumbs_style;
 					$this->transient_widgets[] = 'tp-breadcrumbs-bar';
 				}
-			} 
+			}
 
 			if ( 'tp-clients-listout' === $widget_name ) {
 				$this->transient_widgets[] = $this->tpebl_layout_listing( $options );
@@ -327,7 +324,7 @@ class Plus_Widgets_Manager {
 
 				$this->transient_widgets[] = 'tp-gallery-listout';
 
-				if ( 'style-1' === $gallery_style || 'style-2' === $gallery_style) {
+				if ( 'style-1' === $gallery_style || 'style-2' === $gallery_style ) {
 					$this->transient_widgets[] = 'tp-gallery-listout-' . $gallery_style;
 				}
 
@@ -339,7 +336,7 @@ class Plus_Widgets_Manager {
 				$tm_style = ! empty( $options['style'] ) ? $options['style'] : 'style-1';
 
 				if ( 'style-1' === $tm_style || 'style-3' === $tm_style ) {
-					
+
 					$this->transient_widgets[] = 'tp-team-member-listout-' . $tm_style;
 				}
 				$this->transient_widgets[] = 'tp-team-member-listout';
@@ -383,9 +380,9 @@ class Plus_Widgets_Manager {
 					}
 
 					$this->transient_widgets[] = 'tp-carosual-extra';
-			    }
+				}
 
-				if ('masonry' === $layout || 'grid' === $layout){
+				if ( 'masonry' === $layout || 'grid' === $layout ) {
 					$this->transient_widgets[] = 'tp-bootstrap-grid';
 				}
 			}
@@ -414,19 +411,18 @@ class Plus_Widgets_Manager {
 				if ( ( ! empty( $options['image_icon'] ) && 'svg' === $options['image_icon'] ) || ( ! empty( $options['loop_select_icon'] ) && 'svg' === $options['loop_select_icon'] ) ) {
 					$this->transient_widgets[] = 'tp-draw-svg';
 				}
-				
+
 				$respo_visible = ! empty( $options['responsive_visible_opt'] ) ? $options['responsive_visible_opt'] : '';
 
 				if ( 'yes' === $respo_visible ) {
 					$this->transient_widgets[] = 'plus-responsive-visibility';
 				}
-
 			}
 
 			if ( 'tp-number-counter' === $widget_name ) {
 
-				$nc_style = ! empty( $options['style'] ) ? $options['style'] : 'style-1';
-				$box_effects   = ! empty( $options['box_hover_effects'] ) ? $options['box_hover_effects'] : '';
+				$nc_style    = ! empty( $options['style'] ) ? $options['style'] : 'style-1';
+				$box_effects = ! empty( $options['box_hover_effects'] ) ? $options['box_hover_effects'] : '';
 
 				$this->transient_widgets[] = 'tp-number-counter-' . $nc_style;
 				$this->transient_widgets[] = 'tp-number-counter';
@@ -502,7 +498,7 @@ class Plus_Widgets_Manager {
 
 			if ( 'tp-heading-animation' === $widget_name ) {
 
-				$ha_style = ! empty( $options['anim_styles'] ) ? $options['anim_styles'] : 'style-1';
+				$ha_style                  = ! empty( $options['anim_styles'] ) ? $options['anim_styles'] : 'style-1';
 				$this->transient_widgets[] = 'tp-heading-animation-' . $ha_style;
 				$this->transient_widgets[] = 'tp-heading-animation';
 			}
@@ -534,7 +530,7 @@ class Plus_Widgets_Manager {
 				$cpybtnicon    = ! empty( $options['cpybtnicon']['value'] ) ? $options['cpybtnicon']['value'] : 'fas fa-copy';
 				$copiedbtnicon = ! empty( $options['copiedbtnicon']['value'] ) ? $options['copiedbtnicon']['value'] : 'fas fa-arrow-alt-circle-down';
 				$dwnldBtnIcon  = ! empty( $options['dwnldBtnIcon']['value'] ) ? $options['dwnldBtnIcon']['value'] : 'fas fa-arrow-alt-circle-down';
-				
+
 				if ( ! empty( $themeType ) ) {
 					$this->transient_widgets[] = 'tp-syntax-highlighter';
 					if ( $themeType == 'prism-default' ) {
@@ -569,26 +565,26 @@ class Plus_Widgets_Manager {
 			}
 
 			if ( 'tp-pricing-table' === $widget_name ) {
-				$p_style = ! empty( $options['pricing_table_style'] ) ? $options['pricing_table_style'] : 'style-1';
+				$p_style                   = ! empty( $options['pricing_table_style'] ) ? $options['pricing_table_style'] : 'style-1';
 				$this->transient_widgets[] = 'tp-pricing-table-' . $p_style;
 				$this->transient_widgets[] = 'tp-pricing-table';
 
 				$button_style = ! empty( $options['button_style'] ) ? $options['button_style'] : 'style-8';
 				$this->tp_button_style( $button_style );
 
-				$table_ribbon  = ! empty( $options['display_ribbon_pin'] ) ? $options['display_ribbon_pin'] : 'no';
-                $ribbon_style = ! empty( $options['ribbon_pin_style'] ) ? $options['ribbon_pin_style'] : 'style-1';
+				$table_ribbon = ! empty( $options['display_ribbon_pin'] ) ? $options['display_ribbon_pin'] : 'no';
+				$ribbon_style = ! empty( $options['ribbon_pin_style'] ) ? $options['ribbon_pin_style'] : 'style-1';
 
-                if( 'yes' === $table_ribbon && 'style-1' === $ribbon_style ){
-                    $this->transient_widgets[] = 'tp-pricing-ribbon';
-                }
+				if ( 'yes' === $table_ribbon && 'style-1' === $ribbon_style ) {
+					$this->transient_widgets[] = 'tp-pricing-ribbon';
+				}
 			}
 
-			if ('tp-video-player' === $widget_name){
+			if ( 'tp-video-player' === $widget_name ) {
 
-				$popup = !empty($options['popup_video']) ?$options['popup_video'] : '';
+				$popup = ! empty( $options['popup_video'] ) ? $options['popup_video'] : '';
 
-				if('yes' === $popup){
+				if ( 'yes' === $popup ) {
 					$this->transient_widgets[] = 'tp-lity-extra';
 				}
 			}
@@ -599,19 +595,17 @@ class Plus_Widgets_Manager {
 
 				$head_style = ! empty( $options['style'] ) ? $options['style'] : 'style_1';
 
-				if ( !empty ( $head_style ) ) {
+				if ( ! empty( $head_style ) ) {
 					$this->transient_widgets[] = 'tp-dynamic-categories-' . $head_style;
 					$this->transient_widgets[] = 'tp-dynamic-categories';
 				}
-
 			}
-			
+
 			if ( 'tp-carousel-anything' == $widget_name ) {
 
 				$this->tp_carousel_dots( $options );
 				$this->tp_carousel_arrow( $options );
 			}
-
 		}
 	}
 }

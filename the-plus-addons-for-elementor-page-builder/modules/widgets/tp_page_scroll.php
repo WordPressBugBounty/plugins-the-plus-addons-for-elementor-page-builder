@@ -103,7 +103,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	/**
 	 * It is use for adds.
 	 *
@@ -112,20 +112,20 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -1050,11 +1050,11 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 						$full_page_content .= '<div class="section">';
 
 							$template_status = get_post_status( $elem_templates );
-							if( 'publish' === $template_status ) {
-								$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates );
-							} else {
-								$full_page_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
-							}
+						if ( 'publish' === $template_status ) {
+							$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates );
+						} else {
+							$full_page_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+						}
 
 						$full_page_content .= '</div>';
 
@@ -1065,7 +1065,15 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 				$errortitle   = esc_html__( 'No Template Selected!', 'tpebl' );
 				$errormassage = esc_html__( 'Please Select Template To Get The Desired Result', 'tpebl' );
 
-				echo l_theplus_get_widgetError( $errortitle, $errormassage );
+				echo "<div class='tp-widget-error-notice'>
+					<div class='tp-widget-error-thumb'>
+						<svg width='56' height='56' viewBox='0 0 56 56' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M28 0L52.2487 14V42L28 56L3.75129 42V14L28 0Z' fill='#DD4646'/><path d='M7.71539 16.2887L28 4.57735L48.2846 16.2887V39.7113L28 51.4226L7.71539 39.7113V16.2887Z' stroke='white'/><path fill-rule='evenodd' clip-rule='evenodd' d='M27.1016 15C25.9578 15 25.047 15.9575 25.1041 17.0999L25.9516 34.0499C25.9783 34.5822 26.4175 35 26.9504 35H29.0479C29.5807 35 30.02 34.5822 30.0466 34.0499L30.8941 17.0999C30.9513 15.9575 30.0405 15 28.8967 15H27.1016ZM26.9991 38C26.4468 38 25.9991 38.4477 25.9991 39V41C25.9991 41.5523 26.4468 42 26.9991 42H28.9991C29.5514 42 29.9991 41.5523 29.9991 41V39C29.9991 38.4477 29.5514 38 28.9991 38H26.9991Z' fill='white'/></svg>
+					</div>
+					<div class='tp-widget-error-content'>
+						<span>{$errortitle}</span>
+						<span>{$errormassage}</span>
+					</div>
+				</div>";
 			}
 
 			if ( ! empty( $full_page_anchors ) ) {
@@ -1078,10 +1086,10 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			$dots_text     = ! empty( $settings['nav_dots_tooltips'] ) ? sanitize_text_field( $settings['nav_dots_tooltips'] ) : '';
 			$nav_dots_text = explode( ',', $dots_text );
 
-			$dots_show     = ! empty( $settings['show_dots'] ) ? $settings['show_dots'] : '';
+			$dots_show = ! empty( $settings['show_dots'] ) ? $settings['show_dots'] : '';
 
 			if ( 'yes' === $dots_show && 'tp_full_page' === $page_scroll_opt && 'tp_full_page' === $page_scroll_opt ) {
-				$fullpage_opt['navigation'] = true;
+				$fullpage_opt['navigation']         = true;
 				$fullpage_opt['navigationPosition'] = ! empty( $settings['nav_postion'] ) && 'left' === $settings['nav_postion'] ? 'left' : 'right';
 				$fullpage_opt['navigationTooltips'] = $nav_dots_text;
 			} else {

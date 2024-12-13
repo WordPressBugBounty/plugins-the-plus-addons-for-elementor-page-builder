@@ -1,7 +1,9 @@
 (function ($) {
-    const {
-        __,
-    } = wp.i18n;
+    const { __ } = wp.i18n;
+
+    const ENABLE_TEMPLATES_TEXT = __("Enable Templates", "tpebl");
+    const INSTALLING_TEXT = __("Installing WDesignKit", "tpebl");
+    const WAITING_TEXT = __("Waiting...", "tpebl");
 
     $("document").ready(function () {
         let templateAddSection = $("#tmpl-elementor-add-section");
@@ -82,11 +84,11 @@
                 var $text = $button.find('.theplus-enable-text');
 
                 if ($text.length > 0) {
-                    $text.text('Installing WDesignKit');
+                    $text.text(INSTALLING_TEXT);
                 } else {
                     var $tp_visitPlugin = $button.find('.tp-visit-plugin');
                     if ($tp_visitPlugin.length > 0) {
-                        $tp_visitPlugin.text('Waiting...');
+                        $tp_visitPlugin.text(WAITING_TEXT);
                     }
                 }
 
@@ -111,12 +113,12 @@
                             });
 
                         } else {
-                            $text.text('Enable Templates');
+                            $text.text(ENABLE_TEMPLATES_TEXT);
                         }
                     },
                     error: function () {
                         $loader.css('display', 'none');
-                        $text.css('display', 'block').text('Enable Templates');
+                        $text.css('display', 'block').text(ENABLE_TEMPLATES_TEXT);
                     }
                 });
             });

@@ -195,7 +195,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : The Embedded Comments has been deprecated.<a rel="noopener noreferrer" target="_blank" href="https://developers.facebook.com/docs/plugins/embedded-comments/" target="_blank">More Info</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType'   => 'facebook',
 					'Type'        => 'comments',
@@ -242,7 +242,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : How to <a href="https://developers.facebook.com/apps"  target="_blank" rel="noopener noreferrer">Create App ID ?</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType'   => 'facebook',
 					'Type'        => 'comments',
@@ -466,7 +466,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="https://developers.facebook.com/docs/plugins"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'facebook',
 				),
@@ -1167,7 +1167,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : How to <a href="https://tweetdeck.twitter.com/"  target="_blank" rel="noopener noreferrer">Create List ?</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'twitter',
 					'TweetType' => 'timelines',
@@ -1201,7 +1201,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : How to <a href="https://tweetdeck.twitter.com/"  target="_blank" rel="noopener noreferrer">Create Collections ?</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'twitter',
 					'TweetType' => 'timelines',
@@ -1314,7 +1314,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/overview"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'twitter',
 				),
@@ -1755,7 +1755,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : The <b>mute</b> option should be required when you select the <b>autoplay</b> option.',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'vimeo',
 				),
@@ -1766,7 +1766,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="https://vimeo.zendesk.com/hc/en-us/articles/360001494447-Using-Player-Parameters"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'vimeo',
 				),
@@ -1854,7 +1854,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="https://developers.facebook.com/docs/instagram"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'instagram',
 				),
@@ -1964,7 +1964,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : The <b>mute</b> option should be required when you select the <b>autoplay</b> option.',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'youtube',
 				),
@@ -1975,7 +1975,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="https://developers.google.com/youtube/player_parameters"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'youtube',
 				),
@@ -2031,7 +2031,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank" rel="noopener noreferrer">Language ISO 639-1 Code</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'youtube',
 				),
@@ -2198,7 +2198,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : <a href="https://plus.codes/7JMJ2GP6+9F" target="_blank" rel="noopener noreferrer">Get latitude and longitude</a>',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'EmbedType' => 'googlemap',
 				),

@@ -130,8 +130,10 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-remove.php';
 			}
 
+			$this->tp_remove_notice();
+
 			// if ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) {
-				include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
+				// include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
 			// }
 
 			// if ( is_admin() && current_user_can( 'install_plugins' ) ) {.
@@ -239,6 +241,26 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 				require_once \ABSPATH . 'wp-admin/includes/plugin.php';
 
 				return get_plugins();
+			}
+		}
+
+		/**
+		 * Remove OlD Plugin Notice
+		 *
+		 * @since 6.1.1
+		 */
+		public function tp_remove_notice() {
+
+			if ( get_option('tpae_halloween_notice_dismissed') !== false ) {
+				delete_option('tpae_halloween_notice_dismissed');
+			}
+
+			if ( get_option('tpae_bfsale_notice_dismissed') !== false ) {
+				delete_option('tpae_bfsale_notice_dismissed');
+			}
+
+			if ( get_option('tpae_cmsale_notice_dismissed') !== false ) {
+				delete_option('tpae_cmsale_notice_dismissed');
 			}
 		}
 	}

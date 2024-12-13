@@ -25,13 +25,13 @@ $this->start_controls_section(
 		'label' => wp_kses_post( '<div class="tpae-prosec-text">Pro Features <img src="' . L_THEPLUS_ASSETS_URL . 'images/pro-features/crown.png">', 'tpebl' ),
 	)
 );
-$this->add_control(
-	'tpebl_offer_tag',
-	array(
-		'type' => Controls_Manager::RAW_HTML,
-		'raw'  => wp_kses_post( "<div class='tpae-offer-tag'><span>CYBER MONDAY SALE IS LIVE - UPTO 40% OFF</span></div>" ),
-	)
-);
+// $this->add_control(
+// 	'tpebl_offer_tag',
+// 	array(
+// 		'type' => Controls_Manager::RAW_HTML,
+// 		'raw'  => wp_kses_post( "<div class='tpae-offer-tag'><span>CYBER MONDAY SALE IS LIVE - UPTO 40% OFF</span></div>" ),
+// 	)
+// );
 $this->add_control(
 	'tpebl_offer_sections',
 	array(

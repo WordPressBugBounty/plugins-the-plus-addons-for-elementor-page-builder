@@ -364,7 +364,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'type'            => \Elementor\Controls_Manager::RAW_HTML,
 				'raw'             => 'Note : Just for single column layout.',
-				'content_classes' => 'tp-widget-description',
+				'content_classes' => 'tp-controller-notice',
 				'condition'       => array(
 					'slider_direction' => 'horizontal',
 					'slide_fade_inout' => 'fadeinout',

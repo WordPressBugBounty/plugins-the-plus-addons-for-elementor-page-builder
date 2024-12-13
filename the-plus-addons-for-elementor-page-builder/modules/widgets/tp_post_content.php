@@ -113,6 +113,10 @@ class ThePlus_Post_Content extends Widget_Base {
 		return esc_url( $help_url );
 	}
 
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
 	/**
 	 * It is use for adds.
 	 *
@@ -214,7 +218,7 @@ class ThePlus_Post_Content extends Widget_Base {
 					),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .elementor-widget-container' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} ' => 'display: flex; justify-content: {{VALUE}};',
 				),
 				'separator' => 'before',
 			)
@@ -234,7 +238,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} > .elementor-widget-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} ' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -247,7 +251,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} ',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_excerpts_style' );
@@ -264,7 +268,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} > .elementor-widget-container' => 'color: {{VALUE}}',
+					'{{WRAPPER}} ' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -273,7 +277,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBg',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} ',
 			)
 		);
 		$this->add_group_control(
@@ -281,7 +285,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBorder',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} ',
 			)
 		);
 		$this->add_responsive_control(
@@ -291,7 +295,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} > .elementor-widget-container' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} ' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -299,7 +303,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'boxBoxShadow',
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} ',
 			)
 		);
 		$this->end_controls_tab();
@@ -316,7 +320,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} > .elementor-widget-container:hover:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}}:hover' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -325,7 +329,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBgHover',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container:hover:hover',
+				'selector' => '{{WRAPPER}}:hover',
 			)
 		);
 		$this->add_group_control(
@@ -333,7 +337,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBorderHover',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container:hover:hover',
+				'selector' => '{{WRAPPER}}:hover',
 			)
 		);
 		$this->add_responsive_control(
@@ -343,7 +347,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} > .elementor-widget-container:hover:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}}:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -351,7 +355,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'boxBoxShadowHover',
-				'selector' => '{{WRAPPER}} > .elementor-widget-container:hover:hover',
+				'selector' => '{{WRAPPER}}:hover',
 			)
 		);
 		$this->end_controls_tab();

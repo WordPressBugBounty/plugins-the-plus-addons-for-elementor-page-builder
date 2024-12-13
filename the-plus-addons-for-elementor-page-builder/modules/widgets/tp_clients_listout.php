@@ -120,18 +120,18 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 
@@ -559,7 +559,12 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 				'label'     => esc_html__( 'More Post Loading Options (Pro)', 'tpebl' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'none',
-				'options'   => l_theplus_post_loading_option(),
+				'options'   => array(
+					'none'       => esc_html__( 'Select Options', 'tpebl' ),
+					'pagination' => esc_html__( 'Pagination', 'tpebl' ),
+					'load_more'  => esc_html__( 'Load More', 'tpebl' ),
+					'lazy_load'  => esc_html__( 'Lazy Load', 'tpebl' ),
+				),
 				'separator' => 'before',
 				'condition' => array(
 					'layout!'            => array( 'carousel' ),
@@ -578,6 +583,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 				'condition'   => array(
 					'layout!'            => array( 'carousel' ),
 					'clientContentFrom!' => 'clrepeater',
+					'post_extra_option!' => 'none',
 				),
 			)
 		);
@@ -1488,12 +1494,12 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 
 		$post_name = 'theplus_clients';
 
-		if( isset( $client_post_type ) && ! empty( $client_post_type ) ) {
+		if ( isset( $client_post_type ) && ! empty( $client_post_type ) ) {
 			if ( 'themes' === $client_post_type ) {
 				$post_name = l_theplus_get_option( 'post_type', 'client_theme_name' );
 			} elseif ( 'plugin' === $client_post_type ) {
 				$get_name = l_theplus_get_option( 'post_type', 'client_plugin_name' );
-				if( isset( $get_name ) && ! empty( $get_name ) ) {
+				if ( isset( $get_name ) && ! empty( $get_name ) ) {
 					$post_name = l_theplus_get_option( 'post_type', 'client_plugin_name' );
 				}
 			} elseif ( 'themes_pro' === $client_post_type ) {
