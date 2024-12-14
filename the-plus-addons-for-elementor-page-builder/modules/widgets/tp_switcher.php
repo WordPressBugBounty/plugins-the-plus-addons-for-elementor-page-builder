@@ -110,12 +110,12 @@ class L_ThePlus_Switcher extends Widget_Base {
 	/**
 	 * It is use for widget add in catch or not.
 	 *
-	 * @since 6.1.0
+	 * @since 6.1.2
 	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
-	
+	// public function is_dynamic_content(): bool {
+	// 	return false;
+	// }
+
 	/**
 	 * It is use for adds.
 	 *
@@ -1660,20 +1660,25 @@ class L_ThePlus_Switcher extends Widget_Base {
 				$switcher .= '<div class="content-1">' . wp_kses_post( $content_a_desc ) . '</div>';
 			}
 
-			$template_a_status = get_post_status( $content_a_template );
-				if ( 'template' === $content_a_source && 'manually' === $content_template_type && ! empty( $content_template_id ) ) {
-					if( 'publish' === $template_a_status ) {
-						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ) );
-					} else {
-						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
-					}
-				} elseif ( 'template' === $content_a_source && ! empty( $content_a_template ) ) {
+			if ( 'template' === $content_a_source && 'manually' === $content_template_type ) {
+				$template_status = $this->get_elementor_template_status( $content_template_id );
+
+				if( 'publish' === $template_status ) {
+					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ) );
+				} else {
+					$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+				}
+			} elseif ( 'template' === $content_a_source ) {
+				if( ! empty( $content_a_template ) ){
+					$template_a_status = get_post_status( $content_a_template );
+
 					if( 'publish' === $template_a_status ) {
 						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_a_template );
 					} else {
 						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}
 				}
+			}
 
 			$switcher .= '</div>';
 
@@ -1729,6 +1734,25 @@ class L_ThePlus_Switcher extends Widget_Base {
 			}
 		}
 		echo $css_rule .  $switcher ;
+	}
+
+	/**
+	 * Render content_template.
+	 *
+	 * @since 6.1.2
+	 */
+	public function get_elementor_template_status( $shortcode ) {
+		// Match the ID from the shortcode using regex
+		if ( preg_match( '/id="(\d+)"/', $shortcode, $matches ) ) {
+			$content_template_id = intval( $matches[1] ); // Extract and sanitize the ID
+	
+			// Call get_post_status function
+			$template_status = get_post_status( $content_template_id );
+	
+			return $template_status;
+		}
+
+		return 'Invalid shortcode or ID not found';
 	}
 
 	/**

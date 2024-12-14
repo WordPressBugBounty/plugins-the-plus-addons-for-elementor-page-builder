@@ -105,11 +105,11 @@ class L_ThePlus_Accordion extends Widget_Base {
 	/**
 	 * It is use for widget add in catch or not.
 	 *
-	 * @since 6.1.0
+	 * @since 6.1.2
 	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
+	// public function is_dynamic_content(): bool {
+	// 	return false;
+	// }
 
 	/**
 	 * It is use for adds.

@@ -98,11 +98,11 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 	/**
 	 * It is use for widget add in catch or not.
 	 *
-	 * @since 6.0.6
+	 * @since 6.1.2
 	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
+	// public function is_dynamic_content(): bool {
+	// 	return false;
+	// }
 
 	/**
 	 * It is use for adds.

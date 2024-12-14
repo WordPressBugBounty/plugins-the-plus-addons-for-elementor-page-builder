@@ -109,11 +109,11 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 	/**
 	 * It is use for widget add in catch or not.
 	 *
-	 * @since 6.1.0
+	 * @since 6.1.2
 	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
+	// public function is_dynamic_content(): bool {
+	// 	return false;
+	// }
 	
 	/**
 	 * It is use for adds.
@@ -2255,8 +2255,8 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $item['content_template_id'] ) . '"</b></div><div class="preview-temp-notice-desc"><b>Note :</b> We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.</div></div>';
 					}
 				} elseif ( 'page_template' === $item['content_source'] && ! empty( $item['content_template_id'] ) ) {
+					$template_status = $this->get_elementor_template_status( $item['content_template_id'] );
 
-					$template_status = get_post_status( $content_template );
 					if( 'publish' === $template_status ) {
 						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
 					} else {
@@ -2332,5 +2332,24 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		}
 		$output .= '</div>';
 		echo $output;
+	}
+
+	/**
+	 * Render content_template.
+	 *
+	 * @since 6.1.2
+	 */
+	public function get_elementor_template_status( $shortcode ) {
+		// Match the ID from the shortcode using regex
+		if ( preg_match( '/id="(\d+)"/', $shortcode, $matches ) ) {
+			$content_template_id = intval( $matches[1] ); // Extract and sanitize the ID
+	
+			// Call get_post_status function
+			$template_status = get_post_status( $content_template_id );
+	
+			return $template_status;
+		}
+
+		return 'Invalid shortcode or ID not found';
 	}
 }

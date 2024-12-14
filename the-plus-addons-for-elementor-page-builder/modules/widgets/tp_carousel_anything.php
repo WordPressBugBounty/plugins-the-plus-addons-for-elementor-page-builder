@@ -111,11 +111,11 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 	/**
 	 * It is use for widget add in catch or not.
 	 *
-	 * @since 6.1.0
+	 * @since 6.1.2
 	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
+	// public function is_dynamic_content(): bool {
+	// 	return false;
+	// }
 
 	/**
 	 * It is use for adds.
@@ -1092,18 +1092,28 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 						<div class="slide-content-inner">
 							<?php
 
-							$content_template = isset( $item['content_template'] ) ? intval( $item['content_template'] ) : 0;
-							$template_status  = get_post_status( $content_template );
+							$content_template_type = isset( $item['content_template_type'] ) ? $item['content_template_type'] : 'dropdown';
 
-							if( 'publish' === $template_status ){
-								if ( ( ! empty( $item['content_template_type'] ) && 'manually' === $item['content_template_type'] ) && ! empty( $item['content_template_id'] ) ) {
+							if ( 'manually' === $content_template_type ) {
+								$content_template_id = isset( $item['content_template_id'] ) ? $item['content_template_id'] : '';
+
+								$template_status = $this->get_elementor_template_status( $content_template_id );
+								if ( 'publish' === $template_status ) {
 									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
-								} elseif ( ! empty( $item['content_template'] ) ) {
-									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+								} else {
+									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 								}
-							} else {
-								echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+							}else{
+								$content_template = isset( $item['content_template'] ) ? intval( $item['content_template'] ) : 0;
+								$template_status  = get_post_status( $content_template );
+
+								if( 'publish' === $template_status ){
+									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+								}else{
+									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+								}
 							}
+
 							?>
 													
 						</div>
@@ -1115,5 +1125,24 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			</div>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Render content_template.
+	 *
+	 * @since 6.1.2
+	 */
+	public function get_elementor_template_status( $shortcode ) {
+		// Match the ID from the shortcode using regex
+		if ( preg_match( '/id="(\d+)"/', $shortcode, $matches ) ) {
+			$content_template_id = intval( $matches[1] ); // Extract and sanitize the ID
+	
+			// Call get_post_status function
+			$template_status = get_post_status( $content_template_id );
+	
+			return $template_status;
+		}
+
+		return 'Invalid shortcode or ID not found';
 	}
 }

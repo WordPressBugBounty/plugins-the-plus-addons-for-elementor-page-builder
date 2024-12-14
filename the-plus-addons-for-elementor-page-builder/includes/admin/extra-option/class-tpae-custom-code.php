@@ -31,6 +31,13 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 		private static $instance;
 
 		/**
+		 * Member Variable
+		 *
+		 * @var instance
+		 */
+		public $db_data = array();
+
+		/**
 		 *  Initiator
 		 */
 		public static function get_instance() {
@@ -47,6 +54,8 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 		 * @since 6.0.8
 		 */
 		public function __construct() {
+			$this->db_data = get_option( 'theplus_styling_data' );
+
 			add_action( 'wp_head', array( $this, 'tpae_css_option' ) );
 			add_action( 'wp_footer', array( $this, 'tpae_js_option' ) );
 		}
@@ -54,16 +63,15 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 		/**
 		 * Add Css.
 		 *
-		 * @since 6.0.8
+		 * @since 6.1.2
 		 */
 		public function tpae_css_option() {
-			$theplus_styling_data = get_option( 'theplus_styling_data' );
 
 			$css_rules = '';
-			if ( ! empty( $theplus_styling_data['theplus_custom_css_editor'] ) ) {
+			if ( ! empty( $this->db_data['theplus_custom_css_editor'] ) ) {
 				$css_rules .= '<style>';
 
-					$theplus_custom_css_editor = $theplus_styling_data['theplus_custom_css_editor'];
+					$theplus_custom_css_editor = $this->db_data['theplus_custom_css_editor'];
 
 					$css_rules .= $theplus_custom_css_editor;
 
@@ -76,16 +84,14 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 		/**
 		 * Add Js.
 		 *
-		 * @since 6.0.0
+		 * @since 6.1.2
 		 */
 		public function tpae_js_option() {
+			
 			$js_rules = '';
+			if ( ! empty( $this->db_data['theplus_custom_js_editor'] ) ) {
 
-			if ( ! empty( $theplus_styling_data['theplus_custom_js_editor'] ) ) {
-
-				$theplus_custom_js_editor = $theplus_styling_data['theplus_custom_js_editor'];
-
-				$js_rules = $theplus_custom_js_editor;
+				$js_rules = $this->db_data['theplus_custom_js_editor'];
 
 				echo wp_print_inline_script_tag( $js_rules );
 			}
