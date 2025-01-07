@@ -1784,7 +1784,11 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'name'      => 'button_hover_background',
 				'types'     => array( 'classic', 'gradient' ),
-				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .pt_plus_button .hover_box_button',
+				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover,
+				{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .pt_plus_button .hover_box_button,
+				{{WRAPPER}} .pt_plus_info_box .info-box-inner.tp-info-active .pt_plus_button .hover_box_button,
+				{{WRAPPER}} .info-box-inner:hover .pt_plus_button .button-link-wrap,
+				{{WRAPPER}} .info-box-inner:hover .pt_plus_button .button-link-wrap',
 				'separator' => 'after',
 				'condition' => array(
 					'button_style!' => array( 'style-7', 'style-9' ),
@@ -2172,7 +2176,9 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label'     => esc_html__( 'Hover Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon:before,{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon i:before,{{WRAPPER}} .pt_plus_info_box .info-box-inner.tp-info-active .service-icon:before,{{WRAPPER}} .pt_plus_info_box .info-box-inner.tp-info-active .service-icon i:before' => 'color: {{VALUE}};background: transparent;-webkit-background-clip: unset;-webkit-text-fill-color: initial;',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon:before, 
+					{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon i:before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'fill: {{VALUE}}; stroke: {{VALUE}};',
 				),
 				'condition' => array(
 					'icon_hover_color_option' => 'solid',

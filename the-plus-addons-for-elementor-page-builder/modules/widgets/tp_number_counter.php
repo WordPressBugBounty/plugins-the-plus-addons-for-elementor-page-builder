@@ -139,6 +139,22 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
+		// $this->add_control(
+		// 	'smart-preset-button',
+		// 	array(
+        //         'type'=> Controls_Manager::RAW_HTML,
+        //         'raw' => sprintf(
+		// 			'<div class="tpae-preset-main-raw-main">
+		// 				<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="12570" target="_blank" rel="noopener noreferrer">%s</a>
+		// 				<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="12570">%s</a>
+		// 			</div>',
+		// 			esc_url('https://wdesignkit.com/templates/kit/finpulse--elementor-template-kit/12570'),
+		// 			esc_html__('Live Demo', 'tpebl'),
+		// 			esc_html__('Import Presets', 'tpebl')
+		// 		),
+        //         'label_block' => true,
+        //     )
+		// );
 		$this->add_control(
 			'style',
 			array(
@@ -2180,7 +2196,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$out_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
 
 		$symbol       = ! empty( $settings['symbol'] ) ? $settings['symbol'] : '';
-		$max_number   = ! empty( $settings['max_number'] ) ? $settings['max_number'] : '';
+		$max_number   = ! empty( $settings['max_number'] ) ? $settings['max_number'] : '0';
 		$delay_number = ! empty( $settings['delay_number']['size'] ) ? $settings['delay_number']['size'] : '';
 
 		$increment_number = ! empty( $settings['increment_number']['size'] ) ? $settings['increment_number']['size'] : '';
@@ -2284,7 +2300,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		}
 
 		$number_markup = '';
-		if ( ! empty( $max_number ) ) {
+		if ( $max_number !== '' ) {
 			$number_markup = '<h5 class="counter-number">' . $number_symbol . '</h5>';
 		}
 

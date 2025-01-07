@@ -2772,7 +2772,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 		$showEntries = ! empty( $settings['show_entries'] ) ? $settings['show_entries'] : '';
 
 		$tableSelection  = ! empty( $settings['table_selection'] ) ? $settings['table_selection'] : '';
-		$searchableLabel = ! empty( $settings['searchable_label'] ) ? esc_html( sanitize_text_field( $settings['searchable_label'] ) ) : '';
+		$searchableLabel = ! empty( $settings['searchable_label'] ) ? tp_senitize_js_input( $settings['searchable_label'] ) : '';
 
 		$cell_align_head_desktop = ! empty( $settings['cell_align_head_normal'] ) ? $settings['cell_align_head_normal'] : '';
 		$cell_align_head_tablet  = ! empty( $settings['cell_align_head_normal_tablet'] ) ? $settings['cell_align_head_normal_tablet'] : '';

@@ -185,13 +185,14 @@ final class L_Theplus_Element_Load {
 	 */
 	public function tp_manage_files() {
 
-		require_once L_THEPLUS_PATH . 'includes/admin/tpae_hooks/class-tpae-hooks.php';
-		do_action( 'tpae_db_default' );
+		require_once L_THEPLUS_PATH . 'includes/admin/tpae_hooks/class-tpae-main-hooks.php';
 
 		include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-main.php';
 		include L_THEPLUS_PATH . 'includes/user-experience/class-tp-user-experience-main.php';
 		include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-main.php';
+
 		include L_THEPLUS_PATH . 'includes/preset/class-tpae-preset.php';
+		include L_THEPLUS_PATH . 'includes/preset/class-wdkit-preset.php';
 
 		// Front or Elementor Editor
 		require_once L_THEPLUS_PATH . 'includes/tp-lazy-function.php';
@@ -231,7 +232,7 @@ final class L_Theplus_Element_Load {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		
+
 		require_once L_THEPLUS_INCLUDES_URL . 'plus_addon.php';
 		require_once L_THEPLUS_PATH . 'modules/widgets-feature/class-tp-widgets-feature-main.php';
 
@@ -257,7 +258,7 @@ final class L_Theplus_Element_Load {
 	public function include_widgets() {
 		require_once L_THEPLUS_PATH . 'modules/theplus-include-widgets.php';
 
-		if ( defined('THEPLUS_VERSION') ) {
+		if ( defined( 'THEPLUS_VERSION' ) ) {
 			require L_THEPLUS_PATH . 'includes/admin/white_label/class-tpae-white-label.php';
 		}
 	}

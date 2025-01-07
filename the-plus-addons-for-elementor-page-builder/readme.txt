@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.1.3
+Stable tag: 6.1.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -381,6 +381,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.1.4 =
+Fix : Gravity Form : Form submit Issue solved
+Fix : Navigation Menu Lite : Active color Issue solved when using Repeater
+Fix : Number Counter : Issue solved when Number value is 0
+Fix : Table : Security Patch ( Low security )
+Fix : Minor Bug Fixes & performance Improvements
 
 = 6.1.3 =
 Compatibility : Elementor Free & Pro 3.26

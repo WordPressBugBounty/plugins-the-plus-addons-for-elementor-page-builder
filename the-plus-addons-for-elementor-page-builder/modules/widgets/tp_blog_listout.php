@@ -269,7 +269,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			'smart-loop-builder-button',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-wd_type="tp-blog-listout">Ready Presets</a>',
+				'raw'         => '<a class="tp-loopbuilder-editor-raw" id="tp-loopbuilder-editor-raw" data-wd_type="tp-blog-listout">Ready Presets</a>',
 				// 'content_classes' => 'tp-preset-editor-btn',
 				'label_block' => true,
 			)

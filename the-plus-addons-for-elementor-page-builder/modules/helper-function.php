@@ -64,9 +64,22 @@ function tp_senitize_role( $capability ) {
  * */
 function tp_senitize_js_input( $input ) {
 
-	$input = preg_replace( '/(on|hr)\w+=/', '', $input );
+    // Remove complete iframe tags with or without content
+    $input = preg_replace( '/<iframe[^>]*>.*?<\/iframe>/is', '', $input );
 
-	return $input;
+    // Remove incomplete iframe tags
+    $input = preg_replace( '/<iframe[^>]*\/?>/is', '', $input );
+
+    // Remove JavaScript pseudo-protocols (like javascript:)
+    $input = preg_replace( '/javascript\s*:/i', '', $input );
+
+    // Remove JavaScript event handlers (like onload, onclick, etc.)
+    $input = preg_replace( '/\s*on\w+\s*=\s*(".*?"|\'.*?\'|[^>\s]+)/is', '', $input );
+
+    // Ensure input is not overly stripped by handling invalid tags carefully
+    $input = strip_tags( $input );
+
+    return trim( $input ); // Return the sanitized input, trimmed of whitespace
 }
 
 // Navigation Get Menu

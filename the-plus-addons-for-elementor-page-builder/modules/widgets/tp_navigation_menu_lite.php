@@ -2510,6 +2510,13 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					$itemUrl      = $item['LinkFilter']['url'];
 					$itemTarget   = ! empty( $item['LinkFilter']['is_external'] ) ? ' target="_blank"' : '';
 					$itemNofollow = ! empty( $item['LinkFilter']['nofollow'] ) ? ' rel="nofollow"' : '';
+
+					$current_url = get_permalink();
+
+					if ( $itemUrl === $current_url ) {
+						$current_active = ' active';
+					}
+
 					if ( $item['filterlabel'] === get_the_ID() ) {
 						$current_active = ' active';
 					}

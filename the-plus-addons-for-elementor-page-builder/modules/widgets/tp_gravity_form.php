@@ -102,15 +102,6 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	}
 
 	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.0.6
-	 */
-	public function is_dynamic_content(): bool {
-		return false;
-	}
-
-	/**
 	 * It is use for adds.
 	 *
 	 * @since 6.1.0
