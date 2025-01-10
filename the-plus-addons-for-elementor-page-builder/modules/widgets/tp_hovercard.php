@@ -565,7 +565,7 @@ class ThePlus_Hovercard extends Widget_Base {
 				'label'     => esc_html__( 'Top (Auto / PX)', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'PX', 'tpebl' ),
+				'label_on'  => esc_html__( 'PX/%', 'tpebl' ),
 				'label_off' => esc_html__( 'Auto', 'tpebl' ),
 				'condition' => array(
 					'open_tag!' => 'none',
@@ -578,7 +578,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'type'        => Controls_Manager::SLIDER,
 				'label'       => esc_html__( 'Top Offset', 'tpebl' ),
-				'size_units'  => array( 'px' ),
+				'size_units'  => array( 'px', '%' ),
 				'range'       => array(
 					'px' => array(
 						'min'  => -300,
@@ -604,7 +604,7 @@ class ThePlus_Hovercard extends Widget_Base {
 				'label'     => esc_html__( 'Bottom (Auto / PX)', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'PX', 'tpebl' ),
+				'label_on'  => esc_html__( 'PX/%', 'tpebl' ),
 				'label_off' => esc_html__( 'Auto', 'tpebl' ),
 				'condition' => array(
 					'open_tag!' => 'none',
@@ -617,7 +617,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'type'        => Controls_Manager::SLIDER,
 				'label'       => esc_html__( 'Bottom Offset', 'tpebl' ),
-				'size_units'  => array( 'px' ),
+				'size_units'  => array( 'px', '%' ),
 				'range'       => array(
 					'px' => array(
 						'min'  => -300,
@@ -643,7 +643,7 @@ class ThePlus_Hovercard extends Widget_Base {
 				'label'     => esc_html__( 'Left (Auto / PX)', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'PX', 'tpebl' ),
+				'label_on'  => esc_html__( 'PX/%', 'tpebl' ),
 				'label_off' => esc_html__( 'Auto', 'tpebl' ),
 				'condition' => array(
 					'open_tag!' => 'none',
@@ -656,7 +656,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'type'        => Controls_Manager::SLIDER,
 				'label'       => esc_html__( 'Left Offset', 'tpebl' ),
-				'size_units'  => array( 'px' ),
+				'size_units'  => array( 'px', '%' ),
 				'range'       => array(
 					'px' => array(
 						'min'  => -300,
@@ -682,7 +682,7 @@ class ThePlus_Hovercard extends Widget_Base {
 				'label'     => esc_html__( 'Right (Auto / PX)', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'PX', 'tpebl' ),
+				'label_on'  => esc_html__( 'PX/%', 'tpebl' ),
 				'label_off' => esc_html__( 'Auto', 'tpebl' ),
 				'condition' => array(
 					'open_tag!' => 'none',
@@ -695,7 +695,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'type'        => Controls_Manager::SLIDER,
 				'label'       => esc_html__( 'Right Offset', 'tpebl' ),
-				'size_units'  => array( 'px' ),
+				'size_units'  => array( 'px', '%' ),
 				'range'       => array(
 					'px' => array(
 						'min'  => -300,

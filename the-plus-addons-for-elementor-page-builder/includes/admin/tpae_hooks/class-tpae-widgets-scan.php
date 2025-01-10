@@ -57,22 +57,21 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 		 * @param array $type    Optional. An array of strings specifying the type of scan to perform.
 		 */
 		public function tpae_widget_scan( $type = array() ) {
-
 			if ( in_array( 'get_unused_widgets', $type, true ) ) {
 				return $this->tpae_get_elements_status_scan();
 			}
 
 			if ( in_array( 'get_wdkit_unused_widgets', $type, true ) ) {
 				$widgets = $this->tpae_get_elements_status_scan();
-
 				if ( ! empty( $widgets['widgets'] ) ) {
-					$check_elements = array_keys( $widgets );
-
-					$widget_data = get_option( 'theplus_options' );
+					$check_elements = array_keys( $widgets['widgets'] );
+					$widget_data    = get_option( 'theplus_options' );
 					if ( isset( $widget_data['check_elements'] ) ) {
 						$widget_data['check_elements'] = $check_elements;
 					}
+					update_option( 'theplus_options', $widget_data );
 				}
+				return $this->tpae_set_response( true, 'success.', 'success.' );
 			}
 		}
 

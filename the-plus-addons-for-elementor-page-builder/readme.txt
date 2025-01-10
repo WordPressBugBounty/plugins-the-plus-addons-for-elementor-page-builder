@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.1.4
+Stable tag: 6.1.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,6 +382,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 6.1.5 =
+Update : Hovercard : Corrected Spelling Mistake
+Fix : Minor Bug Fixes & performance Improvements
+
 = 6.1.4 =
 Fix : Gravity Form : Form submit Issue solved
 Fix : Navigation Menu Lite : Active color Issue solved when using Repeater
@@ -436,6 +440,7 @@ Fix : Table : Security Patch ( Low security )
 Fix : Minor Bug Fixes & performance Improvements
 
 = 6.0.8 =
+Update : Hovercard : Compatibility for Widget Output Caching for TTFB
 Fix : Minor Bug Fixes & performance Improvements
 
 = 6.0.7 =
