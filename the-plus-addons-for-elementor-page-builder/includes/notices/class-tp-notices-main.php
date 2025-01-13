@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
+if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 
 	/**
 	 * This class used for only load All Notice Files

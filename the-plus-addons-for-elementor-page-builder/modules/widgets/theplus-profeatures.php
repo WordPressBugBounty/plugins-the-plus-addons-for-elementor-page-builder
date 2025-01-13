@@ -36,7 +36,7 @@ $this->add_control(
 	'tpebl_offer_sections',
 	array(
 		'type' => Controls_Manager::RAW_HTML,
-		'raw'  => wp_kses_post( "<div class='tpae-offer-sections'><div class='tpae-diamond-image'></div><div class='tpae-offer-title'>Upgrade to <br>The Plus Addons for<br> Elementor Pro</div><div class='tpae-offer-description'>Go limitless with the premium version of The Plus Addons for Elementor to unlock  more features and create unique websites.</div><a class='tpae-upgrade-btn' href='https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' target='_blank' rel='noopener noreferrer'>Upgrade PRO</a><div class='tpae-btn-desc'>Limited Time Price Drop</div></div>" ),
+		'raw'  => wp_kses_post( "<div class='tpae-offer-sections'><div class='tpae-diamond-image'></div><div class='tpae-offer-title'>Upgrade to <br>The Plus Addons for<br> Elementor Pro</div><div class='tpae-offer-description'>Go limitless with the premium version of The Plus Addons for Elementor to unlock  more features and create unique websites.</div><a class='tpae-upgrade-btn' href='https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' target='_blank' rel='noopener noreferrer'>Upgrade PRO</a></div>" ),
 	)
 );
 $this->add_control(

@@ -39,7 +39,6 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 		 * Initiator
 		 *
 		 * @since 5.3.3
-		 * @access public
 		 */
 		public static function get_instance() {
 			if ( ! isset( self::$instance ) ) {
@@ -48,6 +47,20 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 
 			return self::$instance;
 		}
+
+		/**
+		 * White label Option
+		 *
+		 * @var string
+		 */
+		public $whitelabel = '';
+
+		/**
+		 * White label Option
+		 *
+		 * @var string
+		 */
+		public $hidden_label = '';
 
 		/**
 		 * Define the core functionality of the plugin.
@@ -67,22 +80,26 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 		 * Plugin Active Settings, Need Help link Show
 		 *
 		 * @since 5.1.18
-		 * @version 5.3.3
-		 * @access public
+		 * @version 6.1.6
 		 *
 		 * @param array $links The array of plugin links.
 		 * @return array The updated plugin meta information containing additional links.
 		 */
 		public function tp_settings_pro_link( $links ) {
 
+			$this->whitelabel   = get_option( 'theplus_white_label' );
+			$this->hidden_label = ! empty( $this->whitelabel['help_link'] ) ? $this->whitelabel['help_link'] : '';
+
 			/**Settings link.*/
 			$setting_link = sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'admin.php?page=theplus_welcome_page' ) ), __( 'Settings', 'tpebl' ) );
 			$links[]      = $setting_link;
-			
+
 			/**Need Help.*/
-			$need_help = sprintf( '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>', esc_url( 'https://theplusaddons.com/help/getting-started/?utm_source=wpbackend&utm_medium=banner&utm_campaign=links' ), __( 'Need Help?', 'tpebl' ) );
-			$links     = (array) $links;
-			$links[]   = $need_help;
+			if(empty( $this->whitelabel ) || 'on' !== $this->hidden_label){
+				$need_help = sprintf( '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>', esc_url( 'https://theplusaddons.com/help/getting-started/?utm_source=wpbackend&utm_medium=banner&utm_campaign=links' ), __( 'Need Help?', 'tpebl' ) );
+				$links     = (array) $links;
+				$links[]   = $need_help;
+			}
 
 			/**Upgrade PRO link.*/
 			if ( ! defined( 'THEPLUS_VERSION' ) ) {
@@ -98,16 +115,17 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 		 * Plugin Active show Document links
 		 *
 		 * @since 5.1.18
-		 * @version 5.3.3
-		 * @access public
+		 * @version 6.1.6
 		 *
 		 * @param array  $plugin_meta The array of plugin links.
 		 * @param String $plugin_file The array of plugin links.
 		 * @return array The updated plugin meta information containing additional links.
 		 */
 		public function tp_extra_links_plugin_row_meta( $plugin_meta = array(), $plugin_file = '' ) {
+			$this->whitelabel   = get_option( 'theplus_white_label' );
+			$this->hidden_label = ! empty( $this->whitelabel['help_link'] ) ? $this->whitelabel['help_link'] : '';
 
-			if ( strpos( $plugin_file, L_THEPLUS_PBNAME ) !== false ) {
+			if ( strpos( $plugin_file, L_THEPLUS_PBNAME ) !== false && ( empty( $this->whitelabel ) || 'on' !== $this->hidden_label) ) {
 				$new_links = array(
 					'official-site'    => '<a href="' . esc_url( 'https://theplusaddons.com/?utm_source=wpbackend&utm_medium=pluginpage&utm_campaign=links' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Visit Plugin site', 'tpebl' ) . '</a>',
 					'docs'             => '<a href="' . esc_url( 'https://theplusaddons.com/docs?utm_source=wpbackend&utm_medium=pluginpage&utm_campaign=links' ) . '" target="_blank" rel="noopener noreferrer" style="color:green;">' . esc_html__( 'Docs', 'tpebl' ) . '</a>',
@@ -119,6 +137,14 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 				);
 
 				$plugin_meta = array_merge( $plugin_meta, $new_links );
+			}
+
+			if ( ! empty( $this->whitelabel['help_link'] ) ) {
+				foreach ( $plugin_meta as $key => $meta ) {
+					if ( stripos( $meta, 'View details' ) !== false ) {
+						unset( $plugin_meta[ $key ] );
+					}
+				}
 			}
 
 			return $plugin_meta;

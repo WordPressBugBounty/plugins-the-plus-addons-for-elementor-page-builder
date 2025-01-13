@@ -1338,24 +1338,23 @@ class ThePlus_Post_Comment extends Widget_Base {
 			'comment_field'        => '<div class="tp-row"><div class="tp-col-md-12 tp-col"><label><textarea id="comment" name="comment" cols="45" rows="6" placeholder="' . esc_html( $placeholder_txt ) . '" aria-required="true"></textarea></label></div></div>',
 
 			'must_log_in' => '<p class="must-log-in">' .
-        sprintf(
-        // Translators: %1$s is replaced with the opening <a> tag, and %2$s is replaced with the closing </a> tag.
-        esc_html__( 'You must be %1$slogged in%2$s to post a comment.', 'tpebl' ),
-        '<a href="' . esc_url( wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '">',
-        '</a>'
-    ) . '</p>',
+				sprintf(
+				// Translators: %1$s is replaced with the opening <a> tag, and %2$s is replaced with the closing </a> tag.
+				esc_html__( 'You must be %1$slogged in%2$s to post a comment.', 'tpebl' ),
+				'<a href="' . esc_url( wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '">',
+				'</a>'
+			) . '</p>',
 
-
-	'logged_in_as' => '<p class="logged-in-as">' .
-    sprintf(
-        // Translators: %1$s is replaced with the user's display name, %2$s is replaced with the opening <a> tag for the user profile link, %3$s is replaced with the closing </a> tag for the user profile link, %4$s is replaced with the opening <a> tag for the logout link, and %5$s is replaced with the closing </a> tag for the logout link.
-        esc_html__( 'Logged in as %1$s%2$s. %3$sLog out?%4$s', 'tpebl' ),
-        $user_identity,
-        '<a href="' . esc_url( admin_url( 'profile.php' ) ) . '">',
-        '</a>',
-        '<a href="' . esc_url( wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '" title="' . esc_attr__( 'Log out of this account', 'tpebl' ) . '">',
-        '</a>'
-    ) . '</p>',
+			'logged_in_as' => '<p class="logged-in-as">' .
+			sprintf(
+				// Translators: %1$s is replaced with the user's display name, %2$s is replaced with the opening <a> tag for the user profile link, %3$s is replaced with the closing </a> tag for the user profile link, %4$s is replaced with the opening <a> tag for the logout link, and %5$s is replaced with the closing </a> tag for the logout link.
+				esc_html__( 'Logged in as %1$s%2$s. %3$sLog out?%4$s', 'tpebl' ),
+				$user_identity,
+				'<a href="' . esc_url( admin_url( 'profile.php' ) ) . '">'.
+				'</a>',
+				'<a href="' . esc_url( wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '" title="' . esc_attr__( 'Log out of this account', 'tpebl' ) . '">',
+				'</a>'
+			) . '</p>',
 
 			'comment_notes_before' => '',
 			'comment_notes_after'  => '',
