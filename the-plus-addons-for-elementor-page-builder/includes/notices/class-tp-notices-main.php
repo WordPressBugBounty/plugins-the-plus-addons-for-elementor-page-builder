@@ -111,11 +111,11 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 		 */
 		public function tp_notices_manage() {
 			
-			$envato_plugins = array(
-				'name'        => 'envato-elements',
-				'status'      => '',
-				'plugin_slug' => 'envato-elements/envato-elements.php',
-			);
+			// $envato_plugins = array(
+			// 	'name'        => 'envato-elements',
+			// 	'status'      => '',
+			// 	'plugin_slug' => 'envato-elements/envato-elements.php',
+			// );
 
 			if ( is_admin() && current_user_can( 'manage_options' ) ) {
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-plugin-page.php';
@@ -130,7 +130,9 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-remove.php';
 			}
 
-			$this->tp_remove_notice();
+			if ( is_admin() ){
+				$this->tp_remove_notice();
+			}
 
 			// if ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) {
 				// include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
@@ -157,18 +159,18 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 			// 	}
 			// }
 
-			// if ( current_user_can( 'install_plugins' ) && current_user_can( 'manage_options' ) && $this->tp_check_plugin_status() ) {
+			if ( current_user_can( 'install_plugins' ) && current_user_can( 'manage_options' ) && $this->tp_check_plugin_status() ) {
+				if ( empty( $this->whitelabel ) || 'on' !== $this->hidden_label ) {
+					$option_value = get_option( 'tp_wdkit_preview_popup' );
 
-			// 	if ( empty( $this->whitelabel ) || 'on' !== $this->hidden_label ) {
-			// 		$option_value = get_option( 'tp_wdkit_preview_popup' );
+					if ( empty( $option_value ) || 'yes' !== $option_value ) {
+						// if( !empty( $envato_details[0]['status'] ) && 'unavailable' == $envato_details[0]['status'] ){
+							include L_THEPLUS_PATH . 'includes/notices/class-tp-wdkit-preview-popup.php';
+						// }
+					}
+				}
+			}
 
-			// 		if ( empty( $option_value ) || 'yes' !== $option_value ) {
-			// 			if( !empty( $envato_details[0]['status'] ) && 'unavailable' == $envato_details[0]['status'] ){
-			// 				include L_THEPLUS_PATH . 'includes/notices/class-tp-wdkit-preview-popup.php';
-			// 			}
-			// 		}
-			// 	}
-			// }
 		}
 
 		/**

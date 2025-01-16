@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.1.6
+Stable tag: 6.1.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,9 +382,16 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 6.1.7 =
+Fix : Age Gate : Compatibility With Html Tags
+Fix : Navigation Menu lite : Border color Issue Solved in Mobile Menu  
+Fix : Navigation Menu lite : Mobile Menu - Submenu not clickable in Editor side 
+Fix : Number Counter : Issue solved when Number value is null
+Fix : Minor Bug Fixes & Performance Improvements
+
 = 6.1.6 =
 Fix : Post Comment : Click Reload Issue
-Fix : White Label : Condition Issue
+Fix : White Label : Condiiton Issue
 Fix : Minor Bug Fixes & performance Improvements
 
 = 6.1.5 =

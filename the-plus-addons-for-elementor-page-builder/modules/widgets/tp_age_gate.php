@@ -2456,7 +2456,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 						$output .= '<div class="tp-agegate-boxes ' . esc_attr( $right_img ) . '">';
 
 			if ( ! empty( $error_msg ) ) {
-				$output .= '<div class="tp-age-wm">' . esc_html( $error_msg ) . '</div>';
+				$output .= '<div class="tp-age-wm">' . wp_kses_post( $error_msg ) . '</div>';
 			}
 
 			$age_head_img = ! empty( $settings['age_head_img']['url'] ) ? $settings['age_head_img']['url'] : '';

@@ -1986,7 +1986,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'default'   => '',
 				'separator' => array( 'before', 'after' ),
 				'selectors' => array(
-					'{{WRAPPER}} .plus-mobile-nav-toggle .plus-mobile-menu .navbar-nav li a' => 'border-bottom-color: {{VALUE}}',
+					'{{WRAPPER}} .plus-mobile-menu-content .plus-mobile-menu .navbar-nav li a' => 'border-bottom-color: {{VALUE}}',
 				),
 			)
 		);
