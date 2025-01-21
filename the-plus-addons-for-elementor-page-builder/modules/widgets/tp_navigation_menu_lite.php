@@ -2354,7 +2354,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 							wp_nav_menu( $nav_menu_args );
 						} elseif ( ! empty( $TypeMenu ) && $TypeMenu == 'custom' ) {
-							echo wp_kses_post( $this->tp_mega_menu( $settings ) );
+							echo $this->tp_mega_menu( $settings );
 						} else {
 							wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings ) );
 						}
@@ -2387,7 +2387,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 								wp_nav_menu( apply_filters( 'widget_nav_menu_args', $mobile_nav_menu_args, $nav_menu, $settings ) );
 							}
 						} elseif ( ! empty( $TypeMenu ) && $TypeMenu == 'custom' ) {
-							echo wp_kses_post($this->tp_mega_menu( $settings ));
+							echo $this->tp_mega_menu( $settings );
 						}
 						?>
 						<?php

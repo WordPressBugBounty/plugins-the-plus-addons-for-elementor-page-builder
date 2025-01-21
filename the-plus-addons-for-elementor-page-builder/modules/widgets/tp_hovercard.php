@@ -60,7 +60,7 @@ class ThePlus_Hovercard extends Widget_Base {
 		return esc_html__( 'Hover Card', 'tpebl' );
 	}
 
-	/**
+    /**
 	 * Get Widget Icon.
 	 *
 	 * @since 1.0.0
@@ -114,7 +114,7 @@ class ThePlus_Hovercard extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-
+	
 	/**
 	 * It is use for adds.
 	 *
@@ -177,6 +177,7 @@ class ThePlus_Hovercard extends Widget_Base {
 					'h4'   => esc_html__( 'H4', 'tpebl' ),
 					'h5'   => esc_html__( 'H5', 'tpebl' ),
 					'h6'   => esc_html__( 'H6', 'tpebl' ),
+					'h6'   => esc_html__( 'H6', 'tpebl' ),
 					'p'    => esc_html__( 'p', 'tpebl' ),
 					'a'    => esc_html__( 'a', 'tpebl' ),
 					'none' => esc_html__( 'None', 'tpebl' ),
@@ -233,6 +234,7 @@ class ThePlus_Hovercard extends Widget_Base {
 					'h4'    => esc_html__( 'H4', 'tpebl' ),
 					'h5'    => esc_html__( 'H5', 'tpebl' ),
 					'h6'    => esc_html__( 'H6', 'tpebl' ),
+					'h6'    => esc_html__( 'H6', 'tpebl' ),
 					'p'     => esc_html__( 'p', 'tpebl' ),
 					'a'     => esc_html__( 'a', 'tpebl' ),
 					'none'  => esc_html__( 'None', 'tpebl' ),
@@ -264,9 +266,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'label'     => wp_kses_post( "Text <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-text-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::TEXTAREA,
-				'dynamic'   => array(
-					'active' => true,
-				),
+				'dynamic'   => array( 'active' => true ),
 				'default'   => esc_html__( 'The Plus', 'tpebl' ),
 				'condition' => array(
 					'content_tag' => 'text',
@@ -293,9 +293,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'type'      => Controls_Manager::MEDIA,
 				'label'     => wp_kses_post( "Media <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-image-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'dynamic'   => array(
-					'active' => true,
-				),
+				'dynamic'   => array( 'active' => true ),
 				'default'   => array(
 					'url' => Utils::get_placeholder_image_src(),
 				),
@@ -321,9 +319,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'label'     => wp_kses_post( "Custom Style <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-style-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::TEXTAREA,
-				'dynamic'   => array(
-					'active' => true,
-				),
+				'dynamic'   => array( 'active' => true ),
 				'default'   => '',
 				'condition' => array(
 					'content_tag' => 'style',
@@ -335,9 +331,7 @@ class ThePlus_Hovercard extends Widget_Base {
 			array(
 				'label'     => wp_kses_post( "Custom Script <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-script-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::TEXTAREA,
-				'dynamic'   => array(
-					'active' => true,
-				),
+				'dynamic'   => array( 'active' => true ),
 				'default'   => '',
 				'condition' => array(
 					'content_tag' => 'script',
@@ -1240,11 +1234,11 @@ class ThePlus_Hovercard extends Widget_Base {
 						),
 						'gradient' => array(
 							'title' => esc_html__( 'Gradient', 'tpebl' ),
-							'icon'  => 'fa fa-barcode',
+							'icon'  => 'eicon-barcode',
 						),
 						'image'    => array(
 							'title' => esc_html__( 'Image', 'tpebl' ),
-							'icon'  => 'fa fa-file-image-o',
+							'icon'  => 'eicon-slideshow',
 						),
 					),
 					'condition'   => array(
@@ -2746,54 +2740,43 @@ class ThePlus_Hovercard extends Widget_Base {
 		$hover_card = '<div class="tp-hover-card-wrapper">';
 
 		foreach ( $hover_cnt as $item ) {
-			$opan_tag = ! empty( $item['open_tag'] ) ? $item['open_tag'] : '';
+
 			$open_tag = '';
+			if ( ! empty( $item['open_tag'] ) && $item['open_tag'] != 'none' ) {
+				$open_tag = l_theplus_validate_html_tag( $item['open_tag'] );
 
-			if ( 'none' !== $opan_tag ) {
-				$open_tag = l_theplus_validate_html_tag( $opan_tag );
-				$this->add_render_attribute( 'loop_attr' . $i, 'class', 'elementor-repeater-item-' . esc_attr( $item['_id'] ) );
+				$this->add_render_attribute( 'loop_attr' . $i, 'class', 'elementor-repeater-item-' . $item['_id'] );
 			}
 
-			$class     = '';
-			$tag_class = ! empty( $item['open_tag_class'] ) ? $item['open_tag_class'] : '';
+			$class = '';
 
-			if ( ! empty( $tag_class ) ) {
-				$this->add_render_attribute( 'loop_attr' . $i, 'class', $tag_class );
+			if ( ! empty( $item['open_tag_class'] ) ) {
+				$this->add_render_attribute( 'loop_attr' . $i, 'class', $item['open_tag_class'] );
 			}
-
-			$con_tag   = ! empty( $item['content_tag'] ) ? $item['content_tag'] : '';
-			$midia_con = ! empty( $item['media_content']['url'] ) ? $item['media_content']['url'] : '';
-
-			if ( 'image' === $con_tag && ! empty( $midia_con ) ) {
+			if ( $item['content_tag'] == 'image' && ! empty( $item['media_content']['url'] ) ) {
 				$img_bg_cls = '';
 				if ( ! empty( $item['content_tag_image_opt'] ) && $item['content_tag_image_opt'] == 'background' ) {
 					$img_bg_cls = ' image-tag-hide';
 				}
-				$this->add_render_attribute( 'loop_attr_img' . $i, 'class', 'elementor-repeater-item-' . esc_attr( $item['_id'] ) . '.loop-inner' . $img_bg_cls );
+				$this->add_render_attribute( 'loop_attr_img' . $i, 'class', 'elementor-repeater-item-' . $item['_id'] . '.loop-inner' . $img_bg_cls );
 			}
 
 			$close_tag = '';
-			$close_tab = ! empty( $item['close_tag'] ) ? $item['close_tag'] : '';
 
-			if ( 'close' === $close_tab ) {
+			if ( ! empty( $item['close_tag'] ) && $item['close_tag'] == 'close' ) {
 				$close_tag = l_theplus_validate_html_tag( $open_tag );
-			} elseif ( 'close' !== $close_tab && 'none' !== $close_tab ) {
-				$close_tag = l_theplus_validate_html_tag( $close_tab );
+			} elseif ( ! empty( $item['close_tag'] ) && $item['close_tag'] != 'close' && $item['close_tag'] != 'none' ) {
+				$close_tag = l_theplus_validate_html_tag( $item['close_tag'] );
 			}
 
-			$a_link = ! empty( $item['a_link'] ) ? $item['a_link']['url'] : '';
-
-			if ( 'a' === $opan_tag ) {
-
-				if ( ! empty( $a_link['url'] ) ) {
-
-					$this->add_render_attribute( 'loop_attr' . $i, 'href', esc_url( $a_link ) );
-
-					if ( $a_link['is_external'] ) {
+			/*a link*/
+			if ( ! empty( $item['open_tag'] ) && $item['open_tag'] == 'a' ) {
+				if ( ! empty( $item['a_link']['url'] ) ) {
+					$this->add_render_attribute( 'loop_attr' . $i, 'href', esc_url( $item['a_link']['url'] ) );
+					if ( $item['a_link']['is_external'] ) {
 						$this->add_render_attribute( 'loop_attr' . $i, 'target', '_blank' );
 					}
-
-					if ( $a_link['nofollow'] ) {
+					if ( $item['a_link']['nofollow'] ) {
 						$this->add_render_attribute( 'loop_attr' . $i, 'rel', 'nofollow' );
 					}
 				}
@@ -2806,44 +2789,34 @@ class ThePlus_Hovercard extends Widget_Base {
 			/*Open Tag end*/
 
 			/*content start*/
-			$text_cont = ! empty( $item['text_content'] ) ? $item['text_content'] : '';
-
-			if ( 'none' !== $con_tag ) {
-				if ( 'text' === $con_tag && ! empty( $text_cont ) ) {
-					$loopitem .= wp_kses_post( $text_cont );
+			if ( ! empty( $item['content_tag'] ) && $item['content_tag'] != 'none' ) {
+				if ( $item['content_tag'] == 'text' && ! empty( $item['text_content'] ) ) {
+					$loopitem .= wp_kses_post( $item['text_content'] );
 				}
 
-				if ( 'image' === $con_tag && ! empty( $midia_con ) ) {
+				if ( $item['content_tag'] == 'image' && ! empty( $item['media_content']['url'] ) ) {
 					if ( ! empty( $item['content_tag_image_opt'] ) && $item['content_tag_image_opt'] == 'background' ) {
-						$loopitem .= '<div class="tp-image-as-background" style="background-image:url(' . esc_url( $midia_con ) . ')"></div>';
+						$loopitem .= '<div class="tp-image-as-background" style="background-image:url(' . esc_url( $item['media_content']['url'] ) . ')"></div>';
 					} else {
-						$loopitem .= '<img ' . $this->get_render_attribute_string( 'loop_attr_img' . $i ) . ' src="' . esc_url( $midia_con ) . '" />';
+						$loopitem .= '<img ' . $this->get_render_attribute_string( 'loop_attr_img' . $i ) . ' src="' . esc_url( $item['media_content']['url'] ) . '" />';
 					}
 				}
 
-				$html_con = ! empty( $item['html_content'] ) ? $item['html_content'] : '';
-				if ( 'html' === $con_tag && ! empty( $html_con ) ) {
-					$loopitem .= wp_kses_post( $html_con );
+				if ( $item['content_tag'] == 'html' && ! empty( $item['html_content'] ) ) {
+					$loopitem .= wp_kses_post( $item['html_content'] );
 				}
-
-				$style_con = ! empty( $item['style_content'] ) ? $item['style_content'] : '';
-				if ( 'style' === $con_tag && ! empty( $style_con ) ) {
-					$loopitem .= '<style>' . esc_attr( $style_con ) . '</style>';
+				if ( $item['content_tag'] == 'style' && ! empty( $item['style_content'] ) ) {
+					$loopitem .= '<style>' . esc_attr( $item['style_content'] ) . '</style>';
 				}
-
-				$script_con = ! empty( $item['script_content'] ) ? $item['script_content'] : '';
-				
-				if( tp_senitize_role( 'unfiltered_html' ) ){
-					if ( 'script' === $con_tag && ! empty( $script_con ) ) {
-						$loopitem .= wp_print_inline_script_tag( $script_con );
-					}
+				if ( $item['content_tag'] == 'script' && ! empty( $item['script_content'] ) ) {
+					$loopitem .= wp_print_inline_script_tag( $item['script_content'] );
 				}
 			}
 
 			/*content start*/
 
 			/*Close Tag start*/
-			if ( 'none' !== $close_tab ) {
+			if ( ! empty( $item['close_tag'] ) && $item['close_tag'] != 'none' ) {
 				$loopitem .= '</' . l_theplus_validate_html_tag( $close_tag ) . '>';
 			}
 			/*Close Tag end*/
@@ -2859,71 +2832,54 @@ class ThePlus_Hovercard extends Widget_Base {
 				$rov = 'auto';
 
 				$top_switch = ! empty( $item['top_offset_switch'] ) ? $item['top_offset_switch'] : '';
-				$top_size   = ! empty( $item['top_offset']['size'] ) ? $item['top_offset']['size'] : '';
+				$top_size   = isset( $item['top_offset']['size'] ) ? $item['top_offset']['size'] : '';
 				$top_unit   = ! empty( $item['top_offset']['unit'] ) ? $item['top_offset']['unit'] : '';
 
-				if ( ( 'yes' === $top_switch ) && ! empty( $top_size ) ) {
+				if ( ( 'yes' === $top_switch ) && isset( $top_size ) ) {
 					$tov = $top_size . $top_unit;
-				} else {
-					$tov = 0;
 				}
 
 				$bottom_switch = ! empty( $item['bottom_offset_switch'] ) ? $item['bottom_offset_switch'] : '';
-				$bottom_size   = ! empty( $item['bottom_offset']['size'] ) ? $item['bottom_offset']['size'] : '';
+				$bottom_size   = isset( $item['bottom_offset']['size'] ) ? $item['bottom_offset']['size'] : '';
 				$bottom_unit   = ! empty( $item['bottom_offset']['unit'] ) ? $item['bottom_offset']['unit'] : '';
 
-				if ( ( 'yes' === $bottom_switch ) && ! empty( $bottom_size ) ) {
+				if ( ( 'yes' === $bottom_switch ) && isset( $bottom_size ) ) {
 					$bov = $bottom_size . $bottom_unit;
-				} else {
-					$bov = 0;
 				}
 
 				$left_switch = ! empty( $item['left_offset_switch'] ) ? $item['left_offset_switch'] : '';
-				$left_size   = ! empty( $item['left_offset']['size'] ) ? $item['left_offset']['size'] : '';
+				$left_size   = isset( $item['left_offset']['size'] ) ? $item['left_offset']['size'] : '';
 				$left_unit   = ! empty( $item['left_offset']['unit'] ) ? $item['left_offset']['unit'] : '';
 
-				if ( 'yes' === $left_switch && ! empty( $left_size ) ) {
+				if ( 'yes' === $left_switch && isset( $left_size ) ) {
 					$lov = $left_size . $left_unit;
-				} else {
-					$lov = 0;
 				}
 
 				$right_switch = ! empty( $item['right_offset_switch'] ) ? $item['right_offset_switch'] : '';
-				$right_size   = ! empty( $item['right_offset']['size'] ) ? $item['right_offset']['size'] : '';
+				$right_size   = isset( $item['right_offset']['size'] ) ? $item['right_offset']['size'] : '';
 				$right_unit   = ! empty( $item['right_offset']['unit'] ) ? $item['right_offset']['unit'] : '';
 
 				if ( 'yes' === $right_switch && ! empty( $right_size ) ) {
 					$rov = $right_size . $right_unit;
-				} else {
-					$rov = 0;
 				}
 
 				$loopcss .= '.elementor-element' . $this->get_unique_selector() . '  .elementor-repeater-item-' . esc_attr( $item['_id'] ) . '{top: ' . esc_attr( $tov ) . ';bottom: ' . esc_attr( $bov ) . ';left: ' . esc_attr( $lov ) . ';right: ' . esc_attr( $rov ) . ';}';
+
 			}
 			/*style for absolute end*/
 
 			/*style tag for hover start*/
+			$get_ele_pre = '';
+			if ( ( ! empty( $item['cst_hover'] ) && $item['cst_hover'] == 'yes' ) || ( ! empty( $item['cst_text_hover'] ) && $item['cst_text_hover'] == 'yes' ) || ( ! empty( $item['cst_image_hover'] ) && $item['cst_image_hover'] == 'yes' ) ) {
 
-			$get_ele_pre     = '';
-			$cst_hover       = ! empty( $item['cst_hover'] ) ? $item['cst_hover'] : '';
-			$cst_text_hover  = ! empty( $item['cst_text_hover'] ) ? $item['cst_text_hover'] : '';
-			$cst_image_hover = ! empty( $item['cst_image_hover'] ) ? $item['cst_image_hover'] : '';
+				$get_ele_pre = '.elementor-element' . $this->get_unique_selector() . ' ' . esc_attr( $item['cst_hover_class'] ) . ':hover .elementor-repeater-item-' . esc_attr( $item['_id'] );
 
-			if ( 'yes' === $cst_hover || 'yes' === $cst_text_hover || ( ! empty( $item['cst_image_hover'] ) && 'yes' === $cst_image_hover ) ) {
-
-				$hover_class = ! empty( $item['cst_hover_class'] ) ? $item['cst_hover_class'] : '';
-				$get_ele_pre = '.elementor-element' . $this->get_unique_selector() . ' ' . esc_attr( $hover_class ) . ':hover .elementor-repeater-item-' . esc_attr( $item['_id'] );
-
-				if ( ! empty( $hover_class ) ) {
-
-					$b_color_option = ! empty( $item['b_color_option'] ) ? $item['b_color_option'] : '';
-
-					if ( 'solid' === $b_color_option ) {
+				if ( ! empty( $item['cst_hover_class'] ) ) {
+					if ( ! empty( $item['b_color_option'] ) && $item['b_color_option'] == 'solid' ) {
 						if ( ! empty( $item['b_color_solid'] ) ) {
 							$loopcss .= esc_attr( $get_ele_pre ) . '{background-color:' . esc_attr( $item['b_color_solid'] ) . ' !important;}';
 						}
-					} elseif ( 'gradient' === $b_color_option ) {
-
+					} elseif ( ! empty( $item['b_color_option'] ) && $item['b_color_option'] == 'gradient' ) {
 						if ( ! empty( $item['b_gradient_style'] ) && $item['b_gradient_style'] == 'linear' ) {
 							if ( ! empty( $item['b_gradient_color1'] ) && ! empty( $item['b_gradient_color2'] ) ) {
 								$loopcss .= esc_attr( $get_ele_pre ) . '{background-image: linear-gradient(' . esc_attr( $item['b_gradient_angle']['size'] ) . esc_attr( $item['b_gradient_angle']['unit'] ) . ', ' . esc_attr( $item['b_gradient_color1'] ) . ' ' . esc_attr( $item['b_gradient_color1_control']['size'] ) . esc_attr( $item['b_gradient_color1_control']['unit'] ) . ', ' . esc_attr( $item['b_gradient_color2'] ) . ' ' . esc_attr( $item['b_gradient_color2_control']['size'] ) . esc_attr( $item['b_gradient_color2_control']['unit'] ) . ') !important}';
@@ -2933,108 +2889,66 @@ class ThePlus_Hovercard extends Widget_Base {
 								$loopcss .= esc_attr( $get_ele_pre ) . '{background-image: radial-gradient(at ' . esc_attr( $item['b_gradient_position'] ) . ', ' . esc_attr( $item['b_gradient_color1'] ) . ' ' . esc_attr( $item['b_gradient_color1_control']['size'] ) . esc_attr( $item['b_gradient_color1_control']['unit'] ) . ', ' . esc_attr( $item['b_gradient_color2'] ) . ' ' . esc_attr( $item['b_gradient_color2_control']['size'] ) . esc_attr( $item['b_gradient_color2_control']['unit'] ) . ') !important}';
 							}
 						}
-					} elseif ( 'image' === $b_color_option ) {
-
-						$b_h_image = ! empty( $item['b_h_image']['url'] ) ? $item['b_h_image']['url'] : '';
-
-						if ( ! empty( $b_h_image ) ) {
-							$loopcss .= $get_ele_pre . '{background-image:url(' . esc_attr( $b_h_image ) . ') !important;background-position:' . esc_attr( $item['b_h_image_position'] ) . ' !important;background-attachment:' . esc_attr( $item['b_h_image_attach'] ) . ' !important;background-repeat:' . esc_attr( $item['b_h_image_repeat'] ) . ' !important;background-size:' . esc_attr( $item['b_h_image_size'] ) . ' !important;}';
+					} elseif ( ! empty( $item['b_color_option'] ) && $item['b_color_option'] == 'image' ) {
+						if ( ! empty( $item['b_h_image']['url'] ) ) {
+							$loopcss .= esc_attr( $get_ele_pre ) . '{background-image:url(' . esc_url( $item['b_h_image']['url'] ) . ') !important;background-position:' . esc_attr( $item['b_h_image_position'] ) . ' !important;background-attachment:' . esc_attr( $item['b_h_image_attach'] ) . ' !important;background-repeat:' . esc_attr( $item['b_h_image_repeat'] ) . ' !important;background-size:' . esc_attr( $item['b_h_image_size'] ) . ' !important;}';
 						}
 					}
 
-					$h_border_style = ! empty( $item['b_h_border_style'] ) ? $item['b_h_border_style'] : '';
-
-					if ( ! empty( $h_border_style ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . '{border-style:' . esc_attr( $h_border_style ) . ' !important;border-width: ' . esc_attr( $item['b_h_border_width']['top'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' ' . esc_attr( $item['b_h_border_width']['right'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' ' . esc_attr( $item['b_h_border_width']['bottom'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' ' . esc_attr( $item['b_h_border_width']['left'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' !important;border-color:' . esc_attr( $item['b_h_border_color'] ) . ' !important;}';
+					if ( ! empty( $item['b_h_border_style'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{border-style:' . esc_attr( $item['b_h_border_style'] ) . ' !important;border-width: ' . esc_attr( $item['b_h_border_width']['top'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' ' . esc_attr( $item['b_h_border_width']['right'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' ' . esc_attr( $item['b_h_border_width']['bottom'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' ' . esc_attr( $item['b_h_border_width']['left'] ) . esc_attr( $item['b_h_border_width']['unit'] ) . ' !important;border-color:' . esc_attr( $item['b_h_border_color'] ) . ' !important;}';
 					}
 
-					$h_radius = ! empty( $item['b_h_border_radius'] ) ? $item['b_h_border_radius'] : '';
-					if ( ! empty( $h_radius ) ) {
+					if ( ! empty( $item['b_h_border_radius'] ) ) {
 						if ( ! empty( $item['b_h_border_radius']['top'] ) || ! empty( $item['b_h_border_radius']['right'] ) || ! empty( $item['b_h_border_radius']['bottom'] ) || ! empty( $item['b_h_border_radius']['left'] ) ) {
 							$loopcss .= esc_attr( $get_ele_pre ) . '{border-radius: ' . esc_attr( $item['b_h_border_radius']['top'] ) . esc_attr( $item['b_h_border_radius']['unit'] ) . ' ' . esc_attr( $item['b_h_border_radius']['right'] ) . esc_attr( $item['b_h_border_radius']['unit'] ) . ' ' . esc_attr( $item['b_h_border_radius']['bottom'] ) . esc_attr( $item['b_h_border_radius']['unit'] ) . ' ' . esc_attr( $item['b_h_border_radius']['left'] ) . esc_attr( $item['b_h_border_radius']['unit'] ) . ' !important;}';
 						}
 					}
 
-					$box_shadow_hov = ! empty( $item['box_shadow_hover_cst'] ) ? $item['box_shadow_hover_cst'] : '';
-					if ( 'yes' === $box_shadow_hov ) {
+					if ( ! empty( $item['box_shadow_hover_cst'] ) && $item['box_shadow_hover_cst'] == 'yes' ) {
 						$loopcss .= esc_attr( $get_ele_pre ) . '{box-shadow: ' . esc_attr( $item['box_shadow_horizontal']['size'] ) . 'px ' . esc_attr( $item['box_shadow_vertical']['size'] ) . 'px ' . esc_attr( $item['box_shadow_blur']['size'] ) . 'px ' . esc_attr( $item['box_shadow_spread']['size'] ) . 'px ' . esc_attr( $item['box_shadow_color'] ) . ' !important;}';
 					}
 
-					$transi_hover_cst = ! empty( $item['transition_hover_cst'] ) ? $item['transition_hover_cst'] : '';
-
-					if ( ! empty( $transi_hover_cst ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . '{ -webkit-transition: ' . esc_attr( $transi_hover_cst ) . ' !important;-moz-transition: ' . esc_attr( $transi_hover_cst ) . ' !important;-o-transition:' . esc_attr( $transi_hover_cst ) . ' !important;-ms-transition: ' . esc_attr( $transi_hover_cst ) . ' !important;}';
+					if ( ! empty( $item['transition_hover_cst'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{ -webkit-transition: ' . esc_attr( $item['transition_hover_cst'] ) . ' !important;-moz-transition: ' . esc_attr( $item['transition_hover_cst'] ) . ' !important;-o-transition:' . esc_attr( $item['transition_hover_cst'] ) . ' !important;-ms-transition: ' . esc_attr( $item['transition_hover_cst'] ) . ' !important;}';
 					}
-
-					$transform_hover = ! empty( $item['transform_hover_cst'] ) ? $item['transform_hover_cst'] : '';
-					if ( ! empty( $transform_hover ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . '{ transform: ' . esc_attr( $transform_hover ) . ' !important;-ms-transform: ' . esc_attr( $transform_hover ) . ' !important;-moz-transform:' . esc_attr( $transform_hover ) . ' !important;-webkit-transform: ' . esc_attr( $transform_hover ) . ' !important;}';
+					if ( ! empty( $item['transform_hover_cst'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{ transform: ' . esc_attr( $item['transform_hover_cst'] ) . ' !important;-ms-transform: ' . esc_attr( $item['transform_hover_cst'] ) . ' !important;-moz-transform:' . esc_attr( $item['transform_hover_cst'] ) . ' !important;-webkit-transform: ' . esc_attr( $item['transform_hover_cst'] ) . ' !important;}';
 					}
-
-					$css_filter   = ! empty( $item['css_filter_hover_cst'] ) ? $item['css_filter_hover_cst'] : '';
-					$cfb          = ! empty( $item['css_filter_brightness']['size'] ) ? $item['css_filter_brightness']['size'] : 100;
-					$cfc          = ! empty( $item['css_filter_contrast']['size'] ) ? $item['css_filter_contrast']['size'] : 100;
-					$css_satura   = ! empty( $item['css_filter_saturation']['size'] ) ? $item['css_filter_saturation']['size'] : 100;
-					$filter_blure = ! empty( $item['css_filter_blur']['size'] ) ? $item['css_filter_blur']['size'] : 0;
-					$filter_hue   = ! empty( $item['css_filter_hue']['size'] ) ? $item['css_filter_hue']['size'] : 0;
-
-					if ( 'yes' === $css_filter ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . '{filter:brightness( ' . esc_attr( $cfb ) . '% ) contrast( ' . esc_attr( $cfc ) . '% ) saturate( ' . esc_attr( $css_satura ) . '% ) blur( ' . esc_attr( $filter_blure ) . 'px ) hue-rotate( ' . esc_attr( $filter_hue ) . 'deg ) !important}';
+					if ( ! empty( $item['css_filter_hover_cst'] ) && $item['css_filter_hover_cst'] == 'yes' ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{filter:brightness( ' . esc_attr( $item['css_filter_brightness']['size'] ) . '% ) contrast( ' . esc_attr( $item['css_filter_contrast']['size'] ) . '% ) saturate( ' . esc_attr( $item['css_filter_saturation']['size'] ) . '% ) blur( ' . esc_attr( $item['css_filter_blur']['size'] ) . 'px ) hue-rotate( ' . esc_attr( $item['css_filter_hue']['size'] ) . 'deg ) !important}';
 					}
-
-					$css_opicity = ! empty( $item['opacity_hover_cst']['size'] ) ? $item['opacity_hover_cst']['size'] : '';
-					if ( ! empty( $css_opicity ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . '{ opacity: ' . esc_attr( $css_opicity ) . ' !important;}';
-					}
-				}
-					$cst_text_chover = ! empty( $item['cst_text_hover_class'] ) ? $item['cst_text_hover_class'] : '';
-				if ( ! empty( $cst_text_chover ) ) {
-					$text_co_cst = ! empty( $item['text_color_h_cst'] ) ? $item['text_color_h_cst'] : '';
-
-					if ( ! empty( $text_co_cst ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . '{ color: ' . esc_attr( $text_co_cst ) . ' !important;}';
-					}
-
-					$ts_color = ! empty( $item['ts_color'] ) ? $item['ts_color'] : '';
-
-					if ( ! empty( $ts_color ) ) {
-						$hor_size = ! empty( $item['ts_horizontal']['size'] ) ? $item['ts_horizontal']['size'] : 0;
-						$ts_verti = ! empty( $item['ts_vertical']['size'] ) ? $item['ts_vertical']['size'] : 0;
-						$ts_blur  = ! empty( $item['ts_blur']['size'] ) ? $item['ts_blur']['size'] : 10;
-
-						$loopcss .= esc_attr( $get_ele_pre ) . '{ text-shadow : ' . esc_attr( $hor_size ) . 'px ' . esc_attr( $ts_verti ) . 'px ' . esc_attr( $ts_blur ) . 'px ' . esc_attr( $ts_color ) . ' !important;}';
+					if ( ! empty( $item['opacity_hover_cst']['size'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{ opacity: ' . esc_attr( $item['opacity_hover_cst']['size'] ) . ' !important;}';
 					}
 				}
 
-				$cst_img_hc = ! empty( $item['cst_image_hover_class'] ) ? $item['cst_image_hover_class'] : '';
+				if ( ! empty( $item['cst_text_hover_class'] ) ) {
+					if ( ! empty( $item['text_color_h_cst'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{ color: ' . esc_attr( $item['text_color_h_cst'] ) . ' !important;}';
+					}
 
-				if ( ! empty( $cst_img_hc ) ) {
+					if ( ! empty( $item['ts_color'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . '{ text-shadow : ' . esc_attr( $item['ts_horizontal']['size'] ) . 'px ' . esc_attr( $item['ts_vertical']['size'] ) . 'px ' . esc_attr( $item['ts_blur']['size'] ) . 'px ' . esc_attr( $item['ts_color'] ) . ' !important;}';
+					}
+				}
 
-					$img_hbs = ! empty( $item['image_h_border_style'] ) ? $item['image_h_border_style'] : '';
-
-					if ( ! empty( $img_hbs ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . ' img{border-style:' . esc_attr( $img_hbs ) . ' !important;border-width: ' . esc_attr( $item['image_h_border_width']['top'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' ' . esc_attr( $item['image_h_border_width']['right'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' ' . esc_attr( $item['image_h_border_width']['bottom'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' ' . esc_attr( $item['image_h_border_width']['left'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' !important;border-color:' . esc_attr( $item['image_h_border_color'] ) . ' !important;}';
+				if ( ! empty( $item['cst_image_hover_class'] ) ) {
+					if ( ! empty( $item['image_h_border_style'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . ' img{border-style:' . esc_attr( $item['image_h_border_style'] ) . ' !important;border-width: ' . esc_attr( $item['image_h_border_width']['top'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' ' . esc_attr( $item['image_h_border_width']['right'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' ' . esc_attr( $item['image_h_border_width']['bottom'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' ' . esc_attr( $item['image_h_border_width']['left'] ) . esc_attr( $item['image_h_border_width']['unit'] ) . ' !important;border-color:' . esc_attr( $item['image_h_border_color'] ) . ' !important;}';
 					}
 					if ( ! empty( $item['image_h_border_radius'] ) ) {
-
 						if ( ! empty( $item['image_h_border_radius']['top'] ) || ! empty( $item['image_h_border_radius']['right'] ) || ! empty( $item['image_h_border_radius']['bottom'] ) || ! empty( $item['image_h_border_radius']['left'] ) ) {
 							$loopcss .= esc_attr( $get_ele_pre ) . ' img{border-radius: ' . esc_attr( $item['image_h_border_radius']['top'] ) . esc_attr( $item['image_h_border_radius']['unit'] ) . ' ' . esc_attr( $item['image_h_border_radius']['right'] ) . esc_attr( $item['image_h_border_radius']['unit'] ) . ' ' . esc_attr( $item['image_h_border_radius']['bottom'] ) . esc_attr( $item['image_h_border_radius']['unit'] ) . ' ' . esc_attr( $item['image_h_border_radius']['left'] ) . esc_attr( $item['image_h_border_radius']['unit'] ) . ' !important;}';
 						}
 					}
-
-					$img_box_shc = ! empty( $item['image_box_shadow_hover_cst'] ) ? $item['image_box_shadow_hover_cst'] : '';
-					if ( 'yes' === $img_box_shc ) {
+					if ( ! empty( $item['image_box_shadow_hover_cst'] ) && $item['image_box_shadow_hover_cst'] == 'yes' ) {
 						$loopcss .= esc_attr( $get_ele_pre ) . ' img{box-shadow: ' . esc_attr( $item['image_box_shadow_horizontal']['size'] ) . 'px ' . esc_attr( $item['image_box_shadow_vertical']['size'] ) . 'px ' . esc_attr( $item['image_box_shadow_blur']['size'] ) . 'px ' . esc_attr( $item['image_box_shadow_spread']['size'] ) . 'px ' . esc_attr( $item['image_box_shadow_color'] ) . ' !important;}';
 					}
-
-					$img_ohc = ! empty( $item['image_opacity_hover_cst']['size'] ) ? $item['image_opacity_hover_cst']['size'] : '';
-
-					if ( ! empty( $img_ohc ) ) {
-						$loopcss .= esc_attr( $get_ele_pre ) . ' img{ opacity: ' . esc_attr( $img_ohc ) . ' !important;}';
+					if ( ! empty( $item['image_opacity_hover_cst']['size'] ) ) {
+						$loopcss .= esc_attr( $get_ele_pre ) . ' img{ opacity: ' . esc_attr( $item['image_opacity_hover_cst']['size'] ) . ' !important;}';
 					}
-
-					$img_cfhc = ! empty( $item['image_css_filter_hover_cst'] ) ? $item['image_css_filter_hover_cst'] : '';
-					if ( 'yes' === $img_cfhc ) {
+					if ( ! empty( $item['image_css_filter_hover_cst'] ) && $item['image_css_filter_hover_cst'] == 'yes' ) {
 						$loopcss .= esc_attr( $get_ele_pre ) . ' img{filter:brightness( ' . esc_attr( $item['image_css_filter_brightness']['size'] ) . '% ) contrast( ' . esc_attr( $item['image_css_filter_contrast']['size'] ) . '% ) saturate( ' . esc_attr( $item['image_css_filter_saturation']['size'] ) . '% ) blur( ' . esc_attr( $item['image_css_filter_blur']['size'] ) . 'px ) hue-rotate( ' . esc_attr( $item['image_css_filter_hue']['size'] ) . 'deg ) !important}';
 					}
 				}
@@ -3050,12 +2964,15 @@ class ThePlus_Hovercard extends Widget_Base {
 
 			$hover_card  .= $loopitem;
 			$hover_card  .= '</div>';
-				$loopcss .= '.tp-hover-card-wrapper{position:relative;display:block;width:100%;height:100%;}
-				.tp-hover-card-wrapper * {transition:all 0.3s linear}';
+				$loopcss .= '.tp-hover-card-wrapper{position:relative;display:block;width:100%;height:100%;} .tp-hover-card-wrapper * {transition:all 0.3s linear}';
 		if ( ! empty( $loopcss ) ) {
 			$hover_card .= '<style>' . esc_attr( $loopcss ) . '</style>';
 		}
 
 		echo $hover_card;
 	}
+
+	protected function content_template() {
+	}
+
 }

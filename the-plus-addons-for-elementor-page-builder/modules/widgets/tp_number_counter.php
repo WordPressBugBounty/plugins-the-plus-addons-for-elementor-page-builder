@@ -2196,7 +2196,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$out_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
 
 		$symbol       = ! empty( $settings['symbol'] ) ? $settings['symbol'] : '';
-		$max_number   = ! empty( $settings['max_number'] ) ? $settings['max_number'] : '0';
+		$max_number   = isset( $settings['max_number'] ) ? $settings['max_number'] : '';
 		$delay_number = ! empty( $settings['delay_number']['size'] ) ? $settings['delay_number']['size'] : '';
 
 		$increment_number = ! empty( $settings['increment_number']['size'] ) ? $settings['increment_number']['size'] : '';
