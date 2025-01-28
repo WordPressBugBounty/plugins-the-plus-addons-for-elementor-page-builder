@@ -2826,9 +2826,9 @@ class ThePlus_Hovercard extends Widget_Base {
 
 			if ( 'absolute' === $position ) {
 
-				$tov = '';
-				$bov = '';
-				$lov = '';
+				$tov = 'auto';
+				$bov = 'auto';
+				$lov = 'auto';
 				$rov = 'auto';
 
 				$top_switch = ! empty( $item['top_offset_switch'] ) ? $item['top_offset_switch'] : '';
@@ -2859,7 +2859,7 @@ class ThePlus_Hovercard extends Widget_Base {
 				$right_size   = isset( $item['right_offset']['size'] ) ? $item['right_offset']['size'] : '';
 				$right_unit   = ! empty( $item['right_offset']['unit'] ) ? $item['right_offset']['unit'] : '';
 
-				if ( 'yes' === $right_switch && ! empty( $right_size ) ) {
+				if ( 'yes' === $right_switch && isset( $right_size ) ) {
 					$rov = $right_size . $right_unit;
 				}
 

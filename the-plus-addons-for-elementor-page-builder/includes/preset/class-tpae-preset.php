@@ -53,7 +53,6 @@ if ( ! class_exists( 'Tpae_Preset' ) ) {
 		 * @since 6.0.0
 		 */
 		public function __construct() {
-			add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'tpap_preset_css_enqueue' ) );
 			add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'tpap_preset_js_enqueue' ) );
 
 			add_action( 'wp_ajax_tpaep_preset_ajax_call', array( $this, 'tpaep_preset_ajax_call' ) );
@@ -65,6 +64,8 @@ if ( ! class_exists( 'Tpae_Preset' ) ) {
 		 * @since 6.0.0
 		 */
 		public function tpap_preset_js_enqueue() {
+
+			wp_enqueue_style( 'tpae-loopbuilder-popup', L_THEPLUS_URL . 'includes/preset/index.css', array(), L_THEPLUS_VERSION, false );
 
 			wp_enqueue_script( 'tpae-loopbuilder-button', L_THEPLUS_URL . 'assets/js/wdesignkit/tp-loopbuilder-btn.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION, true );
 			wp_enqueue_script( 'tpae-loopbuilder-popup', L_THEPLUS_URL . 'includes/preset/index.js', array( 'wp-i18n', 'wp-element', 'wp-components' ), L_THEPLUS_VERSION, true );
@@ -80,15 +81,6 @@ if ( ! class_exists( 'Tpae_Preset' ) ) {
 			);
 
 			wp_set_script_translations( 'tpae-loopbuilder-popup', 'tpebl' );
-		}
-
-		/**
-		 * Loded Preset Template CSS
-		 *
-		 * @since 6.0.0
-		 */
-		public function tpap_preset_css_enqueue() {
-			wp_enqueue_style( 'tpae-loopbuilder-popup', L_THEPLUS_URL . 'includes/preset/index.css', array(), L_THEPLUS_VERSION, false );
 		}
 
 		/**

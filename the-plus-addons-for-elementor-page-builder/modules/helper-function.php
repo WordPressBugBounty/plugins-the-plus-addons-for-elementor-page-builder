@@ -64,6 +64,8 @@ function tp_senitize_role( $capability ) {
  * */
 function tp_senitize_js_input( $input ) {
 
+	$input = preg_replace( '/&#x[0-9a-fA-F]+;/i', '', $input );
+
     // Remove complete iframe tags with or without content
     $input = preg_replace( '/<iframe[^>]*>.*?<\/iframe>/is', '', $input );
 

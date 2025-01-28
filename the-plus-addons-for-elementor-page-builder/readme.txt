@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.1.8
+Stable tag: 6.2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,11 +382,12 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 6.2.0 =
+Fix : Hover Card : Default Value Issue Solved
+Fix : Table : Security Patch ( Low Security )
+Fix : Minor Bug Fixes & Performance Improvements
+
 = 6.1.8 =
-Fix : Hover Card : Link not working in a tag
-Fix : Hover Card : Deafult value Issue solved
-Fix : Number Counter : Issue solved when Number value is 0
-Fix : Navigation Menu lite : CSS Optimize
 Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.1.7 =
