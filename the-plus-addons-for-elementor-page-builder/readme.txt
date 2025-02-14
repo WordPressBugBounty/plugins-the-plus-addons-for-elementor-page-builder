@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.2.0
+Stable tag: 6.2.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -381,6 +381,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.2.1 =
+Add : Blog Listing : Date Formate for the Smart Loop Builder
+Add : Blof Listing : Category for the Smart Loop Builder
+Add : Blof Listing : Tag for the Smart Loop Builder
+Add : Blof Listing : Author Link for the Smart Loop Builder
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.2.0 =
 Fix : Hover Card : Default Value Issue Solved
