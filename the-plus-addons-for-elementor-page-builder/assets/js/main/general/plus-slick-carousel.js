@@ -80,7 +80,7 @@ function theplus_carousel_list(data_widget=''){
 			centerPadding: 0,
 			prevArrow: prev_arrow,
 			nextArrow: next_arrow,
-			slidesToShow: 1,
+			slidesToShow: slider_desktop_column,
 			slidesToScroll: 1,
 			draggable:slider_draggable,
 			dotsClass:slider_dots_style,

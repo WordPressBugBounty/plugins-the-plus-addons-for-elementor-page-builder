@@ -1717,7 +1717,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'label'     => esc_html__( 'Hover Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block:hover .counter-number' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block:hover .counter-number .counter-number-inner' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
 					'gradient_hover_color_option' => 'color',

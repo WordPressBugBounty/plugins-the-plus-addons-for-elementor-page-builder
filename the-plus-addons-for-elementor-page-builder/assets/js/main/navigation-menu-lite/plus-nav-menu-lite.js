@@ -118,6 +118,10 @@ function theplus_ele_menu_clicking(){
 			});
 		}
 
+		if ($(".plus-mobile-menu .navbar-nav li.menu-item-has-children.open", $scope).length === 0) {
+			$(".plus-mobile-menu .navbar-nav li.menu-item-has-children > ul.dropdown-menu", $scope).css("display", "none");
+		}
+
         $(".plus-mobile-menu .navbar-nav li.menu-item-has-children > a", $scope).on("click", function(a) {
             a.preventDefault(),
             a.stopPropagation();

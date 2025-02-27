@@ -295,6 +295,10 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'condition' => array(
 					'main_style' => array('style_3'),
 				),
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box.info-box-style_3 .info-box-bg-box .service-center' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_info_box.info-box-style_3 .info-box-bg-box .service-center .service-border' => 'justify-self: {{VALUE}};',
+				),
 			)
 		);
 		$this->add_control(
@@ -3195,7 +3199,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			if ( 'style_3' === $main_style ) {
 				$output .= '<div class="info-box-bg-box ' . esc_attr( $serice_box_border ) . ' ' . esc_attr( $ll_bgbox ) . '">';
 
-					$output .= '<div class="' . esc_attr( $service_align ) . '">';
+					// $output .= '<div class="' . esc_attr( $service_align ) . '">';
+					$output .= '<div class=" info-box-content ">';
 
 						$output .= '<div class="service-center">';
 

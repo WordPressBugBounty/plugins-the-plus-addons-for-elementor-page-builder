@@ -1256,7 +1256,28 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title,
 					{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title a,
-					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title:hover' => 'color: {{VALUE}}',
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-blog .tpae-preset-content .tpae-preset-title:hover' => 'color: {{VALUE}}',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_title_boxhover',
+			array(
+				'label' => esc_html__( 'Box Hover', 'tpebl' ),
+				'condition' => array(
+					'style' => 'smart-loop-builder',
+				),
+			)
+		);
+		$this->add_control(
+			'title_boxhover_color',
+			array(
+				'label'     => esc_html__( 'Title Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-blog:hover .tpae-preset-title' => 'color: {{VALUE}}',
 				),
 			)
 		);

@@ -1403,6 +1403,28 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'sub_menu_width',
+			array(
+				'label'      => esc_html__( 'Sub Menu Width', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .plus-navigation-menu .nav li.dropdown .dropdown-menu' => 'width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
 			'sub_menu_outer_options',
 			array(
 				'label'     => __( 'Sub-Menu Outer Options', 'tpebl' ),
@@ -2356,7 +2378,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						} elseif ( ! empty( $TypeMenu ) && $TypeMenu == 'custom' ) {
 							echo $this->tp_mega_menu( $settings );
 						} else {
-							wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings ) );
+							wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings, '' ) );
 						}
 						?>
 					</div>
@@ -2384,7 +2406,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 							if ( defined( 'JUPITERX_VERSION' ) ) {
 								wp_nav_menu( $mobile_nav_menu_args );
 							} else {
-								wp_nav_menu( apply_filters( 'widget_nav_menu_args', $mobile_nav_menu_args, $nav_menu, $settings ) );
+								wp_nav_menu( apply_filters( 'widget_nav_menu_args', $mobile_nav_menu_args, $nav_menu, $settings, '' ) );
 							}
 						} elseif ( ! empty( $TypeMenu ) && $TypeMenu == 'custom' ) {
 							echo $this->tp_mega_menu( $settings );

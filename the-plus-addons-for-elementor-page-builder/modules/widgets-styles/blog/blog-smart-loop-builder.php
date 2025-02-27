@@ -25,8 +25,7 @@ $_title   = get_the_title();
 $_content = get_the_content();
 $_post_id = get_the_ID();
 
-/* date format */
-
+/* Date Format */
 $date_placeholders = array(
     '{{tpae_date_created}}' => 'Y-m-d',
     '{{tpae_date_created_m_y_d}}' => 'M Y d',
@@ -42,6 +41,7 @@ $date_placeholders = array(
     '{{tpae_date_created_month_year}}' => 'F Y',
     '{{tpae_date_created_day}}' => 'l',
     '{{tpae_date_created_time_ago}}' => '',
+	'{{tpae_date_created_M_D_Y}}' => 'M d, Y',
 );
 
 foreach ($date_placeholders as $placeholder => $format) {

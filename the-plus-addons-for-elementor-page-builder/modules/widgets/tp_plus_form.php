@@ -549,6 +549,44 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'inline_button',
+			array(
+				'label'     => esc_html__( 'Inline Button', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'no',
+				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
+				'label_off' => esc_html__( 'No', 'tpebl' ),
+			)
+		);
+		
+		$this->add_responsive_control(
+			'button_inline_width',
+			array(
+				'label'       => esc_html__( 'Button Width', 'tpebl' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => array( '%', 'px' ),
+				'range'       => array(
+					'%' => array(
+						'min'  => 10,
+						'max'  => 100,
+						'step' => 2,
+					),
+				),
+				'default'     => array(
+					'unit' => '%',
+					'size' => 50,
+				),
+				'label_block' => true,
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-form .tpae-form-submit-container' => 'width: {{SIZE}}{{UNIT}};',
+				),
+				'condition' => array(
+					'inline_button' => 'yes',
+				),
+			)
+		);
+
 		$this->add_responsive_control(
 			'button_column_width',
 			array(
@@ -569,6 +607,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'label_block' => true,
 				'selectors'  => array(
 					'{{WRAPPER}} .tpae-form .tpae-form-button' => 'width: {{SIZE}}{{UNIT}};',
+				),
+				'condition' => array(
+					'inline_button!' => 'yes',
 				),
 			)
 		);
@@ -1975,12 +2016,20 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			}
 		}
 
+		$inline_button = ! empty( $settings['inline_button'] ) ? $settings['inline_button'] : 'no';
+
 		$email_data = l_tp_plus_simple_decrypt( json_encode( $email_data ), 'ey' );
 
 		$error_message    = 'data-formdata="' . htmlspecialchars( wp_json_encode( $error_message, true ), ENT_QUOTES, 'UTF-8' ) . '"';
 		$email_data  = 'data-emaildata="' . htmlspecialchars( wp_json_encode( $email_data, true ), ENT_QUOTES, 'UTF-8' ) . '"';
 
 		$form_markup = '<div class="tpae-form-container" ' . $error_message . ' ' . $email_data . ' >';
+
+			if( 'yes' === $inline_button ) {
+				$form_markup .= "<style> .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
+			} else if ( 'no' === $inline_button ) {
+				$form_markup .= "<style> .tpae-form-submit-container{ width:100%!important } </style>";
+			}
 
 			$form_markup .= '<div class="tpae-form-messages"></div>';
 
@@ -1989,7 +2038,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		foreach ( $tabs as $tab ) {
 			$tab_column        = ! empty( $tab['column_width']['size'] ) ? $tab['column_width']['size'] : '';
 			$tab_id            = ! empty( $tab['field_id'] ) ? $tab['field_id'] : 'tab_' . uniqid();
-			$tab_label         = ! empty( $tab['field_label'] ) ? $tab['field_label'] : 'Label';
+			$tab_label         = ! empty( $tab['field_label'] ) ? $tab['field_label'] : '';
 			$tab_placeholder   = ! empty( $tab['place_holder'] ) ? $tab['place_holder'] : '';
 			$tab_default       = ! empty( $tab['field_default_value'] ) ? $tab['field_default_value'] : '';
 			$tab_required      = ( ! empty( $tab['required'] ) && 'yes' === $tab['required'] ) ? 'required' : '';
