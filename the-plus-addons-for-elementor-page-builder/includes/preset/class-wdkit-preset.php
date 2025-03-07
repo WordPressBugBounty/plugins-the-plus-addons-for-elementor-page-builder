@@ -94,6 +94,8 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 				array(
 					'nonce'    => wp_create_nonce( 'tp_wdkit_preview_popup' ),
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'tpae_pro' => defined( 'THEPLUS_VERSION' ) ? 1 : 0,
+					'tpag_pro' => defined( 'TPGBP_VERSION' ) ? 1 : 0,
 				)
 			);
 		}

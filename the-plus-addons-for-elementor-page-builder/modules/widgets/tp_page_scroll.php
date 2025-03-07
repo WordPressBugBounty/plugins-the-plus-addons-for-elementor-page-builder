@@ -1045,7 +1045,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 					if ( ! empty( $elem_templates ) ) {
 						$slideid = ! empty( $item['fp-slideid'] ) ? $item['fp-slideid'] : 'fp_' . $id . '_' . $i;
 
-						$full_page_anchors[] = $slideid;
+						$full_page_anchors[] = tp_senitize_js_input($slideid);
 
 						$full_page_content .= '<div class="section">';
 
@@ -1083,7 +1083,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			$fullpage_opt['navigationTooltips'] = false;
 			$fullpage_opt['responsiveWidth']    = ! empty( $settings['res_width_value'] ) ? sanitize_text_field( $settings['res_width_value'] ) : 0;
 
-			$dots_text     = ! empty( $settings['nav_dots_tooltips'] ) ? sanitize_text_field( $settings['nav_dots_tooltips'] ) : '';
+			$dots_text     = ! empty( $settings['nav_dots_tooltips'] ) ? tp_senitize_js_input( $settings['nav_dots_tooltips'] ) : '';
 			$nav_dots_text = explode( ',', $dots_text );
 
 			$dots_show = ! empty( $settings['show_dots'] ) ? $settings['show_dots'] : '';

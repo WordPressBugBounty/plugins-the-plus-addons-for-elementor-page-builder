@@ -77,6 +77,8 @@ function tp_senitize_js_input( $input ) {
 
     // Remove JavaScript event handlers (like onload, onclick, etc.)
     $input = preg_replace( '/\s*on\w+\s*=\s*(".*?"|\'.*?\'|[^>\s]+)/is', '', $input );
+	
+	$input = preg_replace( '/[^a-zA-Z0-9_-]/', '', $input );
 
     // Ensure input is not overly stripped by handling invalid tags carefully
     $input = strip_tags( $input );

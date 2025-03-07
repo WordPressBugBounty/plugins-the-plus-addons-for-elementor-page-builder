@@ -1061,7 +1061,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 		$cpybtniconclass = '';
 		$dowbtniconclass = '';
 
-		$cpybtntext = ! empty( $settings['cpybtntext'] ) ? $settings['cpybtntext'] : '';
+		$cpybtntext = ! empty( $settings['cpybtntext'] ) ? tp_senitize_js_input($settings['cpybtntext']) : '';
 
 		if ( ! empty( $settings['cpybtnicon']['value'] ) || ! empty( $settings['copiedbtnicon']['value'] ) ) {
 			$cpybtniconclass = ' tpcpicon';
@@ -1074,7 +1074,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			ob_end_clean();
 		}
 
-		$copiedbtntext = ! empty( $settings['copiedbtntext'] ) ? $settings['copiedbtntext'] : '';
+		$copiedbtntext = ! empty( $settings['copiedbtntext'] ) ? tp_senitize_js_input($settings['copiedbtntext']) : '';
 		if ( ! empty( $settings['copiedbtnicon'] ) ) {
 			ob_start();
 			\Elementor\Icons_Manager::render_icon( $settings['copiedbtnicon'], array( 'aria-hidden' => 'true' ) );
