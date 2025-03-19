@@ -1956,7 +1956,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	 */
 	public function render() {
 		$settings = $this->get_settings_for_display();
-		$tabs     = ! empty( $settings['tabs'] ) ? $settings['tabs'] : array();
+
+		$widget_id = $this->get_id();
+		$tabs      = ! empty( $settings['tabs'] ) ? $settings['tabs'] : array();
 
 		$submit_button = ! empty( $settings['button_submit'] ) ? $settings['button_submit'] : 'Submit';
 		$label_display = ! empty( $settings['label_display'] ) ? $settings['label_display'] : '';
@@ -2026,9 +2028,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$form_markup = '<div class="tpae-form-container" ' . $error_message . ' ' . $email_data . ' >';
 
 			if( 'yes' === $inline_button ) {
-				$form_markup .= "<style> .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
+				$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
 			} else if ( 'no' === $inline_button ) {
-				$form_markup .= "<style> .tpae-form-submit-container{ width:100%!important } </style>";
+				$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container{ width:100%!important } </style>";
 			}
 
 			$form_markup .= '<div class="tpae-form-messages"></div>';

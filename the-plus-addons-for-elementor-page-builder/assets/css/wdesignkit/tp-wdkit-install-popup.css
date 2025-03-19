@@ -31,7 +31,6 @@
     color: #B1B1D9;
 }
 
-
 .tp-pink-btn {
     display: flex;
     flex-direction: row;
@@ -46,6 +45,7 @@
     text-transform: capitalize;
     transition: 0.3s linear;
     cursor: pointer;
+    gap:8px;
 }
 
 .tp-pink-btn:hover {
@@ -59,7 +59,7 @@
     font-family: "Plus Jakarta Sans", sans-serif !important
 }
 
-#tp-wdkit-elementorp .tp-main-container {
+#tp-wdkit-elementorp .tp-main-container-preset {
     width: 75vw;
     background-color: #040483;
     display: flex;
@@ -181,7 +181,7 @@
     transform-origin: bottom left
 }
 
-#tp-wdkit-elementorp .tp-image-sections {
+#tp-wdkit-elementorp .tpae-image-sections {
     display: flex;
     width: 75vw;
     height: 20vw;

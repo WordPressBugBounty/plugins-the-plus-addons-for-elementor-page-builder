@@ -74,7 +74,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 			}
 
 			add_action( 'wp_ajax_check_plugin_status', array( $this, 'tpae_check_plugin_status' ) );
-			add_action( 'wp_ajax_tp_install_wdkit', array( $this, 'tpae_install_wdkit' ) );
+			add_action( 'wp_ajax_tpae_install_wdkit', array( $this, 'tpae_install_wdkit' ) );
 
 			add_action( 'elementor/editor/footer', array( $this, 'tpae_preview_html_popup' ) );
 		}
@@ -86,10 +86,10 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 */
 		public function tpae_elementor_editor_script() {
 
-			wp_enqueue_script( 'tp-wdkit-preview-popup', L_THEPLUS_URL . 'assets/js/wdesignkit/tp-preset-btn.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION, true );
+			wp_enqueue_script( 'tpae-wdkit-preview-popup', L_THEPLUS_URL . 'assets/js/wdesignkit/tp-preset-btn.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION, true );
 
 			wp_localize_script(
-				'tp-wdkit-preview-popup',
+				'tpae-wdkit-preview-popup',
 				'tp_wdkit_preview_popup',
 				array(
 					'nonce'    => wp_create_nonce( 'tp_wdkit_preview_popup' ),
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 * @since 6.5.6
 		 */
 		public function tpae_elementor_editor_style() {
-			wp_enqueue_style( 'tp-wdkit-elementor-popup', L_THEPLUS_URL . 'assets/css/wdesignkit/tp-wdkit-install-popup.css', array(), L_THEPLUS_VERSION );
+			wp_enqueue_style( 'tp-wdkit-elementor-popup-preset', L_THEPLUS_URL . 'assets/css/wdesignkit/tp-wdkit-install-popup.css', array(), L_THEPLUS_VERSION );
 		}
 
 		/**
@@ -206,7 +206,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 */
 		public function tpae_preview_html_popup() {
 			?>
-			<div id="tp-wdkit-wrap" class="tp-main-container" style="display: none">
+			<div id="tpae-wdkit-wrap" class="tp-main-container-preset" style="display: none">
 				<div class="tp-middel-sections">
 				<div class="tp-text-top">
 					<?php echo esc_html__( 'Import Pre-Designed Widgets Styles for', 'tpebl' ) . '<br />' . esc_html__( 'The Plus Addons for Elementor', 'tpebl' ); ?>
@@ -254,7 +254,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 						</div>
 					</div>
 				</div>
-				<div class="tp-image-sections"></div>
+				<div class="tpae-image-sections"></div>
 			</div>
 			<?php
 		}

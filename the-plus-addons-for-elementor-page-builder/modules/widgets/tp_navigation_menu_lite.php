@@ -1415,10 +1415,6 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						'step' => 1,
 					),
 				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
 				'selectors'  => array(
 					'{{WRAPPER}} .plus-navigation-menu .nav li.dropdown .dropdown-menu' => 'width: {{SIZE}}{{UNIT}};',
 				),
@@ -2560,19 +2556,19 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 							$MegaMenuClass .= ' plus-dropdown-' . $NextMenu['megaMType'];
 						}
 						if ( $NextMenu != '' && $NextMenu['megaMType'] == 'default' ) {
-							$unit = isset( $NextMenu['megaMwid']['size'] ) && ! empty( $NextMenu['megaMwid']['size'] ) ? $NextMenu['megaMwid']['size'] : '';
+							$unit = isset( $NextMenu['megaMwid']['unit'] ) && ! empty( $NextMenu['megaMwid']['unit'] ) ? $NextMenu['megaMwid']['unit'] : '';
 
 							// Desktop
 							if ( isset( $NextMenu['megaMwid']['size'] ) && ! empty( $NextMenu['megaMwid']['size'] ) ) {
 								$stylecss .= '@media (min-width: 1024px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid']['size'] . $unit . '!important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 							// Tablet
-							if ( isset( $NextMenu['megaMwid']['size'] ) && ! empty( $NextMenu['megaMwid']['size'] ) ) {
-								$stylecss .= '@media (max-width: 1024px) and (min-width:768px){ .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid']['size'] . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+							if ( isset( $NextMenu['megaMwid_tablet']['size'] ) && ! empty( $NextMenu['megaMwid_tablet']['size'] ) ) {
+								$stylecss .= '@media (max-width: 1024px) and (min-width:768px){ .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid_tablet']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid_tablet']['size'] . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 							// Mobile
-							if ( isset( $NextMenu['megaMwid']['size'] ) && ! empty( $NextMenu['megaMwid']['size'] ) ) {
-								$stylecss .= '@media (max-width: 767px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid']['size'] . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+							if ( isset( $NextMenu['megaMwid_mobile']['size'] ) && ! empty( $NextMenu['megaMwid_mobile']['size'] ) ) {
+								$stylecss .= '@media (max-width: 767px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid_mobile']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid_mobile']['size'] . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 						}
 					}

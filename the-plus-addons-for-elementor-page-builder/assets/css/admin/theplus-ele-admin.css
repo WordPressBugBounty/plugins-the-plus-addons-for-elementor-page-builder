@@ -602,11 +602,7 @@ ul#adminmenu a[href*="page=theplus-upgrade"]{color:#FFF;background:#8072FC;margi
 }
 
 /**Preset*/
-.tpae-preset-main-raw-main{display: flex;justify-content: space-around;gap: 16px;}
-.tp-preset-live-demo{color:#f05f7d;background:#fadce0;border:0;padding:10px;border-radius: 5px;font-weight: 400 !important;font-size: 13px;transition: all 0.3s ease-in;cursor: pointer;width: 50%;display: flex;align-items: center;justify-content: center;flex-wrap: wrap;align-content: center;}
-.tp-preset-editor-raw{color:#fff;background:#e85264;border:0;padding:10px;border-radius: 5px;font-weight: 400 !important;font-size: 13px;transition: all 0.3s ease-in;cursor: pointer;width: 50%;display: flex;align-items: center;justify-content: center;flex-wrap: wrap;align-content: center;}
-.tp-preset-live-demo:hover{color:#f05f7d}.tp-preset-editor-raw:hover{color:#fff;}
-
+.tpae-preset-main-raw-main{display:flex;justify-content:space-around;gap:16px;margin-bottom:15px}.tp-preset-live-demo{color:#464F57;background:#fff;border:1px solid #464F56;padding:10px;border-radius:5px;font-weight:400!important;font-size:13px;transition:all 0.3sease-in;cursor:pointer;width:50%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;align-content:center;border-block-end:1px solid #464F56!important}.tp-preset-editor-raw{color:#fff;background:#464F57;border:0;padding:10px;border-radius:5px;font-weight:400!important;font-size:13px;transition:all 0.3sease-in;cursor:pointer;width:50%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;align-content:center;border-block-end:unset!important}.tp-preset-live-demo:hover{color:#464F57}.tp-preset-editor-raw:hover{color:#fff;border-block-end:unset!important}
 /**blog listout*/
 #tp-loopbuilder-editor-raw {display: flex;flex-direction: row;align-items: center;justify-content: center;color: #fff;background: #8072FC;padding: 8px 20px;border-radius: 5px;font-weight: 400;font-size: 13px;letter-spacing: .4px;border: 1px solid #8072FC;box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .3);transition: all 0.3s ease-in;cursor: pointer;}
 

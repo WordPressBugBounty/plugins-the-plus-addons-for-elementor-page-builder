@@ -1282,6 +1282,20 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 				'label' => esc_html__( 'Normal', 'tpebl' ),
 			)
 		);
+		$this->add_control(
+			'box_border_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'theplus' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
+				'selectors' => array(
+					'{{WRAPPER}} .team-member-list .team-list-content' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'box_border' => 'yes',
+				),
+			)
+		);
 		$this->add_responsive_control(
 			'border_radius',
 			array(
@@ -1298,6 +1312,20 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 			'tab_border_hover',
 			array(
 				'label' => esc_html__( 'Hover', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'box_border_hover_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'theplus' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
+				'selectors' => array(
+					'{{WRAPPER}} .team-member-list .team-list-content:hover' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'box_border' => 'yes',
+				),
 			)
 		);
 		$this->add_responsive_control(

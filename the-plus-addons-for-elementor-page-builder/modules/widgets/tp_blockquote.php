@@ -137,6 +137,22 @@ class ThePlus_Block_Quote extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'smart-preset-button',
+			array(
+                'type'=> Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+					'<div class="tpae-preset-main-raw-main">
+						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16317" target="_blank" rel="noopener noreferrer">%s</a>
+						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16317">%s</a>
+					</div>',
+					esc_url('https://theplusaddons.com/widgets/elementor-blockquote/'),
+					esc_html__('Live Demo', 'tpebl'),
+					esc_html__('Import Presets', 'tpebl')
+				),
+                'label_block'     => true,
+            )
+		);
+		$this->add_control(
 			'style',
 			array(
 				'label'   => esc_html__( 'Style', 'tpebl' ),

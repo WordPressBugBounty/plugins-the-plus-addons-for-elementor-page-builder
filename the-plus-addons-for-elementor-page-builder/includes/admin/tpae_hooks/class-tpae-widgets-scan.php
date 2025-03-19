@@ -82,10 +82,10 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 		 */
 		public function tpae_get_elements_status_scan() {
 
-			if ( ! current_user_can( 'install_plugins' ) ) {
-				$response = $this->tpae_set_response( false, 'Invalid nonce.', 'The security check failed. Please refresh the page and try again.' );
-				return $response;
-			}
+			// if ( ! current_user_can( 'manage_plugins' ) ) {
+			// 	$response = $this->tpae_set_response( false, 'Invalid nonce.', 'The security check failed. Please refresh the page and try again.' );
+			// 	return $response;
+			// }
 
 			global $wpdb;
 
@@ -155,10 +155,10 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 		 */
 		public function tpae_check_elements_status_scan( $post_id = '', $tp_widgets_list = '' ) {
 
-			if ( ! current_user_can( 'install_plugins' ) ) {
-				$response = $this->tpae_set_response( false, 'Invalid nonce.', 'The security check failed. Please refresh the page and try again.' );
-				return $response;
-			}
+			// if ( ! current_user_can( 'manage_plugins' ) ) {
+			// 	$response = $this->tpae_set_response( false, 'Invalid nonce.', 'The security check failed. Please refresh the page and try again.' );
+			// 	return $response;
+			// }
 
 			if ( ! empty( $post_id ) ) {
 				$meta_data = \Elementor\Plugin::$instance->documents->get( $post_id );

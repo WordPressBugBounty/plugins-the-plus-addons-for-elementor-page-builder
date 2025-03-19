@@ -149,22 +149,22 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
-		// $this->add_control(
-		// 	'smart-preset-button',
-		// 	array(
-        //         'type'=> Controls_Manager::RAW_HTML,
-        //         'raw' => sprintf(
-		// 			'<div class="tpae-preset-main-raw-main">
-		// 				<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="12387" target="_blank" rel="noopener noreferrer">%s</a>
-		// 				<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="12387">%s</a>
-		// 			</div>',
-		// 			esc_url('https://wdesignkit.com/templates/kit/pricing-table---kit/12387'),
-		// 			esc_html__('Live Demo', 'tpebl'),
-		// 			esc_html__('Import Presets', 'tpebl')
-		// 		),
-        //         'label_block' => true,
-        //     )
-		// );
+		$this->add_control(
+			'smart-preset-button',
+			array(
+                'type'=> Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+					'<div class="tpae-preset-main-raw-main">
+						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="12387" target="_blank" rel="noopener noreferrer">%s</a>
+						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="12387">%s</a>
+					</div>',
+					esc_url('https://etemplates.wdesignkit.com/theplusaddons/pricing-table-demo/'),
+					esc_html__('Live Demo', 'tpebl'),
+					esc_html__('Import Presets', 'tpebl')
+				),
+                'label_block' => true,
+            )
+		);
 		$this->add_control(
 			'pricing_table_style',
 			array(

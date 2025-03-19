@@ -2287,7 +2287,7 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 				$data_class .= ' list-isotope';
 		}
 
-		$data_class = '';
+		// $data_class = '';
 		if ( 'carousel' === $layout ) {
 			$data_class .= ' list-carousel-slick ';
 		}

@@ -140,6 +140,22 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'smart-preset-button',
+			array(
+                'type'=> Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+					'<div class="tpae-preset-main-raw-main">
+						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16552" target="_blank" rel="noopener noreferrer">%s</a>
+						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16552">%s</a>
+					</div>',
+					esc_url('https://theplusaddons.com/widgets/elementor-advanced-text-block/'),
+					esc_html__('Live Demo', 'tpebl'),
+					esc_html__('Import Presets', 'tpebl')
+				),
+                'label_block'     => true,
+            )
+		);
+		$this->add_control(
 			'content_description',
 			array(
 				'label'       => wp_kses_post( "Description <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "advanced-text-block-elementor?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),

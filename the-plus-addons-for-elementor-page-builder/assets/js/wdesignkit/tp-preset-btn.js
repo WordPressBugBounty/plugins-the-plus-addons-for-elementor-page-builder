@@ -1,6 +1,19 @@
 (function ($) {
+    const { __ } = wp.i18n;
+
+    const ENABLE_TEMPLATES_TEXT = __("Enable Templates", "tpebl");
+    
     jQuery("document").ready(function () {
         jQuery(document).on('click', ".tp-preset-editor-raw", function (event) {
+
+            var $link = jQuery(this);
+
+            $link.css({ "pointer-events": "none", "cursor": "not-allowed" });
+
+            setTimeout(function () {
+                $link.css({ "pointer-events": "auto", "cursor": "pointer" });
+            }, 5000);
+
             let id = event.target?.dataset?.temp_id;
 
             jQuery.ajax({
@@ -47,7 +60,7 @@
                         }
                         return window.WdkitPopup.show()
                     } else {
-                        window.tp_wdkit_editor = elementorCommon.dialogsManager.createWidget(
+                        window.WdkitPopup = elementorCommon.dialogsManager.createWidget(
                             "lightbox",
                             {
                                 id: "tp-wdkit-elementorp",
@@ -66,18 +79,18 @@
                                 },
                                 onShow: function () {
                                     var dialogLightboxContent = $(".dialog-lightbox-message"),
-                                        clonedWrapElement = $("#tp-wdkit-wrap");
+                                        clonedWrapElement = $("#tpae-wdkit-wrap");
                                     window.location.hash = '#/preset/' + id;
 
                                     clonedWrapElement = clonedWrapElement.clone(true).show()
                                     dialogLightboxContent.html(clonedWrapElement);
 
                                     dialogLightboxContent.on("click", ".tp-close-btn", function () {
-                                        window.tp_wdkit_editor.hide();
+                                        window.WdkitPopup.hide();
                                     });
                                 },
                                 onHide: function () {
-                                    window.tp_wdkit_editor.destroy();
+                                    window.WdkitPopup.destroy();
                                 }
                             }
                         );
@@ -97,7 +110,7 @@
                                 type: "post",
                                 async: true,
                                 data: {
-                                    action: 'tp_install_wdkit',
+                                    action: 'tpae_install_wdkit',
                                     security: tp_wdkit_preview_popup.nonce,
                                 },
                                 success: function (res) {
@@ -121,7 +134,7 @@
                             });
                         });
 
-                        return window.tp_wdkit_editor.show();
+                        return window.WdkitPopup.show();
                     }
                 },
                 error: function (res) {
