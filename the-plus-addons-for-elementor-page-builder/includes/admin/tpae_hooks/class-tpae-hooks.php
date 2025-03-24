@@ -35,6 +35,44 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 		 * @var global_setting
 		 */
 		public $global_setting = array();
+		
+		/**
+		 * Member Variable
+		 *
+		 * @var all_widgets
+		 */
+		public $all_widgets = array(
+			'tp_accordion','tp_age_gate','tp_audio_player','tp_blockquote','tp_button','tp_breadcrumbs_bar',
+			'tp_chart','tp_countdown','tp_coupon_code','tp_carousel_anything','tp_dynamic_categories','tp_dark_mode',
+			'tp_heading_title','tp_info_box','tp_messagebox','tp_navigation_menu','tp_number_counter',
+			'tp_progress_bar','tp_pricing_list','tp_post_title','tp_pricing_table','tp_protected_content',
+			'tp_post_content','tp_post_featured_image','tp_pre_loader','tp_post_navigation','tp_post_author',
+			'tp_post_comment','tp_post_meta','tp_row_background','tp_style_list','tp_syntax_highlighter','tp_site_logo',
+			'tp_table','tp_table_content','tp_tabs_tours','tp_adv_text_block','tp_google_map','tp_video_player','tp_wp_login_register',
+			'tp_post_search','tp_header_extras','tp_horizontal_scroll_advance','tp_image_factory','tp_mobile_menu',
+			'tp_navigation_menu_lite','tp_page_scroll','tp_scroll_sequence','tp_design_tool','tp_advanced_buttons','tp_advanced_typography',
+			'tp_advertisement_banner','tp_shape_divider','tp_animated_service_boxes','tp_heading_animation','tp_before_after','tp_carousel_remote','tp_circle_menu',
+			'tp_cascading_image','tp_draw_svg','tp_dynamic_device','tp_flip_box','tp_hotspot','tp_hovercard','tp_wp_bodymovin',
+			'tp_smooth_scroll','tp_morphing_layouts','tp_mouse_cursor','tp_off_canvas','tp_process_steps','tp_scroll_navigation',
+			'tp_switcher','tp_timeline','tp_unfold','tp_blog_listout','tp_clients_listout','tp_dynamic_listing',
+			'tp_dynamic_smart_showcase','tp_gallery_listout','tp_product_listout','tp_team_member_listout','tp_testimonial_listout',
+			'tp_search_bar','tp_search_filter','tp_social_embed','tp_social_feed','tp_social_icon','tp_social_reviews',
+			'tp_social_sharing','tp_contact_form_7','tp_everest_form','tp_plus_form','tp_gravity_form','tp_mailchimp',
+			'tp_meeting_scheduler','tp_ninja_form','tp_wp_forms','tp_caldera_forms','tp_woo_cart','tp_woo_checkout',
+			'tp_woo_compare','tp_woo_wishlist','tp_wp_quickview','tp_woo_multi_step','tp_woo_myaccount','tp_woo_order_track',
+			'tp_woo_single_basic','tp_woo_single_image','tp_woo_single_pricing','tp_woo_single_tabs','tp_woo_thank_you',
+		);
+
+		/**
+		 * Member Variable
+		 *
+		 * @var extensions
+		 */
+		public $extensions = array(
+			'plus_cross_cp','plus_equal_height','plus_section_column_link','column_custom_css','section_custom_css',
+			'custom_width_column','column_mouse_cursor','order_sort_column','column_sticky','plus_adv_shadow',
+			'plus_glass_morphism','section_scroll_animation','plus_display_rules','plus_event_tracker',
+		);
 
 		/**
 		 *  Initiator
@@ -57,6 +95,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			add_filter( 'tpae_get_post_type', array( $this, 'tpae_get_post_type' ), 10, 2 );
 			add_filter( 'tpae_enable_widgets', array( $this, 'tpae_enable_widgets' ), 10, 1 );
 			add_filter( 'tpae_remove_backend_files', array( $this, 'tpae_remove_backend_files' ), 10, 1 );
+			add_filter( 'tpae_enable_selected_widgets', array( $this, 'tpae_enable_selected_widgets' ), 10, 2 );
 		}
 
 		/**
@@ -176,151 +215,63 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 		public function tpae_enable_widgets( $type = '' ) {
 
 			$widget_data = get_option( 'theplus_options' );
-
 			if ( in_array( 'widgets', $type, true ) ) {
-				$check_elements = array(
-					'tp_accordion',
-					'tp_age_gate',
-					'tp_audio_player',
-					'tp_blockquote',
-					'tp_button',
-					'tp_breadcrumbs_bar',
-					'tp_chart',
-					'tp_countdown',
-					'tp_coupon_code',
-					'tp_carousel_anything',
-					'tp_dynamic_categories',
-					'tp_dark_mode',
-					'tp_heading_title',
-					'tp_info_box',
-					'tp_messagebox',
-					'tp_navigation_menu',
-					'tp_number_counter',
-					'tp_progress_bar',
-					'tp_pricing_list',
-					'tp_post_title',
-					'tp_pricing_table',
-					'tp_protected_content',
-					'tp_post_content',
-					'tp_post_featured_image',
-					'tp_pre_loader',
-					'tp_post_navigation',
-					'tp_post_author',
-					'tp_post_comment',
-					'tp_post_meta',
-					'tp_row_background',
-					'tp_style_list',
-					'tp_syntax_highlighter',
-					'tp_site_logo',
-					'tp_table',
-					'tp_table_content',
-					'tp_tabs_tours',
-					'tp_adv_text_block',
-					'tp_google_map',
-					'tp_video_player',
-					'tp_wp_login_register',
-					'tp_post_search',
-					'tp_header_extras',
-					'tp_horizontal_scroll_advance',
-					'tp_image_factory',
-					'tp_mobile_menu',
-					'tp_navigation_menu_lite',
-					'tp_page_scroll',
-					'tp_scroll_sequence',
-					'tp_design_tool',
-					'tp_advanced_buttons',
-					'tp_advanced_typography',
-					'tp_advertisement_banner',
-					'tp_shape_divider',
-					'tp_animated_service_boxes',
-					'tp_heading_animation',
-					'tp_before_after',
-					'tp_carousel_remote',
-					'tp_circle_menu',
-					'tp_cascading_image',
-					'tp_draw_svg',
-					'tp_dynamic_device',
-					'tp_flip_box',
-					'tp_hotspot',
-					'tp_hovercard',
-					'tp_wp_bodymovin',
-					'tp_smooth_scroll',
-					'tp_morphing_layouts',
-					'tp_mouse_cursor',
-					'tp_off_canvas',
-					'tp_process_steps',
-					'tp_scroll_navigation',
-					'tp_switcher',
-					'tp_timeline',
-					'tp_unfold',
-					'tp_blog_listout',
-					'tp_clients_listout',
-					'tp_dynamic_listing',
-					'tp_dynamic_smart_showcase',
-					'tp_gallery_listout',
-					'tp_product_listout',
-					'tp_team_member_listout',
-					'tp_testimonial_listout',
-					'tp_search_bar',
-					'tp_search_filter',
-					'tp_social_embed',
-					'tp_social_feed',
-					'tp_social_icon',
-					'tp_social_reviews',
-					'tp_social_sharing',
-					'tp_contact_form_7',
-					'tp_everest_form',
-					'tp_plus_form',
-					'tp_gravity_form',
-					'tp_mailchimp',
-					'tp_meeting_scheduler',
-					'tp_ninja_form',
-					'tp_wp_forms',
-					'tp_caldera_forms',
-					'tp_woo_cart',
-					'tp_woo_checkout',
-					'tp_woo_compare',
-					'tp_woo_wishlist',
-					'tp_wp_quickview',
-					'tp_woo_multi_step',
-					'tp_woo_myaccount',
-					'tp_woo_order_track',
-					'tp_woo_single_basic',
-					'tp_woo_single_image',
-					'tp_woo_single_pricing',
-					'tp_woo_single_tabs',
-					'tp_woo_thank_you',
-				);
-
 				if ( isset( $widget_data['check_elements'] ) ) {
-					$widget_data['check_elements'] = $check_elements;
+					$widget_data['check_elements'] = $this->all_widgets;
 				}
 			}
 
 			if ( in_array( 'extensions', $type, true ) ) {
-				$extensions = array(
-					'plus_cross_cp',
-					'plus_equal_height',
-					'plus_section_column_link',
-					'column_custom_css',
-					'section_custom_css',
-					'custom_width_column',
-					'column_mouse_cursor',
-					'order_sort_column',
-					'column_sticky',
-					'plus_adv_shadow',
-					'plus_glass_morphism',
-					'section_scroll_animation',
-					'plus_display_rules',
-					'plus_event_tracker',
-				);
-
 				if ( isset( $widget_data['extras_elements'] ) ) {
-					$widget_data['extras_elements'] = $extensions;
+					$widget_data['extras_elements'] = $this->extensions;
 				}
 			}
 
 			update_option( 'theplus_options', $widget_data );
+		}
+
+		/**
+		 * Enable selected widgets based on the provided type.
+		 *
+		 * This function is responsible for enabling a specific set of widgets 
+		 * based on the given type. The type parameter determines which widgets 
+		 * will be displayed or activated.
+		 *
+		 * @since 6.2.5
+		 *
+		 * @param string $type Specifies the type of widgets to be shown.
+		 */
+		public function tpae_enable_selected_widgets($type) {
+			$w_list = !empty( $type['widgets'] ) ? $type['widgets'] : array();
+
+			if ( empty( $w_list ) ){
+				return $this->tpae_set_response( true, 'Widget Name Not Found.', 'Widget Name Not Found.' );
+			}
+
+			$dataArray = get_option( 'theplus_options', false );
+			$enebal_widget_list = [];
+
+			if ( is_array($w_list) && !empty($dataArray) ) {
+				foreach ($w_list as $widget) {
+
+					$enebal_widget = str_replace('-', '_', $widget);
+
+					if ( in_array($enebal_widget, $this->all_widgets) ) {
+						if ( !in_array($enebal_widget, $dataArray["check_elements"]) ) {
+							$enebal_widget_list[] = $enebal_widget;
+						}
+					}
+				}
+			}
+
+			if ( !empty($enebal_widget_list) ) {
+				$widget_list = array_merge($dataArray["check_elements"], $enebal_widget_list);
+
+				$dataArray["check_elements"] = array_values($widget_list);
+				update_option('theplus_options', $dataArray);
+			}
+
+			return $this->tpae_set_response( true, 'success.', 'success.' );
 		}
 
 		/**
@@ -350,6 +301,26 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 					update_option( $action_page, time() );
 				}
 			}
+		}
+
+		/**
+		 * Set the response data.
+		 *
+		 * @since 6.1.4
+		 *
+		 * @param bool   $success     Indicates whether the operation was successful. Default is false.
+		 * @param string $message     The main message to include in the response. Default is an empty string.
+		 * @param string $description A more detailed description of the message or error. Default is an empty string.
+		 */
+		public function tpae_set_response( $success = false, $message = '', $description = '' ) {
+
+			$response = array(
+				'success'     => $success,
+				'message'     => esc_html( $message ),
+				'description' => esc_html( $description ),
+			);
+
+			return $response;
 		}
 	}
 

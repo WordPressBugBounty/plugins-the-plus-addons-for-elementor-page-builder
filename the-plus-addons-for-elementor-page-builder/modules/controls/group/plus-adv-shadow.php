@@ -905,7 +905,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 		if(!empty($adv_shadow_boxshadow) && $adv_shadow_boxshadow=='yes'){
 			$bs_class = '';
 			if(!empty($settings['adv_shadow_boxshadow_class']) && !empty($adv_shadow_boxshadow_apply) && $adv_shadow_boxshadow_apply=='customclass'){
-				$bs_class = ' '.$settings['adv_shadow_boxshadow_class'];
+				$bs_class = ' .'.$settings['adv_shadow_boxshadow_class'];
 			}
 			
 			$bstrans='';
@@ -981,7 +981,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 		if(!empty($adv_shadow_textshadow) && $adv_shadow_textshadow=='yes'){
 			$ts_class = '';
 			if(!empty($settings['adv_shadow_textshadow_class']) && !empty($adv_shadow_textshadow_apply) && $adv_shadow_textshadow_apply=='customclass'){
-				$ts_class = ' '.$settings['adv_shadow_textshadow_class'];
+				$ts_class = ' .'.$settings['adv_shadow_textshadow_class'];
 			}
 
 			$tstrans='';
@@ -1047,7 +1047,7 @@ class L_Theplus_Advanced_Shadow extends Elementor\Widget_Base {
 		if(!empty($adv_shadow_dropshadow) && $adv_shadow_dropshadow=='yes'){
 			$ds_class = '';
 			if(!empty($settings['adv_shadow_dropshadow_class']) && !empty($adv_shadow_dropshadow_apply) && $adv_shadow_dropshadow_apply=='customclass'){
-				$ds_class = ' '.$settings['adv_shadow_dropshadow_class'];
+				$ds_class = ' .'.$settings['adv_shadow_dropshadow_class'];
 			}
 
 			$dstrans='';

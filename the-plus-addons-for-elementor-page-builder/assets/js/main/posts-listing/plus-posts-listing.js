@@ -244,12 +244,6 @@
                                 });
                             }
 
-                            $('.elementor-widget-tp-row-background .elementor-widget-container').each(function(){
-                                var trig = $(this).html();
-                                $(this).closest('.elementor-section').prepend(trig);
-                                $(this).remove();
-                            });
-
                             current_click.data('requestRunning', false);
                         }
 						}).then(function(){  

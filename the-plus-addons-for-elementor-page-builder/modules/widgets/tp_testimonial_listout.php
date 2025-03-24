@@ -2275,22 +2275,15 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 
 		$layout_attr = '';
 		$data_class  = '';
-
 		if ( ! empty( $layout ) ) {
-			if ( 'grid' !== $layout ) {
+			if ( 'carousel' !== $layout ) {
 				$data_class  .= l_theplus_get_layout_list_class( $layout );
 				$layout_attr .= l_theplus_get_layout_list_attr( $layout );
 			} else {
-				$data_class .= ' list-isotope';
+				$data_class .= ' list-carousel-slick ';
 			}
-		} else {
-				$data_class .= ' list-isotope';
-		}
-
-		// $data_class = '';
-		if ( 'carousel' === $layout ) {
-			$data_class .= ' list-carousel-slick ';
-		}
+		} 
+		
 		$data_class .= ' testimonial-' . $style;
 
 		$read_attr = array();
@@ -2318,6 +2311,8 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 		}
 
 		if ( 'tlrepeater' === $con_from ) {
+			// list-carousel-slick testimonial-style-1
+			// list-isotope list-carousel-slick testimonial-style-1
 
 			if ( ! empty( $testi_list ) ) {
 				$index = 1;

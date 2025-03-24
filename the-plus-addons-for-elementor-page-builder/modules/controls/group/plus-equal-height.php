@@ -138,12 +138,17 @@ class L_Theplus_Equal_Height extends Elementor\Widget_Base {
 
 		if ( ! empty( $settings['seh_switch'] ) && $settings['seh_switch'] == 'yes' ) {
 			$opt = '';
+
 			if ( ! empty( $settings['seh_mode'] ) && $settings['seh_mode'] == 'bodl' ) {
+
+				$widget = '-widget';
+				$con = '-container';
+
 				if ( $settings['seh_opt'] == 'widgets' ) {
-					$opt = '.elementor-widget-container';
+					$opt = '.elementor-widget';
 				}
 				if ( $settings['seh_opt'] == 'widgets_l1' && $settings['seh_eql_opt'] == '1' ) {
-					$opt = '.elementor-widget-container > div:nth-of-type(1)';
+					$opt = '.elementor' . $widget.$con . ' > div:nth-of-type(1)';
 				}
 
 				$nested_opt = $eql_opt = '';
@@ -154,8 +159,7 @@ class L_Theplus_Equal_Height extends Elementor\Widget_Base {
 					for ( $i = 2;$i <= $settings['seh_opt'];$i++ ) {
 						$seh_opt_add .= ' > div ';
 					}
-					$opt = '.elementor-widget-container ' . $seh_opt_add . ' > div:nth-of-type(' . $settings['seh_eql_opt'] . ')';
-
+					$opt = '.elementor' . $widget.$con . ' ' . $seh_opt_add . ' > div:nth-of-type(' . $settings['seh_eql_opt'] . ')';
 				}
 			}
 

@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.2.4
+Stable tag: 6.2.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,12 +382,39 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 6.2.5 =
+Compatibility : Remove Deprecated class of the Elementor
+Fix : Advanced Shadow : Custom class option not working
+Fix : Testimonial : Carousel Issue
+Fix : Minor Bug Fixes & Performance Improvement
+
 = 6.2.4 =
-Add : Team Member Listout : Border Color Option & Hover Border Color Option 
+Add : Audio Player : Add Preset Option for the Ready design
+Add : Breadcrumbs Bar : Add Preset Option for the Ready design
+Add : Chart : Add Preset Option for the Ready design
+Add : Countdown : Add Preset Option for the Ready design
+Add : Coupon Code : Add Preset Option for the Ready design
+Add : Google Map : Add Preset Option for the Ready design
+Add : Horizontal Scroll : Add Preset Option for the Ready design
+Add : Info Box : Add Preset Option for the Ready design
+Add : Pre Loader : Add Preset Option for the Ready design
+Add : Pricing List : Add Preset Option for the Ready design
+Add : Pricing Table : Add Preset Option for the Ready design
+Add : Protected Content : Add Preset Option for the Ready design
+Add : Social Icon : Add Preset Option for the Ready design
+Add : Social Sharing : Add Preset Option for the Ready design
+Add : Stylish List : Add Preset Option for the Ready design
+Add : Table : Add Preset Option for the Ready design
+Add : WP Login & Register : Add Preset Option for the Ready design
 Improvement : Plus Form : CSS Optimize
-Improvement : Flip Box : CSS Optimize
-Fix : Testimonial Listout : Masonry Layout not working
-Fix : Navigation Menu Lite : Repeater > Mega Menu Template width not working
+Improvement : Search Filter : Compatibility with Row Background
+Fix : Navigation Menu : Relayout issue in Product listing while using the Mega Menu
+Fix : Navigation Menu : Sticky Outer Padding Issue
+FIx : Navigation Menu : Sub Menu Width Issue
+Fix : Navigation Menu : Container Padding option not working in the Sticky Menu
+Fix : Navigation Menu : Repeater > Mega Menu Template responsive width not working
+Fix : Table Widget : PHP Warning
+Fix : Table of Content : Fixed Option not working
 Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.2.3 =

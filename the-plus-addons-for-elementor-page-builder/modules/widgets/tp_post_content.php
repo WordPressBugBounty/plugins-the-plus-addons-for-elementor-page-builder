@@ -218,7 +218,7 @@ class ThePlus_Post_Content extends Widget_Base {
 					),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .elementor-widget-container' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .tp-post-content' => 'align-items: {{VALUE}};',
 				),
 				'separator' => 'before',
 			)
@@ -238,7 +238,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} > .elementor-widget-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tp-post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -251,7 +251,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} .tp-post-content',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_excerpts_style' );
@@ -268,7 +268,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} > .elementor-widget-container' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-post-content' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -277,7 +277,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBg',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} .tp-post-content',
 			)
 		);
 		$this->add_group_control(
@@ -285,7 +285,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBorder',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} .tp-post-content',
 			)
 		);
 		$this->add_responsive_control(
@@ -295,7 +295,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} > .elementor-widget-container' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tp-post-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -303,7 +303,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'boxBoxShadow',
-				'selector' => '{{WRAPPER}} > .elementor-widget-container',
+				'selector' => '{{WRAPPER}} .tp-post-content',
 			)
 		);
 		$this->end_controls_tab();
@@ -320,7 +320,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} > .elementor-widget-container:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .tp-post-content:hover' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -329,7 +329,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBgHover',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container:hover',
+				'selector' => '{{WRAPPER}} .tp-post-content:hover',
 			)
 		);
 		$this->add_group_control(
@@ -337,7 +337,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			array(
 				'name'     => 'boxBorderHover',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'selector' => '{{WRAPPER}} > .elementor-widget-container:hover',
+				'selector' => '{{WRAPPER}} .tp-post-content:hover',
 			)
 		);
 		$this->add_responsive_control(
@@ -347,7 +347,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} > .elementor-widget-container:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .tp-post-content:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -355,7 +355,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'boxBoxShadowHover',
-				'selector' => '{{WRAPPER}} > .elementor-widget-container:hover',
+				'selector' => '{{WRAPPER}} .tp-post-content:hover',
 			)
 		);
 		$this->end_controls_tab();

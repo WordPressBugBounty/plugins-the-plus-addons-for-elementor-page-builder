@@ -63,7 +63,7 @@
 			});
 			function cccs(id, sectionData){
 				var adv_shadow_boxshadow = sectionData.adv_shadow_boxshadow,
-				    adv_shadow_boxshadow_class = ' '+sectionData.adv_shadow_boxshadow_class,
+				    adv_shadow_boxshadow_class = '.'+sectionData.adv_shadow_boxshadow_class,
                     adv_shadow_boxshadow_h_s = sectionData.adv_shadow_boxshadow_h_s,
                     as_bs_lists = sectionData.as_bs_lists,
                     as_bs_lists_h = sectionData.as_bs_lists_h,
@@ -72,7 +72,7 @@
                     as_bs_type = sectionData.as_bs_type,
 
                     adv_shadow_textshadow = sectionData.adv_shadow_textshadow,
-                    adv_shadow_textshadow_class = ' '+sectionData.adv_shadow_textshadow_class,
+                    adv_shadow_textshadow_class = '.'+sectionData.adv_shadow_textshadow_class,
                     adv_shadow_textshadow_h_s = sectionData.adv_shadow_textshadow_h_s,
                     as_ts_lists = sectionData.as_ts_lists,
                     as_ts_lists_h = sectionData.as_ts_lists_h,
@@ -81,7 +81,7 @@
 
 
                     adv_shadow_dropshadow = sectionData.adv_shadow_dropshadow,
-                    adv_shadow_dropshadow_class = ' '+sectionData.adv_shadow_dropshadow_class,
+                    adv_shadow_dropshadow_class = '.'+sectionData.adv_shadow_dropshadow_class,
                     adv_shadow_dropshadow_h_s = sectionData.adv_shadow_dropshadow_h_s,
                     as_ds_lists = sectionData.as_ds_lists,
                     as_ds_lists_h = sectionData.as_ds_lists_h,
@@ -105,7 +105,7 @@
 								var as_bs_x = self.attributes.as_bs_x.size+self.attributes.as_bs_x.unit,
 								as_bs_y = self.attributes.as_bs_y.size+self.attributes.as_bs_y.unit,
 								as_bs_blur = self.attributes.as_bs_blur.size+self.attributes.as_bs_blur.unit,
-								as_bs_spread = self.attributes.as_bs_spread.size+self.attributes.as_bs_spread.unit,
+								as_bs_spread = self.attributes.as_bs_spread.size?self.attributes.as_bs_spread.size:'0'+self.attributes.as_bs_spread.unit,
 								as_bs_type = self.attributes.as_bs_type,
 								as_bs_color = self.attributes.as_bs_color;
 
@@ -123,7 +123,7 @@
 						}
 
 
-                        var selectorStyle = '.elementor-element.elementor-element-'+id+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id+'> .elementor-widget-container '+adv_shadow_boxshadow_class+'{ '+bstrans+'box-shadow :' +bStyle+' }';
+                        var selectorStyle = '.elementor-element.elementor-element-'+id+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id+' '+adv_shadow_boxshadow_class+'{ '+bstrans+'box-shadow :' +bStyle+' }';
 				    	setStyle(selectorStyle,id); 
 						
 						if (adv_shadow_boxshadow_h_s != '') {
@@ -159,7 +159,7 @@
 								});
 							}
 							
-							var selectorStyle = '.elementor-element.elementor-element-'+id1+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id1+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id1+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id1+'> .elementor-widget-container '+adv_shadow_boxshadow_class+'{ '+bstransh+'box-shadow :' +bStyleh+' }';
+							var selectorStyle = '.elementor-element.elementor-element-'+id1+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id1+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id1+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_boxshadow_class+',.elementor-element.elementor-element-'+id1+' '+adv_shadow_boxshadow_class+'{ '+bstransh+'box-shadow :' +bStyleh+' }';
 				    	setStyle(selectorStyle,id1); 
 						}
                     }
@@ -192,7 +192,7 @@
 						}
 
 
-                        var selectorStyleT = '.elementor-element.elementor-element-'+id+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id+'> .elementor-widget-container '+adv_shadow_textshadow_class+'{ '+tstrans+'text-shadow :' +tStyle+' }';
+                        var selectorStyleT = '.elementor-element.elementor-element-'+id+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id+' '+adv_shadow_textshadow_class+'{ '+tstrans+'text-shadow :' +tStyle+' }';
 				    	setStyleTs(selectorStyleT,id); 
 						
 						if (adv_shadow_textshadow_h_s != '') {
@@ -221,7 +221,7 @@
 							}
 
 
-							var selectorStyleT = '.elementor-element.elementor-element-'+id1+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id1+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id1+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id1+'> .elementor-widget-container '+adv_shadow_textshadow_class+'{ '+tstransh+'text-shadow :' +tStyleh+' }';
+							var selectorStyleT = '.elementor-element.elementor-element-'+id1+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id1+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id1+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_textshadow_class+',.elementor-element.elementor-element-'+id1+' '+adv_shadow_textshadow_class+'{ '+tstransh+'text-shadow :' +tStyleh+' }';
 							setStyleTs(selectorStyleT,id1);
 						}                     
                     }
@@ -251,7 +251,7 @@
 						}
 
 
-                        var selectorStyleD = '.elementor-element.elementor-element-'+id+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id+'> .elementor-widget-container '+adv_shadow_dropshadow_class+'{ '+dstrans+'filter :' +dStyle+' }';
+                        var selectorStyleD = '.elementor-element.elementor-element-'+id+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id+' '+adv_shadow_dropshadow_class+'{ '+dstrans+'filter :' +dStyle+' }';
 				    	setStyleDs(selectorStyleD,id); 
 						
 						if (adv_shadow_dropshadow_h_s != '') {
@@ -276,7 +276,7 @@
 							}
 
 
-							var selectorStyleD = '.elementor-element.elementor-element-'+id1+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id1+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id1+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id1+'> .elementor-widget-container '+adv_shadow_dropshadow_class+'{ '+dstransh+'filter :' +dStyleh+' }';
+							var selectorStyleD = '.elementor-element.elementor-element-'+id1+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id1+':not(.elementor-motion-effects-element-type-background) > .elementor-widget-wrap '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id1+' > .elementor-widget-wrap > .elementor-motion-effects-container > .elementor-motion-effects-layer '+adv_shadow_dropshadow_class+',.elementor-element.elementor-element-'+id1+' '+adv_shadow_dropshadow_class+'{ '+dstransh+'filter :' +dStyleh+' }';
 							setStyleDs(selectorStyleD,id1);
 						}                         
                     }
