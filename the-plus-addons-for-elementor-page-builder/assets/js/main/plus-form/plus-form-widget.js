@@ -20,6 +20,22 @@
         var serverError = formdata.server_error || "Server error, please try again later.";
         var isSubmitting = false;
 
+        var formFields = container.querySelectorAll(".tpae-form-field");
+        
+        formFields.forEach(el => {
+            let tabletWidth = el.getAttribute("data-tablet-width"),
+                mobileWidth = el.getAttribute("data-mobile-width"),
+                desktopWidth = el.getAttribute("data-width");
+
+            if (window.innerWidth <= 768) {
+                el.style.width = mobileWidth + "%";
+            } else if (window.innerWidth <= 1024) {
+                el.style.width = tabletWidth + "%";
+            } else {
+                el.style.width = desktopWidth + "%";
+            }
+        });
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             if (isSubmitting) return;

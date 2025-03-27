@@ -72,6 +72,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			'plus_cross_cp','plus_equal_height','plus_section_column_link','column_custom_css','section_custom_css',
 			'custom_width_column','column_mouse_cursor','order_sort_column','column_sticky','plus_adv_shadow',
 			'plus_glass_morphism','section_scroll_animation','plus_display_rules','plus_event_tracker',
+			'plus_custom_css',
 		);
 
 		/**
@@ -113,11 +114,13 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 
 				add_option( 'theplus_options', $theplus_options, '', 'on' );
 			} elseif ( ! is_array( $default_load['check_elements'] ) || ! is_array( $default_load['extras_elements'] ) ) {
-					$theplus_options['check_elements']  = is_array( $default_load['check_elements'] ) ? $default_load['check_elements'] : array();
-					$theplus_options['extras_elements'] = is_array( $default_load['extras_elements'] ) ? $default_load['extras_elements'] : array();
+				$theplus_options['check_elements']  = is_array( $default_load['check_elements'] ) ? $default_load['check_elements'] : array();
+				$theplus_options['extras_elements'] = is_array( $default_load['extras_elements'] ) ? $default_load['extras_elements'] : array();
 
-					update_option( 'theplus_options', $theplus_options, '', 'on' );
+				update_option( 'theplus_options', $theplus_options, '', 'on' );
 			}
+
+			$this->tpae_custom_css_enable();
 
 			// Get Listing Data.
 			$get_listing_data = get_option( 'post_type_options' );
@@ -185,6 +188,30 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 				);
 
 				add_option( 'theplus_api_connection_data', $set_extra_option, '', 'on' );
+			}
+		}
+
+		/**
+		 * This Code use for add custom css key to old 6.2.4 version.
+		 *
+		 * @since 6.2.4
+		 */
+		public function tpae_custom_css_enable() {
+
+			$default_load = get_option( 'theplus_options' );
+
+			// add custom css key to old 6.2.4 version.
+			if( !empty( $default_load ) ){
+				$extras_elements = !empty( $default_load['extras_elements'] ) ? $default_load['extras_elements'] : [];
+
+				if ( in_array( 'section_custom_css', $extras_elements, true ) || in_array( 'column_custom_css', $extras_elements, true ) ) {
+					if ( !in_array( 'plus_custom_css', $extras_elements, true ) ) {
+						$extras_elements[] = 'plus_custom_css';
+						$default_load['extras_elements'] = $extras_elements;
+
+						update_option( 'theplus_options', $default_load, '', 'on' );
+					}
+				}
 			}
 		}
 

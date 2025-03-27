@@ -160,8 +160,6 @@ final class L_Theplus_Element_Load {
 			L_Theplus_Elements_Integration()->init();
 		}
 
-		theplus_core_cp_lite()->init();
-
 		$this->include_widgets();
 	}
 
@@ -236,7 +234,8 @@ final class L_Theplus_Element_Load {
 		require_once L_THEPLUS_INCLUDES_URL . 'plus_addon.php';
 		require_once L_THEPLUS_PATH . 'modules/widgets-feature/class-tp-widgets-feature-main.php';
 
-		require L_THEPLUS_PATH . 'modules/theplus-core-cp.php';
+		require L_THEPLUS_PATH . 'modules/extensions/class-tpae-extensions-main.php';
+		// require L_THEPLUS_PATH . 'modules/theplus-core-cp.php';
 
 		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			require L_THEPLUS_PATH . 'modules/theplus-integration.php';

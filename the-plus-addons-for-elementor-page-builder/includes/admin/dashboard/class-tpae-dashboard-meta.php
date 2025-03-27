@@ -69,7 +69,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		public function tpae_enqueue_scripts( $page ) {
 
 			if ( 'toplevel_page_theplus_welcome_page' === $page ) {
-				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', array( 'wp-i18n', 'wp-element', 'wp-components' ), L_THEPLUS_VERSION, true );
+				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', array( 'wp-i18n', 'wp-element', 'wp-components' ), L_THEPLUS_VERSION . time(), true );
 				wp_localize_script(
 					'tpae-db-build',
 					'tpae_db_object',
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 
 				wp_set_script_translations( 'tpae-db-build', 'tpebl' );
 
-				wp_enqueue_style( 'tpae-db-build', L_THEPLUS_URL . 'build/index.css', array(), L_THEPLUS_VERSION, 'all' );
+				wp_enqueue_style( 'tpae-db-build', L_THEPLUS_URL . 'build/index.css', array(), L_THEPLUS_VERSION . time(), 'all' );
 			}
 		}
 

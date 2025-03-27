@@ -2050,7 +2050,10 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$tab_help          = ! empty( $tab['field_help'] ) ? $tab['field_help'] : '';
 			$tab_ad            = ! empty( $tab['field_ad'] ) ? $tab['field_ad'] : '';
 
-			$form_markup .= '<div class="tpae-form-field" style="width: ' . esc_attr( $tab_column ) . '%;">';
+			$tab_column_tablet = ! empty( $tab['column_width_tablet']['size'] ) ? $tab['column_width_tablet']['size'] : '';
+			$tab_column_mobile = ! empty( $tab['column_width_mobile']['size'] ) ? $tab['column_width_mobile']['size'] : '';
+
+			$form_markup .= '<div class="tpae-form-field" data-width="' . esc_attr($tab_column) . '" data-tablet-width="' . esc_attr($tab_column_tablet) . '" data-mobile-width="' . esc_attr($tab_column_mobile) . '"> ';
 
 			if ( 'yes' === $label_display && ! in_array( $tab_field_type, array( 'recaptcha', 'honeypot', 'hidden' ), true ) ) {
 				$form_markup .= '<label for="form_fields[' . esc_attr( $tab_id ) . ']" class="tpae-form-label">';
