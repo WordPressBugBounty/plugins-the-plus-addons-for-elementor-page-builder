@@ -3,7 +3,7 @@
  * Plugin Name: The Plus Addons for Elementor
  * Plugin URI: https://theplusaddons.com/
  * Description: Highly Customisable 120+ Advanced Elementor Widgets & Extensions for Performance Driven Website.
- * Version: 6.2.6
+ * Version: 6.2.7
  * Author: POSIMYTH
  * Author URI: https://posimyth.com/
  * Text Domain: tpebl
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'L_THEPLUS_VERSION', '6.2.6' );
+define( 'L_THEPLUS_VERSION', '6.2.7' );
 define( 'L_THEPLUS_FILE', __FILE__ );
 define( 'L_THEPLUS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'L_THEPLUS_PBNAME', plugin_basename( __FILE__ ) );

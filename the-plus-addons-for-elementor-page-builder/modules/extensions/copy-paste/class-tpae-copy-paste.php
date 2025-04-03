@@ -135,10 +135,9 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 		 */
 		protected static function tp_elements_id_change( $media_import ) {
 
-			return \Elementor\Plugin::instance()->db->iterate_data(
-				$media_import,
+			return \Elementor\Plugin::instance()->db->iterate_data( $media_import,
 				function ( $element ) {
-					$element['id'] = Utils::generate_random_string();
+					$element['id'] = \Elementor\Utils::generate_random_string();
 					return $element;
 				}
 			);
@@ -181,7 +180,7 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 		 * @param Controls_Stack $element The Elementor element instance to import.
 		 * @return array The element's updated data after executing the import logic.
 		 */
-		protected static function element_copy_content_import_start( Controls_Stack $element ) {
+		protected static function element_copy_content_import_start( $element ) {
 			$get_element_instance = $element->get_data();
 			$tp_mi_on_fun         = 'on_import';
 

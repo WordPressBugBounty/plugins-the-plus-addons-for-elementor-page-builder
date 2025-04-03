@@ -51,19 +51,6 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 		 */
 		public function add_controls( $controls_manager ) {
 
-			$grouped_control = array(
-				'plus-equal-height'        => 'L_Theplus_Equal_Height',
-				'plus-section-column-link' => 'L_Theplus_Section_Column_Link',
-				'plus-glass-morphism'      => 'L_Theplus_Glass_Morphism',
-				'plus-adv-shadow'          => 'L_Theplus_Advanced_Shadow',
-			);
-
-			foreach ( $grouped_control as $control_id => $class_name ) {
-				if ( $this->include_control( $control_id, true ) ) {
-					new $class_name();
-				}
-			}
-
 			$plus_control = array(
 				'plus-query' => 'L_Theplus_Query',
 			);
@@ -79,25 +66,6 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 					}
 				}
 			}
-		}
-
-		/**
-		 * Include control file by class name.
-		 *
-		 * @param  [type] $class_name [description]
-		 * @return [type]             [description]
-		 */
-		public function include_control( $control_id, $grouped = false ) {
-
-			$filename = sprintf( 'modules/controls/group/' . $control_id . '.php' );
-
-			if ( ! file_exists( L_THEPLUS_PATH . $filename ) ) {
-				return false;
-			}
-
-			require L_THEPLUS_PATH . $filename;
-
-			return true;
 		}
 
 		/**

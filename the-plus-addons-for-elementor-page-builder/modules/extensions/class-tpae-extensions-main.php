@@ -3,7 +3,7 @@
  * The file that defines the widget plugin for the free version.
  *
  * @link       https://posimyth.com/
- * @since      6.5.6
+ * @since      6.2.7
  *
  * @package    the-plus-addons-for-elementor-page-builder
  */
@@ -15,19 +15,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define L_Tpae_Extensions_Main class for the free version.
  * 
- * @since 6.5.6
+ * @since 6.2.7
  */
 if ( ! class_exists( 'L_Tpae_Extensions_Main' ) ) {
 
     /**
      * Define L_Tpaef_Extensions_Main class for the free version
      * 
-     * @since 6.5.6
+     * @since 6.2.7
      */
     class L_Tpae_Extensions_Main {
 
         /**
          * Call __construct.
+         * 
+         * @since 6.2.7
          */
         public function __construct() {
 
@@ -39,6 +41,26 @@ if ( ! class_exists( 'L_Tpae_Extensions_Main' ) ) {
             if (  in_array( 'plus_cross_cp', $extras_elements ) ) {
                 require L_THEPLUS_PATH . 'modules/extensions/copy-paste/class-tpae-copy-paste.php';
             }
+
+            if( ! defined( 'THEPLUS_VERSION' ) ){
+
+                if (  in_array( 'plus_equal_height', $extras_elements ) ) {
+                    require L_THEPLUS_PATH . 'modules/extensions/class-tpae-equal-height.php';
+                }
+
+                if (  in_array( 'plus_section_column_link', $extras_elements ) ) {
+                    require L_THEPLUS_PATH . 'modules/extensions/wrapper-link/class-tpae-wrapper-link.php';
+                }
+    
+                if (  in_array( 'plus_adv_shadow', $extras_elements ) ) {
+                    require L_THEPLUS_PATH . 'modules/extensions/class-tpae-advanced-shadow.php';
+                }
+
+                if (  in_array( 'plus_glass_morphism', $extras_elements ) ) {
+                    require L_THEPLUS_PATH . 'modules/extensions/class-tpae-glass-morphism.php';
+                }
+            }
+
         }
     }
 }

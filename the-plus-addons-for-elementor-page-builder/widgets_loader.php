@@ -234,7 +234,9 @@ final class L_Theplus_Element_Load {
 		require_once L_THEPLUS_INCLUDES_URL . 'plus_addon.php';
 		require_once L_THEPLUS_PATH . 'modules/widgets-feature/class-tp-widgets-feature-main.php';
 
-		require L_THEPLUS_PATH . 'modules/extensions/class-tpae-extensions-main.php';
+		add_action( 'elementor/init', function() {
+			require L_THEPLUS_PATH . 'modules/extensions/class-tpae-extensions-main.php';
+		});
 		// require L_THEPLUS_PATH . 'modules/theplus-core-cp.php';
 
 		if ( ! defined( 'THEPLUS_VERSION' ) ) {
