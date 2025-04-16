@@ -18,30 +18,12 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 		private static $instance = null;
 
 		/**
-		 * Check if processing elementor widget
-		 *
-		 * @var boolean
-		 */
-		/**
-		 * Localize data array
-		 *
-		 * @var array
-		 */
-		public $localize_data = array();
-
-		/**
 		 * Initalize integration hooks
 		 * 
 		 * @since 1.0.0
 		 */
 		public function init() {
-
 			add_action( 'elementor/controls/controls_registered', array( $this, 'add_controls' ), 10 );
-
-			// Frontend messages
-			$this->localize_data['messages'] = array(
-				'invalidMail' => esc_html__( 'Please specify a valid e-mail', 'tpebl' ),
-			);
 		}
 
 		/**

@@ -147,7 +147,7 @@ if ( ! class_exists( 'Tpae_Glass_Morphism' ) ) {
 						'size' => 0,
 					),
 					'selectors'  => array(
-						'{{WRAPPER}}, {{WRAPPER}} > .elementor-container,{{WRAPPER}} > .elementor-widget-wrap,{{WRAPPER}}.e-container > div,{{WRAPPER}}.e-con > div' => '-webkit-backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;',
+						'{{WRAPPER}}, {{WRAPPER}} > .elementor-container,{{WRAPPER}} > .elementor-widget-wrap,{{WRAPPER}}.e-container,{{WRAPPER}}.e-con' => '-webkit-backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;backdrop-filter:grayscale({{scwbf_grayscale.SIZE}})  blur({{scwbf_blur.SIZE}}{{scwbf_blur.UNIT}}) !important;',
 					),
 					'condition'  => array(
 						'scwbf_options' => 'yes',

@@ -69,11 +69,6 @@ final class L_Theplus_Element_Load {
 
 		add_action( 'in_plugin_update_message-' . L_THEPLUS_PBNAME, array( $this, 'tp_f_in_plugin_update_message' ), 10, 2 );
 
-		if ( ! did_action( 'elementor/loaded' ) ) {
-			add_action( 'admin_notices', array( $this, 'tp_f_elementor_load_notice' ) );
-			return;
-		}
-
 		register_activation_hook( L_THEPLUS_FILE, array( __CLASS__, 'tp_f_activation' ) );
 		register_deactivation_hook( L_THEPLUS_FILE, array( __CLASS__, 'tp_f_deactivation' ) );
 
@@ -147,6 +142,11 @@ final class L_Theplus_Element_Load {
 	 * @since 5.6.6
 	 */
 	public function tp_f_plugin_loaded() {
+
+		if ( ! did_action( 'elementor/loaded' ) ) {
+			add_action( 'admin_notices', array( $this, 'tp_f_elementor_load_notice' ) );
+			return;
+		}
 
 		// Register class automatically.
 		$this->tp_manage_files();

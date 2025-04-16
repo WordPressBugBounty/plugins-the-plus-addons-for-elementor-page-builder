@@ -280,7 +280,10 @@ class ThePlus_Hovercard extends Widget_Base {
 		$repeater->add_control(
 			'text_content',
 			array(
-				'label'     => wp_kses_post( "Text <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-text-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => sprintf( '%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+					esc_html__( 'Text', 'tpebl' ),
+					esc_url( $this->tp_doc . 'use-text-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+				),
 				'type'      => Controls_Manager::TEXTAREA,
 				'dynamic'   => array( 'active' => true ),
 				'default'   => esc_html__( 'The Plus', 'tpebl' ),
@@ -308,7 +311,10 @@ class ThePlus_Hovercard extends Widget_Base {
 			'media_content',
 			array(
 				'type'      => Controls_Manager::MEDIA,
-				'label'     => wp_kses_post( "Media <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-image-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'   => sprintf( '%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+					esc_html__( 'Media', 'tpebl' ),
+					esc_url( $this->tp_doc . 'use-image-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+				),
 				'dynamic'   => array( 'active' => true ),
 				'default'   => array(
 					'url' => Utils::get_placeholder_image_src(),
@@ -321,7 +327,10 @@ class ThePlus_Hovercard extends Widget_Base {
 		$repeater->add_control(
 			'html_content',
 			array(
-				'label'     => wp_kses_post( "HTML Content <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-html-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => sprintf( '%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+					esc_html__( 'HTML Content', 'tpebl' ),
+					esc_url( $this->tp_doc . 'use-html-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+				),
 				'type'      => Controls_Manager::WYSIWYG,
 				'default'   => esc_html__( 'I am text block. Click edit button to change this text.', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
@@ -333,7 +342,10 @@ class ThePlus_Hovercard extends Widget_Base {
 		$repeater->add_control(
 			'style_content',
 			array(
-				'label'     => wp_kses_post( "Custom Style <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-style-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => sprintf( '%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+					esc_html__( 'Custom Style', 'tpebl' ),
+					esc_url( $this->tp_doc . 'use-style-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+				),
 				'type'      => Controls_Manager::TEXTAREA,
 				'dynamic'   => array( 'active' => true ),
 				'default'   => '',
@@ -345,7 +357,10 @@ class ThePlus_Hovercard extends Widget_Base {
 		$repeater->add_control(
 			'script_content',
 			array(
-				'label'     => wp_kses_post( "Custom Script <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "use-script-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => sprintf( '%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+					esc_html__( 'Custom Script', 'tpebl' ),
+					esc_url( $this->tp_doc . 'use-script-content-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+				),
 				'type'      => Controls_Manager::TEXTAREA,
 				'dynamic'   => array( 'active' => true ),
 				'default'   => '',
@@ -1091,7 +1106,10 @@ class ThePlus_Hovercard extends Widget_Base {
 			$repeater->add_control(
 				'cst_hover',
 				array(
-					'label'     => wp_kses_post( "Custom Hover <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-hover-effect-with-custom-hover-class-in-elementor-hover-card/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+					'label'     => sprintf( '%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Custom Hover', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-hover-effect-with-custom-hover-class-in-elementor-hover-card/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					),
 					'type'      => Controls_Manager::SWITCHER,
 					'default'   => 'no',
 					'label_on'  => esc_html__( 'Enable', 'tpebl' ),
@@ -2703,7 +2721,11 @@ class ThePlus_Hovercard extends Widget_Base {
 		$this->add_control(
 			'how_it_works',
 			array(
-				'label' => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-custom-layout-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				// 'label' => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-custom-layout-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label' => sprintf( '<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+					esc_url( $this->tp_doc . 'create-custom-layout-with-hover-card-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+					esc_html__( 'Learn How it works', 'tpebl' )
+				),
 				'type'  => Controls_Manager::HEADING,
 			)
 		);

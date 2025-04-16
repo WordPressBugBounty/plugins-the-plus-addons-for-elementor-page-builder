@@ -45,6 +45,7 @@ if( 'enable' === $remove_db ) {
 		delete_option('theplus_white_label');
 	}
 
+	delete_option('plusextra-v6.2.6');
 	delete_option('tpae_onbording_end');
 	delete_option('theplus_verified');
 	delete_option('theplus_purchase_code');

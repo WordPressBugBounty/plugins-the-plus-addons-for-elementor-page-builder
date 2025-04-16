@@ -27,7 +27,7 @@
                 mobileWidth = el.getAttribute("data-mobile-width"),
                 desktopWidth = el.getAttribute("data-width");
 
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth < 768) {
                 el.style.width = mobileWidth + "%";
             } else if (window.innerWidth <= 1024) {
                 el.style.width = tabletWidth + "%";

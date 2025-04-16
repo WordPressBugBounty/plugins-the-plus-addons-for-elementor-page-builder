@@ -2154,7 +2154,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			if ( $settings['post_extra_option'] == 'load_more' && $layout != 'carousel' ) {
 				if ( ! empty( $total_posts ) && $total_posts > 0 ) {
 					$output     .= '<div class="ajax_load_more">';
-						$output .= '<a class="post-load-more" data-layout="' . esc_attr( $layout ) . '" data-offset-posts="' . $settings['post_offset'] . '" data-load-class="' . esc_attr( $uid ) . '" data-display_post="' . esc_attr( $settings['display_posts'] ) . '" data-post_load_more="' . esc_attr( $settings['load_more_post'] ) . '" data-loaded_posts="' . esc_attr( $loaded_posts_text ) . '" data-tp_loading_text="' . esc_attr( $tp_loading_text ) . '" data-page="1" data-total_page="' . esc_attr( $load_page ) . '" data-loadattr= \'' . $data_loadkey . '\'>' . esc_html( $settings['load_more_btn_text'] ) . '</a>';
+						$output .= '<a class="post-load-more" data-layout="' . esc_attr( $layout ) . '" data-offset-posts="' . esc_attr($settings['post_offset']) . '" data-load-class="' . esc_attr( $uid ) . '" data-display_post="' . esc_attr( $settings['display_posts'] ) . '" data-post_load_more="' . esc_attr( $settings['load_more_post'] ) . '" data-loaded_posts="' . esc_attr( $loaded_posts_text ) . '" data-tp_loading_text="' . esc_attr( $tp_loading_text ) . '" data-page="1" data-total_page="' . esc_attr( $load_page ) . '" data-loadattr= \'' . $data_loadkey . '\'>' . esc_html( $settings['load_more_btn_text'] ) . '</a>';
 					$output     .= '</div>';
 				}
 			}

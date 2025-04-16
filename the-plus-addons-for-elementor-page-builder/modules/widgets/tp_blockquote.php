@@ -337,7 +337,10 @@ class ThePlus_Block_Quote extends Widget_Base {
 			'tweet_Note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : If disable, It will tweet content of blockquote instead of current page URL.</i></p>',
+				'raw'         => sprintf(
+					'<p class="tp-controller-notice"><i>%s</i></p>',
+					esc_html__( 'Note : If disabled, it will tweet content of blockquote instead of current page URL.', 'tpebl' )
+				),
 				'label_block' => true,
 			)
 		);

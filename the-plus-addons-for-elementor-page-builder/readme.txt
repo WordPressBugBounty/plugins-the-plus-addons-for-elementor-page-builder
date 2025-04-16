@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.2.7
+Stable tag: 6.2.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -381,6 +381,23 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.2.8 =
+Add : Product Listing : Wishlist listing Compatibility With Lazy Load
+Add : Continuous Animation : Added switch in Dashboard for the enable/disable
+Add : Magic Scroll : Added switch in Dashboard for the enable/disable
+Add : Mouse Move Parallax : Added switch in Dashboard for the enable/disable
+Add : Overlay Special Effect : Added switch in Dashboard for the enable/disable
+Add : Tilt 3D Parallax : Added switch in Dashboard for the enable/disable
+Add : Tooltip : Added switch in Dashboard for the enable/disable
+Add : Add option for the disable unused extensions
+Improvements : Elementor Widgets Manage Compatibility
+Fix : Blog Listing : Security Patch ( Low Security )
+Fix : Blockquote : Text translate Issue Solved
+Fix : Hovercard : Text translate Issue Solved
+Fix : Form Widget : Responsive width Issue solved
+Fix : Glass Morphism : Blur Issue solved
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.2.7 =
 Add : Accordion : Add Preset Option for the Ready Design

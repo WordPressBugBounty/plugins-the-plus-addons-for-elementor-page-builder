@@ -96,6 +96,9 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				case 'tpae_get_scan_widgets':
 					$response = $this->tpae_get_elements_status_scan();
 					break;
+				case 'tpae_get_scan_extension':
+					$response = $this->tpae_get_extension_status_scan();
+					break;
 				case 'tpae_set_extra_options':
 					$response = $this->tpae_set_extra_options();
 					break;
@@ -178,9 +181,9 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					'plugin_slug' => 'nexter-extension/nexter-extension.php',
 				),
 				// array(
-				// 	'name'        => 'envato-elements',
-				// 	'status'      => '',
-				// 	'plugin_slug' => 'envato-elements/envato-elements.php',
+				// 'name'        => 'envato-elements',
+				// 'status'      => '',
+				// 'plugin_slug' => 'envato-elements/envato-elements.php',
 				// ),
 			);
 
@@ -193,40 +196,42 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 			$tpae_pro = defined( 'THEPLUS_VERSION' ) ? 1 : 0;
 
-			$get_whats_new      = get_transient( 'tp_dashboard_overview' );
+			$get_whats_new = get_transient( 'tp_dashboard_overview' );
 			// $get_active_widgets = $this->tpae_get_elements_status_scan();
 
 			$user_info = array(
-				'user_image'   => $user_image,
-				'roles'        => $user->roles,
-				'user_name'    => $user->display_name,
-				'tpae_pro'     => $tpae_pro,
-				'whatsnew'     => $get_whats_new,
+				'user_image' => $user_image,
+				'roles'      => $user->roles,
+				'user_name'  => $user->display_name,
+				'tpae_pro'   => $tpae_pro,
+				'whatsnew'   => $get_whats_new,
 				// 'used_widgets' => $get_active_widgets,
-				'success'      => true,
+				'success'    => true,
 			);
 
-			$get_widget_list   = get_option( 'theplus_options', array() );
-			$get_extra_option  = get_option( 'theplus_api_connection_data', array() );
-			$get_listing_data  = get_option( 'post_type_options' );
-			$get_custom_css_js = get_option( 'theplus_styling_data' );
-			$get_performance   = get_option( 'theplus_performance' );
+			$elementor_disabled = apply_filters( 'tpae_elementor_disable_widgets', null );
+			$get_widget_list    = get_option( 'theplus_options', array() );
+			$get_extra_option   = get_option( 'theplus_api_connection_data', array() );
+			$get_listing_data   = get_option( 'post_type_options' );
+			$get_custom_css_js  = get_option( 'theplus_styling_data' );
+			$get_performance    = get_option( 'theplus_performance' );
 
 			$wdk_widgets = array();
 			$wdk_widgets = apply_filters( 'wdk_widget_ajax_call', 'wdk_get_widget_ajax' );
 
 			$response = array(
-				'success'       => true,
-				'message'       => esc_html__( 'success', 'tpebl' ),
-				'description'   => esc_html__( 'success', 'tpebl' ),
-				'user_info'     => $user_info,
-				'widgets'       => $get_widget_list,
-				'extra_option'  => $get_extra_option,
-				'listing_data'  => $get_listing_data,
-				'plugin_detail' => $plugin_details,
-				'custom_css_js' => $get_custom_css_js,
-				'performance'   => $get_performance,
-				'wdk_widgets'   => $wdk_widgets,
+				'success'            => true,
+				'message'            => esc_html__( 'success', 'tpebl' ),
+				'description'        => esc_html__( 'success', 'tpebl' ),
+				'user_info'          => $user_info,
+				'widgets'            => $get_widget_list,
+				'extra_option'       => $get_extra_option,
+				'listing_data'       => $get_listing_data,
+				'plugin_detail'      => $plugin_details,
+				'custom_css_js'      => $get_custom_css_js,
+				'performance'        => $get_performance,
+				'wdk_widgets'        => $wdk_widgets,
+				'elementor_disabled' => $elementor_disabled,
 			);
 
 			if ( defined( 'THEPLUS_VERSION' ) ) {
@@ -293,6 +298,22 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 			update_option( 'theplus_options', $widget_data );
 
+			// Remove Elementor Disable Widget.
+			$elementor_disabled_elements = get_option( 'elementor_disabled_elements', false );
+			if ( ! empty( $elementor_disabled_elements ) ) {
+				$converted = array_map(
+					function ( $widget ) {
+						return str_replace( '-', '_', $widget );
+					},
+					$elementor_disabled_elements
+				);
+
+				$final = array_diff( $converted, $widget_data['check_elements'] );
+				$final = array_values( $final );
+
+				update_option( 'elementor_disabled_elements', $final, '', 'on' );
+			}
+
 			$this->tpae_backend_catch_remove();
 
 			return $this->tpae_set_response( true, 'Successfully.', 'Successfully.' );
@@ -316,7 +337,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			}
 
 			$this->tpae_backend_catch_remove();
-			
+
 			return $this->tpae_set_response( true, 'Data Updated.', 'Data Updated Successfully.' );
 		}
 
@@ -327,10 +348,23 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		 */
 		public function tpae_get_elements_status_scan() {
 
-			$type = array('get_unused_widgets');
+			$type = array( 'get_unused_widgets' );
 
 			return apply_filters( 'tpae_widget_scan', $type );
 		}
+
+		/**
+		 * Scan Extension : Get all Scan Extension list
+		 *
+		 * @since 6.1.4
+		 */
+		public function tpae_get_extension_status_scan() {
+
+			$type = array( 'get_unused_extentions' );
+
+			return apply_filters( 'tpae_widget_scan', $type );
+		}
+
 
 		/**
 		 * tpae_get_custom_css_js
@@ -480,16 +514,16 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 			$plugin_slug = basename( L_THEPLUS_PNAME, '.php' );
 
-			$thisVersion     = $current_ver;
-			$this_pluginName = L_THEPLUS_PBNAME;
-			$this_pluginSlug = $plugin_slug;
-			$this_pluginURL  = sprintf( 'https://downloads.wordpress.org/plugin/%s.%s.zip', $this_pluginSlug, $thisVersion );
+			$this_version    = $current_ver;
+			$this_pluginname = L_THEPLUS_PBNAME;
+			$this_pluginslug = $plugin_slug;
+			$this_plugin_url = sprintf( 'https://downloads.wordpress.org/plugin/%s.%s.zip', $this_pluginslug, $this_version );
 
 			$plugin_info = array(
-				'plugin_name' => $this_pluginName,
-				'plugin_slug' => $this_pluginSlug,
-				'version'     => $thisVersion,
-				'package_url' => $this_pluginURL,
+				'plugin_name' => $this_pluginname,
+				'plugin_slug' => $this_pluginslug,
+				'version'     => $this_version,
+				'package_url' => $this_plugin_url,
 			);
 
 			$update_plugins_data = get_site_transient( 'update_plugins' );
@@ -499,12 +533,13 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			}
 
 			$plugin_info              = new \stdClass();
-			$plugin_info->new_version = $thisVersion;
-			$plugin_info->slug        = $this_pluginSlug;
-			$plugin_info->package     = $this_pluginURL;
-			$plugin_info->url         = 'https://theplusaddons.com/';
+			$plugin_info->new_version = $this_version;
 
-			$update_plugins_data->response[ $this_pluginName ] = $plugin_info;
+			$plugin_info->slug    = $this_pluginslug;
+			$plugin_info->package = $this_plugin_url;
+			$plugin_info->url     = 'https://theplusaddons.com/';
+
+			$update_plugins_data->response[ $this_pluginname ] = $plugin_info;
 
 			set_site_transient( 'update_plugins', $update_plugins_data );
 
@@ -513,16 +548,16 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$logo_url = L_THEPLUS_URL . 'assets/images/theplus-logo-small.png';
 
 			$args = array(
-				'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this_pluginName ),
-				'plugin' => $this_pluginName,
-				'nonce'  => 'upgrade-plugin_' . $this_pluginName,
+				'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this_pluginname ),
+				'plugin' => $this_pluginname,
+				'nonce'  => 'upgrade-plugin_' . $this_pluginname,
 				'title'  => '<img src="' . esc_url( $logo_url ) . '" alt="theplus-logo"><div class="theplus-rb-subtitle">' . esc_html__( 'Rollback to Previous Version', 'tpebl' ) . '</div>',
 			);
 
 			$upgrader_plugin = new \Plugin_Upgrader( new \Plugin_Upgrader_Skin( $args ) );
-			$upgrader_plugin->upgrade( $this_pluginName );
+			$upgrader_plugin->upgrade( $this_pluginname );
 
-			$activation_result = activate_plugin( $this_pluginName );
+			$activation_result = activate_plugin( $this_pluginname );
 
 			return $this->tpae_set_response( true, 'Roll Back Successfully', 'Roll Back Successfully Done.' );
 			// wp_redirect( esc_url( admin_url( 'admin.php?page=theplus_welcome_page' ) ) );
@@ -604,14 +639,14 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				$activation_result = activate_plugin( $plugin_basename );
 
 				$success = null === $activation_result;
-				$result  = $this->tpae_set_response( $success, "Successfully Install", "Successfully Install", '' );
+				$result  = $this->tpae_set_response( $success, 'Successfully Install', 'Successfully Install', '' );
 
 			} elseif ( isset( $installed_plugins[ $plugin_basename ] ) ) {
 
 				$activation_result = activate_plugin( $plugin_basename );
 
 				$success = null === $activation_result;
-				$result  = $this->tpae_set_response( $success, "Successfully Activate", "Successfully Activate", '' );
+				$result  = $this->tpae_set_response( $success, 'Successfully Activate', 'Successfully Activate', '' );
 
 			}
 
