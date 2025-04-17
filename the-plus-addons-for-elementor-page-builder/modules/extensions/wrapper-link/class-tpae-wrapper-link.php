@@ -102,7 +102,7 @@ if ( ! class_exists( 'Tpae_Wrapper_Link' ) ) {
 			$element->start_controls_section(
 				'plus_sc_link_section',
 				array(
-					'label' => esc_html__( 'Plus Extras : Wrapper Link', 'tpebl' ),
+					'label' => esc_html__( 'Wrapper Link', 'tpebl' ),
 					'tab'   => Controls_Manager::TAB_ADVANCED,
 				)
 			);

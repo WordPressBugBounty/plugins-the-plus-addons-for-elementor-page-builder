@@ -93,7 +93,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 			$element->start_controls_section(
 				'plus_adv_shadow_section',
 				array(
-					'label' => esc_html__( 'Plus Extras : Advanced Shadows', 'tpebl' ),
+					'label' => esc_html__( 'Advanced Shadows', 'tpebl' ),
 					'tab'   => Controls_Manager::TAB_ADVANCED,
 				)
 			);

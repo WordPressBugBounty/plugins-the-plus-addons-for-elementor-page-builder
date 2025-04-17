@@ -1965,16 +1965,6 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		/** Plus Extra*/
-		$this->start_controls_section(
-			'section_plus_extra_adv',
-			array(
-				'label' => esc_html__( 'Plus Extras', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED,
-			)
-		);
-		$this->end_controls_section();
-
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 

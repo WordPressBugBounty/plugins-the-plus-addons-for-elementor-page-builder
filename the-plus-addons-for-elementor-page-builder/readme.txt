@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.2.8
+Stable tag: 6.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -381,6 +381,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.0 =
+Improvement : Advanced Shadow : UI Improvement
+Improvement : Equal Height : UI Improvement
+Improvement : Glass Morphism : UI Improvement
+Improvement : Wrapper Link : UI Improvement
+Fix : disable unused extensions issue
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.2.8 =
 Add : Product Listing : Wishlist listing Compatibility With Lazy Load

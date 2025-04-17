@@ -96,7 +96,7 @@ if ( ! class_exists( 'Tpae_Equal_Height' ) ) {
 			$element->start_controls_section(
 				'plus_equal_height_section',
 				array(
-					'label' => esc_html__( 'Plus Extras : Equal Height', 'tpebl' ),
+					'label' => esc_html__( 'Equal Height', 'tpebl' ),
 					'tab'   => Controls_Manager::TAB_ADVANCED,
 				)
 			);

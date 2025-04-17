@@ -616,3 +616,29 @@ ul#adminmenu a[href*="page=theplus-upgrade"]{color:#FFF;background:#8072FC;margi
     line-height: 15px;
     letter-spacing: 0.3px;
 }
+
+.elementor-control-plus_event_tracker_options_sections:before,
+.elementor-control-plus_widgets_rules_section:before,
+.elementor-control-plus_scroll_animation_section:before,
+.elementor-control-plus_section_customcss_section:before,
+.elementor-control-plus_adv_shadow_section:before,
+.elementor-control-plus_equal_height_section:before,
+.elementor-control-plus_glass_morphism_section:before,
+.elementor-control-plus_sc_link_section:before,
+.elementor-control-plus_scroll_animation_section:before,
+.elementor-control-plus_column_width_section:before,
+.elementor-control-plus_mouse_cursor_section:before,
+.elementor-control-plus_section_stickycon_section:before {
+    content: "";
+    position: absolute;
+    height: 23px;
+    width: 23px;
+    top: 13px;
+    right: 20px;
+    background-image: url(../../images/products/theplus-product.png);
+    background-position: center center;
+    background-size: cover;
+    z-index: 1;
+    border-radius: 50%;
+    display: flex;
+}

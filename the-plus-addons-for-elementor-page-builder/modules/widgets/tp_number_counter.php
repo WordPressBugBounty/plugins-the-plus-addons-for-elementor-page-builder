@@ -2017,14 +2017,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-		$this->start_controls_section(
-			'section_plus_extra_adv',
-			array(
-				'label' => esc_html__( 'Plus Extras', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_ADVANCED,
-			)
-		);
-		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_animation_styling',
 			array(

@@ -93,7 +93,7 @@ if ( ! class_exists( 'Tpae_Glass_Morphism' ) ) {
 			$element->start_controls_section(
 				'plus_glass_morphism_section',
 				array(
-					'label' => esc_html__( 'Plus Extras : Glass Morphism', 'tpebl' ),
+					'label' => esc_html__( 'Glass Morphism', 'tpebl' ),
 					'tab'   => Controls_Manager::TAB_ADVANCED,
 				)
 			);

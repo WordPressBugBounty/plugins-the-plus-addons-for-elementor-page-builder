@@ -93,7 +93,6 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 		public function add_widgets( $widgets_manager ) {
 
 			$grouped = array(
-				'theplus-widgets'         => '\TheplusAddons\Widgets\L_Theplus_Elements_Widgets',
 				'tp_smooth_scroll'        => '\TheplusAddons\Widgets\ThePlus_Smooth_Scroll',
 				'tp_accordion'            => '\TheplusAddons\Widgets\L_ThePlus_Accordion',
 				'tp_adv_text_block'       => '\TheplusAddons\Widgets\ThePlus_Adv_Text_Block',
@@ -152,7 +151,6 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 
 			$get_option = l_theplus_get_option( 'general', 'check_elements' );
 			if ( ! empty( $get_option ) ) {
-				array_push( $get_option, 'theplus-widgets' );
 				foreach ( $grouped as $widget_id => $class_name ) {
 					if ( in_array( $widget_id, $get_option ) ) {
 						if ( $this->include_widget( $widget_id, true ) ) {
