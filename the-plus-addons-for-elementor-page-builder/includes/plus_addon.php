@@ -1541,13 +1541,6 @@ function l_registered_widgets(){
 				],
 			],
 		],
-		'plus-equal-height' => [
-			'dependency' => [
-				'js' => [
-					L_THEPLUS_PATH . DIRECTORY_SEPARATOR . 'assets/js/main/equal-height/plus-equal-height.min.js',
-				],
-			],
-		],
 		'plus-lazyLoad' => [
 			'dependency' => [
 				'css' => [

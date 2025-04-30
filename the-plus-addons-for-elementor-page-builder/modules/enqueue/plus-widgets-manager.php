@@ -266,10 +266,6 @@ class Plus_Widgets_Manager {
 
 	public function plus_widgets_options( $options = '', $widget_name = '' ) {
 
-		if ( ! empty( $options['seh_switch'] ) && 'yes' === $options['seh_switch'] ) {
-			$this->transient_widgets[] = 'plus-equal-height';
-		}
-
 		if ( tp_has_lazyload() && ! in_array( 'plus-lazyLoad', $this->transient_widgets ) ) {
 			$this->transient_widgets[] = 'plus-lazyLoad';
 		}

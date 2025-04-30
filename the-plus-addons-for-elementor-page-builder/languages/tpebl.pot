@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the The Plus Addons for Elementor plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.3.1\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-17T11:00:24+00:00\n"
+"POT-Creation-Date: 2025-04-29T12:59:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: tpebl\n"
@@ -1302,7 +1302,7 @@ msgstr ""
 #: modules/extensions/class-tpae-advanced-shadow.php:573
 #: modules/extensions/class-tpae-advanced-shadow.php:680
 #: modules/extensions/class-tpae-advanced-shadow.php:830
-#: modules/extensions/class-tpae-equal-height.php:108
+#: modules/extensions/class-tpae-equal-height.php:110
 #: modules/extensions/class-tpae-glass-morphism.php:105
 #: modules/widgets/tp_blockquote.php:210
 #: modules/widgets/tp_blockquote.php:292
@@ -1418,7 +1418,7 @@ msgstr ""
 #: modules/extensions/class-tpae-advanced-shadow.php:574
 #: modules/extensions/class-tpae-advanced-shadow.php:681
 #: modules/extensions/class-tpae-advanced-shadow.php:831
-#: modules/extensions/class-tpae-equal-height.php:109
+#: modules/extensions/class-tpae-equal-height.php:111
 #: modules/extensions/class-tpae-glass-morphism.php:106
 #: modules/widgets/tp_blockquote.php:211
 #: modules/widgets/tp_blockquote.php:293
@@ -2332,29 +2332,29 @@ msgstr ""
 msgid "Hover Drop Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:99
-#: modules/extensions/class-tpae-equal-height.php:106
+#: modules/extensions/class-tpae-equal-height.php:101
+#: modules/extensions/class-tpae-equal-height.php:108
 #: build/index.js:1
 msgid "Equal Height"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:117
+#: modules/extensions/class-tpae-equal-height.php:119
 msgid "Mode Based on"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:132
+#: modules/extensions/class-tpae-equal-height.php:134
 msgid "Select Nested Level"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:157
+#: modules/extensions/class-tpae-equal-height.php:159
 msgid "Select Sub Nested Level"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:181
+#: modules/extensions/class-tpae-equal-height.php:183
 msgid "Enter Unique Class"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:183
+#: modules/extensions/class-tpae-equal-height.php:185
 msgid ".class-name"
 msgstr ""
 
@@ -2372,15 +2372,15 @@ msgstr ""
 msgid "Grayscale"
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:108
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:109
 msgid "Not a Valid"
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:114
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:115
 msgid "Empty Content."
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:259
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:260
 msgid "Warning: TPAE Pro Plugin Widgets Used"
 msgstr ""
 
@@ -5966,6 +5966,7 @@ msgstr ""
 #: modules/widgets/tp_tabs_tours.php:2270
 #: modules/widgets/tp_tabs_tours.php:2279
 #: modules/widgets/tp_tabs_tours.php:2300
+#: modules/extensions/copy-paste/tpae-copy-paste.js:479
 msgid "Note :"
 msgstr ""
 
@@ -8022,6 +8023,8 @@ msgid "Loading Text"
 msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:715
+#: modules/extensions/copy-paste/tpae-copy-paste.js:407
+#: modules/extensions/copy-paste/tpae-copy-paste.js:410
 msgid "Loading..."
 msgstr ""
 
@@ -19019,4 +19022,36 @@ msgstr ""
 
 #: modules/extensions/copy-paste/tpae-copy-paste.js:71
 msgid "Please grant clipboard permission for smoother copying and pasting."
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:174
+msgid "We are pasting your design"
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:175
+msgid "We have pasted your design"
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:176
+msgid "Now we are importing your design"
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:177
+msgid "We have successfully imported the design"
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:411
+msgid "You’ve successfully pasted the design from the source site"
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:465
+msgid "We've found "
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:465
+msgid "widget(s) used in this design"
+msgstr ""
+
+#: modules/extensions/copy-paste/tpae-copy-paste.js:479
+msgid "We enable these widgets in your WordPress site"
 msgstr ""

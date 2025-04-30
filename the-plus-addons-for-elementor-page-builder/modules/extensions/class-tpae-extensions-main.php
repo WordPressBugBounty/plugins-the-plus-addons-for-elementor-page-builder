@@ -39,26 +39,23 @@ if ( ! class_exists( 'L_Tpae_Extensions_Main' ) ) {
             $get_widget = ! empty( $theplus_options['check_elements'] ) ? $theplus_options['check_elements'] : [];
 
             if (  in_array( 'plus_cross_cp', $extras_elements ) ) {
-                require L_THEPLUS_PATH . 'modules/extensions/copy-paste/class-tpae-copy-paste.php';
+                include L_THEPLUS_PATH . 'modules/extensions/copy-paste/class-tpae-copy-paste.php';
             }
 
-            if( ! defined( 'THEPLUS_VERSION' ) ){
+            if (  in_array( 'plus_equal_height', $extras_elements ) ) {
+                include L_THEPLUS_PATH . 'modules/extensions/class-tpae-equal-height.php';
+            }
 
-                if (  in_array( 'plus_equal_height', $extras_elements ) ) {
-                    require L_THEPLUS_PATH . 'modules/extensions/class-tpae-equal-height.php';
-                }
+            if (  in_array( 'plus_section_column_link', $extras_elements ) ) {
+                include L_THEPLUS_PATH . 'modules/extensions/wrapper-link/class-tpae-wrapper-link.php';
+            }
 
-                if (  in_array( 'plus_section_column_link', $extras_elements ) ) {
-                    require L_THEPLUS_PATH . 'modules/extensions/wrapper-link/class-tpae-wrapper-link.php';
-                }
-    
-                if (  in_array( 'plus_adv_shadow', $extras_elements ) ) {
-                    require L_THEPLUS_PATH . 'modules/extensions/class-tpae-advanced-shadow.php';
-                }
+            if (  in_array( 'plus_adv_shadow', $extras_elements ) ) {
+                include L_THEPLUS_PATH . 'modules/extensions/class-tpae-advanced-shadow.php';
+            }
 
-                if (  in_array( 'plus_glass_morphism', $extras_elements ) ) {
-                    require L_THEPLUS_PATH . 'modules/extensions/class-tpae-glass-morphism.php';
-                }
+            if (  in_array( 'plus_glass_morphism', $extras_elements ) ) {
+                include L_THEPLUS_PATH . 'modules/extensions/class-tpae-glass-morphism.php';
             }
 
         }

@@ -616,7 +616,7 @@ ul#adminmenu a[href*="page=theplus-upgrade"]{color:#FFF;background:#8072FC;margi
     line-height: 15px;
     letter-spacing: 0.3px;
 }
-
+.elementor-control-section_plus_extra_adv:before,
 .elementor-control-plus_event_tracker_options_sections:before,
 .elementor-control-plus_widgets_rules_section:before,
 .elementor-control-plus_scroll_animation_section:before,
@@ -639,6 +639,6 @@ ul#adminmenu a[href*="page=theplus-upgrade"]{color:#FFF;background:#8072FC;margi
     background-position: center center;
     background-size: cover;
     z-index: 1;
-    border-radius: 50%;
+    border-radius: 15%;
     display: flex;
 }

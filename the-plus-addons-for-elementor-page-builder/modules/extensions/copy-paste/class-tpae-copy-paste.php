@@ -91,6 +91,7 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 					'nonce'    => wp_create_nonce( 'plus_cross_cp_import' ),
+					'asset_url'=> L_THEPLUS_URL,
 				)
 			);
 		}
@@ -241,7 +242,7 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 			$plugin_check = $this->tpae_check_plugin_status();
 			$widgets_name = isset( $_POST['widgets_name'] ) ? wp_unslash( $_POST['widgets_name'] ) : array();
 
-			if ( false == $plugin_check ) {
+			if ( 'false' == $plugin_check ) {
 				$tpae_widgets = $this->pro_widgets;
 
 				$matching_widgets = array();
@@ -290,9 +291,9 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 
 			$installed_plugins = get_plugins();
 
-			$installed = false;
+			$installed = 'false';
 			if ( is_plugin_active( $this->t_h_e_p_l_u_s_p_r_o_slug ) && isset( $installed_plugins[ $this->t_h_e_p_l_u_s_p_r_o_slug ] ) ) {
-				$installed = true;
+				$installed = 'true';
 			}
 
 			return $installed;

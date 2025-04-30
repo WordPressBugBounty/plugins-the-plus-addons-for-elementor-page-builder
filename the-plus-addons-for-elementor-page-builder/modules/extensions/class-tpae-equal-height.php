@@ -85,6 +85,8 @@ if ( ! class_exists( 'Tpae_Equal_Height' ) ) {
 			// add_action( 'elementor/frontend/section/before_render', [ $this, 'tp_equalheight_before_render'], 10, 1 );!
 			// add_action( 'elementor/frontend/widget/before_render', [ $this, 'tp_equalheight_before_render' ], 10, 1 );!
 			add_action( 'elementor/frontend/before_render', array( $this, 'tp_equalheight_before_render' ), 10, 1 );
+
+			add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'tp_enqueue_scripts' ), 10 );
 		}
 
 		/**
@@ -188,6 +190,15 @@ if ( ! class_exists( 'Tpae_Equal_Height' ) ) {
 				)
 			);
 			$element->end_controls_section();
+		}
+
+		/**
+		 * Enqueue necessary scripts and styles for the widget.
+		 *
+		 * @since 6.2.7
+		 */
+		public function tp_enqueue_scripts() {
+			wp_enqueue_script( 'plus-equal-height', L_THEPLUS_URL . 'modules/extensions/equal-height/plus-equal-height.min.js', array( 'jquery' ), L_THEPLUS_VERSION, true );
 		}
 
 		/**

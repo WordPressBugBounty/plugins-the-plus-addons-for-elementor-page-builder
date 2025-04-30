@@ -36,7 +36,7 @@
 
                                     // Create a textarea element
                                     var textarea = document.createElement('textarea');
-                                        textarea.value = JSON.stringify(b);
+                                    textarea.value = JSON.stringify(b);
 
                                     // Append textarea, select its content, copy, and remove it
                                     document.body.appendChild(textarea);
@@ -68,17 +68,17 @@
                                                 var container = document.createElement('div'),
                                                     paragraph = document.createElement('p');
 
-                                                    paragraph.innerHTML = __("Please grant clipboard permission for smoother copying and pasting.", "tpebl");
+                                                paragraph.innerHTML = __("Please grant clipboard permission for smoother copying and pasting.", "tpebl");
 
                                                 var inputArea = document.createElement('input');
-                                                    inputArea.id = 'tpae-paste-area-input';
-                                                    inputArea.type = 'text';
-                                                    inputArea.setAttribute('autocomplete', 'off');
-                                                    inputArea.setAttribute('autofocus', 'autofocus');
-                                                    inputArea.focus();
+                                                inputArea.id = 'tpae-paste-area-input';
+                                                inputArea.type = 'text';
+                                                inputArea.setAttribute('autocomplete', 'off');
+                                                inputArea.setAttribute('autofocus', 'autofocus');
+                                                inputArea.focus();
 
-                                                    container.appendChild(paragraph);
-                                                    container.appendChild(inputArea);
+                                                container.appendChild(paragraph);
+                                                container.appendChild(inputArea);
 
                                                 inputArea.addEventListener('paste', async function (event) {
                                                     event.preventDefault();
@@ -171,9 +171,22 @@
 
     const tpae_manage_paste = async (parsedData, h) => {
 
-        var widgets_name = await tpae_get_widgetsname(parsedData.tpelecode);
+        let message1 = __('We are pasting your design' , "tpebl");
+        let message2 = __('We have pasted your design' , "tpebl");
+        let message3 = __('Now we are importing your design' , "tpebl");
+        let message4 = __('We have successfully imported the design' , "tpebl");
 
-        let response = await jQuery.ajax({
+        showTpaePopup(message1);
+
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const widgets_name = await tpae_get_widgetsname(parsedData.tpelecode);
+
+        showTpaePopup(message2, widgets_name, false, true);
+
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const response = await jQuery.ajax({
             url: theplus_cross_cp.ajax_url,
             method: "POST",
             data: {
@@ -184,22 +197,37 @@
             }
         });
 
-        if (response.success == false) {
+        if (response.success === false) {
             alert(response.message);
+            hideTpaePopup();
             return;
         }
 
+        showTpaePopup(message3, widgets_name, false, true);
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         await tpae_widgets_load();
 
-        if (response.success) {
-
-            await tpae_createWidgetElements(parsedData, h);
-
-            elementor.saver.update.apply().then(function () {
-                // window.location.reload();
-            });
+        for (let i = 0; i < widgets_name.length; i++) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+            const tickEl = document.getElementById(`tpae-widget-status-${i}`);
+            if (tickEl) {
+                tickEl.classList.remove("loader");
+                tickEl.textContent = "✔";
+            }
         }
-    }
+
+        await tpae_createWidgetElements(parsedData, h);
+
+        showTpaePopup( message4, [], true );
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
+        elementor.saver.update.apply();
+
+        hideTpaePopup();
+    };
 
     /**
      * This Function are used for get all widgets list.
@@ -209,7 +237,6 @@
         if (obj.hasOwnProperty("widgetType") && obj.widgetType) {
             widgetTypes.push(obj.widgetType);
         }
-
         if (Array.isArray(obj.elements)) {
             obj.elements.forEach(element =>
                 tpae_get_widgetsname(element, widgetTypes));
@@ -222,17 +249,14 @@
         const Oa = (e) => {
             return new Promise((resolve, reject) => {
                 const r = document.createElement(e.nodeName);
-                // Set attributes like id, rel, src, href, type
                 ["id", "rel", "src", "href", "type"].forEach(attr => {
                     if (e[attr]) {
                         r[attr] = e[attr];
                     }
                 });
-                // Append inner HTML content if present
                 if (e.innerHTML) {
                     r.appendChild(document.createTextNode(e.innerHTML));
                 }
-                // Resolve on load, reject on error
                 r.onload = () => {
                     resolve(true);
                 };
@@ -360,4 +384,132 @@
             return false;
         }
     }
+
+    /**
+     * This Functionis use for return HTML.
+     * 
+     * @returns HTML
+     */
+    function initTpaePopup() {
+
+        if (document.getElementById("tpae-popup-overlay")) return;
+
+        const style = document.createElement("style");
+        document.head.appendChild(style);
+
+        const popup = document.createElement("div");
+        popup.id = "tpae-popup-overlay";
+        popup.style.display = "none";
+        popup.innerHTML = `
+                    <div id="tpae-popup-box">
+                        <div class="tpae-heading-container">
+                        <div id="tpae-popup-icon" class="tpae-spinner-container tpae-spinner">
+                            <img id="tpae-popup-spinner" class="tpae-spinner" src="${theplus_cross_cp.asset_url}assets/svg/tp_loader.svg" width="60" height="60" alt=" ` + __("Loading...", "tpebl") + ` " />
+                        </div>
+                        <div class="tpae-message-container">
+                            <span id="tpae-popup-message">` + __("Loading...", "tpebl") + `</span>
+                            <span id="tpae-popup-submessage">` + __("You’ve successfully pasted the design from the source site", "tpebl") + `</span>
+                        </div>
+                        </div>
+                        <div id="tpae-widget-info"></div>
+                    </div>`;
+
+        document.body.appendChild(popup);
+    }
+
+    const typeMessage = (element, text, speed = 50) => {
+        element.innerHTML = "";
+        let i = 0;
+
+        const typeChar = () => {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeChar, speed);
+            }
+        };
+
+        typeChar();
+    };
+
+    let storedIconImg = null; // Declare once at the global level
+
+    // Initialize the spinner image element
+    const initSpinner = () => {
+        if (!storedIconImg) {
+            storedIconImg = new Image();
+            storedIconImg.src = theplus_cross_cp.asset_url + 'assets/svg/tp_loader.svg';
+            storedIconImg.width = 60;
+            storedIconImg.height = 60;
+            storedIconImg.alt = "Loading...";
+            storedIconImg.className = "tpae-spinner";
+        }
+    };
+
+    // Function to show popup with spinner or checkmark
+    const showTpaePopup = (message, widgets = [], isSuccess = false, showCount = false) => {
+        initTpaePopup();
+        initSpinner();
+
+        const iconContainer = document.getElementById("tpae-popup-icon");
+        const msg = document.getElementById("tpae-popup-message");
+        const info = document.getElementById("tpae-widget-info");
+
+        typeMessage(msg, message);
+
+        let widgetHTML = "";
+        if (Array.isArray(widgets) && widgets.length > 0) {
+            widgetHTML += `<div class="tpae-widget-list">`;
+
+            if (showCount) {
+                widgetHTML += `<div class="tpae-widget-count"><span>` + __("We've found ", "tpebl") + ` ${widgets.length} ` + __("widget(s) used in this design", "tpebl") + `</span></div>`;
+            }
+
+            widgetHTML += `<div class="tpae-widget-names">`;
+            widgets.forEach((widget, index) => {
+                widgetHTML += `
+                    <div id="tpae-widget-${index}" class="tpae-widget-row">
+                        <span class="tpae-widget-tick loader" id="tpae-widget-status-${index}"></span>
+                        <span class="tpae-widget-name">${widget}</span>
+                    </div>`;
+            });
+            widgetHTML += `</div>`;
+
+            if (showCount) {
+                widgetHTML += `<div class="tpae-widget-note"><span><strong>` + __("Note :", "tpebl") + `</strong>` + __("We enable these widgets in your WordPress site", "tpebl") + ` </span></div>`;
+            }
+
+            widgetHTML += `</div>`;
+        }
+
+        info.innerHTML = widgetHTML;
+
+        if (isSuccess) {
+            iconContainer.className = "tpae-checkmark";
+            iconContainer.textContent = "✔";
+            if (storedIconImg) {
+                storedIconImg.style.display = "none";
+            }
+        } else {
+
+            iconContainer.className = "tpae-spinner-container";
+            iconContainer.textContent = "";
+
+            if (!iconContainer.contains(storedIconImg) && storedIconImg instanceof Node) {
+                iconContainer.appendChild(storedIconImg);
+                storedIconImg.style.display = "inline-block";  // Ensure the spinner is visible
+            }
+        }
+
+        // Show the popup overlay
+        document.getElementById("tpae-popup-overlay").style.display = "flex";
+    };
+
+
+    function hideTpaePopup() {
+        const el = document.getElementById("tpae-popup-overlay");
+        if (el) el.style.display = "none";
+    }
+
+
 })(jQuery);

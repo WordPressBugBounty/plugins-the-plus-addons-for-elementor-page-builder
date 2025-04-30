@@ -190,9 +190,6 @@ class L_Plus_Library {
 		if ( ! empty( $plus_extras ) && in_array( 'section_scroll_animation', $plus_extras ) ) {
 			$merge[] = 'plus-extras-section-skrollr';
 		}
-		if ( ! empty( $plus_extras ) && in_array( 'plus_equal_height', $plus_extras ) ) {
-			$merge[] = 'plus-equal-height';
-		}
 
 		if ( tp_has_lazyload() ) {
 			$merge[] = 'plus-lazyLoad';
