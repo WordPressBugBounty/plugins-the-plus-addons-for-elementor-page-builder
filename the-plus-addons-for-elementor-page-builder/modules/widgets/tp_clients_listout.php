@@ -134,6 +134,14 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		);
 	}
 
+	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
 
 	/**
 	 * Register controls.

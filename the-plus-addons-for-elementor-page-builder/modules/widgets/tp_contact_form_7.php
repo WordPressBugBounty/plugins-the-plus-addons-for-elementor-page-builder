@@ -134,6 +134,15 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 	}
 
 	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
+
+	/**
 	 * Register controls.
 	 *
 	 * @since 1.0.0

@@ -5,6 +5,36 @@
     width: 100%
 }
 
+.pt_plus_video-box-shadow.sticky-active{
+    width: 300px;
+    height: 175px;
+    position: fixed;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: none !important;
+    transition: all 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.pt_plus_video-box-shadow.sticky-active .ts-video-wrapper{
+    width: 300px;
+    height: 175px;
+}
+.pt_plus_video-box-shadow.sticky-active.bottom-left{
+    bottom: 45px;
+    left: 45px;
+}
+.pt_plus_video-box-shadow.sticky-active.bottom-right{
+    bottom: 45px;
+    right: 45px;
+}
+.pt_plus_video-box-shadow.sticky-active.top-right{
+    top: 45px;
+    right: 45px;
+}
+.pt_plus_video-box-shadow.sticky-active.top-left{
+    top: 45px;
+    left: 45px;
+}
+
 .pt_plus_video_player iframe.fluidvids-item {
     opacity: 0
 }

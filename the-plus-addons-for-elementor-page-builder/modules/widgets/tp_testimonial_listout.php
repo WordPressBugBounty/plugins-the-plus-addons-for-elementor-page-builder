@@ -127,6 +127,15 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
 		];
 	}
+
+	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
 	
 	/**
 	 * Register controls.

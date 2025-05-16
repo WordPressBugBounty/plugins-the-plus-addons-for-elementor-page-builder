@@ -112,6 +112,15 @@ class L_ThePlus_Accordion extends Widget_Base {
 	// }
 
 	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
+
+	/**
 	 * It is use for adds.
 	 *
 	 * @since 6.1.0
@@ -169,19 +178,20 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$repeater->add_control(
 			'tab_title',
 			array(
-				'label'       => esc_html__( 'Title & Content', 'tpebl' ),
+				'label'       => esc_html__( 'Title', 'tpebl' ),
+				'ai' => false,
 				'type'        => Controls_Manager::TEXT,
 				'default'     => esc_html__( 'Accordion Title', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
 				),
-				'label_block' => true,
+				'show_label' => true,
 			)
 		);
 		$repeater->add_control(
 			'content_source',
 			array(
-				'label'   => wp_kses_post( "Content Source <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "elementor-accordion-widget-settings-overview?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'   => wp_kses_post( "Type <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "elementor-accordion-widget-settings-overview?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'content',
 				'options' => array(
@@ -196,6 +206,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'label'      => esc_html__( 'Content', 'tpebl' ),
 				'type'       => Controls_Manager::WYSIWYG,
 				'default'    => esc_html__( 'Accordion Content', 'tpebl' ),
+				'ai' => false,
 				'show_label' => false,
 				'dynamic'    => array(
 					'active' => true,
@@ -224,9 +235,15 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => 'no',
 				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
-				'description' => esc_html__( 'Note : If disabled, Template will not visible/load in the backend for better page loading performance.', 'tpebl' ),
-				'separator'   => 'after',
 			)
+		);
+		$repeater->add_control(
+			'backend_Note',
+			[
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> If disabled, Template will not visible/load in the backend for better page loading performance.',
+				'content_classes' => 'tp-controller-notice',
+			]
 		);
 		$repeater->add_control(
 			'display_icon',
@@ -255,7 +272,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->add_control(
 			'tabs',
 			array(
-				'label'       => '',
+				'label'       => 'Accordions',
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
 				'default'     => array(
@@ -275,7 +292,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->start_controls_section(
 			'icon_content_section',
 			array(
-				'label' => esc_html__( 'Icon Option', 'tpebl' ),
+				'label' => esc_html__( 'Toggle Icon', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -289,157 +306,6 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 			)
 		);
-		$this->add_control(
-			'icon_style',
-			array(
-				'label'     => esc_html__( 'Icon Font', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'font_awesome',
-				'options'   => array(
-					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
-					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
-					'icon_mind'      => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
-				),
-				'condition' => array(
-					'display_icon' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'icon_fontawesome',
-			array(
-				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
-				'type'      => Controls_Manager::ICON,
-				'default'   => 'fa fa-plus',
-				'condition' => array(
-					'display_icon' => 'yes',
-					'icon_style'   => 'font_awesome',
-				),
-			)
-		);
-		$this->add_control(
-			'icon_fontawesome_5',
-			array(
-				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
-				'type'      => Controls_Manager::ICONS,
-				'default'   => array(
-					'value'   => 'fas fa-plus',
-					'library' => 'solid',
-				),
-				'condition' => array(
-					'display_icon' => 'yes',
-					'icon_style'   => 'font_awesome_5',
-				),
-			)
-		);
-		$this->add_control(
-			'icons_mind_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'display_icon' => 'yes',
-					'icon_style'   => 'icon_mind',
-				),
-			)
-		);
-
-		$this->add_control(
-			'icon_fontawesome_active',
-			array(
-				'label'     => esc_html__( 'Active Icon Library', 'tpebl' ),
-				'type'      => Controls_Manager::ICON,
-				'default'   => 'fa fa-minus',
-				'condition' => array(
-					'display_icon' => 'yes',
-					'icon_style'   => 'font_awesome',
-				),
-			)
-		);
-		$this->add_control(
-			'icon_fontawesome_5_active',
-			array(
-				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
-				'type'      => Controls_Manager::ICONS,
-				'default'   => array(
-					'value'   => 'fas fa-plus',
-					'library' => 'solid',
-				),
-				'condition' => array(
-					'display_icon' => 'yes',
-					'icon_style'   => 'font_awesome_5',
-				),
-			)
-		);
-		$this->add_control(
-			'title_html_tag',
-			array(
-				'label'     => esc_html__( 'Title HTML Tag', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => array(
-					'h1'  => 'H1',
-					'h2'  => 'H2',
-					'h3'  => 'H3',
-					'h4'  => 'H4',
-					'h5'  => 'H5',
-					'h6'  => 'H6',
-					'div' => 'div',
-				),
-				'default'   => 'div',
-				'separator' => 'before',
-			)
-		);
-		$this->end_controls_section();
-		$this->start_controls_section(
-			'extra_content_section',
-			array(
-				'label' => esc_html__( 'Extra Option', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
-		);
-		$this->add_control(
-			'extra_content_section_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-			)
-		);
-
-		$this->end_controls_section();
-		$this->start_controls_section(
-			'special_content_section',
-			array(
-				'label' => esc_html__( 'Special Options', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
-		);
-		$this->add_control(
-			'active_accordion',
-			array(
-				'label'   => wp_kses_post( "Active Accordion <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '1',
-				'options' => $this->L_theplus_get_numbers(),
-			)
-		);
-		$this->end_controls_section();
-		$this->start_controls_section(
-			'section_toggle_style_icon',
-			array(
-				'label'     => esc_html__( 'Icon', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
-					'display_icon' => 'yes',
-				),
-			)
-		);
-
 		$this->add_control(
 			'icon_align',
 			array(
@@ -463,37 +329,190 @@ class L_ThePlus_Accordion extends Widget_Base {
 				),
 			)
 		);
-
 		$this->add_control(
-			'icon_color',
+			'icon_style',
 			array(
-				'label'     => esc_html__( 'Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon i:before' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon svg' => 'fill: {{VALUE}};',
+				'label'     => esc_html__( 'Icon Font', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'font_awesome',
+				'options'   => array(
+					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
+					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
+					'icon_mind'      => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
 				),
 				'condition' => array(
 					'display_icon' => 'yes',
 				),
 			)
+		);	
+		$this->add_control(
+			'icon_fs_popover_toggle',
+			[
+				'label' => esc_html__( 'Font Awesome', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'textdomain' ),
+				'label_on' => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition' => array(
+					'display_icon' => 'yes',
+					'icon_style'   => 'font_awesome',
+				),
+			]
+		);
+		$this->start_popover();
+			$this->add_control(
+				'icon_fontawesome',
+				array(
+					'label'     => esc_html__( 'Icon Library', 'tpebl' ),
+					'type'      => Controls_Manager::ICON,
+					'default'   => 'fa fa-plus',
+					'condition' => array(
+						'display_icon' => 'yes',
+						'icon_style'   => 'font_awesome',
+					),
+				)
+			);
+			$this->add_control(
+				'icon_fontawesome_active',
+				array(
+					'label'     => esc_html__( 'Active Icon Library', 'tpebl' ),
+					'type'      => Controls_Manager::ICON,
+					'default'   => 'fa fa-minus',
+					'condition' => array(
+						'display_icon' => 'yes',
+						'icon_style'   => 'font_awesome',
+					),
+				)
+			);
+		$this->end_popover();
+		$this->add_control(
+			'icon_f5_popover_toggle',
+			[
+				'label' => esc_html__( 'Font Awesome 5', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'textdomain' ),
+				'label_on' => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition' => array(
+					'display_icon' => 'yes',
+					'icon_style'   => 'font_awesome_5',
+				),
+			]
+		);
+		$this->start_popover();
+			$this->add_control(
+				'icon_fontawesome_5',
+				array(
+					'label'     => esc_html__( 'Icon Library', 'tpebl' ),
+					'type'      => Controls_Manager::ICONS,
+					'default'   => array(
+						'value'   => 'fas fa-plus',
+						'library' => 'solid',
+					),
+					'condition' => array(
+						'display_icon' => 'yes',
+						'icon_style'   => 'font_awesome_5',
+					),
+				)
+			);
+			$this->add_control(
+				'icons_mind_options',
+				array(
+					'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+					'type'        => Controls_Manager::TEXT,
+					'default'     => '',
+					'description' => theplus_pro_ver_notice(),
+					'classes'     => 'plus-pro-version',
+					'condition'   => array(
+						'display_icon' => 'yes',
+						'icon_style'   => 'icon_mind',
+					),
+				)
+			);
+			$this->add_control(
+				'icon_fontawesome_5_active',
+				array(
+					'label'     => esc_html__( 'Icon Library', 'tpebl' ),
+					'type'      => Controls_Manager::ICONS,
+					'default'   => array(
+						'value'   => 'fas fa-plus',
+						'library' => 'solid',
+					),
+					'condition' => array(
+						'display_icon' => 'yes',
+						'icon_style'   => 'font_awesome_5',
+					),
+				)
+			);
+		$this->end_popover();
+		$this->add_control(
+			'title_html_tag',
+			array(
+				'label'     => esc_html__( 'Title Tag', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => array(
+					'h1'  => 'H1',
+					'h2'  => 'H2',
+					'h3'  => 'H3',
+					'h4'  => 'H4',
+					'h5'  => 'H5',
+					'h6'  => 'H6',
+					'div' => 'div',
+				),
+				'default'   => 'div',
+				'separator' => 'before',
+			)
+		);
+		$this->end_controls_section();
+			$this->start_controls_section(
+			'special_content_section',
+			array(
+				'label' => esc_html__( 'Special Options', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'active_accordion',
+			array(
+				'label'   => wp_kses_post( "Active Tab <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '1',
+				'options' => $this->L_theplus_get_numbers(),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'extra_content_section',
+			array(
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'extra_content_section_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+			)
 		);
 
-		$this->add_control(
-			'icon_active_color',
+		$this->end_controls_section();
+	
+		$this->start_controls_section(
+			'section_toggle_style_icon',
 			array(
-				'label'     => esc_html__( 'Active Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon i:before' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon svg' => 'fill: {{VALUE}};',
-				),
+				'label'     => esc_html__( 'Icon', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'display_icon' => 'yes',
 				),
 			)
 		);
-
 		$this->add_responsive_control(
 			'icon_space',
 			array(
@@ -537,7 +556,51 @@ class L_ThePlus_Accordion extends Widget_Base {
 					'display_icon' => 'yes',
 				),
 			)
+		);	
+		$this->start_controls_tabs( 'tabs_color_style' );
+		$this->start_controls_tab(
+			'tab_color_normal',
+			array(
+				'label' => esc_html__( 'Normal', 'tpebl' ),
+			)
 		);
+		$this->add_control(
+			'icon_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon i:before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon svg' => 'fill: {{VALUE}};',
+				),
+				'condition' => array(
+					'display_icon' => 'yes',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_color_active',
+			array(
+				'label' => esc_html__( 'Active', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'icon_active_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon i:before' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon svg' => 'fill: {{VALUE}};',
+				),
+				'condition' => array(
+					'display_icon' => 'yes',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 		$this->start_controls_section(
@@ -545,6 +608,17 @@ class L_ThePlus_Accordion extends Widget_Base {
 			array(
 				'label' => esc_html__( 'Title', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'title_accordion_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -565,7 +639,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->add_control(
 			'title_color_option',
 			array(
-				'label'       => esc_html__( 'Title Color', 'tpebl' ),
+				'label'       => esc_html__( 'Color', 'tpebl' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => array(
 					'solid'    => array(
@@ -863,34 +937,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_accordion_styling',
-			array(
-				'label' => esc_html__( 'Title Background', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_responsive_control(
-			'title_accordion_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_control(
-			'title_border_options',
-			array(
-				'label'     => esc_html__( 'Border Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
 		$this->add_control(
 			'title_box_border',
 			array(
@@ -1032,6 +1079,28 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
+		$this->add_responsive_control(
+			'content_accordion_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'content_accordion_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -1050,43 +1119,12 @@ class L_ThePlus_Accordion extends Widget_Base {
 				),
 			)
 		);
-		$this->end_controls_section();
-		$this->start_controls_section(
-			'section_content_bg_styling',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			array(
-				'label' => esc_html__( 'Content Background', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_responsive_control(
-			'content_accordion_margin',
-			array(
-				'label'      => esc_html__( 'Content Margin Space', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'before',
-			)
-		);
-		$this->add_responsive_control(
-			'content_accordion_padding',
-			array(
-				'label'      => esc_html__( 'Content Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_control(
-			'content_border_options',
-			array(
-				'label'     => esc_html__( 'Border Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'name'     => 'content_box_background',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-content',
 			)
 		);
 		$this->add_control(
@@ -1165,30 +1203,6 @@ class L_ThePlus_Accordion extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'content_background_options',
-			array(
-				'label' => esc_html__( 'Background Options', 'tpebl' ),
-				'type'  => Controls_Manager::HEADING,
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'     => 'content_box_background',
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .theplus-accordion-wrapper .theplus-accordion-item .plus-accordion-content',
-			)
-		);
-		$this->add_control(
-			'content_shadow_options',
-			array(
-				'label'     => esc_html__( 'Box Shadow Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
-
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			array(

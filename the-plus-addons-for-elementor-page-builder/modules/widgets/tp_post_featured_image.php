@@ -123,6 +123,15 @@ class ThePlus_Featured_Image extends Widget_Base {
 	}
 
 	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
+
+	/**
 	 * Get Widget Custom Help Url.
 	 *
 	 * @since 1.0.1

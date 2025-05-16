@@ -103,6 +103,15 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 	}
 
 	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
+
+	/**
 	 * It is use for adds.
 	 *
 	 * @since 6.1.0

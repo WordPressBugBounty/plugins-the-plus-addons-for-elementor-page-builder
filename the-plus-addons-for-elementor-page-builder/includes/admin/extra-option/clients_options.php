@@ -94,7 +94,16 @@ if ( ! class_exists( 'Tpae_Clients_Options' ) ) {
 		public function render_clients_meta_box( $post ) {
 			wp_nonce_field( 'tpae_save_client_meta_box', 'tpae_client_nonce' );
 
-			$client_url = get_post_meta( $post->ID, '_theplus_clients_url', true );
+			$client_url = get_post_meta( $post->ID, 'theplus_clients_url', true );
+
+			if ( empty( $client_url ) ) {
+				$fallback_url = get_post_meta( $post->ID, '_theplus_clients_url', true );
+
+				if ( ! empty( $fallback_url ) ) {
+					update_post_meta( $post->ID, 'theplus_clients_url', $fallback_url );
+					$client_url = $fallback_url;
+				}
+			}
 
 			?>
 			<style>
@@ -141,7 +150,7 @@ if ( ! class_exists( 'Tpae_Clients_Options' ) ) {
 
 			if ( isset( $_POST['theplus_clients_url'] ) ) {
 				$client_url = sanitize_text_field( $_POST['theplus_clients_url'] );
-				update_post_meta( $post_id, '_theplus_clients_url', $client_url );
+				update_post_meta( $post_id, 'theplus_clients_url', $client_url );
 			}
 		}
 	}

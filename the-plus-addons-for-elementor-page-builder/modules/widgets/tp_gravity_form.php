@@ -122,6 +122,15 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
 		];
 	}
+
+	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
 	
 	/**
 	 * Register controls.
@@ -2614,6 +2623,10 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	 */
 	public function render() {
 		$settings = $this->get_settings_for_display();
+
+		$widget_id = $this->get_id();
+
+		$output = "<style> .elementor-element-$widget_id .pt_plus_gravity_form .gfield .ginput_container select{ background-image: url('" . L_THEPLUS_ASSETS_URL . "images/selectarrow.png');background-position: center right;background-repeat: no-repeat } </style>";
 
 		/*--OnScroll View Animation ---*/
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';

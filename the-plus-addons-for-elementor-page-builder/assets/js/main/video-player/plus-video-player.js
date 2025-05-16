@@ -17,6 +17,33 @@ function initFluidVids(){
 ! function(e) {
     "use strict";
 	
+    var WidgetVideoHandler = function($scope, $) {
+
+        let mainCon     = $scope[0].querySelectorAll('.pt_plus_video-box-shadow'),
+            stickyparam = mainCon[0].dataset.stickyparam ? JSON.parse(mainCon[0].dataset.stickyparam) : [];
+
+        let stickyOpt = stickyparam['sticky'] ? stickyparam['sticky'] : '',
+            stickyPos = stickyparam['sticky-pos'] ? stickyparam['sticky-pos'] : '';
+
+        if( stickyOpt ) { 
+            const offsetTop = $scope.offset().top;
+
+            $(window).on('scroll', function() {
+                const scrollTop = $(window).scrollTop();
+
+                if (scrollTop > offsetTop + $scope.outerHeight()) {
+                    mainCon[0].classList.add('sticky-active');
+                    mainCon[0].classList.add(`${stickyPos}`);
+                } else {
+                    if(mainCon[0].classList.contains('sticky-active')) {
+                        mainCon[0].classList.remove('sticky-active');
+                        mainCon[0].classList.remove(`${stickyPos}`);
+                    }
+                }
+            }); 
+        }
+    };
+	
     function t(t) {
         var a = t.find("video"),
 		n = t.find(".ts-video-lazyload");
@@ -49,4 +76,9 @@ function initFluidVids(){
 		}), e(document).ready(function() {
         e(".ts-video-lightbox-link").off()
 	})
+
+    jQuery(window).on('elementor/frontend/init', function () {
+		elementorFrontend.hooks.addAction('frontend/element_ready/tp-video-player.default', WidgetVideoHandler);
+	});
+
 }(jQuery);

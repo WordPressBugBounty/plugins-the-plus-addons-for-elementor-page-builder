@@ -97,6 +97,15 @@ class ThePlus_Video_Player extends Widget_Base {
 	}
 
 	/**
+	 * Disable Elementor's default inner wrapper for custom HTML control.
+	 *
+	 * @since 6.3.3
+	 */
+	public function has_widget_inner_wrapper(): bool {
+		return false;
+	}
+
+	/**
 	 * Register controls.
 	 *
 	 * @since 1.0.0
@@ -183,6 +192,34 @@ class ThePlus_Video_Player extends Widget_Base {
 				),
 			)
 		);
+
+		$this->add_control(
+			'sticky_video',
+			array(
+				'label'       => esc_html__( 'Sticky Video', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_block' => false,
+				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'sticky_video_pos',
+			array(
+				'label'   => esc_html__( 'Position', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'bottom-left',
+				'options' => array(
+					'bottom-left'  => esc_html__( 'Bottom Left', 'tpebl' ),
+					'bottom-right' => esc_html__( 'Bottom Right', 'tpebl' ),
+					'top-right'    => esc_html__( 'Top Right', 'tpebl' ),
+					'top-left'     => esc_html__( 'Top Left', 'tpebl' ),
+				),
+				'condition' => array(
+					'sticky_video' => 'yes',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_video_option',
@@ -1448,8 +1485,21 @@ class ThePlus_Video_Player extends Widget_Base {
 			if ( 'yes' === $mask_img ) {
 				$mask_image = ' creative-mask-media';
 			}
+			
+			$sticky_video = ! empty( $settings['sticky_video'] ) ? $settings['sticky_video'] : '';
 
-			$video_player  = '<div class="pt_plus_video-box-shadow ' . esc_attr( $uid ) . ' ' . esc_attr( $animated_class ) . '" ' . esc_attr( $mask_image ) . ' ' . $animation_attr . '>';
+			$stickyparam = '';
+			if( 'yes' === $sticky_video ) {
+				$sticky_video_pos = ! empty( $settings['sticky_video_pos'] ) ? $settings['sticky_video_pos'] : '';
+
+				$stickyattr  = array(
+					'sticky'     => esc_attr( $sticky_video ),
+					'sticky-pos' => esc_attr( $sticky_video_pos ),
+				);
+				$stickyparam = 'data-stickyparam= \'' . wp_json_encode( $stickyattr ) . '\' ';
+			}
+
+			$video_player  = '<div class="pt_plus_video-box-shadow ' . esc_attr( $uid ) . ' ' . esc_attr( $animated_class ) . '" ' . esc_attr( $mask_image ) . ' ' . $animation_attr . ' ' . $stickyparam . ' >';
 			$video_player .= '<div class="pt_plus_video_player ' . esc_attr( $video_touchable ) . ' ' . esc_attr( $video_space ) . ' text-' . esc_attr( $icon_align_video ) . '">';
 
 			$video_player .= $video_content;

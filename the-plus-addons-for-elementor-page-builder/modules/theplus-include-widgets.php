@@ -56,7 +56,6 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 
 			if ( ! defined( 'THEPLUS_VERSION' ) ) {
 				$this->init();
-				l_theplus_wpml_translate();
 			}
 		}
 
@@ -78,10 +77,6 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 			require_once L_THEPLUS_PATH . 'modules/enqueue/plus-widgets-manager.php';
 			require_once L_THEPLUS_PATH . 'modules/enqueue/plus-library.php';
 			require_once L_THEPLUS_PATH . 'modules/enqueue/plus-generator.php';
-
-			if ( ! defined( 'THEPLUS_VERSION' ) ) {
-				require_once L_THEPLUS_PATH . 'modules/enqueue/plus-wpml.php';
-			}
 		}
 
 		/**
