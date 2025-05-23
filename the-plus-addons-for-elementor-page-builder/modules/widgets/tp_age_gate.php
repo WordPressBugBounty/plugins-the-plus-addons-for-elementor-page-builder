@@ -28,6 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class ThePlus_Age_Gate extends Widget_Base {
 
+	/**
+	 * Document Link For Need help.
+	 *
+	 * @since 5.3.3
+	 *
+	 * @var tp_doc of the class.
+	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
 
 	/**
@@ -75,6 +82,11 @@ class ThePlus_Age_Gate extends Widget_Base {
 		return array( 'Age Gate', 'Age Verification', 'Age Restriction', 'Age Confirmation', 'Age Check', 'Age Limit', 'Age Requirement' );
 	}
 
+	/**
+	 * It is use for help url.
+	 *
+	 * @since 6.0.6
+	 */
 	public function get_custom_help_url() {
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
 			$help_url = L_THEPLUS_HELP;
@@ -102,29 +114,29 @@ class ThePlus_Age_Gate extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
 	 */
 	public function has_widget_inner_wrapper(): bool {
-		return false;
+		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -142,37 +154,48 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'smart-preset-button',
 			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => sprintf(
 					'<div class="tpae-preset-main-raw-main">
 						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16001" target="_blank" rel="noopener noreferrer">%s</a>
 						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16001">%s</a>
 					</div>',
-					esc_url('https://theplusaddons.com/widgets/elementor-age-gate/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
+					esc_url( 'https://theplusaddons.com/widgets/elementor-age-gate/' ),
+					esc_html__( 'Live Demo', 'tpebl' ),
+					esc_html__( 'Import Presets', 'tpebl' )
 				),
-                'label_block'     => true,
-            )
+				'label_block' => true,
+			)
 		);
 		$this->add_control(
 			'age_verify_method',
 			array(
-				'type'    => Controls_Manager::SELECT,
-				'label'   => esc_html__( 'Method', 'tpebl' ),
-				'default' => 'method-1',
-				'options' => array(
-					'method-1' => esc_html__( 'Age Confirmation', 'tpebl' ),
-					'method-2' => esc_html__( 'Birth Date', 'tpebl' ),
-					'method-3' => esc_html__( 'Boolean', 'tpebl' ),
+				'label'       => esc_html__( 'Method', 'theplus' ),
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'label_block' => true,
+				'options'     => array(
+					'method-1' => array(
+						'title' => esc_attr__( 'Age Confirmation', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/age-gate/age-confirmation.svg',
+					),
+					'method-2' => array(
+						'title' => esc_attr__( 'Birth Date', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/age-gate/birth-date.svg',
+					),
+					'method-3' => array(
+						'title' => esc_attr__( 'Boolean', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/age-gate/boolean.svg',
+					),
 				),
+				'default'     => 'method-1',
+				'columns'     => 3,
 			)
 		);
 		$this->add_control(
 			'how_it_works_birth_date',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-age-verification-by-birthdate-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works <i class='eicon-help-o'></i> </a>" ),
-				'type'      => Controls_Manager::HEADING,
+				'type'      => \Elementor\Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post( "<div class='tp-docs-wrapper'><a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-age-verification-by-birthdate-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works  <i class='eicon-help-o'></i> </a></div>" ),
 				'condition' => array(
 					'age_verify_method' => array( 'method-2' ),
 				),
@@ -193,8 +216,11 @@ class ThePlus_Age_Gate extends Widget_Base {
 			'tempNotice',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Keep this disabled, If you do not want that to load on editor page. Either It will highjack your whole page.</i></p>',
+				'raw'         => '<p class="tp-controller-notice"><i><b>Note:</b> Keep this disabled, If you do not want that to load on editor page. Either It will highjack your whole page.</i></p>',
 				'label_block' => true,
+				'condition'   => array(
+					'backend_preview' => 'yes',
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -206,206 +232,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
-		$this->add_control(
-			'age_icon_img_type',
-			array(
-				'label'     => esc_html__( 'Logo', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'age_head_img',
-			array(
-				'label'     => esc_html__( 'Logo', 'tpebl' ),
-				'type'      => Controls_Manager::MEDIA,
-				'dynamic'   => array( 'active' => true ),
-				'default'   => array(
-					'url' => Utils::get_placeholder_image_src(),
-				),
-				'condition' => array(
-					'age_icon_img_type' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_gate_title',
-			array(
-				'label'     => esc_html__( 'Title', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'age_gate_title_input',
-			array(
-				'label'       => esc_html__( 'Title', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array( 'active' => true ),
-				'default'     => esc_html__( 'Age Verification', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Your Title', 'tpebl' ),
-				'label_block' => false,
-				'condition'   => array(
-					'age_gate_title' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_gate_description',
-			array(
-				'label'     => esc_html__( 'Description', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'age_gate_description_input',
-			array(
-				'label'       => esc_html__( 'Description', 'tpebl' ),
-				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__( 'You must be 18 years old to visit our website.', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Description', 'tpebl' ),
-				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'age_verify_method'    => 'method-1',
-					'age_gate_description' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_gate_description_inputwo',
-			array(
-				'label'       => esc_html__( 'Description', 'tpebl' ),
-				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__( 'You must be 18 years old to visit our website. Enter your birthdate below, your age will be calculated automatically.', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Description', 'tpebl' ),
-				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'age_verify_method'    => 'method-2',
-					'age_gate_description' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_gate_description_inputhree',
-			array(
-				'label'       => esc_html__( 'Description', 'tpebl' ),
-				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__( 'You must be 18 years old to visit our website. Select your preference below.', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Description', 'tpebl' ),
-				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'age_verify_method'    => 'method-3',
-					'age_gate_description' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'chkinput_text',
-			array(
-				'label'       => esc_html__( 'Check Input Text', 'tpebl' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'dynamic'     => array( 'active' => true ),
-				'default'     => esc_html__( 'I confirm that I am 18 years old or over', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
-				'separator'   => 'before',
-				'condition'   => array(
-					'age_verify_method' => 'method-1',
-				),
-
-			)
-		);
-		$this->add_control(
-			'birthyears',
-			array(
-				'label'     => esc_html__( 'Minimum Age Limit', 'tpebl' ),
-				'type'      => Controls_Manager::NUMBER,
-				'dynamic'   => array(
-					'active' => true,
-				),
-				'min'       => 6,
-				'max'       => 100,
-				'default'   => 18,
-				'condition' => array(
-					'age_verify_method' => 'method-2',
-				),
-				'separator' => 'before',
-			)
-		);
-		$this->add_responsive_control(
-			'db_max_width',
-			array(
-				'label'       => esc_html__( 'Form Content Max-width', 'tpebl' ),
-				'type'        => Controls_Manager::SLIDER,
-				'separator'   => 'before',
-				'range'       => array(
-					'%' => array(
-						'min'  => 1,
-						'max'  => 100,
-						'step' => 1,
-					),
-				),
-				'render_type' => 'ui',
-				'selectors'   => array(
-					'{{WRAPPER}} .tp-agegate-wrapper .tp-agegate-method' => 'max-width: {{SIZE}}%;',
-				),
-				'condition'   => array(
-					'age_verify_method' => array( 'method-2', 'method-3' ),
-				),
-			)
-		);
-		$this->add_control(
-			'age_extra_info_switch',
-			array(
-				'label'     => esc_html__( 'Extra Info', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'age_extra_info',
-			array(
-				'label'       => esc_html__( 'Extra Info', 'tpebl' ),
-				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__( 'By entering this site you are agreeing to the Terms of Use and Privacy Policy.', 'tpebl' ),
-				'placeholder' => esc_html__( 'Type your extra info here', 'tpebl' ),
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'condition'   => array(
-					'age_extra_info_switch' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_gate_wrong_message',
-			array(
-				'label'       => esc_html__( 'Error Message', 'tpebl' ),
-				'type'        => Controls_Manager::WYSIWYG,
-				'default'     => esc_html__( 'Sorry...!!! You are not eligible for this website', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Your Message', 'tpebl' ),
-				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'age_verify_method' => array( 'method-2', 'method-3' ),
-				),
-				'separator'   => 'before',
-			)
-		);
 		$this->add_responsive_control(
 			'age_gate_align',
 			array(
-				'label'     => esc_html__( 'Alignment', 'tpebl' ),
+				'label'     => esc_html__( 'Title Alignment', 'tpebl' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'center',
 				'options'   => array(
@@ -431,9 +261,171 @@ class ThePlus_Age_Gate extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'age_icon_popover_toggle',
+			array(
+				'label'        => esc_html__( 'Logo', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'age_icon_img_type',
+			array(
+				'label'     => esc_html__( 'Logo', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+			)
+		);
+		$this->add_control(
+			'age_head_img',
+			array(
+				'label'     => esc_html__( 'Icon library', 'tpebl' ),
+				'type'      => Controls_Manager::MEDIA,
+				'dynamic'   => array( 'active' => true ),
+				'ai'        => false,
+				'default'   => array(
+					'url' => Utils::get_placeholder_image_src(),
+				),
+				'condition' => array(
+					'age_icon_img_type' => 'yes',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'age_title_popover_toggle',
+			array(
+				'label'        => esc_html__( 'Title', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'age_gate_title',
+			array(
+				'label'     => esc_html__( 'Title', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'age_gate_title_input',
+			array(
+				'label'       => esc_html__( 'Label', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array( 'active' => false ),
+				'default'     => esc_html__( 'Age Verification', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Your Title', 'tpebl' ),
+				'label_block' => false,
+				'ai'          => false,
+				'condition'   => array(
+					'age_gate_title' => 'yes',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'age_gate_description',
+			array(
+				'label'        => esc_html__( 'Text Description', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'age_gate_description_input',
+			array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::WYSIWYG,
+				'default'     => esc_html__( 'You must be 18 years old to visit our website.', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Description', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'ai'          => false,
+				'condition'   => array(
+					'age_verify_method'    => 'method-1',
+					'age_gate_description' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'age_gate_description_inputwo',
+			array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::WYSIWYG,
+				'default'     => esc_html__( 'You must be 18 years old to visit our website. Enter your birthdate below, your age will be calculated automatically.', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Description', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'ai'          => false,
+				'condition'   => array(
+					'age_verify_method'    => 'method-2',
+					'age_gate_description' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'age_gate_description_inputhree',
+			array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::WYSIWYG,
+				'default'     => esc_html__( 'You must be 18 years old to visit our website. Select your preference below.', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Description', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'ai'          => false,
+				'condition'   => array(
+					'age_verify_method'    => 'method-3',
+					'age_gate_description' => 'yes',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'chkinput_text',
+			array(
+				'label'       => esc_html__( 'Confirm Box', 'tpebl' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'dynamic'     => array( 'active' => false ),
+				'ai'          => false,
+				'default'     => esc_html__( 'I confirm that I am 18 years old or over', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
+				'condition'   => array(
+					'age_verify_method' => 'method-1',
+				),
+
+			)
+		);
+		$this->add_control(
+			'age_extra_info_switch',
+			array(
+				'label'        => esc_html__( 'Extra Content', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
 			'age_gate_align_txtera',
 			array(
-				'label'     => esc_html__( 'Textarea Alignment', 'tpebl' ),
+				'label'     => esc_html__( 'Alignment', 'tpebl' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'default'   => 'center',
 				'options'   => array(
@@ -456,6 +448,23 @@ class ThePlus_Age_Gate extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'age_extra_info',
+			array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::WYSIWYG,
+				'ai'          => false,
+				'default'     => esc_html__( 'By entering this site you are agreeing to the Terms of Use and Privacy Policy.', 'tpebl' ),
+				'placeholder' => esc_html__( 'Type your extra info here', 'tpebl' ),
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'condition'   => array(
+					'age_extra_info_switch' => 'yes',
+				),
+			)
+		);
+		$this->end_popover();
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -466,19 +475,12 @@ class ThePlus_Age_Gate extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'FirstBTn_options',
-			array(
-				'label'     => esc_html__( 'First Button Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
 			'button_text',
 			array(
 				'label'       => esc_html__( 'Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array( 'active' => true ),
+				'dynamic'     => array( 'active' => false ),
+				'ai'          => false,
 				'default'     => esc_html__( 'Enter', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
 			)
@@ -488,9 +490,24 @@ class ThePlus_Age_Gate extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Icon', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
+			)
+		);
+		$this->add_control(
+			'icon_position',
+			array(
+				'type'      => Controls_Manager::SELECT,
+				'label'     => esc_html__( 'Icon Position', 'tpebl' ),
+				'default'   => 'age_icon_prefix',
+				'options'   => array(
+					'age_icon_prefix'  => esc_html__( 'Before', 'tpebl' ),
+					'age_icon_postfix' => esc_html__( 'After', 'tpebl' ),
+				),
+				'condition' => array(
+					'icon_action' => 'yes',
+				),
 			)
 		);
 		$this->add_control(
@@ -501,21 +518,6 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'default'   => array(
 					'value'   => 'fas fa-book-open',
 					'library' => 'solid',
-				),
-				'condition' => array(
-					'icon_action' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'icon_position',
-			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Icon Position', 'tpebl' ),
-				'default'   => 'age_icon_prefix',
-				'options'   => array(
-					'age_icon_prefix'  => esc_html__( 'Prefix', 'tpebl' ),
-					'age_icon_postfix' => esc_html__( 'Postfix', 'tpebl' ),
 				),
 				'condition' => array(
 					'icon_action' => 'yes',
@@ -536,9 +538,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'second_button_text',
 			array(
-				'label'       => esc_html__( 'Button Text', 'tpebl' ),
+				'label'       => esc_html__( 'Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array( 'active' => true ),
+				'ai'          => false,
+				'dynamic'     => array( 'active' => false ),
 				'default'     => esc_html__( 'No', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
 				'condition'   => array(
@@ -549,10 +552,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'second_icon_action',
 			array(
-				'label'     => esc_html__( 'Button Icon', 'tpebl' ),
+				'label'     => esc_html__( 'Icon', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'age_verify_method' => 'method-3',
@@ -560,9 +563,25 @@ class ThePlus_Age_Gate extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'second_icon_position',
+			array(
+				'type'      => Controls_Manager::SELECT,
+				'label'     => esc_html__( 'Icon Position', 'tpebl' ),
+				'default'   => 'age_scnd_icon_prefix',
+				'options'   => array(
+					'age_scnd_icon_prefix'  => esc_html__( 'Before', 'tpebl' ),
+					'age_scnd_icon_postfix' => esc_html__( 'After', 'tpebl' ),
+				),
+				'condition' => array(
+					'age_verify_method'  => 'method-3',
+					'second_icon_action' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
 			'second_button_icon',
 			array(
-				'label'     => esc_html__( 'Button Icon', 'tpebl' ),
+				'label'     => esc_html__( 'Icon', 'tpebl' ),
 				'type'      => Controls_Manager::ICONS,
 				'default'   => array(
 					'value'   => 'fas fa-book-reader',
@@ -574,24 +593,68 @@ class ThePlus_Age_Gate extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'second_icon_position',
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'special_opt',
 			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Icon Position', 'tpebl' ),
-				'default'   => 'age_scnd_icon_prefix',
-				'options'   => array(
-					'age_scnd_icon_prefix'  => esc_html__( 'Prefix', 'tpebl' ),
-					'age_scnd_icon_postfix' => esc_html__( 'Postfix', 'tpebl' ),
+				'label' => esc_html__( 'Special Option', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'birthyears',
+			array(
+				'label'     => esc_html__( 'Minimum Age Limit', 'tpebl' ),
+				'type'      => Controls_Manager::NUMBER,
+				'dynamic'   => array(
+					'active' => false,
 				),
+				'min'       => 6,
+				'max'       => 100,
+				'default'   => 18,
 				'condition' => array(
-					'age_verify_method'  => 'method-3',
-					'second_icon_action' => 'yes',
+					'age_verify_method' => 'method-2',
 				),
 			)
 		);
+		$this->add_control(
+			'age_cookies',
+			array(
+				'label'        => esc_html__( 'Cookies', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'age_cookies_days',
+			array(
+				'label'     => esc_html__( 'Cookies Expiry Time', 'tpebl' ),
+				'type'      => Controls_Manager::NUMBER,
+				'dynamic'   => array(
+					'active' => false,
+				),
+				'min'       => 1,
+				'max'       => 365,
+				'default'   => 10,
+				'condition' => array(
+					'age_cookies' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'age_gate_cookiNote',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => '<p class="tp-controller-notice"><i><b>Note:</b> Set The Number Of Days Cookies To Be Saved.</i></p>',
+				'label_block' => true,
+			)
+		);
+		$this->end_popover();
 		$this->end_controls_section();
-
 		$this->start_controls_section(
 			'ag_extra_opt',
 			array(
@@ -599,22 +662,46 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
+		$this->add_responsive_control(
+			'db_max_width',
+			array(
+				'label'       => esc_html__( 'Form Content Max-width', 'tpebl' ),
+				'type'        => Controls_Manager::SLIDER,
+				'range'       => array(
+					'%' => array(
+						'min'  => 1,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .tp-agegate-wrapper .tp-agegate-method' => 'max-width: {{SIZE}}%;',
+				),
+				'condition'   => array(
+					'age_verify_method' => array( 'method-2', 'method-3' ),
+				),
+			)
+		);
 		$this->add_control(
 			'age_sec_bg_image_switch',
 			array(
-				'label'     => esc_html__( 'Background Image', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'no',
+				'label'        => esc_html__( 'Background Image', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => '',
 			)
 		);
+		$this->start_popover();
 		$this->add_control(
 			'age_sec_bg_image',
 			array(
 				'label'     => esc_html__( 'Background', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
 				'dynamic'   => array( 'active' => true ),
+				'ai'        => false,
 				'default'   => array(
 					'url' => Utils::get_placeholder_image_src(),
 				),
@@ -651,17 +738,20 @@ class ThePlus_Age_Gate extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
 		$this->add_control(
 			'age_side_image_show',
 			array(
-				'label'     => esc_html__( 'Right Side Image', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => '',
-				'separator' => 'before',
+				'label'        => esc_html__( 'Right Side Image', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'separator'    => 'before',
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+				'default'      => '',
 			)
 		);
+		$this->start_popover();
 		$this->add_control(
 			'age_side_img',
 			array(
@@ -691,39 +781,19 @@ class ThePlus_Age_Gate extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
 		$this->add_control(
-			'age_cookies',
+			'age_gate_wrong_message',
 			array(
-				'label'     => esc_html__( 'Cookies', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'age_cookies_days',
-			array(
-				'label'     => esc_html__( 'Cookies Expiry Time', 'tpebl' ),
-				'type'      => Controls_Manager::NUMBER,
-				'dynamic'   => array(
-					'active' => true,
+				'label'       => esc_html__( 'Error Message', 'tpebl' ),
+				'ai'          => false,
+				'type'        => Controls_Manager::WYSIWYG,
+				'default'     => esc_html__( 'Sorry...!!! You are not eligible for this website', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Your Message', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'condition'   => array(
+					'age_verify_method' => array( 'method-2', 'method-3' ),
 				),
-				'min'       => 1,
-				'max'       => 365,
-				'default'   => 10,
-				'condition' => array(
-					'age_cookies' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_gate_cookiNote',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : Set The Number Of Days Cookies To Be Saved.</i></p>',
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -1420,13 +1490,12 @@ class ThePlus_Age_Gate extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->end_controls_section();
 
-		$this->start_controls_section(
+		$this->add_control(
 			'age_tglicon_styling',
 			array(
-				'label'     => esc_html__( 'First Button Icon', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'First Button Icon', 'theplus' ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'icon_action' => 'yes',
 				),
@@ -1720,13 +1789,12 @@ class ThePlus_Age_Gate extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'scndBtn_icn_styling',
+		$this->add_control(
+			'icon_fs_options',
 			array(
-				'label'     => esc_html__( 'Second Button Icon', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Second Button Icon', 'theplus' ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'age_verify_method'  => 'method-3',
 					'second_icon_action' => 'yes',
@@ -1870,7 +1938,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->start_controls_section(
 			'age_einfo_styling',
 			array(
-				'label'     => esc_html__( 'Extra Info', 'tpebl' ),
+				'label'     => esc_html__( 'Extra Content', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'age_extra_info_switch' => 'yes',
@@ -2141,8 +2209,8 @@ class ThePlus_Age_Gate extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Box Position', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -2152,8 +2220,8 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'label'     => esc_html__( 'Left (Auto)', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'box_position' => array( 'yes' ),
 				),
@@ -2193,8 +2261,8 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'label'     => esc_html__( 'Right (Auto)', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'box_position' => array( 'yes' ),
 				),
@@ -2457,18 +2525,18 @@ class ThePlus_Age_Gate extends Widget_Base {
 
 		if ( 'yes' === $cookies ) {
 			$cookies_days = isset( $cookies_days ) ? tp_senitize_js_input( $cookies_days ) : 10;
-			if( is_numeric( $cookies_days ) ){
+			if ( is_numeric( $cookies_days ) ) {
 				$data_attr .= 'data-age_cookies_days="' . esc_attr( $cookies_days ) . '"';
-			}else{
+			} else {
 				$data_attr .= 'data-age_cookies_days="10"';
 			}
 		}
 
 		if ( 'method-2' === $method_type ) {
 			$birthyears = ! empty( $settings['birthyears'] ) ? tp_senitize_js_input( $settings['birthyears'] ) : 18;
-			if( is_numeric( $cookies_days ) ){
+			if ( is_numeric( $cookies_days ) ) {
 				$data_attr .= ' data-userbirth="' . esc_attr( $birthyears ) . '"';
-			}else{
+			} else {
 				$data_attr .= ' data-userbirth="18"';
 			}
 		}

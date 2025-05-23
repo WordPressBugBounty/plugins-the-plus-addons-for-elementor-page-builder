@@ -144,7 +144,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 	 * @since 6.3.3
 	 */
 	public function has_widget_inner_wrapper(): bool {
-		return false;
+		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 	
 	/**
@@ -161,6 +161,22 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label' => esc_html__( 'Content 1', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
+		);
+			$this->add_control(
+			'smart-preset-button',
+			array(
+                'type'=> Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+					'<div class="tpae-preset-main-raw-main">
+						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="17879" target="_blank" rel="noopener noreferrer">%s</a>
+						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="17879">%s</a>
+					</div>',
+					esc_url('https://wdesignkit.com/templates/kit/switcher---kit/17879'),
+					esc_html__('Live Demo', 'tpebl'),
+					esc_html__('Import Presets', 'tpebl')
+				),
+                'label_block'     => true,
+            )
 		);
 		$this->add_control(
 			'switch_a_title',

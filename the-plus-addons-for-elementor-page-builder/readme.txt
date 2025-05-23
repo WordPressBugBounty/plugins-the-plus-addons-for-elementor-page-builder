@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 6.3.3
+Stable tag: 6.3.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -382,13 +382,20 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 6.3.4 =
+Add : Scroll Navigation : Add Preset Option for the Ready design
+Add : Switcher : Add Preset Option for the Ready design
+Improvement : Age gate : UI Improvements
+Improvement : All Widgets : Disable Elementor's default inner wrapper for custom HTML control
+Improvement : Deactivated Form : Design
+Fix : Form Widget : Layout breaking Issue
+Fix : Minor Bug Fixes & Performance Improvements
+
 = 6.3.3 =
 Add : Video Widget : Sticky option 
 Improvement : Unnecessary code removed for better Performance
 Improvement : Accordion : UI Improvements
-Improvement : All Widgets : Disable Elementor default inner wrapper for custom HTML control
 Improvement : Dashboard : Dashboard design
-
 Fix : Client Listing : URL Issue solved
 Fix : Minor Bug Fixes & Performance Improvements
 

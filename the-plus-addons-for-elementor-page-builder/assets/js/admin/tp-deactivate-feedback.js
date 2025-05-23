@@ -2,6 +2,10 @@
 (function ($) {
   'use strict';
 
+  const { __ } = wp.i18n;
+  const submit_txt = __("Submit & Deactivate", "tpebl");
+  const skip_txt = __("Skip & Deactivate", "tpebl");
+
   var TheplusAdminDialog = {
     cacheElements: function cacheElements() {
       this.cache = {
@@ -14,7 +18,6 @@
       var self = this;
           self.cache.$deactivateLink.on('click', function (event) {
             event.preventDefault();
-
             self.getModal().show();
           });
     },
@@ -39,28 +42,32 @@
                 },
                 onReady: function onReady() {
                   DialogsManager.getWidgetType('lightbox').prototype.onReady.apply(this, arguments);
-
                   this.addButton({
                     name: 'submit',
-                    text: 'Submit & Deactivate',
+                    text: submit_txt,
                     callback: self.sendFeedback.bind(self)
                   });
-
                   this.addButton({
                     name: 'skip',
-                    text: 'Skip & Deactivate',
+                    text: skip_txt,
                     callback: self.skipFeedback.bind(self)
+                  });
+                  $('#tp-feedback-close-button').on('click', function() {
+                    $('#tp-deactivate-feedback-modal').hide();
                   });
                 },
                 onShow: function onShow() {
                   var $dialogModal = $('#tp-deactivate-feedback-modal'),
-                      radioSelector = '.tp-deactivate-feedback-dialog-input';
+                      $textareaWrapper = $dialogModal.find('#tp-other-reason-textarea-wrapper');
+                  $textareaWrapper.hide();
 
-                      $dialogModal.find(radioSelector).on('change', function () {
-                        $dialogModal.attr('data-feedback-selected', $(this).val());
-                      });
+                  $dialogModal.find('.tp-feedback-option').off('click').on('click', function () {
 
-                      $dialogModal.find(radioSelector + ':checked').trigger('change');
+                    var associatedInputId = $(this).attr('for');
+                    var $radio = $('#' + associatedInputId);
+                    $radio.prop('checked', true);
+                    $textareaWrapper.show();
+                  });
                 }
               });
             }
@@ -81,6 +88,10 @@
           return;
         }
 
+      var screenWidth = window.innerWidth,
+          screenHeight = window.innerHeight,
+          resolutions = (screenWidth + ' x ' + screenHeight);
+
       self.getModal().getElements('submit').text('').addClass('tp-loading');
 
       jQuery.ajax({
@@ -88,14 +99,10 @@
         type: "post",
         data: {
           action: 'tp_deactivate_rateus_notice',
-          site_url: formData.get('site_url'),
           reason_key: reason_key,
-          reason_tp_found_a_better_plugin: formData.get('reason_tp_found_a_better_plugin'),
-          reason_tp_other: formData.get('reason_tp_other'),
-          cur_datetime: formData.get('cur_datetime'),
-          user_email: formData.get('user_email'),
-          tpae_version: formData.get('tpae_version'),
           nonce: formData.get('nonce'),
+          reason_desc: formData.get('reason_tp_other'),
+          resolutions: resolutions,
         },
         beforeSend: function () {
         },
@@ -109,25 +116,35 @@
     },
     skipFeedback: function skipFeedback() {
       var self = this,
-          formData = self.cache.$dialogForm.serialize(),
-          queryParams = new URLSearchParams(formData);
+          formData = self.cache.$dialogForm.serialize();
+
+      var urlEncodedString = formData;
+      var queryString = decodeURIComponent(urlEncodedString);
+      var formData = new URLSearchParams(queryString);
+
+      var screenWidth = window.innerWidth,
+          screenHeight = window.innerHeight,
+          resolutions = (screenWidth + ' x ' + screenHeight);
 
           jQuery.ajax({
-            url: theplus_ajax_url,
-            type: "post",
-            data: {
-              action: 'tp_skip_rateus_notice',
-              nonce: queryParams.get('nonce'),
-            },
-            beforeSend: function () {
-            },
-            success: function (response) {
-              location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href')
-            },
-            error: function (xhr, status, error) {
-              location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href')
-            }
-          });
+          url: theplus_ajax_url,
+          type: "post",
+          data: {
+            action: 'tp_deactivate_rateus_notice',
+            nonce: formData.get('nonce'),
+            reason_key: 'skip',
+            reason_desc: 'skip',
+            resolutions: resolutions,
+          },
+          beforeSend: function () {
+          },
+          success: function (response) {
+            location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href')
+          },
+          error: function(xhr, status, error) {
+            location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href')
+          }
+        });
     },
     init: function init() {
       this.initModal();

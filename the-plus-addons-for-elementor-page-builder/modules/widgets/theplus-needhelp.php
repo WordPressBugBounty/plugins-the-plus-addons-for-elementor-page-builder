@@ -17,7 +17,7 @@ $this->start_controls_section('tpebl_section_needhelp',
 $this->add_control('tpebl_help_raise_a_ticket',
     [
         'type' => Controls_Manager::RAW_HTML,
-        'raw' => wp_kses_post( "<a class='tp-docs-link' href='https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Raise a Ticket </a>" ),
+        'raw' => wp_kses_post( "<a class='tp-docs-link' href='https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/' target='_blank' rel='noopener noreferrer'> Raise a Ticket </a>" ),
     ]
 );
 $this->add_control('tpebl_help_read_documentation',

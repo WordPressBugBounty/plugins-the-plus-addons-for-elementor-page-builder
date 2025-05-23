@@ -108,7 +108,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 	 * @since 6.3.3
 	 */
 	public function has_widget_inner_wrapper(): bool {
-		return false;
+		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	/**
