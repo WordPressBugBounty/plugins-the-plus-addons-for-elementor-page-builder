@@ -529,7 +529,7 @@ if ( ! class_exists( 'Tp_Onbording' ) ) {
 									$output             .= '<div class="tpae-title mt-5"> ' . esc_html__( 'Congratulations All set!', 'tpebl' ) . '</div>';
 									$output             .= '<div class="tpae-content tpae-wd-80 mt-10">' . esc_html__( 'We have configured The Plus Addons for Elementor based on your site requirements, where only necessary widgets are activated & rest are disabled.', 'tpebl' );
 									$output             .= '</div>';
-									$output             .= '<div class="tpae-check-content tpae-wd-70 blk-color mt-10"><input id="tpae_ondata" type="checkbox" checked><span>' . esc_html__( 'Agree to contribute to make The Plus Addons for Elementor better by sharing non-sensitive details. ', 'tpebl' ) . '<span class="tpae-show-details">' . esc_html__( ' See what details are shared ', 'tpebl' ) . '</span></span>';
+									$output             .= '<div class="tpae-check-content tpae-wd-70 blk-color mt-10"><input id="tpae_ondata" type="checkbox"><span>' . esc_html__( 'Agree to contribute to make The Plus Addons for Elementor better by sharing non-sensitive details. ', 'tpebl' ) . '<span class="tpae-show-details">' . esc_html__( ' See what details are shared ', 'tpebl' ) . '</span></span>';
 										$output         .= '<div class="tpae-details">';
 											$output     .= '<div class="tpae-details-inner">';
 												$output .= '<span class="tpae-collect-txt">' . esc_html__( 'We collect :', 'tpebl' ) . '</span>';
@@ -659,28 +659,26 @@ if ( ! class_exists( 'Tp_Onbording' ) ) {
 						if ( 200 === $status_one ) {
 							$get_data_one = wp_remote_retrieve_body( $response );
 							$get_data_one = (array) json_decode( json_decode( $get_data_one, true ) );
-
-							if ( isset( $get_data_one['success'] ) && ! empty( $get_data_one['success'] ) ) {
-								$tpae_exoption = get_option( 'tpae_onbording_end' );
-
-								if ( ! empty( $tpae_exoption ) ) {
-									update_option( 'tpae_onbording_end', true );
-								} else {
-									$tpae_exoption['tpgb_share_details'] = 'enable';
-									add_option( 'tpae_onbording_end', true );
-								}
-
-								if ( 'normal' === $load ) {
-									wp_send_json( array( 'onBoarding' => true ) );
-
-									wp_die();
-								} else {
-									wp_send_json( array( 'onBoarding' => true ) );
-									wp_die();
-								}
-							}
 						}
 					}
+				} 
+
+				$tpae_exoption = get_option( 'tpae_onbording_end' );
+
+				if ( ! empty( $tpae_exoption ) ) {
+					update_option( 'tpae_onbording_end', true );
+				} else {
+					$tpae_exoption['tpgb_share_details'] = 'enable';
+					add_option( 'tpae_onbording_end', true );
+				}
+
+				if ( 'normal' === $load ) {
+					wp_send_json( array( 'onBoarding' => true ) );
+
+					wp_die();
+				} else {
+					wp_send_json( array( 'onBoarding' => true ) );
+					wp_die();
 				}
 			}
 

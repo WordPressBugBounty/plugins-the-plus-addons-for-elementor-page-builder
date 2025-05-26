@@ -622,7 +622,7 @@
     text-decoration: none
 }
 
-.tpae-section-data>.tpae-check-content>input[type=checkbox],.tpae-theme-left>.tpae-bgwhite-details>input[type=checkbox] {
+.tpae-theme-left>.tpae-bgwhite-details>input[type=checkbox] {
     background-color: #7248f1
 }
 /** Page 5 */
@@ -1013,6 +1013,14 @@
 .tpae-onboarding-button>.tpae-boarding-proceed:disabled {
     cursor: not-allowed;
     opacity: .8
+}
+
+.tpae-section-data>.tpae-check-content>input[type=checkbox]:checked{
+    background-color:#666ffd;
+}
+.tpae-section-data>.tpae-check-content>input[type=checkbox]{
+    background-color: #fff;
+    border: 1px solid #d1d1d6;
 }
 /** Bottom Section */
 

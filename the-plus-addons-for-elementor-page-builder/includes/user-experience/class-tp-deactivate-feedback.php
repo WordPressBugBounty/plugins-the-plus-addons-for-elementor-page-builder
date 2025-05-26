@@ -41,11 +41,17 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 		 * Singleton Instance of the Class.
 		 *
 		 * @since 5.3.4
-		 * @access private
-		 * @static
 		 * @var string|deactive_count_api $deactive_count_api An instance of the class or null if not instantiated yet.
 		 */
-		private $count_api = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_deactive_user_count_api';
+		public $count_api = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_deactive_user_count_api';
+		
+		/**
+		 * Singleton Instance of the Class.
+		 *
+		 * @since 5.3.4
+		 * @var string|deactive_count_api $deavtive_url An instance of the class or null if not instantiated yet.
+		 */
+		public $deavtive_url = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_deactivate_user_data';
 
 		/**
 		 * Singleton Instance Creation Method.
@@ -218,7 +224,7 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 						foreach ( $reasons as $index => $reason ) {
 							$id = 'tp-feedback-reason-' . esc_attr( $index ); ?>
 
-							<input type="radio" name="reason_key" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $reason['label'] ); ?>" hidden />
+							<input type="radio" name="issue_type" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $reason['label'] ); ?>" hidden />
 
 							<label for="<?php echo esc_attr( $id ); ?>" class="tp-feedback-option">
 								<span class="tp-feedback-icon"><?php echo $reason['svg']; ?></span>
@@ -227,7 +233,7 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 						<?php } ?>
 
 							<div id="tp-other-reason-textarea-wrapper" style="display:none;">
-								<textarea name="reason_tp_other" placeholder="Please share the reason"></textarea>
+								<textarea name="issue_text" placeholder="Please share the reason"></textarea>
 							</div>
 						</div>
 
@@ -236,8 +242,17 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 								echo esc_html__('After submitting, we’ll get in touch with you via email to provide the support you need. If you require any help, please ', 'tpebl' );
 								echo '<a href="https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/" target="_blank" rel="noopener">' . esc_html__('Create A Ticket', 'tpebl') . '</a>';
 								echo esc_html__(', we reply within 24 working hours. Looking for instant solutions? - ', 'tpebl');
-								echo '<a href="https://theplusaddons.com/docs/?utm_source=wpbackend&utm_medium=admin&utm_campaign=pluginpage" target="_blank" rel="noopener">Read our Documentation</a> '. esc_html__('or', 'tpebl') .'<a target="_blank" ref="https://theplusaddons.com/chat/?utm_source=wpbackend&utm_medium=admin&utm_campaign=pluginpage" target="_blank" rel="noopener"> '.esc_html__('Ask AI', 'tpebl') .'</a>';
+								echo '<a href="https://theplusaddons.com/docs/?utm_source=wpbackend&utm_medium=admin&utm_campaign=pluginpage" target="_blank" rel="noopener">Read our Documentation</a> '. esc_html__('or', 'tpebl') .'<a target="_blank" href="https://theplusaddons.com/chat/?utm_source=wpbackend&utm_medium=admin&utm_campaign=pluginpage" target="_blank" rel="noopener"> '.esc_html__('Ask AI', 'tpebl') .'</a>';
 							?>
+						</div>
+
+						<div class="tp-feedback-agree-terms">
+							<input type="checkbox" id="tp_collect_email" name="tp_collect_email">
+							<span>
+								<?php 
+									echo esc_html__('I agree to be contacted via email for support with this plugin.', 'tpebl');
+								?>
+							</span>
 						</div>
 					</div>
 				</form>
@@ -252,9 +267,6 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 		 * and sends the necessary data to the remote API for processing.
 		 *
 		 * @since 5.3.3
-		 * @access public
-		 *
-		 * @return void
 		 */
 		public function tp_deactivate_rateus_notice() {
 			global $wpdb;
@@ -264,64 +276,32 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 			if ( ! isset( $nonce ) || empty( $nonce ) || ! wp_verify_nonce( $nonce, 'tp-deactivate-feedback' ) ) {
 				$response = array(
 					'success'     => false,
-					'message'     => 'Security checked!',
-					'description' => 'Security checked!',
+					'message'     => esc_html__('Security checked!', 'tpebl'),
+					'description' => esc_html__('Security checked!', 'tpebl'),
 				);
 
 				wp_send_json( $response );
 			}
 
-			$deavtive_url = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_deactivate_user_data';
+			$this->deavtive_url = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_deactivate_user_data';
 
-			$reason_key  = ! empty( $_POST['reason_key'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_key'] ) ) : '';
-			$reason_desc = ! empty( $_POST['reason_desc'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_desc'] ) ) : '';
-
-			$current_datetime = date( 'Y-m-d H:i:s' );
-
-			$current_user = wp_get_current_user();
-			$user_email   = $current_user->user_email;
-
-			$site_url = site_url();
-
-			$server       = ! empty( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
-			$themes       = get_option( 'current_theme' );
-			$plugins      = get_plugins();
-			$plugin_names = array();
-			foreach ( $plugins as $plugin ) {
-				$plugin_names[] = $plugin['Name'];
-			}
-			$plugin_names = implode( ', ', $plugin_names );
-
-			$wp_version  = get_bloginfo( 'version' );
-			$php_version = phpversion();
-			$db_version  = $wpdb->db_version();
-
-			$memory_limit = ini_get( 'memory_limit' );
-			$language     = get_bloginfo( 'language' );
-
-			$max_execution_time = ini_get( 'max_execution_time' );
-			$screen_resolution  = ! empty( $_POST['resolutions'] ) ? sanitize_text_field( wp_unslash( $_POST['resolutions'] ) ) : '';
+			$issue_type  = ! empty( $_POST['issue_type'] ) ? sanitize_text_field( wp_unslash( $_POST['issue_type'] ) ) : '';
+			$issue_text = ! empty( $_POST['issue_text'] ) ? sanitize_text_field( wp_unslash( $_POST['issue_text'] ) ) : '';
+			$collect_email = ! empty( $_POST['collect_email'] ) ? sanitize_text_field( wp_unslash( $_POST['collect_email'] ) ) : '';
 
 			$api_params = array(
-				'site_url'           => $site_url,
-				'email'              => $user_email,
-				'reason_key'         => $reason_key,
-				'reason_tp_other'    => $reason_desc,
-				'plugins'            => $plugin_names,
-				'themes'             => $themes,
-				'tpae_version'       => L_THEPLUS_VERSION,
-				'wp_version'         => $wp_version,
-				'php_version'        => $php_version,
-				'db_version'         => $db_version,
-				'server'             => $server,
-				'memory_limit'       => $memory_limit,
-				'max_execution_time' => $max_execution_time,
-				'language'           => $language,
-				'screen_resolution'  => $screen_resolution,
+				'reason_key'         => $issue_type,
+				'reason_tp_other'    => $issue_text,
 			);
 
-			$data = wp_remote_post(
-				$deavtive_url,
+			if( 'on' === $collect_email ) {
+				$current_user = wp_get_current_user();
+				$user_email   = $current_user->user_email;
+
+				$api_params['email'] = $user_email;
+			}
+
+			$data = wp_remote_post( $this->deavtive_url,
 				array(
 					'timeout'   => 60,
 					'sslverify' => false,

@@ -52,7 +52,7 @@
                     text: skip_txt,
                     callback: self.skipFeedback.bind(self)
                   });
-                  $('#tp-feedback-close-button').on('click', function() {
+                  $(document).on('click', '#tp-feedback-close-button', function() {
                     $('#tp-deactivate-feedback-modal').hide();
                   });
                 },
@@ -83,27 +83,30 @@
       var queryString = decodeURIComponent(urlEncodedString);
       var formData = new URLSearchParams(queryString);
 
-      var reason_key = formData.get('reason_key');
-        if( !reason_key ){
-          return;
-        }
+      var issue_type = formData.get('issue_type');
+      if( !issue_type ){
+        return;
+      }
 
-      var screenWidth = window.innerWidth,
-          screenHeight = window.innerHeight,
-          resolutions = (screenWidth + ' x ' + screenHeight);
+      var collect_email = formData.get('tp_collect_email');
+
+      var ajaxData = {
+          action: 'tp_deactivate_rateus_notice',
+          issue_text: formData.get('issue_text'),
+          reason_key: issue_type,
+          nonce: formData.get('nonce'),
+      };
+
+      if (collect_email !== null) {
+        ajaxData.collect_email = collect_email;
+      }
 
       self.getModal().getElements('submit').text('').addClass('tp-loading');
 
       jQuery.ajax({
         url: theplus_ajax_url,
         type: "post",
-        data: {
-          action: 'tp_deactivate_rateus_notice',
-          reason_key: reason_key,
-          nonce: formData.get('nonce'),
-          reason_desc: formData.get('reason_tp_other'),
-          resolutions: resolutions,
-        },
+        data: ajaxData,
         beforeSend: function () {
         },
         success: function (response) {
@@ -115,36 +118,7 @@
       });
     },
     skipFeedback: function skipFeedback() {
-      var self = this,
-          formData = self.cache.$dialogForm.serialize();
-
-      var urlEncodedString = formData;
-      var queryString = decodeURIComponent(urlEncodedString);
-      var formData = new URLSearchParams(queryString);
-
-      var screenWidth = window.innerWidth,
-          screenHeight = window.innerHeight,
-          resolutions = (screenWidth + ' x ' + screenHeight);
-
-          jQuery.ajax({
-          url: theplus_ajax_url,
-          type: "post",
-          data: {
-            action: 'tp_deactivate_rateus_notice',
-            nonce: formData.get('nonce'),
-            reason_key: 'skip',
-            reason_desc: 'skip',
-            resolutions: resolutions,
-          },
-          beforeSend: function () {
-          },
-          success: function (response) {
-            location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href')
-          },
-          error: function(xhr, status, error) {
-            location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href')
-          }
-        });
+      location.href = $('#the-list').find('[data-slug="the-plus-addons-for-elementor-page-builder"] span.deactivate a').attr('href');
     },
     init: function init() {
       this.initModal();

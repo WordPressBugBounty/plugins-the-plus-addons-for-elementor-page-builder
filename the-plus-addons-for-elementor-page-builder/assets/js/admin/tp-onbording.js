@@ -319,7 +319,7 @@
                     loder = document.querySelector('.tpae-nxt-load'),
                     notice = document.querySelector('.tpae-wrong-msg-notice');
 
-                addnxt.addEventListener("change", function () {
+                addnxt?.addEventListener("change", function () {
                     if (this.checked) {
                         btnscope.setAttribute('disabled', true)
 
