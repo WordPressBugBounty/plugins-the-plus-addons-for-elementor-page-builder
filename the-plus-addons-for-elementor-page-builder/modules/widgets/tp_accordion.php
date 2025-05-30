@@ -1836,6 +1836,11 @@ class L_ThePlus_Accordion extends Widget_Base {
 									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
 								}
 							} elseif ( 'page_template' === $content_source ) {
+
+								if ( has_filter( 'wpml_object_id' ) ) {
+									$content_template = apply_filters( 'wpml_object_id', $content_template, get_post_type( $content_template ), true);
+								}
+
 								$template_status = get_post_status( $content_template );
 								if ( 'publish' === $template_status ) {
 									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';

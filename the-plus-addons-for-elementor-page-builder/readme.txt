@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.5
+Stable tag: 6.3.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -381,6 +381,18 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.6 =
+Improvement : Button : UI Improvements
+Improvement : Breadcrumbs Bar : UI Improvements
+Improvement : Accordion : WPML Compatibility with template
+Improvement : Carousel Anything : WPML Compatibility with template
+Improvement : Navigation Menu Lite : WPML Compatibility with template
+Improvement : Page Scroll : WPML Compatibility with template
+Improvement : Tabs/Tours : WPML Compatibility with template
+Improvement : Dashboard : Dashboard design
+Fix : Dark Mode : Console Error
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.5 =
 Fix : Minor Bug Fixes & Performance Improvements

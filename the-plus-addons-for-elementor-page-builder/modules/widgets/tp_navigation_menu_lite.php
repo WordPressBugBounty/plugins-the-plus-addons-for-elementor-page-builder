@@ -2592,6 +2592,11 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					if ( empty( $sett ) || empty( $item['moblieMmenu'] && $item['moblieMmenu'] == 'no' ) ) {
 						$start_Li .= '<div class="plus-megamenu-content">';
 						if ( ( $item['blockTemp'] ) && $item['blockTemp'] != '0' ) {
+
+							if ( has_filter( 'wpml_object_id' ) ) {
+								$item['blockTemp'] = apply_filters( 'wpml_object_id', $item['blockTemp'], get_post_type( $item['blockTemp'] ), true);
+							}
+
 							$template_status = get_post_status( $item['blockTemp'] );
 							if( 'publish' === $template_status ) {
 								$start_Li .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['blockTemp'] ) . '</div>';

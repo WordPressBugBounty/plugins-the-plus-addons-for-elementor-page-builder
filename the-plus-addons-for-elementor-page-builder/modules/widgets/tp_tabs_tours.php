@@ -2268,7 +2268,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 							$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 						}
 					} else {
-						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $item['content_template_id'] ) . '"</b></div><div class="preview-temp-notice-desc"><b>Note :</b> We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.</div></div>';
+						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}
 				} elseif ( 'page_template' === $item['content_source'] && ! empty( $item['content_template_id'] ) ) {
 					$template_status = $this->get_elementor_template_status( $item['content_template_id'] );
@@ -2301,6 +2301,10 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 					$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>Note :</b> We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.</div></div>';
 				}
 			} elseif ( 'page_template' === $item['content_source'] && ! empty( $content_template ) ) {
+
+				if ( has_filter( 'wpml_object_id' ) ) {
+					$content_template = apply_filters( 'wpml_object_id', $content_template, get_post_type( $content_template ), true);
+				}
 
 				$template_status = get_post_status( $content_template );
 				if( 'publish' === $template_status ) {

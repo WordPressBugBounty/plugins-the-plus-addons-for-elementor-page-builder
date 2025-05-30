@@ -84,16 +84,13 @@
       var formData = new URLSearchParams(queryString);
 
       var issue_type = formData.get('issue_type');
-      if( !issue_type ){
-        return;
-      }
 
       var collect_email = formData.get('tp_collect_email');
 
       var ajaxData = {
           action: 'tp_deactivate_rateus_notice',
           issue_text: formData.get('issue_text'),
-          reason_key: issue_type,
+          issue_type: issue_type,
           nonce: formData.get('nonce'),
       };
 

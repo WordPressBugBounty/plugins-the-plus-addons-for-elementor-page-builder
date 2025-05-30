@@ -1130,10 +1130,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 								}
 							}else{
 								$content_template = isset( $item['content_template'] ) ? intval( $item['content_template'] ) : 0;
+
+								if ( has_filter( 'wpml_object_id' ) ) {
+									$content_template = apply_filters('wpml_object_id', $content_template, get_post_type( $content_template ), true);
+								}
+
 								$template_status  = get_post_status( $content_template );
 
 								if( 'publish' === $template_status ){
-									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $item['content_template'] ) . '</div>';
+									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
 								}else{
 									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 								}

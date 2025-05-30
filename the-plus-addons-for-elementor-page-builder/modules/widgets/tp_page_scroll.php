@@ -1058,6 +1058,10 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 
 						$full_page_content .= '<div class="section">';
 
+							if ( has_filter( 'wpml_object_id' ) ) {
+								$elem_templates = apply_filters( 'wpml_object_id', $elem_templates, get_post_type( $elem_templates ), true);
+							}
+
 							$template_status = get_post_status( $elem_templates );
 						if ( 'publish' === $template_status ) {
 							$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates );

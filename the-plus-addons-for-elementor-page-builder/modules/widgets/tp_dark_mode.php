@@ -1035,7 +1035,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				jQuery( "' . esc_js( $dm_ingnor ) . '" ).addClass( "theplus-darkmode-ignore" );
 			});';
 
-			echo wp_print_inline_script_tag( esc_js( $dm_ignore_js ) );
+			echo wp_print_inline_script_tag( $dm_ignore_js );
 		}
 
 		if ( 'yes' === $ignore_class ) {
@@ -1043,7 +1043,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				jQuery( ".theplus-hotspot,.pt-plus-animated-image-wrapper .pt_plus_animated_image,.elementor-image img,.elementor-widget-image img,.elementor-image, .animated-image-parallax,.pt_plus_before_after,.pt_plus_animated_image,.team-list-content .post-content-image,.product-list .product-content-image,.gallery-list .gallery-list-content,.bss-list,.blog-list.list-isotope-metro,.blog-list .post-content-image,.blog-list-content:hover .post-content-image,.blog-list.blog-style-1 .grid-item" ).addClass( "theplus-darkmode-ignore" );
 			});';
 
-			echo wp_print_inline_script_tag( esc_js($ignore_js) );
+			echo wp_print_inline_script_tag( $ignore_js );
 		}
 
 		echo '</div>';

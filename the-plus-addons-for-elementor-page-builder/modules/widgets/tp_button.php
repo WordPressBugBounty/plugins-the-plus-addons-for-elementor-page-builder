@@ -106,7 +106,7 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Content', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -159,97 +159,6 @@ class L_ThePlus_Button extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'button_text',
-			array(
-				'label'       => esc_html__( 'Text', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'default'     => esc_html__( 'Read More', 'tpebl' ),
-				'placeholder' => esc_html__( 'Read More', 'tpebl' ),
-			)
-		);
-		$this->add_control(
-			'button_24_text',
-			array(
-				'label'       => esc_html__( 'Button Tag Text', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'default'     => esc_html__( 'Click Here', 'tpebl' ),
-				'placeholder' => esc_html__( 'Click Here', 'tpebl' ),
-				'condition'   => array(
-					'button_style' => array( 'style-24' ),
-				),
-			)
-		);
-		$this->add_control(
-			'button_hover_text',
-			array(
-				'label'       => wp_kses_post( "Hover Text <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "button-text-on-hover-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'        => Controls_Manager::TEXT,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'default'     => esc_html__( 'Click Here', 'tpebl' ),
-				'placeholder' => esc_html__( 'Click Here', 'tpebl' ),
-				'condition'   => array(
-					'button_style' => array( 'style-4', 'style-11', 'style-14' ),
-				),
-			)
-		);
-		$this->add_control(
-			'button_link',
-			array(
-				'label'       => esc_html__( 'Link', 'tpebl' ),
-				'type'        => Controls_Manager::URL,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'separator'   => 'before',
-				'placeholder' => esc_html__( 'https://www.demo-link.com', 'tpebl' ),
-				'default'     => array(
-					'url' => '#',
-				),
-			)
-		);
-		$this->add_control(
-			'button_custom_attributes',
-			array(
-				'label'     => __( 'Add Custom Attributes', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
-				'default'   => 'no',
-			)
-		);
-
-		$this->add_control(
-			'custom_attributes',
-			array(
-				'label'       => __( 'Custom Attributes', 'tpebl' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'placeholder' => __( 'key=value', 'tpebl' ),
-				'condition'   => array(
-					'button_custom_attributes' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_button_styling',
-			array(
-				'label' => esc_html__( 'Layout', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
-		);
 		$this->add_responsive_control(
 			'button_align',
 			array(
@@ -289,6 +198,93 @@ class L_ThePlus_Button extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'button_text',
+			array(
+				'label'       => esc_html__( 'Text', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai' => false,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => esc_html__( 'Read More', 'tpebl' ),
+				'placeholder' => esc_html__( 'Read More', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'button_24_text',
+			array(
+				'label'       => esc_html__( 'Button Tag Text', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => esc_html__( 'Click Here', 'tpebl' ),
+				'placeholder' => esc_html__( 'Click Here', 'tpebl' ),
+				'condition'   => array(
+					'button_style' => array( 'style-24' ),
+				),
+			)
+		);
+		$this->add_control(
+			'button_hover_text',
+			array(
+				'label'       => wp_kses_post( "Hover Text <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "button-text-on-hover-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'        => Controls_Manager::TEXT,
+				'ai' => false,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => esc_html__( 'Click Here', 'tpebl' ),
+				'placeholder' => esc_html__( 'Click Here', 'tpebl' ),
+				'condition'   => array(
+					'button_style' => array( 'style-4', 'style-11', 'style-14' ),
+				),
+			)
+		);
+		$this->add_control(
+			'button_link',
+			array(
+				'label'       => esc_html__( 'Link', 'tpebl' ),
+				'type'        => Controls_Manager::URL,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'separator'   => 'before',
+				'placeholder' => esc_html__( 'https://www.demo-link.com', 'tpebl' ),
+				'default'     => array(
+					'url' => '#',
+				),
+			)
+		);
+		$this->add_control(
+			'button_custom_attributes',
+			array(
+				'label'     => __( 'Add Custom Attributes', 'tpebl' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'custom_attributes',
+			array(
+				'label'       => __( 'Custom Attributes', 'tpebl' ),
+				'type'        => Controls_Manager::TEXTAREA,
+				'ai' => false,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'placeholder' => __( 'key=value', 'tpebl' ),
+				'condition'   => array(
+					'button_custom_attributes' => 'yes',
+				),
+			)
+		);
+		$this->end_popover();
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_button_icon_styling',
@@ -332,6 +328,29 @@ class L_ThePlus_Button extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'font_awesome',
+			array(
+				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition'   => array(
+					'button_icon_style' => 'font_awesome',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'icon_fs_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
+			)
+		);
+		$this->add_control(
 			'button_icon',
 			array(
 				'label'       => esc_html__( 'Icon', 'tpebl' ),
@@ -342,6 +361,30 @@ class L_ThePlus_Button extends Widget_Base {
 					'button_style!'     => array( 'style-3', 'style-6', 'style-7', 'style-9' ),
 					'button_icon_style' => 'font_awesome',
 				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'font_awesome_5',
+			array(
+				'label' => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition'   => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'icon_f5_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
 			)
 		);
 		$this->add_control(
@@ -359,11 +402,26 @@ class L_ThePlus_Button extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
+		$this->add_control(
+			'iconmind_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'button_icon_style' => 'icon_mind'
+				),
+			)
+		);
 		$this->add_control(
 			'before_after',
 			array(
 				'label'     => esc_html__( 'Icon Position', 'tpebl' ),
 				'type'      => Controls_Manager::SELECT,
+				'separator' => 'before',
 				'default'   => 'after',
 				'options'   => array(
 					'after'  => esc_html__( 'After', 'tpebl' ),
@@ -422,7 +480,7 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->start_controls_section(
 			'section_extra_styling',
 			array(
-				'label' => esc_html__( 'Extra', 'tpebl' ),
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -431,6 +489,7 @@ class L_ThePlus_Button extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Button ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai' => false,
 				'default'     => '',
 				'title'       => esc_html__( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'tpebl' ),
 				'label_block' => false,
@@ -448,7 +507,7 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->start_controls_section(
 			'section_styling',
 			array(
-				'label' => esc_html__( 'Typography and Cosmetics', 'tpebl' ),
+				'label' => esc_html__( 'Background Option', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
