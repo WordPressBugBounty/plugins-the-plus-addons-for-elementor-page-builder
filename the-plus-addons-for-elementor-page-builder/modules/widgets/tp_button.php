@@ -812,6 +812,21 @@ class L_ThePlus_Button extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'btn_icon_color_hover',
+			array(
+				'label'     => esc_html__( 'Icon Hover Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button:hover .button-link-wrap:hover .btn-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button.button-style-6 .button-link-wrap::before:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap:after:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap:hover span.btn-arrow' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button.button-style-9 a.button-link-wrap:hover .btn-arrow' => 'color: {{VALUE}};',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			array(
@@ -925,7 +940,6 @@ class L_ThePlus_Button extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_button.button-style-4 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-5 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-10 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-11 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-12 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-13 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-14 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-16 .button-link-wrap::before,{{WRAPPER}} .pt_plus_button.button-style-17 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-19 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-20 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-21 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-22 .button-link-wrap:hover,{{WRAPPER}} .pt_plus_button.button-style-24 .button-link-wrap:hover' => 'border-color: {{VALUE}};',
 					'{{WRAPPER}} .pt_plus_button.button-style-18 .button-link-wrap::before' => 'background: {{VALUE}};',
 				),
-				'separator' => 'before',
 				'condition' => array(
 					'button_style'         => array( 'style-4', 'style-5', 'style-8', 'style-10', 'style-11', 'style-12', 'style-13', 'style-14', 'style-16', 'style-17', 'style-18', 'style-19', 'style-20', 'style-21', 'style-22', 'style-24' ),
 					'button_border_style!' => 'none',
@@ -1018,6 +1032,19 @@ class L_ThePlus_Button extends Widget_Base {
 			array(
 				'name'      => 'button_tag_typography',
 				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-24 .button-tag-hint',
+				'condition' => array(
+					'button_style' => 'style-24',
+				),
+			)
+		);
+		$this->add_control(
+			'btn_tag_text_color',
+			array(
+				'label'     => esc_html__( 'Button Tag Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-24 .button-tag-hint' => 'color: {{VALUE}};',
+				),
 				'condition' => array(
 					'button_style' => 'style-24',
 				),
@@ -1182,7 +1209,7 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'shake_animate',
 			array(
-				'label'     => wp_kses_post( "Interval Shake Animate' <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "interval-shake-animation-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post( 'Interval Shake Animate <a class="tp-docs-link" href="' . esc_url( $this->tp_doc ) . 'interval-shake-animation-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
 				'separator' => 'before',

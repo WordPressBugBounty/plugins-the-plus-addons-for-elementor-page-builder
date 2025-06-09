@@ -144,6 +144,9 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				case 'set_whitelabel':
 					$response = apply_filters( 'tpaep_dashboard_ajax_call', 'tpaep_set_whitelabel' );
 					break;
+				case 'tpae_widgets_setting_data':
+					$response = $this->tpae_widgets_setting_data();;
+					break;
 			}
 
 			wp_send_json( $response );
@@ -209,6 +212,21 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'success'    => true,
 			);
 
+			$tp_form_settings    = get_option( 'theplus_widgets_settings' );
+
+			if ( false === $tp_form_settings ) {
+				$form_default_settings = array(
+					'tp_plus_form' => array(
+						'google_site_key'        => '',
+						'google_secret_key'     => '',
+						'cloudflare_site_key'   => '',
+						'cloudflare_secret_key' => '',
+					),
+				);
+
+				add_option( 'theplus_widgets_settings', $form_default_settings );
+			}
+
 			$elementor_disabled = apply_filters( 'tpae_elementor_disable_widgets', null );
 			$get_widget_list    = get_option( 'theplus_options', array() );
 			$get_extra_option   = get_option( 'theplus_api_connection_data', array() );
@@ -232,6 +250,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'performance'        => $get_performance,
 				'wdk_widgets'        => $wdk_widgets,
 				'elementor_disabled' => $elementor_disabled,
+				'tp_widgets_setting' => $tp_form_settings,
 			);
 
 			if ( defined( 'THEPLUS_VERSION' ) ) {
@@ -838,6 +857,38 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		 */
 		public function tpae_backend_catch_remove() {
 			l_theplus_library()->remove_backend_dir_files();
+		}
+
+		/**
+		 * tpae_set_custom_css_js
+		 *
+		 * @since 6.0.0
+		 */
+		public function tpae_widgets_setting_data() {
+
+
+			if ( ! check_ajax_referer( 'tpae-db-nonce', 'nonce', false ) ) {
+
+				$response = $this->tpae_set_response( false, 'Invalid nonce.', 'The security check failed. Please refresh the page and try again.' );
+
+				wp_send_json( $response );
+				wp_die();
+			}
+
+			$settings_json = isset($_POST['tp_widgets_setting']) ? wp_unslash($_POST['tp_widgets_setting']) : '';
+			
+			if (!empty($settings_json)) {
+				$settings = json_decode($settings_json, true); 
+				if (!is_array($settings)) {
+					return $this->tpae_set_response(false, 'Invalid data format.', 'Data is not in correct format.');
+				}
+
+				update_option('theplus_widgets_settings', $settings);
+
+				return $this->tpae_set_response(true, 'Data Updated.', 'Data Updated Successfully.');
+			}
+
+			return $this->tpae_set_response(false, 'No data found.', 'Please send valid data.');
 		}
 
 		/**

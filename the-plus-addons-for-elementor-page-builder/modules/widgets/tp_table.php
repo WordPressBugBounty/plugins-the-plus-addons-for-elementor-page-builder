@@ -165,6 +165,22 @@ class L_ThePlus_Data_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'smart-preset-button',
+			array(
+                'type'=> Controls_Manager::RAW_HTML,
+                'raw' => sprintf(
+					'<div class="tpae-preset-main-raw-main">
+						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16051" target="_blank" rel="noopener noreferrer">%s</a>
+						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16051">%s</a>
+					</div>',
+					esc_url('https://theplusaddons.com/widgets/elementor-data-table/'),
+					esc_html__('Live Demo', 'tpebl'),
+					esc_html__('Import Presets', 'tpebl')
+				),
+                'label_block'     => true,
+            )
+		);
+		$this->add_control(
 			'table_selection',
 			array(
 				'label'   => wp_kses_post( "Content Table <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "table-elementor-widget-settings-overview/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
@@ -214,22 +230,6 @@ class L_ThePlus_Data_Table extends Widget_Base {
 			), 
 			)
 			
-		);
-		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16051" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16051">%s</a>
-					</div>',
-					esc_url('https://theplusaddons.com/widgets/elementor-data-table/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
-                'label_block'     => true,
-            )
 		);
 		$this->end_controls_section();
 
@@ -1888,7 +1888,6 @@ class L_ThePlus_Data_Table extends Widget_Base {
 				'name'      => 'button_background',
 				'types'     => array( 'classic', 'gradient' ),
 				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap',
-				'separator' => 'after',
 				'condition' => array(
 					'table_selection!' => 'csv_file',
 				),
@@ -1932,6 +1931,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 				),
 				'condition'  => array(
 					'table_selection!' => 'csv_file',
+					'button_border_style!' => 'none'
 				),
 			)
 		);
@@ -1947,6 +1947,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 				'separator' => 'after',
 				'condition' => array(
 					'table_selection!' => 'csv_file',
+					'button_border_style!' => 'none'
 				),
 			)
 		);

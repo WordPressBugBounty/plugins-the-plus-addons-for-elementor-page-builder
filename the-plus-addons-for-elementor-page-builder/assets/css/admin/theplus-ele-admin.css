@@ -646,3 +646,5 @@ ul#adminmenu a[href*="page=theplus-upgrade"]{color:#FFF;background:#8072FC;margi
     border-radius: 15%;
     display: flex;
 }
+.tp-docs-wrapper{display:flex;justify-content:center}
+.elementor-control-direction_dots span.elementor-switch-label {overflow: hidden}

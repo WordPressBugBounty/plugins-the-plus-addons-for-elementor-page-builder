@@ -185,11 +185,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Title', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'  => false,
 				'default'     => esc_html__( 'Slide 1', 'tpebl' ),
-				'dynamic'     => array(
-					'active' => true,
-				),
-				'label_block' => true,
 			)
 		);
 		$repeater->add_control(
@@ -211,7 +208,6 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '0',
 				'options'     => l_theplus_get_templates(),
-				'label_block' => 'true',
 				'condition'   => array(
 					'content_template_type' => 'dropdown',
 				),
@@ -225,6 +221,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
+				'ai'  => false,
 				'default'     => '',
 				'placeholder' => '[elementor-template id="70"]',
 				'condition'   => array(
@@ -249,28 +246,6 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'title_field' => '{{{ tab_title }}}',
 			)
 		);
-		$this->add_control(
-			'slide_overflow_hidden',
-			array(
-				'label'       => esc_html__( 'Overflow Hidden', 'tpebl' ),
-				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'On', 'tpebl' ),
-				'label_off'   => esc_html__( 'Off', 'tpebl' ),
-				'default'     => 'no',
-				'separator'   => 'before',
-				'description' => esc_html__( 'If any content goes outside of section and conflict with another. We suggest to turn this option on.', 'tpebl' ),
-			)
-		);
-		$this->add_control(
-			'carousel_unique_id',
-			array(
-				'label'       => wp_kses_post( "Unique Carousel ID <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "connect-infobox-with-carousel-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'separator'   => 'before',
-				'description' => esc_html__( 'Keep this blank or Setup Unique id for carousel which you can use with "Carousel Remote" widget.', 'tpebl' ),
-			)
-		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -283,10 +258,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slide_random_order',
 			array(
-				'label'     => esc_html__( 'Slide Random Order', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Slide Random Order <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -303,7 +283,43 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				),
 			)
 		);
-
+		$this->add_control(
+			'slide_overflow_hidden',
+			array(
+				'label'       => esc_html__( 'Overflow Hidden', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'On', 'tpebl' ),
+				'label_off'   => esc_html__( 'Off', 'tpebl' ),
+				'default'     => 'no',
+				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'slide_overflow_hidden_Note',
+			array(
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> If any content goes outside of section and conflict with another. We suggest to turn this option on.',
+				'content_classes' => 'tp-controller-notice',
+			)
+		);
+		$this->add_control(
+			'carousel_unique_id',
+			array(
+				'label'       => wp_kses_post( "Unique Carousel ID <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "connect-infobox-with-carousel-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'ai'  => false,
+				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'carousel_unique_id_Note',
+			array(
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> Keep this blank or Setup Unique id for carousel which you can use with "Carousel Remote" widget.',
+				'content_classes' => 'tp-controller-notice',
+			)
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -445,11 +461,18 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'label'       => esc_html__( 'Next Previous', 'tpebl' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '1',
-				'description' => esc_html__( 'Select option of column scroll on previous or next in carousel.', 'tpebl' ),
 				'options'     => array(
 					'1' => esc_html__( 'One Column', 'tpebl' ),
 					'2' => esc_html__( 'All Visible Columns', 'tpebl' ),
 				),
+			)
+		);
+		$this->add_control(
+			'steps_slide_Note',
+			array(
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> Select option of column scroll on previous or next in carousel.',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_responsive_control(
@@ -476,8 +499,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Draggable', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 			)
 		);
@@ -486,8 +509,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Multi Drag', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'slider_draggable' => 'yes',
@@ -497,10 +520,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slider_infinite',
 			array(
-				'label'     => wp_kses_post( 'Infinite Mode', 'tpebl'),
+				'label' => wp_kses_post(
+					sprintf(
+						'Infinite Mode <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -520,10 +548,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slider_pause_hover',
 			array(
-				'label'     => esc_html__( 'Pause On Hover', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Pause On Hover <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -545,18 +578,23 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Adaptive Height', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'slider_autoplay',
 			array(
-				'label'     => wp_kses_post( 'Autoplay', 'tpebl'),
+				'label' => wp_kses_post(
+					sprintf(
+						'Autoplay <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -579,8 +617,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'     => wp_kses_post( "Show Dots <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "showhide-arrows-dots-in-elementor-carousel/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'separator' => 'before',
 			)
@@ -694,8 +732,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Overlay Content Dots', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'slider_dots' => 'yes',
@@ -705,7 +743,12 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'direction_dots',
 			array(
-				'label'     => esc_html__( 'Direction Dots', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Direction Dots <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Vertical', 'tpebl' ),
 				'label_off' => esc_html__( 'Horizontal', 'tpebl' ),
@@ -731,10 +774,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'hover_show_dots',
 			array(
-				'label'     => esc_html__( 'On Hover Dots', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'On Hover Dots <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'slider_dots' => 'yes',
@@ -759,8 +807,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			array(
 				'label'     => wp_kses_post( "Show Arrows <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "showhide-arrows-dots-in-elementor-carousel/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -868,10 +916,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'outer_section_arrow',
 			array(
-				'label'     => esc_html__( 'Outer Content Arrow', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Outer Content Arrow <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'slider_arrows'       => 'yes',
@@ -896,10 +949,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'hover_show_arrow',
 			array(
-				'label'     => esc_html__( 'On Hover Arrow', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'On Hover Arrow <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'slider_arrows' => 'yes',
@@ -922,10 +980,17 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slider_center_mode',
 			array(
-				'label'     => wp_kses_post( "Center Mode <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "increase-center-slide-in-elementor-carousel/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				// 'label'     => wp_kses_post( "Center Mode <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "increase-center-slide-in-elementor-carousel/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label' => wp_kses_post(
+				sprintf(
+						'Center Mode <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_url( $this->tp_doc . 'increase-center-slide-in-elementor-carousel/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)

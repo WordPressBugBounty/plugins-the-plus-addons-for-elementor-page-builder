@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 $this->start_controls_section('tpebl_section_needhelp', 
     [
-        'label' => esc_html__( 'Need Help ?', 'tpebl' ),
+        'label' => esc_html__( 'Need Help?', 'tpebl' ),
         'tab' => Controls_Manager::TAB_CONTENT,
     ]
 );

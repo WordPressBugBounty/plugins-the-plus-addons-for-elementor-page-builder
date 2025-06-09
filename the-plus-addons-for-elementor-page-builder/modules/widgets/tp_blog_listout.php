@@ -151,25 +151,43 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Content Layout', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
 		$this->add_control(
-			'style',
+		'style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => array(
-					'style-1'            => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2'            => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
-					'style-3'            => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
-					'style-4'            => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
-					'smart-loop-builder' => esc_html__( 'Smart Loop Builder - Beta', 'tpebl' ),
+				'label'        => esc_html__( 'Style', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'style-1',
+				'options'      => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-1.svg',
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-2-pro.svg',
+					),
+					'style-3' => array(
+						'title' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-3-pro.svg',
+					),
+					'style-4' => array(
+						'title' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-4-pro.svg',
+					),
+					'smart-loop-builder' => array(
+						'title' => esc_html__( 'Smart Loop Builder', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/smart-loop-builder.svg',
+					),
 				),
+				'columns'      => 3,
 			)
 		);
+
 		$this->add_control(
 			'smart_loop_builder_note_doc',
 			array(
@@ -205,17 +223,31 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'layout',
+		'layout',
 			array(
-				'label'   => esc_html__( 'Layout', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'grid',
-				'options' => array(
-					'grid'     => esc_html__( 'Grid', 'tpebl' ),
-					'masonry'  => esc_html__( 'Masonry', 'tpebl' ),
-					'metro'    => esc_html__( 'Metro', 'tpebl' ),
-					'carousel' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+				'label'        => esc_html__( 'Layout', 'theplus' ),
+				'label_block'  => true,
+				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'grid',
+				'options'      => array(
+					'grid' => array(
+						'title' => esc_html__( 'Grid', 'theplus' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/grid.svg',
+					),
+					'masonry' => array(
+						'title' => esc_html__( 'Masonry', 'theplus' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/masonry.svg',
+					),
+					'metro' => array(
+						'title' => esc_html__( 'Metro', 'theplus' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/metro.svg',
+					),
+					'carousel' => array(
+						'title' => esc_html__( 'Carousel (PRO)', 'theplus' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/carousel-pro.svg',
+					),
 				),
+				'columns'      => 4,
 			)
 		);
 		$this->add_control(
@@ -303,7 +335,84 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
+		$this->start_controls_section(
+			'content_source_section',
+			array(
+				'label' => esc_html__( 'Content Source', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'display_posts',
+			array(
+				'label'   => esc_html__( 'Maximum Posts Display', 'tpebl' ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 1,
+				'max'     => 200,
+				'step'    => 1,
+				'default' => 8,
+			)
+		);
+		$this->add_control(
+			'post_offset',
+			array(
+				'label'   => wp_kses_post( "Offset Posts <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "hide-recent-blog-post-from-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'    => Controls_Manager::NUMBER,
+				'min'     => 0,
+				'max'     => 50,
+				'step'    => 1,
+				'default' => '',
+			)
+		);
+		$this->add_control(
+			'post_offset_Note',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => '<p class="tp-controller-notice"><i>Note : Hide posts from the beginning of listing.</i></p>',
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'post_category',
+			array(
+				'type'        => Controls_Manager::SELECT2,
+				'label'       => esc_html__( 'Select Category', 'tpebl' ),
+				'default'     => '',
+				'label_block' => true,
+				'multiple'    => true,
+				'options'     => $this->l_theplus_get_categories(),
+			)
+		);
+		$this->add_control(
+			'post_tags',
+			array(
+				'type'        => Controls_Manager::SELECT2,
+				'label'       => esc_html__( 'Select Tags', 'tpebl' ),
+				'default'     => '',
+				'label_block' => true,
+				'multiple'    => true,
+				'options'     => l_theplus_get_tags(),
+			)
+		);
+		$this->add_control(
+			'post_order_by',
+			array(
+				'label'   => wp_kses_post( "Order By <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-recent-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'date',
+				'options' => l_theplus_orderby_arr(),
+			)
+		);
+		$this->add_control(
+			'post_order',
+			array(
+				'label'   => esc_html__( 'Order', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'DESC',
+				'options' => l_theplus_order_arr(),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'columns_section',
 			array(
@@ -416,269 +525,42 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
 		$this->start_controls_section(
-			'content_source_section',
+			'morepost_option_section',
 			array(
-				'label' => esc_html__( 'Content Source', 'tpebl' ),
+				'label' => esc_html__( 'More Post Options', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
 		$this->add_control(
-			'post_category',
+		'post_extra_option',
 			array(
-				'type'        => Controls_Manager::SELECT2,
-				'label'       => esc_html__( 'Select Category', 'tpebl' ),
-				'default'     => '',
-				'label_block' => true,
-				'multiple'    => true,
-				'options'     => $this->l_theplus_get_categories(),
-			)
-		);
-		$this->add_control(
-			'post_tags',
-			array(
-				'type'        => Controls_Manager::SELECT2,
-				'label'       => esc_html__( 'Select Tags', 'tpebl' ),
-				'default'     => '',
-				'label_block' => true,
-				'multiple'    => true,
-				'options'     => l_theplus_get_tags(),
-			)
-		);
-		$this->add_control(
-			'display_posts',
-			array(
-				'label'   => esc_html__( 'Maximum Posts Display', 'tpebl' ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 1,
-				'max'     => 200,
-				'step'    => 1,
-				'default' => 8,
-			)
-		);
-		$this->add_control(
-			'post_offset',
-			array(
-				'label'   => wp_kses_post( "Offset Posts <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "hide-recent-blog-post-from-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 0,
-				'max'     => 50,
-				'step'    => 1,
-				'default' => '',
-			)
-		);
-		$this->add_control(
-			'post_offset_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : Hide posts from the beginning of listing.</i></p>',
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
-			'post_order_by',
-			array(
-				'label'   => wp_kses_post( "Order By <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-recent-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'date',
-				'options' => l_theplus_orderby_arr(),
-			)
-		);
-		$this->add_control(
-			'post_order',
-			array(
-				'label'   => esc_html__( 'Order', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'DESC',
-				'options' => l_theplus_order_arr(),
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'extra_option_section',
-			array(
-				'label' => esc_html__( 'Extra Options', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
-			)
-		);
-		$this->add_control(
-			'post_title_tag',
-			array(
-				'label'     => esc_html__( 'Title Tag', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h3',
-				'options'   => l_theplus_get_tags_options(),
-				'separator' => 'after',
-			)
-		);
-		$this->add_control(
-			'display_title_limit',
-			array(
-				'label'     => esc_html__( 'Title Limit', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-			)
-		);
-		$this->add_control(
-			'display_title_limit_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'display_title_limit' => array( 'yes' ),
-				),
-			)
-		);
-		$this->add_control(
-			'display_post_category',
-			array(
-				'label'     => esc_html__( 'Display Category Post', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-				'condition' => array(
-					'style!' => array( 'style-1' ),
-				),
-			)
-		);
-		$this->add_control(
-			'display_post_category_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'style!'                => array( 'style-1' ),
-					'display_post_category' => array( 'yes' ),
-				),
-			)
-		);
-		$this->add_control(
-			'display_excerpt',
-			array(
-				'label'     => esc_html__( 'Display Excerpt/Content', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'post_excerpt_count',
-			array(
-				'label'     => wp_kses_post( "Excerpt/Content Count <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "limit-post-excerpt-in-elementor-blog-posts/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'      => Controls_Manager::NUMBER,
-				'min'       => 5,
-				'max'       => 500,
-				'step'      => 2,
-				'default'   => 30,
-				'separator' => 'after',
-				'condition' => array(
-					'display_excerpt' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'display_thumbnail',
-			array(
-				'label'     => esc_html__( 'Display Image Size', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'condition' => array(
-					'layout!' => 'carousel',
-				),
-			)
-		);
-		$this->add_control(
-			'display_thumbnail_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'layout!'           => 'carousel',
-					'display_thumbnail' => array( 'yes' ),
-				),
-			)
-		);
-		$this->add_control(
-			'display_post_meta',
-			array(
-				'label'     => esc_html__( 'Display Post Meta', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'post_meta_tag_style',
-			array(
-				'label'     => esc_html__( 'Post Meta Tag', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'style-1',
-				'options'   => l_theplus_get_style_list( 1 ),
-				'condition' => array(
-					'display_post_meta' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'filter_category',
-			array(
-				'label'     => wp_kses_post( "Category Wise Filter <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-category-wise-filter-in-blog-post-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'condition' => array(
-					'layout!' => 'carousel',
-				),
-			)
-		);
-		$this->add_control(
-			'filter_category_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'layout!'         => 'carousel',
-					'filter_category' => array( 'yes' ),
-				),
-			)
-		);
-		$this->add_control(
-			'post_extra_option',
-			array(
-				'label'     => esc_html__( 'More Post Loading Options', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'none',
-				'options'   => array(
-					'none'       => esc_html__( 'Select Options', 'tpebl' ),
-					'pagination' => esc_html__( 'Pagination (PRO)', 'tpebl' ),
-					'load_more'  => esc_html__( 'Load More', 'tpebl' ),
-					'lazy_load'  => esc_html__( 'Lazy Load (PRO)', 'tpebl' ),
+				'label'        => esc_html__( 'Post Loading Options', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'none',
+				'options'      => array(
+					'none' => array(
+						'title' => esc_html__( 'None', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/none.svg',
+					),
+					'pagination' => array(
+						'title' => esc_html__( 'Pagination', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/pagination-pro.svg',
+					),
+					'load_more' => array(
+						'title' => esc_html__( 'Load More', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/load-more.svg',
+					),
+					'lazy_load' => array(
+						'title' => esc_html__( 'Lazy Load', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/lazy-load-pro.svg',
+					),
 				),
 				'condition' => array(
 					'layout!' => array( 'carousel' ),
 				),
+				'columns'      => 4,
 			)
 		);
 		$this->add_control(
@@ -709,6 +591,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button Text', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::TEXT,
+				'ai' => false,
 				'default'   => esc_html__( 'Load More', 'tpebl' ),
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
@@ -721,6 +604,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Loading Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai' => false,
 				'default'   => esc_html__( 'Loading...', 'tpebl' ),
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
@@ -733,6 +617,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'All Posts Loaded Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai' => false,
 				'default'   => esc_html__( 'All done!', 'tpebl' ),
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
@@ -1092,6 +977,191 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		$this->end_controls_section();
+		$this->start_controls_section(
+			'extra_option_section',
+			array(
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'post_title_tag',
+			array(
+				'label'     => esc_html__( 'Title Tag', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'h3',
+				'options'   => l_theplus_get_tags_options(),
+				'separator' => 'after',
+			)
+		);
+		$this->add_control(
+			'display_title_limit',
+			array(
+				'label' => wp_kses_post(
+					sprintf(
+						'Title Limit <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+			)
+		);
+		$this->add_control(
+			'display_title_limit_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'display_title_limit' => array( 'yes' ),
+				),
+			)
+		);
+		$this->add_control(
+			'display_post_category',
+			array(
+				'label'     => esc_html__( 'Display Category Post', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+				'condition' => array(
+					'style!' => array( 'style-1' ),
+				),
+			)
+		);
+		$this->add_control(
+			'display_post_category_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'style!'                => array( 'style-1' ),
+					'display_post_category' => array( 'yes' ),
+				),
+			)
+		);
+		$this->add_control(
+			'display_excerpt',
+			array(
+				'label'     => esc_html__( 'Display Excerpt/Content', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+			)
+		);
+		$this->add_control(
+			'post_excerpt_count',
+			array(
+				'label'     => wp_kses_post( "Excerpt/Content Count <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "limit-post-excerpt-in-elementor-blog-posts/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'type'      => Controls_Manager::NUMBER,
+				'min'       => 5,
+				'max'       => 500,
+				'step'      => 2,
+				'default'   => 30,
+				'separator' => 'after',
+				'condition' => array(
+					'display_excerpt' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'display_thumbnail',
+			array(
+				'label' => wp_kses_post(
+					sprintf(
+						'Display Image Size <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'layout!' => 'carousel',
+				),
+			)
+		);
+		$this->add_control(
+			'display_thumbnail_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'layout!'           => 'carousel',
+					'display_thumbnail' => array( 'yes' ),
+				),
+			)
+		);
+		$this->add_control(
+			'display_post_meta',
+			array(
+				'label'     => esc_html__( 'Display Post Meta', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+			)
+		);
+		$this->add_control(
+			'post_meta_tag_style',
+			array(
+				'label'     => esc_html__( 'Post Meta Tag', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'style-1',
+				'options'   => l_theplus_get_style_list( 1 ),
+				'condition' => array(
+					'display_post_meta' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'filter_category',
+			array(
+				'label' => wp_kses_post(
+					sprintf(
+						'Category Wise Filter <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_url( $this->tp_doc . 'add-category-wise-filter-in-blog-post-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'layout!' => 'carousel',
+				),
+			)
+		);
+		$this->add_control(
+			'filter_category_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'layout!'         => 'carousel',
+					'filter_category' => array( 'yes' ),
+				),
+			)
+		);
+		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_meta_tag_style',
@@ -1189,31 +1259,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-title,
-				              {{WRAPPER}} .blog-list .post-inner-loop .post-title a,
-							  {{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title',
-			)
-		);
-		$this->add_responsive_control(
-			'title_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .post-title,
-					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
 		$this->add_responsive_control(
 			's_title_pg',
 			array(
@@ -1229,6 +1274,31 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'title_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-title,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'global'   => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
+				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-title,
+				              {{WRAPPER}} .blog-list .post-inner-loop .post-title a,
+							  {{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title',
+			)
+		);
 		$this->start_controls_tabs( 'tabs_title_style' );
 		$this->start_controls_tab(
 			'tab_title_normal',
@@ -1239,7 +1309,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => esc_html__( 'Title Color', 'tpebl' ),
+				'label'     => esc_html__( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
@@ -1259,7 +1329,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'title_hover_color',
 			array(
-				'label'     => esc_html__( 'Title Color', 'tpebl' ),
+				'label'     => esc_html__( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
@@ -1297,10 +1367,35 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'section_excerpt_style',
 			array(
-				'label'     => esc_html__( 'Excerpt/Content', 'tpebl' ),
+				'label'     => esc_html__( 'Content', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'display_excerpt' => 'yes',
+				),
+			)
+		);
+		/* Content Background Padding Start */
+		$this->add_responsive_control(
+			's_excerpt_content_pg',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .blog-list-content .entry-content p,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		/* Content Background Padding End */
+		$this->add_responsive_control(
+			'excerpt_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .entry-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -1317,31 +1412,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description',
 			)
 		);
-		/* Content Background Padding Start */
-		$this->add_responsive_control(
-			'excerpt_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .post-inner-loop .entry-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			's_excerpt_content_pg',
-			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .blog-list .blog-list-content .entry-content p,
-					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		/* Content Background Padding End */
 		$this->start_controls_tabs( 'tabs_excerpt_style' );
 		$this->start_controls_tab(
 			'tab_excerpt_normal',
@@ -1384,13 +1454,12 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->end_controls_section();
-
-		$this->start_controls_section(
+		$this->add_control(
 			'section_content_bg_style',
 			array(
-				'label' => esc_html__( 'Content Background', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Content Background', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_content_bg_style' );
@@ -1708,7 +1777,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'section_extra_options_styling',
 			array(
-				'label' => esc_html__( 'Extra Options', 'tpebl' ),
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
