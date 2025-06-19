@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.7
+Stable tag: 6.3.8
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -310,9 +310,12 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 
 ###🔍 OUR PRODUCTS
-<strong>[🥇 The Plus Blocks for Gutenberg](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
+<strong>[🥇 Nexter Blocks](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
 
-<strong>[🥇 NexterWP Theme](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter Theme for Elementor. Which Replaces 22+ WordPress Plugin.
+<strong>[🥇 NexterWP Theme](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter  and lightweight Theme for Elementor.
+
+ <strong>[🥇 Nexter Extension](
+https://nexterwp.com/nexter-extension?utm_source=wordpress&utm_medium=readmepage&utm_campaign=nexterblocks)</strong> - Power up your WordPress website with 20+ extensions that work with all themes, boost performance, and harden security. 
 
 <strong>[🥇 UiChemy - Figma to Elementor Convertor](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Convert your Figma Templates In Live Elementor Website using our [FREE Figma Plugin.](https://www.figma.com/community/plugin/1265873702834050352/)
 
@@ -381,6 +384,20 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.8 =
+Add : Form Widget : Form Name Show option Added
+Improvement : Accordion : Add notice when Template not selected
+Improvement : Carousel Anything : Add notice when Template not selected
+Improvement : Navigation Menu Lite : Add notice when Template not selected
+Improvement : Page Scroll : Add notice when Template not selected
+Improvement : Switcher : Add notice when Template not selected
+Improvement : Tabs/Tours : Add notice when Template not selected
+Improvement : Need Help Section : Controller Improvement
+Improvement : All widget : Widget Icon change on Elementor editor side
+Improvement : Dashboard : Dashboard design
+Improvement : Dashboard : Product Logo
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.7 =
 Add : Button : Hover Icon color option

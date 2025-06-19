@@ -66,7 +66,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-bars theplus_backend_icon';
+		return 'fa fa-nav-menu theplus_backend_icon';
 	}
 
 	/**
@@ -2591,7 +2591,8 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				if ( $depth == '1' && $item['SmenuType'] == 'mega-menu' ) {
 					if ( empty( $sett ) || empty( $item['moblieMmenu'] && $item['moblieMmenu'] == 'no' ) ) {
 						$start_Li .= '<div class="plus-megamenu-content">';
-						if ( ( $item['blockTemp'] ) && $item['blockTemp'] != '0' ) {
+						// if ( ( $item['blockTemp'] ) && $item['blockTemp'] != '0' ) {
+						if ( ( $item['blockTemp'] ) && ! empty ( $item['blockTemp'] ) ) {
 
 							if ( has_filter( 'wpml_object_id' ) ) {
 								$item['blockTemp'] = apply_filters( 'wpml_object_id', $item['blockTemp'], get_post_type( $item['blockTemp'] ), true);
@@ -2603,6 +2604,11 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 							} else {
 								$start_Li .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 							}
+						} else {
+							$start_Li .= '<div class="tab-preview-template-notice">
+											<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'theplus' ) . '</div>
+											<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+										</div>';
 						}
 						$start_Li .= '</div>';
 					}

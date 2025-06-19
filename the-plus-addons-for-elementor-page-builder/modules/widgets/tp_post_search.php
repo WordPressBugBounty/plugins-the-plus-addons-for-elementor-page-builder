@@ -59,7 +59,7 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-search theplus_backend_icon';
+		return 'fa fa-post-search theplus_backend_icon';
 	}
 
 	/**

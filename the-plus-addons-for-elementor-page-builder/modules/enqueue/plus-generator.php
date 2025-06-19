@@ -782,7 +782,7 @@ class L_Plus_Generator {
 	 */
 	public function plus_purge_clear_print_style() {
 		if ( ( is_admin_bar_showing() ) ) { ?>
-			<style>#wpadminbar .theplus-purge-clear > .ab-item:before {content: '';background-image: url(<?php echo esc_url( L_THEPLUS_URL . '/assets/images/theplus-logo-small.png' ); ?>) !important;background-size: 20px !important;background-position: center;width: 20px;height: 20px;background-repeat: no-repeat;top: 50%;transform: translateY(-50%);} @media (max-width:660px){ #wpadminbar {position: fixed;} }</style>
+			<style>#wpadminbar .theplus-purge-clear > .ab-item:before {content: '';background-image: url(<?php echo esc_url( L_THEPLUS_URL . '/assets/images/tpae-logo-small.png' ); ?>) !important;background-size: 20px !important;background-position: center;width: 20px;height: 20px;background-repeat: no-repeat;top: 50%;transform: translateY(-50%);} @media (max-width:660px){ #wpadminbar {position: fixed;} }</style>
 			<?php
 		}
 	}

@@ -50,10 +50,10 @@ $this->add_control('tpebl_help_join_facebook_community',
         'raw' => wp_kses_post( "<a class='tp-docs-link' href='https://www.facebook.com/groups/theplus4elementor' target='_blank' rel='noopener noreferrer'> Join Facebook Community </a>" ),
     ]
 );
-$this->add_control('tpebl_help_Didnt_work_bug_reports',
-    [
-        'type' => Controls_Manager::RAW_HTML,
-        'raw' => wp_kses_post( "<a class='tp-docs-link' href='https://roadmap.theplusaddons.com/boards/bug-reports' target='_blank' rel='noopener noreferrer'> Didn't work like you wanted? Report Issue </a>" ),
-    ]
+$this->add_control( 'tpebl_help_join_discord_channel',
+	array(
+		'type' => Controls_Manager::RAW_HTML,
+		'raw'  => wp_kses_post( " <a class='tp-docs-link' href='https://go.posimyth.com/plus-elementor-discord' target='_blank' rel='noopener noreferrer'> Join Discord Channel </a>" ),
+	)
 );
 $this->end_controls_section();

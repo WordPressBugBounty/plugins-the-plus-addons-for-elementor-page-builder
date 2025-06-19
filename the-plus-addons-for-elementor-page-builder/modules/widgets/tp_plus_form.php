@@ -1017,6 +1017,18 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		);
 
 		$this->add_control(
+			'form_title_display',
+			array(
+				'label'     => esc_html__( 'Show Form Title', 'theplus' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'no',
+				'label_on'  => esc_html__( 'Yes', 'theplus' ),
+				'label_off' => esc_html__( 'No', 'theplus' ),
+
+			)
+		);
+
+		$this->add_control(
 			'label_display',
 			array(
 				'label'     => esc_html__( 'Show Label', 'tpebl' ),
@@ -1098,6 +1110,207 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				),
 			)
 		);
+
+		$this->add_control(
+			'form_title_heading',
+			array(
+				'label'     => esc_html__( 'Form Title', 'theplus' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => array(
+					'form_title_display' => 'yes',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'form_title_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'theplus' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-form-name' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'   => array(
+					'form_title_display' => 'yes',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'form_title_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'theplus' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-form-name' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'   => array(
+					'form_title_display' => 'yes',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'      => 'form_title_typography',
+				'label'     => esc_html__( 'Typography', 'theplus' ),
+				'selector'  => '{{WRAPPER}} .tpae-form-name',
+				'condition' => array(
+					'form_title_display' => 'yes',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'form_title_position',
+			array(
+				'label'       => esc_html__( 'Text Align', 'theplus' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => array(
+					'left'   => array(
+						'title' => esc_html__( 'Left', 'theplus' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center' => array(
+						'title' => esc_html__( 'Center', 'theplus' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'right'  => array(
+						'title' => esc_html__( 'Right', 'theplus' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'selectors'   => array(
+					'{{WRAPPER}} .tpae-form-name' => 'justify-content: {{VALUE}};',
+				),
+				'default'     => 'center',
+				'toggle'      => true,
+				'label_block' => false,
+				'condition'   => array(
+					'form_title_display' => 'yes',
+				),
+			)
+		);
+		$this->start_controls_tabs(
+			'tabs_form_title_colors',
+			array(
+				'condition'   => array(
+					'form_title_display' => 'yes',
+				),
+			)
+		);
+
+		$this->start_controls_tab(
+			'form_title_normal',
+			array(
+				'label' => esc_html__( 'Normal', 'theplus' ),
+			)
+		);
+
+		$this->add_control(
+			'form_title_color',
+			array(
+				'label'     => esc_html__( 'Text Color', 'theplus' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000',
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-form-name' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'form_title_bg_color',
+				'label'    => esc_html__( 'Background', 'theplus' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-form-name',
+				'exclude'  => array( 'image' ),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'form_title_border_normal',
+				'label'    => esc_html__( 'Border', 'theplus' ),
+				'selector' => '{{WRAPPER}} .tpae-form-name',
+			)
+		);
+
+		$this->add_responsive_control(
+			'form_title_border_radius_normal',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'theplus' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-form-name' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'form_title_hover',
+			array(
+				'label' => esc_html__( 'Hover', 'theplus' ),
+			)
+		);
+
+		$this->add_control(
+			'form_title_color_hover',
+			array(
+				'label'     => esc_html__( 'Text Color', 'theplus' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000',
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-form-name:hover' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'form_title_bg_color_hover',
+				'label'    => esc_html__( 'Background', 'theplus' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-form-name:hover',
+				'exclude'  => array( 'image' ),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'form_title_border_hover',
+				'label'    => esc_html__( 'Border', 'theplus' ),
+				'selector' => '{{WRAPPER}} .tpae-form-name:hover',
+			)
+		);
+
+		$this->add_responsive_control(
+			'form_title_border_radius_hover',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'theplus' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-form-name:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'form_label_heading',
@@ -2122,6 +2335,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$label_display = ! empty( $settings['label_display'] ) ? $settings['label_display'] : '';
 		$button_column = ! empty( $settings['button_column_width']['size'] ) ? $settings['button_column_width']['size'] : '100';
 
+		$unique_form_name   = ! empty( $settings['form_title'] ) ? $settings['form_title'] : '';
+		$form_title_display = ! empty( $settings['form_title_display'] ) ? $settings['form_title_display'] : '';
+
 		$button_input_size = ! empty( $settings['input_size'] ) ? $settings['input_size'] : 'medium';
 		$button_icon_style = ! empty( $settings['button_icon_style'] ) ? $settings['button_icon_style'] : 'font_awesome_5';
 
@@ -2189,6 +2405,10 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
 			} else if ( 'no' === $inline_button ) {
 				$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container{ width:100%!important } </style>";
+			}
+
+			if ( 'yes' === $form_title_display ) {
+				$form_markup .= '<div class="tpae-form-name">' . esc_attr( $unique_form_name ) . '</div>';
 			}
 
 			$form_markup .= '<form id="' . esc_attr( $form_id ) . '" class="tpae-form" method="post">';

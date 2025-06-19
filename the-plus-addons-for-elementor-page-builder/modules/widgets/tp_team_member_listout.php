@@ -73,7 +73,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-users theplus_backend_icon';
+		return 'fa fa-team-member theplus_backend_icon';
 	}
 
 	/**
@@ -1691,7 +1691,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 
 		$post_category = ! empty( $settings['post_category'] ) ? $settings['post_category'] : '';
 
-		$content_alignment = ( '' !== $settings['content_alignment'] ) ? 'text-' . $settings['content_alignment'] : '';
+		$content_alignment = ! empty( $settings['post_category'] ) ? 'text-' . $settings['content_alignment'] : '';
 
 		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
 		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;

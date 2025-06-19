@@ -62,7 +62,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-envelope-o theplus_backend_icon';
+		return 'fa fa-gravity-form theplus_backend_icon';
 	}
 
 	/**

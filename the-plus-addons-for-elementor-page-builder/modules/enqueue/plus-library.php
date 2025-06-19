@@ -106,6 +106,7 @@ class L_Plus_Library {
 
 		if ( ! empty( $elements ) ) {
 			$merge[] = 'plus-alignmnet-effect';
+			$merge[] = 'tp-temp-notice';
 		}
 
 		if ( in_array( 'tp-number-counter', $elements ) ) {

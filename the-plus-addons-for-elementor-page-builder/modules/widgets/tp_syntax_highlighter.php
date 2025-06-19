@@ -59,7 +59,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa- tp-syntax-highlighter theplus_backend_icon';
+		return 'fa-syntax-highlighter theplus_backend_icon';
 	}
 
 	/**

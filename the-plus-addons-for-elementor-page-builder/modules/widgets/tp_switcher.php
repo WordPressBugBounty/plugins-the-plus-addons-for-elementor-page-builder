@@ -1694,7 +1694,14 @@ class L_ThePlus_Switcher extends Widget_Base {
 					$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 				}
 			} elseif ( 'template' === $content_a_source ) {
-				if( ! empty( $content_a_template ) ){
+
+				if ( empty( $content_a_template ) || '0' === $content_a_template ) {
+
+					$switcher .= '<div class="tab-preview-template-notice">
+								<div class="preview-temp-notice-heading">' . esc_html__( 'Select a Template', 'theplus' ) . '</div>
+								<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+							</div>';
+				} else {
 
 					if ( has_filter( 'wpml_object_id' ) ) {
 						$content_a_template = apply_filters( 'wpml_object_id', $content_a_template, get_post_type( $content_a_template ), true);
@@ -1729,16 +1736,25 @@ class L_ThePlus_Switcher extends Widget_Base {
 					}
 				} elseif ( 'template' === $content_b_source ) {
 
-					if ( has_filter( 'wpml_object_id' ) ) {
-						$content_b_template = apply_filters( 'wpml_object_id', $content_b_template, get_post_type( $content_b_template ), true);
-					}
+					if ( empty( $content_b_template ) || '0' === $content_b_template ) {
 
-					$template_b_status = get_post_status( $content_b_template );
-
-					if( 'publish' === $template_b_status ) {
-						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
+						$switcher .= '<div class="tab-preview-template-notice">
+									<div class="preview-temp-notice-heading">' . esc_html__( 'Select B Template', 'theplus' ) . '</div>
+									<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+								</div>';
 					} else {
-						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+
+						if ( has_filter( 'wpml_object_id' ) ) {
+							$content_b_template = apply_filters( 'wpml_object_id', $content_b_template, get_post_type( $content_b_template ), true);
+						}
+
+						$template_b_status = get_post_status( $content_b_template );
+
+						if( 'publish' === $template_b_status ) {
+							$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
+						} else {
+							$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+						}
 					}
 				}
 

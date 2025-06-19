@@ -61,7 +61,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-file-image-o theplus_backend_icon';
+		return 'fa fa-post-img theplus_backend_icon';
 	}
 
 	/**

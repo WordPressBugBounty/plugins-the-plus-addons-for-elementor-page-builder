@@ -1552,6 +1552,13 @@ function l_registered_widgets(){
 				],
 			],
 		],
+		'tp-temp-notice' => [
+			'dependency' => [
+				'css' => [
+					L_THEPLUS_PATH . DIRECTORY_SEPARATOR .'assets/css/main/plus-extra-adv/plus-temp-notice.css',
+				],
+			],
+		],
 		'plus-backend-editor' => [
 			'dependency' => [
 				'css' => [

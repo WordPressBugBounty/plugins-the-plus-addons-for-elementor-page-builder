@@ -602,6 +602,10 @@ class Plus_Widgets_Manager {
 				$this->tp_carousel_dots( $options );
 				$this->tp_carousel_arrow( $options );
 			}
+
+			if ( 'tp-accordion' === $widget_name || 'tp-carousel-anything' === $widget_name || 'tp-navigation-menu-lite' === $widget_name || 'tp-off-canvas' === $widget_name || 'tp-page-scroll' === $widget_name || 'tp-switcher' === $widget_name ) {
+				$this->transient_widgets[] = "tp-temp-notice";
+			}
 		}
 	}
 }

@@ -2004,7 +2004,6 @@ class L_ThePlus_Data_Table extends Widget_Base {
 				'name'      => 'button_hover_background',
 				'types'     => array( 'classic', 'gradient' ),
 				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover',
-				'separator' => 'after',
 				'condition' => array(
 					'table_selection!' => 'csv_file',
 				),

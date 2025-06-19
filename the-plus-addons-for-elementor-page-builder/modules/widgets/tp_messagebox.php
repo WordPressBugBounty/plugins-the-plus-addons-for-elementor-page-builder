@@ -60,7 +60,7 @@ class ThePlus_MessageBox extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-calendar-o theplus_backend_icon';
+		return 'fa fa-msg-box theplus_backend_icon';
 	}
 
 	/**

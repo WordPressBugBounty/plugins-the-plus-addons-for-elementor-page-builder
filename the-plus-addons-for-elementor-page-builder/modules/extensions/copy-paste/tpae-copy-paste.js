@@ -7,6 +7,15 @@
     const Json_error = __("Warning: The data is not in JSON format", "tpebl");
     const elementor_json_error = __('Warning: This is not a valid Elementor JSON. "tpelecode" not found.', "tpebl");
 
+    const keysToClear = [
+        'content_template',
+        'content_a_template',
+        'content_b_template',
+        'fp_content_template',
+        'protected_content_template',
+        'blockTemp'
+    ];
+
     var g = ["section", "column", "widget", "container"],
         a = [];
     elementor.on("preview:loaded", function () {
@@ -91,6 +100,7 @@
                                                     }
 
                                                     var parsedData = JSON.parse(pastedData);
+                                                    clearContentKeys( parsedData, keysToClear );
 
                                                     if (!parsedData.tpelecode || typeof parsedData !== 'object') {
                                                         alert(elementor_json_error);
@@ -143,6 +153,7 @@
                                                 }
 
                                                 var parsedData = JSON.parse(pastedData);
+                                                clearContentKeys( parsedData, keysToClear );
 
                                                 if (!parsedData.tpelecode || typeof parsedData !== 'object') {
                                                     alert(elementor_json_error);
@@ -513,3 +524,23 @@
 
 
 })(jQuery);
+
+function clearContentKeys( obj, keysToClear ) {
+    if ( typeof obj !== 'object' || obj === null ) {
+        return;
+    }
+
+    if ( Array.isArray( obj ) ) {
+        obj.forEach( item => clearContentKeys( item, keysToClear ) );
+    } else {
+        for ( let key in obj ) {
+            if ( !obj.hasOwnProperty( key ) ) continue;
+
+            if ( keysToClear.includes( key ) ) {
+                obj[key] = '';
+            } else if (typeof obj[key] === 'object') {
+                clearContentKeys( obj[key], keysToClear );
+            }
+        }
+    }
+}

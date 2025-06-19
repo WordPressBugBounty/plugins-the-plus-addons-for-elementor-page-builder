@@ -564,7 +564,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 
-			$logo_url = L_THEPLUS_URL . 'assets/images/theplus-logo-small.png';
+			$logo_url = L_THEPLUS_URL . 'assets/images/tpae-logo-small.png';
 
 			$args = array(
 				'url'    => 'update.php?action=upgrade-plugin&plugin=' . rawurlencode( $this_pluginname ),
