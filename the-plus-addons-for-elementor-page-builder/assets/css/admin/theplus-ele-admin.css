@@ -1,13 +1,13 @@
 .wp-customizer #customize-controls .control-section-ast_section .wrapper {
     height: auto; /*customizer compatibility */
 }
-.current.toplevel_page_theplus_welcome_page .wp-menu-image.dashicons-before.dashicons-plus-settings{
+.current.toplevel_page_theplus_welcome_page .dashicons-plus-settings{
     background: url(../../images/tpae-favicon-white.png);
     background-size: 22px;
     background-repeat: no-repeat;
     background-position: center;
 }
-.wp-menu-image.dashicons-before.dashicons-plus-settings {
+.dashicons-plus-settings {
     background: url(../../images/tpae-favicon.png);	
     background-size: 22px;
     background-repeat: no-repeat;	
@@ -19,7 +19,7 @@
 .elementor-control-type-repeater .elementor-control:before{
 	display: block !important;
 }
-#elementor-panel-category-theplus-addons .elementor-element{
+#elementor-panel-category-theplus-addons .essslementor-element{
 /* #elementor-panel-elements .elementor-element .theplus_backend_icon{ */
     position: relative;
 }
