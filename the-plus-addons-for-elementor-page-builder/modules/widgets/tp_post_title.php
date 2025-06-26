@@ -142,62 +142,21 @@ class ThePlus_Post_Title extends Widget_Base {
 	 */
 	protected function register_controls() {
 		$this->start_controls_section(
-			'content_section',
+			'layout_section',
 			array(
-				'label' => esc_html__( 'Post Title', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
 		$this->add_control(
 			'posttype',
 			array(
-				'label'   => esc_html__( 'Post Types', 'tpebl' ),
+				'label'   => esc_html__( 'Types', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'singlepage',
 				'options' => array(
 					'singlepage'  => esc_html__( 'Single Page', 'tpebl' ),
 					'archivepage' => esc_html__( 'Archive Page', 'tpebl' ),
-				),
-			)
-		);
-		$this->add_control(
-			'titleprefix',
-			array(
-				'label'   => esc_html__( 'Prefix Text', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '',
-				'dynamic' => array(
-					'active' => true,
-				),
-			)
-		);
-		$this->add_control(
-			'titlepostfix',
-			array(
-				'label'   => esc_html__( 'Postfix Text', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => '',
-				'dynamic' => array(
-					'active' => true,
-				),
-			)
-		);
-		$this->add_control(
-			'titleTag',
-			array(
-				'label'   => esc_html__( 'Tag', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'h3',
-				'options' => array(
-					'h1'   => esc_html__( 'H1', 'tpebl' ),
-					'h2'   => esc_html__( 'H2', 'tpebl' ),
-					'h3'   => esc_html__( 'H3', 'tpebl' ),
-					'h4'   => esc_html__( 'H4', 'tpebl' ),
-					'h5'   => esc_html__( 'H5', 'tpebl' ),
-					'h6'   => esc_html__( 'H6', 'tpebl' ),
-					'div'  => esc_html__( 'Div', 'tpebl' ),
-					'span' => esc_html__( 'Span', 'tpebl' ),
-					'p'    => esc_html__( 'P', 'tpebl' ),
 				),
 			)
 		);
@@ -224,7 +183,6 @@ class ThePlus_Post_Title extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .tp-post-title' => 'justify-content: {{VALUE}};',
 				),
-				'separator' => 'before',
 			)
 		);
 		$this->add_responsive_control(
@@ -258,9 +216,60 @@ class ThePlus_Post_Title extends Widget_Base {
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
+			'content_section',
+			array(
+				'label' => esc_html__( 'Content', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'titleprefix',
+			array(
+				'label'   => esc_html__( 'Prefix Text', 'tpebl' ),
+				'type'    => Controls_Manager::TEXT,
+				'ai' => false,
+				'default' => '',
+				'dynamic' => array(
+					'active' => true,
+				),
+			)
+		);
+		$this->add_control(
+			'titlepostfix',
+			array(
+				'label'   => esc_html__( 'Postfix Text', 'tpebl' ),
+				'type'    => Controls_Manager::TEXT,
+				'ai' => false,
+				'default' => '',
+				'dynamic' => array(
+					'active' => true,
+				),
+			)
+		);
+		$this->add_control(
+			'titleTag',
+			array(
+				'label'   => esc_html__( 'Tag', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'h3',
+				'options' => array(
+					'h1'   => esc_html__( 'H1', 'tpebl' ),
+					'h2'   => esc_html__( 'H2', 'tpebl' ),
+					'h3'   => esc_html__( 'H3', 'tpebl' ),
+					'h4'   => esc_html__( 'H4', 'tpebl' ),
+					'h5'   => esc_html__( 'H5', 'tpebl' ),
+					'h6'   => esc_html__( 'H6', 'tpebl' ),
+					'div'  => esc_html__( 'Div', 'tpebl' ),
+					'span' => esc_html__( 'Span', 'tpebl' ),
+					'p'    => esc_html__( 'P', 'tpebl' ),
+				),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
 			'extra_opt_section',
 			array(
-				'label' => esc_html__( 'Extra Options', 'tpebl' ),
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -270,14 +279,14 @@ class ThePlus_Post_Title extends Widget_Base {
 				'label'     => esc_html__( 'Link', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 			)
 		);
 		$this->add_control(
 			'limitCountType',
 			array(
-				'label'   => esc_html__( 'Length Limit', 'tpebl' ),
+				'label'   => esc_html__( 'Limit', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'default',
 				'options' => array(
@@ -290,7 +299,7 @@ class ThePlus_Post_Title extends Widget_Base {
 		$this->add_control(
 			'titleLimit',
 			array(
-				'label'     => esc_html__( 'Limit of Words/Character', 'tpebl' ),
+				'label'     => esc_html__( 'Words/Character', 'tpebl' ),
 				'type'      => Controls_Manager::NUMBER,
 				'min'       => 1,
 				'max'       => 5000,

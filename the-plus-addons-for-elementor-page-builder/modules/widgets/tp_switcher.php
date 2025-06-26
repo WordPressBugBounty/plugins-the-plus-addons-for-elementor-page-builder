@@ -669,7 +669,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'name'     => 'normal_label_border',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-2,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-1',
+				'selector' => '{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-2,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-1',
 			)
 		);
 		$this->add_responsive_control(
@@ -689,6 +689,21 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'name'     => 'normal_label_shadow',
 				'label'    => esc_html__( 'Box Shadow', 'tpebl' ),
 				'selector' => '{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-2,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-1.switch-label-text',
+			)
+		);
+		$this->add_control(
+			'normal_switcher_head',
+			array(
+				'label'     => esc_html__( 'Switcher Border', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'      => 'normal_switcher_border',
+				'label'     => esc_html__( 'Switcher Border', 'tpebl' ),
+				'selector'  => '{{WRAPPER}} .switcher-toggle.inactive .switch-slider',
 			)
 		);
 		$this->end_controls_tab();
@@ -749,7 +764,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'name'     => 'normal_label_border_a',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-1,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-2,{{WRAPPER}}.switch-label-text',
+				'selector' => '{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-1,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-2,{{WRAPPER}}.switch-label-text',
 			)
 		);
 		$this->add_responsive_control(
@@ -769,6 +784,21 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'name'     => 'normal_label_shadow_a',
 				'label'    => esc_html__( 'Box Shadow', 'tpebl' ),
 				'selector' => '{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-1,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-2',
+			)
+		);
+		$this->add_control(
+			'active_switcher_head',
+			array(
+				'label'     => esc_html__( 'Active Switcher Border', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'      => 'active_switcher_border',
+				'label'     => esc_html__( 'Switcher Border', 'tpebl' ),
+				'selector'  => '{{WRAPPER}} .switcher-toggle.active .switch-slider',
 			)
 		);
 		$this->end_controls_tab();
@@ -1698,8 +1728,8 @@ class L_ThePlus_Switcher extends Widget_Base {
 				if ( empty( $content_a_template ) || '0' === $content_a_template ) {
 
 					$switcher .= '<div class="tab-preview-template-notice">
-								<div class="preview-temp-notice-heading">' . esc_html__( 'Select a Template', 'theplus' ) . '</div>
-								<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+								<div class="preview-temp-notice-heading">' . esc_html__( 'Select a Template', 'tpebl' ) . '</div>
+								<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'tpebl' ) . '</div>
 							</div>';
 				} else {
 
@@ -1739,8 +1769,8 @@ class L_ThePlus_Switcher extends Widget_Base {
 					if ( empty( $content_b_template ) || '0' === $content_b_template ) {
 
 						$switcher .= '<div class="tab-preview-template-notice">
-									<div class="preview-temp-notice-heading">' . esc_html__( 'Select B Template', 'theplus' ) . '</div>
-									<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+									<div class="preview-temp-notice-heading">' . esc_html__( 'Select B Template', 'tpebl' ) . '</div>
+									<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'tpebl' ) . '</div>
 								</div>';
 					} else {
 

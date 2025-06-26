@@ -170,7 +170,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_verify_method',
 			array(
-				'label'       => esc_html__( 'Method', 'theplus' ),
+				'label'       => esc_html__( 'Method', 'tpebl' ),
 				'type'        => Controls_Manager::VISUAL_CHOICE,
 				'label_block' => true,
 				'options'     => array(
@@ -1494,7 +1494,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_tglicon_styling',
 			array(
-				'label'     => esc_html__( 'First Button Icon', 'theplus' ),
+				'label'     => esc_html__( 'First Button Icon', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'icon_action' => 'yes',
@@ -1793,7 +1793,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'icon_fs_options',
 			array(
-				'label'     => esc_html__( 'Second Button Icon', 'theplus' ),
+				'label'     => esc_html__( 'Second Button Icon', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'age_verify_method'  => 'method-3',

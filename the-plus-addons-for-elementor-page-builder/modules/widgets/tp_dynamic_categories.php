@@ -153,35 +153,60 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Content Layout', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
 		$this->add_control(
-			'style',
+		'style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style_1',
-				'options' => array(
-					'style_1' => esc_html__( 'Style-1', 'tpebl' ),
-					'style_2' => esc_html__( 'Style-2', 'tpebl' ),
-					'style_3' => esc_html__( 'Style-3', 'tpebl' ),
+				'label'         => esc_html__( 'Style', 'tpebl' ),
+				'label_block'   => true,
+				'type'          => Controls_Manager::VISUAL_CHOICE,
+				'default'       => 'style_1',
+				'options'       => array(
+					'style_1' => array(
+						'title' => esc_html__( 'Style-1', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/dynamic-categories/style-1.svg'),
+					),
+					'style_2' => array(
+						'title' => esc_html__( 'Style-2', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/dynamic-categories/style-2.svg'),
+					),
+					'style_3' => array(
+						'title' => esc_html__( 'Style-3', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/dynamic-categories/style-3.svg'),
+					),
 				),
+				'columns'       => 3,
 			)
 		);
 		$this->add_control(
-			'layout',
+		'layout',
 			array(
-				'label'   => esc_html__( 'Layout', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'grid',
-				'options' => array(
-					'grid'     => esc_html__( 'Grid', 'tpebl' ),
-					'masonry'  => esc_html__( 'Masonry', 'tpebl' ),
-					'metro'    => esc_html__( 'Metro', 'tpebl' ),
-					'carousel' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+				'label'        => esc_html__( 'Layout', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'grid',
+				'options'      => array(
+					'grid' => array(
+						'title' => esc_html__( 'Grid', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/grid.svg'),
+					),
+					'masonry' => array(
+						'title' => esc_html__( 'Masonry', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/masonry.svg'),
+					),
+					'metro' => array(
+						'title' => esc_html__( 'Metro', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/metro.svg'),
+					),
+					'carousel' => array(
+						'title' => esc_html__( 'Carousel (Pro)', 'tpebl' ),
+						'image' => esc_url(L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/carousel-pro.svg'),
+					),
 				),
+				'columns'      => 4,
 			)
 		);
 		$this->add_control(
@@ -206,18 +231,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'default'   => 'category',
 				'condition' => array(
 					'layout!' => 'carousel',
-				),
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'content_align_section',
-			array(
-				'label'     => esc_html__( 'Content Alignment', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_CONTENT,
-				'condition' => array(
-					'style!' => 'style_3',
 				),
 			)
 		);
@@ -246,6 +259,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				),
 				'condition' => array(
 					'style' => 'style_1',
+					'style!' => 'style_3',
 				),
 				'toggle'    => true,
 			)
@@ -275,6 +289,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				),
 				'condition' => array(
 					'style' => 'style_2',
+					'style!' => 'style_3',
 				),
 				'toggle'    => true,
 			)
@@ -298,7 +313,9 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
-				'separator' => 'before',
+				'condition' => array(
+					'style!' => 'style_3',
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper .pt-dynamic-hover-content' => 'align-items:{{VALUE}};',
 				),
@@ -310,7 +327,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 		$this->start_controls_section(
 			'content_source_section',
 			array(
-				'label' => esc_html__( 'Content Source', 'tpebl' ),
+				'label' => esc_html__( 'Content', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -337,6 +354,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Include Terms ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
+				'ai' => false,
 				'label_block' => true,
 				'placeholder' => 'Use Terms Id,if you want to use multiple id so use comma as separator.',
 			)
@@ -347,6 +365,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Exclude Terms ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'label_block' => true,
+				'ai' => false,
 				'placeholder' => 'Use Terms Id,if you want to use multiple id so use comma as separator.',
 			)
 		);
@@ -359,7 +378,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'max'       => 200,
 				'step'      => 1,
 				'default'   => 8,
-				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -371,7 +389,14 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'max'         => 50,
 				'step'        => 1,
 				'default'     => '',
-				'description' => esc_html__( 'Hide categories from the beginning of listing.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'post_offset_Note',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> Hide categories from the beginning of listing.',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_control(
@@ -393,6 +418,112 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'options' => l_theplus_order_arr(),
 			)
 		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'columns_section',
+			array(
+				'label'     => esc_html__( 'Columns Manage', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'layout!' => array( 'carousel' ),
+				),
+			)
+		);
+		$this->add_control(
+			'desktop_column',
+			array(
+				'label'     => esc_html__( 'Desktop Column', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '3',
+				'options'   => l_theplus_get_columns_list(),
+				'condition' => array(
+					'layout!' => array( 'metro', 'carousel' ),
+				),
+			)
+		);
+		$this->add_control(
+			'tablet_column',
+			array(
+				'label'     => esc_html__( 'Tablet Column', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '4',
+				'options'   => l_theplus_get_columns_list(),
+				'condition' => array(
+					'layout!' => array( 'metro', 'carousel' ),
+				),
+			)
+		);
+		$this->add_control(
+			'mobile_column',
+			array(
+				'label'     => esc_html__( 'Mobile Column', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '6',
+				'options'   => l_theplus_get_columns_list(),
+				'condition' => array(
+					'layout!' => array( 'metro', 'carousel' ),
+				),
+			)
+		);
+		$this->add_control(
+			'metro_column',
+			array(
+				'label'     => esc_html__( 'Metro Column', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '3',
+				'options'   => array(
+					'3' => esc_html__( 'Column 3', 'tpebl' ),
+					'4' => esc_html__( 'Column 4 (PRO)', 'tpebl' ),
+					'5' => esc_html__( 'Column 5 (PRO)', 'tpebl' ),
+					'6' => esc_html__( 'Column 6 (PRO)', 'tpebl' ),
+				),
+				'condition' => array(
+					'layout' => array( 'metro' ),
+				),
+			)
+		);
+		$this->add_control(
+			'metro_style_3',
+			array(
+				'label'     => esc_html__( 'Metro Style', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'style-1',
+				'options'   => l_theplus_get_style_list( 1 ),
+				'condition' => array(
+					'metro_column' => '3',
+					'layout'       => array( 'metro' ),
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'columns_gap',
+			array(
+				'label'      => esc_html__( 'Columns Gap/Space Between', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'default'    => array(
+					'top'    => '15',
+					'right'  => '15',
+					'bottom' => '15',
+					'left'   => '15',
+				),
+				'separator'  => 'before',
+				'condition'  => array(
+					'layout!' => array( 'carousel' ),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .dynamic-cat-list .post-inner-loop .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'content_align_section',
+			array(
+				'label'     => esc_html__( 'Extra Option', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+			)
+		);
 		$this->add_control(
 			'hide_pro_count',
 			array(
@@ -400,7 +531,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
-				'separator' => 'before',
 				'default'   => 'yes',
 			)
 		);
@@ -411,7 +541,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
-				'separator' => 'before',
 				'default'   => 'no',
 				'condition' => array(
 					'style!' => 'style_3',
@@ -530,105 +659,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'columns_section',
-			array(
-				'label'     => esc_html__( 'Columns Manage', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_CONTENT,
-				'condition' => array(
-					'layout!' => array( 'carousel' ),
-				),
-			)
-		);
-		$this->add_control(
-			'desktop_column',
-			array(
-				'label'     => esc_html__( 'Desktop Column', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '3',
-				'options'   => l_theplus_get_columns_list(),
-				'condition' => array(
-					'layout!' => array( 'metro', 'carousel' ),
-				),
-			)
-		);
-		$this->add_control(
-			'tablet_column',
-			array(
-				'label'     => esc_html__( 'Tablet Column', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '4',
-				'options'   => l_theplus_get_columns_list(),
-				'condition' => array(
-					'layout!' => array( 'metro', 'carousel' ),
-				),
-			)
-		);
-		$this->add_control(
-			'mobile_column',
-			array(
-				'label'     => esc_html__( 'Mobile Column', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '6',
-				'options'   => l_theplus_get_columns_list(),
-				'condition' => array(
-					'layout!' => array( 'metro', 'carousel' ),
-				),
-			)
-		);
-		$this->add_control(
-			'metro_column',
-			array(
-				'label'     => esc_html__( 'Metro Column', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => '3',
-				'options'   => array(
-					'3' => esc_html__( 'Column 3', 'tpebl' ),
-					'4' => esc_html__( 'Column 4 (PRO)', 'tpebl' ),
-					'5' => esc_html__( 'Column 5 (PRO)', 'tpebl' ),
-					'6' => esc_html__( 'Column 6 (PRO)', 'tpebl' ),
-				),
-				'condition' => array(
-					'layout' => array( 'metro' ),
-				),
-			)
-		);
-		$this->add_control(
-			'metro_style_3',
-			array(
-				'label'     => esc_html__( 'Metro Style', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'style-1',
-				'options'   => l_theplus_get_style_list( 1 ),
-				'condition' => array(
-					'metro_column' => '3',
-					'layout'       => array( 'metro' ),
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'columns_gap',
-			array(
-				'label'      => esc_html__( 'Columns Gap/Space Between', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
-				'default'    => array(
-					'top'    => '15',
-					'right'  => '15',
-					'bottom' => '15',
-					'left'   => '15',
-				),
-				'separator'  => 'before',
-				'condition'  => array(
-					'layout!' => array( 'carousel' ),
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .dynamic-cat-list .post-inner-loop .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
 			'section_title_style',
 			array(
 				'label' => esc_html__( 'Title', 'tpebl' ),
@@ -705,8 +735,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Title Background', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -856,8 +886,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Title Underline', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -1042,11 +1072,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			'count_extra_text',
 			array(
 				'type'        => Controls_Manager::TEXT,
-				'label'       => esc_html__( 'Product Count After Text', 'tpebl' ),
-				'label_block' => true,
-				'dynamic'     => array(
-					'active' => true,
-				),
+				'label'       => esc_html__( 'Count After Text', 'tpebl' ),
+				'ai'  => false,
 			)
 		);
 		$this->add_control(
@@ -1167,6 +1194,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .pt-dynamic-wrapper.style_2 .pt-dynamic-hover-content-inner .pt-dynamic-hover-cat-count' => 'transform: {{VALUE}};-ms-transform: {{VALUE}};-moz-transform: {{VALUE}};-webkit-transform: {{VALUE}};transform-style: preserve-3d;-ms-transform-style: preserve-3d;-moz-transform-style: preserve-3d;-webkit-transform-style: preserve-3d;',
@@ -1181,8 +1209,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Background Option', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'style' => 'style_1',
@@ -1279,6 +1307,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .pt-dynamic-wrapper.style_2:hover .pt-dynamic-hover-content-inner .pt-dynamic-hover-cat-count' => 'transform: {{VALUE}};-ms-transform: {{VALUE}};-moz-transform: {{VALUE}};-webkit-transform: {{VALUE}};transform-style: preserve-3d;-ms-transform-style: preserve-3d;-moz-transform-style: preserve-3d;-webkit-transform-style: preserve-3d;',
@@ -1470,8 +1499,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Description Background', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -1754,7 +1783,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			'cl_bg_ol_color',
 			array(
 				'label'     => esc_html__( 'Whole Overlay Color', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper .pt-dynamic-hover-content' => 'background-color: {{VALUE}};',
 				),
@@ -1766,8 +1795,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Hover Content Only', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Disable', 'tpebl' ),
-				'label_off' => esc_html__( 'Enable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'style' => 'style_1',
@@ -1830,6 +1859,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper img,					
@@ -1847,6 +1877,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper .dynamic-cat-bg-image-metro' => 'transform: {{VALUE}};-ms-transform: {{VALUE}};-moz-transform: {{VALUE}};-webkit-transform: {{VALUE}};transform-style: preserve-3d;-ms-transform-style: preserve-3d;-moz-transform-style: preserve-3d;-webkit-transform-style: preserve-3d;',
@@ -1957,7 +1988,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			'cl_bg_ol_color_h',
 			array(
 				'label'     => esc_html__( 'Whole Overlay Color', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
+				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper:hover .pt-dynamic-hover-content' => 'background-color: {{VALUE}};',
 				),
@@ -2021,8 +2052,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'With Content Transform', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Disable', 'tpebl' ),
-				'label_off' => esc_html__( 'Enable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -2032,6 +2063,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper:hover img' => 'transform: {{VALUE}};-ms-transform: {{VALUE}};-moz-transform: {{VALUE}};-webkit-transform: {{VALUE}};transform-style: preserve-3d;-ms-transform-style: preserve-3d;-moz-transform-style: preserve-3d;-webkit-transform-style: preserve-3d;',
@@ -2048,6 +2080,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper:hover .dynamic-cat-bg-image-metro' => 'transform: {{VALUE}};-ms-transform: {{VALUE}};-moz-transform: {{VALUE}};-webkit-transform: {{VALUE}};transform-style: preserve-3d;-ms-transform-style: preserve-3d;-moz-transform-style: preserve-3d;-webkit-transform-style: preserve-3d;',
@@ -2064,6 +2097,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper:hover img,
@@ -2082,6 +2116,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper:hover .dynamic-cat-bg-image-metro,
@@ -2100,6 +2135,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label'       => esc_html__( 'Transform css', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'  => false,
 				'placeholder' => esc_html__( 'rotate(10deg) scale(1.1)', 'tpebl' ),
 				'selectors'   => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper:hover .extra-wcc-inn' => 'transform: {{VALUE}};-ms-transform: {{VALUE}};-moz-transform: {{VALUE}};-webkit-transform: {{VALUE}};transform-style: preserve-3d;-ms-transform-style: preserve-3d;-moz-transform-style: preserve-3d;-webkit-transform-style: preserve-3d;',
@@ -2159,7 +2195,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			'cl_inner_heading',
 			array(
 				'label'     => esc_html__( 'Inner Content Option', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
 		);
@@ -2168,8 +2204,8 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Inner Content Option', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 			)
 		);
 		$this->add_responsive_control(
@@ -2284,7 +2320,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 		$this->start_controls_section(
 			'section_extra_options_styling',
 			array(
-				'label' => esc_html__( 'Extra Options', 'tpebl' ),
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -2326,8 +2362,15 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'type'        => Controls_Manager::SWITCHER,
 				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
 				'label_off'   => esc_html__( 'No', 'tpebl' ),
-				'description' => esc_html__( 'This effect will be parallax on scroll effect. It will move image as you scroll your page.', 'tpebl' ),
 				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'plus_mouse_move_parallax_note',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> This effect will be parallax on scroll effect. It will move image as you scroll your page.',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_control(
@@ -2347,9 +2390,9 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			'messy_column',
 			array(
 				'label'     => esc_html__( 'Messy Columns', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)

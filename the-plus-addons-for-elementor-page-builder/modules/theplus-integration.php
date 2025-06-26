@@ -35,6 +35,7 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 
 			$plus_control = array(
 				'plus-query' => 'L_Theplus_Query',
+				'tpae-need-help' => 'Tpae_Need_Help_Control',
 			);
 
 			foreach ( $plus_control as $control_id => $class_name ) {
@@ -64,7 +65,7 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 				return false;
 			}
 
-			require L_THEPLUS_PATH . $filename;
+			include L_THEPLUS_PATH . $filename;
 
 			return true;
 		}

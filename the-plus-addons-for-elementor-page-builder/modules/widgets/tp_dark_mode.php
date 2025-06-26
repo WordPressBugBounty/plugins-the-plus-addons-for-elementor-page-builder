@@ -142,7 +142,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Dark Mode', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -172,14 +172,21 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'dm_style',
 			array(
-				'type'    => Controls_Manager::SELECT,
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'default' => 'tp_dm_style2',
-				'options' => array(
-					'tp_dm_style2' => esc_html__( 'Style 1', 'tpebl' ),
-					'tp_dm_style1' => esc_html__( 'Style 2', 'tpebl' ),
-
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'label_block' => true,
+				'options'     => array(
+					'tp_dm_style2' => array(
+						'title' => esc_attr__( 'Style 1', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/dark-mode/style-1.svg' ),
+					),
+					'tp_dm_style1' => array(
+						'title' => esc_attr__( 'Style 2', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/dark-mode/style-2.svg' ),
+					),
 				),
+				'default'     => 'tp_dm_style2',
+				'columns'     => 2,
 			)
 		);
 		$this->add_control(
@@ -187,7 +194,6 @@ class ThePlus_Dark_Mode extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Background Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
-				'separator' => 'before',
 				'condition' => array(
 					'dm_type!' => 'dm_type_gc',
 				),
@@ -219,7 +225,6 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'selectors' => array(
 					'body .darkmode-layer' => 'mix-blend-mode: {{VALUE}};',
 				),
-				'separator' => 'before',
 			)
 		);
 		$this->add_responsive_control(
@@ -230,7 +235,6 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'min'       => 1,
 				'max'       => 100,
 				'step'      => 1,
-				'separator' => 'before',
 				'condition' => array(
 					'dm_type!' => 'dm_type_gc',
 					'dm_style' => 'tp_dm_style1',
@@ -250,14 +254,23 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'dm_right',
 			array(
-				'label'     => esc_html__( 'Right Offset', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
+				'label' => esc_html__( 'Right Offset', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
 			)
 		);
+		$this->start_popover();
+			$this->add_control(
+				'right_offset_options',
+				array(
+					'label'     => esc_html__( 'Right Offset', 'tpebl' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'after',
+				)
+			);
 		$this->add_responsive_control(
 			'dm_right_offset',
 			array(
@@ -283,17 +296,27 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
 		$this->add_control(
 			'dm_bottom',
-			array(
-				'label'     => esc_html__( 'Bottom Offset', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
-			)
+			[
+				'label' => esc_html__( 'Bottom Offset', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
 		);
+		$this->start_popover();
+			$this->add_control(
+				'bottom_offset_options',
+				array(
+					'label'     => esc_html__( 'Bottom Offset', 'tpebl' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'after',
+				)
+			);
 		$this->add_responsive_control(
 			'dm_bottom_offset',
 			array(
@@ -319,6 +342,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_global_color_option',
@@ -336,6 +360,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Label', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
+				'ai'  => false,
 				'default' => esc_html__( 'Label', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -376,7 +401,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->start_controls_section(
 			'content_extra_option',
 			array(
-				'label' => esc_html__( 'Extra Options', 'tpebl' ),
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -386,7 +411,6 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'label'     => esc_html__( 'Save in Cookies', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -395,6 +419,9 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'type'        => Controls_Manager::RAW_HTML,
 				'raw'         => '<p class="tp-controller-notice"><i>If enabled, It will remember choice of user and load accordingly on next website visit.</i></p>',
 				'label_block' => true,
+				'condition'   => array(
+					'dm_save_in_cookies' => 'yes',
+				),
 			)
 		);
 		$this->add_control(
@@ -412,6 +439,9 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'type'        => Controls_Manager::RAW_HTML,
 				'raw'         => '<p class="tp-controller-notice"><i>If enabled, It will automatically apply based on Mode of Visitor device settings.</i></p>',
 				'label_block' => true,
+				'condition'   => array(
+					'dm_auto_match_os_theme' => 'yes',
+				),
 			)
 		);
 		$this->add_control(
@@ -430,6 +460,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'label'       => __( 'Ignore Dark Mode Classes', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 10,
+				'ai'   => false,
 				'placeholder' => __( 'Enter All Classes with Comma to ignore those in Dark Mode', 'tpebl' ),
 				'condition'   => array(
 					'dm_ignore_class' => 'yes',

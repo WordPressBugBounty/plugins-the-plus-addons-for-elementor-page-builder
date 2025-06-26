@@ -2339,7 +2339,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$out_speed  = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
 		$border_box = ! empty( $settings['box_border'] ) ? $settings['box_border'] : '';
 		$image_icon = ! empty( $settings['image_icon'] ) ? $settings['image_icon'] : '';
-		$icon_style = ! empty( $settings['icon_style'] ) ? $settings['icon_style'] : 'square';
+		$icon_style = ! empty( $settings['icon_style'] ) ? $settings['icon_style'] : '';
 		$icon_font  = ! empty( $settings['icon_font_style'] ) ? $settings['icon_font_style'] : 'font_awesome';
 		$image_id   = ! empty( $settings['select_image']['id'] ) ? $settings['select_image']['id'] : '';
 		$icon_5     = ! empty( $settings['icon_fontawesome_5'] ) ? $settings['icon_fontawesome_5'] : '';

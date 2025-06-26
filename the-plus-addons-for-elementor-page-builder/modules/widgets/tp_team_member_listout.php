@@ -1294,7 +1294,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		$this->add_control(
 			'box_border_color',
 			array(
-				'label'     => esc_html__( 'Border Color', 'theplus' ),
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#252525',
 				'selectors' => array(
@@ -1326,7 +1326,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		$this->add_control(
 			'box_border_hover_color',
 			array(
-				'label'     => esc_html__( 'Border Color', 'theplus' ),
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#252525',
 				'selectors' => array(

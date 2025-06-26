@@ -144,7 +144,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Style Counter', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -165,12 +165,23 @@ class L_ThePlus_Number_Counter extends Widget_Base {
             )
 		);
 		$this->add_control(
-			'style',
+		'style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => l_theplus_get_style_list( 2 ),
+				'label'        => esc_html__( 'Style', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'style-1',
+				'options'      => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/number-counter/style-1.svg' ),
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/number-counter/style-2.svg' ),
+					),
+				),
+				'columns'  => 2,
 			)
 		);
 		$this->add_control(
@@ -178,6 +189,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Title', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
+				'ai' => false,
 				'default' => esc_html__( 'Title', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -323,13 +335,20 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'dynamic' => array( 'active' => true ),
 			)
 		);
-
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'extra_option_section',
+			array(
+				'label' => esc_html__( 'Extra Option', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
 		$this->add_control(
 			'symbol',
 			array(
 				'label'     => esc_html__( 'Symbol', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'separator' => 'before',
+				'ai' => false,
 			)
 		);
 		$this->add_control(
@@ -406,6 +425,30 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'font_awesome_toggle',
+			array(
+				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition' => array(
+					'icon_type'       => 'icon',
+					'icon_font_style' => 'font_awesome',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'icon_fs_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
+			)
+		);
+		$this->add_control(
 			'icon_fontawesome',
 			array(
 				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
@@ -417,6 +460,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
 		$this->add_control(
 			'icons_mind_options',
 			array(
@@ -449,6 +493,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Choose Image', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
+				'ai' => false,
 				'default'   => array(
 					'url' => Utils::get_placeholder_image_src(),
 				),
@@ -507,7 +552,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->start_controls_section(
 			'section_icon_styling',
 			array(
-				'label'     => esc_html__( 'Icon Style', 'tpebl' ),
+				'label'     => esc_html__( 'Icon', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'icon_type' => 'icon',
@@ -517,7 +562,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'icon_style',
 			array(
-				'label'   => esc_html__( 'Icon Styles', 'tpebl' ),
+				'label'   => esc_html__( 'Style', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'square',
 				'options' => array(
@@ -1025,7 +1070,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->start_controls_section(
 			'section_title_styling',
 			array(
-				'label' => esc_html__( 'Title Style', 'tpebl' ),
+				'label' => esc_html__( 'Title', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -1411,7 +1456,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->start_controls_section(
 			'section_digit_option',
 			array(
-				'label' => esc_html__( 'Digit Style', 'tpebl' ),
+				'label' => esc_html__( 'Digit			', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -1591,7 +1636,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'gradient_hover_color_option',
 			array(
-				'label'       => esc_html__( 'Gradient Hover Color', 'tpebl' ),
+				'label'       => esc_html__( 'Digit Hover Color', 'tpebl' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => array(
 					'color'    => array(
@@ -2007,8 +2052,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Vertical Center', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'style' => array( 'style-2' ),

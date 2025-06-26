@@ -8,9 +8,9 @@
     background-position: center;
 }
 .dashicons-plus-settings {
-    background: url(../../images/tpae-favicon.png);	
+    background: url(../../images/tpae-favicon.png); 
     background-size: 22px;
-    background-repeat: no-repeat;	
+    background-repeat: no-repeat;   
     background-position: center;
 }
 .elementor-control .elementor-control.elementor-control-separator-after+.elementor-control-separator-default, .elementor-control.elementor-control-separator-after+.elementor-control-type-tabs,.elementor-control.elementor-control-type-repeater .elementor-control.elementor-control-separator-before {
@@ -19,7 +19,7 @@
 .elementor-control-type-repeater .elementor-control:before{
 	display: block !important;
 }
-#elementor-panel-category-theplus-addons .essslementor-element{
+#elementor-panel-category-theplus-addons .elementor-element{
 /* #elementor-panel-elements .elementor-element .theplus_backend_icon{ */
     position: relative;
 }
@@ -558,7 +558,7 @@ a.plus-menu-icon-thumbnail.button.change-icon {
     padding-right: 5px;
 }
 .theplus-pro-features-wrapper .tp-pf-info {
-    color: #4d555f;
+    color: var(--e-a-color-txt);
     position: relative;
     display: inline-block;
     margin-top: 15px;
@@ -712,3 +712,6 @@ ul#adminmenu a[href*="page=theplus-upgrade"]{color:#FFF;background:#8072FC;margi
 }
 .tp-docs-wrapper{display:flex;justify-content:center}
 .elementor-control-direction_dots span.elementor-switch-label {overflow: hidden}
+
+/** Custom Controller CSS*/
+.tpae-need-help{display:flex;flex-direction:column;align-items:center;gap:15px}.tpae-need-help-req-buttons{display:flex;flex-wrap:wrap;justify-content:center;width:100%;gap:10px}a.tp-docs-link-container{width:48%;background-color:var(--e-a-bg-default);border:1px solid var(--e-a-bg-active);padding:8px 0;border-radius:4px}a.tp-docs-link-container:hover{background-color:var(--e-a-bg-hover)!important;color:var(--e-a-bg-hover)!important}.tp-docs-link-container .tp-docs-link{text-decoration:none;color:var(--e-a-color-txt-accent);text-align:center;font-size:11px;font-weight:400;line-height:18px;letter-spacing:.3px}.tp-docs-link-container .tp-docs-link:hover{text-decoration:none;color:var(--e-a-color-txt-accent)!important}.tpae-ask-ai{width:100%;display:flex;justify-content:center;align-items:center;gap:5px;color:var(--e-a-bg-default);background-color:var(--e-a-color-txt);padding:13px 0;border-radius:6px}.tpae-ask-ai:hover{cursor:pointer}.tpae-ask-ai span{color:var(--e-a-bg-default);font-size:12px;line-height:18px}.tpae-ask-ai:hover span{color:var(--e-a-bg-default);text-decoration:none}.tpae-ask-ai svg,.tpae-ask-ai svg path:nth-child(2){fill:var(--e-a-bg-default);stroke:var(--e-a-bg-default)}.tpae-ask-ai svg path:nth-child(1){fill:transparent;stroke:var(--e-a-bg-default)}.tpae-join-discord-container{background-color:var(--e-a-bg-hover)!important;border:1px solid var(--e-a-bg-active);padding:15px;border-radius:5px}.tpae-join-discord-text{font-style:italic;font-size:12px;line-height:18px;letter-spacing:.2px;color:var(--e-a-color-txt)}.tpae-join-discord-text-bold{color:var(--e-a-color-txt-accent)}.tpae-join-discord-text a{color:var(--e-a-color-accent-promotion)}.tpae-join-discord-text a:hover{text-decoration:none;border:none!important;color:var(--e-a-color-primary-bold);border-block-end-color:transparent!important}

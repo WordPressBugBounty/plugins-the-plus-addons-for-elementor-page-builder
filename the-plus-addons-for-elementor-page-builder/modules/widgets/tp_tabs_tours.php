@@ -2417,8 +2417,8 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				}
 			} elseif ( 'page_template' === $item['content_source'] && 'dropdown' === $item['content_template_type'] && ( empty( $content_template ) || '0' === $content_template ) ) {
 				$tab_content .= '<div class="tab-preview-template-notice">
-						<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'theplus' ) . '</div>
-						<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+						<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'tpebl' ) . '</div>
+						<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'tpebl' ) . '</div>
 					</div>';
 			}
 				$tab_content .= '</div>';

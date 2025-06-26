@@ -225,25 +225,25 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 		'layout',
 			array(
-				'label'        => esc_html__( 'Layout', 'theplus' ),
+				'label'        => esc_html__( 'Layout', 'tpebl' ),
 				'label_block'  => true,
 				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
 				'default'      => 'grid',
 				'options'      => array(
 					'grid' => array(
-						'title' => esc_html__( 'Grid', 'theplus' ),
+						'title' => esc_html__( 'Grid', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/grid.svg',
 					),
 					'masonry' => array(
-						'title' => esc_html__( 'Masonry', 'theplus' ),
+						'title' => esc_html__( 'Masonry', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/masonry.svg',
 					),
 					'metro' => array(
-						'title' => esc_html__( 'Metro', 'theplus' ),
+						'title' => esc_html__( 'Metro', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/metro.svg',
 					),
 					'carousel' => array(
-						'title' => esc_html__( 'Carousel (PRO)', 'theplus' ),
+						'title' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/carousel-pro.svg',
 					),
 				),

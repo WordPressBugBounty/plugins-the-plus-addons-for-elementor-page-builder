@@ -1198,8 +1198,8 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 
 								if ( empty( $content_template ) || '0' === $content_template ) {
 									echo '<div class="tab-preview-template-notice">
-											<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'theplus' ) . '</div>
-											<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+											<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'tpebl' ) . '</div>
+											<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'tpebl' ) . '</div>
 										</div>';
 								} else {
 									if ( has_filter( 'wpml_object_id' ) ) {

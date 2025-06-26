@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.9
+Stable tag: 6.3.10
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -384,6 +384,22 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.10 =
+Add : Switcher : Switcher Border option Added
+Improvement : Blockquote : UI Improvements
+Improvement : Dark Mode : UI Improvements
+Improvement : Dynamic Categories : UI Improvements
+Improvement : Heading Title : UI Improvements
+Improvement : Message Box : UI Improvements
+Improvement : Number Counter : UI Improvements
+Improvement : Post Title : UI Improvements
+Improvement : Progress Bar : UI Improvements
+Improvement : Flipbox : CSS Improvements
+Improvement : Progress Bar : Controller Improvements
+Improvement : Dashboard : Design Improvements
+Improvement : Need Help Controller
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.9 =
 Fix : Minor Bug Fixes & Performance Improvements

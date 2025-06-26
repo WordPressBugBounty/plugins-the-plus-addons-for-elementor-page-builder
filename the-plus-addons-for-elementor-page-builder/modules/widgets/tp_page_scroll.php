@@ -1074,8 +1074,8 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 						++$i;
 					} else {
 						$full_page_content .= '<div class="tab-preview-template-notice">
-								<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'theplus' ) . '</div>
-								<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'theplus' ) . '</div>
+								<div class="preview-temp-notice-heading">' . esc_html__( 'Select Template', 'tpebl' ) . '</div>
+								<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'tpebl' ) . '</div>
 							</div>';
 					}
 				}

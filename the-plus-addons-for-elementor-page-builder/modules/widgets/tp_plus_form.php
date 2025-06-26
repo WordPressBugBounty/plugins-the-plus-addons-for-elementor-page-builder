@@ -1019,11 +1019,11 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_control(
 			'form_title_display',
 			array(
-				'label'     => esc_html__( 'Show Form Title', 'theplus' ),
+				'label'     => esc_html__( 'Show Form Title', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'Yes', 'theplus' ),
-				'label_off' => esc_html__( 'No', 'theplus' ),
+				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
+				'label_off' => esc_html__( 'No', 'tpebl' ),
 
 			)
 		);
@@ -1114,7 +1114,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_control(
 			'form_title_heading',
 			array(
-				'label'     => esc_html__( 'Form Title', 'theplus' ),
+				'label'     => esc_html__( 'Form Title', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => array(
@@ -1126,7 +1126,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_title_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'theplus' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1141,7 +1141,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_title_margin',
 			array(
-				'label'      => esc_html__( 'Margin', 'theplus' ),
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1157,7 +1157,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'form_title_typography',
-				'label'     => esc_html__( 'Typography', 'theplus' ),
+				'label'     => esc_html__( 'Typography', 'tpebl' ),
 				'selector'  => '{{WRAPPER}} .tpae-form-name',
 				'condition' => array(
 					'form_title_display' => 'yes',
@@ -1168,19 +1168,19 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_title_position',
 			array(
-				'label'       => esc_html__( 'Text Align', 'theplus' ),
+				'label'       => esc_html__( 'Text Align', 'tpebl' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => array(
 					'left'   => array(
-						'title' => esc_html__( 'Left', 'theplus' ),
+						'title' => esc_html__( 'Left', 'tpebl' ),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
-						'title' => esc_html__( 'Center', 'theplus' ),
+						'title' => esc_html__( 'Center', 'tpebl' ),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
-						'title' => esc_html__( 'Right', 'theplus' ),
+						'title' => esc_html__( 'Right', 'tpebl' ),
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
@@ -1207,14 +1207,14 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->start_controls_tab(
 			'form_title_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'theplus' ),
+				'label' => esc_html__( 'Normal', 'tpebl' ),
 			)
 		);
 
 		$this->add_control(
 			'form_title_color',
 			array(
-				'label'     => esc_html__( 'Text Color', 'theplus' ),
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#000',
 				'selectors' => array(
@@ -1227,7 +1227,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			Group_Control_Background::get_type(),
 			array(
 				'name'     => 'form_title_bg_color',
-				'label'    => esc_html__( 'Background', 'theplus' ),
+				'label'    => esc_html__( 'Background', 'tpebl' ),
 				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .tpae-form-name',
 				'exclude'  => array( 'image' ),
@@ -1238,7 +1238,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'form_title_border_normal',
-				'label'    => esc_html__( 'Border', 'theplus' ),
+				'label'    => esc_html__( 'Border', 'tpebl' ),
 				'selector' => '{{WRAPPER}} .tpae-form-name',
 			)
 		);
@@ -1246,7 +1246,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_title_border_radius_normal',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'theplus' ),
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1260,14 +1260,14 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->start_controls_tab(
 			'form_title_hover',
 			array(
-				'label' => esc_html__( 'Hover', 'theplus' ),
+				'label' => esc_html__( 'Hover', 'tpebl' ),
 			)
 		);
 
 		$this->add_control(
 			'form_title_color_hover',
 			array(
-				'label'     => esc_html__( 'Text Color', 'theplus' ),
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#000',
 				'selectors' => array(
@@ -1280,7 +1280,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			Group_Control_Background::get_type(),
 			array(
 				'name'     => 'form_title_bg_color_hover',
-				'label'    => esc_html__( 'Background', 'theplus' ),
+				'label'    => esc_html__( 'Background', 'tpebl' ),
 				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .tpae-form-name:hover',
 				'exclude'  => array( 'image' ),
@@ -1291,7 +1291,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'form_title_border_hover',
-				'label'    => esc_html__( 'Border', 'theplus' ),
+				'label'    => esc_html__( 'Border', 'tpebl' ),
 				'selector' => '{{WRAPPER}} .tpae-form-name:hover',
 			)
 		);
@@ -1299,7 +1299,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_title_border_radius_hover',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'theplus' ),
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(

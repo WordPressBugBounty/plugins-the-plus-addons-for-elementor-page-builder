@@ -505,10 +505,10 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'icon_image_options',
 			array(
-				'label' => esc_html__( 'Icon Image', 'theplus' ),
+				'label' => esc_html__( 'Icon Image', 'tpebl' ),
 				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'theplus' ),
-				'label_on' => esc_html__( 'Custom', 'theplus' ),
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default' => 'yes',
 				'condition'  => array(
@@ -521,7 +521,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'iconimage_options',
 			array(
-				'label'     => esc_html__( 'Icon Image', 'theplus' ),
+				'label'     => esc_html__( 'Icon Image', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'after',
 			)
