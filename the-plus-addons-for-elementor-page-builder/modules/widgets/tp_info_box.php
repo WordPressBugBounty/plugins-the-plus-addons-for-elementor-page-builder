@@ -62,7 +62,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-info-circle theplus_backend_icon';
+		return 'theplus-i-info-box tpae-editor-logo';
 	}
 
 	/**
@@ -114,18 +114,18 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -136,7 +136,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -153,21 +153,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16254" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16254">%s</a>
-					</div>',
-					esc_url('https://theplusaddons.com/widgets/elementor-info-box/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
-                'label_block'     => true,
+            'tpae_preset_controller',
+            array(
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 16254,
+                'label_block' => true,
             )
-		);
+        );
 		$this->add_control(
 			'info_box_layout',
 			array(
@@ -231,7 +223,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
-					'main_style!' => array( 'style_1', 'style_3','style_4' ),
+					'main_style!' => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -275,7 +267,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -291,7 +283,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -318,7 +310,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'toggle'    => true,
 				'separator' => 'before',
 				'condition' => array(
-					'main_style' => array('style_3'),
+					'main_style' => array( 'style_3' ),
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_info_box.info-box-style_3 .info-box-bg-box .service-center' => 'text-align: {{VALUE}};',
@@ -341,7 +333,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition'     => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -360,7 +352,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -382,7 +374,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -396,7 +388,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'svg',
 				),
 			)
@@ -415,7 +407,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition'  => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'image',
 				),
 			)
@@ -428,7 +420,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'after',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'image',
 				),
 			)
@@ -447,7 +439,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'icon',
 				),
 			)
@@ -460,7 +452,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'default'   => 'fa fa-bank',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'icon',
 					'icon_font_style' => 'font_awesome',
 				),
@@ -477,7 +469,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'icon',
 					'icon_font_style' => 'font_awesome_5',
 				),
@@ -493,7 +485,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'image_icon'      => 'icon',
 					'icon_font_style' => array( 'icon_mind', 'icon_image' ),
 				),
@@ -510,7 +502,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -527,7 +519,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'  => 'yes',
 				),
 			)
@@ -542,7 +534,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'  => 'yes',
 					'button_style!'   => 'style-8',
 				),
@@ -560,7 +552,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'placeholder' => esc_html__( 'Read More', 'tpebl' ),
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'  => 'yes',
 					'button_style'    => 'style-8',
 				),
@@ -580,7 +572,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'  => 'yes',
 					'button_style'    => 'style-8',
 				),
@@ -600,7 +592,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'  => 'yes',
 					'button_style!'   => array( 'style-7', 'style-9' ),
 				),
@@ -615,7 +607,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'default'     => 'fa fa-chevron-right',
 				'condition'   => array(
 					'info_box_layout'   => 'single_layout',
-					'main_style'        => array( 'style_1', 'style_3','style_4' ),
+					'main_style'        => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'    => 'yes',
 					'button_style!'     => array( 'style-7', 'style-9' ),
 					'button_icon_style' => 'font_awesome',
@@ -633,7 +625,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout'   => 'single_layout',
-					'main_style'        => array( 'style_1', 'style_3','style_4' ),
+					'main_style'        => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'    => 'yes',
 					'button_style!'     => array( 'style-7', 'style-9' ),
 					'button_icon_style' => 'font_awesome_5',
@@ -650,7 +642,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout'   => 'single_layout',
-					'main_style'        => array( 'style_1', 'style_3','style_4' ),
+					'main_style'        => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'    => 'yes',
 					'button_style!'     => array( 'style-7', 'style-9' ),
 					'button_icon_style' => 'icon_mind',
@@ -669,7 +661,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout'    => 'single_layout',
-					'main_style'         => array( 'style_1', 'style_3','style_4' ),
+					'main_style'         => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style!' => array( '', 'icon_mind' ),
@@ -688,7 +680,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'info_box_layout'    => 'single_layout',
-					'main_style'         => array( 'style_1', 'style_3','style_4' ),
+					'main_style'         => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style!' => array( '', 'icon_mind' ),
@@ -709,7 +701,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'default'   => 'no',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4'),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'display_button'  => 'yes',
 					'button_style'    => array( 'style-8' ),
 				),
@@ -726,7 +718,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array('style_3','style_4'),
+					'main_style'      => array( 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -740,7 +732,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout'  => 'single_layout',
-					'main_style'       => array('style_3','style_4'),
+					'main_style'       => array( 'style_3', 'style_4' ),
 					'display_pin_text' => 'yes',
 				),
 			)
@@ -756,7 +748,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -771,7 +763,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -783,7 +775,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -1126,64 +1118,64 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->add_responsive_control(
 			'title_top_space',
-			[
-				'type' => Controls_Manager::SLIDER,
-				'label' => esc_html__( 'Title Top Space', 'tpebl' ),
-				'range' => [
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Title Top Space', 'tpebl' ),
+				'range'           => array(
 					'px' => array(
 						'step' => 2,
 						'min'  => -150,
 						'max'  => 150,
 					),
-				],
-				'devices' => [ 'desktop', 'tablet', 'mobile' ],
-				'desktop_default' => [
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
 					'unit' => 'px',
 					'size' => 0,
-				],
-				'tablet_default' => [
+				),
+				'tablet_default'  => array(
 					'unit' => 'px',
 					'size' => 0,
-				],
-				'mobile_default' => [
+				),
+				'mobile_default'  => array(
 					'unit' => 'px',
 					'size' => 0,
-				],
-				'selectors'   => array(
+				),
+				'selectors'       => array(
 					'{{WRAPPER}} .pt_plus_info_box.info-box-style_1 .info-box-inner .service-title,{{WRAPPER}} .pt_plus_info_box.info-box-style_3 .info-box-inner .service-title,{{WRAPPER}} .pt_plus_info_box.info-box-style_4 .info-box-inner .service-media' => 'margin-top : {{SIZE}}{{UNIT}}',
 				),
-			]
+			)
 		);
 		$this->add_responsive_control(
 			'title_btm_space',
-			[
-				'type' => Controls_Manager::SLIDER,
-				'label' => esc_html__( 'Title Bottom Space', 'tpebl' ),
-				'range' => [
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Title Bottom Space', 'tpebl' ),
+				'range'           => array(
 					'px' => array(
 						'step' => 2,
 						'min'  => -150,
 						'max'  => 150,
 					),
-				],
-				'devices' => [ 'desktop', 'tablet', 'mobile' ],
-				'desktop_default' => [
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
 					'unit' => 'px',
 					'size' => 0,
-				],
-				'tablet_default' => [
+				),
+				'tablet_default'  => array(
 					'unit' => 'px',
 					'size' => 0,
-				],
-				'mobile_default' => [
+				),
+				'mobile_default'  => array(
 					'unit' => 'px',
 					'size' => 0,
-				],
-				'render_type' => 'ui',
-				'selectors'   => array(
+				),
+				'render_type'     => 'ui',
+				'selectors'       => array(
 					'{{WRAPPER}} .pt_plus_info_box.info-box-style_1 .info-box-inner .service-title,{{WRAPPER}} .pt_plus_info_box.info-box-style_2 .info-box-inner .service-title,{{WRAPPER}} .pt_plus_info_box.info-box-style_3 .info-box-inner .service-title,{{WRAPPER}} .pt_plus_info_box.info-box-style_4 .info-box-inner .service-media,{{WRAPPER}} .pt_plus_info_box.info-box-style_7 .info-box-inner .service-title' => 'margin-bottom : {{SIZE}}{{UNIT}}',
 				),
-			]
+			)
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
@@ -1343,7 +1335,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -1356,7 +1348,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'options'   => l_theplus_get_border_style(),
 				'condition' => array(
 					'box_border' => 'yes',
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .info-box-bg-box' => 'border-style: {{VALUE}};',
@@ -1384,7 +1376,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .info-box-bg-box' => 'border-color: {{VALUE}};',
 				),
 				'condition' => array(
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 					'box_border' => 'yes',
 				),
 			)
@@ -1405,7 +1397,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .info-box-bg-box' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 					'box_border' => 'yes',
 				),
 			)
@@ -1420,7 +1412,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .info-box-bg-box,{{WRAPPER}} .pt_plus_info_box .info-box-inner .infobox-overlay-color' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 					'box_border' => 'yes',
 				),
 			)
@@ -1446,7 +1438,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					{{WRAPPER}} .pt_plus_info_box .info-box-inner.tp-info-active .info-box-bg-box' => 'border-color: {{VALUE}};',
 				),
 				'condition' => array(
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 					'box_border' => 'yes',
 				),
 			)
@@ -1462,7 +1454,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					{{WRAPPER}} .pt_plus_info_box .info-box-inner.tp-info-active .info-box-bg-box,{{WRAPPER}} .pt_plus_info_box .info-box-inner.tp-info-active .infobox-overlay-color' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'main_style' => array( 'style_1', 'style_3','style_4' ),
+					'main_style' => array( 'style_1', 'style_3', 'style_4' ),
 					'box_border' => 'yes',
 				),
 			)
@@ -2017,6 +2009,36 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
 			'icon_gradient_color1',
 			array(
 				'label'     => esc_html__( 'Color 1', 'tpebl' ),
@@ -2216,6 +2238,36 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'icon_fill_color_hover',
+			array(
+				'label'     => esc_html__( 'Hover Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Hover Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
 			'icon_hover_gradient_color1',
 			array(
 				'label'     => esc_html__( 'Color 1', 'tpebl' ),
@@ -2381,7 +2433,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -2395,7 +2447,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3','style_4' ),
+					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 					'icon_overlay'    => 'yes',
 				),
 			)
@@ -2421,7 +2473,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'info_box_layout'   => 'single_layout',
-					'main_style'        => array( 'style_1', 'style_3','style_4' ),
+					'main_style'        => array( 'style_1', 'style_3', 'style_4' ),
 					'icon_shine_effect' => 'yes',
 				),
 			)
@@ -2602,7 +2654,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label_off' => esc_html__( 'Off', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
-					'main_style' => array( 'style_1','style_4' ),
+					'main_style' => array( 'style_1', 'style_4' ),
 				),
 			)
 		);
@@ -3183,7 +3235,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				$ll_bgbox = tp_bg_lazyLoad( $settings['box_background_image'], $settings['box_hover_background_image'] );
 
 				$lazy_bg    = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['box_background_image'], $settings['box_hover_background_image'] ) : '';
-			    $lazy_ol_bg = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['box_hover_background_image'] ) : '';
+				$lazy_ol_bg = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['box_hover_background_image'] ) : '';
 
 			if ( 'style_1' === $main_style ) {
 

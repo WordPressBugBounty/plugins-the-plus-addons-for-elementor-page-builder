@@ -117,6 +117,32 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 			// 	'plugin_slug' => 'envato-elements/envato-elements.php',
 			// );
 
+			$nxt_plugin = array(
+				'name'        => 'the-plus-addons-for-block-editor',
+				'status'      => '',
+				'plugin_slug' => 'the-plus-addons-for-block-editor/the-plus-addons-for-block-editor.php',
+			);
+			$nxt_pro_plugin = array(
+				'name'        => 'the-plus-addons-for-block-editor-pro',
+				'status'      => '',
+				'plugin_slug' => 'the-plus-addons-for-block-editor-pro/the-plus-addons-for-block-editor-pro.php',
+			);
+			$nxt_ext_plugin = array(
+				'name'        => 'nexter-extension',
+				'status'      => '',
+				'plugin_slug' => 'nexter-extension/nexter-extension.php',
+			);
+			$nxt_ext_pro_plugin = array(
+				'name'        => 'nexter-pro-extensions',
+				'status'      => '',
+				'plugin_slug' => 'nexter-pro-extensions/nexter-pro-extensions.php',
+			);
+			$ele_pro_plugin = array(
+				'name'        => 'elementor-pro',
+				'status'      => '',
+				'plugin_slug' => 'elementor-pro/elementor-pro.php',
+			);
+
 			if ( is_admin() && current_user_can( 'manage_options' ) ) {
 				include L_THEPLUS_PATH . 'includes/notices/class-tp-plugin-page.php';
 
@@ -134,13 +160,30 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 				$this->tp_remove_notice();
 			}
 
-			// if ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) {
-				// include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
-			// }
+			$nxt_details = $this->tpae_check_plugins_depends( $nxt_plugin );
+			$nxt_pro_details = $this->tpae_check_plugins_depends( $nxt_pro_plugin );
 
-			// if ( is_admin() && current_user_can( 'install_plugins' ) ) {.
-				// include L_THEPLUS_PATH . 'includes/notices/class-tp-tpag-install-notice.php';
-			// }.
+			$nxt_ext_details = $this->tpae_check_plugins_depends( $nxt_ext_plugin );
+			$ele_pro_details = $this->tpae_check_plugins_depends( $ele_pro_plugin );
+			$nxt_ext_pro_details = $this->tpae_check_plugins_depends( $nxt_ext_pro_plugin );
+
+			if ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) {
+				// include L_THEPLUS_PATH . 'includes/notices/class-tp-halloween-notice.php';
+
+				if( ! empty( $ele_pro_details[0]['status'] ) && 'unavailable' == $ele_pro_details[0]['status'] ) {
+					if( ! empty( $nxt_ext_details[0]['status'] ) && 'unavailable' == $nxt_ext_details[0]['status'] ) {
+						if( ! empty( $nxt_ext_pro_details[0]['status'] ) && 'unavailable' == $nxt_ext_pro_details[0]['status'] ) {
+							include L_THEPLUS_PATH . 'includes/notices/class-tp-nexter-extension-promo.php';
+						}
+					}
+				}
+
+				if( ! empty( $nxt_details[0]['status'] ) && 'unavailable' == $nxt_details[0]['status'] ) {
+					if( ! empty( $nxt_pro_details[0]['status'] ) && 'unavailable' == $nxt_pro_details[0]['status'] ) {
+						include L_THEPLUS_PATH . 'includes/notices/class-tp-nexter-notice.php';
+					}
+				}
+			}
 
 			// $envato_details = $this->tpae_check_plugins_depends( $envato_plugins );
 			// if ( current_user_can( 'manage_options' ) ) {
@@ -247,7 +290,7 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 		}
 
 		/**
-		 * Remove OlD Plugin Notice
+		 * Remove Old Plugin Notice
 		 *
 		 * @since 6.1.1
 		 */

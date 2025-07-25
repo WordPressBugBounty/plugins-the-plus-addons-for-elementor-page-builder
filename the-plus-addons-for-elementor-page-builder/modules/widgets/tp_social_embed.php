@@ -52,7 +52,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-code theplus_backend_icon';
+		return 'theplus-i-social-embed tpae-editor-logo';
 	}
 
 	/**

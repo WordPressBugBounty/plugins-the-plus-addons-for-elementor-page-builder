@@ -63,7 +63,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-wp-form theplus_backend_icon';
+		return 'theplus-i-wp-forms tpae-editor-logo';
 	}
 
 	/**

@@ -54,7 +54,7 @@ class ThePlus_Post_Comment extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-commenting theplus_backend_icon';
+		return 'theplus-i-post-comment tpae-editor-logo';
 	}
 
 	/**

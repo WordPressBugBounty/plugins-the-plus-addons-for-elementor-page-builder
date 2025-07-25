@@ -73,7 +73,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-sliders theplus_backend_icon';
+		return 'theplus-i-carousel-anything tpae-editor-logo';
 	}
 
 	/**
@@ -164,21 +164,13 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="17360" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="17360">%s</a>
-					</div>',
-					esc_url('https://theplusaddons.com/widgets/elementor-carousel-slider/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
+            'tpae_preset_controller',
+            array(
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 17360,
                 'label_block' => true,
             )
-		);
+        );
 		$repeater = new \Elementor\Repeater();
 		$repeater->add_control(
 			'tab_title',

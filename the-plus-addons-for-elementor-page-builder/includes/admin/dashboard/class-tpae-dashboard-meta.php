@@ -68,6 +68,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		 */
 		public function tpae_enqueue_scripts( $page ) {
 
+			wp_enqueue_style( 'tpae-db-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
+
 			if ( 'toplevel_page_theplus_welcome_page' === $page ) {
 				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', array( 'wp-i18n', 'wp-element', 'wp-components' ), L_THEPLUS_VERSION . time(), true );
 				wp_localize_script(

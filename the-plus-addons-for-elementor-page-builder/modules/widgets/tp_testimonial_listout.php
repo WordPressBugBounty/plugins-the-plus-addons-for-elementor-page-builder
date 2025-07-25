@@ -45,6 +45,20 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 	public $tp_help = L_THEPLUS_HELP;
 
 	/**
+	 * Tablet prefix class
+	 *
+	 * @var slick_tablet of the class.
+	 */
+	public $slick_tablet = 'body[data-elementor-device-mode="tablet"] {{WRAPPER}} .list-carousel-slick ';
+
+	/**
+	 * Mobile prefix class.
+	 *
+	 * @var slick_mobile of the class.
+	 */
+	public $slick_mobile = 'body[data-elementor-device-mode="mobile"] {{WRAPPER}} .list-carousel-slick ';
+
+	/**
 	 * Get Widget Name.
 	 *
 	 * @since 1.0.1
@@ -71,7 +85,7 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-users theplus_backend_icon';
+		return 'theplus-i-testimonial tpae-editor-logo';
 	}
 
 	/**
@@ -1987,13 +2001,21 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'tab_carousel_tablet_options',
+			'slider_tablet_column',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'label'   => esc_html__( 'Tablet Columns', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '1',
+				'options' => array(
+					'1' => esc_html__( 'Column 1', 'tpebl' ),
+					'2' => esc_html__( 'Column 2', 'tpebl' ),
+					'3' => esc_html__( 'Column 3', 'tpebl' ),
+					'4' => esc_html__( 'Column 4', 'tpebl' ),
+					'5' => esc_html__( 'Column 5', 'tpebl' ),
+					'6' => esc_html__( 'Column 6', 'tpebl' ),
+					'7' => esc_html__( 'Column 7', 'tpebl' ),
+					'8' => esc_html__( 'Column 8', 'tpebl' ),
+				),
 			)
 		);
 		$this->end_controls_tab();
@@ -2004,15 +2026,22 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'tab_carousel_mobile_options',
+			'slider_mobile_column',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'label'   => esc_html__( 'Mobile Columns', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '1',
+				'options' => array(
+					'1' => esc_html__( 'Column 1', 'tpebl' ),
+					'2' => esc_html__( 'Column 2', 'tpebl' ),
+					'3' => esc_html__( 'Column 3', 'tpebl' ),
+					'4' => esc_html__( 'Column 4', 'tpebl' ),
+					'5' => esc_html__( 'Column 5', 'tpebl' ),
+					'6' => esc_html__( 'Column 6', 'tpebl' ),
+				),
 			)
 		);
+		
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		$this->end_controls_section();
@@ -2472,6 +2501,8 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 		$draggable_on  = ! empty( $settings['slider_draggable'] ) ? $settings['slider_draggable'] : '';
 
 		$desktop_column = ! empty( $settings['slider_desktop_column'] ) ? $settings['slider_desktop_column'] : '1';
+		$tablet_column  = ! empty( $settings['slider_tablet_column'] ) ? $settings['slider_tablet_column'] : '1';
+		$mobile_column  = ! empty( $settings['slider_mobile_column'] ) ? $settings['slider_mobile_column'] : '1';
 
 		$data_slider .= ' data-slide_speed="' . esc_attr( $settings['slide_speed']['size'] ) . '"';
 
@@ -2510,6 +2541,12 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 		if( !empty( $settings['arrow_hover_icon_color'] ) ){
 			$data_slider  .= ' data-arrow_hover_icon_color="' . esc_attr( $settings['arrow_hover_icon_color'] ) . '" ';
 		}
+
+		/** For Tablet*/
+		$data_slider .= ' data-slider_tablet_column="' . esc_attr( $tablet_column ) . '"';
+
+		/** For Mobile*/
+		$data_slider .= ' data-slider_mobile_column="' . esc_attr( $mobile_column ) . '"';
 
 		return $data_slider;
 	}

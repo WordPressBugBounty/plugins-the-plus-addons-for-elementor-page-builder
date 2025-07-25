@@ -36,6 +36,7 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 			$plus_control = array(
 				'plus-query' => 'L_Theplus_Query',
 				'tpae-need-help' => 'Tpae_Need_Help_Control',
+				'tpae-preset-controller' => 'Tpae_Preset_Controller',
 			);
 
 			foreach ( $plus_control as $control_id => $class_name ) {

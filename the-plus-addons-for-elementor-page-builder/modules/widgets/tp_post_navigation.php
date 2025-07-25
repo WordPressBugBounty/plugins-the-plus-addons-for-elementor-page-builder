@@ -63,7 +63,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-exchange theplus_backend_icon';
+		return 'theplus-i-post-prev-next tpae-editor-logo';
 	}
 
 	/**
@@ -152,15 +152,29 @@ class ThePlus_Post_Navigation extends Widget_Base {
 		$this->add_control(
 			'style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => array(
-					'style-1' => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2' => esc_html__( 'Style 2', 'tpebl' ),
-					'style-3' => esc_html__( 'Style 3', 'tpebl' ),
-					'style-4' => esc_html__( 'Style 4', 'tpebl' ),
+				'label'        => esc_html__( 'Style', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'style-1',
+				'options'      => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/post-navigation/style-1.svg'),
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/post-navigation/style-2.svg'),
+					),
+					'style-3' => array(
+						'title' => esc_html__( 'Style 3', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/post-navigation/style-3.svg'),
+					),
+					'style-4' => array(
+						'title' => esc_html__( 'Style 4', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/post-navigation/style-4.svg'),
+					),
 				),
+				'columns'      => 2,
 			)
 		);
 		$this->add_control(
@@ -168,8 +182,8 @@ class ThePlus_Post_Navigation extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Related', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -213,9 +227,10 @@ class ThePlus_Post_Navigation extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Previous Post', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => 'Previous Post',
 				'placeholder' => 'Previous Post',
-				'label_block' => true,
+				'label_block' => false,
 			)
 		);
 		$this->add_control(
@@ -223,9 +238,10 @@ class ThePlus_Post_Navigation extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Next Post', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => 'Next Post',
 				'placeholder' => 'Next Post',
-				'label_block' => true,
+				'label_block' => false,
 			)
 		);
 		$this->end_controls_section();

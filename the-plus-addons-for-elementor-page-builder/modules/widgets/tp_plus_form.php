@@ -66,7 +66,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	 * @since 6.0.4
 	 */
 	public function get_icon() {
-		return 'fa fa-plus-form theplus_backend_icon';
+		return 'theplus-i-form tpae-editor-logo';
 	}
 
 	/**
@@ -115,18 +115,18 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -137,7 +137,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -568,7 +568,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'label_off' => esc_html__( 'No', 'tpebl' ),
 			)
 		);
-		
+
 		$this->add_responsive_control(
 			'button_inline_width',
 			array(
@@ -587,10 +587,10 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'size' => 50,
 				),
 				'label_block' => true,
-				'selectors'  => array(
+				'selectors'   => array(
 					'{{WRAPPER}} .tpae-form .tpae-form-submit-container' => 'width: {{SIZE}}{{UNIT}};',
 				),
-				'condition' => array(
+				'condition'   => array(
 					'inline_button' => 'yes',
 				),
 			)
@@ -614,10 +614,10 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'size' => 50,
 				),
 				'label_block' => true,
-				'selectors'  => array(
+				'selectors'   => array(
 					'{{WRAPPER}} .tpae-form .tpae-form-button' => 'width: {{SIZE}}{{UNIT}};',
 				),
-				'condition' => array(
+				'condition'   => array(
 					'inline_button!' => 'yes',
 				),
 			)
@@ -786,15 +786,15 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_control(
 			'email_heading',
 			array(
-				'label'     => esc_html__( 'Email Heading', 'tpebl' ),
-				'type'      => Controls_Manager::TEXT,
-				'dynamic'   => array(
+				'label'   => esc_html__( 'Email Heading', 'tpebl' ),
+				'type'    => Controls_Manager::TEXT,
+				'dynamic' => array(
 					'active' => false,
 				),
-				'ai'        => array(
+				'ai'      => array(
 					'active' => false,
 				),
-				'default'   => 'New Form Submission',
+				'default' => 'New Form Submission',
 			)
 		);
 
@@ -1132,7 +1132,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .tpae-form-name' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'condition'   => array(
+				'condition'  => array(
 					'form_title_display' => 'yes',
 				),
 			)
@@ -1147,7 +1147,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .tpae-form-name' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'condition'   => array(
+				'condition'  => array(
 					'form_title_display' => 'yes',
 				),
 			)
@@ -1198,7 +1198,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->start_controls_tabs(
 			'tabs_form_title_colors',
 			array(
-				'condition'   => array(
+				'condition' => array(
 					'form_title_display' => 'yes',
 				),
 			)
@@ -1327,9 +1327,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'form_label_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .tpae-form-label',
+				'name'      => 'form_label_typography',
+				'label'     => esc_html__( 'Typography', 'tpebl' ),
+				'selector'  => '{{WRAPPER}} .tpae-form-label',
 				'condition' => array(
 					'label_display' => 'yes',
 				),
@@ -1357,7 +1357,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .tpae-form-label' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				),
-				'condition' => array(
+				'condition'   => array(
 					'label_display' => 'yes',
 				),
 			)
@@ -1388,14 +1388,14 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'default'     => 'left',
 				'toggle'      => true,
 				'label_block' => false,
-				'condition' => array(
+				'condition'   => array(
 					'label_display' => 'yes',
 				),
 			)
 		);
 
-		$this->start_controls_tabs( 
-			'tabs_form_label_colors' ,
+		$this->start_controls_tabs(
+			'tabs_form_label_colors',
 			array(
 				'condition' => array(
 					'label_display' => 'yes',
@@ -1562,7 +1562,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#fff',
 				'selectors' => array(
-					'{{WRAPPER}} .tpae-form input, {{WRAPPER}} .tpae-form textarea' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .tpae-form input, {{WRAPPER}} .tpae-form textarea,{{WRAPPER}} .tpae-form select' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -1658,7 +1658,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#000000',
 				'selectors' => array(
-					'{{WRAPPER}} .tpae-form input:focus::placeholder, {{WRAPPER}} .tpae-form-field input[type="date"]:focus, {{WRAPPER}} .tpae-form-field input[type="time"]:focus, {{WRAPPER}} .tpae-form textarea:focus::placeholder' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .tpae-form input, {{WRAPPER}} .tpae-form-field input[type="date"], {{WRAPPER}} .tpae-form-field input[type="time"], {{WRAPPER}} .tpae-form select, {{WRAPPER}} .tpae-form textarea::placeholder' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -1861,11 +1861,11 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'{{WRAPPER}} .tpae-form .tpae-form-button.tpae-icon-before' => 'gap: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .tpae-form .tpae-form-button.tpae-icon-after' => 'gap: {{SIZE}}{{UNIT}};',
 				),
-				'default'    => [
-						'size' => 10,
-						'unit' => 'px',
-					],
-				'condition' => array(
+				'default'    => array(
+					'size' => 10,
+					'unit' => 'px',
+				),
+				'condition'  => array(
 					'button_icon_style' => 'font_awesome_5',
 				),
 			)
@@ -1877,10 +1877,10 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'label'      => esc_html__( 'Icon Size', 'tpebl' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', 'em', '%' ),
-				'default'    => [
-						'size' => 18,
-						'unit' => 'px',
-					],
+				'default'    => array(
+					'size' => 18,
+					'unit' => 'px',
+				),
 				'range'      => array(
 					'px' => array(
 						'min'  => 10,
@@ -1892,7 +1892,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'{{WRAPPER}} .tpae-form .tpae-form-button svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .tpae-form .tpae-form-button i::before' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
 				),
-				'condition' => array(
+				'condition'  => array(
 					'button_icon_style' => 'font_awesome_5',
 				),
 			)
@@ -1935,7 +1935,55 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					),
 				)
 			);
+			$this->add_control(
+				'icon_fill_color',
+				array(
+					'label'     => esc_html__( 'Fill', 'tpebl' ),
+					'type'      => Controls_Manager::COLOR,
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button svg path' => 'fill: {{VALUE}} !important;; ',
+						'{{WRAPPER}} .tpae-form .tpae-form-button svg' => 'fill: {{VALUE}} !important;',
 
+					),
+					'condition' => array(
+						'button_icon_style' => 'font_awesome_5',
+					),
+				)
+			);
+			$this->add_control(
+				'icon_stroke_color',
+				array(
+					'label'     => esc_html__( 'Stroke', 'tpebl' ),
+					'type'      => Controls_Manager::COLOR,
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button svg path' => 'stroke: {{VALUE}} !important;; ',
+						'{{WRAPPER}} .tpae-form .tpae-form-button svg' => 'stroke: {{VALUE}} !important;',
+
+					),
+					'condition' => array(
+						'button_icon_style' => 'font_awesome_5',
+					),
+				)
+			);
+			$this->add_control(
+				'form_btn_bg_type',
+				array(
+					'label'       => esc_html__( 'Background Type', 'theplus' ),
+					'type'        => Controls_Manager::CHOOSE,
+					'options'     => array(
+						'color'    => array(
+							'title' => esc_html__( 'Color', 'theplus' ),
+							'icon'  => 'eicon-paint-brush',
+						),
+						'gradient' => array(
+							'title' => esc_html__( 'Gradient', 'theplus' ),
+							'icon'  => 'eicon-barcode',
+						),
+					),
+					'label_block' => false,
+					'default'     => 'color',
+				)
+			);
 			$this->add_control(
 				'form_button_background_color',
 				array(
@@ -1945,6 +1993,128 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'selectors' => array(
 						'{{WRAPPER}} .tpae-form .tpae-form-button' => 'background-color: {{VALUE}};',
 					),
+					'condition' => array(
+						'form_btn_bg_type' => 'color',
+					),
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_color1',
+				array(
+					'label'     => esc_html__( 'Gradient Color 1', 'theplus' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => '#000',
+					'condition' => array(
+						'form_btn_bg_type' => 'gradient',
+					),
+					'of_type'   => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_color1_control',
+				array(
+					'type'        => Controls_Manager::SLIDER,
+					'label'       => esc_html__( 'Color 1 Location', 'theplus' ),
+					'size_units'  => array( '%' ),
+					'default'     => array(
+						'unit' => '%',
+						'size' => 0,
+					),
+					'render_type' => 'ui',
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button' => 'background: linear-gradient({{SIZE}}{{UNIT}}, {{form_btn_gradient_color1.VALUE}} {{form_btn_gradient_color1_control.SIZE}}{{form_btn_gradient_color1_control.UNIT}}, {{form_btn_gradient_color2.VALUE}} {{form_btn_gradient_color2_control.SIZE}}{{form_btn_gradient_color2_control.UNIT}})',
+					),
+					'condition'   => array(
+						'form_btn_bg_type' => 'gradient',
+					),
+					'of_type'     => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_color2',
+				array(
+					'label'     => esc_html__( 'Gradient Color 2', 'theplus' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => '#fff',
+					'condition' => array(
+						'form_btn_bg_type' => 'gradient',
+					),
+					'of_type'   => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_color2_control',
+				array(
+					'type'        => Controls_Manager::SLIDER,
+					'label'       => esc_html__( 'Color 2 Location', 'theplus' ),
+					'size_units'  => array( '%' ),
+					'default'     => array(
+						'unit' => '%',
+						'size' => 100,
+					),
+					'render_type' => 'ui',
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button' => 'background: linear-gradient({{SIZE}}{{UNIT}}, {{form_btn_gradient_color1.VALUE}} {{form_btn_gradient_color1_control.SIZE}}{{form_btn_gradient_color1_control.UNIT}}, {{form_btn_gradient_color2.VALUE}} {{form_btn_gradient_color2_control.SIZE}}{{form_btn_gradient_color2_control.UNIT}})',
+					),
+					'condition'   => array(
+						'form_btn_bg_type' => 'gradient',
+					),
+					'of_type'     => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_style',
+				array(
+					'type'      => Controls_Manager::SELECT,
+					'label'     => esc_html__( 'Gradient Style', 'theplus' ),
+					'default'   => 'linear',
+					'options'   => l_theplus_get_gradient_styles(),
+					'condition' => array(
+						'form_btn_bg_type' => 'gradient',
+					),
+					'of_type'   => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_angle',
+				array(
+					'label'      => esc_html__( 'Gradient Angle', 'theplus' ),
+					'type'       => Controls_Manager::SLIDER,
+					'size_units' => array( 'deg' ),
+					'default'    => array(
+						'unit' => 'deg',
+						'size' => 180,
+					),
+					'range'      => array(
+						'deg' => array(
+							'step' => 10,
+						),
+					),
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button' => 'background: linear-gradient({{SIZE}}{{UNIT}}, {{form_btn_gradient_color1.VALUE}} {{form_btn_gradient_color1_control.SIZE}}{{form_btn_gradient_color1_control.UNIT}}, {{form_btn_gradient_color2.VALUE}} {{form_btn_gradient_color2_control.SIZE}}{{form_btn_gradient_color2_control.UNIT}})',
+					),
+					'condition'  => array(
+						'form_btn_bg_type' => 'gradient',
+						'form_btn_gradient_style' => array( 'linear' ),
+					),
+					'of_type'    => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_gradient_position',
+				array(
+					'type'      => Controls_Manager::SELECT,
+					'label'     => esc_html__( 'Position', 'theplus' ),
+					'options'   => l_theplus_get_position_options(),
+					'default'   => 'center center',
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button' => 'background: radial-gradient(at {{VALUE}}, {{form_btn_gradient_color1.VALUE}} {{form_btn_gradient_color1_control.SIZE}}{{form_btn_gradient_color1_control.UNIT}}, {{form_btn_gradient_color2.VALUE}} {{form_btn_gradient_color2_control.SIZE}}{{form_btn_gradient_color2_control.UNIT}})',
+					),
+					'condition' => array(
+						'form_btn_bg_type' => 'gradient',
+						'form_btn_gradient_style' => array( 'radial' ),
+					),
+					'of_type'   => 'gradient',
 				)
 			);
 
@@ -2014,7 +2184,56 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					),
 				)
 			);
+			$this->add_control(
+				'icon_fill_color_hover',
+				array(
+					'label'     => esc_html__( 'Hover Fill', 'tpebl' ),
+					'type'      => Controls_Manager::COLOR,
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover svg path' => 'fill: {{VALUE}} !important;; ',
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover svg' => 'fill: {{VALUE}} !important;',
 
+					),
+					'condition' => array(
+						'button_icon_style' => 'font_awesome_5',
+					),
+				)
+			);
+			$this->add_control(
+				'icon_stroke_color_hover',
+				array(
+					'label'     => esc_html__( 'Hover Stroke', 'tpebl' ),
+					'type'      => Controls_Manager::COLOR,
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover svg path' => 'stroke: {{VALUE}} !important;; ',
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover svg' => 'stroke: {{VALUE}} !important;',
+
+					),
+					'condition' => array(
+						'button_icon_style' => 'font_awesome_5',
+					),
+				)
+			);
+
+			$this->add_control(
+				'form_btn_hvr_bg_type',
+				array(
+					'label'       => esc_html__( 'Background Type', 'theplus' ),
+					'type'        => Controls_Manager::CHOOSE,
+					'options'     => array(
+						'color'    => array(
+							'title' => esc_html__( 'Color', 'theplus' ),
+							'icon'  => 'eicon-paint-brush',
+						),
+						'gradient' => array(
+							'title' => esc_html__( 'Gradient', 'theplus' ),
+							'icon'  => 'eicon-barcode',
+						),
+					),
+					'label_block' => false,
+					'default'     => 'color',
+				)
+			);
 			$this->add_control(
 				'form_button_hover_background_color',
 				array(
@@ -2022,18 +2241,140 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#000',
 					'selectors' => array(
-						'{{WRAPPER}} .tpae-form .tpae-form-button:hover' => 'background-color: {{VALUE}};',
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover' => 'background-color: {{VALUE}};background: {{VALUE}};',
 					),
+					'condition' => array(
+						'form_btn_hvr_bg_type' => 'color',
+					),
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_color1',
+				array(
+					'label'     => esc_html__( 'Gradient Color 1', 'theplus' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => '#fff',
+					'condition' => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+					),
+					'of_type'   => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_color1_control',
+				array(
+					'type'        => Controls_Manager::SLIDER,
+					'label'       => esc_html__( 'Color 1 Location', 'theplus' ),
+					'size_units'  => array( '%' ),
+					'default'     => array(
+						'unit' => '%',
+						'size' => 0,
+					),
+					'render_type' => 'ui',
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover' => 'background: linear-gradient({{SIZE}}{{UNIT}}, {{form_btn_hvr_gradient_color1.VALUE}} {{form_btn_hvr_gradient_color1_control.SIZE}}{{form_btn_hvr_gradient_color1_control.UNIT}}, {{form_btn_hvr_gradient_color2.VALUE}} {{form_btn_hvr_gradient_color2_control.SIZE}}{{form_btn_hvr_gradient_color2_control.UNIT}})',
+					),
+					'condition'   => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+					),
+					'of_type'     => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_color2',
+				array(
+					'label'     => esc_html__( 'Gradient Color 2', 'theplus' ),
+					'type'      => Controls_Manager::COLOR,
+					'default'   => '#000',
+					'condition' => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+					),
+					'of_type'   => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_color2_control',
+				array(
+					'type'        => Controls_Manager::SLIDER,
+					'label'       => esc_html__( 'Color 2 Location', 'theplus' ),
+					'size_units'  => array( '%' ),
+					'default'     => array(
+						'unit' => '%',
+						'size' => 100,
+					),
+					'render_type' => 'ui',
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover' => 'background: linear-gradient({{SIZE}}{{UNIT}}, {{form_btn_hvr_gradient_color1.VALUE}} {{form_btn_hvr_gradient_color1_control.SIZE}}{{form_btn_hvr_gradient_color1_control.UNIT}}, {{form_btn_hvr_gradient_color2.VALUE}} {{form_btn_hvr_gradient_color2_control.SIZE}}{{form_btn_hvr_gradient_color2_control.UNIT}})',
+					),
+					'condition'   => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+					),
+					'of_type'     => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_style',
+				array(
+					'type'      => Controls_Manager::SELECT,
+					'label'     => esc_html__( 'Gradient Style', 'theplus' ),
+					'default'   => 'linear',
+					'options'   => l_theplus_get_gradient_styles(),
+					'condition' => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+					),
+					'of_type'   => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_angle',
+				array(
+					'label'      => esc_html__( 'Gradient Angle', 'theplus' ),
+					'type'       => Controls_Manager::SLIDER,
+					'size_units' => array( 'deg' ),
+					'default'    => array(
+						'unit' => 'deg',
+						'size' => 180,
+					),
+					'range'      => array(
+						'deg' => array(
+							'step' => 10,
+						),
+					),
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover' => 'background: linear-gradient({{SIZE}}{{UNIT}}, {{form_btn_hvr_gradient_color1.VALUE}} {{form_btn_hvr_gradient_color1_control.SIZE}}{{form_btn_hvr_gradient_color1_control.UNIT}}, {{form_btn_hvr_gradient_color2.VALUE}} {{form_btn_hvr_gradient_color2_control.SIZE}}{{form_btn_hvr_gradient_color2_control.UNIT}})',
+					),
+					'condition'  => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+						'form_btn_hvr_gradient_style' => array( 'linear' ),
+					),
+					'of_type'    => 'gradient',
+				)
+			);
+			$this->add_control(
+				'form_btn_hvr_gradient_position',
+				array(
+					'type'      => Controls_Manager::SELECT,
+					'label'     => esc_html__( 'Position', 'theplus' ),
+					'options'   => l_theplus_get_position_options(),
+					'default'   => 'center center',
+					'selectors' => array(
+						'{{WRAPPER}} .tpae-form .tpae-form-button:hover' => 'background: radial-gradient(at {{VALUE}}, {{form_btn_hvr_gradient_color1.VALUE}} {{form_btn_hvr_gradient_color1_control.SIZE}}{{form_btn_hvr_gradient_color1_control.UNIT}}, {{form_btn_hvr_gradient_color2.VALUE}} {{form_btn_hvr_gradient_color2_control.SIZE}}{{form_btn_hvr_gradient_color2_control.UNIT}})',
+					),
+					'condition' => array(
+						'form_btn_hvr_bg_type' => 'gradient',
+						'form_btn_hvr_gradient_style' => array( 'radial' ),
+					),
+					'of_type'   => 'gradient',
 				)
 			);
 
 			$this->add_group_control(
 				Group_Control_Border::get_type(),
 				array(
-					'name'     => 'form_button_border_hover',
-					'label'    => esc_html__( 'Button Border', 'tpebl' ),
-					'selector' => '{{WRAPPER}} .tpae-form .tpae-form-button:hover',
-					'separator'  => 'before',
+					'name'      => 'form_button_border_hover',
+					'label'     => esc_html__( 'Button Border', 'tpebl' ),
+					'selector'  => '{{WRAPPER}} .tpae-form .tpae-form-button:hover',
+					'separator' => 'before',
 				)
 			);
 
@@ -2382,9 +2723,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'is_external' => ! empty( $settings['redirect_to']['is_external'] ) ? true : false,
 				'nofollow'    => ! empty( $settings['redirect_to']['nofollow'] ) ? true : false,
 			) : '',
-			'nonce' => wp_create_nonce( 'tp-form-nonce' ),
+			'nonce'           => wp_create_nonce( 'tp-form-nonce' ),
 		);
-		
+
 		$required_fields = array();
 		foreach ( $tabs as $tab ) {
 			if ( ! empty( $tab['required'] ) && 'yes' === $tab['required'] ) {
@@ -2396,20 +2737,20 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 
 		$email_data = l_tp_plus_simple_decrypt( json_encode( $email_data ), 'ey' );
 
-		$error_message    = 'data-formdata="' . htmlspecialchars( wp_json_encode( $error_message, true ), ENT_QUOTES, 'UTF-8' ) . '"';
-		$email_data  = 'data-emaildata="' . htmlspecialchars( wp_json_encode( $email_data, true ), ENT_QUOTES, 'UTF-8' ) . '"';
+		$error_message = 'data-formdata="' . htmlspecialchars( wp_json_encode( $error_message, true ), ENT_QUOTES, 'UTF-8' ) . '"';
+		$email_data    = 'data-emaildata="' . htmlspecialchars( wp_json_encode( $email_data, true ), ENT_QUOTES, 'UTF-8' ) . '"';
 
 		$form_markup = '<div class="tpae-form-container" ' . $error_message . ' ' . $email_data . ' >';
 
-			if( 'yes' === $inline_button ) {
-				$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
-			} else if ( 'no' === $inline_button ) {
-				$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container{ width:100%!important } </style>";
-			}
+		if ( 'yes' === $inline_button ) {
+			$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
+		} elseif ( 'no' === $inline_button ) {
+			$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container{ width:100%!important } </style>";
+		}
 
-			if ( 'yes' === $form_title_display ) {
-				$form_markup .= '<div class="tpae-form-name">' . esc_attr( $unique_form_name ) . '</div>';
-			}
+		if ( 'yes' === $form_title_display ) {
+			$form_markup .= '<div class="tpae-form-name">' . esc_attr( $unique_form_name ) . '</div>';
+		}
 
 			$form_markup .= '<form id="' . esc_attr( $form_id ) . '" class="tpae-form" method="post">';
 
@@ -2429,7 +2770,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$tab_column_tablet = ! empty( $tab['column_width_tablet']['size'] ) ? $tab['column_width_tablet']['size'] : '';
 			$tab_column_mobile = ! empty( $tab['column_width_mobile']['size'] ) ? $tab['column_width_mobile']['size'] : '';
 
-			$form_markup .= '<div class="tpae-form-field" data-width="' . esc_attr($tab_column) . '" data-tablet-width="' . esc_attr($tab_column_tablet) . '" data-mobile-width="' . esc_attr($tab_column_mobile) . '"> ';
+			$form_markup .= '<div class="tpae-form-field" data-width="' . esc_attr( $tab_column ) . '" data-tablet-width="' . esc_attr( $tab_column_tablet ) . '" data-mobile-width="' . esc_attr( $tab_column_mobile ) . '"> ';
 
 			if ( 'yes' === $label_display && ! in_array( $tab_field_type, array( 'recaptcha', 'honeypot', 'hidden' ), true ) ) {
 				$form_markup .= '<label for="form_fields[' . esc_attr( $tab_id ) . ']" class="tpae-form-label">';
@@ -2454,7 +2795,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			} elseif ( 'honeypot' === $tab_field_type ) {
 				$form_markup .= '<input class="tpae-honey" type="text" name="honeypot" />';
 			} elseif ( 'dropdown' === $tab_field_type ) {
-				$options = ! empty( $tab['dropdown_options'] ) ? explode( "\n", $tab['dropdown_options'] ) : array();
+				$options      = ! empty( $tab['dropdown_options'] ) ? explode( "\n", $tab['dropdown_options'] ) : array();
 				$form_markup .= '<select name="' . esc_attr( $tab_id ) . '" id="' . esc_attr( $tab_id ) . '" class="' . esc_attr( $tab_input_size ) . '" ' . $tab_required . '>';
 				foreach ( $options as $option ) {
 					$option_value = trim( $option );

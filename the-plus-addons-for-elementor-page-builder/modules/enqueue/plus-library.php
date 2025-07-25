@@ -84,6 +84,7 @@ class L_Plus_Library {
 			'tp_testimonial_listout'  => 'tp-testimonial-listout',
 			'tp_table'                => 'tp-table',
 			'tp_video_player'         => 'tp-video-player',
+			'tp_icon'         		  => 'tp-icon',
 			'tp_wp_forms'             => 'tp-wp-forms',
 		);
 

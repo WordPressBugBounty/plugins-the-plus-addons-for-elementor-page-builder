@@ -153,6 +153,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			'tp_woo_single_pricing',
 			'tp_woo_single_tabs',
 			'tp_woo_thank_you',
+			'tp_icon',
 		);
 
 		/**

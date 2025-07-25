@@ -67,7 +67,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-lightbulb-o theplus_backend_icon';
+		return 'theplus-i-accordion tpae-editor-logo';
 	}
 
 	/**
@@ -108,7 +108,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 	 * @since 6.1.2
 	 */
 	// public function is_dynamic_content(): bool {
-	// 	return false;
+	// return false;
 	// }
 
 	/**
@@ -158,19 +158,11 @@ class L_ThePlus_Accordion extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'smart-preset-button',
+            'tpae_preset_controller',
             array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-                    '<div class="tpae-preset-main-raw-main">
-                        <a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="17409" target="_blank" rel="noopener noreferrer">%s</a>
-                        <a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="17409">%s</a>
-                    </div>',
-                    esc_url('https://theplusaddons.com/widgets/elementor-accordion/'),
-                    esc_html__('Live Demo', 'tpebl'),
-                    esc_html__('Import Presets', 'tpebl')
-                ),
-                'label_block'     => true,
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 17409,
+                'label_block' => true,
             )
         );
 		$repeater = new \Elementor\Repeater();
@@ -178,11 +170,11 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$repeater->add_control(
 			'tab_title',
 			array(
-				'label'       => esc_html__( 'Title', 'tpebl' ),
-				'ai' => false,
-				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Accordion Title', 'tpebl' ),
-				'dynamic'     => array(
+				'label'      => esc_html__( 'Title', 'tpebl' ),
+				'ai'         => false,
+				'type'       => Controls_Manager::TEXT,
+				'default'    => esc_html__( 'Accordion Title', 'tpebl' ),
+				'dynamic'    => array(
 					'active' => true,
 				),
 				'show_label' => true,
@@ -206,7 +198,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'label'      => esc_html__( 'Content', 'tpebl' ),
 				'type'       => Controls_Manager::WYSIWYG,
 				'default'    => esc_html__( 'Accordion Content', 'tpebl' ),
-				'ai' => false,
+				'ai'         => false,
 				'show_label' => false,
 				'dynamic'    => array(
 					'active' => true,
@@ -219,39 +211,39 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$repeater->add_control(
 			'content_template',
 			array(
-				'label'       => esc_html__( 'Templates', 'tpebl' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => '0',
-				'options'     => L_theplus_get_templates(),
+				'label'      => esc_html__( 'Templates', 'tpebl' ),
+				'type'       => Controls_Manager::SELECT,
+				'default'    => '0',
+				'options'    => L_theplus_get_templates(),
 				'show_label' => true,
-				'condition'   => array( 'content_source' => 'page_template' ),
+				'condition'  => array( 'content_source' => 'page_template' ),
 			)
 		);
 		$repeater->add_control(
 			'backend_preview_template',
 			array(
-				'label'       => esc_html__( 'Backend Visibility', 'tpebl' ),
-				'type'        => Controls_Manager::SWITCHER,
-				'default'     => 'no',
-				'label_on'    => esc_html__( 'Show', 'tpebl' ),
-				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label'     => esc_html__( 'Backend Visibility', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => 'no',
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
 			'backend_Note',
-			[
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> If disabled, Template will not visible/load in the backend for better page loading performance.',
+			array(
+				'type'            => \Elementor\Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> If disabled, Template will not visible/load in the backend for better page loading performance.',
 				'content_classes' => 'tp-controller-notice',
-				'condition'   => array(
+				'condition'       => array(
 					'backend_preview_template' => 'yes',
 				),
-			]
+			)
 		);
 		$repeater->add_control(
 			'display_icon',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
 						'Show Icon <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
@@ -351,21 +343,21 @@ class L_ThePlus_Accordion extends Widget_Base {
 					'display_icon' => 'yes',
 				),
 			)
-		);	
+		);
 		$this->add_control(
 			'icon_fs_popover_toggle',
-			[
-				'label' => esc_html__( 'Font Awesome', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'textdomain' ),
-				'label_on' => esc_html__( 'Custom', 'textdomain' ),
+			array(
+				'label'        => esc_html__( 'Font Awesome', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'display_icon' => 'yes',
 					'icon_style'   => 'font_awesome',
 				),
-			]
+			)
 		);
 		$this->start_popover();
 			$this->add_control(
@@ -403,18 +395,18 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->end_popover();
 		$this->add_control(
 			'icon_f5_popover_toggle',
-			[
-				'label' => esc_html__( 'Font Awesome 5', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'textdomain' ),
-				'label_on' => esc_html__( 'Custom', 'textdomain' ),
+			array(
+				'label'        => esc_html__( 'Font Awesome 5', 'textdomain' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'display_icon' => 'yes',
 					'icon_style'   => 'font_awesome_5',
 				),
-			]
+			)
 		);
 		$this->start_popover();
 			$this->add_control(
@@ -457,19 +449,19 @@ class L_ThePlus_Accordion extends Widget_Base {
 			);
 		$this->end_popover();
 		$this->add_control(
-				'icons_mind_options',
-				array(
-					'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-					'type'        => Controls_Manager::TEXT,
-					'default'     => '',
-					'description' => theplus_pro_ver_notice(),
-					'classes'     => 'plus-pro-version',
-					'condition'   => array(
-						'display_icon' => 'yes',
-						'icon_style'   => 'icon_mind',
-					),
-				)
-			);
+			'icons_mind_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'display_icon' => 'yes',
+					'icon_style'   => 'icon_mind',
+				),
+			)
+		);
 		$this->add_control(
 			'title_html_tag',
 			array(
@@ -524,15 +516,15 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'on_hover_accordion' => 'yes',
 				),
-				
+
 			)
 		);
 		$this->add_control(
 			'horizontal_popover',
-			[
+			array(
 				'label'     => wp_kses_post( "Horizontal Accordion <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "elementor-horizontal-accordion/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::POPOVER_TOGGLE,
 				'default'   => 'no',
@@ -541,7 +533,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'condition' => array(
 					'on_hover_accordion!' => 'yes',
 				),
-			]
+			)
 		);
 		$this->add_control(
 			'horizontal_section',
@@ -551,10 +543,10 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'horizontal_popover' => 'yes',
 				),
-				
+
 			)
 		);
 		$this->add_control(
@@ -562,7 +554,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Autoplay', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'separator'   => 'before',
+				'separator' => 'before',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
@@ -576,22 +568,22 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'tabs_autoplay' => 'yes',
 				),
-				
+
 			)
 		);
 		$this->add_control(
 			'expand_collapse_popover',
-			[
-				'label'       => wp_kses_post( "Expand & Collapse Button <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "expand-close-elementor-accordion-button/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+			array(
+				'label'     => wp_kses_post( "Expand & Collapse Button <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "expand-close-elementor-accordion-button/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::POPOVER_TOGGLE,
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-			]
-		);	
+			)
+		);
 		$this->add_control(
 			'expand_collapse_section',
 			array(
@@ -600,22 +592,22 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'expand_collapse_popover' => 'yes',
 				),
-				
+
 			)
 		);
 		$this->add_control(
 			'search_bar_popover',
-			[
+			array(
 				'label'     => wp_kses_post( "Search Bar<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "elementor-accordion-search/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::POPOVER_TOGGLE,
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-			]
-		);	
+			)
+		);
 		$this->add_control(
 			'search_bar_section',
 			array(
@@ -624,22 +616,22 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'search_bar_popover' => 'yes',
 				),
-				
+
 			)
 		);
 		$this->add_control(
 			'slider_accordion_popover',
-			[
-				'label'       => wp_kses_post( "Slider & Pagination <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "elementor-accordion-pagination/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+			array(
+				'label'     => wp_kses_post( "Slider & Pagination <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "elementor-accordion-pagination/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'      => Controls_Manager::POPOVER_TOGGLE,
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-			]
-		);	
+			)
+		);
 		$this->add_control(
 			'slider_accordion_section',
 			array(
@@ -648,10 +640,10 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'slider_accordion_popover' => 'yes',
 				),
-				
+
 			)
 		);
 		$this->end_controls_section();
@@ -674,16 +666,16 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->add_control(
 			'accordion_scroll_top',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
 						'Scroll Top <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
 					)
 				),
-				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Show', 'tpebl' ),
-				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
-				'default'     => 'no',
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
 			)
 		);
 
@@ -695,7 +687,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'accordion_scroll_top' => 'yes',
 				),
 			)
@@ -703,7 +695,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->add_control(
 			'schema_accordion',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
 						'SEO Schema Markup <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
@@ -718,8 +710,6 @@ class L_ThePlus_Accordion extends Widget_Base {
 			)
 		);
 
-
-
 		$this->add_control(
 			'schema_accordion_section',
 			array(
@@ -728,7 +718,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'schema_accordion' => 'yes',
 				),
 			)
@@ -736,7 +726,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$this->add_control(
 			'accordion_stager',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
 						'Stagger Animation <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
@@ -757,13 +747,13 @@ class L_ThePlus_Accordion extends Widget_Base {
 				'default'     => '',
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
-				'condition' => array(
+				'condition'   => array(
 					'accordion_stager' => 'yes',
-				),	
+				),
 			)
 		);
 		$this->end_controls_section();
-	
+
 		$this->start_controls_section(
 			'section_toggle_style_icon',
 			array(
@@ -817,7 +807,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 					'display_icon' => 'yes',
 				),
 			)
-		);	
+		);
 		$this->start_controls_tabs( 'tabs_color_style' );
 		$this->start_controls_tab(
 			'tab_color_normal',
@@ -839,6 +829,36 @@ class L_ThePlus_Accordion extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title .elementor-accordion-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .elementor-accordion+ .elementor-tab-title .elementor-accordion-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_style' => 'font_awesome_5',
+				),
+			)
+		);
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'tab_color_active',
@@ -857,6 +877,36 @@ class L_ThePlus_Accordion extends Widget_Base {
 				),
 				'condition' => array(
 					'display_icon' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color_active',
+			array(
+				'label'     => esc_html__( 'Active Fill ', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_active',
+			array(
+				'label'     => esc_html__( 'Active Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .elementor-accordion .elementor-tab-title.active .elementor-accordion-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_style' => 'font_awesome_5',
 				),
 			)
 		);
@@ -1852,7 +1902,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 								} else {
 
 									if ( has_filter( 'wpml_object_id' ) ) {
-										$content_template = apply_filters( 'wpml_object_id', $content_template, get_post_type( $content_template ), true);
+										$content_template = apply_filters( 'wpml_object_id', $content_template, get_post_type( $content_template ), true );
 									}
 
 									$template_status = get_post_status( $content_template );

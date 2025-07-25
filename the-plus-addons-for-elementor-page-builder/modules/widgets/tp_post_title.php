@@ -64,7 +64,7 @@ class ThePlus_Post_Title extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-underline theplus_backend_icon';
+		return 'theplus-i-post-title tpae-editor-logo';
 	}
 
 	/**

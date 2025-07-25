@@ -59,7 +59,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa-syntax-highlighter theplus_backend_icon';
+		return 'theplus-i-syntax-highlighter tpae-editor-logo';
 	}
 
 	/**
@@ -154,21 +154,13 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="12518" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="12518">%s</a>
-					</div>',
-					esc_url('https://theplusaddons.com/widgets/elementor-syntax-highlighter/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
-                'label_block'     => true,
+            'tpae_preset_controller',
+            array(
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 12518,
+                'label_block' => true,
             )
-		);
+        );
 		$this->add_control(
 			'languageType',
 			array(
@@ -239,6 +231,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Source Code', 'tpebl' ),
 				'type'    => Controls_Manager::CODE,
+				'ai'      => false,    
 				'dynamic' => array( 'active' => true ),
 				'default' => '<h1>Welcome To Posimyth Innovation</h1>',
 			)
@@ -283,10 +276,11 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Language Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array( 'active' => true ),
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
-				'label_block' => true,
+				'label_block' => false,
 			)
 		);
 		$this->add_control(
@@ -294,10 +288,11 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Copy Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array( 'active' => true ),
 				'default'     => esc_html__( 'Copy', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
-				'label_block' => true,
+				'label_block' => false,
 				'separator'   => 'before',
 			)
 		);
@@ -317,10 +312,11 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Copied Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array( 'active' => true ),
 				'default'     => esc_html__( 'Copied!', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
-				'label_block' => true,
+				'label_block' => false,
 			)
 		);
 		$this->add_control(
@@ -339,19 +335,24 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Copy Error Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array( 'active' => true ),
 				'default'     => esc_html__( 'Error', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter Text', 'tpebl' ),
-				'label_block' => true,
+				'label_block' => false,
 			)
 		);
 		$this->add_control(
 			'lineNumber',
 			array(
-				'label'     => wp_kses_post( "Line Number <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "highlight-any-specific-line-in-syntax-highlight-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'      => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label'     => wp_kses_post( sprintf(
+					"%s <a class='tp-docs-link' href='%s' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>",
+					esc_html__( 'Line Number', 'tpebl' ),
+					esc_url( $this->tp_doc . "highlight-any-specific-line-in-syntax-highlight-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget" )
+				) ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -361,19 +362,24 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Line Highlight', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array( 'active' => true ),
 				'default'     => '',
 				'placeholder' => esc_html__( 'Ex: 1,2,3,4-15', 'tpebl' ),
-				'label_block' => true,
+				'label_block' => false,
 			)
 		);
 		$this->add_control(
 			'dnloadBtn',
 			array(
-				'label'     => wp_kses_post( "Download Button <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-download-button-in-code-highlighter-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'      => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label'     => wp_kses_post( sprintf(
+					"%s <a class='tp-docs-link' href='%s' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>",
+					esc_html__( 'Download Button', 'tpebl' ),
+					esc_url( $this->tp_doc . "add-download-button-in-code-highlighter-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget" )
+				) ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -381,8 +387,9 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 		$this->add_control(
 			'dwnldBtnText',
 			array(
-				'label'     => esc_html__( 'Button Text', 'tpebl' ),
+				'label'     => esc_html__( 'Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false,
 				'dynamic'   => array( 'active' => true ),
 				'default'   => esc_html__( 'Download', 'tpebl' ),
 				'condition' => array(
@@ -393,7 +400,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 		$this->add_control(
 			'dwnldBtnIcon',
 			array(
-				'label' => esc_html__( 'Button Icon', 'tpebl' ),
+				'label' => esc_html__( 'Icon', 'tpebl' ),
 				'type'  => Controls_Manager::ICONS,
 			)
 		);
@@ -890,7 +897,7 @@ class ThePlus_Syntax_Highlighter extends Widget_Base {
 			'display_scrolling_bar',
 			array(
 				'label'     => esc_html__( 'Scrolling Bar', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::SWITCHER,
+				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',

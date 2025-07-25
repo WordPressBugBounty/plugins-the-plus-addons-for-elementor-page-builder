@@ -64,7 +64,7 @@ class ThePlus_Post_Author extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-user theplus_backend_icon';
+		return 'theplus-i-post-author tpae-editor-logo';
 	}
 
 	/**

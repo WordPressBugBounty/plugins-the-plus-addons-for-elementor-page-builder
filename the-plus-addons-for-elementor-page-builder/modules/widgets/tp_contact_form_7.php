@@ -63,7 +63,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-contact-form-7 theplus_backend_icon';
+		return 'theplus-i-contact-form-7 tpae-editor-logo';
 	}
 
 	/**

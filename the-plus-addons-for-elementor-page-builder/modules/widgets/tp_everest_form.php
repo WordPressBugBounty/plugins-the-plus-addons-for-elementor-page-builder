@@ -60,7 +60,7 @@ class ThePlus_Everest_form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-everest-form theplus_backend_icon';
+		return 'theplus-i-everest-form tpae-editor-logo';
 	}
 
 	/**

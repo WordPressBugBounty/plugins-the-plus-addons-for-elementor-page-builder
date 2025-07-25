@@ -5,7 +5,7 @@
  * Author: Theplus
  * Author URI: https://posimyth.com
  *
- * @package ThePlus
+ * @package the-plus-addons-for-elementor-page-builder
  */
 
 namespace TheplusAddons\Widgets;
@@ -71,7 +71,7 @@ class ThePlus_Post_Content extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-file-text-o theplus_backend_icon';
+		return 'theplus-i-post-content tpae-editor-logo';
 	}
 
 	/**
@@ -160,7 +160,7 @@ class ThePlus_Post_Content extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Post Content', 'tpebl' ),
+				'label' => esc_html__( 'Content', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);

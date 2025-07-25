@@ -68,7 +68,7 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-grav theplus_backend_icon';
+		return 'theplus-i-gallery-listing tpae-editor-logo';
 	}
 
 	/**

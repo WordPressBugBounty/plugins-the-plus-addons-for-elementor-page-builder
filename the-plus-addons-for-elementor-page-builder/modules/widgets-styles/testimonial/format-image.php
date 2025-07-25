@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+$tp_border_reduis = ! empty( $settings['featured_image_radius'] ) ? $settings['featured_image_radius'] : '';
+
+$has_border_radius = ! empty( $tp_border_reduis['top'] ) || ! empty( $tp_border_reduis['right'] ) || ! empty( $tp_border_reduis['bottom'] ) || ! empty( $tp_border_reduis['left'] );
+
 if ( 'tlrepeater' === $con_from ) {
 	$tsize   = '';
 	$feat_id = $testi_image_id;

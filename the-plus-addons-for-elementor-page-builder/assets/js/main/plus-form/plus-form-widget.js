@@ -17,23 +17,27 @@
         var successMessage = formdata.success_message || "Your message has been sent successfully.";
         var formError = formdata.form_error || "There was an error with the form submission.";
         var requiredFieldsError = formdata.required_fields || "Please fill in the required fields.";
+        var emailFormatError = formdata.email_format_error || "Please enter a valid email address.";
         var serverError = formdata.server_error || "Server error, please try again later.";
         var isSubmitting = false;
 
-        var formFields = container.querySelectorAll(".tpae-form-field");
-        
-        formFields.forEach(el => {
-            let tabletWidth = el.getAttribute("data-tablet-width"),
-                mobileWidth = el.getAttribute("data-mobile-width"),
-                desktopWidth = el.getAttribute("data-width");
+        // Email validation regex pattern
+        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            if (window.innerWidth < 768) {
-                el.style.width = mobileWidth + "%";
-            } else if (window.innerWidth <= 1024) {
-                el.style.width = tabletWidth + "%";
-            } else {
-                el.style.width = desktopWidth + "%";
-            }
+        // Add real-time email validation
+        form.querySelectorAll('input[type="email"], input[name*="email"], input[id*="email"]').forEach(function(input) {
+            input.addEventListener('blur', function() {
+                var inputValue = this.value.trim();
+                if (inputValue !== '' && !emailRegex.test(inputValue)) {
+                    showFieldError(this, emailFormatError);
+                } else {
+                    clearFieldError(this);
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                clearFieldError(this);
+            });
         });
 
         form.addEventListener('submit', function (e) {
@@ -53,6 +57,8 @@
                     var inputValue = input.value.trim();
                     var inputID = input.getAttribute('id') || '';
                     var inputName = input.getAttribute('name') || '';
+                    var inputType = input.getAttribute('type') || '';
+                    
                     formFields.push({
                         field_id: inputID,
                         field_name: inputName,
@@ -62,6 +68,21 @@
                         isValid = false;
                         showFieldError(input, requiredFieldsError.replace('%field%', label));
                     }
+                    
+                    // Validate email format for email fields
+                    // Check multiple ways to identify email fields
+                    var isEmailField = inputType === 'email' || 
+                                     inputName.toLowerCase().includes('email') || 
+                                     inputID.toLowerCase().includes('email') ||
+                                     label.toLowerCase().includes('email');
+                    
+                    if (isEmailField && inputValue !== '') {
+                        if (!emailRegex.test(inputValue)) {
+                            isValid = false;
+                            showFieldError(input, emailFormatError);
+                        }
+                    }
+                    
                     formData[input.name || label || input.id] = inputValue;
 
                 }
@@ -148,6 +169,26 @@
             messageDiv.textContent = message;
             form.appendChild(messageDiv);
         };
+
+        function setFormFieldWidth() {
+            var formFields = container.querySelectorAll(".tpae-form-field");
+                formFields.forEach(el => {
+                    let tabletWidth = el.getAttribute("data-tablet-width"),
+                        mobileWidth = el.getAttribute("data-mobile-width"),
+                        desktopWidth = el.getAttribute("data-width");
+
+                    if (window.innerWidth < 768) {
+                        el.style.width = mobileWidth + "%";
+                    } else if (window.innerWidth <= 1024) {
+                        el.style.width = tabletWidth + "%";
+                    } else {
+                        el.style.width = desktopWidth + "%";
+                    }
+                });
+        }
+
+        setFormFieldWidth();
+        window.addEventListener('resize', setFormFieldWidth);
     };
 
     window.addEventListener('elementor/frontend/init', function () {

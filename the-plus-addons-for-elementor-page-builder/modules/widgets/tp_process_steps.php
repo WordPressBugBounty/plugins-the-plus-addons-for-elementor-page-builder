@@ -64,7 +64,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-ellipsis-h theplus_backend_icon';
+		return 'theplus-i-process-steps tpae-editor-logo';
 	}
 
 	/**

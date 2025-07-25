@@ -68,7 +68,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-money theplus_backend_icon';
+		return 'theplus-i-pricing-table tpae-editor-logo';
 	}
 
 	/**
@@ -159,21 +159,13 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="12387" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="12387">%s</a>
-					</div>',
-					esc_url('https://etemplates.wdesignkit.com/theplusaddons/pricing-table-demo/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
+            'tpae_preset_controller',
+            array(
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 12387,
                 'label_block' => true,
             )
-		);
+        );
 		$this->add_control(
 			'pricing_table_style',
 			array(

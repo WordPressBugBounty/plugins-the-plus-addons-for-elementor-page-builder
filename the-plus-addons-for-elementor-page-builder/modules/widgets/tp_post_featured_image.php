@@ -61,7 +61,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-post-img theplus_backend_icon';
+		return 'theplus-i-post-featured-image tpae-editor-logo';
 	}
 
 	/**
@@ -141,7 +141,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Post Feature Image', 'tpebl' ),
+				'label' => esc_html__( 'Content', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);

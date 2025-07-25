@@ -62,7 +62,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-info theplus_backend_icon';
+		return 'theplus-i-header-meta-content tpae-editor-logo';
 	}
 
 	/**

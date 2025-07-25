@@ -66,7 +66,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_icon() {
-		return 'fa fa-newspaper-o theplus_backend_icon';
+		return 'theplus-i-blog-listing tpae-editor-logo';
 	}
 
 	/**
@@ -156,26 +156,26 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-		'style',
+			'style',
 			array(
-				'label'        => esc_html__( 'Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style-1',
-				'options'      => array(
-					'style-1' => array(
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => \Elementor\Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-1',
+				'options'     => array(
+					'style-1'            => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-1.svg',
 					),
-					'style-2' => array(
+					'style-2'            => array(
 						'title' => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-2-pro.svg',
 					),
-					'style-3' => array(
+					'style-3'            => array(
 						'title' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-3-pro.svg',
 					),
-					'style-4' => array(
+					'style-4'            => array(
 						'title' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-4-pro.svg',
 					),
@@ -184,7 +184,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/smart-loop-builder.svg',
 					),
 				),
-				'columns'      => 3,
+				'columns'     => 3,
 			)
 		);
 
@@ -223,22 +223,22 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-		'layout',
+			'layout',
 			array(
-				'label'        => esc_html__( 'Layout', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'grid',
-				'options'      => array(
-					'grid' => array(
+				'label'       => esc_html__( 'Layout', 'tpebl' ),
+				'label_block' => true,
+				'type'        => \Elementor\Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'grid',
+				'options'     => array(
+					'grid'     => array(
 						'title' => esc_html__( 'Grid', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/grid.svg',
 					),
-					'masonry' => array(
+					'masonry'  => array(
 						'title' => esc_html__( 'Masonry', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/masonry.svg',
 					),
-					'metro' => array(
+					'metro'    => array(
 						'title' => esc_html__( 'Metro', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/metro.svg',
 					),
@@ -247,7 +247,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/carousel-pro.svg',
 					),
 				),
-				'columns'      => 4,
+				'columns'     => 4,
 			)
 		);
 		$this->add_control(
@@ -528,39 +528,42 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'morepost_option_section',
 			array(
-				'label' => esc_html__( 'More Post Options', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
+				'label'     => esc_html__( 'More Post Options', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'layout!' => array( 'carousel' ),
+				),
 			)
 		);
 		$this->add_control(
-		'post_extra_option',
+			'post_extra_option',
 			array(
-				'label'        => esc_html__( 'Post Loading Options', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'none',
-				'options'      => array(
-					'none' => array(
+				'label'       => esc_html__( 'Post Loading Options', 'tpebl' ),
+				'label_block' => true,
+				'type'        => \Elementor\Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'none',
+				'options'     => array(
+					'none'       => array(
 						'title' => esc_html__( 'None', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/none.svg',
 					),
 					'pagination' => array(
-						'title' => esc_html__( 'Pagination', 'tpebl' ),
+						'title' => esc_html__( 'Pagination (Pro)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/pagination-pro.svg',
 					),
-					'load_more' => array(
+					'load_more'  => array(
 						'title' => esc_html__( 'Load More', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/load-more.svg',
 					),
-					'lazy_load' => array(
-						'title' => esc_html__( 'Lazy Load', 'tpebl' ),
+					'lazy_load'  => array(
+						'title' => esc_html__( 'Lazy Load (Pro)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/lazy-load-pro.svg',
 					),
 				),
-				'condition' => array(
+				'condition'   => array(
 					'layout!' => array( 'carousel' ),
 				),
-				'columns'      => 4,
+				'columns'     => 4,
 			)
 		);
 		$this->add_control(
@@ -591,7 +594,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button Text', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'        => false,
 				'default'   => esc_html__( 'Load More', 'tpebl' ),
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
@@ -604,7 +607,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Loading Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'        => false,
 				'default'   => esc_html__( 'Loading...', 'tpebl' ),
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
@@ -617,7 +620,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'All Posts Loaded Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'        => false,
 				'default'   => esc_html__( 'All done!', 'tpebl' ),
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
@@ -997,7 +1000,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_title_limit',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
 						'Title Limit <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
@@ -1131,7 +1134,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'filter_category',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
 						'Category Wise Filter <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
@@ -1343,7 +1346,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_tab(
 			'tab_title_boxhover',
 			array(
-				'label' => esc_html__( 'Box Hover', 'tpebl' ),
+				'label'     => esc_html__( 'Box Hover', 'tpebl' ),
 				'condition' => array(
 					'style' => 'smart-loop-builder',
 				),
@@ -1454,12 +1457,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_control(
+		$this->end_controls_section();
+		/*Content Background*/
+		$this->start_controls_section(
 			'section_content_bg_style',
 			array(
-				'label'     => esc_html__( 'Content Background', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label'     => esc_html__( 'Content Background', 'theplus' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
 		$this->start_controls_tabs( 'tabs_content_bg_style' );

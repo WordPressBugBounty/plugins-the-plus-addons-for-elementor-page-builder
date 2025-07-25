@@ -66,7 +66,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-nav-menu theplus_backend_icon';
+		return 'theplus-i-navigation-menu-lite tpae-editor-logo';
 	}
 
 	/**

@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.10
+Stable tag: 6.3.11
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -384,6 +384,29 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.11 =
+Add : New widget : Icon Widget
+Add : Accordion : Add Fil/Stroke color option for the Font Awesome 5 Icons
+Add : Button : Add Fil/Stroke color option for the Font Awesome 5 Icons
+Add : Flip Box : Add Fil/Stroke color option for the Font Awesome 5 Icons
+Add : Info Box : Add Fil/Stroke color option for the Font Awesome 5 Icons
+Add : Form Widget : Add Fil/Stroke color option for the Font Awesome 5 Icons
+Add : Number Counter : Add gradient color option for the Symbol
+Add : Form Widget : Add gradient color option for the Submit Button
+Add : Testimonial : Tablet & Mobile Column options
+Improvement : Post Content : UI Improvements
+Improvement : Post Featured Image : UI Improvements
+Improvement : Post Prev/Next : UI Improvements
+Improvement : Syntax Highlighter : UI Improvements
+Improvement : Form widget : Email Field Validation
+Improvement : Form widget : WPML Compatibility
+Improvement : Dashboard : Design Improvements
+Improvement : Dashboard : language Compatibility 
+Fix : Form widget : Field width not changes on the resize
+Fix : Form widget : Dropdown BG color
+Fix : Form widget : Active text color
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.10 =
 Add : Switcher : Switcher Border option Added

@@ -67,7 +67,7 @@ class ThePlus_Hovercard extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-square theplus_backend_icon';
+		return 'theplus-i-hover-card tpae-editor-logo';
 	}
 
 	/**
@@ -162,22 +162,13 @@ class ThePlus_Hovercard extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'smart-preset-button',
+            'tpae_preset_controller',
             array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-                    '<div class="tpae-preset-main-raw-main">
-                        <a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="17376" target="_blank" rel="noopener noreferrer">%s</a>
-                        <a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="17376">%s</a>
-                    </div>',
-                    esc_url('https://theplusaddons.com/widgets/advanced-elementor-hover-card/'),
-                    esc_html__('Live Demo', 'tpebl'),
-                    esc_html__('Import Presets', 'tpebl')
-                ),
-                'label_block'     => true,
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 17376,
+                'label_block' => true,
             )
         );
-
 		$repeater = new \Elementor\Repeater();
 		$repeater->start_controls_tabs( 'tabs_tag_open_close' );
 
@@ -2856,7 +2847,8 @@ class ThePlus_Hovercard extends Widget_Base {
 					$loopitem .= '<style>' . esc_attr( $item['style_content'] ) . '</style>';
 				}
 				if ( $item['content_tag'] == 'script' && ! empty( $item['script_content'] ) ) {
-					$loopitem .= wp_print_inline_script_tag( $item['script_content'] );
+					$sanitized_script = current_user_can( 'manage_options' ) ? wp_kses_post( $item['script_content'] ) : '';
+					$loopitem .= wp_print_inline_script_tag( $sanitized_script );
 				}
 			}
 

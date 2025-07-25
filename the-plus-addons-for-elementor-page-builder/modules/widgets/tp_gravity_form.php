@@ -62,7 +62,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-gravity-form theplus_backend_icon';
+		return 'theplus-i-gravity-form tpae-editor-logo';
 	}
 
 	/**

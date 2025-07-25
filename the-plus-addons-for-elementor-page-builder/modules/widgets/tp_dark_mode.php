@@ -54,7 +54,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_icon() {
-		return 'fa fa-adjust theplus_backend_icon';
+		return 'theplus-i-dark-mode tpae-editor-logo';
 	}
 
 	/**

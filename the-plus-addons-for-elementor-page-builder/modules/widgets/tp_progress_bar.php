@@ -62,7 +62,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-pie-chart theplus_backend_icon';
+		return 'theplus-i-progress-bar tpae-editor-logo';
 	}
 
 	/**
@@ -119,18 +119,18 @@ class ThePlus_Progress_Bar extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -141,7 +141,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -158,21 +158,13 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16111" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16111">%s</a>
-					</div>',
-					esc_url('https://theplusaddons.com/widgets/elementor-progress-bar/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
-                'label_block'     => true,
+            'tpae_preset_controller',
+            array(
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 16111,
+                'label_block' => true,
             )
-		);
+        );
 		$this->add_control(
 			'main_style',
 			array(
@@ -188,24 +180,24 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'how_it_works_piechart',
 			array(
-				'label' => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-circle-progress-bars-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
-				'type'  => Controls_Manager::HEADING,
+				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-circle-progress-bars-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'main_style' => 'pie_chart',
 				),
 			)
 		);
 		$this->add_control(
-		'pie_chart_style',
+			'pie_chart_style',
 			array(
-				'label'        => esc_html__( 'Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style_1',
-				'options'      => array(
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style_1',
+				'options'     => array(
 					'style_1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
-						'image' =>  esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/pie-1.svg' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/pie-1.svg' ),
 					),
 					'style_2' => array(
 						'title' => esc_html__( 'Style 2', 'tpebl' ),
@@ -216,56 +208,56 @@ class ThePlus_Progress_Bar extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/pie-3.svg' ),
 					),
 				),
-				'condition' => array(
+				'condition'   => array(
 					'main_style' => array( 'pie_chart' ),
 				),
-				'columns'  => 3,
+				'columns'     => 3,
 			)
 		);
 		$this->add_control(
-		'progressbar_style',
+			'progressbar_style',
 			array(
-				'label'        => esc_html__( 'Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style_1',
-				'options'      => array(
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style_1',
+				'options'     => array(
 					'style_1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
-						'image' =>  esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/style-1.svg' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/style-1.svg' ),
 					),
 					'style_2' => array(
 						'title' => esc_html__( 'Style 2', 'tpebl' ),
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/style-2.svg' ),
 					),
 				),
-				'condition' => array(
+				'condition'   => array(
 					'main_style' => array( 'progressbar' ),
 				),
-				'columns'  => 2,
+				'columns'     => 2,
 			)
 		);
 		$this->add_control(
-		'pie_border_style',
+			'pie_border_style',
 			array(
-				'label'        => esc_html__( 'Round Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style_1',
-				'options'      => array(
+				'label'       => esc_html__( 'Round Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style_1',
+				'options'     => array(
 					'style_1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
-						'image' =>  esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/round-1.svg' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/round-1.svg' ),
 					),
 					'style_2' => array(
 						'title' => esc_html__( 'Style 2', 'tpebl' ),
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/round-2.svg' ),
 					),
 				),
-				'condition' => array(
+				'condition'   => array(
 					'main_style' => array( 'pie_chart' ),
 				),
-				'columns'  => 2,
+				'columns'     => 2,
 			)
 		);
 		$this->add_control(
@@ -320,21 +312,21 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'title',
 			array(
-				'label'     => esc_html__( 'Title', 'tpebl' ),
-				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'The Plus', 'tpebl' ),
-				'dynamic'   => array( 'active' => false ),
-				'ai' 		=> array('active' => false ),
+				'label'   => esc_html__( 'Title', 'tpebl' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'The Plus', 'tpebl' ),
+				'dynamic' => array( 'active' => false ),
+				'ai'      => array( 'active' => false ),
 			)
 		);
 		$this->add_control(
 			'sub_title',
 			array(
-				'label'     => esc_html__( 'Sub Title', 'tpebl' ),
-				'type'      => Controls_Manager::TEXT,
-				'default'   => esc_html__( 'The Plus', 'tpebl' ),
-				'dynamic'   => array( 'active' => false ),
-				'ai' 		=> array('active' => false ),
+				'label'   => esc_html__( 'Sub Title', 'tpebl' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( 'The Plus', 'tpebl' ),
+				'dynamic' => array( 'active' => false ),
+				'ai'      => array( 'active' => false ),
 			)
 		);
 
@@ -347,7 +339,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 				'placeholder' => esc_html__( 'Enter Number Ex. 50 , 60', 'tpebl' ),
 				'separator'   => 'before',
 				'dynamic'     => array( 'active' => false ),
-				'ai' 		  => array('active' => false ),
+				'ai'          => array( 'active' => false ),
 			)
 		);
 		$this->add_control(
@@ -358,7 +350,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 				'default'     => esc_html__( '%', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter Symbol', 'tpebl' ),
 				'dynamic'     => array( 'active' => false ),
-				'ai' 		  => array('active' => false ),
+				'ai'          => array( 'active' => false ),
 			)
 		);
 		$this->add_control(
@@ -366,7 +358,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Position', 'tpebl' ),
 				'type'      => Controls_Manager::SELECT,
-				'default' => 'after',
+				'default'   => 'after',
 				'options'   => array(
 					'after'  => esc_html__( 'After Number', 'tpebl' ),
 					'before' => esc_html__( 'Before Number', 'tpebl' ),
@@ -392,9 +384,9 @@ class ThePlus_Progress_Bar extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'icon',
 				'options' => array(
-					''      => esc_html__( 'None', 'tpebl' ),
-					'icon'  => esc_html__( 'Icon', 'tpebl' ),
-					'image' => esc_html__( 'Image', 'tpebl' ),
+					''       => esc_html__( 'None', 'tpebl' ),
+					'icon'   => esc_html__( 'Icon', 'tpebl' ),
+					'image'  => esc_html__( 'Image', 'tpebl' ),
 					'lottie' => esc_html__( 'Lottie', 'tpebl' ),
 				),
 			)
@@ -412,7 +404,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Use Image As icon', 'tpebl' ),
 				'type'       => Controls_Manager::MEDIA,
-				'ai' => false,
+				'ai'         => false,
 				'default'    => array(
 					'url' => '',
 				),
@@ -428,8 +420,8 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			array(
 				'name'      => 'select_image_thumbnail',
 				'default'   => 'full',
-				'condition' => array( 
-					'image_icon' => 'image' 
+				'condition' => array(
+					'image_icon' => 'image',
 				),
 			)
 		);
@@ -451,13 +443,13 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'font_awesome_toggle',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'image_icon' => 'icon',
 					'type'       => 'font_awesome',
 				),
@@ -488,13 +480,13 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'font_awesome5_toggle',
 			array(
-				'label' => esc_html__( 'Font Awesome 5', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'image_icon' => 'icon',
 					'type'       => 'font_awesome_5',
 				),
@@ -882,10 +874,10 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->start_controls_section(
 			'section_icon_styling',
 			array(
-				'label' => esc_html__( 'Icon/Image Setting', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Icon/Image Setting', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'image_icon' => array( 'icon','image' ),
+					'image_icon' => array( 'icon', 'image' ),
 				),
 			)
 		);
@@ -899,8 +891,38 @@ class ThePlus_Progress_Bar extends Widget_Base {
 					'image_icon' => array( 'icon' ),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} span.progres-ims' => 'color: {{VALUE}}',
+					'{{WRAPPER}} span.progres-ims'     => 'color: {{VALUE}}',
 					'{{WRAPPER}} span.progres-ims svg' => 'fill: {{VALUE}}',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} span.progres-ims svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} span.progres-ims svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'type' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} span.progres-ims svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} span.progres-ims svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'type' => 'font_awesome_5',
 				),
 			)
 		);
@@ -1114,11 +1136,11 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'progress_empty_color',
 			array(
-				'label' => esc_html__( 'Empty Color', 'tpebl' ),
-				'type'  => Controls_Manager::COLOR,
-				'selectors' => [
+				'label'     => esc_html__( 'Empty Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
 					'{{WRAPPER}} .progress_bar .progress_bar-skill.skill-fill' => 'background-color: {{VALUE}};',
-				],
+				),
 			)
 		);
 		$this->add_control(
@@ -1177,7 +1199,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
-		$progress_width    = ! empty( $settings['value_width']['size'] ) ? $settings['value_width']['size'] . '%' : '';
+		$progress_width = ! empty( $settings['value_width']['size'] ) ? $settings['value_width']['size'] . '%' : '';
 
 		$main_style       = ! empty( $settings['main_style'] ) ? $settings['main_style'] : 'progressbar';
 		$pie_chart_style  = ! empty( $settings['pie_chart_style'] ) ? $settings['pie_chart_style'] : 'style_1';
@@ -1213,7 +1235,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		}
 
 		if ( ! empty( $pie_size ) ) {
-			$inner_width  = ' style="';
+			$inner_width = ' style="';
 
 				$inner_width .= 'width: ' . esc_attr( $pie_size ) . 'px;';
 				$inner_width .= 'height: ' . esc_attr( $pie_size ) . 'px;';
@@ -1354,7 +1376,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 
 						$progress_bar .= $number_markup;
 
-					$progress_bar .= '</div>';
+					$progress_bar     .= '</div>';
 					$progress_bar     .= '<div class="progress_bar-skill skill-fill ' . esc_attr( $progress_bar_size ) . '">';
 						$progress_bar .= '<div class="progress_bar-skill-bar-filled ' . $icon_bg . '" data-width="' . esc_attr( $progress_width ) . '">	</div>';
 					$progress_bar     .= '</div>';
@@ -1416,11 +1438,11 @@ class ThePlus_Progress_Bar extends Widget_Base {
 
 						$progress_bar .= '<div class="pianumber-css" >';
 
-						if ( 'style_3' !== $pie_chart_style ) {
-							$progress_bar .= $number_markup;
-						} else {
-							$progress_bar .= $progress_bar_img;
-						}
+			if ( 'style_3' !== $pie_chart_style ) {
+				$progress_bar .= $number_markup;
+			} else {
+				$progress_bar .= $progress_bar_img;
+			}
 
 						$progress_bar .= '</div>';
 

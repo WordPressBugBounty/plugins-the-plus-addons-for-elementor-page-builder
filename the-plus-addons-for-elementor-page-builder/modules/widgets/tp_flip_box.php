@@ -59,7 +59,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-dot-circle-o theplus_backend_icon';
+		return 'theplus-i-flip-box tpae-editor-logo';
 	}
 
 	/**
@@ -101,7 +101,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	/**
 	 * It is use for adds.
 	 *
@@ -110,18 +110,18 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -149,19 +149,11 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'smart-preset-button',
+            'tpae_preset_controller',
             array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-                    '<div class="tpae-preset-main-raw-main">
-                        <a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="12274" target="_blank" rel="noopener noreferrer">%s</a>
-                        <a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="12274">%s</a>
-                    </div>',
-                    esc_url('https://theplusaddons.com/widgets/elementor-flipbox/'),
-                    esc_html__('Live Demo', 'tpebl'),
-                    esc_html__('Import Presets', 'tpebl')
-                ),
-                'label_block'     => true,
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 12274,
+                'label_block' => true,
             )
         );
 		$this->add_control(
@@ -788,6 +780,36 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
 			'icon_gradient_color1',
 			array(
 				'label'     => esc_html__( 'Color 1', 'tpebl' ),
@@ -966,6 +988,36 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 					'icon_hover_color_option' => 'solid',
 				),
 				'separator' => 'after',
+			)
+		);
+		$this->add_control(
+			'icon_fill_color_Hover',
+			array(
+				'label'     => esc_html__( 'Hover Fill ', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Hover Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
 			)
 		);
 		$this->add_control(

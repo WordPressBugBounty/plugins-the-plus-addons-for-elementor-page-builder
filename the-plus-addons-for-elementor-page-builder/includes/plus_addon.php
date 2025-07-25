@@ -874,6 +874,13 @@ function l_registered_widgets(){
 				),
 			),
 		),
+		'tp-icon' => array(
+            'dependency' => array(
+                'css' => array( 
+                    L_THEPLUS_PATH . DIRECTORY_SEPARATOR . 'assets/css/main/icon/icon.css',
+                ),
+            ),
+        ),
 		'tp-info-box' => array(
 			'dependency' => array(
 				'css' => array(

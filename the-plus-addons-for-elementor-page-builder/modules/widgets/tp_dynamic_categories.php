@@ -66,7 +66,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-paw theplus_backend_icon';
+		return 'theplus-i-dynamic-categories tpae-editor-logo';
 	}
 
 	/**

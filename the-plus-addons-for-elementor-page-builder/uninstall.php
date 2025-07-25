@@ -51,6 +51,10 @@ if( 'enable' === $remove_db ) {
 	delete_option('theplus_purchase_code');
 	delete_transient('theplus_verify_trans_api_store');
 
+	delete_option( 'tpae_nxt_ext_pnotice' );
+	delete_option( 'tpae_nexter_extension_notice' );
+	delete_option( 'tpae_nexter_block_notice' );
+
 	// if ( file_exists( L_THEPLUS_ASSET_PATH . '/theplus.min.css' ) ) {
 	// 	wp_delete_file( L_THEPLUS_ASSET_PATH . DIRECTORY_SEPARATOR . '/theplus.min.css' );
 	// }

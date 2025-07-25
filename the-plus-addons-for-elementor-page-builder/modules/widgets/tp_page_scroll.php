@@ -61,7 +61,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_icon() {
-		return 'fa fa-rocket theplus_backend_icon';
+		return 'theplus-i-page-scroll tpae-editor-logo';
 	}
 
 	/**

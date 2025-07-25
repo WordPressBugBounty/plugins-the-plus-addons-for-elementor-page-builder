@@ -58,7 +58,7 @@ class L_ThePlus_Button extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_icon() {
-		return 'fa fa-link theplus_backend_icon';
+		return 'theplus-i-button tpae-editor-logo';
 	}
 
 	/**
@@ -111,21 +111,13 @@ class L_ThePlus_Button extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'smart-preset-button',
-			array(
-                'type'=> Controls_Manager::RAW_HTML,
-                'raw' => sprintf(
-					'<div class="tpae-preset-main-raw-main">
-						<a href="%s" class="tp-preset-live-demo" id="tp-preset-live-demo" data-temp_id="16452" target="_blank" rel="noopener noreferrer">%s</a>
-						<a class="tp-preset-editor-raw" id="tp-preset-editor-raw" data-temp_id="16452">%s</a>
-					</div>',
-					esc_url('https://theplusaddons.com/widgets/free-elementor-buttons/'),
-					esc_html__('Live Demo', 'tpebl'),
-					esc_html__('Import Presets', 'tpebl')
-				),
-                'label_block'     => true,
+            'tpae_preset_controller',
+            array(
+                'type'        => 'tpae_preset_button',
+                'temp_id'     => 16452,
+                'label_block' => true,
             )
-		);
+        );
 		$this->add_control(
 			'button_style',
 			array(
@@ -203,7 +195,7 @@ class L_ThePlus_Button extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'          => false,
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -231,7 +223,7 @@ class L_ThePlus_Button extends Widget_Base {
 			array(
 				'label'       => wp_kses_post( "Hover Text <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "button-text-on-hover-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'        => Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'          => false,
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -260,12 +252,12 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'button_custom_attributes',
 			array(
-				'label'     => __( 'Add Custom Attributes', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => __( 'Add Custom Attributes', 'tpebl' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
+				'default'      => 'yes',
 			)
 		);
 		$this->start_popover();
@@ -274,7 +266,7 @@ class L_ThePlus_Button extends Widget_Base {
 			array(
 				'label'       => __( 'Custom Attributes', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
-				'ai' => false,
+				'ai'          => false,
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -330,13 +322,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'font_awesome',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition'   => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'button_icon_style' => 'font_awesome',
 				),
 			)
@@ -367,13 +359,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'font_awesome_5',
 			array(
-				'label' => esc_html__( 'Font Awesome 5', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition'   => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'button_icon_style' => 'font_awesome_5',
 				),
 			)
@@ -412,7 +404,7 @@ class L_ThePlus_Button extends Widget_Base {
 				'description' => theplus_pro_ver_notice(),
 				'classes'     => 'plus-pro-version',
 				'condition'   => array(
-					'button_icon_style' => 'icon_mind'
+					'button_icon_style' => 'icon_mind',
 				),
 			)
 		);
@@ -489,7 +481,7 @@ class L_ThePlus_Button extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Button ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'          => false,
 				'default'     => '',
 				'title'       => esc_html__( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'tpebl' ),
 				'label_block' => false,
@@ -604,6 +596,36 @@ class L_ThePlus_Button extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_button.button-style-6 .button-link-wrap::before' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap span.btn-arrow' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .pt_plus_button.button-style-9 a.button-link-wrap .btn-arrow' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
 				),
 			)
 		);
@@ -824,6 +846,36 @@ class L_ThePlus_Button extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap:after:hover' => 'border-color: {{VALUE}};',
 					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap:hover span.btn-arrow' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .pt_plus_button.button-style-9 a.button-link-wrap:hover .btn-arrow' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color_hover',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
 				),
 			)
 		);
@@ -1251,7 +1303,7 @@ class L_ThePlus_Button extends Widget_Base {
 	 */
 	protected function render() {
 
-		$settings    = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
 		/*--OnScroll View Animation ---*/
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';

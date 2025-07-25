@@ -57,7 +57,7 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_icon() {
-		return 'fa fa-envelope-open theplus_backend_icon';
+		return 'theplus-i-caldera-form tpae-editor-logo';
 	}
 
 	/**
