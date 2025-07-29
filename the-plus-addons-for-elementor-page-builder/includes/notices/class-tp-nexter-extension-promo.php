@@ -129,9 +129,9 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
                     <div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: center; position: relative; margin-left: 0; flex-direction: row-reverse; justify-content: flex-end; padding: 20px 5px 20px 5px;">
                         <div style="margin: 0; color: #000;">
                             <h3 style="margin: 0; font-weight: 600; font-size: 1.030rem; line-height: 1.2; font-family: Roboto, Arial, Helvetica, sans-serif;">' . esc_html__( 'Create Elementor Header, Footer, Single, Archive, 404 etc for FREE!', 'tpebl' ) . '</h3>
-                            <p style="margin: 0; padding: 0; margin-block-start: 8px; line-height: 1.2;">' . wp_kses_post( sprintf(__( 'Install <a href="https://nexterwp.com/nexter-extension/" target="_blank" rel="noopener noreferrer" style="font-weight: 500; text-decoration: underline;">%s</a> from The Plus Addons for Elementor to use FREE Theme Builder for Elementor.', 'tpebl' ), 'Nexter Extension Plugin' ) ) . '</p>
+                            <p style="margin: 0; padding: 0; margin-block-start: 8px; line-height: 1.2;">' . wp_kses_post( sprintf(__( 'Install <a href="https://nexterwp.com/nexter-extension/?utm_source=wpbackend&utm_medium=banner&utm_campaign=links" target="_blank" rel="noopener noreferrer" style="font-weight: 500; text-decoration: underline;">%s</a> from The Plus Addons for Elementor to use FREE Theme Builder for Elementor.', 'tpebl' ), 'Nexter Extension Plugin' ) ) . '</p>
 							<div class="tp-nexter-extension-button" style="display: flex; margin-block-start: 1rem;">
-                          	  <a href="' . esc_url( $install_url ) . '" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: rgba(255, 255, 255, 1);">' . esc_html__( 'Enable FREE Theme Builder', 'tpebl' ) . '</a>
+                          	  <a href="' . esc_url( $install_url ) . '" class="button" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: rgba(255, 255, 255, 1);">' . esc_html__( 'Enable FREE Theme Builder', 'tpebl' ) . '</a>
                             </div>
                         </div>
                     </div>
@@ -281,10 +281,10 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 													<div style="font-size: 13px; line-height: 18px; color: #d3d6da;">
 														${ sprintf(
 															__( 'Install %s from The Plus Addons for Elementor to use FREE Theme Builder.', 'tpebl' ),
-															'<a href="https://nexterwp.com/nexter-extension/" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">' + __( 'Nexter Extension Plugin', 'tpebl' ) + '</a>'
+															'<a href="https://nexterwp.com/nexter-extension/?utm_source=wpbackend&utm_medium=banner&utm_campaign=links" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">' + __( 'Nexter Extension Plugin', 'tpebl' ) + '</a>'
 														) }
 													</div>
-													<a href="<?php echo esc_url( $install_url ); ?>" target="_blank" rel="noopener noreferrer" style="font-size: 13px; font-weight: 500; color: #1F2123; background: #ffffff; padding: 7px 12px; border: none; border-radius: 4px; cursor: pointer; letter-spacing: 0.1px; text-align: center;">
+													<a href="<?php echo esc_url( $install_url ); ?>" rel="noopener noreferrer" style="font-size: 13px; font-weight: 500; color: #1F2123; background: #ffffff; padding: 7px 12px; border: none; border-radius: 4px; cursor: pointer; letter-spacing: 0.1px; text-align: center;">
 														${ __( 'Enable FREE Theme Builder', 'tpebl' ) }
 													</a>
 												</div>
@@ -302,7 +302,9 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 								}
 							}
 
-							checkIframeLoaded();
+							setTimeout(() => {
+								checkIframeLoaded();
+							}, 1000);
 		
 						});
 					});

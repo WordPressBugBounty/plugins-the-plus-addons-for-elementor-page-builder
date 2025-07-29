@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.11
+Stable tag: 6.3.12
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -384,6 +384,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.12 =
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.11 =
 Add : New widget : Icon Widget
