@@ -208,10 +208,11 @@ class ThePlus_Progress_Bar extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/pie-3.svg' ),
 					),
 				),
+				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 				'condition'   => array(
 					'main_style' => array( 'pie_chart' ),
 				),
-				'columns'     => 3,
 			)
 		);
 		$this->add_control(
@@ -231,10 +232,11 @@ class ThePlus_Progress_Bar extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/style-2.svg' ),
 					),
 				),
+				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 				'condition'   => array(
 					'main_style' => array( 'progressbar' ),
 				),
-				'columns'     => 2,
 			)
 		);
 		$this->add_control(
@@ -254,10 +256,11 @@ class ThePlus_Progress_Bar extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/progress-bar/round-2.svg' ),
 					),
 				),
+				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 				'condition'   => array(
 					'main_style' => array( 'pie_chart' ),
 				),
-				'columns'     => 2,
 			)
 		);
 		$this->add_control(

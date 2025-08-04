@@ -187,6 +187,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				),
 				'default'     => 'tp_dm_style2',
 				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(

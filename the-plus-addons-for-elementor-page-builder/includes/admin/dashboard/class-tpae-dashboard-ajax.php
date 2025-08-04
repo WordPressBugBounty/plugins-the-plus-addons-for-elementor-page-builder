@@ -221,6 +221,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 						'google_secret_key'     => '',
 						'cloudflare_site_key'   => '',
 						'cloudflare_secret_key' => '',
+						'active_tab'=> 'google',
 					),
 				);
 

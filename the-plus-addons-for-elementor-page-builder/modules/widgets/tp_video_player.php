@@ -46,7 +46,7 @@ class ThePlus_Video_Player extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_title() {
-		return esc_html__( 'Video', 'tpebl' );
+		return esc_html__( 'Video Player', 'tpebl' );
 	}
 
 	/**
@@ -148,7 +148,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label'       => esc_html__( 'YouTube Id', 'tpebl' ),
 				'label_block' => true,
-				'separator'   => 'before',
+				'ai'          => false,
 				'default'     => esc_html__( 'TJ1SDXbij8Y', 'tpebl' ),
 				'placeholder' => esc_html__( 'YouTube ID : TJ1SDXbij8Y', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -163,7 +163,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label'       => esc_html__( 'Vimeo Id', 'tpebl' ),
 				'label_block' => true,
-				'separator'   => 'before',
+				'ai'          => false,
 				'default'     => esc_html__( '27246366', 'tpebl' ),
 				'placeholder' => esc_html__( 'Vimeo ID : 27246366', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -177,6 +177,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Mp4 Video Link', 'tpebl' ),
 				'type'       => Controls_Manager::MEDIA,
+				'ai'         => false,
 				'media_type' => 'video',
 				'dynamic'    => array( 'active' => true ),
 				'condition'  => array(
@@ -191,7 +192,8 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label'       => esc_html__( 'Sticky Video', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_block' => false,
-				'separator'   => 'before',
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -221,18 +223,12 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'video_options',
-			array(
-				'label'     => esc_html__( 'Video Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
 			'video_autoplay',
 			array(
 				'label' => esc_html__( 'AutoPlay', 'tpebl' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
 		);
 
@@ -241,6 +237,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label' => esc_html__( 'Mute', 'tpebl' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -248,6 +246,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label' => esc_html__( 'Loop', 'tpebl' ),
 				'type'  => Controls_Manager::SWITCHER,
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -271,20 +271,29 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'default'     => 'yes',
-				'description' => 'Video Info is <a href="https://developers.google.com/youtube/player_parameters#showinfo" class="theplus-btn" target="_blank">deprecated.</a>',
 				'condition'   => array(
 					'video_type' => array( 'youtube' ),
 				),
 			)
 		);
-
+		$this->add_control(
+			'showinf_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> Video Info is <a href="https://developers.google.com/youtube/player_parameters#showinfo" class="theplus-btn" target="_blank">deprecated.</a>',
+				'content_classes' => 'tp-controller-notice',
+				'condition'   => array(
+					'video_type' => array( 'youtube' ),
+				),
+			)
+		);
 		$this->add_control(
 			'video_touch_disable',
 			array(
 				'label'     => esc_html__( 'Video Touch Disable', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'No', 'tpebl' ),
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -293,6 +302,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Modest Branding', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'condition' => array(
 					'video_type'     => array( 'youtube' ),
 					'video_controls' => 'yes',
@@ -317,7 +328,17 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'description' => 'Suggested Videos <a href="https://developers.google.com/youtube/player_parameters#rel" class="theplus-btn" target="_blank">Parameter change.</a>',
+				'condition' => array(
+					'video_type' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
+			'relnote',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> Suggested Videos <a href="https://developers.google.com/youtube/player_parameters#rel" class="theplus-btn" target="_blank">Parameter change.</a>',
+				'content_classes' => 'tp-controller-notice',
 				'condition' => array(
 					'video_type' => 'youtube',
 				),
@@ -341,6 +362,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Privacy Mode', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'condition'   => array(
 					'video_type' => 'youtube',
 				),
@@ -434,6 +457,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Choose Image', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
+				'ai'        => false,
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
 					'image_banner' => 'only_icon',
@@ -483,8 +507,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Banner Image', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'image_banner' => 'banner_img',
@@ -496,6 +520,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Image Upload', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
+				'ai'        => false,
 				'default'   => array(
 					'url' => L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg',
 				),
@@ -523,6 +548,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Icon Upload', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
+				'ai'        => false,
 				'default'   => array(
 					'url' => '',
 				),
@@ -552,6 +578,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label'       => esc_html__( 'Title of Video', 'tpebl' ),
 				'label_block' => true,
+				'ai'          => false,
 				'separator'   => 'before',
 				'default'     => esc_html__( 'Video Title', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -567,7 +594,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'        => Controls_Manager::TEXTAREA,
 				'label'       => esc_html__( 'Video Description', 'tpebl' ),
 				'label_block' => true,
-				'separator'   => 'before',
+				'ai'          => false,
 				'default'     => '',
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
@@ -589,10 +616,9 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Schema Markup', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'default'   => 'no',
-				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -708,8 +734,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Video On Popup', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'image_banner' => 'banner_img',
@@ -757,6 +783,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label'       => esc_html__( 'Transform Effect', 'tpebl' ),
 				'label_block' => true,
+				'ai'          => false,
 				'separator'   => 'before',
 				'placeholder' => esc_html__( 'rotate(2deg) skew(50deg)', 'tpebl' ),
 				'default'     => '',
@@ -838,10 +865,9 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Continuous Animation', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
-				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'render_type' => 'template',
-				'separator'   => 'before',
 			)
 		);
 		$this->add_control(
@@ -868,8 +894,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Hover Animation', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
-				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'render_type' => 'template',
 				'condition'   => array(
 					'icon_continuous_animation' => 'yes',
@@ -990,11 +1016,18 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Mask Image Shape', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'description' => esc_html__( 'Use PNG image with the shape you want to mask around Media.', 'tpebl' ),
-				'label_on'    => esc_html__( 'On', 'tpebl' ),
-				'label_off'   => esc_html__( 'Off', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'default'     => 'no',
 				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'mask_image_display_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> Use PNG image with the shape you want to mask around Media.',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_control(
@@ -1002,6 +1035,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Mask Image', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
+				'ai'        => false,
 				'default'   => array(
 					'url' => '',
 				),

@@ -185,6 +185,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					),
 				),
 				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 
@@ -248,6 +249,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					),
 				),
 				'columns'     => 4,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -564,6 +566,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'layout!' => array( 'carousel' ),
 				),
 				'columns'     => 4,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -1462,7 +1465,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'section_content_bg_style',
 			array(
-				'label'     => esc_html__( 'Content Background', 'theplus' ),
+				'label'     => esc_html__( 'Content Background', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);

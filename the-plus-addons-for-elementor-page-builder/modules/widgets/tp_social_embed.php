@@ -138,17 +138,38 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'EmbedType',
 			array(
-				'label'   => esc_html__( 'Type', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'facebook',
-				'options' => array(
-					'facebook'  => esc_html__( 'Facebook', 'tpebl' ),
-					'twitter'   => esc_html__( 'Twitter', 'tpebl' ),
-					'vimeo'     => esc_html__( 'Vimeo', 'tpebl' ),
-					'instagram' => esc_html__( 'Instagram', 'tpebl' ),
-					'youtube'   => esc_html__( 'YouTube', 'tpebl' ),
-					'googlemap' => esc_html__( 'Google Map', 'tpebl' ),
+				'label'     => esc_html__( 'Type', 'tpebl' ),
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'label_block' => true,
+				'default'   => 'facebook',
+				'options'   => array(
+					'facebook'  => array(
+						'title' => esc_html__( 'Facebook', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/facebook.svg' ),
+					),
+					'twitter'   => array(
+						'title' => esc_html__( 'Twitter', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/twitter.svg' ),
+					),
+					'vimeo'     => array(
+						'title' => esc_html__( 'Vimeo', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/vimeo.svg' ),
+					),
+					'instagram' => array(
+						'title' => esc_html__( 'Instagram', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/instagram.svg' ),
+					),
+					'youtube'   => array(
+						'title' => esc_html__( 'YouTube', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/youtube.svg' ),
+					),
+					'googlemap' => array(
+						'title' => esc_html__( 'Google Map', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/googlemap.svg' ),
+					),
 				),
+				'columns'      => 3,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->end_controls_section();
@@ -333,7 +354,6 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'EmbedType' => 'facebook',
 					'Type'      => 'posts',
 				),
-				'separator'     => 'before',
 			)
 		);
 		$this->add_control(
@@ -497,6 +517,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Parent Comment', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType'   => 'facebook',
@@ -593,6 +615,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Show Text', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -652,6 +676,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Allow Full Screen', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -664,6 +690,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Autoplay', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -676,6 +704,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Captions', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -752,6 +782,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Small Header', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -764,6 +796,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Cover Photo', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -776,6 +810,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Show Friend\'s Faces', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -788,6 +824,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Custom CTA Button', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -914,6 +952,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Share Button', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -926,6 +966,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Faces', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'facebook',
@@ -1092,6 +1134,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Loading Message', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
+				'ai'      => false,
 				'default' => esc_html__( 'Loading', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -1202,7 +1245,6 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'TweetType' => 'timelines',
 					'TwGuides'  => 'Collection',
 				),
-				'separator'     => 'before',
 			)
 		);
 		$this->add_control(
@@ -1243,6 +1285,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Username', 'tpebl' ),
 				'type'       => Controls_Manager::TEXT,
+				'ai'         => false,
 				'default'    => esc_html__( 'TwitterDev', 'tpebl' ),
 				'dynamic'    => array(
 					'active' => true,
@@ -1345,6 +1388,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Dark Mode', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'twitter',
@@ -1357,6 +1402,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Disable Media', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'twitter',
@@ -1369,6 +1416,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Disable Conversation', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'twitter',
@@ -1589,6 +1638,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Followers Count', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'EmbedType' => 'twitter',
@@ -1602,6 +1653,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Disable Username', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'twitter',
@@ -1632,6 +1685,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Disable Icon', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'twitter',
@@ -1693,6 +1748,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Loading Message', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( 'Loading', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
@@ -1721,6 +1777,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Vimeo ID', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false, 
 				'default'   => esc_html__( '288344114', 'tpebl' ),
 				'dynamic'   => array(
 					'active' => true,
@@ -1786,6 +1843,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Video Start Time', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'E.g : 5m0s', 'tpebl' ),
 				'dynamic'     => array(
@@ -1838,6 +1896,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Instagram ID', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false,
 				'default'   => esc_html__( 'CGAvnLcA3zb', 'tpebl' ),
 				'dynamic'   => array(
 					'active' => true,
@@ -1852,6 +1911,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Disable Captioned', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'EmbedType' => 'instagram',
@@ -1901,6 +1962,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Video ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( 'XmtXC_n6X6Q', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
@@ -1917,6 +1979,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Playlist ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( 'PLivjPDlt6ApQgylktXlL2AhuPvRtDiN1S', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
@@ -1933,6 +1996,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Username', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( 'NationalGeographic', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
@@ -1995,6 +2059,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Start Time', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,  
 				'default'     => '',
 				'placeholder' => esc_html__( 'E.g : 60', 'tpebl' ),
 				'dynamic'     => array(
@@ -2010,6 +2075,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'End Time', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'E.g : 60', 'tpebl' ),
 				'dynamic'     => array(
@@ -2025,6 +2091,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Language', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'E.g : en', 'tpebl' ),
 				'dynamic'     => array(
@@ -2074,6 +2141,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => __( 'AccessToken', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
+				'ai'          => false,
 				'rows'        => 2,
 				'default'     => '',
 				'placeholder' => __( 'Enter AccessToken', 'tpebl' ),
@@ -2104,6 +2172,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => __( 'Search Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => __( 'New York, NY, USA', 'tpebl' ),
 				'placeholder' => __( 'Enter Location Text', 'tpebl' ),
 				'condition'   => array(
@@ -2116,6 +2185,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => __( 'Starting point', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => __( 'LosAngeles+California+USA', 'tpebl' ),
 				'placeholder' => __( 'Enter Starting Point', 'tpebl' ),
 				'separator'   => 'before',
@@ -2130,6 +2200,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => __( 'End Point', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => __( 'Corona+California+USA', 'tpebl' ),
 				'placeholder' => __( 'Enter Starting Point', 'tpebl' ),
 				'condition'   => array(
@@ -2143,6 +2214,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => __( 'Way Points', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
+				'ai'          => false,
 				'rows'        => 3,
 				'default'     => __( 'Huntington+Beach+California+US | Santa Ana+California+USA', 'tpebl' ),
 				'placeholder' => __( 'Type your description here', 'tpebl' ),

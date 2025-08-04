@@ -165,15 +165,15 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'options' => $this->l_theplus_get_ninja_form_post(),
 			)
 		);
-		$this->add_control(
-			'form_style',
-			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => l_theplus_get_style_list( 1 ),
-			)
-		);
+		// $this->add_control(
+		// 	'form_style',
+		// 	array(
+		// 		'label'   => esc_html__( 'Style', 'tpebl' ),
+		// 		'type'    => Controls_Manager::SELECT,
+		// 		'default' => 'style-1',
+		// 		'options' => l_theplus_get_style_list( 1 ),
+		// 	)
+		// );
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -287,33 +287,10 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'input_typography',
-				'selector' => '{{WRAPPER}} .theplus-ninja-form .nf-field-element input[type="text"],
-				{{WRAPPER}} .theplus-ninja-form .nf-field-element input[type="email"],
-				{{WRAPPER}} .theplus-ninja-form .nf-field-element input[type="number"],
-				{{WRAPPER}} .theplus-ninja-form .nf-field-element select',
-			)
-		);
-		$this->add_control(
-			'input_placeholder_color',
-			array(
-				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .nf-form-content input::-webkit-input-placeholder,
-					{{WRAPPER}} .nf-form-content  email::-webkit-input-placeholder,
-					{{WRAPPER}} .nf-form-content  number::-webkit-input-placeholder,
-					{{WRAPPER}} .nf-form-content  select::-webkit-input-placeholder' => 'color: {{VALUE}};',
-				),
-			)
-		);
 		$this->add_responsive_control(
 			'input_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -350,7 +327,29 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'separator'  => 'after',
 			)
 		);
-
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'input_typography',
+				'selector' => '{{WRAPPER}} .theplus-ninja-form .nf-field-element input[type="text"],
+				{{WRAPPER}} .theplus-ninja-form .nf-field-element input[type="email"],
+				{{WRAPPER}} .theplus-ninja-form .nf-field-element input[type="number"],
+				{{WRAPPER}} .theplus-ninja-form .nf-field-element select',
+			)
+		);
+		$this->add_control(
+			'input_placeholder_color',
+			array(
+				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .nf-form-content input::-webkit-input-placeholder,
+					{{WRAPPER}} .nf-form-content  email::-webkit-input-placeholder,
+					{{WRAPPER}} .nf-form-content  number::-webkit-input-placeholder,
+					{{WRAPPER}} .nf-form-content  select::-webkit-input-placeholder' => 'color: {{VALUE}};',
+				),
+			)
+		);
 		$this->start_controls_tabs( 'tabs_input_field_style' );
 		$this->start_controls_tab(
 			'tab_input_field_normal',
@@ -622,7 +621,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 		$this->add_responsive_control(
 			'textarea_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1114,6 +1113,28 @@ class ThePlus_Ninja_form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'button_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-ninja-form .field-wrap input[type=button]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-ninja-form .field-wrap input[type=button]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'button_max_width',
 			array(
 				'type'        => Controls_Manager::SLIDER,
@@ -1143,30 +1164,6 @@ class ThePlus_Ninja_form extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'selector' => '{{WRAPPER}} .theplus-ninja-form .field-wrap input[type=button]',
-			)
-		);
-		$this->add_responsive_control(
-			'button_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-ninja-form .field-wrap input[type=button]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'before',
-			)
-		);
-		$this->add_responsive_control(
-			'button_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-ninja-form .field-wrap input[type=button]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_button_style' );
@@ -1392,7 +1389,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 		$this->add_responsive_control(
 			'oute_r_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1521,7 +1518,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 		$this->add_responsive_control(
 			'outer_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1750,17 +1747,10 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'response_msg_typography',
-				'selector' => '{{WRAPPER}} .nf-form-wrap .nf-response-msg',
-			)
-		);
 		$this->add_responsive_control(
 			'response_msg_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1779,6 +1769,13 @@ class ThePlus_Ninja_form extends Widget_Base {
 					'{{WRAPPER}} .nf-form-wrap .nf-response-msg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'response_msg_typography',
+				'selector' => '{{WRAPPER}} .nf-form-wrap .nf-response-msg',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_response_style' );
@@ -1958,6 +1955,17 @@ class ThePlus_Ninja_form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'required_field_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-ninja-form.style-1 .nf-error-msg.nf-error-required-error,{{WRAPPER}} .theplus-ninja-form.style-1 .nf-error-msg.nf-error-field-errors' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'content_max_width',
 			array(
 				'type'        => Controls_Manager::SLIDER,
@@ -1978,17 +1986,6 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'render_type' => 'ui',
 				'selectors'   => array(
 					'{{WRAPPER}} .theplus-ninja-form.style-1' => 'max-width: {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'required_field_inner_padding',
-			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-ninja-form.style-1 .nf-error-msg.nf-error-required-error,{{WRAPPER}} .theplus-ninja-form.style-1 .nf-error-msg.nf-error-field-errors' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -2068,7 +2065,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
-		$form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';
+		// $form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';
 
 		$this->add_render_attribute(
 			'contact-form',
@@ -2087,9 +2084,15 @@ class ThePlus_Ninja_form extends Widget_Base {
 			)
 		);
 
-		$output      = '<div class="theplus-ninja-form ' . esc_attr( $form_style ) . ' ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
+		// $output      = '<div class="theplus-ninja-form ' . esc_attr( $form_style ) . ' ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
+		// 	$output .= do_shortcode( $this->get_shortcode() );
+		// $output     .= '</div>';
+
+		$output  = '<div class="theplus-ninja-form ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
+
 			$output .= do_shortcode( $this->get_shortcode() );
-		$output     .= '</div>';
+
+		$output .= '</div>';
 
 		if ( defined( 'THEPLUS_VERSION' ) ) {
 			echo $before_content . $output . $after_content;

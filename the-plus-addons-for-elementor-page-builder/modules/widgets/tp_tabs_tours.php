@@ -188,6 +188,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				),
 				'columns'       => 2,
 				'prefix_class'  => 'elementor-tabs-view-',
+				'classes'       => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(

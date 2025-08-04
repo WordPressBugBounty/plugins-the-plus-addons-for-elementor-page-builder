@@ -179,6 +179,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 					),
 				),
 				'columns'       => 3,
+				'classes'       => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -207,6 +208,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 					),
 				),
 				'columns'      => 4,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(

@@ -173,6 +173,7 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 				'label'       => wp_kses_post( "User Name <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "embed-calendly-meeting-elementor?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
+				'ai'          => false,
 				'placeholder' => esc_html__( 'Enter User Name', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
@@ -215,8 +216,8 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Event Type', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
 				'condition' => array(
 					'scheduler_select' => 'calendly',
@@ -255,6 +256,7 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'       => wp_kses_post( "URL <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "embed-freebusy-elementor?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter URL', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -325,8 +327,8 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Scroll Bar', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'scheduler_select' => 'freebusy',
@@ -338,6 +340,7 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'URL', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,   
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter URL', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -385,6 +388,7 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'       => wp_kses_post( "URL <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "embed-vyte-elementor?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter URL', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -455,6 +459,7 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'User Name', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter User Name', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -479,6 +484,7 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Page Name', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter Page Name', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),

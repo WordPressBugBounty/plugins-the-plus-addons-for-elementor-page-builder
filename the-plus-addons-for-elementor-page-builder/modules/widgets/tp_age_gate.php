@@ -181,6 +181,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 				),
 				'default'     => 'method-1',
 				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(

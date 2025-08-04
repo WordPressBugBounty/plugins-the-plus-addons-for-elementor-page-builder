@@ -545,7 +545,22 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'default' => 'font_awesome',
 				'options' => array(
 					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
+					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
 					'icon_mind'    => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
+				),
+			)
+		);
+		$repeater->add_control(
+			'icon_fontawesome_5',
+			array(
+				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => array(
+					'value'   => 'fas fa-plus',
+					'library' => 'solid',
+				),
+				'condition' => array(
+					'list_icon_style' => 'font_awesome_5',
 				),
 			)
 		);
@@ -3713,13 +3728,20 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				$list_icon_style = ! empty( $item['list_icon_style'] ) ? $item['list_icon_style'] : 'font_awesome';
 				if ( 'font_awesome' === $list_icon_style ) {
 					$icons = $item['list_icon_fontawesome'];
+				}elseif ( 'font_awesome_5' === $list_icon_style && ! empty( $item['icon_fontawesome_5']['value'] ) ) {
+					ob_start();
+					\Elementor\Icons_Manager::render_icon( $item['icon_fontawesome_5'], array( 'aria-hidden' => 'true' ) );
+					$icons .= ob_get_clean();
 				}
 
 				if ( ! empty( $icons ) ) {
 					$pricing_content .= '<span class="plus-icon-list-icon">';
 
+					if ( 'font_awesome_5' === $list_icon_style ) {
+						$pricing_content .= '<span>' . $icons . '</span>';
+					} else {
 						$pricing_content .= '<i class="' . esc_attr( $icons ) . '" aria-hidden="true"></i>';
-
+					}
 						$pricing_content .= '</span>';
 				}
 

@@ -167,6 +167,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					),
 				),
 				'columns'      => 2,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -1237,6 +1238,24 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				),
 				'condition'  => array(
 					'sep_icon_font_style' => array( 'sep_font_awesome' ),
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'breadcrumps_gap',
+			array(
+				'label'      => esc_html__( 'Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 35,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar #breadcrumbs' => 'gap: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);

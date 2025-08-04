@@ -165,15 +165,15 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'options' => $this->l_theplus_get_contact_form_post(),
 			)
 		);
-		$this->add_control(
-			'form_style',
-			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => l_theplus_get_style_list( 1 ),
-			)
-		);
+		// $this->add_control(
+		// 	'form_style',
+		// 	array(
+		// 		'label'   => esc_html__( 'Style', 'tpebl' ),
+		// 		'type'    => Controls_Manager::SELECT,
+		// 		'default' => 'style-1',
+		// 		'options' => l_theplus_get_style_list( 1 ),
+		// 	)
+		// );
 		$this->add_responsive_control(
 			'content_align',
 			array(
@@ -235,27 +235,10 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'input_typography',
-				'selector' => '{{WRAPPER}} .theplus-contact-form .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)',
-			)
-		);
-		$this->add_control(
-			'input_placeholder_color',
-			array(
-				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .theplus-contact-form .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)::placeholder' => 'color: {{VALUE}};',
-				),
-			)
-		);
 		$this->add_responsive_control(
 			'input_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -273,6 +256,23 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 					'{{WRAPPER}} .theplus-contact-form .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'input_typography',
+				'selector' => '{{WRAPPER}} .theplus-contact-form .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)',
+			)
+		);
+		$this->add_control(
+			'input_placeholder_color',
+			array(
+				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .theplus-contact-form .wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)::placeholder' => 'color: {{VALUE}};',
+				),
 			)
 		);
 		$this->start_controls_tabs( 'tabs_input_field_style' );
@@ -491,8 +491,31 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 		$this->start_controls_section(
 			'section_textarea_styling',
 			array(
-				'label' => esc_html__( 'TextArea (Message) Field', 'tpebl' ),
+				'label' => esc_html__( 'Text Area (Message) Field', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'textarea_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-contact-form textarea.wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'after',
+			)
+		);
+		$this->add_responsive_control(
+			'textarea_inner_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-contact-form textarea.wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 			)
 		);
 		$this->add_responsive_control(
@@ -529,30 +552,6 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .theplus-contact-form textarea.wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)::placeholder' => 'color: {{VALUE}};',
 				),
-			)
-		);
-		$this->add_responsive_control(
-			'textarea_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-contact-form textarea.wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
-			)
-		);
-		$this->add_responsive_control(
-			'textarea_inner_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-contact-form textarea.wpcf7-form-control:not(.wpcf7-submit):not(.wpcf7-checkbox):not(.wpcf7-radio):not(.wpcf7-file)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_textarea_field_style' );
@@ -1115,6 +1114,17 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
+		$this->add_responsive_control(
+			'file_field_top',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap.cf7-style-file' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -1189,17 +1199,6 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap.cf7-style-file' => '-webkit-justify-content: {{VALUE}};-ms-flex-pack: {{VALUE}};justify-content: {{VALUE}};',
 					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap.cf7-style-file span' => 'text-align: {{VALUE}}',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'file_field_top',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-contact-form span.wpcf7-form-control-wrap.cf7-style-file' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -1321,18 +1320,10 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'outer_typography',
-				'selector' => '{{WRAPPER}} .theplus-contact-form.style-1.plus-cf7-label form.wpcf7-form  label,{{WRAPPER}} .theplus-contact-form.style-1.plus-cf7-custom form.wpcf7-form .tp-cf7-outer',
-			)
-		);
-
 		$this->add_responsive_control(
 			'outer_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1351,6 +1342,13 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 					'{{WRAPPER}} .theplus-contact-form.style-1.plus-cf7-label form.wpcf7-form  label,{{WRAPPER}} .theplus-contact-form.style-1.plus-cf7-custom form.wpcf7-form .tp-cf7-outer' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'outer_typography',
+				'selector' => '{{WRAPPER}} .theplus-contact-form.style-1.plus-cf7-label form.wpcf7-form  label,{{WRAPPER}} .theplus-contact-form.style-1.plus-cf7-custom form.wpcf7-form .tp-cf7-outer',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_outer_field_style' );
@@ -1574,6 +1572,28 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'button_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-contact-form input.wpcf7-form-control.wpcf7-submit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-contact-form input.wpcf7-form-control.wpcf7-submit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'button_max_width',
 			array(
 				'type'        => Controls_Manager::SLIDER,
@@ -1603,30 +1623,6 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'selector' => '{{WRAPPER}} .theplus-contact-form input.wpcf7-form-control.wpcf7-submit',
-			)
-		);
-		$this->add_responsive_control(
-			'button_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-contact-form input.wpcf7-form-control.wpcf7-submit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'before',
-			)
-		);
-		$this->add_responsive_control(
-			'button_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .theplus-contact-form input.wpcf7-form-control.wpcf7-submit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_button_style' );
@@ -1849,23 +1845,15 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'response_msg_typography',
-				'selector' => '{{WRAPPER}} .wpcf7-response-output',
-			)
-		);
 		$this->add_responsive_control(
 			'response_msg_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .theplus-contact-form .wpcf7-response-output' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'before',
 			)
 		);
 		$this->add_responsive_control(
@@ -1878,6 +1866,13 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 					'{{WRAPPER}} .theplus-contact-form .wpcf7-response-output' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'response_msg_typography',
+				'selector' => '{{WRAPPER}} .wpcf7-response-output',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_response_style' );
@@ -2225,7 +2220,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
-		$form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';
+		// $form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';	
 
 		$outer_field_class = ! empty( $settings['outer_field_class'] ) ? $settings['outer_field_class'] : '';
 
@@ -2236,7 +2231,9 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 
 		$content_align   = ' text-' . ( ! empty( $settings['content_align'] ) ? $settings['content_align'] : '' );
 
-		$output = '<div class="theplus-contact-form ' . esc_attr( $form_style ) . ' plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
+		// $output = '<div class="theplus-contact-form ' . esc_attr( $form_style ) . ' plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
+
+		$output = '<div class="theplus-contact-form plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
 			
 			$output .= do_shortcode( $this->get_shortcode() );
 

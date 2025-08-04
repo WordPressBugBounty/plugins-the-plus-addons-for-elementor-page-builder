@@ -154,17 +154,38 @@ class ThePlus_Heading_Animation extends Widget_Base {
 		$this->add_control(
 			'anim_styles',
 			array(
-				'label'   => esc_html__( 'Animation Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => array(
-					'style-1' => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2' => esc_html__( 'Style 2', 'tpebl' ),
-					'style-3' => esc_html__( 'Style 3', 'tpebl' ),
-					'style-4' => esc_html__( 'Style 4', 'tpebl' ),
-					'style-5' => esc_html__( 'Style 5', 'tpebl' ),
-					'style-6' => esc_html__( 'Style 6', 'tpebl' ),
+				'label'        => esc_html__( 'Animation Style', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'style-1',
+				'options'      => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-1.svg' ),
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-2.svg' ),
+					),
+					'style-3' => array(
+						'title' => esc_html__( 'Style 3', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-3.svg' ),
+					),
+					'style-4' => array(
+						'title' => esc_html__( 'Style 4', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-4.svg' ),
+					),
+					'style-5' => array(
+						'title' => esc_html__( 'Style 5', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-5.svg' ),
+					),
+					'style-6' => array(
+						'title' => esc_html__( 'Style 6', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-6.svg' ),
+					),
 				),
+				'columns'      => 3,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -173,6 +194,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'label'       => esc_html__( 'Prefix Text', 'tpebl' ),
 				'label_block' => true,
+				'ai'          => false,
 				'separator'   => 'before',
 				'default'     => esc_html__( 'This is ', 'tpebl' ),
 				'dynamic'     => array(
@@ -193,6 +215,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Animated Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
+				'ai'          => false, 
 				'rows'        => 5,
 				'default'     => esc_html__( 'Heading', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
@@ -223,6 +246,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			array(
 				'type'        => Controls_Manager::TEXT,
 				'label'       => esc_html__( 'Postfix Text', 'tpebl' ),
+				'ai'          => false,
 				'label_block' => true,
 				'separator'   => 'before',
 				'default'     => esc_html__( 'Animation', 'tpebl' ),

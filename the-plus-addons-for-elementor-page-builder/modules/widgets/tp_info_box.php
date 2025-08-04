@@ -16,6 +16,8 @@ use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Image_Size;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Group_Control_Border;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;// Exit if accessed directly.
@@ -347,6 +349,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					''      => esc_html__( 'None', 'tpebl' ),
 					'icon'  => esc_html__( 'Icon', 'tpebl' ),
 					'image' => esc_html__( 'Image', 'tpebl' ),
+					'text' => esc_html__( 'Text', 'tpebl' ),
 					'svg'   => esc_html__( 'Svg (PRO)', 'tpebl' ),
 				),
 				'separator' => 'before',
@@ -363,6 +366,20 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'image_icon' => array( 'image' ),
+				),
+			)
+		);
+		$this->add_control(
+			'tp_info_title',
+			array(
+				'label'   => esc_html__( 'Title', 'tpebl' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => esc_html__( '0', 'tpebl' ),
+				'dynamic' => array(
+					'active' => true,
+				),
+				'condition'   => array(
+					'image_icon' => 'text',
 				),
 			)
 		);
@@ -1682,6 +1699,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_button .button-link-wrap' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap:after' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap svg' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -2009,36 +2027,6 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'icon_fill_color',
-			array(
-				'label'     => esc_html__( 'Fill', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'fill: {{VALUE}} !important;',
-
-				),
-				'condition' => array(
-					'icon_font_style' => 'font_awesome_5',
-				),
-			)
-		);
-		$this->add_control(
-			'icon_stroke_color',
-			array(
-				'label'     => esc_html__( 'Stroke', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'stroke: {{VALUE}} !important;',
-
-				),
-				'condition' => array(
-					'icon_font_style' => 'font_awesome_5',
-				),
-			)
-		);
-		$this->add_control(
 			'icon_gradient_color1',
 			array(
 				'label'     => esc_html__( 'Color 1', 'tpebl' ),
@@ -2156,6 +2144,36 @@ class L_ThePlus_Info_Box extends Widget_Base {
 
 			)
 		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			array(
@@ -2235,36 +2253,6 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					'icon_hover_color_option' => 'solid',
 				),
 				'separator' => 'after',
-			)
-		);
-		$this->add_control(
-			'icon_fill_color_hover',
-			array(
-				'label'     => esc_html__( 'Hover Fill', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'fill: {{VALUE}} !important;',
-
-				),
-				'condition' => array(
-					'icon_font_style' => 'font_awesome_5',
-				),
-			)
-		);
-		$this->add_control(
-			'icon_stroke_color_hover',
-			array(
-				'label'     => esc_html__( 'Hover Stroke', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'stroke: {{VALUE}} !important;',
-
-				),
-				'condition' => array(
-					'icon_font_style' => 'font_awesome_5',
-				),
 			)
 		);
 		$this->add_control(
@@ -2380,6 +2368,36 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'of_type'   => 'gradient',
 				'separator' => 'after',
+			)
+		);
+		$this->add_control(
+			'icon_fill_color_hover',
+			array(
+				'label'     => esc_html__( 'Hover Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Hover Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -2617,6 +2635,162 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+		$this->start_controls_section(
+			'section_text_styling',
+			array(
+				'label' => esc_html__( 'Text Style', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'tab_text_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'global'   => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
+				'selector' => '{{WRAPPER}} .service-icon-text',
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'service_text_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'default'    => array(
+					'top'    => '10',
+					'right'  => '10',
+					'bottom' => '10',
+					'left'   => '10',
+					'unit'   => 'px',
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .service-icon-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				),
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->start_controls_tabs( 'tabs_tab_text' );
+		$this->start_controls_tab(
+			'tab_tab_text_n',
+			array(
+				'label' => esc_html__( 'Normal', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'tab_text_color_n',
+			array(
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .service-icon-text' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'wl_btn_background',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .service-icon-text',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'wl_btn_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'default' => array(
+					'color' => '#666666',
+				),
+				'selector' => '{{WRAPPER}} .service-icon-text',
+			)
+		);
+		$this->add_responsive_control(
+			'service_text_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .service-icon-text' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				),
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_tab_text_h',
+			array(
+				'label' => esc_html__( 'Hover', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'tab_text_color_h',
+			array(
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .service-icon-text:hover' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'wl_btn_background_h',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .service-icon-text:hover',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'wl_btn_border_h',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'default' => array(
+					'color' => '#666666',
+				),
+				'selector' => '{{WRAPPER}} .service-icon-text:hover',
+			)
+		);
+		$this->add_responsive_control(
+			'service_text_border_radius_h',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .service-icon-text:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				),
+				'condition' => array(
+					'image_icon' => 'text',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();		
+	    $this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_extra_option_styling',
@@ -3132,6 +3306,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					$service_img = '<div class="service-icon-wrap"><i class=" ' . esc_attr( $icons ) . ' service-icon ' . $si_bg . ' ' . esc_attr( $service_icon_style ) . '"></i></div>';
 				}
 			}
+		}else{
+			$service_img = '<div class="service-icon-text">'.wp_kses_post($settings['tp_info_title']).'</div>';
 		}
 
 		$border_cright = ! empty( $settings['border_check_right'] ) ? $settings['border_check_right'] : '';

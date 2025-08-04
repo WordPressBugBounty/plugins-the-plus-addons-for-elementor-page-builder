@@ -175,6 +175,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 					),
 				),
 				'columns'      => 2,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(

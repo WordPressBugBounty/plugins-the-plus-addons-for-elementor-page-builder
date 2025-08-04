@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.12
+Stable tag: 6.3.13
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -384,6 +384,25 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.13 =
+Add : Info Box : Add Text Support
+Add : Number Counter : Add responsive option for the Icon size
+Add : Number Counter : Support Font Awesome 5 
+Add : Pricing Table : Support Font Awesome 5 
+Add : Breadcrumbs Bar : Add option for the spacing
+Improvement : Contact Form 7 : UI Improvements
+Improvement : Everest Form : UI Improvements
+Improvement : Gravity Form : UI Improvements
+Improvement : Heading Animation : UI Improvements
+Improvement : Meeting Schedular : UI Improvements
+Improvement : Ninja Form : UI Improvements
+Improvement : Smooth Scroll : UI Improvements
+Improvement : Social Embed : UI Improvements
+Improvement : Video Player : UI Improvements
+Improvement : WP Form : UI Improvements
+Fix : Info Box : Color not working on the Font Awesome 5 Icon
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.12 =
 Fix : Minor Bug Fixes & Performance Improvements

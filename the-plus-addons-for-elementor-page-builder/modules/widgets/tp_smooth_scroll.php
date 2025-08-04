@@ -221,8 +221,8 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Plus Algorithm', 'tpebl' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
-				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'     => esc_html__( 'Show', 'tpebl' ),
+				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -324,8 +324,8 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Keyboard Support', 'tpebl' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
-				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'     => esc_html__( 'Show', 'tpebl' ),
+				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -362,8 +362,8 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Touch pad Support', 'tpebl' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
-				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'     => esc_html__( 'Show', 'tpebl' ),
+				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			)
@@ -373,8 +373,8 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			array(
 				'label'        => esc_html__( 'Fixed Support', 'tpebl' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
-				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'     => esc_html__( 'Show', 'tpebl' ),
+				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -410,8 +410,8 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Tablet/Mobile Smooth Scroll', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Off', 'tpebl' ),
-				'label_off' => esc_html__( 'On', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);

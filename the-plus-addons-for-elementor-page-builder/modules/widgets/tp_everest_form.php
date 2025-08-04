@@ -175,7 +175,7 @@ class ThePlus_Everest_form extends Widget_Base {
 		$this->add_responsive_control(
 			'label_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -243,35 +243,10 @@ class ThePlus_Everest_form extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'input_typography',
-				'selector' => '{{WRAPPER}} .pt_plus_everest_form input[type="text"],
-				{{WRAPPER}} .pt_plus_everest_form input[type="email"],
-				{{WRAPPER}} .pt_plus_everest_form input[type="number"],
-				{{WRAPPER}} .pt_plus_everest_form input[type="url"],
-				{{WRAPPER}} .pt_plus_everest_form .everest-forms .evf-field-container .evf-frontend-row select',
-			)
-		);
-		$this->add_control(
-			'input_placeholder_color',
-			array(
-				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_everest_form input::-webkit-input-placeholder,
-					{{WRAPPER}} .pt_plus_everest_form  email::-webkit-input-placeholder,
-					{{WRAPPER}} .pt_plus_everest_form  number::-webkit-input-placeholder,
-					{{WRAPPER}} .pt_plus_everest_form  select::-webkit-input-placeholder,
-					{{WRAPPER}} .pt_plus_everest_form  url::-webkit-input-placeholder' => 'color: {{VALUE}};',
-				),
-			)
-		);
 		$this->add_responsive_control(
 			'input_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -297,6 +272,31 @@ class ThePlus_Everest_form extends Widget_Base {
 				{{WRAPPER}} .pt_plus_everest_form .everest-forms .evf-field-container .evf-frontend-row select' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'input_typography',
+				'selector' => '{{WRAPPER}} .pt_plus_everest_form input[type="text"],
+				{{WRAPPER}} .pt_plus_everest_form input[type="email"],
+				{{WRAPPER}} .pt_plus_everest_form input[type="number"],
+				{{WRAPPER}} .pt_plus_everest_form input[type="url"],
+				{{WRAPPER}} .pt_plus_everest_form .everest-forms .evf-field-container .evf-frontend-row select',
+			)
+		);
+		$this->add_control(
+			'input_placeholder_color',
+			array(
+				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_everest_form input::-webkit-input-placeholder,
+					{{WRAPPER}} .pt_plus_everest_form  email::-webkit-input-placeholder,
+					{{WRAPPER}} .pt_plus_everest_form  number::-webkit-input-placeholder,
+					{{WRAPPER}} .pt_plus_everest_form  select::-webkit-input-placeholder,
+					{{WRAPPER}} .pt_plus_everest_form  url::-webkit-input-placeholder' => 'color: {{VALUE}};',
+				),
 			)
 		);
 		$this->start_controls_tabs( 'tabs_input_field_style' );
@@ -582,7 +582,7 @@ class ThePlus_Everest_form extends Widget_Base {
 		$this->add_responsive_control(
 			'textarea_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1196,6 +1196,28 @@ class ThePlus_Everest_form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'button_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-part-button,{{WRAPPER}} .pt_plus_everest_form .everest-forms button[type=submit],{{WRAPPER}} .pt_plus_everest_form .everest-forms input[type=submit]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-part-button,{{WRAPPER}} .pt_plus_everest_form .everest-forms button[type=submit],{{WRAPPER}} .pt_plus_everest_form .everest-forms input[type=submit]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'button_max_width',
 			array(
 				'type'        => Controls_Manager::SLIDER,
@@ -1225,29 +1247,6 @@ class ThePlus_Everest_form extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'selector' => '{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-part-button,{{WRAPPER}} .pt_plus_everest_form .everest-forms button[type=submit],{{WRAPPER}} .pt_plus_everest_form .everest-forms input[type=submit]',
-			)
-		);
-		$this->add_responsive_control(
-			'button_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-part-button,{{WRAPPER}} .pt_plus_everest_form .everest-forms button[type=submit],{{WRAPPER}} .pt_plus_everest_form .everest-forms input[type=submit]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'button_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-part-button,{{WRAPPER}} .pt_plus_everest_form .everest-forms button[type=submit],{{WRAPPER}} .pt_plus_everest_form .everest-forms input[type=submit]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_button_style' );
@@ -1482,6 +1481,18 @@ class ThePlus_Everest_form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'oute_r_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .evf-field' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'after',
+			)
+		);
+		$this->add_responsive_control(
 			'oute_r_inner_margin',
 			array(
 				'label'      => esc_html__( 'Margin', 'tpebl' ),
@@ -1490,18 +1501,6 @@ class ThePlus_Everest_form extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .evf-field' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-			)
-		);
-		$this->add_responsive_control(
-			'oute_r_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .evf-field' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_oute_r' );
@@ -1601,7 +1600,7 @@ class ThePlus_Everest_form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_cont_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1723,6 +1722,17 @@ class ThePlus_Everest_form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'response_success_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-notice--success,{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-notice::before' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'response_success_margin',
 			array(
 				'label'      => esc_html__( 'Margin', 'tpebl' ),
@@ -1730,17 +1740,6 @@ class ThePlus_Everest_form extends Widget_Base {
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-notice--success' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'response_success_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-notice--success,{{WRAPPER}} .pt_plus_everest_form .everest-forms .everest-forms-notice::before' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -1799,13 +1798,12 @@ class ThePlus_Everest_form extends Widget_Base {
 		$this->add_responsive_control(
 			'response_validation_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_everest_form .everest-forms label.evf-error' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-
 			)
 		);
 		$this->add_responsive_control(

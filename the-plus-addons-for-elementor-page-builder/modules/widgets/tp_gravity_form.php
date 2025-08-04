@@ -544,29 +544,10 @@ class ThePlus_Gravity_Form extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'input_typography',
-				'selector' => '{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="text"],
-				{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper select,{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="email"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="tel"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="url"]',
-			)
-		);
-		$this->add_control(
-			'input_placeholder_color',
-			array(
-				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input::-webkit-input-placeholder,
-					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper  select::-webkit-input-placeholder' => 'color: {{VALUE}};',
-				),
-			)
-		);
 		$this->add_responsive_control(
 			'input_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -584,6 +565,25 @@ class ThePlus_Gravity_Form extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield .ginput_container input[type="text"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield .ginput_container select,{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="email"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="tel"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="url"]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'input_typography',
+				'selector' => '{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="text"],
+				{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper select,{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="email"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="tel"],{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="url"]',
+			)
+		);
+		$this->add_control(
+			'input_placeholder_color',
+			array(
+				'label'     => esc_html__( 'Placeholder Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input::-webkit-input-placeholder,
+					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper  select::-webkit-input-placeholder' => 'color: {{VALUE}};',
+				),
 			)
 		);
 		$this->start_controls_tabs( 'tabs_input_field_style' );
@@ -833,7 +833,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'textarea_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1107,8 +1107,8 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Height Auto', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Enable', 'tpebl' ),
-				'label_off' => __( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield .ginput_container select' => 'height: auto;',
@@ -1614,7 +1614,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			'enable_multi_file_upload',
 			array(
 				'label'     => esc_html__( 'Enable Multi-File Upload', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
 		);
@@ -1623,8 +1623,8 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Multi-File Upload Style', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -1746,6 +1746,30 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'button_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="button"],
+					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="button"],
+					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="submit"]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'button_max_width',
 			array(
 				'type'        => Controls_Manager::SLIDER,
@@ -1802,32 +1826,6 @@ class ThePlus_Gravity_Form extends Widget_Base {
 				'name'     => 'button_typography',
 				'selector' => '{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="button"],
 					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="submit"]',
-			)
-		);
-		$this->add_responsive_control(
-			'button_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="button"],
-					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="submit"]' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'before',
-			)
-		);
-		$this->add_responsive_control(
-			'button_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="button"],
-					{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper input[type="submit"]' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_button_style' );
@@ -2158,6 +2156,18 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'oute_r_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'after',
+			)
+		);
+		$this->add_responsive_control(
 			'oute_r_inner_margin',
 			array(
 				'label'      => esc_html__( 'Margin', 'tpebl' ),
@@ -2166,18 +2176,6 @@ class ThePlus_Gravity_Form extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-			)
-		);
-		$this->add_responsive_control(
-			'oute_r_inner_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_gravity_form .gform_wrapper .gfield' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_oute_r' );
@@ -2277,7 +2275,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'form_cont_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -2399,6 +2397,17 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'response_success_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_gravity_form .gform_confirmation_wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'response_success_margin',
 			array(
 				'label'      => esc_html__( 'Margin', 'tpebl' ),
@@ -2406,17 +2415,6 @@ class ThePlus_Gravity_Form extends Widget_Base {
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gform_confirmation_wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'response_success_padding',
-			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_gravity_form .gform_confirmation_wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
 			)
@@ -2475,13 +2473,12 @@ class ThePlus_Gravity_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'response_validation_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_gravity_form .gfield_description.validation_message' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-
 			)
 		);
 		$this->add_responsive_control(

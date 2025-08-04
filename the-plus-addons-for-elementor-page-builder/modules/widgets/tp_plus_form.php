@@ -1968,15 +1968,15 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_bg_type',
 				array(
-					'label'       => esc_html__( 'Background Type', 'theplus' ),
+					'label'       => esc_html__( 'Background Type', 'tpebl' ),
 					'type'        => Controls_Manager::CHOOSE,
 					'options'     => array(
 						'color'    => array(
-							'title' => esc_html__( 'Color', 'theplus' ),
+							'title' => esc_html__( 'Color', 'tpebl' ),
 							'icon'  => 'eicon-paint-brush',
 						),
 						'gradient' => array(
-							'title' => esc_html__( 'Gradient', 'theplus' ),
+							'title' => esc_html__( 'Gradient', 'tpebl' ),
 							'icon'  => 'eicon-barcode',
 						),
 					),
@@ -2001,7 +2001,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_gradient_color1',
 				array(
-					'label'     => esc_html__( 'Gradient Color 1', 'theplus' ),
+					'label'     => esc_html__( 'Gradient Color 1', 'tpebl' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#000',
 					'condition' => array(
@@ -2014,7 +2014,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_gradient_color1_control',
 				array(
 					'type'        => Controls_Manager::SLIDER,
-					'label'       => esc_html__( 'Color 1 Location', 'theplus' ),
+					'label'       => esc_html__( 'Color 1 Location', 'tpebl' ),
 					'size_units'  => array( '%' ),
 					'default'     => array(
 						'unit' => '%',
@@ -2033,7 +2033,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_gradient_color2',
 				array(
-					'label'     => esc_html__( 'Gradient Color 2', 'theplus' ),
+					'label'     => esc_html__( 'Gradient Color 2', 'tpebl' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#fff',
 					'condition' => array(
@@ -2046,7 +2046,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_gradient_color2_control',
 				array(
 					'type'        => Controls_Manager::SLIDER,
-					'label'       => esc_html__( 'Color 2 Location', 'theplus' ),
+					'label'       => esc_html__( 'Color 2 Location', 'tpebl' ),
 					'size_units'  => array( '%' ),
 					'default'     => array(
 						'unit' => '%',
@@ -2066,7 +2066,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_gradient_style',
 				array(
 					'type'      => Controls_Manager::SELECT,
-					'label'     => esc_html__( 'Gradient Style', 'theplus' ),
+					'label'     => esc_html__( 'Gradient Style', 'tpebl' ),
 					'default'   => 'linear',
 					'options'   => l_theplus_get_gradient_styles(),
 					'condition' => array(
@@ -2078,7 +2078,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_gradient_angle',
 				array(
-					'label'      => esc_html__( 'Gradient Angle', 'theplus' ),
+					'label'      => esc_html__( 'Gradient Angle', 'tpebl' ),
 					'type'       => Controls_Manager::SLIDER,
 					'size_units' => array( 'deg' ),
 					'default'    => array(
@@ -2104,7 +2104,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_gradient_position',
 				array(
 					'type'      => Controls_Manager::SELECT,
-					'label'     => esc_html__( 'Position', 'theplus' ),
+					'label'     => esc_html__( 'Position', 'tpebl' ),
 					'options'   => l_theplus_get_position_options(),
 					'default'   => 'center center',
 					'selectors' => array(
@@ -2218,15 +2218,15 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_hvr_bg_type',
 				array(
-					'label'       => esc_html__( 'Background Type', 'theplus' ),
+					'label'       => esc_html__( 'Background Type', 'tpebl' ),
 					'type'        => Controls_Manager::CHOOSE,
 					'options'     => array(
 						'color'    => array(
-							'title' => esc_html__( 'Color', 'theplus' ),
+							'title' => esc_html__( 'Color', 'tpebl' ),
 							'icon'  => 'eicon-paint-brush',
 						),
 						'gradient' => array(
-							'title' => esc_html__( 'Gradient', 'theplus' ),
+							'title' => esc_html__( 'Gradient', 'tpebl' ),
 							'icon'  => 'eicon-barcode',
 						),
 					),
@@ -2251,7 +2251,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_hvr_gradient_color1',
 				array(
-					'label'     => esc_html__( 'Gradient Color 1', 'theplus' ),
+					'label'     => esc_html__( 'Gradient Color 1', 'tpebl' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#fff',
 					'condition' => array(
@@ -2264,7 +2264,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_hvr_gradient_color1_control',
 				array(
 					'type'        => Controls_Manager::SLIDER,
-					'label'       => esc_html__( 'Color 1 Location', 'theplus' ),
+					'label'       => esc_html__( 'Color 1 Location', 'tpebl' ),
 					'size_units'  => array( '%' ),
 					'default'     => array(
 						'unit' => '%',
@@ -2283,7 +2283,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_hvr_gradient_color2',
 				array(
-					'label'     => esc_html__( 'Gradient Color 2', 'theplus' ),
+					'label'     => esc_html__( 'Gradient Color 2', 'tpebl' ),
 					'type'      => Controls_Manager::COLOR,
 					'default'   => '#000',
 					'condition' => array(
@@ -2296,7 +2296,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_hvr_gradient_color2_control',
 				array(
 					'type'        => Controls_Manager::SLIDER,
-					'label'       => esc_html__( 'Color 2 Location', 'theplus' ),
+					'label'       => esc_html__( 'Color 2 Location', 'tpebl' ),
 					'size_units'  => array( '%' ),
 					'default'     => array(
 						'unit' => '%',
@@ -2316,7 +2316,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_hvr_gradient_style',
 				array(
 					'type'      => Controls_Manager::SELECT,
-					'label'     => esc_html__( 'Gradient Style', 'theplus' ),
+					'label'     => esc_html__( 'Gradient Style', 'tpebl' ),
 					'default'   => 'linear',
 					'options'   => l_theplus_get_gradient_styles(),
 					'condition' => array(
@@ -2328,7 +2328,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			$this->add_control(
 				'form_btn_hvr_gradient_angle',
 				array(
-					'label'      => esc_html__( 'Gradient Angle', 'theplus' ),
+					'label'      => esc_html__( 'Gradient Angle', 'tpebl' ),
 					'type'       => Controls_Manager::SLIDER,
 					'size_units' => array( 'deg' ),
 					'default'    => array(
@@ -2354,7 +2354,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'form_btn_hvr_gradient_position',
 				array(
 					'type'      => Controls_Manager::SELECT,
-					'label'     => esc_html__( 'Position', 'theplus' ),
+					'label'     => esc_html__( 'Position', 'tpebl' ),
 					'options'   => l_theplus_get_position_options(),
 					'default'   => 'center center',
 					'selectors' => array(

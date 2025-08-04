@@ -171,6 +171,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 					),
 				),
 				'columns'      => 2,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->add_responsive_control(
@@ -459,6 +460,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 					),
 				),
 				'columns'      => 4,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
 		$this->end_controls_section();
