@@ -313,7 +313,31 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/carousel-anything/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=yszLgc0TJPA',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_carousel_options_styling',
 			array(
@@ -1064,7 +1088,6 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->end_controls_section();
 		/*carousel option*/
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 

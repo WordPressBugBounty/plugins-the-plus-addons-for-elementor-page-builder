@@ -60,7 +60,7 @@
 }
 
 #tp-wdkit-elementorp .tp-main-container-preset {
-    width: 75vw;
+    width: 993px;
     background-color: #040483;
     display: flex;
     flex-direction: column;
@@ -158,7 +158,7 @@
     display: inline-block
 }
 
-#tp-wdkit-elementorp .tp-top-sections .tp-message .tp-not-show-again::after,
+/* #tp-wdkit-elementorp .tp-top-sections .tp-message .tp-not-show-again::after,
 #tp-wdkit-elementorp .tp-wdesign-about::after,
 #tp-wdkit-elementorp .tp-wdesign-install .theplus-enable-text::after,
 #tp-wdkit-elementorp .tp-wdesign-install .tp-visit-plugin::after {
@@ -172,19 +172,19 @@
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform .25s ease-out
-}
+} */
 
-#tp-wdkit-elementorp .tp-wdesign-about:hover::after,
+/* #tp-wdkit-elementorp .tp-wdesign-about:hover::after,
 #tp-wdkit-elementorp .tp-wdesign-install .theplus-enable-text:hover::after,
 #tp-wdkit-elementorp .tp-wdesign-install .tp-visit-plugin:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left
-}
+} */
 
 #tp-wdkit-elementorp .tpae-image-sections {
     display: flex;
-    width: 75vw;
-    height: 20vw;
+    width: 992px;
+    height: 292px;
     position: relative;
     background-image: url(../../images/wdesignkit/wdkit-frame.png);
     background-size: cover

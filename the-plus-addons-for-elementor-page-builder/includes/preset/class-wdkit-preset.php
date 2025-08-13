@@ -118,6 +118,13 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 
 			check_ajax_referer( 'tp_wdkit_preview_popup', 'security' );
 
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				$response = $this->tpae_response('Invalid Permission.', 'Something went wrong.',false );
+
+				wp_send_json( $response );
+				wp_die();
+			}
+
 			$installed_plugins = get_plugins();
 
 			include_once ABSPATH . 'wp-admin/includes/file.php';

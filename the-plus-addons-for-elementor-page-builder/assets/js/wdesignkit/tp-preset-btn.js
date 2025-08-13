@@ -95,7 +95,7 @@
                             }
                         );
 
-                        $(document).on('click', '.tp-wdesign-install', function (e) {
+                        $(document).on('click', '.wkit-tp-preset-enable .tp-wdesign-install', function (e) {
                             e.preventDefault();
 
                             var $button = $(this);
@@ -114,6 +114,10 @@
                                     security: tp_wdkit_preview_popup.nonce,
                                 },
                                 success: function (res) {
+
+                                    if(!res.success){
+                                        alert('Only site admins can install presets. Please ask your admin to complete the installation.')
+                                    }
 
                                     $loader.css('display', 'none');
 

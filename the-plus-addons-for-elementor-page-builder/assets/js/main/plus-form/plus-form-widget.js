@@ -97,6 +97,18 @@
         });
 
         var submitForm = function (formData, formFields) {
+            var submitBtn = form.querySelector('.tpae-form-submit'),
+                btnText   = submitBtn.querySelector('.tpae-button-text'),
+                btnLoader = submitBtn.querySelector('.tpae-button-loader');
+        
+            submitBtn.disabled = true;
+            if (btnText) {
+                btnText.style.display = 'none';
+            }
+            if (btnLoader) {
+                btnLoader.style.display = 'inline-flex';
+            }
+        
             $.ajax({
                 url: theplus_ajax_url,
                 type: 'POST',
@@ -132,8 +144,16 @@
                 },
                 complete: function () {
                     isSubmitting = false;
+                    if (btnLoader) {
+                        btnLoader.style.display = 'none';
+                    }
+                    if (btnText) {
+                        btnText.style.display = 'inline-block';
+                    }
+                    submitBtn.disabled = false;
                 }
             });
+
             return false;
         };
 

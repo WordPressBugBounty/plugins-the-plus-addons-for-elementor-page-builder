@@ -811,6 +811,31 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/info-box/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=wcnlT5JE0vM',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
 			'section_title_styling',
 			array(
 				'label' => esc_html__( 'Title Style', 'tpebl' ),
@@ -3132,7 +3157,6 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
@@ -3306,7 +3330,9 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					$service_img = '<div class="service-icon-wrap"><i class=" ' . esc_attr( $icons ) . ' service-icon ' . $si_bg . ' ' . esc_attr( $service_icon_style ) . '"></i></div>';
 				}
 			}
-		}else{
+		}
+		
+		if ( 'text' === $image_icon ) {
 			$service_img = '<div class="service-icon-text">'.wp_kses_post($settings['tp_info_title']).'</div>';
 		}
 

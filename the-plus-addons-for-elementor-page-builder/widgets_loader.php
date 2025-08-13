@@ -212,7 +212,8 @@ final class L_Theplus_Element_Load {
 			add_action( 'wp_head', array( $this, 'print_style' ) );
 		}
 
-		add_action( 'elementor/init', array( $this, 'add_elementor_category' ) );
+		// add_action( 'elementor/init', array( $this, 'add_elementor_category' ) );
+		add_action( 'elementor/elements/categories_registered', array( $this, 'add_elementor_category' ) );
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'theplus_editor_styles' ) );
 
 		add_filter( 'upload_mimes', array( $this, 'theplus_mime_types' ) );

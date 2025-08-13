@@ -662,7 +662,31 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/breadcrumbs-bar/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=Bzbl0LmNZ1s',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_bredcrums_styling',
 			array(
@@ -1534,7 +1558,6 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 
 		/*--On Scroll View Animation ---*/
         include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 
 	}

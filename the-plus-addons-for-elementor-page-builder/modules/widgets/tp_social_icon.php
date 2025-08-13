@@ -280,6 +280,7 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 				'label_block' => true,
 				'label'       => esc_html__( 'Title', 'tpebl' ),
 				'default'     => '',
+				'ai'          => false, 
 				'dynamic'     => array( 'active' => true ),
 			)
 		);
@@ -358,9 +359,16 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 		$repeater->add_control(
 			'loop_magic_scroll',
 			array(
-				'label'     => esc_html__( 'Magic Scroll', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Magic Scroll <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'separator' => 'before',
 			)
 		);
@@ -381,9 +389,15 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 			'plus_tooltip',
 			array(
 				'label'       => esc_html__( 'Tooltip', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Tooltip <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
-				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'render_type' => 'template',
 				'separator'   => 'before',
 			)
@@ -405,9 +419,15 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 			'plus_mouse_move_parallax',
 			array(
 				'label'     => esc_html__( 'Mouse Move Parallax', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Mouse Move Parallax <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'separator' => 'before',
 			)
 		);
@@ -428,9 +448,15 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 			'plus_continuous_animation',
 			array(
 				'label'     => esc_html__( 'Continuous Animation', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Continuous Animation <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'separator' => 'before',
 			)
 		);
@@ -456,8 +482,8 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Hover Animation', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'plus_continuous_animation' => 'yes',
 				),
@@ -557,8 +583,8 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Vertical Layout', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 				'condition' => array(
@@ -579,6 +605,31 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 				'condition'  => array(
 					'styles'              => array( 'style-14', 'style-15' ),
 					'social_icon_verical' => 'yes',
+				),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/social-icons-for-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=exz4Ahc-KeA',
+					),
 				),
 			)
 		);
@@ -963,6 +1014,8 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'animation_effects!' => 'no-animation',
 				),
@@ -1062,7 +1115,6 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 

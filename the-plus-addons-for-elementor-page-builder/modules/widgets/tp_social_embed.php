@@ -2461,6 +2461,31 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->end_controls_section();
 		/*Extra Options End*/
 
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=MbopAQ85pdg',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
+
 		/*Embed Options Style Start*/
 		$this->start_controls_section(
 			'section_EmdOpt_styling',
@@ -3117,10 +3142,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 		/*Embed Options Style End*/
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
-		} else {
-			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		}
 	}
 

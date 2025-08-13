@@ -159,14 +159,23 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$this->add_control(
 			'info_box_layout',
 			array(
-				'label'   => esc_html__( 'Select Layout', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'single_layout',
-				'options' => array(
-					'single_layout'   => esc_html__( 'Listing', 'tpebl' ),
-					'carousel_layout' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+				'label'     => esc_html__( 'Select Layout', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'default'   => 'single_layout',
+				'options'   => array(
+					'single_layout' => array(
+						'title' => esc_html__( 'Listing', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/flip-box/grid.svg' ),
+					),
+					'carousel_layout' => array(
+						'title' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/carousel-pro.svg' ),
+					),
 				),
-			)
+				'columns'      => 2,
+				'classes'      => 'tpae-visual_choice',
+			) 
 		);
 		$this->add_control(
 			'plus_pro_info_box_layout_options',
@@ -185,12 +194,21 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			'flip_style',
 			array(
 				'label'     => esc_html__( 'Flip Type', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
 				'default'   => 'horizontal',
 				'options'   => array(
-					'horizontal' => esc_html__( 'Horizontal', 'tpebl' ),
-					'vertical'   => esc_html__( 'Vertical', 'tpebl' ),
+					'horizontal' => array(
+						'title' => esc_html__( 'Horizontal', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/flip-box/horizontal.svg' ),
+					),
+					'vertical' => array(
+						'title' => esc_html__( 'Vertical', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/flip-box/vertical.svg' ),
+					),
 				),
+				'columns'      => 2,
+				'classes'      => 'tpae-visual_choice',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
 				),
@@ -234,21 +252,11 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'front_options',
-			array(
-				'label'     => esc_html__( 'Front Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_control(
 			'title',
 			array(
 				'label'     => esc_html__( 'Title', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false, 
 				'default'   => esc_html__( 'The Plus', 'tpebl' ),
 				'dynamic'   => array(
 					'active' => true,
@@ -303,6 +311,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Use Image As icon', 'tpebl' ),
 				'type'       => Controls_Manager::MEDIA,
+				'ai'         => false,
 				'default'    => array(
 					'url' => '',
 				),
@@ -369,6 +378,31 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'icon_fs_popover_toggle',
+			array(
+				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+					'image_icon'      => 'icon',
+					'icon_font_style' => 'font_awesome',
+				),
+			)
+		);
+		$this->start_popover();
+			$this->add_control(
+				'icon_fs_options',
+				array(
+					'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'after',
+				)
+			);
+		$this->add_control(
 			'icon_fontawesome',
 			array(
 				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
@@ -381,6 +415,32 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
+		$this->add_control(
+			'icon_f5_popover_toggle',
+			array(
+				'label' => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+					'image_icon'      => 'icon',
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->start_popover();
+			$this->add_control(
+				'icon_f5_options',
+				array(
+					'label'     => esc_html__( 'Font Awesome 5', 'tpebl' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'after',
+				)
+			);
 		$this->add_control(
 			'icon_fontawesome_5',
 			array(
@@ -397,6 +457,22 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
+		$this->add_control(
+			'iconmind_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+					'image_icon'      => 'icon',
+					'icon_font_style' => 'icon_mind',
+				),
+			)
+		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'back_content_section',
@@ -409,21 +485,11 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'back_options',
-			array(
-				'label'     => esc_html__( 'Back Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_control(
 			'content_desc',
 			array(
 				'label'       => esc_html__( 'Description', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
+				'ai'          => false,
 				'default'     => esc_html__( 'I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
 				'condition'   => array(
@@ -436,8 +502,8 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 				'condition' => array(
@@ -482,6 +548,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -532,19 +599,29 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'icon_mind_options',
+			'button_icon_toggle',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
 				'condition'   => array(
 					'info_box_layout'        => 'single_layout',
 					'display_button'         => 'yes',
 					'button_style!'          => array( 'style-7', 'style-9' ),
-					'button_icon_font_style' => 'icon_mind',
+					'button_icon_font_style' => 'font_awesome',
 				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'button_icon_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
 			)
 		);
 		$this->add_control(
@@ -562,6 +639,33 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
+		$this->add_control(
+			'button_icon_5_toggle',
+			array(
+				'label' => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'condition' => array(
+					'info_box_layout'        => 'single_layout',
+					'display_button'         => 'yes',
+					'button_style!'          => array( 'style-7', 'style-9' ),
+					'button_icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->start_popover();
+			$this->add_control(
+				'button_icon_5_options',
+				array(
+					'label'     => esc_html__( 'Font Awesome 5', 'tpebl' ),
+					'type'      => Controls_Manager::HEADING,
+					'separator' => 'after',
+				)
+			);
 		$this->add_control(
 			'button_icon_5',
 			array(
@@ -576,6 +680,23 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 					'display_button'         => 'yes',
 					'button_style!'          => array( 'style-7', 'style-9' ),
 					'button_icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'icon_mind_options',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'info_box_layout'        => 'single_layout',
+					'display_button'         => 'yes',
+					'button_style!'          => array( 'style-7', 'style-9' ),
+					'button_icon_font_style' => 'icon_mind',
 				),
 			)
 		);
@@ -1163,10 +1284,95 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/flip-box/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=rbasfNo7K_E',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
 			'section_title_styling',
 			array(
 				'label' => esc_html__( 'Front Title', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'title_top_space',
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Title Top Space', 'tpebl' ),
+				'range'           => array(
+					'px' => array(
+						'step' => 2,
+						'min'  => -150,
+						'max'  => 150,
+					),
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'tablet_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'mobile_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'selectors'       => array(
+					'{{WRAPPER}} .pt_plus_info_box.info-box-style_5 .info-box-inner .service-title' => 'margin-top : {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'title_btm_space',
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Title Bottom Space', 'tpebl' ),
+				'range'           => array(
+					'px' => array(
+						'step' => 2,
+						'min'  => -150,
+						'max'  => 150,
+					),
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'tablet_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'mobile_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'selectors'       => array(
+					'{{WRAPPER}} .pt_plus_info_box.info-box-style_5 .info-box-inner .service-title' => 'margin-bottom : {{SIZE}}{{UNIT}}',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -1177,6 +1383,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'selector' => '{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-title',
 			)
 		);
+
 		$this->start_controls_tabs( 'tabs_title_style' );
 		$this->start_controls_tab(
 			'tab_title_normal',
@@ -1485,66 +1692,6 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_responsive_control(
-			'title_top_space',
-			array(
-				'type'            => Controls_Manager::SLIDER,
-				'label'           => esc_html__( 'Title Top Space', 'tpebl' ),
-				'range'           => array(
-					'px' => array(
-						'step' => 2,
-						'min'  => -150,
-						'max'  => 150,
-					),
-				),
-				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default' => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'tablet_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'mobile_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'selectors'       => array(
-					'{{WRAPPER}} .pt_plus_info_box.info-box-style_5 .info-box-inner .service-title' => 'margin-top : {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'title_btm_space',
-			array(
-				'type'            => Controls_Manager::SLIDER,
-				'label'           => esc_html__( 'Title Bottom Space', 'tpebl' ),
-				'range'           => array(
-					'px' => array(
-						'step' => 2,
-						'min'  => -150,
-						'max'  => 150,
-					),
-				),
-				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default' => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'tablet_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'mobile_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'selectors'       => array(
-					'{{WRAPPER}} .pt_plus_info_box.info-box-style_5 .info-box-inner .service-title' => 'margin-bottom : {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1565,7 +1712,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$this->add_control(
 			'desc_hover_color',
 			array(
-				'label'     => esc_html__( 'Desc Color', 'tpebl' ),
+				'label'     => esc_html__( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-desc,{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-desc p' => 'color: {{VALUE}}',
@@ -1610,13 +1757,6 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'separator'  => 'after',
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'button_typography',
-				'selector' => '{{WRAPPER}} .pt_plus_button .button-link-wrap',
-			)
-		);
 		$this->add_control(
 			'button_svg_icon',
 			array(
@@ -1638,6 +1778,13 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .pt_plus_button .button-link-wrap svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
 				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'selector' => '{{WRAPPER}} .pt_plus_button .button-link-wrap',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_button_style' );
@@ -1836,6 +1983,81 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
+
+		
+		$this->start_controls_tabs( 'tabs_background_style' );
+		$this->start_controls_tab(
+			'tab_background_front',
+			array(
+				'label'     => esc_html__( 'Front', 'tpebl' ),
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'box_front_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  => '{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-front',
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->add_control(
+			'box_front_overlay_bg_color',
+			array(
+				'label'     => esc_html__( 'Overlay Background Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .infobox-front-overlay' => 'background: {{VALUE}};',
+				),
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_background_back',
+			array(
+				'label'     => esc_html__( 'Back', 'tpebl' ),
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'box_back_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  => '{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-back',
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->add_control(
+			'box_back_overlay_bg_color',
+			array(
+				'label'     => esc_html__( 'Overlay Background Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .infobox-back-overlay' => 'background: {{VALUE}};',
+				),
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+
 		$this->add_control(
 			'box_border',
 			array(
@@ -1844,6 +2066,22 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
+				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'box_border_style',
+			array(
+				'label'     => esc_html__( 'Border Style', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'solid',
+				'options'   => l_theplus_get_border_style(),
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-front,{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-back' => 'border-style: {{VALUE}};',
+				),
+				'condition' => array(
+					'box_border' => 'yes',
+				),
 			)
 		);
 		$this->add_control(
@@ -1880,22 +2118,6 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				),
 			)
 		);
-
-		$this->add_control(
-			'box_border_style',
-			array(
-				'label'     => esc_html__( 'Border Style', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'solid',
-				'options'   => l_theplus_get_border_style(),
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-front,{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-back' => 'border-style: {{VALUE}};',
-				),
-				'condition' => array(
-					'box_border' => 'yes',
-				),
-			)
-		);
 		$this->add_responsive_control(
 			'border_radius',
 			array(
@@ -1907,80 +2129,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				),
 			)
 		);
-		$this->start_controls_tabs( 'tabs_background_style' );
-		$this->start_controls_tab(
-			'tab_background_front',
-			array(
-				'label'     => esc_html__( 'Front', 'tpebl' ),
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'      => 'box_front_background',
-				'types'     => array( 'classic', 'gradient' ),
-				'selector'  => '{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-front',
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_control(
-			'box_front_overlay_bg_color',
-			array(
-				'label'     => esc_html__( 'Overlay Background Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'separator' => 'before',
-				'default'   => '',
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .infobox-front-overlay' => 'background: {{VALUE}};',
-				),
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->end_controls_tab();
-		$this->start_controls_tab(
-			'tab_background_back',
-			array(
-				'label'     => esc_html__( 'Back', 'tpebl' ),
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'      => 'box_back_background',
-				'types'     => array( 'classic', 'gradient' ),
-				'selector'  => '{{WRAPPER}} .pt_plus_info_box .info-box-inner .service-flipbox-back',
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_control(
-			'box_back_overlay_bg_color',
-			array(
-				'label'     => esc_html__( 'Overlay Background Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'separator' => 'before',
-				'default'   => '',
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_info_box .info-box-inner .infobox-back-overlay' => 'background: {{VALUE}};',
-				),
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->end_controls_tab();
-		$this->end_controls_tabs();
+
 		$this->add_control(
 			'shadow_options',
 			array(
@@ -2075,8 +2224,8 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Messy Columns', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'info_box_layout' => 'carousel_layout',
@@ -2163,8 +2312,8 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'label'     => esc_html__( 'Responsive Visibility', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'separator' => 'before',
 			)
 		);
@@ -2352,7 +2501,6 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 

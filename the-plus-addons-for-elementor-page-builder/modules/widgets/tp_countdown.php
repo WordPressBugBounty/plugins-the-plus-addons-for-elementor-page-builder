@@ -12,6 +12,7 @@ namespace TheplusAddons\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Utils;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
@@ -138,7 +139,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Countdown Date', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -189,20 +190,31 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->add_control(
 			'CDstyle',
 			array(
-				'label'     => esc_html__( 'Countdown Style', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'style-1',
-				'options'   => array(
-					'style-1' => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2' => esc_html__( 'Style 2', 'tpebl' ),
-					'style-3' => esc_html__( 'Style 3 ', 'tpebl' ),
+				'label'        => esc_html__( 'Countdown Style', 'tpebl' ),
+				'label_block'  => true,
+				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'default'      => 'style-1',
+				'options'      => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/countdown/style-1.svg',
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/countdown/style-2.svg',
+					),
+					'style-3' => array(
+						'title' => esc_html__( 'Style 3', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/countdown/style-3.svg',
+					),
 				),
 				'condition' => array(
 					'CDType' => 'normal',
 				),
+				'columns'      => 3,
+				'classes'      => 'tpae-visual_choice',
 			)
 		);
-
 		$this->add_control(
 			'counting_timer',
 			array(
@@ -216,16 +228,28 @@ class L_ThePlus_Countdown extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'count_Note',
+			'count_note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Date set according to your timezone: %s.</i></p>',
-				'label_block' => true,
+				'raw'         => sprintf( esc_html__( 'Date set according to your timezone: %s.', 'tpebl' ), Utils::get_timezone_string() ),
+				'content_classes' => 'tp-controller-notice',
+				// 'label_block' => true,
 				'condition'   => array(
 					'CDType' => 'normal',
 				),
 			)
 		);
+		// $this->add_control(
+		// 	'cityminit_Note',
+		// 	array(
+		// 		'type' => \Elementor\Controls_Manager::RAW_HTML,
+		// 		'raw' => '<b>Note:</b> Enter time in minutes when you want to reset timer data.',
+		// 		'condition'   => array(
+		// 			'CDType'           => 'scarcity',
+		// 			'woo_loop_switch!' => 'yes',
+		// 		),
+		// 	)
+		// );
 		$this->add_control(
 			'inline_style',
 			array(
@@ -296,9 +320,21 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->add_control(
 			'show_labels',
 			array(
-				'label'   => esc_html__( 'Show Labels', 'tpebl' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'yes',
+				'label'        => esc_html__( 'Show Labels', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'show_labels_name',
+			array(
+				'label'     => esc_html__( 'Show Labels', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
 			)
 		);
 		$this->add_control(
@@ -306,7 +342,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 			array(
 				'type'      => Controls_Manager::TEXT,
 				'label'     => esc_html__( 'Days Section Text', 'tpebl' ),
-				'separator' => 'before',
+				'ai' => false,
 				'default'   => esc_html__( 'Days', 'tpebl' ),
 				'condition' => array(
 					'show_labels!' => '',
@@ -319,6 +355,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'label'     => esc_html__( 'Hours Section Text', 'tpebl' ),
 				'default'   => esc_html__( 'Hours', 'tpebl' ),
+				'ai' => false,
 				'condition' => array(
 					'show_labels!' => '',
 				),
@@ -330,6 +367,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'label'     => esc_html__( 'Minutes Section Text', 'tpebl' ),
 				'default'   => esc_html__( 'Minutes', 'tpebl' ),
+				'ai' => false,
 				'condition' => array(
 					'show_labels!' => '',
 				),
@@ -341,8 +379,62 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'type'      => Controls_Manager::TEXT,
 				'label'     => esc_html__( 'Seconds Section Text', 'tpebl' ),
 				'default'   => esc_html__( 'Seconds', 'tpebl' ),
+				'ai' => false,
 				'condition' => array(
 					'show_labels!' => '',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'specialoption_downcount',
+			array(
+				'label'     => esc_html__( 'Special Option', 'tpebl' ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Special Option <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
+				'conditions'   => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'terms' => array(
+								array(
+									'name'     => 'CDType',
+									'operator' => '===',
+									'value'    => 'normal',
+								),
+							),
+						),
+					),
+				),
+			)
+		);
+		$this->add_control(
+			'expirytype',
+			array(
+				'label'        => esc_html__( 'After Expiry Action', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
+				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			)
+		);
+		$this->add_control(
+			'expirytype_pro',
+			array(
+				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'description' => theplus_pro_ver_notice(),
+				'classes'     => 'plus-pro-version',
+				'condition'   => array(
+					'expirytype' => 'yes',
 				),
 			)
 		);
@@ -365,8 +457,8 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'default'    => 'dark',
 				'options'    => array(
 					'dark'  => esc_html__( 'Dark', 'tpebl' ),
-					'light' => esc_html__( 'Light ( Pro )', 'tpebl' ),
-					'mix'   => esc_html__( 'Mix ( Pro )', 'tpebl' ),
+					'light' => esc_html__( 'Light (Pro)', 'tpebl' ),
+					'mix'   => esc_html__( 'Mix (Pro)', 'tpebl' ),
 				),
 				'condition'  => array(
 					'CDType' => array( 'normal', 'scarcity' ),
@@ -397,44 +489,6 @@ class L_ThePlus_Countdown extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'expirytype',
-			array(
-				'label'        => esc_html__( 'After Expiry Action', 'tpebl' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
-				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
-				'return_value' => 'yes',
-				'default'      => '',
-				'conditions'   => array(
-					'relation' => 'or',
-					'terms'    => array(
-						array(
-							'terms' => array(
-								array(
-									'name'     => 'CDType',
-									'operator' => '===',
-									'value'    => 'normal',
-								),
-							),
-						),
-					),
-				),
-			)
-		);
-		$this->add_control(
-			'expirytype_pro',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'expirytype' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
 			'countdownExpiry',
 			array(
 				'label'      => esc_html__( 'Select Action', 'tpebl' ),
@@ -442,9 +496,9 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'default'    => 'none',
 				'options'    => array(
 					'none'     => esc_html__( 'None', 'tpebl' ),
-					'showmsg'  => esc_html__( 'Message ( Pro )', 'tpebl' ),
-					'showtemp' => esc_html__( 'Template ( Pro )', 'tpebl' ),
-					'redirect' => esc_html__( 'Page Redirect ( Pro )', 'tpebl' ),
+					'showmsg'  => esc_html__( 'Message (Pro)', 'tpebl' ),
+					'showtemp' => esc_html__( 'Template (Pro)', 'tpebl' ),
+					'redirect' => esc_html__( 'Page Redirect (Pro)', 'tpebl' ),
 				),
 				'conditions' => array(
 					'relation' => 'or',
@@ -479,11 +533,17 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->add_control(
 			'cd_classbased',
 			array(
-				'label'     => wp_kses_post( "Class Based Section Visibility <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "change-website-content-when-countdown-timer-ends/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label' => wp_kses_post(
+					sprintf(
+						'Class Based Section Visibility <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_url( $this->tp_doc . 'change-website-content-when-countdown-timer-ends/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'separator' => 'before',
 				'condition' => array(
 					'CDType'   => 'normal',
@@ -506,6 +566,31 @@ class L_ThePlus_Countdown extends Widget_Base {
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/count-down/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=RdPTAGc3PMY',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
 			'section_styling',
 			array(
 				'label'     => esc_html__( 'Counter Styling', 'tpebl' ),
@@ -515,14 +600,26 @@ class L_ThePlus_Countdown extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'number_text_color',
+		$this->add_responsive_control(
+			'counter_padding',
 			array(
-				'label'     => esc_html__( 'Counter Font Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '',
-				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_countdown li > span' => 'color: {{VALUE}};',
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'separator'  => 'before',
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_countdown li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'counter_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_countdown li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -546,6 +643,17 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'separator' => 'after',
 				'condition' => array(
 					'show_labels!' => '',
+				),
+			)
+		);
+		$this->add_control(
+			'number_text_color',
+			array(
+				'label'     => esc_html__( 'Counter Font Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_countdown li > span' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -735,29 +843,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_responsive_control(
-			'counter_padding',
-			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em', '%' ),
-				'separator'  => 'before',
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_countdown li' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'counter_margin',
-			array(
-				'label'      => esc_html__( 'Margin', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_countdown li' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
+
 		$this->add_control(
 			'count_border_style',
 			array(
@@ -1089,7 +1175,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->add_control(
 			's3hoverstyle',
 			array(
-				'label'     => __( 'Hover style', 'tpebl' ),
+				'label'     => __( 'Hover Style', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -1666,7 +1752,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->start_controls_tab(
 			'bg_hover',
 			array(
-				'label' => esc_html__( 'hover', 'tpebl' ),
+				'label' => esc_html__( 'Hover', 'tpebl' ),
 			)
 		);
 		$this->add_group_control(
@@ -1848,7 +1934,6 @@ class L_ThePlus_Countdown extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 

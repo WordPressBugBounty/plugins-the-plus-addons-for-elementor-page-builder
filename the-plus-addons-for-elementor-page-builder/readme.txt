@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.13
+Stable tag: 6.3.14
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -384,6 +384,20 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.14 =
+Add : Form Widget : Spinner in the Submit Button and Style Options
+Improvement : Countdown : UI Improvements
+Improvement : Flipbox : UI Improvements
+Improvement : Process Steps : UI Improvements
+Improvement : Scroll Navigation : UI Improvements
+Improvement : Social Icon : UI Improvements
+Improvement : Stylish List : UI Improvements
+Improvement : Switcher : UI Improvements
+Improvement : Need Help Section : Added widget-wise documentation & video links
+Fix : Form Widget : Placeholder Text Color Issue
+Fix : Info Box : Image not displaying
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.13 =
 Add : Info Box : Add Text Support

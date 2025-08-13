@@ -545,7 +545,31 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/progress-bar/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=01purtRY770',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_pie_chart_styling',
 			array(
@@ -1175,10 +1199,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
-		} else {
-			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		}
 	}
 

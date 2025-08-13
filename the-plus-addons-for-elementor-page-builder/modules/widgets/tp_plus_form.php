@@ -1054,7 +1054,31 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/form-builder/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=7DVDIACjSSQ&t',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'form_style',
 			array(
@@ -1550,7 +1574,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#888888',
 				'selectors' => array(
-					'{{WRAPPER}} .tpae-form-field input, {{WRAPPER}} .tpae-form select, {{WRAPPER}} .tpae-form-field input::placeholder, {{WRAPPER}} .tpae-form-field textarea::placeholder, {{WRAPPER}} .tpae-form-field input[type="date"], {{WRAPPER}} .tpae-form-field input[type="time"]' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .tpae-form-field input, {{WRAPPER}} .tpae-form select, {{WRAPPER}} .tpae-form-field input::placeholder, {{WRAPPER}} .tpae-form-field textarea::placeholder, {{WRAPPER}} .tpae-form-field input[type="date"]::placeholder, {{WRAPPER}} .tpae-form-field input[type="time"]::placeholder' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -1658,7 +1682,8 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#000000',
 				'selectors' => array(
-					'{{WRAPPER}} .tpae-form input, {{WRAPPER}} .tpae-form-field input[type="date"], {{WRAPPER}} .tpae-form-field input[type="time"], {{WRAPPER}} .tpae-form select, {{WRAPPER}} .tpae-form textarea::placeholder' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .tpae-form input:not([type="date"]):not([type="time"]), {{WRAPPER}} .tpae-form select:focus, {{WRAPPER}} .tpae-form textarea:focus, {{WRAPPER}} .tpae-form textarea, {{WRAPPER}} .tpae-form input:not([type="date"]):not([type="time"]):focus' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .tpae-form-field input[type="date"]:focus, {{WRAPPER}} .tpae-form-field input[type="time"]:focus' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -2403,6 +2428,58 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 
 		$this->end_controls_tabs();
 
+		$this->add_control(
+			'button_spinner',
+			array(
+				'label'     => esc_html__( 'Spinner', 'tpebl' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+			)
+		);
+		$this->add_responsive_control(
+			'button_spinner_size',
+			array(
+				'label'      => esc_html__( 'Spinner Size', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', '%' ),
+				'default'    => [
+						'size' => 18,
+						'unit' => 'px',
+					],
+				'range'      => array(
+					'px' => array(
+						'min'  => 10,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-form .tpae-form-button .tpae-spinner' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
+			'spinner_inner_color',
+			array(
+				'label'     => esc_html__( 'Spinner Inner Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#fff',
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-form .tpae-form-button .tpae-spinner' => 'border-color: {{VALUE}} !important;',
+				),
+			)
+		);
+		$this->add_control(
+			'spinner_color',
+			array(
+				'label'     => esc_html__( 'Spinner Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000',
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-form .tpae-form-button .tpae-spinner' => 'border-top-color: {{VALUE}} !important;',
+				),
+			)
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -2657,7 +2734,6 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
@@ -2812,7 +2888,14 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 		}
 				$form_markup .= '<div class="tpae-form-submit-container">';
 
-					$form_markup .= '<button id="' . esc_attr( $button_id ) . '" type="submit" class="tpae-form-submit tpae-form-button ' . esc_attr( $icon_position_class ) . '" >' . $button_icon . ' ' . esc_html( $submit_button ) . '</button>';
+					// $form_markup .= '<button id="' . esc_attr( $button_id ) . '" type="submit" class="tpae-form-submit tpae-form-button ' . esc_attr( $icon_position_class ) . '" >' . $button_icon . ' ' . esc_html( $submit_button ) . '</button>';
+
+					$form_markup .= '<button id="' . esc_attr( $button_id ) . '" type="submit" class="tpae-form-submit tpae-form-button">';
+						
+						$form_markup .= '<span class="tpae-button-text">' . $button_icon . ' ' . esc_html( $submit_button ) . '</span>';
+						$form_markup .= '<span class="tpae-button-loader" style="display:none;"><span class="tpae-spinner"></span></span>';
+
+					$form_markup .= '</button>';
 
 				$form_markup .= '</div>';
 

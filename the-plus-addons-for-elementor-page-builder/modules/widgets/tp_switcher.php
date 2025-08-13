@@ -175,6 +175,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Title', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
+				'ai'      => false,
 				'default' => esc_html__( 'Switch A', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -196,6 +197,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Content', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
+				'ai'          => false,
 				'default'     => esc_html__( 'I am text block. Click edit button to change this text.', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -238,6 +240,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Enter Elementor Template Shortcode', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
+				'ai'          => false,
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -261,14 +264,22 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => wp_kses_post( "Unique ID<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "anchor-link-to-elementor-switcher-template/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'dynamic'     => array(
 					'active' => true,
 				),
 				'title'       => __( 'Add custom ID WITHOUT the Pound key. e.g: tab-id', 'tpebl' ),
-				'description' => 'Note : Use this option to give anchor id to individual switcher.',
 				'label_block' => false,
 				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'con1_hashid_note',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->end_controls_section();
@@ -285,6 +296,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Title', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
+				'ai'      => false,
 				'default' => esc_html__( 'Switch B', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -307,6 +319,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Content', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
+				'ai'          => false,
 				'default'     => esc_html__( 'I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -349,6 +362,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Enter Elementor Template Shortcode', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
+				'ai'          => false,
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -372,14 +386,22 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Unique ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'dynamic'     => array(
 					'active' => true,
 				),
 				'title'       => __( 'Add custom ID WITHOUT the Pound key. e.g: tab-id', 'tpebl' ),
-				'description' => 'Note : Use this option to give anchor id to individual switcher.',
 				'label_block' => false,
 				'separator'   => 'before',
+			)
+		);
+		$this->add_control(
+			'con2_hashid_note',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
+				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->end_controls_section();
@@ -396,9 +418,17 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'       => wp_kses_post( "Unique Switcher ID <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "connect-carousel-remote-with-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
+			)
+		);
+		$this->add_control(
+			'switcher_unique_id_note',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw' => '<b>Note:</b> Keep this blank or Setup Unique id for switcher which you can use with "Carousel Remote" widget.',
+				'content_classes' => 'tp-controller-notice',
 				'separator'   => 'after',
-				'description' => esc_html__( 'Keep this blank or Setup Unique id for switcher which you can use with "Carousel Remote" widget.', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -455,8 +485,8 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Tooltip', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'switcher_style!' => array( 'style-4', 'style-3' ),
@@ -468,6 +498,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Content 1', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false,  
 				'default'   => esc_html__( 'Switch A', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -481,6 +512,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Content 2', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false, 
 				'default'   => esc_html__( 'Switch B', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -583,10 +615,47 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label'   => __( 'Need Help', 'tpebl' ),
+				'type'    => 'tpae_need_help',
+				'default' => array(
+					array(
+						'label' => __( 'Read Docs', 'tpebl' ),
+						'url'   => 'https://theplusaddons.com/help/switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+					),
+					array(
+						'label' => __( 'Watch Video', 'tpebl' ),
+						'url'   => 'https://www.youtube.com/watch?v=nYhVnMnD_UA',
+					),
+				),
+			)
+		);
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'section_switcher_styling',
 			array(
 				'label' => esc_html__( 'Switcher Cosmetics', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'normal_label_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-2,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 			)
 		);
 		$this->add_control(
@@ -634,17 +703,6 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .switch-toggle + .switch-slider' => 'color:{{VALUE}};',
 					'{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-2,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-1' => 'color:{{VALUE}};', // remover this
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'normal_label_padding',
-			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-2,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -1590,7 +1648,6 @@ class L_ThePlus_Switcher extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 
