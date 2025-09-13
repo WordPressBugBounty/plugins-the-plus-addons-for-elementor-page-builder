@@ -28,7 +28,7 @@
 
 .wkit-preset-label {
     margin: 0;
-    color: #B1B1D9;
+    color: #808080;
 }
 
 .tp-pink-btn {
@@ -36,21 +36,22 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: #C22076;
+    background: #020202;
     border-radius: 6px;
-    border: 1px solid #C22076;
+    /* border: 1px solid #C22076; */
     font-size: 14px;
     color: #FFFFFF;
-    padding: 15px 25px;
+    padding: 15px 38px;
     text-transform: capitalize;
     transition: 0.3s linear;
     cursor: pointer;
-    gap:8px;
+    gap: 8px;
+    position: relative;
 }
 
 .tp-pink-btn:hover {
-    background: #9B1A5E;
-    border: 1px solid #9B1A5E;
+    background: #363434;
+    /* border: 1px solid #9B1A5E; */
     color: #FFFFFF;
 
 }
@@ -61,16 +62,15 @@
 
 #tp-wdkit-elementorp .tp-main-container-preset {
     width: 993px;
-    background-color: #040483;
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
     position: relative;
-    padding: 20px 20px 0;
     overflow: hidden;
     align-items: center;
-    gap: 30px
+    gap: 10px
 }
 
 #tp-wdkit-elementorp.dialog-type-lightbox {
@@ -84,6 +84,23 @@
     top: unset !important;
     left: unset !important;
     border-radius: 10px
+}
+
+#tp-wdkit-elementorp .tp-header-preset {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 32px 0px;
+}
+
+#tp-wdkit-elementorp .tp-close-preset {
+    border: 1px solid #F1F1F1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px;
 }
 
 #tp-wdkit-elementorp .tp-top-sections {
@@ -125,6 +142,7 @@
     font-size: 28px;
     font-weight: 700;
     text-align: center;
+    color: #020202;
 }
 
 #tp-wdkit-elementorp .tp-middel-sections .tp-text-bottom {
@@ -183,16 +201,18 @@
 
 #tp-wdkit-elementorp .tpae-image-sections {
     display: flex;
-    width: 992px;
-    height: 292px;
+    width: 994px;
+    height: 290px;
     position: relative;
-    background-image: url(../../images/wdesignkit/wdkit-frame.png);
+    background-image: url(../../images/wdesignkit/wdkit-preset.png);
     background-size: cover
 }
 
 #tp-wdkit-elementorp .tp-wdesign-install .tp-wkit-publish-loader {
     justify-content: center;
-    align-items: center
+    align-items: center;
+    position: absolute;
+    right: 12px;
 }
 
 #tp-wdkit-elementorp .tp-wdesign-install .tp-wkit-publish-loader .tp-wb-loader-circle {

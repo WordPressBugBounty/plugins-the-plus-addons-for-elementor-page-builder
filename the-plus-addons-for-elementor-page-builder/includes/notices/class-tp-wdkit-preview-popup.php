@@ -267,37 +267,42 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 		public function tp_wdkit_preview_html_popup() {
 			$plugin_status = $this->check_plugin_status(); ?>
 			
-			<div id="tp-wdkit-wrap" class="tp-main-container" style="display: none">
-				<div class="tp-top-sections">
-					<div class="tp-message">
-						<a class="tp-not-show-again" href="#"><?php echo esc_html__( 'Don’t Show Again', 'tpebl' ); ?></a>
+			<div id="tp-wdkit-preview" class="tp-pre-container" style="display: none">
+				<div class="tp-pre-top-sections">
+					<div class="tp-pre-message">
+						<a class="tp-pre-not-show-again" href="#"><?php echo esc_html__( 'Don’t Show Again', 'tpebl' ); ?></a>
 					</div>
-					<div class="tp-close-btn">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976312 12.6834 -0.0976312 12.2929 0.292893L7 5.58579L1.70711 0.292893C1.31658 -0.0976312 0.683417 -0.0976312 0.292893 0.292893C-0.0976312 0.683417 -0.0976312 1.31658 0.292893 1.70711L5.58579 7L0.292893 12.2929C-0.0976312 12.6834 -0.0976312 13.3166 0.292893 13.7071C0.683417 14.0976 1.31658 14.0976 1.70711 13.7071L7 8.41421L12.2929 13.7071C12.6834 14.0976 13.3166 14.0976 13.7071 13.7071C14.0976 13.3166 14.0976 12.6834 13.7071 12.2929L8.41421 7L13.7071 1.70711Z" fill="white" fill-opacity="0.8" /></svg>
+					<div class="tp-pre-close-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="#000000"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976312 12.6834 -0.0976312 12.2929 0.292893L7 5.58579L1.70711 0.292893C1.31658 -0.0976312 0.683417 -0.0976312 0.292893 0.292893C-0.0976312 0.683417 -0.0976312 1.31658 0.292893 1.70711L5.58579 7L0.292893 12.2929C-0.0976312 12.6834 -0.0976312 13.3166 0.292893 13.7071C0.683417 14.0976 1.31658 14.0976 1.70711 13.7071L7 8.41421L12.2929 13.7071C12.6834 14.0976 13.3166 14.0976 13.7071 13.7071C14.0976 13.3166 14.0976 12.6834 13.7071 12.2929L8.41421 7L13.7071 1.70711Z" fill="#000000" fill-opacity="0.8" /></svg>
 					</div>
 				</div>
-				<div class="tp-middel-sections">
-					<div class="tp-text-top">
-						<?php echo esc_html__( 'Get 1000+ Predesigned Elementor Templates & Sections', 'tpebl' ); ?>
+				<div class="tp-pre-middel-sections">
+					<div class="tp-pre-text-top">
+						<?php echo esc_html__( 'Get 1000+ Predesigned ', 'tpebl' ); ?>
+						<br>
+						<?php echo esc_html__( 'Elementor Templates & Sections', 'tpebl' ); ?>
 					</div>
-					<div class="tp-text-bottom">
-						<?php echo esc_html__( 'Uniquely designed Elementor Templates for every website type made with Elementor & The Plus Addons for Elementor Widgets.', 'tpebl' ); ?>
+					<div class="tp-pre-text-bottom">
+						<?php echo esc_html__( 'Uniquely designed Elementor Templates for every website type made ', 'tpebl' ); ?>
+						<br>
+						<?php echo esc_html__( 'with Elementor & The Plus Addons for Elementor Widgets.', 'tpebl' ); ?>
+
 					</div>
-					<div class="tp-learn-more-about">
+					<div class="tp-pre-learn-more-about">
 						<?php if ( false === $plugin_status['installed'] ) { ?>
-							<a class="tp-wdesign-install" href="#">
-								<span class="theplus-enable-text"><?php echo esc_html__( 'Enable Templates', 'tpebl' ); ?></span>
-								<div class="tp-wkit-publish-loader">
-									<div class="tp-wb-loader-circle"></div>
+							<a class="tp-pre-wdesign-install" href="#">
+								<span class="tpae-pre-enable-text"><?php echo esc_html__( 'Enable Templates', 'tpebl' ); ?></span>
+								<div class="tp-wkit-pre-loader">
+									<div class="tp-pre-loader-circle"></div>
 								</div>
 							</a>
 						<?php } else { ?>
-							<a class="tp-wdesign-install" href="#"><span class="tp-visit-plugin"><?php echo esc_html__( 'Visit Plugin', 'tpebl' ); ?></span></a>
+							<a class="tp-pre-wdesign-install" href="#"><span class="tp-visit-plugin"><?php echo esc_html__( 'Visit Plugin', 'tpebl' ); ?></span></a>
 						<?php } ?>
-							<a class="tp-wdesign-about" href="https://wdesignkit.com/browse/template?plugin=%5B1003%5D&temp_type=pagetemplate"><?php echo esc_html__( 'Learn More', 'tpebl' ); ?></a>
+							<a class="tp-pre-wdesign-about" target="_blank" href="https://wdesignkit.com/browse/template?plugin=%5B1003%5D&temp_type=pagetemplate"><?php echo esc_html__( 'Learn More', 'tpebl' ); ?></a>
 					</div>
 				</div>
-				<div class="tp-image-sections"></div>
+				<div class="tp-pre-image-sections"></div>
 			</div> 
 			<?php
 		}

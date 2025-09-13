@@ -35,12 +35,12 @@
                     },
                     onShow: function () {
                         var dialogLightboxContent = $(".dialog-lightbox-message"),
-                            clonedWrapElement = $("#tp-wdkit-wrap");
+                            clonedWrapElement = $("#tp-wdkit-preview");
 
                             clonedWrapElement = clonedWrapElement.clone(true).show()
                             dialogLightboxContent.html(clonedWrapElement);
 
-                            dialogLightboxContent.on("click", ".tp-close-btn", function () {
+                            dialogLightboxContent.on("click", ".tp-pre-close-btn", function () {
                                 window.tp_wdkit_editor.hide();
                             });
                     },
@@ -54,7 +54,7 @@
                 window.tp_wdkit_editor.show();
             });
 
-            $(document).on('click', '.tp-not-show-again', function (e) {
+            $(document).on('click', '.tp-pre-not-show-again', function (e) {
                 e.preventDefault();
                 $.ajax({
                     url: tp_wdkit_preview_popup.ajax_url,
@@ -76,12 +76,12 @@
                 });
             });
 
-            $(document).on('click', '.tp-learn-more-about .tp-wdesign-install', function (e) {
+            $(document).on('click', '.tp-pre-learn-more-about .tp-pre-wdesign-install', function (e) {
                 e.preventDefault();
 
                 var $button = $(this);
-                var $loader = $button.find('.tp-wb-loader-circle');
-                var $text = $button.find('.theplus-enable-text');
+                var $loader = $button.find('.tp-pre-loader-circle');
+                var $text = $button.find('.tpae-pre-enable-text');
 
                 if ($text.length > 0) {
                     $text.text(INSTALLING_TEXT);

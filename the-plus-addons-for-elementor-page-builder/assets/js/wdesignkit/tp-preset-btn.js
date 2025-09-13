@@ -85,7 +85,7 @@
                                     clonedWrapElement = clonedWrapElement.clone(true).show()
                                     dialogLightboxContent.html(clonedWrapElement);
 
-                                    dialogLightboxContent.on("click", ".tp-close-btn", function () {
+                                    dialogLightboxContent.on("click", ".tp-close-preset", function () {
                                         window.WdkitPopup.hide();
                                     });
                                 },

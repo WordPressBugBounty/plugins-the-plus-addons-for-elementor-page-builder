@@ -2,21 +2,21 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.3.14\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.3.15\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-13T11:34:03+00:00\n"
+"POT-Creation-Date: 2025-09-13T04:43:30+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
 
 #. Plugin Name of the plugin
 #: theplus_elementor_addon.php
-#: includes/preset/class-wdkit-preset.php:219
+#: includes/preset/class-wdkit-preset.php:230
 msgid "The Plus Addons for Elementor"
 msgstr ""
 
@@ -542,26 +542,34 @@ msgid "Don’t Show Again"
 msgstr ""
 
 #: includes/notices/class-tp-wdkit-preview-popup.php:281
-msgid "Get 1000+ Predesigned Elementor Templates & Sections"
+msgid "Get 1000+ Predesigned "
 msgstr ""
 
-#: includes/notices/class-tp-wdkit-preview-popup.php:284
-#: includes/preset/class-wdkit-preset.php:223
-msgid "Uniquely designed Elementor Templates for every website type made with Elementor & The Plus Addons for Elementor Widgets."
+#: includes/notices/class-tp-wdkit-preview-popup.php:283
+msgid "Elementor Templates & Sections"
 msgstr ""
 
-#: includes/notices/class-tp-wdkit-preview-popup.php:289
+#: includes/notices/class-tp-wdkit-preview-popup.php:286
+msgid "Uniquely designed Elementor Templates for every website type made "
+msgstr ""
+
+#: includes/notices/class-tp-wdkit-preview-popup.php:288
+msgid "with Elementor & The Plus Addons for Elementor Widgets."
+msgstr ""
+
+#: includes/notices/class-tp-wdkit-preview-popup.php:294
 #: assets/js/admin/tp-wdkit-banner.js:5
 #: assets/js/wdesignkit/tp-preset-btn.js:4
 #: assets/js/wdesignkit/tp-wdkit-preview-popup.js:4
+#: build/index.js:1
 msgid "Enable Templates"
 msgstr ""
 
-#: includes/notices/class-tp-wdkit-preview-popup.php:295
+#: includes/notices/class-tp-wdkit-preview-popup.php:300
 msgid "Visit Plugin"
 msgstr ""
 
-#: includes/notices/class-tp-wdkit-preview-popup.php:297
+#: includes/notices/class-tp-wdkit-preview-popup.php:302
 #: includes/user-experience/class-tp-onbording.php:450
 #: build/index.js:1
 msgid "Learn More"
@@ -599,27 +607,31 @@ msgstr ""
 msgid "Insufficient permissions."
 msgstr ""
 
-#: includes/preset/class-wdkit-preset.php:219
+#: includes/preset/class-wdkit-preset.php:230
 msgid "Import Pre-Designed Widgets Styles for"
 msgstr ""
 
-#: includes/preset/class-wdkit-preset.php:230
+#: includes/preset/class-wdkit-preset.php:234
+msgid "Uniquely designed Elementor Templates for every website type made with Elementor & The Plus Addons for Elementor Widgets."
+msgstr ""
+
+#: includes/preset/class-wdkit-preset.php:241
 msgid "Start Quickly Without Designing from Scratch"
 msgstr ""
 
-#: includes/preset/class-wdkit-preset.php:236
+#: includes/preset/class-wdkit-preset.php:247
 msgid "Fully Customizable for Any Style"
 msgstr ""
 
-#: includes/preset/class-wdkit-preset.php:244
+#: includes/preset/class-wdkit-preset.php:255
 msgid "Time-Saving and Efficient Workflow"
 msgstr ""
 
-#: includes/preset/class-wdkit-preset.php:250
+#: includes/preset/class-wdkit-preset.php:261
 msgid "Explore Versatile Layout Options"
 msgstr ""
 
-#: includes/preset/class-wdkit-preset.php:257
+#: includes/preset/class-wdkit-preset.php:268
 msgid "Enable Presets"
 msgstr ""
 
@@ -4757,6 +4769,7 @@ msgstr ""
 #: modules/widgets/tp_tabs_tours.php:1452
 #: modules/widgets/tp_tabs_tours.php:1508
 #: modules/widgets/tp_tabs_tours.php:2028
+#: build/index.js:1
 msgid "Active"
 msgstr ""
 
@@ -10942,6 +10955,7 @@ msgid "Search Bar"
 msgstr ""
 
 #: modules/widgets/tp_header_extras.php:164
+#: build/index.js:1
 msgid "Mini Cart"
 msgstr ""
 
@@ -11353,6 +11367,7 @@ msgid "Translatepress Language Switcher"
 msgstr ""
 
 #: modules/widgets/tp_header_extras.php:2524
+#: build/index.js:1
 msgid "Language Switcher"
 msgstr ""
 
@@ -13963,6 +13978,7 @@ msgstr ""
 #: modules/widgets/tp_post_search.php:227
 #: modules/widgets/tp_post_search.php:228
 #: modules/widgets/tp_table.php:1007
+#: build/index.js:1
 #: includes/preset/index.js:1
 msgid "Search"
 msgstr ""
@@ -17558,6 +17574,7 @@ msgid "Skip & Deactivate"
 msgstr ""
 
 #: assets/js/wdesignkit/tp-wdkit-preview-popup.js:5
+#: build/index.js:1
 msgid "Installing WDesignKit"
 msgstr ""
 
@@ -17575,6 +17592,38 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Chart"
+msgstr ""
+
+#: build/index.js:1
+msgid "Get Data From Google Sheet"
+msgstr ""
+
+#: build/index.js:1
+msgid "Get Data From CSV"
+msgstr ""
+
+#: build/index.js:1
+msgid "Line"
+msgstr ""
+
+#: build/index.js:1
+msgid "Bar"
+msgstr ""
+
+#: build/index.js:1
+msgid "Radar"
+msgstr ""
+
+#: build/index.js:1
+msgid "Doughnut & Pie"
+msgstr ""
+
+#: build/index.js:1
+msgid "Bubble"
+msgstr ""
+
+#: build/index.js:1
+msgid "Polar Area"
 msgstr ""
 
 #: build/index.js:1
@@ -17638,6 +17687,10 @@ msgid "Form Compatibility"
 msgstr ""
 
 #: build/index.js:1
+msgid "SQL Query"
+msgstr ""
+
+#: build/index.js:1
 msgid "Table Of Content"
 msgstr ""
 
@@ -17647,6 +17700,14 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Post Search"
+msgstr ""
+
+#: build/index.js:1
+msgid "Toggle Bar"
+msgstr ""
+
+#: build/index.js:1
+msgid "Music"
 msgstr ""
 
 #: build/index.js:1
@@ -17947,6 +18008,10 @@ msgid "Open Nexter"
 msgstr ""
 
 #: build/index.js:1
+msgid "Subscribe Now"
+msgstr ""
+
+#: build/index.js:1
 msgid "Welcome,"
 msgstr ""
 
@@ -18197,11 +18262,11 @@ msgid "WDesignKit Widgets"
 msgstr ""
 
 #: build/index.js:1
-msgid "Get Access to 50+ More Unique"
+msgid "Get Access to 50+ More Unique Elementor"
 msgstr ""
 
 #: build/index.js:1
-msgid "Elementor Widgets from WDesignKit"
+msgid "Widgets from WDesignKit"
 msgstr ""
 
 #: build/index.js:1
@@ -18221,7 +18286,7 @@ msgid "100% Customizable Widgets"
 msgstr ""
 
 #: build/index.js:1
-msgid "Upgrade to TPAE PRO to Unlock All Widgets & All Pre-Made Templates"
+msgid "Upgrade to The Plus Addons for Elementor Pro to Unlock All Widgets & All Pre-Made Templates"
 msgstr ""
 
 #: build/index.js:1
@@ -18385,7 +18450,7 @@ msgid "Wipe Settings before Uninstall"
 msgstr ""
 
 #: build/index.js:1
-msgid "This button will delete all of The Plus Addons for Elementor's settings from Database. You will then need to enter all your settings again. You can also do this before deactivating/deinstalling The Plus Addons for Elementor if you wish."
+msgid "Note: Select the data you wish to delete from your database while uninstalling The Plus Addons for Elementor. You’ll need to reconfigure settings manually if you reinstall the plugin later. Once deleted, this data cannot be recovered."
 msgstr ""
 
 #: build/index.js:1
@@ -18769,7 +18834,22 @@ msgid "*Keep Blank if you want to keep default Name"
 msgstr ""
 
 #: build/index.js:1
+#, js-format
+msgid "Enter value for clients custom post type name. Default: \"theplus_%s\""
+msgstr ""
+
+#: build/index.js:1
+#, js-format
+msgid "Enter value for clients custom post title name. Default: \"Tp %s\""
+msgstr ""
+
+#: build/index.js:1
 msgid "Category Taxonomy Value"
+msgstr ""
+
+#: build/index.js:1
+#, js-format
+msgid "Enter value for Category Taxonomy Value. Default: \"theplus_%s_cat\""
 msgstr ""
 
 #: build/index.js:1
@@ -18777,7 +18857,17 @@ msgid "Prebuilt Post Name : (You can find that from here)"
 msgstr ""
 
 #: build/index.js:1
+#, js-format
+msgid "Enter the value of your current post type name which is prebuilt with your theme. E.g.: \"theplus_%s\"."
+msgstr ""
+
+#: build/index.js:1
 msgid "Prebuilt Category Taxonomy Value : (You can find that from here)"
+msgstr ""
+
+#: build/index.js:1
+#, js-format
+msgid "Enter the value of your current Category Taxonomy Value which is prebuilt with your theme. E.g.: \"theplus_%s\"."
 msgstr ""
 
 #: build/index.js:1
@@ -18905,6 +18995,10 @@ msgid "In \"On Demand Assets\" method, We detect widgets used in page and based 
 msgstr ""
 
 #: build/index.js:1
+msgid "Select Version"
+msgstr ""
+
+#: build/index.js:1
 msgid "Roll Back Plugin"
 msgstr ""
 
@@ -18945,7 +19039,7 @@ msgid "Hide Plugin RollBack Tab?"
 msgstr ""
 
 #: build/index.js:1
-msgid "Upgrade to The Plus Addons PRO and Brand the Widgets under your Agency's Name"
+msgid "Upgrade to The Plus Addons for Elementor Pro and Brand the Widgets under your Agency's Name"
 msgstr ""
 
 #: build/index.js:1
@@ -19054,6 +19148,10 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Are you sure you want to deactivate The Plus Addons for Elementor Pro License Key?"
+msgstr ""
+
+#: build/index.js:1
+msgid "Invalid Key Entered !"
 msgstr ""
 
 #: build/index.js:1
@@ -19362,6 +19460,10 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Works with Most Themes"
+msgstr ""
+
+#: build/index.js:1
+msgid "Powered by POSIMYTH Innovations"
 msgstr ""
 
 #: build/index.js:1

@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 6.3.14
+Stable tag: 6.3.15
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -13,7 +13,7 @@ Best Elementor Addons with 120+ Elementor FREE & Pro Widgets & 1000+ Elementor T
 == Description ==
 The Plus Addons for Elementor is the powerful extension for [Elementor Website Builder](https://wordpress.org/plugins/elementor/) with <strong>120+ Powerful Widgets & Extension, 1000+ Elementor Templates</strong>.
 
-One Elementor Addon to replace multiple WordPress Plugins. Packed with <strong>[Blog Website Builder](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [WooCommerce Store Builder](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Mega Menu for Elementor](https://theplusaddons.com/widgets/mega-menu/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Grid Builder for Elementor](https://theplusaddons.com/grid-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Popup Builder for Elementor](https://theplusaddons.com/widgets/popup-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Header Builder for Elementor](https://theplusaddons.com/plus-builder/#header-builder-wgts?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) and more.</strong>
+One Elementor Addon to replace multiple WordPress Plugins. Packed with <strong>[Blog Website Builder](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [WooCommerce Store Builder](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Mega Menu for Elementor](https://theplusaddons.com/widgets/mega-menu/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Grid Builder for Elementor](https://theplusaddons.com/grid-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Popup Builder for Elementor](https://theplusaddons.com/elementor-builder/popup-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Header Builder for Elementor](https://theplusaddons.com/elementor-builder/header-builder/#header-builder-wgts?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) and more.</strong>
 
  <strong> [ VIEW ALL ELEMENTOR WIDGETS DEMO](https://theplusaddons.com/elementor-widgets?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
@@ -48,7 +48,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 * <strong>Supports RTL | WPML</strong> or any Translation | <strong>Multisite Networks</strong>
 * <strong>Optimized Code Delivery</strong> with <strong>Ultra Light Modular</strong> backend architecture
 * <strong>SEO Friendly,  A/B Tested Designs</strong> and <strong>Mobile Friendly</strong>
-* Compatible with most <strong>WordPress themes like <strong>[Nexter](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), Blocksy , Kadence, Astra, OceanWP, GeneratePress, Neve etc.</strong>
+* Compatible with most <strong>WordPress themes like <strong>[Nexter](https://nexterwp.com/nexter-theme/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), Blocksy , Kadence, Astra, OceanWP, GeneratePress, Neve etc.</strong>
 
 ###🏆 Reviewed by Top YouTubers & Bloggers 🏆
 
@@ -66,7 +66,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 * <strong>[ FREE Blog Website Builder for Elementor 🔥](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) </strong>
 [Post Title](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Content](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Featured Image](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Meta](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Author](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Comment](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Navigation (Next/Previous Button)](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Search Bar](https://theplusaddons.com/?s=perfect&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
 
-* <strong> [FREE Block Quote Box for Elementor](https://theplusaddons.com/widgets/blockquote/?s=perfect&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
+* <strong> [FREE Block Quote Box for Elementor](https://theplusaddons.com/widgets/blockquote/?&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[FREE Buttons for Elementor](https://theplusaddons.com/widgets/buttons/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -113,19 +113,19 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[FREE WP Forms Styler Widget for Elementor](https://theplusaddons.com/widgets/wpforms/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[FREE Blog Posts Listing for Elementor](https://theplusaddons.com/pluslisting/#plus-blog?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
+* <strong>[FREE Blog Posts Listing for Elementor](https://theplusaddons.com/elementor-listing/blog-post/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 [Grid Post Layout](https://theplusaddons.com/plus-blogs/grid-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Masonry Post Layout](https://theplusaddons.com/plus-blogs/masonry-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Metro Post Layout](https://theplusaddons.com/plus-blogs/metro-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Carousel Slider ](https://theplusaddons.com/plus-blogs/carousel-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) |[Stagger Load Layout](https://theplusaddons.com/plus-blogs/blog-stagger-load/) 
 
-* <strong>[ FREE Image Gallery for Elementor](https://theplusaddons.com/pluslisting/#plus-gallery?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
+* <strong>[ FREE Image Gallery for Elementor](https://theplusaddons.com/elementor-listing/image-gallery/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 [Image Grid Gallery](https://theplusaddons.com/plus-image-gallery/image-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Masonry Gallery](https://theplusaddons.com/plus-image-gallery/image-masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Metro Gallery](https://theplusaddons.com/plus-image-gallery/image-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Carousel Slider](https://theplusaddons.com/plus-image-gallery/image-carousel/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
 
-* <strong>[FREE Team Members Listing for Elementor](https://theplusaddons.com/pluslisting/#Team%20member?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[Grid Team Member Listing](https://theplusaddons.com/team-member/#grid-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Masonry Team Member Listing](https://theplusaddons.com/team-member/#masonary-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Carousel Slider for Team Member Listing](https://theplusaddons.com/team-member/#grid-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+* <strong>[FREE Team Members Listing for Elementor](https://theplusaddons.com/elementor-listing/team-members/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+[Grid Team Member Listing](https://theplusaddons.com/pluslisting/elementor-team-members/grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Masonry Team Member Listing](https://theplusaddons.com/pluslisting/elementor-team-members/masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Carousel Slider for Team Member Listing](https://theplusaddons.com/pluslisting/elementor-team-members/carousel/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
 
-* <strong>[FREE Testimonials Listing for Elementor](https://theplusaddons.com/pluslisting/#plus-testimonial?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[FREE Testimonials Listing for Elementor](https://theplusaddons.com/elementor-listing/testimonials/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[FREE Client Logos Listing for Elementor](https://theplusaddons.com/pluslisting/#plus-clients?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[Grid Logo Layout ](https://theplusaddons.com/team-member/#grid-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Client Logo Masonry Layout](https://theplusaddons.com/widgets/clients/#masonry-layout?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+* <strong>[FREE Client Logos Listing for Elementor](https://theplusaddons.com/elementor-listing/client-logos/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+[Grid Logo Layout ](https://theplusaddons.com/team-member/#grid-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Client Logo Masonry Layout](https://theplusaddons.com/elementor-listing/client-logos/masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
 
 * <strong>[FREE Equal Height for Elementor ( Same Column Height ) 🔥](https://theplusaddons.com/plus-extras/equal-height/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
@@ -141,7 +141,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 * <strong> [FREE Glass Morphism Effect for Elementor / Forested Glass Effect](https://theplusaddons.com/plus-extras/glass-morphism/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 
-* <strong> [FREE Advanced Shadow for Elementor](https://theplusaddons.com/neumorphism/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
+* <strong> [FREE Advanced Shadow for Elementor](https://theplusaddons.com/elementor-extras/neumorphism/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[FREE Cross Domain Copy and Paste for Elementor 🔥](https://theplusaddons.com/plus-extras/cross-domain-copy-paste-and-live-copy-elementor/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -155,14 +155,14 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Image Scroll sequence for Elementor](https://theplusaddons.com/widgets/elementor-image-scroll-sequence/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[Mp3 Audio Player for Elementor](https://theplusaddons.com/widgets/audio-player/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Mp3 Audio Player for Elementor](https://theplusaddons.com/elementor-widget/audio-player/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Login, Signup & Registration Elementor Form & Password Reset Form for Elementor](https://theplusaddons.com/widgets/login-signup-password/)</strong> 
 
 * <strong>[WooCommerce Store Builder for Elementor](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[My Account Page](https://theplusaddons.com/woo-builder/#my-account?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Order Track Page ](https://theplusaddons.com/woo-builder/#order-track?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Cart Page](https://theplusaddons.com/woo-builder/#cart?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Checkout Page](https://theplusaddons.com/woo-builder/#checkout?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Single Product Page](https://theplusaddons.com/woo-builder/#single-prodct?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Product Single Image](https://theplusaddons.com/woo-builder/#single-prodct?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Single Pricing](https://theplusaddons.com/woo-builder/#single-prodct?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Product Tabs](https://theplusaddons.com/woo-builder/#single-prodct?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Product Variation Swatches](https://theplusaddons.com/product/ceramic-colored-pots/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Thank You Page](https://theplusaddons.com/woo-builder/#thank-you?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Search Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+[My Account Page]( https://theplusaddons.com/plus-builder/woocommerce-builder/my-account-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Order Track Page ](https://theplusaddons.com/plus-builder/woocommerce-builder/order-tracking-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Cart Page](https://theplusaddons.com/plus-builder/woocommerce-builder/cart-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Checkout Page](https://theplusaddons.com/plus-builder/woocommerce-builder/checkout-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Single Product Page](https://theplusaddons.com/plus-builder/woocommerce-builder/product-single-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | | [Thank You Page](https://theplusaddons.com/plus-builder/woocommerce-builder/thank-you-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Search Filters](https://theplusaddons.com/plus-builder/woocommerce-builder/ajax-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
 
-* <strong>[Pricing List for Elementor](https://theplusaddons.com/widgets/pricing-list/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Pricing List for Elementor](https://theplusaddons.com/elementor-widget/price-list/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Password Protect Content, Section, Pages & Posts for Elementor](https://theplusaddons.com/widgets/protected-content/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
@@ -180,17 +180,17 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Animated Service Boxes, Sliding Boxes & Horizontal & Vertical Image Accordion](https://theplusaddons.com/widgets/animated-service-boxes/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
-* <strong>[Before and After Image Slider Comparison for Elementor ](https://theplusaddons.com/widgets/before-after-2/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Before and After Image Slider Comparison for Elementor ](hhttps://theplusaddons.com/elementor-widget/before-after-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[ Advanced Carousel Anything Slider for Elementor ](https://theplusaddons.com/widgets/carousal-anything/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[ Advanced Carousel Anything Slider for Elementor ](https://theplusaddons.com/widgets/elementor-carousel-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[Carousel Slider Remote for Elementor *(Custom Dots, Arrows, Next Previous Button)* ](https://theplusaddons.com/widgets/carousal-remote/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Carousel Slider Remote for Elementor *(Custom Dots, Arrows, Next Previous Button)* ](https://theplusaddons.com/widgets/elementor-carousel-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Circle Floating Icon Menu for Elementor](https://theplusaddons.com/widgets/circle-menu/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Creative Image & Photo for Elementor](https://theplusaddons.com/widgets/creative-images/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[Draw SVG Icon Animation for Elementor](https://theplusaddons.com/widgets/draw-svg/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Draw SVG Icon Animation for Elementor](https://theplusaddons.com/elementor-widget/draw-animated-svg-icon/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Dynamic Devices Mockup & Device Frame for Elementor](https://theplusaddons.com/widgets/device-dynamic/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -224,28 +224,28 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Mobile Menu for Elementor](https://theplusaddons.com/widgets/mobile-menu/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Google Map for Elementor](https://theplusaddons.com/widgets/google-maps/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Google Map for Elementor](https://theplusaddons.com/elementor-widget/google-maps/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-* <strong>[Mailchimp Subscription for Elementor](https://theplusaddons.com/widgets/mailchimp/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Mailchimp Subscription for Elementor](https://theplusaddons.com/elementor-widget/mailchimp-form/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Blog Posts Listing for Elementor](https://theplusaddons.com/pluslisting/#plus-blog?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Blog Posts Listing for Elementor](https://theplusaddons.com/elementor-listing/blog-post/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 [Post Carousel](https://theplusaddons.com/plus-blogs/carousel-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Post Grid](https://theplusaddons.com/plus-blogs/blog-styles/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Post Filter](https://theplusaddons.com/plus-blogs/blog-filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Post Infinite Load](https://theplusaddons.com/plus-blogs/lazy-load-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Post Load More](https://theplusaddons.com/plus-blogs/load-more-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Post Pagination](https://theplusaddons.com/plus-blogs/pagination-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)
 
-* <strong>[Image Gallery for Elementor](https://theplusaddons.com/pluslisting/#plus-gallery?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Image Gallery for Elementor](https://theplusaddons.com/elementor-listing/image-gallery/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 [Image Carousel](https://theplusaddons.com/plus-image-gallery/image-carousel/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Image Filter](https://theplusaddons.com/plus-image-gallery/image-filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [ACF Gallery Field](https://theplusaddons.com/pluslisting/elementor-acf-gallery-support/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Image Grid Layout](https://theplusaddons.com/plus-image-gallery/image-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Image Metro](https://theplusaddons.com/plus-image-gallery/image-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Image Masonry Layout](https://theplusaddons.com/plus-image-gallery/image-masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) 
 
-* <strong>[Woo Products for Elementor](https://theplusaddons.com/pluslisting/#woo-products?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
-[Woo Products Carousel](https://theplusaddons.com/pluslisting/product-carousal/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Filter](https://theplusaddons.com/pluslisting/product-filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Grid Layout](https://theplusaddons.com/pluslisting/product-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Infinite Load](https://theplusaddons.com/pluslisting/product-lazy-load/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Load More](https://theplusaddons.com/pluslisting/product-load-more/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Metro](https://theplusaddons.com/pluslisting/product-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Pagination](https://theplusaddons.com/pluslisting/product-pagination/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) 
+* <strong>[Woo Products for Elementor](https://theplusaddons.com/elementor-listing/woocommerce-product/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+[Woo Products Carousel](https://theplusaddons.com/pluslisting/product-carousal/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Filter](https://theplusaddons.com/elementor-listing/woocommerce-product/filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Grid Layout](https://theplusaddons.com/pluslisting/product-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Infinite Load](https://theplusaddons.com/pluslisting/product-lazy-load/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Load More](https://theplusaddons.com/pluslisting/product-load-more/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Metro](https://theplusaddons.com/pluslisting/product-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Products Pagination](https://theplusaddons.com/pluslisting/product-pagination/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) 
 
-* <strong>[Team Members for Elementor](https://theplusaddons.com/pluslisting/#Team%20member?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Team Members for Elementor](https://theplusaddons.com/elementor-listing/team-members/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-* <strong>[Testimonials for Elementor](https://theplusaddons.com/pluslisting/#plus-testimonial?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Testimonials for Elementor](https://theplusaddons.com/elementor-listing/testimonials/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-* <strong>[Client Logos for Elementor](https://theplusaddons.com/pluslisting/#plus-clients?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Client Logos for Elementor](https://theplusaddons.com/elementor-listing/client-logos/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Client Logo CSS Filters](https://theplusaddons.com/widgets/clients/#css-filters?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>  
+* <strong>[Client Logo CSS Filters](https://theplusaddons.com/elementor-listing/client-logos/filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>  
 
-* <strong>[Dynamic Post Listing Options](https://theplusaddons.com/pluslisting/#plus-dynamic-listing?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Dynamic Post Listing Options](https://theplusaddons.com/elementor-listing/dynamic-listing/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 [Elementor Custom Loop Skins](https://theplusaddons.com/pluslisting/custom-loop-skin-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) 
 
 * <strong>[Dynamic Category Grid for Elementor](https://theplusaddons.com/pluslisting/dynamic-category/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
@@ -255,7 +255,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Mouse Cursor Icon for Elementor](https://theplusaddons.com/widgets/mouse-cursor-icon-widget/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
                            
-* <strong>[Preloader & Page Transitions for Elementor](https://theplusaddons.com/widgets/pre-loader/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Preloader & Page Transitions for Elementor](https://theplusaddons.com/elementor-widget/preloader-and-page-transition//?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
 * <strong>[Social Feed for Elementor](https://theplusaddons.com/widgets/social-feed/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
@@ -274,23 +274,23 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 * <strong>[Search Bar for Elementor](https://theplusaddons.com/plus-search-filters/advanced-wp-ajax-searchbar/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 [Vertical Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Horizontal Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters-horizontal-columns/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) | [Filters with Popups](https://theplusaddons.com/plus-search-filters/advanced-wp-filters-modal-popup/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)| [Inline Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters-inline?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/) 
 
-* <strong>[Column Ordering In Devices for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#column-order?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Column Ordering In Devices for Elementor](https://theplusaddons.com/elementor-extras/column-ordering-devices/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-* <strong>[Custom Media Query Breakpoints for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#media-query-breakpoint?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Custom Media Query Breakpoints for Elementor](https://theplusaddons.com/elementor-extras/custom-media-query-breakpoints/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Column Width(Px,%,Calc()) for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#column-width?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Column Width(Px,%,Calc()) for Elementor](https://theplusaddons.com/elementor-extras/column-width/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
 * <strong>[Sticky Column for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#sticky-column?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Display/Conditional Rules for Elementor](https://theplusaddons.com/plus-extras/display-rules/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
+* <strong>[Display/Conditional Rules for Elementor](https://theplusaddons.com/elementor-extras/display-conditions//?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Global Continuous Effects for Elementor](https://theplusaddons.com/plus-extras/special-effects-parallax-3d-mouse-hover-continuous-animations-elementor-widgets/#continuous-effects?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Global Continuous Effects for Elementor](https://theplusaddons.com/elementor-extras/continuous-effects/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-* <strong>[Global Mouse Hover Parallax for Elementor](https://theplusaddons.com/plus-extras/special-effects-parallax-3d-mouse-hover-continuous-animations-elementor-widgets/#mouse-parallax?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Global Mouse Hover Parallax for Elementor](https://theplusaddons.com/elementor-extras/global-mouse-hover-parallax/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
-* <strong>[Global Special Overlay Color  for Elementor](https://theplusaddons.com/plus-extras/special-effects-parallax-3d-mouse-hover-continuous-animations-elementor-widgets/#first-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)
+* <strong>[Global Special Overlay Color  for Elementor](https://theplusaddons.com/elementor-extras/special-overlay-color/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)
 
-* <strong>[Global Tilt 3D Effects  for Elementor](https://theplusaddons.com/plus-extras/special-effects-parallax-3d-mouse-hover-continuous-animations-elementor-widgets/#tilt-3d?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Global Tilt 3D Effects  for Elementor](https://theplusaddons.com/elementor-extras/global-mouse-hover-parallax/#3d-effects/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
 * <strong>[Global Tooltip for Elementor](https://theplusaddons.com/plus-extras/global-tooltips-elementor-widgets/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
@@ -306,20 +306,20 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Row Section Scroll Animation  for Elementor](https://theplusaddons.com/plus-extras/row-section-full-scroll-animation/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Custom CSS(Section & Column) for Elementor](https://theplusaddons.com/plus-extras/elementor-column-improvements-upgrades-responsive/#custom-css?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Custom CSS(Section & Column) for Elementor](https://theplusaddons.com/elementor-extras/custom-css/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
 
 ###🔍 OUR PRODUCTS
 <strong>[🥇 Nexter Blocks](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
 
-<strong>[🥇 NexterWP Theme](https://nexterwp.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter  and lightweight Theme for Elementor.
+<strong>[🥇 NexterWP Theme](https://nexterwp.com/nexter-theme/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter  and lightweight Theme for Elementor.
 
  <strong>[🥇 Nexter Extension](
 https://nexterwp.com/nexter-extension?utm_source=wordpress&utm_medium=readmepage&utm_campaign=nexterblocks)</strong> - Power up your WordPress website with 20+ extensions that work with all themes, boost performance, and harden security. 
 
 <strong>[🥇 UiChemy - Figma to Elementor Convertor](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Convert your Figma Templates In Live Elementor Website using our [FREE Figma Plugin.](https://www.figma.com/community/plugin/1265873702834050352/)
 
-<strong>[🥇WdesignKit](https://wdesignkit.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - 1000+ Elementor Template, Elementor Widget Builder, Widget Convertor to Block, Bricks, Cloud Template & Widget Storage & more.
+<strong>[🥇WDesignKit](https://wdesignkit.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - 1000+ Elementor Template, Elementor Widget Builder, Widget Convertor to Block, Bricks, Cloud Template & Widget Storage & more.
 
 
 == Installation ==
@@ -384,6 +384,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.3.15 =
+Improvement : WdesignKit 2.0 Compatibility
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.14 =
 Add : Form Widget : Spinner in the Submit Button and Style Options
