@@ -217,6 +217,7 @@ final class L_Theplus_Element_Load {
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'theplus_editor_styles' ) );
 
 		add_filter( 'upload_mimes', array( $this, 'theplus_mime_types' ) );
+		add_filter( 'wp_handle_upload_prefilter', array( $this, 'theplus_sanitize_svg_upload' ) );
 
 		// Include some backend files.
 		add_action( 'admin_enqueue_scripts', array( $this, 'theplus_elementor_admin_css' ) );
@@ -319,10 +320,49 @@ final class L_Theplus_Element_Load {
 	 * @since 1.0.0
 	 */
 	public function theplus_mime_types( $mimes ) {
-		$mimes['svg']  = 'image/svg+xml';
-		$mimes['svgz'] = 'image/svg+xml';
+
+		if ( current_user_can( 'manage_options' ) ) {
+			$mimes['svg']  = 'image/svg+xml';
+			$mimes['svgz'] = 'image/svg+xml';
+		} else {
+			unset( $mimes['svg'], $mimes['svgz'] );
+		}
 
 		return $mimes;
+
+	}
+
+	/**
+	 * Sanitize uploaded SVGs
+	 * 
+	 * @since 6.3.16
+	 */
+	public function theplus_sanitize_svg_upload( $file ) {
+
+		$ext = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
+
+		if ( $ext === 'svg' ) {
+			$contents = file_get_contents( $file['tmp_name'] );
+
+			$bad_patterns = [
+				'/<\s*script/i',
+				'/\son[a-z]+\s*=/i',
+				'/<\s*foreignObject/i',
+				'/<\s*(iframe|embed|object)/i',
+				'/javascript:/i',
+				'/data:/i',
+			];
+
+			foreach ( $bad_patterns as $re ) {
+				if ( preg_match( $re, $contents ) ) {
+					$file['error'] = __( 'SVG contains unsafe content', 'tpebl' );
+
+					return $file;
+				}
+			}
+		}
+
+		return $file;
 	}
 
 	/**
