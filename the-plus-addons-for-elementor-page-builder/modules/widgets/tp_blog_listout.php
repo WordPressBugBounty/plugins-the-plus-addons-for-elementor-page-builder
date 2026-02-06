@@ -15,6 +15,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Border;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -75,7 +76,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_categories() {
-		return array( 'plus-listing' );
+		return array( 'plus-listing', 'plus-archive' );
 	}
 
 	/**
@@ -84,7 +85,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'blog list', 'listing', 'bloglisting', 'Elementor blog' );
+		return array( 'Blog Listing', 'Post Listing', 'Post Grid', 'Masonry Blog', 'Metro Blog Layout', 'Post Carousel', 'Post Filter', 'Load More Posts', 'Post Pagination', 'Lazy Load Posts', 'Smart Loop Post', 'Order Posts' );
 	}
 
 	/**
@@ -156,6 +157,14 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 17849,
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'style',
 			array(
 				'label'       => esc_html__( 'Style', 'tpebl' ),
@@ -179,6 +188,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 						'title' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-4-pro.svg',
 					),
+					'style-5'            => array(
+						'title' => esc_html__( 'Style 5', 'tpebl' ),
+						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/style-5.svg',
+					),
 					'smart-loop-builder' => array(
 						'title' => esc_html__( 'Smart Loop Builder', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/blog-listing/smart-loop-builder.svg',
@@ -188,22 +201,18 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'classes'     => 'tpae-visual_choice',
 			)
 		);
-
-		$this->add_control(
-			'smart_loop_builder_note_doc',
-			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-custom-elementor-post-loop-skin-with-smart-loop-builder/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => array(
-					'style' => array( 'smart-loop-builder' ),
-				),
-			)
-		);
 		$this->add_control(
 			'smart_loop_builder_note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : This is first version of Smart Loop Builder, We will have more dynamic options, ACF support and release in more listing widgets coming up next..</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'This is first version of Smart Loop Builder, We will have more dynamic options, ACF support and release in more listing widgets coming up next..', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-custom-elementor-post-loop-skin-with-smart-loop-builder/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 				'condition'   => array(
 					'style' => array( 'smart-loop-builder' ),
@@ -213,13 +222,11 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'style_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
-					'style!' => array( 'style-1', 'smart-loop-builder' ),
+					'style!' => array( 'style-1', 'style-5', 'smart-loop-builder' ),
 				),
 			)
 		);
@@ -255,7 +262,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_grid',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-blog-posts-in-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'show-blog-posts-in-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => 'grid',
@@ -265,7 +278,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_Masonry',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-blog-posts-in-masonry-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'show-blog-posts-in-masonry-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => 'masonry',
@@ -275,7 +294,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_Metro',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-blog-posts-in-metro-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'show-blog-posts-in-metro-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => 'metro',
@@ -285,11 +310,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'layout_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'layout' => 'carousel',
 				),
@@ -312,7 +335,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			'smart-loop-builder-button',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<a class="tp-loopbuilder-editor-raw" id="tp-loopbuilder-editor-raw" data-wd_type="tp-blog-listout">Ready Presets</a>',
+				'raw'         => '<a class="tp-loopbuilder-editor-raw" id="tp-loopbuilder-editor-raw" data-tp_name="Blog Listing" data-tp_filter_visible="true" data-wd_type="tp-blog-listout">Ready Presets</a>',
 				// 'content_classes' => 'tp-preset-editor-btn',
 				'label_block' => true,
 			)
@@ -358,7 +381,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_offset',
 			array(
-				'label'   => wp_kses_post( "Offset Posts <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "hide-recent-blog-post-from-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'   => esc_html__( 'Offset Posts', 'tpebl' ),
 				'type'    => Controls_Manager::NUMBER,
 				'min'     => 0,
 				'max'     => 50,
@@ -367,10 +390,17 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'post_offset_Note',
+			'post_offset_label',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : Hide posts from the beginning of listing.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Add a number here to hide posts from the beginning of your recent posts listing', 'tpebl' ),
+						esc_url( $this->tp_doc . 'hide-recent-blog-post-from-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 			)
 		);
@@ -399,7 +429,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_order_by',
 			array(
-				'label'   => wp_kses_post( "Order By <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-recent-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'   => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Order By', 'tpebl' ),
+						esc_url( $this->tp_doc . 'show-recent-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'date',
 				'options' => l_theplus_orderby_arr(),
@@ -494,11 +530,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'plus_pro_metro_column_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'metro_column!' => '3',
 					'layout'        => array( 'metro' ),
@@ -570,13 +604,27 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'post_extra_option_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'You can choose how additional posts load on your page, either through Pagination, Load More, or Lazy Load.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'layout!' => array( 'carousel' ),
+				),
+			)
+		);
+		$this->add_control(
 			'post_extra_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'post_extra_option!' => array( 'none', 'load_more' ),
 				),
@@ -585,7 +633,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_load_more',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-read-more-button-in-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'add-read-more-button-in-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'post_extra_option' => array( 'load_more' ),
@@ -993,22 +1047,29 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_title_tag',
 			array(
-				'label'     => esc_html__( 'Title Tag', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h3',
-				'options'   => l_theplus_get_tags_options(),
-				'separator' => 'after',
+				'label'   => esc_html__( 'Title Tag', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'h3',
+				'options' => l_theplus_get_tags_options(),
+			)
+		);
+		$this->add_control(
+			'post_title_tag_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Select the heading tag for your post title. Choose based on your page hierarchy to keep your website SEO-friendly and structured.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'display_title_limit',
 			array(
-				'label'     => wp_kses_post(
-					sprintf(
-						'Title Limit <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
-						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
-					)
-				),
+				'label'     => esc_html__( 'Title Limit', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -1016,15 +1077,56 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'display_title_limit_options',
+			'display_title_limit_label',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'display_title_limit' => array( 'yes' ),
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Enable this to limit long post titles and keep your layout clean. Perfect when you want all cards or listings to look uniform.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'display_title_by',
+			array(
+				'type'      => Controls_Manager::SELECT,
+				'label'     => esc_html__( 'Limit on', 'tpebl' ),
+				'default'   => 'char',
+				'options'   => array(
+					'char' => esc_html__( 'Character', 'tpebl' ),
+					'word' => esc_html__( 'Word', 'tpebl' ),
+				),
+				'condition' => array(
+					'display_title_limit' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'display_title_input',
+			array(
+				'label'     => esc_html__( 'Title Count', 'tpebl' ),
+				'type'      => Controls_Manager::NUMBER,
+				'min'       => 1,
+				'max'       => 1000,
+				'step'      => 1,
+				'condition' => array(
+					'display_title_limit' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'display_title_3_dots',
+			array(
+				'label'     => esc_html__( 'Display Dots', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'display_title_limit' => 'yes',
 				),
 			)
 		);
@@ -1042,16 +1144,31 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'display_post_category_options',
+			'post_category_style',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
+				'label'     => esc_html__( 'Style', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'style-1',
+				'options'   => l_theplus_get_style_list( 2 ),
+				'condition' => array(
 					'style!'                => array( 'style-1' ),
-					'display_post_category' => array( 'yes' ),
+					'display_post_category' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'display_post_category_all',
+			array(
+				'label'     => esc_html__( 'Display All Category', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+				'separator' => 'after',
+				'condition' => array(
+					'style!'                => array( 'style-1' ),
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
 				),
 			)
 		);
@@ -1068,7 +1185,13 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_excerpt_count',
 			array(
-				'label'     => wp_kses_post( "Excerpt/Content Count <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "limit-post-excerpt-in-elementor-blog-posts/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Excerpt/Content Count', 'tpebl' ),
+						esc_url( $this->tp_doc . 'limit-post-excerpt-in-elementor-blog-posts/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::NUMBER,
 				'min'       => 5,
 				'max'       => 500,
@@ -1081,11 +1204,202 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'show_post_date',
+			array(
+				'label'     => esc_html__( 'Date & Time', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+			)
+		);
+		$this->add_control(
+			'show_post_date_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"> %s </p>',
+						esc_html__( 'Turn this on to display the post’s published date or last updated time below the title.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'show_post_author',
+			array(
+				'label'     => esc_html__( 'Author Name', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+			)
+		);
+		$this->add_control(
+			'show_post_author_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"> %s </p>',
+						esc_html__( 'Enable this to show the author name under each post.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'show_read_time',
+			array(
+				'label'     => esc_html__( 'Read Time', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+			)
+		);
+		$this->add_control(
+			'show_read_time_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"> %s </p>',
+						esc_html__( 'Display an estimated reading time for each post to help visitors gauge their reading commitment.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'display_button',
+			array(
+				'label'     => esc_html__( 'Button', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+				'separator' => 'before',
+				'condition' => array(
+					'style' => array( 'style-2', 'style-3', 'style-5' ),
+				),
+			)
+		);
+		$this->add_control(
+			'button_style',
+			array(
+				'type'      => Controls_Manager::SELECT,
+				'label'     => esc_html__( 'Button Style', 'tpebl' ),
+				'default'   => 'style-7',
+				'options'   => array(
+					'style-7' => esc_html__( 'Style 1', 'tpebl' ),
+					'style-8' => esc_html__( 'Style 2', 'tpebl' ),
+					'style-9' => esc_html__( 'Style 3', 'tpebl' ),
+				),
+				'condition' => array(
+					'style'          => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'button_text',
+			array(
+				'label'       => esc_html__( 'Text', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => esc_html__( 'Read More', 'tpebl' ),
+				'placeholder' => esc_html__( 'Read More', 'tpebl' ),
+				'condition'   => array(
+					'style'          => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'button_icon_style',
+			array(
+				'label'     => esc_html__( 'Icon Font', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'font_awesome',
+				'options'   => array(
+					''             => esc_html__( 'None', 'tpebl' ),
+					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
+				),
+				'condition' => array(
+					'style'          => array( 'style-2', 'style-3', 'style-5' ),
+					'button_style!'  => array( 'style-7', 'style-9' ),
+					'display_button' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'button_icon',
+			array(
+				'label'     => esc_html__( 'Icon', 'tpebl' ),
+				'type'      => Controls_Manager::ICON,
+				'default'   => 'fa fa-chevron-right',
+				'condition' => array(
+					'style'             => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button'    => 'yes',
+					'button_style!'     => array( 'style-7', 'style-9' ),
+					'button_icon_style' => 'font_awesome',
+				),
+			)
+		);
+		$this->add_control(
+			'before_after',
+			array(
+				'label'     => esc_html__( 'Icon Position', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'after',
+				'options'   => array(
+					'after'  => esc_html__( 'After', 'tpebl' ),
+					'before' => esc_html__( 'Before', 'tpebl' ),
+				),
+				'condition' => array(
+					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button'     => 'yes',
+					'button_style!'      => array( 'style-7', 'style-9' ),
+					'button_icon_style!' => '',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_spacing',
+			array(
+				'label'     => esc_html__( 'Icon Spacing', 'tpebl' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'max' => 100,
+					),
+				),
+				'condition' => array(
+					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button'     => 'yes',
+					'button_style!'      => array( 'style-7', 'style-9' ),
+					'button_icon_style!' => '',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .button-link-wrap i.button-after' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .button-link-wrap i.button-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .button-link-wrap .button-after svg' => 'margin-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .button-link-wrap .button-before svg' => 'margin-right: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
 			'display_thumbnail',
 			array(
-				'label' => wp_kses_post(
+				'label'     => wp_kses_post(
 					sprintf(
-						'Display Image Size <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Display Image Size', 'tpebl' ),
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
 					)
 				),
@@ -1101,11 +1415,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_thumbnail_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'layout!'           => 'carousel',
 					'display_thumbnail' => array( 'yes' ),
@@ -1123,6 +1435,19 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'display_post_meta_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"> %s </p>',
+						esc_html__( 'Enable this to show extra post details like date, author, and other meta information for better context.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'post_meta_tag_style',
 			array(
 				'label'     => esc_html__( 'Post Meta Tag', 'tpebl' ),
@@ -1135,11 +1460,30 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'author_prefix',
+			array(
+				'label'       => esc_html__( 'Author Prefix', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'dynamic'     => array(
+					'active' => true,
+				),
+				'default'     => esc_html__( 'By', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter Prefix Text', 'tpebl' ),
+				'condition'   => array(
+					'display_post_meta'    => 'yes',
+					'post_meta_tag_style!' => 'style-3',
+					'style'                => 'style-5',
+				),
+			)
+		);
+		$this->add_control(
 			'filter_category',
 			array(
 				'label'     => wp_kses_post(
 					sprintf(
-						'Category Wise Filter <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Category Wise Filter', 'tpebl' ),
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
 						esc_url( $this->tp_doc . 'add-category-wise-filter-in-blog-post-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
 					)
@@ -1156,11 +1500,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'filter_category_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'layout!'         => 'carousel',
 					'filter_category' => array( 'yes' ),
@@ -1193,6 +1535,27 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		if ( ! tpae_wl_pluginads_enabled() ) {
+			$this->start_controls_section(
+				'tpae_theme_builder_sec',
+				array(
+					'label' => esc_html__( 'Use with Theme Builder', 'tpebl' ),
+					'tab'   => Controls_Manager::TAB_CONTENT,
+				)
+			);
+			$this->add_control(
+				'tpae_theme_builder',
+				array(
+					'type'        => 'tpae_theme_builder',
+					'notice'      => 'We recommend using this widget in the Archive Template to load it for all categories & tags.',
+					'button_text' => esc_html__( 'Create Archive Page', 'tpebl' ),
+					'page_type'   => 'tp_archives',
+				)
+			);
+			$this->end_controls_section();
+		}
+
 		$this->start_controls_section(
 			'section_meta_tag_style',
 			array(
@@ -1211,8 +1574,11 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span,
-				               {{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag',
+				'selector' => '
+				 {{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span,
+				 {{WRAPPER}} .blog-list .post-inner-loop .tpae-blog-meta span,
+				 {{WRAPPER}} .blog-list .post-inner-loop .tpae-blog-meta-overflow span,
+				 {{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_post_meta_style' );
@@ -1230,7 +1596,11 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-blog-meta span,
+					 {{WRAPPER}} .blog-list .post-inner-loop .tpae-blog-meta-overflow span,
 					{{WRAPPER}} .blog-list .post-inner-loop .post-meta-info span a,
+					 {{WRAPPER}} .blog-list .post-inner-loop .tpae-blog-meta-overflow span a,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-blog-meta span a,
 					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag' => 'color: {{VALUE}}',
 				),
 			)
@@ -1251,6 +1621,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-meta-info span,
 					{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-meta-info span a,
+					{{WRAPPER}} ..blog-list .post-inner-loop .tpae-blog-content:hover .tpae-blog-meta-overflow span a,
+					{{WRAPPER}} ..blog-list .post-inner-loop .tpae-blog-content:hover .tpae-blog-meta span a,
 					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-meta-tag:hover' => 'color: {{VALUE}}',
 				),
 			)
@@ -1260,28 +1632,1376 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'section_portable_style',
+			array(
+				'label'     => esc_html__( 'Customize Layout', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'style' => 'style-5',
+				),
+			)
+		);
+		$this->add_control(
+			'blog_card_layout',
+			array(
+				'label'        => __( 'Layout', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			)
+		);
+		$this->start_popover();
+		$this->add_responsive_control(
+			'wrap_flex_direction',
+			array(
+				'label'       => esc_html__( 'Layout Direction', 'tpebl' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => array(
+					'column'         => array(
+						'title' => esc_html__( 'Column', 'tpebl' ),
+						'icon'  => 'eicon-arrow-down',
+					),
+					'row'            => array(
+						'title' => esc_html__( 'Row', 'tpebl' ),
+						'icon'  => 'eicon-arrow-right',
+					),
+					'column-reverse' => array(
+						'title' => esc_html__( 'Column Reverse', 'tpebl' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+					'row-reverse'    => array(
+						'title' => esc_html__( 'Row Reverse', 'tpebl' ),
+						'icon'  => 'eicon-h-align-right',
+					),
+				),
+				'default'     => 'column',
+				'toggle'      => false,
+				'label_block' => false,
+				'selectors'   => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap' => 'flex-direction: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'tp_row_one_width',
+			array(
+				'label'          => esc_html__( 'Image Box', 'tpebl' ),
+				'type'           => Controls_Manager::SLIDER,
+				'size_units'     => array( '%' ),
+				'default'        => array(
+					'size' => '50',
+					'unit' => '%',
+				),
+				'tablet_default' => array(
+					'size' => 50,
+					'unit' => '%',
+				),
+				'mobile_default' => array(
+					'size' => 50,
+					'unit' => '%',
+				),
+				'condition'      => array( 'wrap_flex_direction' => array( 'row', 'row-reverse' ) ),
+				'selectors'      => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-image' => 'width: {{SIZE}}%;',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'tp_row_two_width',
+			array(
+				'label'          => esc_html__( 'Content Box', 'tpebl' ),
+				'type'           => Controls_Manager::SLIDER,
+				'size_units'     => array( '%' ),
+				'default'        => array(
+					'size' => '50',
+					'unit' => '%',
+				),
+				'tablet_default' => array(
+					'size' => 50,
+					'unit' => '%',
+				),
+				'mobile_default' => array(
+					'size' => 50,
+					'unit' => '%',
+				),
+				'condition'      => array( 'wrap_flex_direction' => array( 'row', 'row-reverse' ) ),
+				'selectors'      => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-content' => 'width: {{SIZE}}%;',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'tp_content_alignment',
+			array(
+				'label'       => esc_html__( 'Text Alignment', 'tpebl' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => array(
+					'left'   => array(
+						'title' => esc_html__( 'Left', 'tpebl' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center' => array(
+						'title' => esc_html__( 'Center', 'tpebl' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'right'  => array(
+						'title' => esc_html__( 'Right', 'tpebl' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'default'     => 'left',
+				'toggle'      => false,
+				'label_block' => false,
+				'selectors'   => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'text-align: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'tp_item_content_alignment',
+			array(
+				'label'       => esc_html__( 'Layout Alignment', 'tpebl' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => array(
+					'flex-start' => array(
+						'title' => esc_html__( 'Left', 'tpebl' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center'     => array(
+						'title' => esc_html__( 'Center', 'tpebl' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'flex-end'   => array(
+						'title' => esc_html__( 'Right', 'tpebl' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'default'     => 'left',
+				'toggle'      => false,
+				'label_block' => false,
+				'selectors'   => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'align-items: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'wrap_gap',
+			array(
+				'label'      => esc_html__( 'Item Gap', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'em'  => array(
+						'min' => 0,
+						'max' => 10,
+					),
+					'rem' => array(
+						'min' => 0,
+						'max' => 10,
+					),
+				),
+				'default'    => array(
+					'size' => 20,
+					'unit' => 'px',
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap' => 'gap: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
+			'tp_absolute_layout',
+			array(
+				'label'     => esc_html__( 'Layout Position', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+			)
+		);
+		$this->add_responsive_control(
+			'tp_top_card',
+			array(
+				'label'      => esc_html__( 'Left', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 10,
+					),
+				),
+				'default'    => array(
+					'size' => '',
+					'unit' => 'px',
+				),
+				'condition'  => array( 'tp_absolute_layout' => array( 'yes' ) ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-content.tpae-protebal-absolute' => 'left: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'tp_bottom_card',
+			array(
+				'label'      => esc_html__( 'bottom', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 10,
+					),
+				),
+				'default'    => array(
+					'size' => '',
+					'unit' => 'px',
+				),
+				'condition'  => array( 'tp_absolute_layout' => array( 'yes' ) ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-content' => 'bottom: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'tp_width_card',
+			array(
+				'label'      => esc_html__( 'Width', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 10,
+					),
+				),
+				'default'    => array(
+					'size' => '100',
+					'unit' => '%',
+				),
+				'condition'  => array( 'tp_absolute_layout' => array( 'yes' ) ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-content' => 'width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'content_background_options',
+			array(
+				'label'     => esc_html__( 'Content', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			)
+		);
+		$this->add_responsive_control(
+			'content_direction',
+			array(
+				'label'       => esc_html__( 'Content Direction', 'tpebl' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'options'     => array(
+					'row'            => array(
+						'title' => esc_html__( 'Row', 'tpebl' ),
+						'icon'  => 'eicon-h-align-left',
+					),
+					'row-reverse'    => array(
+						'title' => esc_html__( 'Row Reverse', 'tpebl' ),
+						'icon'  => 'eicon-h-align-right',
+					),
+					'column'         => array(
+						'title' => esc_html__( 'Column', 'tpebl' ),
+						'icon'  => 'eicon-v-align-top',
+					),
+					'column-reverse' => array(
+						'title' => esc_html__( 'Column Reverse', 'tpebl' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+				),
+				'default'     => 'column',
+				'toggle'      => false,
+				'label_block' => false,
+				'selectors'   => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'display: flex; flex-direction: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'content_vertical_justify',
+			array(
+				'label'     => esc_html__( 'Vertical Alignment', 'tpebl' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'flex-start'    => array(
+						'title' => esc_html__( 'Start', 'tpebl' ),
+						'icon'  => 'eicon-v-align-top',
+					),
+					'center'        => array(
+						'title' => esc_html__( 'Center', 'tpebl' ),
+						'icon'  => 'eicon-v-align-middle',
+					),
+					'flex-end'      => array(
+						'title' => esc_html__( 'End', 'tpebl' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+					'space-between' => array(
+						'title' => esc_html__( 'Space Between', 'tpebl' ),
+						'icon'  => 'eicon-justify-space-between-v',
+					),
+					'space-around'  => array(
+						'title' => esc_html__( 'Space Around', 'tpebl' ),
+						'icon'  => 'eicon-justify-space-around-v',
+					),
+				),
+				'default'   => 'flex-start',
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'justify-content: {{VALUE}};',
+				),
+				'condition' => array(
+					'content_direction' => array( 'column', 'column-reverse' ),
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'blog_content_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'default'    => array(
+					'top'    => '',
+					'bottom' => '',
+					'left'   => '',
+					'right'  => '',
+					'unit'   => 'px',
+				),
+				'condition'  => array(
+					'style' => array( 'style-5' ),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'blog_content_margin',
+			array(
+				'label'      => esc_html__( 'Margin', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'default'    => array(
+					'top'    => '',
+					'bottom' => '',
+					'left'   => '',
+					'right'  => '',
+					'unit'   => 'px',
+				),
+				'condition'  => array(
+					'style' => array( 'style-5' ),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			array(
+				'name'     => 'blog_content_background',
+				'label'    => esc_html__( 'Background', 'tpebl' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-content',
+			)
+		);
+		$this->add_control(
+			'blog_border_post',
+			array(
+				'label'        => __( 'Border', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'style' => array( 'style-5' ),
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'blog_content_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-content',
+			)
+		);
+		$this->add_control(
+			'blog_content_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'meta_style_options',
+			array(
+				'label'     => esc_html__( 'Meta', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'blog_meta_layout_post',
+			array(
+				'label'        => __( 'Meta Layout', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'style' => array( 'style-5' ),
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'meta_flex_direction',
+			array(
+				'label'     => esc_html__( 'Meta Direction', 'tpebl' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'row'            => array(
+						'title' => esc_html__( 'Row', 'tpebl' ),
+						'icon'  => 'eicon-h-align-left',
+					),
+					'row-reverse'    => array(
+						'title' => esc_html__( 'Row Reverse', 'tpebl' ),
+						'icon'  => 'eicon-h-align-right',
+					),
+					'column'         => array(
+						'title' => esc_html__( 'Column', 'tpebl' ),
+						'icon'  => 'eicon-v-align-top',
+					),
+					'column-reverse' => array(
+						'title' => esc_html__( 'Column Reverse', 'tpebl' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+				),
+				'default'   => 'row',
+				'toggle'    => false,
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-blog-meta,{{WRAPPER}} .tpae-blog-meta-overflow' => 'display: flex; flex-direction: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'meta_align_items',
+			array(
+				'label'     => esc_html__( 'Meta Align', 'tpebl' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'flex-start' => array(
+						'title' => esc_html__( 'Top', 'tpebl' ),
+						'icon'  => 'eicon-v-align-top',
+					),
+					'center'     => array(
+						'title' => esc_html__( 'Middle', 'tpebl' ),
+						'icon'  => 'eicon-v-align-middle',
+					),
+					'flex-end'   => array(
+						'title' => esc_html__( 'Bottom', 'tpebl' ),
+						'icon'  => 'eicon-v-align-bottom',
+					),
+				),
+				'default'   => 'center',
+				'condition' => array(
+					'content_direction' => array( 'row', 'row-reverse' ),
+				),
+				'toggle'    => false,
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-blog-meta' => 'align-items: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'meta_gap',
+			array(
+				'label'      => esc_html__( 'Item Gap', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'default'    => array(
+					'size' => 10,
+					'unit' => 'px',
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta,{{WRAPPER}} .tpae-blog-meta-overflow' => 'gap: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_responsive_control(
+			'tp_meta_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow,{{WRAPPER}} .tpae-blog-meta' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'before',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'tp_meta_bg',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'tp_meta_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta',
+			)
+		);
+		$this->add_responsive_control(
+			'tp_meta_border_r',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
+			'date_overflow',
+			array(
+				'label'     => esc_html__( 'Date Position', 'tpebl' ),
+				'type'      => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on'  => esc_html__( 'Custom', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'style'          => array( 'style-5' ),
+					'show_post_date' => 'yes',
+				),
+
+			)
+		);
+		$this->start_popover();
+		$this->add_responsive_control(
+			'category_date_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .meta-date' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'before',
+			)
+		);
+		$this->add_responsive_control(
+			'date_style_margin_tb',
+			array(
+				'label'      => esc_html__( 'Top/Bottom Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .meta-date' => 'top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'date_style_margin_lr',
+			array(
+				'label'      => esc_html__( 'Left/Right Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .meta-date' => 'left: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'wl_btn_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta-overflow .meta-date',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'overflow_date_background',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta-overflow .meta-date',
+			)
+		);
+		$this->add_responsive_control(
+			'overflow_date_br',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .meta-date' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'meta_overflow',
+			array(
+				'label'     => esc_html__( 'Author Position', 'tpebl' ),
+				'type'      => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on'  => esc_html__( 'Custom', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'style'            => array( 'style-5' ),
+					'show_post_author' => 'yes',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_responsive_control(
+			'category_meta_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-author' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'before',
+			)
+		);
+		$this->add_responsive_control(
+			'meta_style_margin_tb',
+			array(
+				'label'      => esc_html__( 'Top/Bottom Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-author' => 'top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'meta_style_margin_lr',
+			array(
+				'label'      => esc_html__( 'Left/Right Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-author' => 'left: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'overflow_meta_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-author',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'overflow_date__meta_background',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-author',
+			)
+		);
+		$this->add_responsive_control(
+			'overflow_meta_br',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-author' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'post_tima_overflow',
+			array(
+				'label'     => esc_html__( 'Post Time Position', 'tpebl' ),
+				'type'      => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on'  => esc_html__( 'Custom', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'style'          => array( 'style-5' ),
+					'show_read_time' => 'yes',
+				),
+
+			)
+		);
+		$this->start_popover();
+		$this->add_responsive_control(
+			'category_post_time_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-read-time' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'before',
+			)
+		);
+		$this->add_responsive_control(
+			'post_style_margin_tb',
+			array(
+				'label'      => esc_html__( 'Top/Bottom Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-read-time' => 'top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'post_style_margin_lr',
+			array(
+				'label'      => esc_html__( 'Left/Right Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-read-time' => 'left: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'overflow_post_time_border',
+				'label'    => esc_html__( 'Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-read-time',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'overflow_post_time_background',
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-read-time',
+			)
+		);
+		$this->add_responsive_control(
+			'overflow_post_time_br',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .tpae-blog-meta-overflow .tpae-blog-read-time' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
+			'button_overflow',
+			array(
+				'label'     => esc_html__( 'Button Absolute', 'tpebl' ),
+				'type'      => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'tpebl' ),
+				'label_on'  => esc_html__( 'Custom', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'style'          => array( 'style-5' ),
+					'display_button' => 'yes',
+				),
+
+			)
+		);
+		$this->start_popover();
+			$this->add_responsive_control(
+				'button_style_margin_tb',
+				array(
+					'label'      => esc_html__( 'Top/Bottom Spacing', 'tpebl' ),
+					'type'       => Controls_Manager::SLIDER,
+					'size_units' => array( 'px', '%' ),
+					'range'      => array(
+						'px' => array(
+							'min' => 0,
+							'max' => 500,
+						),
+						'%'  => array(
+							'min' => 0,
+							'max' => 100,
+						),
+					),
+					'selectors'  => array(
+						'{{WRAPPER}} .pt-plus-button-wrapper.overflow' => 'top: {{SIZE}}{{UNIT}};',
+					),
+				)
+			);
+
+			$this->add_responsive_control(
+				'button_style_margin_lr',
+				array(
+					'label'      => esc_html__( 'Left/Right Spacing', 'tpebl' ),
+					'type'       => Controls_Manager::SLIDER,
+					'size_units' => array( 'px', '%' ),
+					'range'      => array(
+						'px' => array(
+							'min' => 0,
+							'max' => 500,
+						),
+						'%'  => array(
+							'min' => 0,
+							'max' => 100,
+						),
+					),
+					'selectors'  => array(
+						'{{WRAPPER}} .pt-plus-button-wrapper.overflow' => 'left: {{SIZE}}{{UNIT}};',
+					),
+				)
+			);
+		$this->end_popover();
+		$this->end_controls_section();
+		/*Post category*/
+		$this->start_controls_section(
 			'section_post_category_style',
 			array(
 				'label'     => esc_html__( 'Category Post', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'display_post_category' => 'yes',
-					'style!'                => 'style-1',
+					'style!'                => array( 'style-1', 'smart-loop-builder' ),
 				),
 			)
 		);
 		$this->add_control(
-			'section_post_category_style_options',
+			'blog_category_post',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'label'        => __( 'Category Post', 'tpebl' ),
+				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'style!'                => array( 'style-1' ),
+					'display_post_category' => 'yes',
+				),
 			)
 		);
-		$this->end_controls_section();
+		$this->start_popover();
+		$this->add_responsive_control(
+			'category_style_margin_tb',
+			array(
+				'label'      => esc_html__( 'Top/Bottom Spacing', 'tpebl' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tp-blog-cetegory-style-5, {{WRAPPER}} .tpae-blog-category-style-5' => 'top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'category_style_margin_lr',
+			array(
+				'label'      => esc_html__( 'Left/Right Spacing', 'tpebl' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tp-blog-cetegory-style-5, {{WRAPPER}} .tpae-blog-category-style-5' => 'left: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_responsive_control(
+			'category_inner_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .post-category-list.style-1 span a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'before',
+				'condition'  => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'      => 'category_typography',
+				'label'     => esc_html__( 'Typography', 'tpebl' ),
+				'selector'  => '{{WRAPPER}} .blog-list .post-category-list span a',
+				'condition' => array(
+					'display_post_category' => 'yes',
+				),
+			)
+		);
+		$this->start_controls_tabs( 'tabs_category_style' );
+		$this->start_controls_tab(
+			'tab_category_normal',
+			array(
+				'label' => esc_html__( 'Normal', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'category_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-category-list span a' => 'color: {{VALUE}}',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_category_hover',
+			array(
+				'label' => esc_html__( 'Hover', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'category_hover_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-category-list span:hover a' => 'color: {{VALUE}}',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->add_control(
+			'category_2_border_hover_color',
+			array(
+				'label'     => esc_html__( 'Hover Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ff214f',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a:before' => 'background: {{VALUE}};',
+				),
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-2',
+				),
+			)
+		);
+		$this->add_control(
+			'category_border',
+			array(
+				'label'     => esc_html__( 'Border', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
 
+		$this->add_control(
+			'category_border_style',
+			array(
+				'label'     => esc_html__( 'Border Style', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'solid',
+				'options'   => l_theplus_get_border_style(),
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a' => 'border-style: {{VALUE}};',
+				),
+				'condition' => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'box_category_border_width',
+			array(
+				'label'      => esc_html__( 'Border Width', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'default'    => array(
+					'top'    => 1,
+					'right'  => 1,
+					'bottom' => 1,
+					'left'   => 1,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->start_controls_tabs(
+			'tabs_category_border_style',
+			array(
+				'condition' => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->start_controls_tab(
+			'tab_category_border_normal',
+			array(
+				'label'     => esc_html__( 'Normal', 'tpebl' ),
+				'condition' => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_control(
+			'category_border_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'category_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_category_border_hover',
+			array(
+				'label'     => esc_html__( 'Hover', 'tpebl' ),
+				'condition' => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_control(
+			'category_border_hover_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span:hover a' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'category_border_hover_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span:hover a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'category_border'       => 'yes',
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->add_control(
+			'category_bg_options',
+			array(
+				'label'     => esc_html__( 'Background Options', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->start_controls_tabs(
+			'tabs_category_background_style',
+			array(
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->start_controls_tab(
+			'tab_category_background_normal',
+			array(
+				'label'     => esc_html__( 'Normal', 'tpebl' ),
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'category_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  => '{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_category_background_hover',
+			array(
+				'label'     => esc_html__( 'Hover', 'tpebl' ),
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'category_hover_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  => '{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span:hover a',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->add_control(
+			'category_shadow_options',
+			array(
+				'label'     => esc_html__( 'Box Shadow Options', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->start_controls_tabs(
+			'tabs_category_shadow_style',
+			array(
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->start_controls_tab(
+			'tab_category_shadow_normal',
+			array(
+				'label'     => esc_html__( 'Normal', 'tpebl' ),
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'      => 'category_shadow',
+				'selector'  => '{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span a',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_category_shadow_hover',
+			array(
+				'label'     => esc_html__( 'Hover', 'tpebl' ),
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'      => 'category_hover_shadow',
+				'selector'  => '{{WRAPPER}} .blog-list .post-inner-loop .post-category-list span:hover a',
+				'condition' => array(
+					'display_post_category' => 'yes',
+					'post_category_style'   => 'style-1',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->end_controls_section();
+		/*Post category*/
 		$this->start_controls_section(
 			'section_title_style',
 			array(
@@ -1300,6 +3020,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-2 .post-title, 
 					{{WRAPPER}} .blog-list.blog-style-3 h3.post-title, 
 					{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-4 .post-title,
+					{{WRAPPER}} #pt-plus-blog-post-list.blog-list.blog-style-5 .post-title,
 					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
@@ -1365,6 +3086,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title,
 					{{WRAPPER}} .blog-list .post-inner-loop .blog-list-content:hover .post-title a,
+					{{WRAPPER}} .blog-list .post-inner-loop .tpae-compect-blog-wrap .post-title a:hover .post-title a,
 					{{WRAPPER}} .blog-list .post-inner-loop .tpae-preset-blog .tpae-preset-content .tpae-preset-title:hover' => 'color: {{VALUE}}',
 				),
 			)
@@ -1484,13 +3206,12 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->end_controls_section();
-		/*Content Background*/
-		$this->start_controls_section(
+		$this->add_control(
 			'section_content_bg_style',
 			array(
 				'label'     => esc_html__( 'Content Background', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_content_bg_style' );
@@ -1539,6 +3260,70 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'blog_featured_image_width',
+			array(
+				'label'      => esc_html__( 'Image width', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', '%', 'vh' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 1000,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 50,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'vh' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-featured-image .thumb-wrap img' => 'width: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'style' => array( 'style-5' ),
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'blog_featured_image_height',
+			array(
+				'label'      => esc_html__( 'Image Height', 'tpebl' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', '%', 'vh' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 1000,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 50,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'vh' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .blog-featured-image .thumb-wrap img' => 'height: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'style' => array( 'style-5' ),
+				),
+			)
+		);
 		$this->add_control(
 			'hover_image_style',
 			array(
@@ -1555,7 +3340,39 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .blog-list.blog-style-3 .blog-list-content,{{WRAPPER}} .blog-list.blog-style-3 .blog-featured-image,{{WRAPPER}} .blog-list.blog-style-2 .blog-featured-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list.blog-style-3 .blog-list-content,
+					{{WRAPPER}} .blog-list.blog-style-3 .blog-featured-image,
+					{{WRAPPER}} .blog-list .tpae-compect-blog-wrap .blog-featured-image span.thumb-wrap img,
+					{{WRAPPER}} .blog-list.blog-style-2 .blog-featured-image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
+			'tpae_enable_overlay',
+			array(
+				'label'        => esc_html__( 'Enable Overlay', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'tpebl' ),
+				'label_off'    => esc_html__( 'No', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'condition'    => array(
+					'style' => 'style-5',
+				),
+			)
+		);
+		$this->add_control(
+			'tpae_overlay_color',
+			array(
+				'label'     => esc_html__( 'Overlay Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => 'rgba(0,0,0,0.6)',
+				'selectors' => array(
+					'{{WRAPPER}} .tpae-overlay-blog' => 'background: linear-gradient(to top, {{VALUE}}, transparent);',
+				),
+				'condition' => array(
+					'tpae_enable_overlay' => 'yes',
+					'style'               => 'style-5',
 				),
 			)
 		);
@@ -1574,13 +3391,295 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_filter_category_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'section_button_styling',
+			array(
+				'label'     => esc_html__( 'Button Style', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'style'          => array( 'style-5' ),
+					'display_button' => 'yes',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'default'    => array(
+					'top'      => '15',
+					'right'    => '30',
+					'bottom'   => '15',
+					'left'     => '30',
+					'isLinked' => false,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'separator'  => 'after',
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'selector' => '{{WRAPPER}} .pt_plus_button .button-link-wrap',
+			)
+		);
+
+		$this->start_controls_tabs( 'tabs_button_style' );
+
+		$this->start_controls_tab(
+			'tab_button_normal',
+			array(
+				'label' => esc_html__( 'Normal', 'tpebl' ),
+			)
+		);
+
+		$this->add_control(
+			'btn_text_color',
+			array(
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_button.button-style-7 .button-link-wrap:after' => 'border-color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .button-link-wrap .btn-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .button-link-wrap .btn-icon svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .button-link-wrap .btn-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .button-link-wrap .btn-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'button_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap',
+				'separator' => 'after',
+				'condition' => array(
+					'button_style!' => array( 'style-7', 'style-9' ),
+				),
+			)
+		);
+		$this->add_control(
+			'button_border_style',
+			array(
+				'label'     => esc_html__( 'Border Style', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'solid',
+				'options'   => array(
+					'none'   => esc_html__( 'None', 'tpebl' ),
+					'solid'  => esc_html__( 'Solid', 'tpebl' ),
+					'dotted' => esc_html__( 'Dotted', 'tpebl' ),
+					'dashed' => esc_html__( 'Dashed', 'tpebl' ),
+					'groove' => esc_html__( 'Groove', 'tpebl' ),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap' => 'border-style: {{VALUE}};',
+				),
+				'condition' => array(
+					'button_style' => array( 'style-8' ),
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_border_width',
+			array(
+				'label'      => esc_html__( 'Border Width', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'default'    => array(
+					'top'    => 1,
+					'right'  => 1,
+					'bottom' => 1,
+					'left'   => 1,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'button_style'         => array( 'style-8' ),
+					'button_border_style!' => 'none',
+				),
+			)
+		);
+		$this->add_control(
+			'button_border_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#313131',
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'button_style'         => array( 'style-8' ),
+					'button_border_style!' => 'none',
+				),
+				'separator' => 'after',
+			)
+		);
+		$this->add_responsive_control(
+			'button_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'button_style' => array( 'style-8' ),
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'      => 'button_shadow',
+				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap',
+				'condition' => array(
+					'button_style' => array( 'style-8' ),
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_button_hover',
+			array(
+				'label' => esc_html__( 'Hover', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'btn_text_hover_color',
+			array(
+				'label'     => esc_html__( 'Text Hover Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color_hover',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .button-link-wrap .btn-icon:hover svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .button-link-wrap .btn-icon:hover svg' => 'fill: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .button-link-wrap .btn-icon:hover svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .button-link-wrap .btn-icon:hover svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'button_icon_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'button_hover_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover',
+				'separator' => 'after',
+				'condition' => array(
+					'button_style!' => array( 'style-7', 'style-9' ),
+				),
+			)
+		);
+		$this->add_control(
+			'button_border_hover_color',
+			array(
+				'label'     => esc_html__( 'Hover Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#313131',
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'button_style'         => array( 'style-8' ),
+					'button_border_style!' => 'none',
+				),
+				'separator' => 'after',
+			)
+		);
+		$this->add_responsive_control(
+			'button_hover_radius',
+			array(
+				'label'      => esc_html__( 'Hover Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'button_style' => array( 'style-8' ),
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'      => 'button_hover_shadow',
+				'selector'  => '{{WRAPPER}} .pt_plus_button.button-style-8 .button-link-wrap:hover',
+				'condition' => array(
+					'button_style' => array( 'style-8' ),
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1598,6 +3697,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap,
 					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
@@ -1624,6 +3724,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'options'   => L_theplus_get_border_style(),
 				'selectors' => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap,
 					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-style: {{VALUE}};',
 				),
 				'condition' => array(
@@ -1645,6 +3746,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap,
 					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
@@ -1662,6 +3764,22 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'box_border_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'box_border' => 'yes',
+				),
+			)
+		);
 		$this->add_responsive_control(
 			'border_radius',
 			array(
@@ -1670,6 +3788,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap,
 					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
@@ -1687,6 +3806,22 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'box_border_hover_color',
+			array(
+				'label'     => esc_html__( 'Border Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#252525',
+				'selectors' => array(
+					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap:hover,
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover' => 'border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'box_border' => 'yes',
+				),
+			)
+		);
 		$this->add_responsive_control(
 			'border_hover_radius',
 			array(
@@ -1695,6 +3830,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover
+					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap:hover
 					{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
@@ -1716,7 +3852,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'name'     => 'box_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+				'selector' =>
+				'{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content,
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap,
 				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog',
 			)
 		);
@@ -1732,7 +3870,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			array(
 				'name'     => 'box_active_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover,
+				'selector' => '
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .blog-list-content:hover,
+				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-compect-blog-wrap:hover,
 				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover',
 			)
 		);
@@ -1760,7 +3900,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'content_shadow',
-				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content,
+				'selector' =>
+				'{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content,
+				{{WRAPPER}} .blog-list .tpae-compect-blog-wrap,
 				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog',
 			)
 		);
@@ -1775,7 +3917,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'content_hover_shadow',
-				'selector' => '{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content:hover,
+				'selector' =>
+				'{{WRAPPER}} .blog-list.blog-style-1 .blog-list-content:hover,
+				{{WRAPPER}} .blog-list .tpae-compect-blog-wrap:hover,
 				{{WRAPPER}} .blog-list .post-inner-loop .grid-item .tpae-preset-blog:hover',
 			)
 		);
@@ -1796,11 +3940,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_carousel_options_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -1825,11 +3967,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'messy_column_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'messy_column' => array( 'yes' ),
 				),
@@ -2061,6 +4201,32 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$ani_speed    = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
 		$out_effect   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : 'no-animation';
 
+		$tp_absolute_layout = ! empty( $settings['tp_absolute_layout'] ) ? $settings['tp_absolute_layout'] : 'no';
+
+		$show_date_time   = ! empty( $settings['show_post_date'] ) && 'yes' === $settings['show_post_date'] ? 'yes' : 'no';
+		$show_author_name = ! empty( $settings['show_post_author'] ) && 'yes' === $settings['show_post_author'] ? 'yes' : 'no';
+		$show_read_time   = ! empty( $settings['show_read_time'] ) && 'yes' === $settings['show_read_time'] ? 'yes' : 'no';
+		$display_btn      = ! empty( $settings['display_button'] ) ? $settings['display_button'] : '';
+		$author_prefix    = ! empty( $settings['author_prefix'] ) ? $settings['author_prefix'] : 'By';
+
+		$before_after      = $settings['before_after'];
+		$button_text       = $settings['button_text'];
+		$button_icon_style = $settings['button_icon_style'];
+		$button_icon       = $settings['button_icon'];
+		// $button_icons_mind = $settings['button_icons_mind'];
+
+		$tp_date_overflow      = $settings['date_overflow'];
+		$tp_meta_overflow      = $settings['meta_overflow'];
+		$tp_post_tima_overflow = $settings['post_tima_overflow'];
+
+		$display_post_category = $settings['display_post_category'];
+		$post_category_style   = $settings['post_category_style'];
+
+		$display_title_limit  = $settings['display_title_limit'];
+		$display_title_by     = $settings['display_title_by'];
+		$display_title_input  = $settings['display_title_input'];
+		$display_title_3_dots = $settings['display_title_3_dots'];
+
 		$animated_columns = '';
 
 		if ( 'no-animation' === $ani_effect ) {
@@ -2145,7 +4311,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 
 		if ( ! $query->have_posts() ) {
 			$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Posts not found', 'tpebl' ) . '</h3>';
-		} elseif ( 'style-1' === $style || 'smart-loop-builder' === $style ) {
+		} elseif ( 'style-1' === $style || 'smart-loop-builder' === $style || 'style-5' === $style ) {
 
 			if ( 'smart-loop-builder' === $style ) {
 				$style_custom = ! empty( $settings['content_css'] ) ? $settings['content_css'] : '';
@@ -2168,6 +4334,40 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 
 				$query->the_post();
 				$post = $query->post;
+
+				// read more button
+				$the_button = $button_attr = '';
+				if ( 'yes' === $settings['display_button'] ) {
+					$button_attr = 'button' . $ji;
+					if ( ! empty( get_the_permalink() ) ) {
+						$this->add_render_attribute( $button_attr, 'href', get_the_permalink() );
+						$this->add_render_attribute( $button_attr, 'rel', 'nofollow' );
+					}
+
+					$this->add_render_attribute( $button_attr, 'class', 'button-link-wrap' );
+					$this->add_render_attribute( $button_attr, 'role', 'button' );
+
+					$button_style   = $settings['button_style'];
+					$button_text    = $settings['button_text'];
+					$btn_uid        = uniqid( 'btn' );
+					$data_class     = $btn_uid;
+					$data_class    .= ' button-' . $button_style . ' ';
+					$overflow_class = ( ! empty( $settings['button_overflow'] ) && 'yes' === $settings['button_overflow'] ) ? ' overflow' : '';
+
+					$the_button                      = '<div class="pt-plus-button-wrapper' . $overflow_class . '">';
+						$the_button                 .= '<div class="button_parallax">';
+							$the_button             .= '<div class="ts-button">';
+								$the_button         .= '<div class="pt_plus_button ' . $data_class . '">';
+									$the_button     .= '<div class="animted-content-inner">';
+										$the_button .= '<a ' . $this->get_render_attribute_string( $button_attr ) . '>';
+										$the_button .= include L_THEPLUS_WSTYLES . 'blog/post-button.php';
+										$the_button .= '</a>';
+									$the_button     .= '</div>';
+								$the_button         .= '</div>';
+							$the_button             .= '</div>';
+						$the_button                 .= '</div>';
+					$the_button                     .= '</div>';
+				}
 
 				if ( 'metro' === $layout ) {
 
@@ -2262,7 +4462,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			if ( $settings['post_extra_option'] == 'load_more' && $layout != 'carousel' ) {
 				if ( ! empty( $total_posts ) && $total_posts > 0 ) {
 					$output     .= '<div class="ajax_load_more">';
-						$output .= '<a class="post-load-more" data-layout="' . esc_attr( $layout ) . '" data-offset-posts="' . esc_attr($settings['post_offset']) . '" data-load-class="' . esc_attr( $uid ) . '" data-display_post="' . esc_attr( $settings['display_posts'] ) . '" data-post_load_more="' . esc_attr( $settings['load_more_post'] ) . '" data-loaded_posts="' . esc_attr( $loaded_posts_text ) . '" data-tp_loading_text="' . esc_attr( $tp_loading_text ) . '" data-page="1" data-total_page="' . esc_attr( $load_page ) . '" data-loadattr= \'' . $data_loadkey . '\'>' . esc_html( $settings['load_more_btn_text'] ) . '</a>';
+						$output .= '<a class="post-load-more" data-layout="' . esc_attr( $layout ) . '" data-offset-posts="' . esc_attr( $settings['post_offset'] ) . '" data-load-class="' . esc_attr( $uid ) . '" data-display_post="' . esc_attr( $settings['display_posts'] ) . '" data-post_load_more="' . esc_attr( $settings['load_more_post'] ) . '" data-loaded_posts="' . esc_attr( $loaded_posts_text ) . '" data-tp_loading_text="' . esc_attr( $tp_loading_text ) . '" data-page="1" data-total_page="' . esc_attr( $load_page ) . '" data-loadattr= \'' . $data_loadkey . '\'>' . esc_html( $settings['load_more_btn_text'] ) . '</a>';
 					$output     .= '</div>';
 				}
 			}

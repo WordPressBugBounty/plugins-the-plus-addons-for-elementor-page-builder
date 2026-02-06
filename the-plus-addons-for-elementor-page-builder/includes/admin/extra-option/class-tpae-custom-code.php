@@ -87,7 +87,7 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 		 * @since 6.1.2
 		 */
 		public function tpae_js_option() {
-			
+
 			$js_rules = '';
 			if ( ! empty( $this->db_data['theplus_custom_js_editor'] ) ) {
 

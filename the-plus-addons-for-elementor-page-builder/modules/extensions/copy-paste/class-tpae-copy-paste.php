@@ -274,9 +274,10 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 				}
 			}
 
+
 			$type = array(
 				'widgets' => $widgets_name,
-				// 'extensions' => $extensions
+				'extensions' => ''
 			);
 
 			return apply_filters( 'tpae_enable_selected_widgets', $type );

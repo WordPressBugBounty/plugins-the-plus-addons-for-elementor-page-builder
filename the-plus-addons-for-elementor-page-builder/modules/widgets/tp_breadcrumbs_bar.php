@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 
-    /**
+	/**
 	 * Document Link For Need help.
 	 *
 	 * @since 6.1.0
@@ -73,7 +73,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 	 * @since 6.1.0
 	 */
 	public function get_categories() {
-		return array( 'plus-header' );
+		return array( 'plus-essential', 'plus-single' );
 	}
 
 	/**
@@ -82,10 +82,10 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 	 * @since 6.1.0
 	 */
 	public function get_keywords() {
-		return array( 'Breadcrumb', 'Navigation', 'Trail', 'Path', 'Links', 'Navigational Links', 'Navigation Bar' );
+		return array( 'Breadcrumb', 'Breadcrumb Navigation', 'Breadcrumb Trail', 'SEO Breadcrumb', 'Full-Width Breadcrumb', 'Home Icon Breadcrumb', 'Responsive Breadcrumb', 'Navigation Path' );
 	}
 
-    /**
+	/**
 	 * Get Widget Custom Help Url.
 	 *
 	 * @since 6.1.0
@@ -104,20 +104,20 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
@@ -126,7 +126,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -142,21 +142,21 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 17013,
-                'label_block' => true,
-            )
-        );
-		$this->add_control(
-		'breadcrumbs_style',
+			'tpae_preset_controller',
 			array(
-				'label'        => esc_html__( 'Breadcrumbs Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => \Elementor\Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style_1',
-				'options'      => array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 17013,
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'breadcrumbs_style',
+			array(
+				'label'       => esc_html__( 'Breadcrumbs Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style_1',
+				'options'     => array(
 					'style_1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/breadcrumbs/style-1.svg',
@@ -166,15 +166,15 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/breadcrumbs/style-2.svg',
 					),
 				),
-				'columns'      => 2,
-				'classes'      => 'tpae-visual_choice',
+				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
 			'breadcrumbs_full_auto',
 			array(
 				'label'     => esc_html__( 'Breadcrumbs Full Width', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::SWITCHER,
+				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
 				'default'   => 'no',
@@ -226,7 +226,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Home Title', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
-				'ai'  => false,
+				'ai'      => false,
 				'default' => esc_html__( 'Home', 'tpebl' ),
 			)
 		);
@@ -234,22 +234,14 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'home_select_icon',
 			array(
-				'label'       => esc_html__( 'Select Icon', 'tpebl' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'icon',
-				'options'     => array(
+				'label'   => esc_html__( 'Select Icon', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'icon',
+				'options' => array(
 					''     => esc_html__( 'None', 'tpebl' ),
 					'icon' => esc_html__( 'Icon', 'tpebl' ),
 				),
 
-			)
-		);
-		$this->add_control(
-			'home_select_Note',
-			array(
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> You can select Icon or Image using this option.',
-				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_control(
@@ -271,13 +263,13 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'fontawesome_option',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'home_select_icon' => 'icon',
 					'icon_font_style'  => 'font_awesome',
 				),
@@ -308,41 +300,24 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'special_effect_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'home_select_icon' => 'icon',
 					'icon_font_style'  => 'icon_mind',
 				),
 			)
 		);
-		// $this->add_control(
-		// 	'icons_mind',
-		// 	array(
-		// 		'label'       => esc_html__( 'Icon Library', 'tpebl' ),
-		// 		'type'        => Controls_Manager::SELECT2,
-		// 		'default'     => '',
-		// 		'label_block' => true,
-		// 		// 'options'     => theplus_icons_mind(),
-		// 		'condition'   => array(
-		// 			'home_select_icon' => 'icon',
-		// 			'icon_font_style'  => 'icon_mind',
-		// 		),
-		// 	)
-		// );
 		$this->add_control(
 			'icon_img_options',
 			array(
-				'label' => esc_html__( 'Icon Image', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Icon Image', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition'  => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'home_select_icon' => 'icon',
 					'icon_font_style'  => 'icon_image',
 				),
@@ -397,10 +372,10 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'sep_select_icon',
 			array(
-				'label'       => esc_html__( 'Select Icon', 'tpebl' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => '',
-				'options'     => array(
+				'label'   => esc_html__( 'Select Icon', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => array(
 					''         => esc_html__( 'None', 'tpebl' ),
 					'sep_icon' => esc_html__( 'Icon', 'tpebl' ),
 				),
@@ -409,8 +384,8 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'spe_select_Note',
 			array(
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> You can select Icon or Image using this option.',
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> You can select Icon or Image using this option.',
 				'content_classes' => 'tp-controller-notice',
 			)
 		);
@@ -433,13 +408,13 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'font_awesome_option',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'sep_select_icon'     => 'sep_icon',
 					'sep_icon_font_style' => 'sep_font_awesome',
 				),
@@ -470,41 +445,24 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'sep_icon_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'sep_select_icon'     => 'sep_icon',
 					'sep_icon_font_style' => 'sep_icon_mind',
 				),
 			)
 		);
-		// $this->add_control(
-		// 	'sep_icons_mind',
-		// 	array(
-		// 		'label'       => esc_html__( 'Icon Library', 'tpebl' ),
-		// 		'type'        => Controls_Manager::SELECT2,
-		// 		'default'     => '',
-		// 		'label_block' => true,
-		// 		// 'options'     => theplus_icons_mind(),
-		// 		'condition'   => array(
-		// 			'sep_select_icon'     => 'sep_icon',
-		// 			'sep_icon_font_style' => 'sep_icon_mind',
-		// 		),
-		// 	)
-		// );
 		$this->add_control(
 			'icon_image_options',
 			array(
-				'label' => esc_html__( 'Icon Image', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Icon Image', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition'  => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'sep_select_icon'     => 'sep_icon',
 					'sep_icon_font_style' => 'sep_icon_image',
 				),
@@ -558,12 +516,12 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'section_letter_limit',
 			array(
-				'label' => esc_html__( 'Letter Limit', 'tpebl' ),
-				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Letter Limit', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
+				'default'      => 'yes',
 			)
 		);
 		$this->start_popover();
@@ -571,7 +529,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'letter_limit_parent_switch',
 			array(
 				'label'        => esc_html__( 'Parent', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
@@ -583,7 +541,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'letter_limit_parent',
 			array(
 				'label'     => esc_html__( 'Parent', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::NUMBER,
+				'type'      => Controls_Manager::NUMBER,
 				'min'       => 0,
 				'max'       => 100,
 				'step'      => 1,
@@ -598,7 +556,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'letter_limit_current_switch',
 			array(
 				'label'        => esc_html__( 'Current', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
@@ -609,7 +567,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'letter_limit_current',
 			array(
 				'label'     => esc_html__( 'Current', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::NUMBER,
+				'type'      => Controls_Manager::NUMBER,
 				'min'       => 0,
 				'max'       => 100,
 				'step'      => 1,
@@ -632,7 +590,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'breadcrumbs_on_off_home',
 			array(
 				'label'        => esc_html__( 'Home', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
@@ -642,8 +600,14 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'breadcrumbs_on_off_parent',
 			array(
-				'label'        => wp_kses_post( "Parent <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-breadcrumbs-with-parent-page-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label'        => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Parent', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-breadcrumbs-with-parent-page-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
@@ -654,7 +618,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'breadcrumbs_on_off_current',
 			array(
 				'label'        => esc_html__( 'Current', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
@@ -687,6 +651,26 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		if ( ! tpae_wl_pluginads_enabled() ) {
+			$this->start_controls_section(
+				'tpae_theme_builder_sec',
+				array(
+					'label' => esc_html__( 'Use with Theme Builder', 'tpebl' ),
+					'tab'   => Controls_Manager::TAB_CONTENT,
+				)
+			);
+			$this->add_control(
+				'tpae_theme_builder',
+				array(
+					'type'        => 'tpae_theme_builder',
+					'notice'      => 'We recommend adding this widget to the Header Template so it loads globally before any page content appears.',
+					'button_text' => esc_html__( 'Create Header Template', 'tpebl' ),
+					'page_type'   => 'tp_header',
+				)
+			);
+			$this->end_controls_section();
+		}
 		$this->start_controls_section(
 			'section_bredcrums_styling',
 			array(
@@ -936,7 +920,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'active_page_text_heading',
 			array(
 				'label'     => esc_html__( 'Active Page Text color if required then click below button', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
 		);
@@ -944,7 +928,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			'active_page_text_default',
 			array(
 				'label'        => esc_html__( 'Active Color for Page Title', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
@@ -1143,7 +1127,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->start_controls_tab(
 			'home_icon_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'tpebl' ),
+				'label'     => esc_html__( 'Normal', 'tpebl' ),
 				'condition' => array(
 					'icon_font_style' => array( 'font_awesome' ),
 				),
@@ -1166,7 +1150,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->start_controls_tab(
 			'home_icon_hover',
 			array(
-				'label' => esc_html__( 'Hover', 'tpebl' ),
+				'label'     => esc_html__( 'Hover', 'tpebl' ),
 				'condition' => array(
 					'icon_font_style' => array( 'font_awesome' ),
 				),
@@ -1287,7 +1271,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->start_controls_tab(
 			'sep_icon_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'tpebl' ),
+				'label'     => esc_html__( 'Normal', 'tpebl' ),
 				'condition' => array(
 					'sep_icon_font_style' => array( 'sep_font_awesome' ),
 				),
@@ -1310,7 +1294,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->start_controls_tab(
 			'sep_icon_hover',
 			array(
-				'label' => esc_html__( 'Hover', 'tpebl' ),
+				'label'     => esc_html__( 'Hover', 'tpebl' ),
 				'condition' => array(
 					'sep_icon_font_style' => array( 'sep_font_awesome' ),
 				),
@@ -1471,7 +1455,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span:not(.del) a,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span:not(.del) .current_tab_sec' => 'background: {{VALUE}} !important',
-					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span:not(.del):before' => 'border-left: 30px solid {{VALUE}}',
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span:not(.del):before' => 'border-left-color: {{VALUE}}',
 				),
 			)
 		);
@@ -1482,8 +1466,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span.bc_home .home_bread_tab' => 'background: {{VALUE}} !important',
-					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.bc_home:before' => 'border-left: 30px solid {{VALUE}}',
-
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.bc_home:before' => 'border-left-color: {{VALUE}}',
 				),
 			)
 		);
@@ -1494,7 +1477,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span:not(.del) .current_tab_sec' => 'background: {{VALUE}} !important',
-					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current_active:before' => 'border-left: 30px solid {{VALUE}}',
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current_active:before' => 'border-left-color: {{VALUE}}',
 				),
 			)
 		);
@@ -1512,7 +1495,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span:not(.del):hover a,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span.current:hover .current_tab_sec,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span.current_active:hover .current_tab_sec' => 'background: {{VALUE}} !important',
-					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span:not(.del):hover:before' => 'border-left: 30px solid {{VALUE}}',
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span:not(.del):hover:before' => 'border-left-color: {{VALUE}}',
 				),
 			)
 		);
@@ -1523,7 +1506,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span.bc_home:hover a' => 'background: {{VALUE}} !important',
-					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.bc_home:hover:before' => 'border-left: 30px solid {{VALUE}}',
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.bc_home:hover:before' => 'border-left-color: {{VALUE}}',
 				),
 			)
 		);
@@ -1534,7 +1517,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span.current:hover .current_tab_sec,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner #breadcrumbs > span.current_active:hover .current_tab_sec' => 'background: {{VALUE}} !important',
-					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current:hover:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current_active:hover:before' => 'border-left: 30px solid {{VALUE}}',
+					'{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current:hover:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar_inner.bred_style_2 #breadcrumbs > span.current_active:hover:before' => 'border-left-color: {{VALUE}}',
 				),
 			)
 		);
@@ -1553,26 +1536,25 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		/*Adv tab*/
 
 		/*--On Scroll View Animation ---*/
-        include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
-
 	}
 
 	/**
 	 * Breadcrumbs render.
-     * 
-     * @since 6.1.0
+	 *
+	 * @since 6.1.0
 	 */
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
 
 		/*--On Scroll View Animation ---*/
-        include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$breadcrumbs_style = ! empty( $settings['breadcrumbs_style'] ) ? $settings['breadcrumbs_style'] : 'style_1';
 		$home_icon         = ! empty( $settings['home_select_icon'] ) ? $settings['home_select_icon'] : '';
@@ -1808,17 +1790,19 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			} elseif ( is_single() && ! is_attachment() ) {
 				if ( 'product' === get_post_type( $post ) ) {
 
-					$terms_cate = wc_get_product_terms(
-						$post->ID,
-						'product_cat',
-						apply_filters(
-							'woocommerce_breadcrumb_product_terms_args',
-							array(
-								'orderby' => 'parent',
-								'order'   => 'DESC',
+					if ( function_exists( 'wc_get_product_terms' ) ) {
+						$terms_cate = wc_get_product_terms(
+							$post->ID,
+							'product_cat',
+							apply_filters(
+								'woocommerce_breadcrumb_product_terms_args',
+								array(
+									'orderby' => 'parent',
+									'order'   => 'DESC',
+								)
 							)
-						)
-					);
+						);
+					}
 
 					if ( ! empty( $terms_cate ) ) {
 						$first_term = apply_filters( 'woocommerce_breadcrumb_main_term', $terms_cate[0], $terms_cate );

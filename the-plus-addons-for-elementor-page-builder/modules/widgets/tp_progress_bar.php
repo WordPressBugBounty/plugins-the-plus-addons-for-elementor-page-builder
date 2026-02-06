@@ -99,7 +99,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'pie chart', 'chart', 'Graph', 'Data Visualization', 'Circular Chart', 'Percentage Chart', 'Statistics Chart', 'Progress Bar', 'Progress Indicator', 'Progress Tracker', 'Progress Meter', 'Progress Graph', 'Progress Chart', 'Progress Status' );
+		return array( 'Progress Bar', 'Circle Progress Bar', 'Linear Progress Bar', 'Animated Progress Bar', 'Lottie Progress Bar', 'Percentage Counter', 'Progress Indicator', 'Skill Meter', 'Percentage Progress Indicator', 'Goal Tracker Bar', 'Pie Progress', 'Bar Chart Progress' );
 	}
 
 	/**
@@ -158,13 +158,13 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16111,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16111,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'main_style',
 			array(
@@ -178,10 +178,34 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'how_it_works_piechart',
+			'progressbar_label',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-circle-progress-bars-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
-				'type'      => Controls_Manager::HEADING,
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Displays a horizontal progress indicator based on a value from 0 to 100. Ideal for showing completion status, percentages, or visual progress on your page.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'main_style' => 'progressbar',
+				),
+			)
+		);
+		$this->add_control(
+			'pie_chart_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Displays progress in a circular pie format. Ideal for showcasing stats, completion levels, or performance metrics in a clean and compact visual way.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-circle-progress-bars-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition' => array(
 					'main_style' => 'pie_chart',
 				),
@@ -304,6 +328,22 @@ class ThePlus_Progress_Bar extends Widget_Base {
 				'separator'  => 'before',
 			)
 		);
+		$this->add_control(
+			'value_width_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set the progress value percentage that will be visually filled in the bar.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'  => array(
+					'main_style' => 'progressbar' ,
+				),
+			)
+		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_section',
@@ -343,6 +383,19 @@ class ThePlus_Progress_Bar extends Widget_Base {
 				'separator'   => 'before',
 				'dynamic'     => array( 'active' => false ),
 				'ai'          => array( 'active' => false ),
+			)
+		);
+		$this->add_control(
+			'number_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the numeric value you want to display.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -392,14 +445,6 @@ class ThePlus_Progress_Bar extends Widget_Base {
 					'image'  => esc_html__( 'Image', 'tpebl' ),
 					'lottie' => esc_html__( 'Lottie', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'image_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can select Icon, Custom Image using this option.</i></p>',
-				'label_block' => true,
 			)
 		);
 		$this->add_control(

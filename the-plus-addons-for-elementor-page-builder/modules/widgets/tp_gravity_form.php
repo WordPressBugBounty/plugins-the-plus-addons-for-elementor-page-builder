@@ -82,7 +82,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Gravity Forms', 'Form Builder', 'Contact Form', 'WordPress Forms', 'Elementor Forms' );
+		return array( 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -109,18 +109,18 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -131,7 +131,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -171,6 +171,19 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'gravity_form_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Create a Gravity Form first, then you’ll be able to select and display it here.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'title_hide',
 			array(
 				'label'     => esc_html__( 'Title', 'tpebl' ),
@@ -186,6 +199,19 @@ class ThePlus_Gravity_Form extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
 				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'ajax_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this option to submit the form without reloading the page.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -2616,7 +2642,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
-		
+
 		if ( defined( 'THEPLUS_VERSION' ) ) {
 			$this->start_controls_section(
 				'section_plus_extra_adv',
@@ -2627,7 +2653,7 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
@@ -2726,9 +2752,8 @@ class ThePlus_Gravity_Form extends Widget_Base {
 			$gravity_forms  = \RGFormsModel::get_forms( null, 'title' );
 			$g_form_options = array( '0' => esc_html__( 'Select Form', 'tpebl' ) );
 
-
 			if ( ! empty( $gravity_forms ) && ! is_wp_error( $gravity_forms ) ) {
-				foreach ( $gravity_forms as $form ) {   
+				foreach ( $gravity_forms as $form ) {
 					$g_form_options[ $form->id ] = $form->title;
 				}
 			}
@@ -2748,10 +2773,10 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	function l_theplus_gravity_form_using_dm() {
 		$gf_dm = array();
 		$gf_dm = array( '0' => esc_html__( 'Select Form', 'tpebl' ) );
-		
-		$gf_dm_form = get_posts('post_type="dlm_download"&numberposts=-1');
 
-		if ( !empty( $gf_dm_form ) ) {
+		$gf_dm_form = get_posts( 'post_type="dlm_download"&numberposts=-1' );
+
+		if ( ! empty( $gf_dm_form ) ) {
 			foreach ( $gf_dm_form as $gfdmform ) {
 				$gf_dm[ $gfdmform->ID ] = $gfdmform->post_title;
 			}
@@ -2761,5 +2786,4 @@ class ThePlus_Gravity_Form extends Widget_Base {
 
 		return $gf_dm;
 	}
-
 }

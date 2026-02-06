@@ -72,7 +72,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-header' );
+		return array( 'plus-advanced', 'plus-header' );
 	}
 
 	/**
@@ -82,7 +82,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Header extras', 'Elementor header extras', 'Elementor addon', 'The Plus Addons for Elementor', 'Search bar', 'Search widget' );
+		return array( 'Header extras', 'Elementor header extras', 'Elementor addon', 'The Plus Addons for Elementor', 'Search bar', 'Search widget', 'cart', 'minicart', 'mini cart', 'language switcher' );
 	}
 
 	/**
@@ -104,7 +104,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	/**
 	 * It is use for adds.
 	 *
@@ -113,18 +113,18 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -135,7 +135,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -173,7 +173,13 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$repeater->add_control(
 			'how_it_works_search',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-search-icon-to-elementor-navigation-header-menu/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'add-search-icon-to-elementor-navigation-header-menu/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'select_icon_list' => array( 'search' ),
@@ -183,7 +189,13 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$repeater->add_control(
 			'how_it_works_cart',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-woocommerce-mini-cart-in-elementor-navigation-header-menu/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'add-woocommerce-mini-cart-in-elementor-navigation-header-menu/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'select_icon_list' => array( 'cart' ),
@@ -300,8 +312,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Search Bar', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -324,11 +336,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'search_icon_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_search_bar' => 'yes',
 					'search_icon_style'  => array( 'style-custom-icon', 'style-custom-image' ),
@@ -989,27 +998,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_control(
-			'search_custom_img_heads',
-			array(
-				'label'     => esc_html__( 'Custom Image', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => array(
-					'search_icon_style' => array( 'style-custom-image' ),
-				),
-			)
-		);
-		$this->add_control(
-			'search_custom_img_heads_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-			)
-		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1024,8 +1013,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Cart', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -1047,11 +1036,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'cart_icon_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_mini_cart' => 'yes',
 					'cart_icon_style'   => 'style-2',
@@ -1324,6 +1310,17 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				'label' => esc_html__( 'Normal', 'tpebl' ),
 			)
 		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'mini_cart_bg_background',
+				'label'    => esc_html__( 'Background', 'tpebl' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-1 .widget_shopping_cart_content,
+				{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-2 .tpmc-header-extra-toggle-content,
+					{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open',
+			)
+		);
 		$this->add_responsive_control(
 			'min_cart_box_radius',
 			array(
@@ -1335,17 +1332,6 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 					{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-2 .tpmc-header-extra-toggle-content,
 					{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'     => 'mini_cart_bg_background',
-				'label'    => esc_html__( 'Background', 'tpebl' ),
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-1 .widget_shopping_cart_content,
-				{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-2 .tpmc-header-extra-toggle-content,
-					{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open',
 			)
 		);
 		$this->add_group_control(
@@ -1363,6 +1349,17 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				'label' => esc_html__( 'Hover', 'tpebl' ),
 			)
 		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'mini_cart_bg_hover',
+				'label'    => esc_html__( 'Background', 'tpebl' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-1 .widget_shopping_cart_content:hover,
+				{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-2 .tpmc-header-extra-toggle-content:hover,
+					{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open:hover',
+			)
+		);
 		$this->add_responsive_control(
 			'min_cart_box_radius_hover',
 			array(
@@ -1374,17 +1371,6 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 					{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-2 .tpmc-header-extra-toggle-content:hover,
 					{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'     => 'mini_cart_bg_hover',
-				'label'    => esc_html__( 'Background', 'tpebl' ),
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-1 .widget_shopping_cart_content:hover,
-				{{WRAPPER}} .header-extra-icons .mini-cart-icon.style-2 .tpmc-header-extra-toggle-content:hover,
-					{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open:hover',
 			)
 		);
 		$this->add_group_control(
@@ -1436,6 +1422,15 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				),
 			)
 		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'mini_cart_bg_background_bt',
+				'label'    => esc_html__( 'Background', 'tpebl' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open,{{WRAPPER}} .header-extra-icons .mini-cart-icon .mc-extra-bottom-con',
+			)
+		);
 		$this->add_responsive_control(
 			'min_cart_box_radius_bt',
 			array(
@@ -1445,15 +1440,6 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .header-extra-icons .mini-cart-icon .mc-extra-bottom-con' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'     => 'mini_cart_bg_background_bt',
-				'label'    => esc_html__( 'Background', 'tpebl' ),
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open,{{WRAPPER}} .header-extra-icons .mini-cart-icon .mc-extra-bottom-con',
 			)
 		);
 		$this->add_group_control(
@@ -1482,6 +1468,15 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				),
 			)
 		);
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'     => 'mini_cart_bg_hover_bt',
+				'label'    => esc_html__( 'Background', 'tpebl' ),
+				'types'    => array( 'classic', 'gradient' ),
+				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open:hover .mc-extra-bottom-con',
+			)
+		);
 		$this->add_responsive_control(
 			'min_cart_box_radius_hover_bt',
 			array(
@@ -1491,15 +1486,6 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open:hover .mc-extra-bottom-con' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Background::get_type(),
-			array(
-				'name'     => 'mini_cart_bg_hover_bt',
-				'label'    => esc_html__( 'Background', 'tpebl' ),
-				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .header-extra-icons .mini-cart-icon .tpmc-header-extra-toggle-content-ext.open:hover .mc-extra-bottom-con',
 			)
 		);
 		$this->add_group_control(
@@ -1527,11 +1513,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'cart_inner_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_mini_cart' => 'yes',
 					'cart_icon_style'   => 'style-2',
@@ -1565,16 +1548,6 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'mini_cart_empty_icon_color',
-			array(
-				'label'     => esc_html__( 'Icon Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .woocommerce-mini-cart__empty-message:before' => 'color: {{VALUE}}',
-				),
-			)
-		);
-		$this->add_control(
 			'mini_cart_empty_text_size',
 			array(
 				'label'      => esc_html__( 'Text Size', 'tpebl' ),
@@ -1589,6 +1562,16 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .widget_shopping_cart_content .woocommerce-mini-cart__empty-message' => 'font-size: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
+			'mini_cart_empty_icon_color',
+			array(
+				'label'     => esc_html__( 'Icon Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .woocommerce-mini-cart__empty-message:before' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -1927,7 +1910,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'min_cart_btn_border_style',
 			array(
-				'label'     => esc_html__( 'Border Style', 'tpebl' ),
+				'label'     => esc_html__( 'Border Type', 'tpebl' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'none',
 				'options'   => array(
@@ -1992,7 +1975,7 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_responsive_control(
 			'min_cart_btn_hover_radius',
 			array(
-				'label'      => esc_html__( 'Hover Border Radius', 'tpebl' ),
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -2387,17 +2370,13 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'mc_close_heading_options_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'cart_icon_style' => 'style-2',
 				),
 			)
 		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -2412,8 +2391,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Toggle Bar', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -2438,11 +2417,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'extra_toggle_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_extra_toggle_bar' => 'yes',
 				),
@@ -2463,11 +2439,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'section_extra_toggle_bar_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -2486,11 +2459,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'section_language_switcher_wpml_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -2509,11 +2479,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'section_language_switcher_translatepress_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -2530,8 +2497,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Language Switcher', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
@@ -2553,11 +2520,8 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'select_trans_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_language_switcher' => 'yes',
 				),
@@ -2577,19 +2541,16 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Music', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'display_music_bar_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_music_bar' => array( 'yes' ),
 				),
@@ -2610,11 +2571,9 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'section_music_bar_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -2631,19 +2590,16 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Call To Action', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'display_call_to_action_1_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_call_to_action_1' => array( 'yes' ),
 				),
@@ -2664,11 +2620,9 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'section_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -2685,19 +2639,17 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Display Call To Action', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'display_call_to_action_2_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'display_call_to_action_2' => array( 'yes' ),
 				),
@@ -2718,11 +2670,9 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		$this->add_control(
 			'section_button_2_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -2796,6 +2746,26 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 		);
 		$this->end_controls_section();
 
+		if ( ! tpae_wl_pluginads_enabled() ) {
+			$this->start_controls_section(
+				'tpae_theme_builder_sec',
+				array(
+					'label' => esc_html__( 'Use with Theme Builder', 'tpebl' ),
+					'tab'   => Controls_Manager::TAB_CONTENT,
+				)
+			);
+			$this->add_control(
+				'tpae_theme_builder',
+				array(
+					'type'        => 'tpae_theme_builder',
+					'notice'      => esc_html__( 'We recommend using this widget in the Header Template to load on all pages.', 'tpebl' ),
+					'button_text' => esc_html__( 'Create Header Template', 'tpebl' ),
+					'page_type'   => 'tp_header',
+				)
+			);
+			$this->end_controls_section();
+		}
+
 		$this->start_controls_section(
 			'section_extra_option',
 			array(
@@ -2808,19 +2778,16 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Sticky Options', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'sticky_options_pro',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'sticky_options' => array( 'yes' ),
 				),

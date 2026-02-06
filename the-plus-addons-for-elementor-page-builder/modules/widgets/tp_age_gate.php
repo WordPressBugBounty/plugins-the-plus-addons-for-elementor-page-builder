@@ -79,7 +79,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 	 * @since 5.3.5
 	 */
 	public function get_keywords() {
-		return array( 'Age Gate', 'Age Verification', 'Age Restriction', 'Age Confirmation', 'Age Check', 'Age Limit', 'Age Requirement' );
+		return array( 'Age Verification', 'Birthdate Verification', 'Age Restriction', '18+ Verification', 'Adult Content Lock', 'Age Popup', 'Age Restricted Content', 'Minimum Age Limit' );
 	}
 
 	/**
@@ -152,13 +152,13 @@ class ThePlus_Age_Gate extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16001,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16001,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'age_verify_method',
 			array(
@@ -185,12 +185,52 @@ class ThePlus_Age_Gate extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'how_it_works_birth_date',
+			'age_verify_method1_label',
 			array(
-				'type'      => \Elementor\Controls_Manager::RAW_HTML,
-				'raw'       => wp_kses_post( "<div class='tp-docs-wrapper'><a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-age-verification-by-birthdate-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works  <i class='eicon-help-o'></i> </a></div>" ),
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use this option when you want users to confirm they are above a certain age with a simple enter or continue action.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition' => array(
-					'age_verify_method' => array( 'method-2' ),
+					'age_verify_method' => 'method-1',
+				),
+			)
+		);
+		$this->add_control(
+			'age_verify_method2_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Choose this option when you need users to enter their date of birth so the system can calculate and verify their exact age.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-age-verification-by-birthdate-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'age_verify_method' => 'method-2',
+				),
+			)
+		);
+		$this->add_control(
+			'age_verify_method3_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use this option when you only need a simple Yes/No confirmation.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'age_verify_method' => 'method-3',
 				),
 			)
 		);
@@ -209,7 +249,12 @@ class ThePlus_Age_Gate extends Widget_Base {
 			'tempNotice',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i><b>Note:</b> Keep this disabled, If you do not want that to load on editor page. Either It will highjack your whole page.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Keep this disabled, If you do not want that to load on editor page. Either It will highjack your whole page.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 				'condition'   => array(
 					'backend_preview' => 'yes',
@@ -256,10 +301,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_icon_popover_toggle',
 			array(
-				'label'        => esc_html__( 'Logo', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label'        => esc_html__( 'Logo', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -294,10 +339,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_title_popover_toggle',
 			array(
-				'label'        => esc_html__( 'Title', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label'        => esc_html__( 'Title', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'texttpebldomain' ),
+				'label_on'     => esc_html__( 'Custom', 'textdotpeblmain' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -333,10 +378,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_gate_description',
 			array(
-				'label'        => esc_html__( 'Text Description', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label'        => esc_html__( 'Text Description', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -406,10 +451,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_extra_info_switch',
 			array(
-				'label'        => esc_html__( 'Extra Content', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label'        => esc_html__( 'Extra Content', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			)
@@ -613,10 +658,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_cookies',
 			array(
-				'label'        => esc_html__( 'Cookies', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label'        => esc_html__( 'Cookies', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			)
@@ -639,11 +684,19 @@ class ThePlus_Age_Gate extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'age_gate_cookiNote',
+			'age_cookies_days_label',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i><b>Note:</b> Set The Number Of Days Cookies To Be Saved.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set how many days the cookie should be stored before it automatically expires.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
+				'condition' => array(
+					'age_cookies' => 'yes',
+				),
 			)
 		);
 		$this->end_popover();
@@ -679,10 +732,10 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_sec_bg_image_switch',
 			array(
-				'label'        => esc_html__( 'Background Image', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label'        => esc_html__( 'Background Image', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			)
@@ -735,11 +788,11 @@ class ThePlus_Age_Gate extends Widget_Base {
 		$this->add_control(
 			'age_side_image_show',
 			array(
-				'label'        => esc_html__( 'Right Side Image', 'textdomain' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => esc_html__( 'Default', 'textdomain' ),
+				'label'        => esc_html__( 'Right Side Image', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
 				'separator'    => 'before',
-				'label_on'     => esc_html__( 'Custom', 'textdomain' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			)

@@ -72,7 +72,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Social Embed', 'Social Media Embed', 'Embed Social Media', 'Social Media Widget', 'Social Media', 'Elementor Social Embed', 'Social Embed' );
+		return array( 'Social Media Embed', 'Facebook Embed', 'X (Twitter) Embed', 'Instagram Embed', 'YouTube Embed', 'Vimeo Embed', 'Google Maps Embed', 'Social Feed', 'Facebook Comments', 'Facebook Post', 'Facebook Video', 'Facebook Page', 'Facebook Like Button', 'Twitter Profile', 'Instagram Reels', 'YouTube Playlist', 'Google Maps', 'Vimeo Video', 'Tweets', 'Retweet Button', 'Twitter Follow Button', 'Twitter Likes Timeline' );
 	}
 
 	/**
@@ -98,18 +98,18 @@ class ThePlus_Social_Embed extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -120,7 +120,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -138,11 +138,11 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'EmbedType',
 			array(
-				'label'     => esc_html__( 'Type', 'tpebl' ),
-				'type'         => Controls_Manager::VISUAL_CHOICE,
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::VISUAL_CHOICE,
 				'label_block' => true,
-				'default'   => 'facebook',
-				'options'   => array(
+				'default'     => 'facebook',
+				'options'     => array(
 					'facebook'  => array(
 						'title' => esc_html__( 'Facebook', 'tpebl' ),
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/facebook.svg' ),
@@ -168,8 +168,8 @@ class ThePlus_Social_Embed extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/social-embed/googlemap.svg' ),
 					),
 				),
-				'columns'      => 3,
-				'classes'      => 'tpae-visual_choice',
+				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->end_controls_section();
@@ -204,6 +204,24 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'custom_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Choose the kind of Facebook content you want to embed.', 'tpebl' ),
+						esc_url( 'https://developers.facebook.com/docs/plugins' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'EmbedType' => 'facebook',
+				),
+			)
+		);
+		$this->add_control(
 			'CommentType',
 			array(
 				'label'     => esc_html__( 'Options', 'tpebl' ),
@@ -223,10 +241,16 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'CommentTypeViewCommentDep',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : The Embedded Comments has been deprecated.<a rel="noopener noreferrer" target="_blank" href="https://developers.facebook.com/docs/plugins/embedded-comments/" target="_blank">More Info</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'The Embedded Comments has been deprecated.', 'tpebl' ),
+						esc_url( 'https://developers.facebook.com/docs/plugins/embedded-comments/' ),
+						esc_html__( 'More Info', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType'   => 'facebook',
 					'Type'        => 'comments',
 					'CommentType' => 'viewcomment',
@@ -270,10 +294,16 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'AppIDFbPost',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : How to <a href="https://developers.facebook.com/apps"  target="_blank" rel="noopener noreferrer">Create App ID ?</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s<a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'How to ', 'tpebl' ),
+						esc_url( 'https://developers.facebook.com/apps' ),
+						esc_html__( 'Create App ID?', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType'   => 'facebook',
 					'Type'        => 'comments',
 					'CommentType' => 'onlypost',
@@ -488,17 +518,6 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'Type'      => 'share',
 				),
 				'separator'     => 'before',
-			)
-		);
-		$this->add_control(
-			'ReMrFbPost',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="https://developers.facebook.com/docs/plugins"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
-					'EmbedType' => 'facebook',
-				),
 			)
 		);
 		$this->end_controls_section();
@@ -1217,10 +1236,16 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'TwlisturlNote',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : How to <a href="https://tweetdeck.twitter.com/"  target="_blank" rel="noopener noreferrer">Create List ?</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Note: How to', 'tpebl' ),
+						esc_url( 'https://tweetdeck.twitter.com/' ),
+						esc_html__( 'Create List?', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'twitter',
 					'TweetType' => 'timelines',
 					'TwGuides'  => 'List',
@@ -1364,10 +1389,16 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'ReMrTwPost',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/overview"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Note: ', 'tpebl' ),
+						esc_url( 'https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/overview' ),
+						esc_html__( 'Read More About All Options', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'twitter',
 				),
 			)
@@ -1777,12 +1808,28 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Vimeo ID', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai'        => false, 
+				'ai'        => false,
 				'default'   => esc_html__( '288344114', 'tpebl' ),
 				'dynamic'   => array(
 					'active' => true,
 				),
 				'condition' => array(
+					'EmbedType' => 'vimeo',
+				),
+			)
+		);
+		$this->add_control(
+			'ViId_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' Enter your Vimeo video ID to embed the video directly.', 'tpebl' )
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'EmbedType' => 'vimeo',
 				),
 			)
@@ -1819,10 +1866,14 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'VmAutoplayNote',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : The <b>mute</b> option should be required when you select the <b>autoplay</b> option.',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'The "Mute" option is required when you select the "Autoplay" option.', 'tpebl' )
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'vimeo',
 				),
 			)
@@ -1830,10 +1881,16 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'ReMrVmPost',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="https://vimeo.zendesk.com/hc/en-us/articles/360001494447-Using-Player-Parameters"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s<a href="%s"  target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Note: ', 'tpebl' ),
+						esc_url( 'https://vimeo.zendesk.com/hc/en-us/articles/360001494447-Using-Player-Parameters' ),
+						esc_html__( 'Read More About All Options', 'tpebl' )
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'vimeo',
 				),
 			)
@@ -1849,6 +1906,22 @@ class ThePlus_Social_Embed extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
+				'condition'   => array(
+					'EmbedType' => 'vimeo',
+				),
+			)
+		);
+		$this->add_control(
+			'VmStime_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' If you want your video to start from a specific point, set the time here.', 'tpebl' )
+					)
+				),
+				'label_block' => true,
 				'condition'   => array(
 					'EmbedType' => 'vimeo',
 				),
@@ -1892,6 +1965,24 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'IGType_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s<a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Select the type of Instagram content you want to display.', 'tpebl' ),
+						esc_url( 'https://developers.facebook.com/docs/instagram' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'EmbedType' => 'instagram',
+				),
+			)
+		);
+		$this->add_control(
 			'IGId',
 			array(
 				'label'     => esc_html__( 'Instagram ID', 'tpebl' ),
@@ -1902,6 +1993,22 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'active' => true,
 				),
 				'condition' => array(
+					'EmbedType' => 'instagram',
+				),
+			)
+		);
+		$this->add_control(
+			'IGId_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the Instagram post, reel, or IGTV video ID to fetch the content.', 'tpebl' )
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'EmbedType' => 'instagram',
 				),
 			)
@@ -1920,12 +2027,17 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'ReMrIgPost',
+			'IGCaptione_label',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="https://developers.facebook.com/docs/instagram"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' Enable this option if you don’t want to show captions with your Instagram content.', 'tpebl' )
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'EmbedType' => 'instagram',
 				),
 			)
@@ -1953,6 +2065,24 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'YtuserV' => esc_html__( 'Users Video', 'tpebl' ),
 				),
 				'condition' => array(
+					'EmbedType' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
+			'YtType_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Select the type of YouTube content you want to display.', 'tpebl' ),
+						esc_url( 'https://developers.google.com/youtube/player_parameters' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'EmbedType' => 'youtube',
 				),
 			)
@@ -2033,23 +2163,32 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'YtAutoplayNote',
+			'YtOption_label',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : The <b>mute</b> option should be required when you select the <b>autoplay</b> option.',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Select playback options to control how your YouTube video behaves', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'EmbedType' => 'youtube',
 				),
 			)
 		);
 		$this->add_control(
-			'ReMrYtPost',
+			'YtAutoplayNote',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="https://developers.google.com/youtube/player_parameters"  target="_blank" rel="noopener noreferrer">Read More About All Options</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Note: Mute must be enabled when autoplay is turned on.', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'youtube',
 				),
 			)
@@ -2059,12 +2198,28 @@ class ThePlus_Social_Embed extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Start Time', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
-				'ai'          => false,  
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'E.g : 60', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
 				),
+				'condition'   => array(
+					'EmbedType' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
+			'YtSTime_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'If you want the video to start from a specific time, set the time here.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition'   => array(
 					'EmbedType' => 'youtube',
 				),
@@ -2087,6 +2242,22 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'YtETime_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'If you want the video to stop playing at a specific time, set the end time here.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'EmbedType' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
 			'Ytlanguage',
 			array(
 				'label'       => esc_html__( 'Language', 'tpebl' ),
@@ -2103,12 +2274,35 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'Ytlanguage_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the language code to display captions or subtitles in your preferred language.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'EmbedType' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
 			'YtLangNote',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank" rel="noopener noreferrer">Language ISO 639-1 Code</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => 'Note : <a href="" target="_blank" rel="noopener noreferrer"></a>',
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Note: ', 'tpebl' ),
+						esc_url( 'http://www.loc.gov/standards/iso639-2/php/code_list.php' ),
+						esc_html__( 'Language ISO 639-1 Code', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'youtube',
 				),
 			)
@@ -2134,6 +2328,19 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'default'     => esc_html__( 'Default', 'tpebl' ),
 					'accesstoken' => esc_html__( 'Access Token', 'tpebl' ),
 				),
+			)
+		);
+		$this->add_control(
+			'Mapaccesstoken_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose how you want to connect your map, use Default for basic setup or Access Token for secure API-based integration.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -2168,6 +2375,22 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'GMapModes_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Select how your Google Map should display.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'Mapaccesstoken' => 'accesstoken',
+				),
+			)
+		);
+		$this->add_control(
 			'GSearchText',
 			array(
 				'label'       => __( 'Search Text', 'tpebl' ),
@@ -2196,6 +2419,23 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'GOrigin_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' Enter the location where the route should begin.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'Mapaccesstoken' => 'accesstoken',
+					'GMapModes'      => 'directions',
+				),
+			)
+		);
+		$this->add_control(
 			'GDestination',
 			array(
 				'label'       => __( 'End Point', 'tpebl' ),
@@ -2203,6 +2443,23 @@ class ThePlus_Social_Embed extends Widget_Base {
 				'ai'          => false,
 				'default'     => __( 'Corona+California+USA', 'tpebl' ),
 				'placeholder' => __( 'Enter Starting Point', 'tpebl' ),
+				'condition'   => array(
+					'Mapaccesstoken' => 'accesstoken',
+					'GMapModes'      => 'directions',
+				),
+			)
+		);
+		$this->add_control(
+			'GDestination_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set the destination point for your map route.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition'   => array(
 					'Mapaccesstoken' => 'accesstoken',
 					'GMapModes'      => 'directions',
@@ -2218,6 +2475,23 @@ class ThePlus_Social_Embed extends Widget_Base {
 				'rows'        => 3,
 				'default'     => __( 'Huntington+Beach+California+US | Santa Ana+California+USA', 'tpebl' ),
 				'placeholder' => __( 'Type your description here', 'tpebl' ),
+				'condition'   => array(
+					'Mapaccesstoken' => 'accesstoken',
+					'GMapModes'      => 'directions',
+				),
+			)
+		);
+		$this->add_control(
+			'GWaypoints_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add multiple stops between the starting and ending locations to create a detailed travel route.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition'   => array(
 					'Mapaccesstoken' => 'accesstoken',
 					'GMapModes'      => 'directions',
@@ -2244,6 +2518,23 @@ class ThePlus_Social_Embed extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'GTravelMode_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' Select your mode of transportation.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'Mapaccesstoken' => 'accesstoken',
+					'GMapModes'      => 'directions',
+				),
+			)
+		);
+		$this->add_control(
 			'Gavoid',
 			array(
 				'label'       => esc_html__( 'Avoid Elements', 'tpebl' ),
@@ -2253,6 +2544,23 @@ class ThePlus_Social_Embed extends Widget_Base {
 				'options'     => array(
 					'tolls'    => __( 'Tolls', 'tpebl' ),
 					'highways' => __( 'Highways', 'tpebl' ),
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'Mapaccesstoken' => 'accesstoken',
+					'GMapModes'      => 'directions',
+				),
+			)
+		);
+		$this->add_control(
+			'Gavoid_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' Choose elements like tolls and highways to exclude them from the suggested route.', 'tpebl' ),
+					)
 				),
 				'label_block' => true,
 				'condition'   => array(
@@ -2277,10 +2585,16 @@ class ThePlus_Social_Embed extends Widget_Base {
 		$this->add_control(
 			'Pluscodelink',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : <a href="https://plus.codes/7JMJ2GP6+9F" target="_blank" rel="noopener noreferrer">Get latitude and longitude</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'      => Controls_Manager::RAW_HTML,
+				'raw'       => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Note: ', 'tpebl' ),
+						esc_url( 'https://plus.codes/7JMJ2GP6+9F' ),
+						esc_html__( 'Get latitude and longitude', 'tpebl' ),
+					)
+				),
+				'condition' => array(
 					'EmbedType' => 'googlemap',
 				),
 			)

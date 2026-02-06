@@ -105,9 +105,11 @@
     gap: 10px;
     background-color: #020202;
     border: 0;
-    color: #FFFFFF;
+    color: #fff;
     padding: 14px 38px;
     border-radius: 5px;
+    cursor: pointer;
+    position: relative;
     cursor: pointer;
     position: relative;
 }
@@ -163,6 +165,9 @@
 
 #tp-wdkit-elementorp .tp-pre-wdesign-install .tp-wkit-pre-loader {
     justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 12px;
     align-items: center;
     position: absolute;
     right: 12px;

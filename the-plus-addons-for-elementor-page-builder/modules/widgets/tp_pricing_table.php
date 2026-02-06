@@ -100,7 +100,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Pricing', 'Table', 'Pricing Table', 'Pricing Plan', 'Pricing Comparison', 'Pricing Options', 'Pricing Packages', 'Pricing Grid', 'Pricing Chart' );
+		return array( 'Pricing List', 'Menu Price List', 'Modern Pricing List', 'Food Menu', 'Menu List', 'Flip-Box Pricing' );
 	}
 
 	/**
@@ -111,7 +111,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	/**
 	 * It is use for adds.
 	 *
@@ -120,18 +120,18 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -142,7 +142,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -159,45 +159,53 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 12387,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 12387,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'pricing_table_style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => array(
-					'style-1' => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2' => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
-					'style-3' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-1',
+				'options'     => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/pricing-table/style-1.svg' ),
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2 (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/pricing-table/style-2-pro.svg' ),
+					),
+					'style-3' => array(
+						'title' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/pricing-table/style-3-pro.svg' ),
+					),
 				),
+				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
 			'pricing_table_style_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'pricing_table_style!' => array( 'style-1' ),
 				),
 			)
 		);
-
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'title_content_section',
 			array(
-				'label'     => esc_html__( 'Title Section', 'tpebl' ),
+				'label'     => esc_html__( 'Content', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => array(
 					'pricing_table_style' => 'style-1',
@@ -205,17 +213,9 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'title_heading',
-			array(
-				'label'     => esc_html__( 'Title', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
 			'title_style',
 			array(
-				'label'   => esc_html__( 'Title Style', 'tpebl' ),
+				'label'   => esc_html__( 'Style', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => array(
@@ -227,7 +227,8 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			'pricing_title',
 			array(
 				'label'   => esc_html__( 'Title', 'tpebl' ),
-				'type'    => \Elementor\Controls_Manager::TEXT,
+				'type'    => Controls_Manager::TEXT,
+				'ai'      => false,
 				'default' => esc_html__( 'Professional', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -236,7 +237,8 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			'pricing_subtitle',
 			array(
 				'label'   => esc_html__( 'Sub Title', 'tpebl' ),
-				'type'    => \Elementor\Controls_Manager::TEXT,
+				'type'    => Controls_Manager::TEXT,
+				'ai'      => false,
 				'default' => '',
 				'dynamic' => array( 'active' => true ),
 			)
@@ -245,7 +247,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			'icons_heading',
 			array(
 				'label'     => esc_html__( 'Icon Options', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::HEADING,
+				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
 		);
@@ -274,11 +276,8 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'svg_icon_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'image_icon' => 'svg',
 				),
@@ -289,6 +288,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Use Image As icon', 'tpebl' ),
 				'type'       => Controls_Manager::MEDIA,
+				'ai'         => false,
 				'default'    => array(
 					'url' => '',
 				),
@@ -306,12 +306,37 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'font_awesome',
 				'options'   => array(
-					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
-					'icon_mind'    => esc_html__( 'Icons Mind (PRO)', 'tpebl' ),
+					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
+					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
+					'icon_mind'      => esc_html__( 'Icons Mind (PRO)', 'tpebl' ),
 				),
 				'condition' => array(
 					'image_icon' => 'icon',
 				),
+			)
+		);
+		$this->add_control(
+			'fontawesometoggle',
+			array(
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'image_icon'      => 'icon',
+					'icon_font_style' => 'font_awesome',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'icon_fsoptions',
+			array(
+				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
 			)
 		);
 		$this->add_control(
@@ -326,14 +351,52 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
+		$this->add_control(
+			'font_awesome5_toggle',
+			array(
+				'label'        => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'image_icon'      => 'icon',
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'icon_f5_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
+			)
+		);
+		$this->add_control(
+			'icon_fontawesome_5',
+			array(
+				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => array(
+					'value'   => 'fas fa-university',
+					'library' => 'solid',
+				),
+				'condition' => array(
+					'image_icon'      => 'icon',
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->end_popover();
 		$this->add_control(
 			'icons_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'image_icon'      => 'icon',
 					'icon_font_style' => 'icon_mind',
@@ -368,22 +431,19 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'price_style_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'price_style!' => 'style-1',
 				),
 			)
 		);
-
 		$this->add_control(
 			'price_prefix',
 			array(
 				'label'       => esc_html__( 'Prefix Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( '$', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter text of Price Prefix.. Ex. $,Rs,...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -397,6 +457,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Value Of Price', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( '59.99', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter value of Price.. Ex. 49,69...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -410,6 +471,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Postfix Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( 'Per Month', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter text of Price Postfix.. Ex. Per Month...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -443,6 +505,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Prefix Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( '$', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter text of Price Prefix.. Ex. $,Rs,...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -456,6 +519,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Value Of Price', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => esc_html__( '59.99', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter value of Price.. Ex. 49,69...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -469,6 +533,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Postfix Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter text of Price Postfix.. Ex. Rs,%..', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -481,7 +546,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'content_description_section',
 			array(
-				'label'     => esc_html__( 'Content Description', 'tpebl' ),
+				'label'     => esc_html__( 'Description', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => array(
 					'pricing_table_style' => 'style-1',
@@ -491,7 +556,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'content_style',
 			array(
-				'label'   => esc_html__( 'Content Style', 'tpebl' ),
+				'label'   => esc_html__( 'Style', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'stylist_list',
 				'options' => array(
@@ -503,7 +568,13 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'how_it_works_stylist',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-show-more-button-for-features-in-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'add-show-more-button-for-features-in-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'content_style' => 'stylist_list',
@@ -513,7 +584,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'content_list_style',
 			array(
-				'label'     => esc_html__( 'Content List Style', 'tpebl' ),
+				'label'     => esc_html__( 'List Style', 'tpebl' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'style-1',
 				'options'   => array(
@@ -532,6 +603,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'List Description', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
+				'ai'          => false,
 				'default'     => esc_html__( 'I am text block.', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
@@ -544,9 +616,9 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'font_awesome',
 				'options' => array(
-					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
+					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
 					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
-					'icon_mind'    => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
+					'icon_mind'      => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
 				),
 			)
 		);
@@ -565,6 +637,29 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$repeater->add_control(
+			'fontawesome_toggle',
+			array(
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'list_icon_style' => 'font_awesome',
+				),
+			)
+		);
+		$repeater->start_popover();
+		$repeater->add_control(
+			'iconfs_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
+			)
+		);
+		$repeater->add_control(
 			'list_icon_fontawesome',
 			array(
 				'label'     => esc_html__( 'Icon Library', 'tpebl' ),
@@ -576,14 +671,12 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				),
 			)
 		);
+		$repeater->end_popover();
 		$repeater->add_control(
 			'list_icons_mind_pro',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'list_icon_style' => array( 'icon_mind' ),
 				),
@@ -592,7 +685,13 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$repeater->add_control(
 			'show_tooltips',
 			array(
-				'label'       => esc_html__( 'Tooltip options', 'tpebl' ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Tooltip Options', 'tpebl' ),
+						esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
 				'label_off'   => esc_html__( 'No', 'tpebl' ),
@@ -603,11 +702,8 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$repeater->add_control(
 			'show_tooltips_pro',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'show_tooltips' => 'yes',
 				),
@@ -656,6 +752,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Content', 'tpebl' ),
 				'type'      => Controls_Manager::WYSIWYG,
+				'ai'        => false,
 				'default'   => esc_html__( 'Luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -688,39 +785,48 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'button_style',
 			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Button Style', 'tpebl' ),
-				'default'   => 'style-8',
-				'options'   => array(
-					'style-7' => esc_html__( 'Style 1 (PRO)', 'tpebl' ),
-					'style-8' => esc_html__( 'Style 2', 'tpebl' ),
-					'style-9' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-8',
+				'options'     => array(
+					'style-7' => array(
+						'title' => esc_html__( 'Style 1 (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/pricing-table/button-1-pro.svg' ),
+					),
+					'style-8' => array(
+						'title' => esc_html__( 'Style 2', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/pricing-table/button-2.svg' ),
+					),
+					'style-9' => array(
+						'title' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/pricing-table/button-3-pro.svg' ),
+					),
 				),
-				'condition' => array(
+				'condition'   => array(
 					'display_button' => 'yes',
 				),
+				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
 			'button_style_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_button' => 'yes',
 					'button_style!'  => 'style-8',
 				),
 			)
 		);
-
 		$this->add_control(
 			'button_text',
 			array(
 				'label'     => esc_html__( 'Button Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
+				'ai'        => false,
 				'default'   => esc_html__( 'Free Trial', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -765,6 +871,31 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'font_awesome_toggle',
+			array(
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => array(
+					'display_button'    => 'yes',
+					'button_style!'     => array( 'style-7', 'style-9' ),
+					'button_icon_style' => 'font_awesome',
+				),
+			)
+		);
+		$this->start_popover();
+		$this->add_control(
+			'icon_fs_options',
+			array(
+				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'after',
+			)
+		);
+		$this->add_control(
 			'button_icon',
 			array(
 				'label'       => esc_html__( 'Icon', 'tpebl' ),
@@ -778,14 +909,12 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				),
 			)
 		);
+		$this->end_popover();
 		$this->add_control(
 			'button_icons_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_button'    => 'yes',
 					'button_style!'     => array( 'style-7', 'style-9' ),
@@ -835,7 +964,13 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'call_to_action_section',
 			array(
-				'label'     => esc_html__( 'Call to Action', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Call to Action', 'tpebl' ),
+						esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/pro-tag.svg' )
+					)
+				),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => array(
 					'pricing_table_style' => 'style-1',
@@ -845,14 +980,10 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'call_to_action_section_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -868,7 +999,13 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'display_ribbon_pin',
 			array(
-				'label'     => wp_kses_post( "Display Ribbon <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Display Ribbon', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
 				'label_off' => esc_html__( 'No', 'tpebl' ),
@@ -878,7 +1015,13 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'ribbon_pin_style',
 			array(
-				'label'     => wp_kses_post( "Ribbon Style <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Style', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'style-1',
 				'options'   => array(
@@ -896,6 +1039,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Ribbon/Pin Text', 'tpebl' ),
 				'type'      => Controls_Manager::WYSIWYG,
+				'ai'        => false,
 				'default'   => esc_html__( 'Recommended', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -907,18 +1051,14 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'ribbon_pin_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'display_ribbon_pin' => 'yes',
 					'ribbon_pin_style!'  => 'style-1',
 				),
 			)
 		);
-
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
@@ -958,14 +1098,10 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'section_svg_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -995,6 +1131,16 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'icon_style_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'icon_style' => array( 'hexagon', 'pentagon', 'square-rotate' ),
+				),
+			)
+		);
+		$this->add_control(
 			'icon_size',
 			array(
 				'type'        => Controls_Manager::SLIDER,
@@ -1014,6 +1160,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'render_type' => 'ui',
 				'selectors'   => array(
 					'{{WRAPPER}} .plus-pricing-table .pricing-table-inner .pricing-icon' => 'font-size: {{SIZE}}{{UNIT}} !important;',
+					'{{WRAPPER}} .plus-pricing-table .pricing-table-inner .pricing-icon svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -1194,6 +1341,35 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'of_type'   => 'gradient',
 				'separator' => 'after',
 
+			)
+		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg' => 'fill: {{VALUE}} !important;',
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -1390,6 +1566,35 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'separator' => 'after',
 			)
 		);
+		$this->add_control(
+			'icon_fill_color_hover',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg path:hover' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg:hover' => 'fill: {{VALUE}} !important;',
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg path:hover' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .pricing-table-inner .pricing-icon svg:hover' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			array(
@@ -1431,23 +1636,82 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		$this->end_controls_section();
-
+		$this->start_controls_section(
+			'section_image_styling',
+			array(
+				'label'     => esc_html__( 'Image Style', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'image_icon' => 'image',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'imagewidth',
+			array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Width', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 1000,
+						'step' => 1,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => '',
+				),
+				'render_type' => 'template',
+				'selectors'   => array(
+					'{{WRAPPER}} .pricing-icon-img' => 'width: {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'imageHeight',
+			array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Height', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 1,
+						'max'  => 1000,
+						'step' => 1,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => '',
+				),
+				'render_type' => 'template',
+				'selectors'   => array(
+					'{{WRAPPER}} .pricing-icon-img' => 'height: {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'image_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pricing-icon-img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_title_styling',
 			array(
-				'label'     => esc_html__( 'Title Style', 'tpebl' ),
+				'label'     => esc_html__( 'Title', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'pricing_title!' => '',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-title',
 			)
 		);
 		$this->add_responsive_control(
@@ -1472,6 +1736,14 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .plus-pricing-table.pricing-style-1 .pricing-title' => 'text-align: {{VALUE}}',
 				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-title',
 			)
 		);
 		$this->start_controls_tabs( 'tabs_title_style' );
@@ -1646,7 +1918,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 					),
 					'gradient' => array(
 						'title' => esc_html__( 'Gradient', 'tpebl' ),
-						'icon'  => 'fa fa-barcode',
+						'icon'  => 'eicon-barcode',
 					),
 				),
 				'label_block' => false,
@@ -1787,19 +2059,11 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_subtitle_styling',
 			array(
-				'label'     => esc_html__( 'SubTitle Style', 'tpebl' ),
+				'label'     => esc_html__( 'SubTitle', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'pricing_subtitle!' => '',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'subtitle_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-table-inner .pricing-subtitle',
 			)
 		);
 		$this->add_responsive_control(
@@ -1824,6 +2088,14 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .plus-pricing-table.pricing-style-1 .pricing-subtitle' => 'text-align: {{VALUE}}',
 				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'subtitle_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-table-inner .pricing-subtitle',
 			)
 		);
 		$this->add_control(
@@ -1853,19 +2125,11 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_previous_price_styling',
 			array(
-				'label'     => esc_html__( 'Previous Price Style', 'tpebl' ),
+				'label'     => esc_html__( 'Previous Price', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'show_previous_price' => 'yes',
 				),
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'previous_price_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-previous-price-wrap',
 			)
 		);
 		$this->add_control(
@@ -1893,6 +2157,14 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .plus-pricing-table .pricing-previous-price-wrap' => 'vertical-align: {{VALUE}};',
 				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'previous_price_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-previous-price-wrap',
 			)
 		);
 		$this->start_controls_tabs( 'previous_price_style_tab' );
@@ -1937,24 +2209,8 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_price_styling',
 			array(
-				'label' => esc_html__( 'Price Style', 'tpebl' ),
+				'label' => esc_html__( 'Price', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'price_style_heading',
-			array(
-				'label'     => esc_html__( 'Price Main', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'price_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-price-wrap.style-1 span.price-prefix-text,{{WRAPPER}} .plus-pricing-table .pricing-price-wrap.style-1 .pricing-price',
 			)
 		);
 		$this->add_responsive_control(
@@ -1979,6 +2235,14 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .plus-pricing-table.pricing-style-1 .pricing-price-wrap' => 'text-align: {{VALUE}}',
 				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'price_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-price-wrap.style-1 span.price-prefix-text,{{WRAPPER}} .plus-pricing-table .pricing-price-wrap.style-1 .pricing-price',
 			)
 		);
 		$this->start_controls_tabs( 'price_style_tab' );
@@ -2076,31 +2340,45 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_content_styling',
 			array(
-				'label' => esc_html__( 'Content Style', 'tpebl' ),
+				'label' => esc_html__( 'Content', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_responsive_control(
+			'content_spg',
 			array(
-				'name'      => 'content_typography',
-				'label'     => esc_html__( 'Typography', 'tpebl' ),
-				'selector'  => '{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc .pricing-content',
-				'condition' => array(
-					'content_style' => 'wysiwyg_content',
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .pricing-content-wrap.listing-content.style-1 ul.plus-icon-list-items, {{WRAPPER}} .pricing-content-wrap.listing-content.style-2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
 		$this->add_control(
-			'content_text_color',
+			'list_icon_size',
 			array(
-				'label'     => esc_html__( 'Content Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc .pricing-content,{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc .pricing-content p' => 'color: {{VALUE}};',
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'List Icon Size', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 2,
+					),
 				),
-				'condition' => array(
-					'content_style' => 'wysiwyg_content',
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 14,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content li span.plus-icon-list-icon' => 'font-size: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content li span.plus-icon-list-icon svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}}',
+				),
+				'condition'   => array(
+					'content_style' => 'stylist_list',
 				),
 			)
 		);
@@ -2132,26 +2410,54 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'content_border_top_color',
+			'list_between_space',
 			array(
-				'label'     => esc_html__( 'Border Top Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc.style-1 hr.border-line' => 'border-top:1px solid;border-top-color: {{VALUE}};',
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'List Between Space', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 2,
+					),
 				),
-				'condition' => array(
-					'content_style'         => 'wysiwyg_content',
-					'content_wysiwyg_style' => 'style-1',
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 5,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content.style-1 li' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content.style-2 li' => 'padding: {{SIZE}}{{UNIT}} 0',
+				),
+				'condition'   => array(
+					'content_style' => 'stylist_list',
 				),
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_responsive_control(
+			'icon_between_space',
 			array(
-				'name'      => 'list_content_typography',
-				'label'     => esc_html__( 'Typography', 'tpebl' ),
-				'selector'  => '{{WRAPPER}} .plus-pricing-table ul.plus-icon-list-items span.plus-icon-list-text',
-				'condition' => array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Icon Spacing', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 2,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 5,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .plus-pricing-table .plus-icon-list-items .plus-icon-list-item .plus-icon-list-icon' => 'margin-right: {{SIZE}}{{UNIT}}',
+				),
+				'condition'   => array(
 					'content_style' => 'stylist_list',
 				),
 			)
@@ -2214,41 +2520,52 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'toggle'    => true,
 			)
 		);
-		$this->add_control(
-			'list_icon_size',
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
 			array(
-				'type'        => Controls_Manager::SLIDER,
-				'label'       => esc_html__( 'List Icon Size', 'tpebl' ),
-				'size_units'  => array( 'px' ),
-				'range'       => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 2,
-					),
+				'name'      => 'content_typography',
+				'label'     => esc_html__( 'Typography', 'tpebl' ),
+				'selector'  => '{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc .pricing-content',
+				'condition' => array(
+					'content_style' => 'wysiwyg_content',
 				),
-				'default'     => array(
-					'unit' => 'px',
-					'size' => 14,
-				),
-				'render_type' => 'ui',
-				'selectors'   => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content li span.plus-icon-list-icon' => 'font-size: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content li span.plus-icon-list-icon svg' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}}',
-				),
-				'condition'   => array(
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'      => 'list_content_typography',
+				'label'     => esc_html__( 'Typography', 'tpebl' ),
+				'selector'  => '{{WRAPPER}} .plus-pricing-table ul.plus-icon-list-items span.plus-icon-list-text',
+				'condition' => array(
 					'content_style' => 'stylist_list',
 				),
 			)
 		);
-		$this->add_responsive_control(
-			'content_spg',
+		$this->add_control(
+			'content_text_color',
 			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .pricing-content-wrap.listing-content.style-1 ul.plus-icon-list-items, {{WRAPPER}} .pricing-content-wrap.listing-content.style-2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'label'     => esc_html__( 'Content Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc .pricing-content,{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc .pricing-content p' => 'color: {{VALUE}};',
+				),
+				'condition' => array(
+					'content_style' => 'wysiwyg_content',
+				),
+			)
+		);
+		$this->add_control(
+			'content_border_top_color',
+			array(
+				'label'     => esc_html__( 'Border Top Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.content-desc.style-1 hr.border-line' => 'border-top:1px solid;border-top-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'content_style'         => 'wysiwyg_content',
+					'content_wysiwyg_style' => 'style-1',
 				),
 			)
 		);
@@ -2407,65 +2724,12 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_control(
-			'list_between_space',
-			array(
-				'type'        => Controls_Manager::SLIDER,
-				'label'       => esc_html__( 'List Between Space', 'tpebl' ),
-				'size_units'  => array( 'px' ),
-				'range'       => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 2,
-					),
-				),
-				'default'     => array(
-					'unit' => 'px',
-					'size' => 5,
-				),
-				'render_type' => 'ui',
-				'selectors'   => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content.style-1 li' => 'margin-bottom: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .plus-pricing-table .pricing-content-wrap.listing-content.style-2 li' => 'padding: {{SIZE}}{{UNIT}} 0',
-				),
-				'condition'   => array(
-					'content_style' => 'stylist_list',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'icon_between_space',
-			array(
-				'type'        => Controls_Manager::SLIDER,
-				'label'       => esc_html__( 'Icon Spacing', 'tpebl' ),
-				'size_units'  => array( 'px' ),
-				'range'       => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 2,
-					),
-				),
-				'default'     => array(
-					'unit' => 'px',
-					'size' => 5,
-				),
-				'render_type' => 'ui',
-				'selectors'   => array(
-					'{{WRAPPER}} .plus-pricing-table .plus-icon-list-items .plus-icon-list-item .plus-icon-list-icon' => 'margin-right: {{SIZE}}{{UNIT}}',
-				),
-				'condition'   => array(
-					'content_style' => 'stylist_list',
-				),
-			)
-		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_content_bg_styling',
 			array(
-				'label'     => esc_html__( 'Content Background Style', 'tpebl' ),
+				'label'     => esc_html__( 'Content Background', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'content_style'      => 'stylist_list',
@@ -2480,7 +2744,6 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'separator' => 'before',
 				'default'   => 'no',
 			)
 		);
@@ -2665,30 +2928,55 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_tooltip_option_styling',
+			'section_button_styling',
 			array(
-				'label' => esc_html__( 'Tooltip Options', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Button', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'display_button' => 'yes',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'button_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em' ),
+				'default'    => array(
+					'top'      => '8',
+					'right'    => '35',
+					'bottom'   => '8',
+					'left'     => '35',
+					'isLinked' => false,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .pt_plus_button .button-link-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 			)
 		);
 		$this->add_control(
-			'section_tooltip_option_styling_options',
+			'button_top_space',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-			)
-		);
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_button_styling',
-			array(
-				'label'     => esc_html__( 'Button Style', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Button Above Space', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 2,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .pt-plus-button-wrapper' => 'margin-top: {{SIZE}}{{UNIT}}',
+				),
+				'condition'   => array(
 					'display_button' => 'yes',
 				),
 			)
@@ -2733,51 +3021,6 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 						'icon'  => 'eicon-v-align-bottom',
 					),
 				),
-			)
-		);
-		$this->add_control(
-			'button_top_space',
-			array(
-				'type'        => Controls_Manager::SLIDER,
-				'label'       => esc_html__( 'Button Above Space', 'tpebl' ),
-				'size_units'  => array( 'px' ),
-				'range'       => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 2,
-					),
-				),
-				'default'     => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'render_type' => 'ui',
-				'selectors'   => array(
-					'{{WRAPPER}} .pt-plus-button-wrapper' => 'margin-top: {{SIZE}}{{UNIT}}',
-				),
-				'condition'   => array(
-					'display_button' => 'yes',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'button_padding',
-			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', 'em' ),
-				'default'    => array(
-					'top'      => '8',
-					'right'    => '35',
-					'bottom'   => '8',
-					'left'     => '35',
-					'isLinked' => false,
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .pt_plus_button .button-link-wrap' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_group_control(
@@ -3051,18 +3294,15 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->start_controls_section(
 			'section_call_to_action_styling',
 			array(
-				'label' => esc_html__( 'Call To Action(CTA)', 'tpebl' ),
+				'label' => esc_html__( 'Call To Action', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
 		$this->add_control(
 			'section_call_to_action_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -3078,24 +3318,17 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				),
 			)
 		);
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_responsive_control(
+			'ribbon_padding',
 			array(
-				'name'     => 'ribbon_pin_typography',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-1 .ribbon-pin-inner ' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin .ribbon-pin-inner',
-			)
-		);
-		$this->add_control(
-			'ribbon_text_color',
-			array(
-				'label'     => esc_html__( 'Text Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#fff',
-				'selectors' => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin .ribbon-pin-inner,{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin .ribbon-pin-inner p' => 'color: {{VALUE}};',
+				'condition'  => array(
+					'ribbon_pin_style' => 'style-1',
 				),
 			)
 		);
@@ -3126,31 +3359,25 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				),
 			)
 		);
-		$this->add_responsive_control(
-			'ribbon_padding',
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
 			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-1 .ribbon-pin-inner ' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'name'     => 'ribbon_pin_typography',
+				'global'   => array(
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
 				),
-				'separator'  => 'before',
-				'condition'  => array(
-					'ribbon_pin_style' => 'style-1',
-				),
+				'selector' => '{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin .ribbon-pin-inner',
 			)
 		);
-		$this->add_responsive_control(
-			'ribbon_radius',
+		$this->add_control(
+			'ribbon_text_color',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-1 .ribbon-pin-inner,{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-2,{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-3' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#fff',
+				'selectors' => array(
+					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin .ribbon-pin-inner,{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin .ribbon-pin-inner p' => 'color: {{VALUE}};',
 				),
-				'separator'  => 'before',
 			)
 		);
 		$this->add_group_control(
@@ -3165,68 +3392,14 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'ribbon_bg_style_3',
-			array(
-				'label'     => esc_html__( 'Background Color', 'tpebl' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#212121',
-				'selectors' => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-3' => 'background: {{VALUE}};',
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-3:after' => 'border-top-color: {{VALUE}};border-left-color: {{VALUE}};',
-				),
-				'condition' => array(
-					'ribbon_pin_style' => array( 'style-3' ),
-				),
-			)
-		);
 		$this->add_responsive_control(
-			'ribbon_pin_width',
+			'ribbon_radius',
 			array(
-				'label'      => esc_html__( 'Max-Width', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px' ),
-				'range'      => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 500,
-						'step' => 2,
-					),
-				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => 120,
-				),
+				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-2' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
-				),
-				'condition'  => array(
-					'ribbon_pin_style' => 'style-2',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'ribbon_pin_adjust',
-			array(
-				'label'      => esc_html__( 'Adjust Pin Text', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px' ),
-				'range'      => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 300,
-						'step' => 1,
-					),
-				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => 20,
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-2 .ribbon-pin-inner' => 'margin-top: -{{SIZE}}{{UNIT}};margin-left: {{SIZE}}{{UNIT}};',
-				),
-				'condition'  => array(
-					'ribbon_pin_style' => 'style-2',
+					'{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-1 .ribbon-pin-inner,{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-2,{{WRAPPER}} .plus-pricing-table .pricing-ribbon-pin.style-3' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -3369,7 +3542,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'bg_hover_animation',
 			array(
-				'label'   => esc_html__( 'Background Hover Animation', 'tpebl' ),
+				'label'   => esc_html__( 'Hover Animation', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'hover_normal',
 				'options' => array(
@@ -3379,6 +3552,16 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 					'hover_slide_right'  => esc_html__( 'SlideInRight (Pro)', 'tpebl' ),
 					'hover_slide_top'    => esc_html__( 'SlideInTop (Pro)', 'tpebl' ),
 					'hover_slide_bottom' => esc_html__( 'SlideInBotton (Pro)', 'tpebl' ),
+				),
+			)
+		);
+		$this->add_control(
+			'bg_hover_animation_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'bg_hover_animation!' => array( 'hover_normal' ),
 				),
 			)
 		);
@@ -3696,13 +3879,23 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 
 			if ( 'font_awesome' === $if_style ) {
 				$icons = $settings['icon_fontawesome'];
+			} elseif ( 'font_awesome_5' === $if_style && ! empty( $settings['icon_fontawesome_5']['value'] ) ) {
+				$icons = $settings['icon_fontawesome_5'];
 			} else {
 				$icons = '';
 			}
 
 			$icon_bg = tp_bg_lazyLoad( $settings['icon_background_image'], $settings['icon_hover_background_image'] );
 			if ( ! empty( $icons ) ) {
-				$icons_content = '<div class="pricing-icon ' . esc_attr( $service_icon_style ) . ' ' . $icon_bg . '"><i class=" ' . esc_attr( $icons ) . ' "></i></div>';
+				$icons_content = '<div class="pricing-icon ' . esc_attr( $service_icon_style ) . ' ' . $icon_bg . '">';
+				if ( 'font_awesome_5' === $if_style ) {
+					ob_start();
+					\Elementor\Icons_Manager::render_icon( $icons, array( 'aria-hidden' => 'true' ) );
+					$icons_content .= ob_get_clean();
+				} else {
+					$icons_content .= '<i class="' . esc_attr( $icons ) . '"></i>';
+				}
+				$icons_content .= '</div>';
 			}
 		}
 
@@ -3751,7 +3944,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				$list_icon_style = ! empty( $item['list_icon_style'] ) ? $item['list_icon_style'] : 'font_awesome';
 				if ( 'font_awesome' === $list_icon_style ) {
 					$icons = $item['list_icon_fontawesome'];
-				}elseif ( 'font_awesome_5' === $list_icon_style && ! empty( $item['icon_fontawesome_5']['value'] ) ) {
+				} elseif ( 'font_awesome_5' === $list_icon_style && ! empty( $item['icon_fontawesome_5']['value'] ) ) {
 					ob_start();
 					\Elementor\Icons_Manager::render_icon( $item['icon_fontawesome_5'], array( 'aria-hidden' => 'true' ) );
 					$icons .= ob_get_clean();

@@ -38,5 +38,27 @@ if ( 'tlrepeater' === $con_from ) {
 ?>
 
 <div class="testimonial-featured-image">
-	<span class="thumb-wrap"><?php echo wp_kses_post( $featured_image ); ?></span>
+	<?php
+	if ( ! empty( $has_border_radius ) ) {
+		?>
+		<span class="thumb-wrap">
+			<?php echo $featured_image; ?>
+		</span>
+		<?php
+	} else {
+		?>
+		<span class="thumb-wrap" style="
+			display: inline-block;
+			-webkit-mask-image: url('<?php echo esc_url( L_THEPLUS_ASSETS_URL . 'svg/testimonial-mask.svg' ); ?>');
+			-webkit-mask-repeat: no-repeat;
+			mask-image: url('<?php echo esc_url( L_THEPLUS_ASSETS_URL . 'svg/testimonial-mask.svg' ); ?>');
+			mask-size: contain;
+			width: 75px;
+            height: 90px;
+		">
+			<?php echo $featured_image; ?>
+		</span>
+		<?php
+	}
+	?>
 </div>

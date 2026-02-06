@@ -59,7 +59,7 @@ if ( ! class_exists( 'Tp_Nexter_Notice' ) ) {
 		 * Ensures only one instance of the class is loaded or can be loaded.
 		 *
 		 * @since 6.3.11
-		 * 
+		 *
 		 * @return instance of the class.
 		 */
 		public static function instance() {
@@ -78,7 +78,20 @@ if ( ! class_exists( 'Tp_Nexter_Notice' ) ) {
 		 * @since 6.3.11
 		 */
 		public function __construct() {
-			add_action( 'admin_notices', array( $this, 'theplus_blocks_promo_install_plugin' ) );
+
+			$saved_time = get_option( 'tpae_install_time' );
+
+			$saved_timestamp   = strtotime( $saved_time );
+			$current_timestamp = current_time( 'timestamp' );
+
+			$days_passed = floor( ( $current_timestamp - $saved_timestamp ) / DAY_IN_SECONDS );
+
+			if ( $days_passed >= 2 ) {
+				if ( ! get_option( 'tpae_nexter_block_notice' ) ) {
+					add_action( 'admin_notices', array( $this, 'theplus_blocks_promo_install_plugin' ) );
+				}
+			}
+
 			add_action( 'wp_ajax_theplus_blocks_dismiss_promo', array( $this, 'theplus_blocks_dismiss_promo' ) );
 		}
 
@@ -90,20 +103,29 @@ if ( ! class_exists( 'Tp_Nexter_Notice' ) ) {
 		public function theplus_blocks_promo_install_plugin() {
 			$installed_plugins = get_plugins();
 
-			$file_path   = $this->t_p_a_g_slug;
-			$screen      = get_current_screen();
-			$nonce       = wp_create_nonce( 'theplus-addons-tpag-blocks' );
-			$pt_exclude  = ! empty( $screen->post_type ) && in_array( $screen->post_type, array( 'elementor_library', 'product', 'update' ), true );
-
-			$parent_base = ! empty( $screen->parent_base ) && in_array( $screen->parent_base, array( 'index', 'elementor', 'themes', 'edit', 'plugins', 'theplus_welcome_page'  ), true );
-			$get_action  = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
-
-			if ( ! $parent_base || $pt_exclude ) {
+			$notice_dismissed = get_option( 'tpae_nexter_block_notice' );
+			if ( ! empty( $notice_dismissed ) ) {
 				return;
 			}
 
-			$notice_dismissed = get_option( 'tpae_nexter_block_notice' );
-			if ( ! empty( $notice_dismissed ) ) {
+			$file_path  = $this->t_p_a_g_slug;
+			$screen     = get_current_screen();
+			$nonce      = wp_create_nonce( 'theplus-addons-tpag-blocks' );
+			$pt_exclude = ! empty( $screen->post_type ) && in_array( $screen->post_type, array( 'elementor_library', 'product', 'update' ), true );
+
+			$et_plugin_status = apply_filters( 'tpae_get_plugin_status', 'template-kit-import/template-kit-import.php' );
+
+			$allowed_parents = array( 'index', 'elementor', 'themes', 'edit', 'plugins' );
+
+			if ( get_option( 'tpae_onbording_end' ) || 'not_installed' !== $et_plugin_status ) {
+				$allowed_parents[] = 'theplus_welcome_page';
+			}
+
+			$parent_base = ! empty( $screen->parent_base ) && in_array( $screen->parent_base, $allowed_parents, true );
+
+			$get_action = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+
+			if ( ! $parent_base || $pt_exclude ) {
 				return;
 			}
 
@@ -121,24 +143,25 @@ if ( ! class_exists( 'Tp_Nexter_Notice' ) ) {
 			);
 
 			echo '<div class="notice notice-error is-dismissible tpae-notice-show tpae-tpag-blocks-promo" style="border-left-color: #1717CC;">
-                    <div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
+				<div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
 
-                        <div class="tp-nexter-logo" style="display: flex; padding-top: 14px;">
-                           <img style="max-width: 120px; max-height: 120px;" src="' . esc_url( L_THEPLUS_URL . '/assets/images/products/nexter-logo.svg' ) . '" alt="Nexter Blocks Promo" />
-                        </div>
-                        <div style="margin: 0 10px; color: #000;">
-                            <h3 style="margin: 10px 0 7px;">' . esc_html__( 'Using Gutenberg Editor for Blogs? Check Out Nexter Blocks', 'tpebl' ) . '</h3>
-                            
-                            <p>' . esc_html__( 'Try our free Nexter Blocks to add more interactive elements with a growing collection of 90+ WordPress Gutenberg Blocks — designed to make your site faster, cleaner, and more powerful. Everything you need to take your WordPress experience to the next level — no coding required.', 'tpebl' ) . '</p>
-                            
-                            <div class="tp-nexter-button" style="margin-top: 10px;">
-                                <a href="' . esc_url( $install_url ) . '" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: rgba(23, 23, 204, 1); color: rgba(255, 255, 255, 1);">' . esc_html__( 'Install Nexter Blocks', 'tpebl' ) . '</a>
-                            </div>
-                            
-                            <p style="margin-top: 8px; color: rgba(90, 90, 90, 1); font-style: italic;">' . esc_html__( 'Note : Safe to install - no effect on Elementor setup', 'tpebl' ) . '</p>
-                        </div>
-                    </div>
-                </div>';
+					<div class="tp-nexter-logo" style="display: flex; padding-top: 14px;">
+						<img style="max-width: 120px; max-height: 120px;" src="' . esc_url( L_THEPLUS_URL . 'assets/images/products/nexter-logo.svg' ) . '" alt="Nexter Blocks Promo" />
+					</div>
+					<div style="margin: 0 10px; color: #000;">
+						<h3 style="margin: 10px 0 7px;">' . esc_html__( 'Using Gutenberg Editor for Blogs? Check Out Nexter Blocks', 'tpebl' ) . '</h3>
+						
+						<p>' . esc_html__( 'Try our free Nexter Blocks to add more interactive elements with a growing collection of 90+ WordPress Gutenberg Blocks — designed to make your site faster, cleaner, and more powerful. Everything you need to take your WordPress experience to the next level — no coding required.', 'tpebl' ) . '</p>
+						
+						<div class="tp-nexter-button" style="margin-top: 10px;">
+							<a href="' . esc_url( $install_url ) . '" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: rgba(23, 23, 204, 1); color: rgba(255, 255, 255, 1);">' . esc_html__( 'Install Nexter Blocks', 'tpebl' ) . '</a>
+						</div>
+						
+						<p style="margin-top: 8px; color: rgba(90, 90, 90, 1); font-style: italic;">' . esc_html__( 'Note : Safe to install - no effect on Elementor setup', 'tpebl' ) . '</p>
+					</div>
+				</div>
+			</div>';
+
 			?>
 			<script>
 				jQuery(document).on('click', '.tpae-tpag-blocks-promo .notice-dismiss', function(e) {

@@ -27,6 +27,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class ThePlus_Block_Quote extends Widget_Base {
 
+	/**
+	 * Document Link For Need help.
+	 *
+	 * @since 5.3.3
+	 *
+	 * @var tp_doc of the class.
+	 */
 	public $tp_doc = L_THEPLUS_TPDOC;
 
 	/**
@@ -97,18 +104,18 @@ class ThePlus_Block_Quote extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -146,32 +153,32 @@ class ThePlus_Block_Quote extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16317,
-                'label_block' => true,
-            )
-        );
-		$this->add_control(
-		'style',
+			'tpae_preset_controller',
 			array(
-				'label'        => esc_html__( 'Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style-1',
-				'options'      => array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16317,
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'style',
+			array(
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-1',
+				'options'     => array(
 					'style-1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/style-1.svg'),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/style-1.svg' ),
 					),
 					'style-2' => array(
 						'title' => esc_html__( 'Style 2', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/style-2.svg'),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/style-2.svg' ),
 					),
 				),
-				'columns'      => 2,
-				'classes'      => 'tpae-visual_choice',
+				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_responsive_control(
@@ -207,7 +214,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'label'       => esc_html__( 'Description', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
 				'default'     => esc_html__( '"I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."', 'tpebl' ),
-				'ai' => false,
+				'ai'          => false,
 				'placeholder' => esc_html__( 'Type your block quote here', 'tpebl' ),
 				'dynamic'     => array(
 					'active' => true,
@@ -220,7 +227,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'label'     => esc_html__( 'Author', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
 				'default'   => esc_html__( 'John Doe', 'tpebl' ),
-				'ai' => false,
+				'ai'        => false,
 				'condition' => array(
 					'style' => 'style-2',
 				),
@@ -232,7 +239,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'label'     => esc_html__( 'Author Description', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
 				'default'   => esc_html__( '- Developer', 'tpebl' ),
-				'ai' => false,
+				'ai'        => false,
 				'condition' => array(
 					'style!' => 'style-1',
 				),
@@ -241,13 +248,13 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'quote_icon',
 			array(
-				'label' => esc_html__( 'Icon', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'default' => '',
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Icon', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'default'      => '',
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'condition' => array(
+				'condition'    => array(
 					'style!' => 'style-1',
 				),
 			)
@@ -325,11 +332,17 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'quote_tweet',
 			array(
-				'label'     => wp_kses_post( "Tweet <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "click-to-tweet-text-box-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'default' => 'no',
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Tweet', 'tpebl' ),
+						esc_url( $this->tp_doc . 'click-to-tweet-text-box-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'default'      => 'no',
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 			)
 		);
@@ -354,7 +367,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'label'     => esc_html__( 'Text', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
 				'default'   => esc_html__( 'Tweet', 'tpebl' ),
-				'ai'  => false,
+				'ai'        => false,
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
 					'quote_tweet' => 'yes',
@@ -378,9 +391,11 @@ class ThePlus_Block_Quote extends Widget_Base {
 			'tweet_Note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => sprintf(
-					'<p class="tp-controller-notice"><i>%s</i></p>',
-					esc_html__( 'Note : If disabled, it will tweet content of blockquote instead of current page URL.', 'tpebl' )
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-notice"><i>%s</i></p>',
+						esc_html__( 'Note : If disabled, it will tweet content of blockquote instead of current page URL.', 'tpebl' )
+					)
 				),
 				'label_block' => true,
 			)
@@ -405,7 +420,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'label'      => esc_html__( 'Select', 'tpebl' ),
 				'type'       => Controls_Manager::MEDIA,
 				'media_type' => 'image',
-				'ai' => false,
+				'ai'         => false,
 				'condition'  => array(
 					'style!'             => 'style-1',
 					'quote_iamge_switch' => 'yes',
@@ -427,7 +442,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'label'     => esc_html__( 'Drop Cap', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
-				'label_on' => esc_html__( 'Show', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'style!' => 'style-2',
@@ -435,32 +450,32 @@ class ThePlus_Block_Quote extends Widget_Base {
 			)
 		);
 		$this->add_control(
-		'border_layout',
+			'border_layout',
 			array(
-				'label'        => esc_html__( 'Border Layout', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'none',
-				'options'      => array(
+				'label'       => esc_html__( 'Border Layout', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'none',
+				'options'     => array(
 					'none' => array(
 						'title' => esc_html__( 'None', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/none.svg'),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/none.svg' ),
 					),
 					'bl_1' => array(
 						'title' => esc_html__( 'Layout 1', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/layout-1.svg'),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/layout-1.svg' ),
 					),
 					'bl_2' => array(
 						'title' => esc_html__( 'Layout 2', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/layout-2.svg'),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/layout-2.svg' ),
 					),
 					'bl_3' => array(
 						'title' => esc_html__( 'Layout 3', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/layout-3.svg'),
+						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/blockquote/layout-3.svg' ),
 					),
 				),
-				'columns'      => 4,
-				'classes'      => 'tpae-visual_choice',
+				'columns'     => 4,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->end_controls_section();
@@ -846,7 +861,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Author Extras', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
@@ -1693,7 +1708,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Tweet Extras', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
@@ -1776,7 +1791,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'border_l1_inner_heading',
 			array(
-				'label' => 'Inner Part',
+				'label' => esc_html__( 'Inner Part', 'tpebl' ),
 				'type'  => Controls_Manager::HEADING,
 			)
 		);
@@ -1837,7 +1852,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'border_l1_outer_heading',
 			array(
-				'label'     => 'Outer Part',
+				'label'     => esc_html__( 'Outer Part', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -1916,7 +1931,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'bl2o_bg_heading',
 			array(
-				'label' => 'Normal',
+				'label' => esc_html__( 'Normal', 'tpebl' ),
 				'type'  => Controls_Manager::HEADING,
 			)
 		);
@@ -2310,7 +2325,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 	 */
 	protected function render() {
 
-		$settings    = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
 		/*--OnScroll View Animation ---*/
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
@@ -2446,7 +2461,6 @@ class ThePlus_Block_Quote extends Widget_Base {
 					$text_block .= '<i class="fa fa-quote-left quote-left" aria-hidden="true"></i>';
 				}
 			}
-
 		}
 		if ( 'yes' === $iamge_on && ! empty( $q_image ) ) {
 			$text_block .= $quote_img;

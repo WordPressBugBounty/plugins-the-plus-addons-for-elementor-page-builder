@@ -84,7 +84,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Info Box', 'Information Box', 'Content Box', 'Text Box', 'Feature Box', 'Icon Box', 'Callout Box', 'Highlight Box', 'Notification Box', 'Alert Box', 'Message Box', 'Card Box', 'Box Widget', 'Box Element', 'Box Container' );
+		return array( 'Info Box', 'Infobox Layout', 'Info Box Carousel', 'Info Box Listing', 'Animated Info Box', 'Lottie Info Box', 'SVG Info Box', 'Linked Info Box', 'Icon Info Box', 'Image Info Box' );
 	}
 
 	/**
@@ -155,13 +155,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16254,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16254,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'info_box_layout',
 			array(
@@ -177,7 +177,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'how_it_works_single_layout',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-services-box-in-wordpress-using-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'show-services-box-in-wordpress-using-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'info_box_layout' => array( 'single_layout' ),
@@ -206,11 +212,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'loop_select_icon_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'carousel_layout',
 				),
@@ -219,11 +222,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'main_style_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'main_style!' => array( 'style_1', 'style_3', 'style_4' ),
 				),
@@ -246,18 +246,14 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'connection_switch_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout'   => 'carousel_layout',
 					'connection_switch' => 'yes',
 				),
 			)
 		);
-
 		$this->add_control(
 			'title',
 			array(
@@ -349,7 +345,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 					''      => esc_html__( 'None', 'tpebl' ),
 					'icon'  => esc_html__( 'Icon', 'tpebl' ),
 					'image' => esc_html__( 'Image', 'tpebl' ),
-					'text' => esc_html__( 'Text', 'tpebl' ),
+					'text'  => esc_html__( 'Text', 'tpebl' ),
 					'svg'   => esc_html__( 'Svg (PRO)', 'tpebl' ),
 				),
 				'separator' => 'before',
@@ -362,7 +358,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'how_it_works_image',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-elementor-image-box/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> How it works <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'create-elementor-image-box/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'image_icon' => array( 'image' ),
@@ -372,13 +374,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'tp_info_title',
 			array(
-				'label'   => esc_html__( 'Title', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'default' => esc_html__( '0', 'tpebl' ),
-				'dynamic' => array(
+				'label'     => esc_html__( 'Title', 'tpebl' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => esc_html__( '0', 'tpebl' ),
+				'dynamic'   => array(
 					'active' => true,
 				),
-				'condition'   => array(
+				'condition' => array(
 					'image_icon' => 'text',
 				),
 			)
@@ -398,11 +400,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'svg_icon_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
 					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
@@ -495,11 +494,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'icons_image_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
 					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
@@ -544,11 +540,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'button_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
 					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
@@ -652,11 +645,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'button_icons_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout'   => 'single_layout',
 					'main_style'        => array( 'style_1', 'style_3', 'style_4' ),
@@ -713,8 +703,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Hover Button InfoBox', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
@@ -742,11 +732,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'display_pin_text_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout'  => 'single_layout',
 					'main_style'       => array( 'style_3', 'style_4' ),
@@ -772,7 +759,13 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'full_infobox_switch',
 			array(
-				'label'     => wp_kses_post( "Full Infobox Link <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-link-to-the-info-box-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Full Infobox Link', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-link-to-the-info-box-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
@@ -799,11 +792,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'full_infobox_switch_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'full_infobox_switch' => array( 'yes' ),
 				),
@@ -1552,6 +1542,16 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'bg_hover_animation_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'bg_hover_animation!' => 'hover_normal',
+				),
+			)
+		);
 		$this->start_controls_tabs( 'tabs_background_style' );
 		$this->start_controls_tab(
 			'tab_background_normal',
@@ -1918,11 +1918,11 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'section_svg_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'info_box_layout' => 'carousel_layout',
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -2470,8 +2470,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Icon Overlay', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 				'condition' => array(
@@ -2483,11 +2483,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'icon_overlay_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'single_layout',
 					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
@@ -2500,8 +2497,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Icon Shine Effect', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -2509,11 +2506,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'icon_shine_effect_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout'   => 'single_layout',
 					'main_style'        => array( 'style_1', 'style_3', 'style_4' ),
@@ -2630,11 +2624,11 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'section_pin_text_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'info_box_layout' => 'carousel_layout',
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -2652,19 +2646,19 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'section_carousel_options_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'info_box_layout' => 'carousel_layout',
+				),
 			)
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_text_styling',
 			array(
-				'label' => esc_html__( 'Text Style', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Text Style', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'image_icon' => 'text',
 				),
@@ -2673,12 +2667,12 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'tab_text_typography',
-				'label'    => esc_html__( 'Typography', 'tpebl' ),
-				'global'   => array(
+				'name'      => 'tab_text_typography',
+				'label'     => esc_html__( 'Typography', 'tpebl' ),
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}} .service-icon-text',
+				'selector'  => '{{WRAPPER}} .service-icon-text',
 				'condition' => array(
 					'image_icon' => 'text',
 				),
@@ -2700,7 +2694,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .service-icon-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				),
-				'condition' => array(
+				'condition'  => array(
 					'image_icon' => 'text',
 				),
 			)
@@ -2739,7 +2733,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'name'     => 'wl_btn_border',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'default' => array(
+				'default'  => array(
 					'color' => '#666666',
 				),
 				'selector' => '{{WRAPPER}} .service-icon-text',
@@ -2754,7 +2748,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .service-icon-text' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				),
-				'condition' => array(
+				'condition'  => array(
 					'image_icon' => 'text',
 				),
 			)
@@ -2793,7 +2787,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'name'     => 'wl_btn_border_h',
 				'label'    => esc_html__( 'Border', 'tpebl' ),
-				'default' => array(
+				'default'  => array(
 					'color' => '#666666',
 				),
 				'selector' => '{{WRAPPER}} .service-icon-text:hover',
@@ -2808,14 +2802,14 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .service-icon-text:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				),
-				'condition' => array(
+				'condition'  => array(
 					'image_icon' => 'text',
 				),
 			)
 		);
 		$this->end_controls_tab();
-		$this->end_controls_tabs();		
-	    $this->end_controls_section();
+		$this->end_controls_tabs();
+		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_extra_option_styling',
@@ -2875,11 +2869,8 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'Parallax_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'tilt_parallax' => 'yes',
 				),
@@ -2901,18 +2892,14 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'messy_column_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'info_box_layout' => 'carousel_layout',
 					'messy_column'    => 'yes',
 				),
 			)
 		);
-
 		$this->add_control(
 			'min_height_section',
 			array(
@@ -2960,6 +2947,16 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'default'   => '',
 				'options'   => l_theplus_get_content_hover_effect_options(),
 				'separator' => 'before',
+			)
+		);
+		$this->add_control(
+			'box_hover_effects_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'box_hover_effects' => array( 'grow', 'bounce-in', 'float', 'wobble_horizontal', 'wobble_vertical', 'float_shadow', 'grow_shadow', 'shadow_radial' ),
+				),
 			)
 		);
 		$this->add_control(
@@ -3331,9 +3328,9 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				}
 			}
 		}
-		
+
 		if ( 'text' === $image_icon ) {
-			$service_img = '<div class="service-icon-text">'.wp_kses_post($settings['tp_info_title']).'</div>';
+			$service_img = '<div class="service-icon-text">' . wp_kses_post( $settings['tp_info_title'] ) . '</div>';
 		}
 
 		$border_cright = ! empty( $settings['border_check_right'] ) ? $settings['border_check_right'] : '';

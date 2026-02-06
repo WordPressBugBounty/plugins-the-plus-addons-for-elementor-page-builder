@@ -86,7 +86,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 */
 		public function tpae_elementor_editor_script() {
 
-			wp_enqueue_script( 'tpae-wdkit-preview-popup', L_THEPLUS_URL . 'assets/js/wdesignkit/tp-preset-btn.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION, true );
+			wp_enqueue_script( 'tpae-wdkit-preview-popup', L_THEPLUS_URL . 'includes/preset/tp-preset-popup.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION, true );
 
 			wp_localize_script(
 				'tpae-wdkit-preview-popup',
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 * @since 6.5.6
 		 */
 		public function tpae_elementor_editor_style() {
-			wp_enqueue_style( 'tp-wdkit-elementor-popup-preset', L_THEPLUS_URL . 'assets/css/wdesignkit/tp-wdkit-install-popup.css', array(), L_THEPLUS_VERSION );
+			wp_enqueue_style( 'tp-wdkit-elementor-popup-preset', L_THEPLUS_URL . 'includes/preset/tp-preset-popup.css', array(), L_THEPLUS_VERSION );
 		}
 
 		/**
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 			check_ajax_referer( 'tp_wdkit_preview_popup', 'security' );
 
 			if ( ! current_user_can( 'install_plugins' ) ) {
-				$response = $this->tpae_response('Invalid Permission.', 'Something went wrong.',false );
+				$response = $this->tpae_response( 'Invalid Permission.', 'Something went wrong.', false, 'invalid-permission' );
 
 				wp_send_json( $response );
 				wp_die();
@@ -165,6 +165,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 
 				$installed         = $upgrader->install( $plugin_info->download_link );
 				$activation_result = activate_plugin( $plugin_basename );
+				$this->tpae_wdkit_hook();
 
 				$success = null === $activation_result;
 				$result  = $this->tpae_response( 'Success Install WDesignKit', 'Success Install WDesignKit', $success, '' );
@@ -172,6 +173,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 			} elseif ( isset( $installed_plugins[ $plugin_basename ] ) ) {
 
 				$activation_result = activate_plugin( $plugin_basename );
+				$this->tpae_wdkit_hook();
 
 				$success = null === $activation_result;
 				$result  = $this->tpae_response( 'Success Install WDesignKit', 'Success Install WDesignKit', $success, '' );
@@ -207,20 +209,35 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		}
 
 		/**
+		 * Tpae Side Wdkit Hook Call after install
+		 *
+		 * @since 6.4.0
+		 */
+		public function tpae_wdkit_hook() {
+			$my_array = array(
+				'elementor_builder'  => true,
+				'elementor_template' => true,
+			);
+
+			$builder = array( 'nexter-blocks' );
+			do_action( 'wdkit_active_settings', $my_array, $builder );
+		}
+
+		/**
 		 * It is WDesignKit Popup Design for Download and install
 		 *
 		 * @since 6.5.6
 		 */
 		public function tpae_preview_html_popup() {
 
-			$tp_check_svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"16\" fill=\"none\"><path fill=\"gray\" d=\"M12.803 3.988a.5.5 0 0 1 .724.69l-7 7.334a.5.5 0 0 1-.715.008L3.478 9.687a.5.5 0 0 1 .67-.742l.038.035 1.97 1.971 6.647-6.963Z\"/></svg>";
+			$tp_check_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none"><path fill="gray" d="M12.803 3.988a.5.5 0 0 1 .724.69l-7 7.334a.5.5 0 0 1-.715.008L3.478 9.687a.5.5 0 0 1 .67-.742l.038.035 1.97 1.971 6.647-6.963Z"/></svg>';
 
 			?>
 			<div id="tpae-wdkit-wrap" class="tp-main-container-preset" style="display: none">
 				<div class="tp-header-preset">
 					<div class="tp-wdkit-image">
-				       	<img src="<?php echo esc_url( L_THEPLUS_URL . 'assets/images/wdesignkit/wdkit-tredmark.svg' ); ?>"/>
-				    </div>
+							<img src="<?php echo esc_url( L_THEPLUS_URL . 'assets/images/wdesignkit/wdkit-tredmark.svg' ); ?>"/>
+					</div>
 					<div class="tp-close-preset">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" fill="none"><path fill="gray" d="M15.393 4.105a.625.625 0 1 1 .883.884l-5.391 5.392 5.391 5.391.044.047a.625.625 0 0 1-.88.88l-.047-.043L10 11.264 4.61 16.656a.625.625 0 1 1-.884-.884l5.391-5.391-5.391-5.392a.625.625 0 1 1 .884-.884L10 9.497l5.392-5.392Z"/></svg>
 					</div>
@@ -250,7 +267,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 						</div>
 						<div class="wkit-tp-preset-checkbox">
 							<span class="wkit-preset-checkbox-content">
-								   <?php echo $tp_check_svg; ?>
+									<?php echo $tp_check_svg; ?>
 									<p class="wkit-preset-label">
 									<?php echo esc_html__( 'Time-Saving and Efficient Workflow', 'tpebl' ); ?>
 								</p>

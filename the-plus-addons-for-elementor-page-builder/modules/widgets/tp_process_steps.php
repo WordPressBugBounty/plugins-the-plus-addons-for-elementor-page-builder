@@ -74,7 +74,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-creatives' );
+		return array( 'plus-creative' );
 	}
 
 	/**
@@ -84,7 +84,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Process', 'Steps', 'Procedure', 'Method', 'Workflow', 'Sequence', 'Order', 'Stages', 'Phases', 'Actions', 'Tasks', 'Activities', 'Operation', 'Protocol', 'Technique', 'Approach', 'System', 'Plan', 'Strategy', 'Path', 'Route', 'Formula', 'Algorithm', 'Blueprint', 'Roadmap' );
+		return array( 'Process Steps', 'Step-by-Step Flow', 'Horizontal Steps', 'Vertical Steps', 'Numbered Steps', 'Icon Steps', 'Image Steps', 'Lottie Steps', 'Interactive Process Steps', 'Custom Process Steps' );
 	}
 
 	/**
@@ -115,18 +115,18 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -137,7 +137,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -157,22 +157,22 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$this->add_control(
 			'ps_style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'   => 'style_1',
-				'options'   => array(
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style_1',
+				'options'     => array(
 					'style_1' => array(
 						'title' => esc_html__( 'Vertical', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/process-step/vertical.svg'),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/process-step/vertical.svg' ),
 					),
 					'style_2' => array(
 						'title' => esc_html__( 'Horizontal', 'tpebl' ),
-						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/process-step/horizontal.svg'),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/process-step/horizontal.svg' ),
 					),
 				),
-				'columns'      => 2,
-				'classes'      => 'tpae-visual_choice',
+				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -362,11 +362,11 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'loop_image_icon',
 			array(
-				'label'       => esc_html__( 'Select Icon', 'tpebl' ),
-				'type'        => Controls_Manager::SELECT,
-				'default'     => 'icon',
-				'separator'   => 'before',
-				'options'     => array(
+				'label'     => esc_html__( 'Select Icon', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'icon',
+				'separator' => 'before',
+				'options'   => array(
 					''       => esc_html__( 'None', 'tpebl' ),
 					'icon'   => esc_html__( 'Icon', 'tpebl' ),
 					'image'  => esc_html__( 'Image', 'tpebl' ),
@@ -378,8 +378,8 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'loop_image_icon_note',
 			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> You can select Icon, Custom Image or Text using this option.',
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> You can select Icon, Custom Image or Text using this option.',
 				'content_classes' => 'tp-controller-notice',
 			)
 		);
@@ -483,13 +483,13 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'icon_fs_popover_toggle',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'loop_image_icon' => 'icon',
 					'loop_icon_style' => 'font_awesome',
 				),
@@ -523,11 +523,9 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'icons_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'loop_icon_style' => 'icon_mind',
 				),
@@ -656,11 +654,9 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$this->add_control(
 			'carousel_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'connection_switch' => 'yes',
 				),
@@ -2035,17 +2031,14 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$this->add_control(
 			'animation_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
-
 	}
 
 	/**

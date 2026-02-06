@@ -280,6 +280,21 @@ class Plus_Widgets_Manager {
 				$this->transient_widgets[] = 'plus-alignmnet-effect';
 			}
 
+			if('tp-adv-text-block' === $widget_name){
+				$tp_text_animation = ! empty( $options['enable_text_animation'] ) ? $options['enable_text_animation'] : '';
+				if('yes' === $tp_text_animation){
+					$this->transient_widgets[] = "tp-text-block-animation";
+				}
+			}
+			if('tp-heading-title' === $widget_name){
+				$tp_heading_animation = ! empty( $options['enable_text_animation'] ) ? $options['enable_text_animation'] : '';
+				$tp_heading_sub_animation = ! empty( $options['enable_text_animation_sub_txt'] ) ? $options['enable_text_animation_sub_txt'] : '';
+
+				if('yes' === $tp_heading_animation || 'yes' === $tp_heading_sub_animation){
+					$this->transient_widgets[] = "tp-gsap-heading-animation";
+				}
+			}
+
 			if ( 'tp-button' === $widget_name ) {
 
 				$hover_effect = ! empty( $options['btn_hover_effects'] ) ? $options['btn_hover_effects'] : '';
@@ -297,6 +312,11 @@ class Plus_Widgets_Manager {
 				$blog_style                = ! empty( $options['style'] ) ? $options['style'] : 'style-1';
 				$this->transient_widgets[] = 'tp-bloglistout-' . $blog_style;
 				$this->transient_widgets[] = 'tp-blog-listout';
+
+				if ( ! empty( $options['display_button'] ) && 'yes' === $options['display_button'] ) {
+					$button_style = ! empty( $options['button_style'] ) ? $options['button_style'] : 'style-7';
+					$this->tp_button_style( $button_style );
+				}
 
 				$this->transient_widgets[] = $this->tpebl_layout_listing( $options );
 			}

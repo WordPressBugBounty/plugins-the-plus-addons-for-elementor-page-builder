@@ -83,7 +83,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Ninja Forms', 'form builder', 'form plugin', 'contact forms', 'form creator', 'form designer', 'form generator', 'form maker', 'form widget', 'form element', 'form addon', 'form extension' );
+		return array( 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -119,18 +119,18 @@ class ThePlus_Ninja_form extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -141,7 +141,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -165,16 +165,30 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'options' => $this->l_theplus_get_ninja_form_post(),
 			)
 		);
+		$this->add_control(
+			'ninja_form_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Create a Ninja Form first, then you’ll be able to select and display it here.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
 		// $this->add_control(
-		// 	'form_style',
-		// 	array(
-		// 		'label'   => esc_html__( 'Style', 'tpebl' ),
-		// 		'type'    => Controls_Manager::SELECT,
-		// 		'default' => 'style-1',
-		// 		'options' => l_theplus_get_style_list( 1 ),
-		// 	)
+		// 'form_style',
+		// array(
+		// 'label'   => esc_html__( 'Style', 'tpebl' ),
+		// 'type'    => Controls_Manager::SELECT,
+		// 'default' => 'style-1',
+		// 'options' => l_theplus_get_style_list( 1 ),
+		// )
 		// );
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
 			array(
@@ -200,6 +214,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_style_form_heading',
 			array(
@@ -2011,7 +2026,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .theplus-ninja-form.style-1' => 'max-width: {{SIZE}}{{UNIT}}',
 				),
-				'separator'  => 'after',
+				'separator'   => 'after',
 			)
 		);
 		$this->add_control(
@@ -2060,7 +2075,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
@@ -2075,7 +2090,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function render() {
-		$settings   = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
 		/*--OnScroll View Animation ---*/
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
@@ -2106,10 +2121,10 @@ class ThePlus_Ninja_form extends Widget_Base {
 		);
 
 		// $output      = '<div class="theplus-ninja-form ' . esc_attr( $form_style ) . ' ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
-		// 	$output .= do_shortcode( $this->get_shortcode() );
+		// $output .= do_shortcode( $this->get_shortcode() );
 		// $output     .= '</div>';
 
-		$output  = '<div class="theplus-ninja-form ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
+		$output = '<div class="theplus-ninja-form ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 
 			$output .= do_shortcode( $this->get_shortcode() );
 
@@ -2162,7 +2177,7 @@ class ThePlus_Ninja_form extends Widget_Base {
 
 				$options[0] = esc_html__( 'Select Ninja Form', 'tpebl' );
 
-				foreach ( $contact_forms as $form ) {   
+				foreach ( $contact_forms as $form ) {
 					$options[ $form->get_id() ] = $form->get_setting( 'title' );
 				}
 			}

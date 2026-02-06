@@ -153,7 +153,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 			check_ajax_referer( 'tp_wdkit_preview_popup', 'security' );
 
 			if ( ! current_user_can( 'install_plugins' ) ) {
-				$response = $this->tp_response('Invalid Permission.', 'Something went wrong.',false );
+				$response = $this->tp_response( 'Invalid Permission.', 'Something went wrong.', false );
 
 				wp_send_json( $response );
 				wp_die();
@@ -199,6 +199,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 
 				$installed         = $upgrader->install( $plugin_info->download_link );
 				$activation_result = activate_plugin( $plugin_basename );
+				$this->tpae_wdkit_hook();
 
 				$success = null === $activation_result;
 				$result  = $this->tp_response( 'Success Install WDesignKit', 'Success Install WDesignKit', $success, '' );
@@ -206,6 +207,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 			} elseif ( isset( $installed_plugins[ $plugin_basename ] ) ) {
 
 				$activation_result = activate_plugin( $plugin_basename );
+				$this->tpae_wdkit_hook();
 
 				$success = null === $activation_result;
 				$result  = $this->tp_response( 'Success Install WDesignKit', 'Success Install WDesignKit', $success, '' );
@@ -213,6 +215,21 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 			}
 
 			wp_send_json( $result );
+		}
+
+		/**
+		 * Tpae Side Wdkit Hook Call after install
+		 *
+		 * @since 6.4.0
+		 */
+		public function tpae_wdkit_hook() {
+			$my_array = array(
+				'elementor_builder'  => true,
+				'elementor_template' => true,
+			);
+
+			$builder = array( 'nexter-blocks' );
+			do_action( 'wdkit_active_settings', $my_array, $builder );
 		}
 
 		/**
@@ -299,7 +316,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 						<?php } else { ?>
 							<a class="tp-pre-wdesign-install" href="#"><span class="tp-visit-plugin"><?php echo esc_html__( 'Visit Plugin', 'tpebl' ); ?></span></a>
 						<?php } ?>
-							<a class="tp-pre-wdesign-about" target="_blank" href="https://wdesignkit.com/browse/template?plugin=%5B1003%5D&temp_type=pagetemplate"><?php echo esc_html__( 'Learn More', 'tpebl' ); ?></a>
+							<a class="tp-pre-wdesign-about" target="_blank" href="https://wdesignkit.com/templates?temp_type_req=pagetemplate&builder_req=1001"><?php echo esc_html__( 'Learn More', 'tpebl' ); ?></a>
 					</div>
 				</div>
 				<div class="tp-pre-image-sections"></div>

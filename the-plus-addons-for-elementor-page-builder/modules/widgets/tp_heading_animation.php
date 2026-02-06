@@ -60,7 +60,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-creatives' );
+		return array( 'plus-creative' );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Animated Text', 'Text Animation', 'Animated Typography', 'Animated Heading', 'Animated Title', 'Animated Words' );
+		return array( 'Animated Heading', 'Heading Animation', 'Text Animation Effects', 'Typing Heading', 'Flipping Text', 'Zoom-In Heading', 'Underline Heading Animation', 'Slide-In Heading', 'Bounce Letter Heading', 'Prefix-Postfix Heading', 'Split Text Animation', 'Looping Animated Title' );
 	}
 
 	/**
@@ -105,18 +105,18 @@ class ThePlus_Heading_Animation extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -127,7 +127,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -144,21 +144,21 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 17060,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 17060,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'anim_styles',
 			array(
-				'label'        => esc_html__( 'Animation Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style-1',
-				'options'      => array(
+				'label'       => esc_html__( 'Animation Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-1',
+				'options'     => array(
 					'style-1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
 						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-1.svg' ),
@@ -184,8 +184,8 @@ class ThePlus_Heading_Animation extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/heading-animation/style-6.svg' ),
 					),
 				),
-				'columns'      => 3,
-				'classes'      => 'tpae-visual_choice',
+				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -203,10 +203,15 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'prefix_note',
+			'prefix_label',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Enter Text, Which will be visible before the Animated Text.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add text that appears before the animated heading and stays visible at all times.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 			)
 		);
@@ -215,7 +220,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Animated Text', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
-				'ai'          => false, 
+				'ai'          => false,
 				'rows'        => 5,
 				'default'     => esc_html__( 'Heading', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
@@ -225,10 +230,15 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'title_note',
+			'ani_title_label',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You need to add Multiple line by ctrl + Enter Or Shift + Enter for animated text.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add the text that will animate in this heading. You can enter multiple lines, each line will animate one by one. Use Ctrl + Enter or Shift + Enter to add a new line.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 			)
 		);
@@ -256,10 +266,15 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'postfix_note',
+			'postfix_label',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Enter Text, Which will be visible After the Animated Text.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add text that appears after the animated heading and remains visible once the animation plays.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 			)
 		);
@@ -393,7 +408,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
@@ -411,7 +426,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 	 */
 	protected function render() {
 
-		$settings    = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
 		$anim_styles = ! empty( $settings['anim_styles'] ) ? $settings['anim_styles'] : 'style-1';
 
@@ -422,11 +437,11 @@ class ThePlus_Heading_Animation extends Widget_Base {
 
 		/*--OnScroll View Animation ---*/
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
-		
+
 		$heading_animation_back = 'style="';
 
 		$ani_bg = ! empty( $settings['ani_bg_color'] ) ? $settings['ani_bg_color'] : '';
-		
+
 		if ( ! empty( $ani_bg ) ) {
 			$heading_animation_back .= 'background: ' . esc_attr( $ani_bg ) . ';';
 		}
@@ -444,7 +459,7 @@ class ThePlus_Heading_Animation extends Widget_Base {
 
 		$background_css = '';
 
-		$font_color   = ! empty( $settings['ani_color'] ) ? $settings['ani_color'] : '';
+		$font_color = ! empty( $settings['ani_color'] ) ? $settings['ani_color'] : '';
 
 		if ( ! empty( $font_color ) ) {
 			$background_css .= 'background-color: ' . esc_attr( $font_color ) . ';';

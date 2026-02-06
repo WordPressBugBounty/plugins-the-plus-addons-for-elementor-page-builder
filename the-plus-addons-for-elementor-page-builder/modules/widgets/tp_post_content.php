@@ -82,7 +82,7 @@ class ThePlus_Post_Content extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-builder' );
+		return array( 'plus-essential', 'plus-single' );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class ThePlus_Post_Content extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Protected Content', 'Password Protected Content', 'Content Protection', 'Secure Content', 'Restricted Content', 'Post Content', 'Content', 'Blog Post', 'Article Content', 'Page Content', 'Text Content', 'Elementor Post Content' );
+		return array( 'Post Content', 'Blog Content', 'Dynamic Post Content', 'Post Excerpt' );
 	}
 
 	/**
@@ -125,18 +125,18 @@ class ThePlus_Post_Content extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -147,7 +147,7 @@ class ThePlus_Post_Content extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -177,6 +177,19 @@ class ThePlus_Post_Content extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'posttype_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Select Single Page to show the same content style across all single post pages, or choose Archive Page to display uniform content for all posts in listings.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'postContentType',
 			array(
 				'type'      => Controls_Manager::SELECT,
@@ -192,6 +205,22 @@ class ThePlus_Post_Content extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'postContentType_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose whether to show the full post content or only a short excerpt.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'posttype' => 'singlepage',
+				),
+			)
+		);
+		$this->add_control(
 			'postContentEditorType',
 			array(
 				'type'      => Controls_Manager::SELECT,
@@ -201,6 +230,22 @@ class ThePlus_Post_Content extends Widget_Base {
 					'default'   => esc_html__( 'Elementor', 'tpebl' ),
 					'wordpress' => esc_html__( 'Wordpress', 'tpebl' ),
 				),
+				'condition' => array(
+					'posttype' => 'singlepage',
+				),
+			)
+		);
+		$this->add_control(
+			'postContentEditorType_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose whether to display post content created using Elementor or the default WordPress editor.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition' => array(
 					'posttype' => 'singlepage',
 				),
@@ -233,6 +278,7 @@ class ThePlus_Post_Content extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
 			array(
@@ -258,6 +304,27 @@ class ThePlus_Post_Content extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		if ( ! tpae_wl_pluginads_enabled() ) {
+			$this->start_controls_section(
+				'tpae_theme_builder_sec',
+				array(
+					'label' => esc_html__( 'Use with Theme Builder', 'tpebl' ),
+					'tab'   => Controls_Manager::TAB_CONTENT,
+				)
+			);
+			$this->add_control(
+				'tpae_theme_builder',
+				array(
+					'type'        => 'tpae_theme_builder',
+					'notice'      => 'We recommend using this widget in the Post Single Page Template to render the main content dynamically.',
+					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
+					'page_type'   => 'tp_singular_page',
+				)
+			);
+			$this->end_controls_section();
+		}
+
 		$this->start_controls_section(
 			'section_excerpts_style',
 			array(
@@ -529,7 +596,11 @@ class ThePlus_Post_Content extends Widget_Base {
 				}
 			} elseif ( 'excerpt' === $post_content_type ) {
 
+				echo '<div class="tp-post-content">';
+
 				the_excerpt( get_the_ID() );
+
+				echo '</div>';
 			}
 		} elseif ( 'archivepage' === $posttype ) {
 

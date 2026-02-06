@@ -83,7 +83,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Contact Form 7', 'form', 'contact form', 'form builder', 'form plugin', 'form creator', 'form generator' );
+		return array( 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -119,18 +119,18 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -165,14 +165,27 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'options' => $this->l_theplus_get_contact_form_post(),
 			)
 		);
+		$this->add_control(
+			'contact_form_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose the contact form you want to display inside this widget.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
 		// $this->add_control(
-		// 	'form_style',
-		// 	array(
-		// 		'label'   => esc_html__( 'Style', 'tpebl' ),
-		// 		'type'    => Controls_Manager::SELECT,
-		// 		'default' => 'style-1',
-		// 		'options' => l_theplus_get_style_list( 1 ),
-		// 	)
+		// 'form_style',
+		// array(
+		// 'label'   => esc_html__( 'Style', 'tpebl' ),
+		// 'type'    => Controls_Manager::SELECT,
+		// 'default' => 'style-1',
+		// 'options' => l_theplus_get_style_list( 1 ),
+		// )
 		// );
 		$this->add_responsive_control(
 			'content_align',
@@ -222,11 +235,17 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			'outer_field_Note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>For Outer Section you can select styling option values to Label or to Custom class.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'For Outer Section you can select styling option values to Label or to Custom class.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
 			array(
@@ -252,6 +271,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_style_input',
 			array(
@@ -2215,7 +2235,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
@@ -2230,7 +2250,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function render() {
-		$settings   = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
 		/*--OnScroll View Animation ---*/
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
@@ -2241,21 +2261,21 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
-		// $form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';	
+		// $form_style = ! empty( $settings['form_style'] ) ? $settings['form_style'] : '';
 
 		$outer_field_class = ! empty( $settings['outer_field_class'] ) ? $settings['outer_field_class'] : '';
 
 		$content_align_tablet = ! empty( $settings['content_align_tablet'] ) ? ' text--tablet' . $settings['content_align_tablet'] : '';
 		$content_align_mobile = ! empty( $settings['content_align_mobile'] ) ? ' text--mobile' . $settings['content_align_mobile'] : '';
 		$animation_effects    = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-        $icon_position = !empty($settings['icon_position']) ? $settings['icon_position'] : 'after';
+		$icon_position        = ! empty( $settings['icon_position'] ) ? $settings['icon_position'] : 'after';
 
-		$content_align   = ' text-' . ( ! empty( $settings['content_align'] ) ? $settings['content_align'] : '' );
+		$content_align = ' text-' . ( ! empty( $settings['content_align'] ) ? $settings['content_align'] : '' );
 
 		// $output = '<div class="theplus-contact-form ' . esc_attr( $form_style ) . ' plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
 
 		$output = '<div class="theplus-contact-form plus-cf7-' . esc_attr( $outer_field_class ) . ' ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . ' ' . esc_attr( $animated_class ) . ' ' . esc_attr( $icon_position ) . ' " ' . $animation_attr . '>';
-			
+
 			$output .= do_shortcode( $this->get_shortcode() );
 
 		$output .= '</div>';
@@ -2304,14 +2324,14 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 		$ContactForms = array();
 
 		$cf7 = get_posts( 'post_type="wpcf7_contact_form"&numberposts=-1' );
-	
+
 		if ( ! empty( $cf7 ) ) {
 			$ContactForms['none'] = esc_html__( 'No Forms Selected', 'tpebl' );
-	
+
 			foreach ( $cf7 as $cform ) {
 				$GetId    = ! empty( $cform->ID ) ? $cform->ID : '';
 				$GetTitle = ! empty( $cform->post_title ) ? $cform->post_title : '';
-	
+
 				if ( ! empty( $GetId ) ) {
 					$ContactForms[ $GetId ] = $GetTitle;
 				}
@@ -2319,7 +2339,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 		} else {
 			$ContactForms['none'] = esc_html__( 'No contact forms found', 'tpebl' );
 		}
-	
+
 		return $ContactForms;
 	}
 }

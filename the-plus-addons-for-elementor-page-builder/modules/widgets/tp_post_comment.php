@@ -64,7 +64,7 @@ class ThePlus_Post_Comment extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-builder' );
+		return array( 'plus-essential', 'plus-single' );
 	}
 
 	/**
@@ -74,7 +74,7 @@ class ThePlus_Post_Comment extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Comment', 'Comment', 'Comment Box', 'Comment Section', 'Feedback', 'User Feedback', 'User Comment', 'Add Comment', 'Leave Comment', 'Submit Comment', 'Comment Form', 'Comment Widget', 'Comment Element', 'Elementor Comment', 'Elementor Comment Box', 'Elementor Comment Section', 'Elementor Feedback', 'Elementor User Feedback', 'Elementor User Comment', 'Elementor Add Comment', 'Elementor Leave Comment', 'Elementor Submit Comment', 'Elementor Comment Form' );
+		return array( 'Post Comment', 'Comment Section', 'Blog Comments', 'User Feedback', 'Comment Form' );
 	}
 
 	/**
@@ -100,18 +100,18 @@ class ThePlus_Post_Comment extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -122,7 +122,7 @@ class ThePlus_Post_Comment extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Get Widget Custom Help Url.
 	 *
@@ -197,7 +197,21 @@ class ThePlus_Post_Comment extends Widget_Base {
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
 			)
 		);
+		$this->add_control(
+			'cmtcount_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this to show the total number of comments on the post.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
 			array(
@@ -223,6 +237,7 @@ class ThePlus_Post_Comment extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'content_section',
 			array(
@@ -1356,31 +1371,42 @@ class ThePlus_Post_Comment extends Widget_Base {
 
 		$user_identity = $user->exists() ? $user->display_name : '';
 
+		$parent_id     = isset( $_GET['replytocom'] ) ? intval( $_GET['replytocom'] ) : 0;
+		$parent_author = '';
+
+		if ( $parent_id ) {
+			$parent_comment = get_comment( $parent_id );
+			if ( $parent_comment ) {
+				$parent_author = $parent_comment->comment_author;
+			}
+		}
+
 		$args = array(
 			'id_form'              => 'commentform',
 			'class_form'           => 'comment-form',
 			'id_submit'            => 'submit',
 			'title_reply'          => esc_html( $post_title ),
 			// Translators: %s is replaced with the title of the post being replied to.
-            'title_reply_to' => esc_html( $leave_txt ) . sprintf( esc_html__( 'Reply to %s', 'tpebl' ), esc_html( $post_title ) ),
+			// 'title_reply_to'       => esc_html( $leave_txt ) . sprintf( esc_html__( 'Reply to %s', 'tpebl' ), esc_html( $post_title ) ),
+			'title_reply_to'       => $parent_id ? sprintf( esc_html__( '%s %s', 'tpebl' ), esc_html( $leave_txt ), esc_html( $parent_author ) ) : esc_html( $leave_txt ),
 			'cancel_reply_link'    => esc_html( $cancel_txt ),
 			'label_submit'         => esc_html( $btn_title ),
 			'comment_field'        => '<div class="tp-row"><div class="tp-col-md-12 tp-col"><label><textarea id="comment" name="comment" cols="45" rows="6" placeholder="' . esc_html( $placeholder_txt ) . '" aria-required="true"></textarea></label></div></div>',
 
-			'must_log_in' => '<p class="must-log-in">' .
+			'must_log_in'          => '<p class="must-log-in">' .
 				sprintf(
 				// Translators: %1$s is replaced with the opening <a> tag, and %2$s is replaced with the closing </a> tag.
-				esc_html__( 'You must be %1$slogged in%2$s to post a comment.', 'tpebl' ),
-				'<a href="' . esc_url( wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '">',
-				'</a>'
-			) . '</p>',
+					esc_html__( 'You must be %1$slogged in%2$s to post a comment.', 'tpebl' ),
+					'<a href="' . esc_url( wp_login_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '">',
+					'</a>'
+				) . '</p>',
 
-			'logged_in_as' => '<p class="logged-in-as">' .
+			'logged_in_as'         => '<p class="logged-in-as">' .
 			sprintf(
 				// Translators: %1$s is replaced with the user's display name, %2$s is replaced with the opening <a> tag for the user profile link, %3$s is replaced with the closing </a> tag for the user profile link, %4$s is replaced with the opening <a> tag for the logout link, and %5$s is replaced with the closing </a> tag for the logout link.
 				esc_html__( 'Logged in as %1$s%2$s. %3$sLog out?%4$s', 'tpebl' ),
 				$user_identity,
-				'<a href="' . esc_url( admin_url( 'profile.php' ) ) . '">'.
+				'<a href="' . esc_url( admin_url( 'profile.php' ) ) . '">' .
 				'</a>',
 				'<a href="' . esc_url( wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '" title="' . esc_attr__( 'Log out of this account', 'tpebl' ) . '">',
 				'</a>'

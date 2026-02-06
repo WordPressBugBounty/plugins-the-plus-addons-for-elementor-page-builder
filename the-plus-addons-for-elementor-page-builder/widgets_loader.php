@@ -101,25 +101,32 @@ final class L_Theplus_Element_Load {
 
 		$installed_plugins = get_plugins();
 
-		if ( isset( $installed_plugins[ $plugin ] ) ) {
-
-			if ( ! current_user_can( 'activate_plugins' ) ) {
-				return;
-			}
-
-			$activation_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin );
-			$admin_notice   = '<p>' . esc_html__( 'Elementor is missing. You need to activate your installed Elementor to use The Plus Addons.', 'tpebl' ) . '</p>';
-			$admin_notice  .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $activation_url, esc_html__( 'Activate Elementor Now', 'tpebl' ) ) . '</p>';
-		} else {
-			if ( ! current_user_can( 'install_plugins' ) ) {
-				return;
-			}
-			$install_url   = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
-			$admin_notice  = '<p>' . esc_html__( 'Elementor Required. You need to install & activate Elementor to use The Plus Addons.', 'tpebl' ) . '</p>';
-			$admin_notice .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $install_url, esc_html__( 'Install Elementor Now', 'tpebl' ) ) . '</p>';
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
 		}
 
-		echo '<div class="notice notice-error is-dismissible" style="border-left-color: #8072fc;">' . $admin_notice . '</div>';
+		$tp_ele_btn_txt = esc_html__( 'Install Now', 'tpebl' );
+
+		if ( isset( $installed_plugins[ $plugin ] ) ) {
+			$tp_ele_btn_txt = esc_html__( 'Activate Now', 'tpebl' );
+		}else{
+			$tp_ele_btn_txt = esc_html__( 'Install Now', 'tpebl' );
+		}
+
+		echo '<div class="notice notice-error tpae-notice-show tpae-install-elementor" style="border-left-color: #6660EF;">
+			<div class="tp-notice-wrap" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
+
+				<div style="margin: 0; color: #000;">
+					<h3 style="margin: 10px 0 7px;">' . esc_html__( 'Elementor Plugin Required', 'tpebl' ) . '</h3>
+					<p>' . esc_html__( 'The Plus Addons for Elementor works as an extension of Elementor. Please install and activate Elementor to unlock all 120+ widgets and extensions. Without Elementor, the addon cannot function.', 'tpebl' ) . '</p>';
+						echo '<div class="tp-tpae-button" style="margin-top: 10px;">
+								<div style="background: #6660EF; color: #fff; position: relative;" class="button tpae-ele-btn" data-slug="elementor/elementor.php" data-name="elementor">
+									'. esc_html( $tp_ele_btn_txt ) .'
+								</div>
+							</div>';
+				echo '</div>
+			</div>
+		</div>';
 	}
 
 	/**
@@ -145,6 +152,8 @@ final class L_Theplus_Element_Load {
 
 		if ( ! did_action( 'elementor/loaded' ) ) {
 			add_action( 'admin_notices', array( $this, 'tp_f_elementor_load_notice' ) );
+			add_action('wp_ajax_tpae_elementor_ajax_call', array($this, 'tpae_elementor_ajax_call'));
+			add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_css_js'));
 			return;
 		}
 
@@ -161,6 +170,110 @@ final class L_Theplus_Element_Load {
 		}
 
 		$this->include_widgets();
+	}
+
+	public function tpae_elementor_ajax_call() {
+
+		check_ajax_referer("tpae-addons", "nonce");
+
+		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error([
+				'message' => __('Invalid permission. Only administrators can perform this action.', 'tpebl')
+			], 403);
+		}
+
+		$tp_slug             = 'elementor';
+		$tp_plugin_basename  = 'elementor/elementor.php';
+
+		include_once ABSPATH . 'wp-admin/includes/file.php';
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
+		include_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+
+		$installed_plugins = get_plugins();
+
+		$response = wp_remote_post(
+			'http://api.wordpress.org/plugins/info/1.0/',
+			[
+				'body' => [
+					'action'  => 'plugin_information',
+					'request' => serialize((object) [
+						'slug'   => $tp_slug,
+						'fields' => ['version' => false],
+					]),
+				],
+			]
+		);
+
+		$plugin_info = unserialize(wp_remote_retrieve_body($response));
+
+		if (!$plugin_info) {
+			wp_send_json_error([
+				'message' => __('Failed to retrieve plugin information.', 'tpebl')
+			]);
+		}
+
+		$skin     = new \Automatic_Upgrader_Skin();
+		$upgrader = new \Plugin_Upgrader($skin);
+
+
+		if (!isset($installed_plugins[$tp_plugin_basename])) {
+
+			$installed = $upgrader->install($plugin_info->download_link);
+
+			if (!$installed) {
+				wp_send_json_error([
+					'message' => __('Failed to install Elementor plugin.', 'tpebl')
+				]);
+			}
+
+			$activation = activate_plugin($tp_plugin_basename);
+
+			if (is_wp_error($activation)) {
+				wp_send_json_error([
+					'message' => __('Plugin installed but activation failed.', 'tpebl')
+				]);
+			}
+
+			wp_send_json_success([
+				'message' => __('Elementor installed & activated successfully!', 'tpebl'),
+				'installed' => true,
+				'activated' => true,
+			]);
+		}
+
+		$activation = activate_plugin($tp_plugin_basename);
+
+		if (is_wp_error($activation)) {
+			wp_send_json_error([
+				'message' => __('Elementor activation failed.', 'tpebl')
+			]);
+		}
+
+		wp_send_json_success([
+			'message' => __('Elementor activated successfully!', 'tpebl'),
+			'installed' => true,
+			'activated' => true,
+		]);
+	}
+
+
+	/*
+	* Admin Enqueue Scripts
+	* @sinc 6.4.3
+	**/
+	public function admin_enqueue_css_js( $hook ){
+		
+		wp_enqueue_script( 'tpae-admins-js', L_THEPLUS_ASSETS_URL . 'js/admin/tp-elementor-install.js',array() , L_THEPLUS_VERSION, true );
+		wp_localize_script(
+			'tpae-admins-js',
+			'tpae_admins_js',
+			array(
+				'ajax_url'   => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'tpae_nonce' => wp_create_nonce("tpae-addons"),
+			)
+		);
+
 	}
 
 	/**
@@ -189,8 +302,9 @@ final class L_Theplus_Element_Load {
 		include L_THEPLUS_PATH . 'includes/user-experience/class-tp-user-experience-main.php';
 		include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-main.php';
 
-		include L_THEPLUS_PATH . 'includes/preset/class-tpae-preset.php';
+		include L_THEPLUS_PATH . 'includes/smart-loop-builder/class-tpae-loop-builder.php';
 		include L_THEPLUS_PATH . 'includes/preset/class-wdkit-preset.php';
+		include L_THEPLUS_PATH . 'modules/controls/theme-builder/tpae-class-nxt-download.php';
 
 		// Front or Elementor Editor
 		require_once L_THEPLUS_PATH . 'includes/tp-lazy-function.php';
@@ -202,11 +316,13 @@ final class L_Theplus_Element_Load {
 	 * This private method sets up hooks and actions needed for the functionality of the ThePlus Load class.
 	 *
 	 * @since 5.1.18
+	 * @version 6.4.1
 	 */
 	private function hooks() {
 		$theplus_options = get_option( 'theplus_options' );
 
 		$plus_extras = l_theplus_get_option( 'general', 'extras_elements' );
+		$elements    = l_theplus_get_option( 'general', 'check_elements' );
 
 		if ( ( isset( $plus_extras ) && empty( $plus_extras ) && empty( $theplus_options ) ) || ( ! empty( $plus_extras ) && in_array( 'plus_display_rules', $plus_extras ) ) ) {
 			add_action( 'wp_head', array( $this, 'print_style' ) );
@@ -215,12 +331,25 @@ final class L_Theplus_Element_Load {
 		// add_action( 'elementor/init', array( $this, 'add_elementor_category' ) );
 		add_action( 'elementor/elements/categories_registered', array( $this, 'add_elementor_category' ) );
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'theplus_editor_styles' ) );
+		
+		if ( defined( 'THEPLUS_VERSION' ) && ! empty( $elements ) && is_array( $elements ) && in_array( 'tp_social_feed', $elements ) ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'theplus_frontend_styles' ) );
+		}
 
 		add_filter( 'upload_mimes', array( $this, 'theplus_mime_types' ) );
 		add_filter( 'wp_handle_upload_prefilter', array( $this, 'theplus_sanitize_svg_upload' ) );
 
 		// Include some backend files.
 		add_action( 'admin_enqueue_scripts', array( $this, 'theplus_elementor_admin_css' ) );
+
+		$get_notification = get_option( 'tpae_menu_notification' );
+
+		if ( $get_notification !== TPAE_MENU_NOTIFICETIONS ) {
+			add_action( 'admin_footer', array( $this, 'tpae_add_notificetion' ) );
+		}
+
+		add_option( 'tpae_menu_notification', '2' );
+		add_option( 'tpae_whats_new_notification', '2' );
 	}
 
 	/**
@@ -243,6 +372,8 @@ final class L_Theplus_Element_Load {
 
 		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			require L_THEPLUS_PATH . 'modules/theplus-integration.php';
+
+			include L_THEPLUS_PATH . 'modules/widget-promotion/tp-widget-promotion-main.php';
 		}
 
 		require L_THEPLUS_PATH . 'modules/query-control/module.php';
@@ -286,6 +417,15 @@ final class L_Theplus_Element_Load {
 	}
 
 	/**
+	 * Load Icon library on the frontend side
+	 *
+	 * @since 6.4.2
+	 */
+	public function theplus_frontend_styles() {
+		wp_enqueue_style( 'theplus-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
+	}
+
+	/**
 	 * Enqueue Theplus Elementor Admin CSS and JavaScript
 	 *
 	 * This method enqueues the necessary scripts and styles for Theplus Elementor Admin.
@@ -320,13 +460,8 @@ final class L_Theplus_Element_Load {
 	 * @since 1.0.0
 	 */
 	public function theplus_mime_types( $mimes ) {
-
-		if ( current_user_can( 'manage_options' ) ) {
 			$mimes['svg']  = 'image/svg+xml';
 			$mimes['svgz'] = 'image/svg+xml';
-		} else {
-			unset( $mimes['svg'], $mimes['svgz'] );
-		}
 
 		return $mimes;
 
@@ -393,19 +528,146 @@ final class L_Theplus_Element_Load {
 
 		$elementor = \Elementor\Plugin::$instance;
 
+		$post_id = get_the_ID();
+		$template_type = '';
+
+		if ( $post_id ) {
+			$document = \Elementor\Plugin::$instance->documents->get( $post_id );
+			if ( $document ) {
+				$template_type = $document->get_name();
+				$source_type   = get_post_meta( $post_id, '_elementor_source', true );
+			} else {
+				$template_type = get_post_meta( $post_id, '_elementor_template_type', true );
+			}
+		}
+
 		$plus_categories = array(
             'plus-essential'   => array( 'title' => 'Plus Essential', 'icon'  => 'fa fa-plug' ),
+            'plus-advanced'    => array( 'title' => 'Plus Advanced', 'icon'  => 'fa fa-plug' ),
+            'plus-creative'    => array( 'title' => 'Plus Creative', 'icon'  => 'fa fa-plug' ),
             'plus-listing'     => array( 'title' => 'Plus Listing', 'icon'  => 'fa fa-plug' ),
-            'plus-creatives'   => array( 'title' => 'Plus Creatives', 'icon'  => 'fa fa-plug' ),
-            'plus-forms'   	   => array( 'title' => 'Plus Forms', 'icon'  => 'fa fa-plug' ),
-            'plus-tabbed'      => array( 'title' => 'Plus Tabbed', 'icon'  => 'fa fa-plug' ),
-            'plus-adapted'     => array( 'title' => 'Plus Adapted', 'icon'  => 'fa fa-plug' ),
-            'plus-header'      => array( 'title' => 'Plus Header', 'icon'  => 'fa fa-plug' ),
-            'plus-builder'     => array( 'title' => 'Plus Builder', 'icon'  => 'fa fa-plug' ),
             'plus-social'      => array( 'title' => 'Plus Social', 'icon'  => 'fa fa-plug' ),
+            'plus-forms'   	   => array( 'title' => 'Plus Forms', 'icon'  => 'fa fa-plug' ),
             'plus-woo-builder' => array( 'title' => 'Plus WooCommerce', 'icon'  => 'fa fa-plug' ),
             'plus-depreciated' => array( 'title' => 'Plus Depreciated', 'icon'  => 'fa fa-plug' ),
+            // 'plus-header'      => array( 'title' => 'Plus Header', 'icon'  => 'fa fa-plug' ),
         );
+
+		if ( $post_id ) {
+			$post_type = get_post_type( $post_id );
+
+			/** For check header of the nexter extension */
+			if ( in_array( $post_type, [ 'nxt_builder', 'nxt_template' ], true ) ) {
+				$template_type = get_post_meta( $post_id, 'template_type', true );
+			}
+		}
+
+		// if ( 'loop-item' === $template_type ) {
+		// 	$template_type = $source_type;
+		// }
+
+		if ( in_array( $template_type, [ 'header' ] ) ) {
+        	$all_categories = $elementor->elements_manager->get_categories();
+        	$new_categories = [];
+
+			foreach ( $all_categories as $key => $category ) {
+				$new_categories[ $key ] = $category;
+
+				if ( 'favorites' === $key ) {
+					$new_categories['plus-header'] = [
+						'title' => esc_html__( 'Plus Header', 'tpebl' ),
+						'icon'  => 'fa fa-plug',
+					];
+				}
+			}
+
+			$reflection = new \ReflectionProperty( $elementor->elements_manager, 'categories' );
+			$reflection->setAccessible( true );
+			$reflection->setValue( $elementor->elements_manager, $new_categories );
+		}
+
+		if ( in_array( $template_type, [ 'archive', 'archives' ] ) ) {
+        	$all_categories = $elementor->elements_manager->get_categories();
+        	$new_categories = [];
+
+			foreach ( $all_categories as $key => $category ) {
+				$new_categories[ $key ] = $category;
+
+				if ( 'favorites' === $key ) {
+					$new_categories['plus-archive'] = [
+						'title' => esc_html__( 'Plus Archive', 'tpebl' ),
+						'icon'  => 'fa fa-plug',
+					];
+				}
+			}
+
+			$reflection = new \ReflectionProperty( $elementor->elements_manager, 'categories' );
+			$reflection->setAccessible( true );
+			$reflection->setValue( $elementor->elements_manager, $new_categories );
+		}
+
+		if ( in_array( $template_type, [ 'product-archive' ] ) ) {
+        	$all_categories = $elementor->elements_manager->get_categories();
+
+        	$new_categories = [];
+
+			foreach ( $all_categories as $key => $category ) {
+				$new_categories[ $key ] = $category;
+
+				if ( 'favorites' === $key ) {
+					$new_categories['plus-product-archive'] = [
+						'title' => esc_html__( 'Plus Product Archive', 'tpebl' ),
+						'icon'  => 'fa fa-plug',
+					];
+				}
+			}
+
+			$reflection = new \ReflectionProperty( $elementor->elements_manager, 'categories' );
+			$reflection->setAccessible( true );
+			$reflection->setValue( $elementor->elements_manager, $new_categories );
+		}
+
+		if ( in_array( $template_type, [ 'product', 'singular' ] ) ) {
+        	$all_categories = $elementor->elements_manager->get_categories();
+
+        	$new_categories = [];
+
+			foreach ( $all_categories as $key => $category ) {
+				$new_categories[ $key ] = $category;
+
+				if ( 'favorites' === $key ) {
+					$new_categories['plus-product'] = [
+						'title' => esc_html__( 'Plus Product', 'tpebl' ),
+						'icon'  => 'fa fa-plug',
+					];
+				}
+			}
+
+			$reflection = new \ReflectionProperty( $elementor->elements_manager, 'categories' );
+			$reflection->setAccessible( true );
+			$reflection->setValue( $elementor->elements_manager, $new_categories );
+		}
+
+		if ( in_array( $template_type, [ 'single-page', 'single-post', 'singular' ] ) ) {
+        	$all_categories = $elementor->elements_manager->get_categories();
+
+        	$new_categories = [];
+
+			foreach ( $all_categories as $key => $category ) {
+				$new_categories[ $key ] = $category;
+
+				if ( 'favorites' === $key ) {
+					$new_categories['plus-single'] = [
+						'title' => esc_html__( 'Plus Single', 'tpebl' ),
+						'icon'  => 'fa fa-plug',
+					];
+				}
+			}
+
+			$reflection = new \ReflectionProperty( $elementor->elements_manager, 'categories' );
+			$reflection->setAccessible( true );
+			$reflection->setValue( $elementor->elements_manager, $new_categories );
+		}
 
         foreach ( $plus_categories as $index => $plus_widgets ) {
             $elementor->elements_manager->add_category(
@@ -418,6 +680,25 @@ final class L_Theplus_Element_Load {
             );
         }
 
+	}
+
+	/**
+	 * The Plus Addon Menu Notificetions icon
+	 *
+	 * @since 6.4.1
+	 */
+	public function tpae_add_notificetion() {
+
+		?>
+			<script type="text/javascript">
+				document.addEventListener('DOMContentLoaded', function() {
+					var menuItem = document.querySelector('#toplevel_page_theplus_welcome_page');
+					if (menuItem) {
+						menuItem.classList.add('tpae-admin-notice-active');
+					}
+				});
+			</script>
+		<?php
 	}
 }
 

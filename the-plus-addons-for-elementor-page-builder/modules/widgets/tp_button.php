@@ -76,7 +76,7 @@ class L_ThePlus_Button extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Buttons', 'Button widget', 'Elementor buttons', ' Elementor button widget', 'Button elementor addon', 'Elementor plus addon buttons', 'Elementor plus buttons', 'Button', 'Button elementor element', 'Button elementor module', 'Elementor button module', 'Elementor button element', 'Button elementor extension', 'Elementor button extension', 'Button elementor plugin', 'Elementor button plugin' );
+		return array( 'Button', 'CTA Button', 'Hover-Text Button', 'Icon Button', 'Tooltip Button', 'Parallax Button', 'Continuous Animation Button', 'Shake Animation Button', 'Full-Width Button', 'Scroll-Animation Button' );
 	}
 
 	public function get_custom_help_url() {
@@ -111,13 +111,13 @@ class L_ThePlus_Button extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16452,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16452,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'button_style',
 			array(
@@ -221,7 +221,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'button_hover_text',
 			array(
-				'label'       => wp_kses_post( "Hover Text <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "button-text-on-hover-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Hover Text', 'tpebl' ),
+						esc_url( $this->tp_doc . 'button-text-on-hover-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
 				'dynamic'     => array(
@@ -253,7 +259,7 @@ class L_ThePlus_Button extends Widget_Base {
 			'button_custom_attributes',
 			array(
 				'label'        => __( 'Add Custom Attributes', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'label_off'    => esc_html__( 'Default', 'tpebl' ),
 				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
@@ -310,6 +316,7 @@ class L_ThePlus_Button extends Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'font_awesome',
 				'options'   => array(
+					'none'           => esc_html__( 'None', 'tpebl' ),
 					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
 					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
 					'icon_mind'      => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
@@ -323,7 +330,7 @@ class L_ThePlus_Button extends Widget_Base {
 			'font_awesome',
 			array(
 				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'label_off'    => esc_html__( 'Default', 'tpebl' ),
 				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
@@ -360,7 +367,7 @@ class L_ThePlus_Button extends Widget_Base {
 			'font_awesome_5',
 			array(
 				'label'        => esc_html__( 'Font Awesome 5', 'tpebl' ),
-				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
 				'label_off'    => esc_html__( 'Default', 'tpebl' ),
 				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
@@ -398,13 +405,37 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'iconmind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'button_icon_style' => 'icon_mind',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'icon_circl_size',
+			array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Circle Size', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 200,
+						'step' => 1,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 50,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .pt_plus_button.button-style-2 .button-link-wrap > i,{{WRAPPER}} .pt_plus_button.button-style-2 .btn-icon > i' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
+				),
+				'condition'   => array(
+					'button_style'       => 'style-2',
+					'button_icon_style!' => 'none',
 				),
 			)
 		);
@@ -421,7 +452,7 @@ class L_ThePlus_Button extends Widget_Base {
 				),
 				'condition' => array(
 					'button_style!'      => array( 'style-3', 'style-6', 'style-7', 'style-9', 'style-17' ),
-					'button_icon_style!' => '',
+					'button_icon_style!' => array( '', 'none' ),
 				),
 			)
 		);
@@ -437,7 +468,7 @@ class L_ThePlus_Button extends Widget_Base {
 				),
 				'condition' => array(
 					'button_style!'      => array( 'style-3', 'style-6', 'style-7', 'style-9', 'style-17' ),
-					'button_icon_style!' => '',
+					'button_icon_style!' => array( '', 'none' ),
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .button-link-wrap .button-after' => 'margin-left: {{SIZE}}{{UNIT}};',
@@ -460,7 +491,7 @@ class L_ThePlus_Button extends Widget_Base {
 				'separator' => 'before',
 				'condition' => array(
 					'button_style!'      => array( 'style-3', 'style-6', 'style-7', 'style-9', 'style-17' ),
-					'button_icon_style!' => '',
+					'button_icon_style!' => array( '', 'none' ),
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .button-link-wrap .btn-icon' => 'font-size: {{SIZE}}{{UNIT}};',
@@ -1145,11 +1176,8 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'btn_magic_scroll_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'btn_magic_scroll' => array( 'yes' ),
 				),
@@ -1158,7 +1186,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'plus_tooltip',
 			array(
-				'label'       => wp_kses_post( "Tooltip <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "tooltip-text-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Tooltip', 'tpebl' ),
+						esc_url( $this->tp_doc . 'tooltip-text-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
 				'label_off'   => esc_html__( 'No', 'tpebl' ),
@@ -1169,11 +1203,8 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'plus_tooltip_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'plus_tooltip' => array( 'yes' ),
 				),
@@ -1191,11 +1222,8 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'btn_special_effect_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'btn_special_effect' => array( 'yes' ),
 				),
@@ -1215,11 +1243,8 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'plus_mouse_move_parallax_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'plus_mouse_move_parallax' => array( 'yes' ),
 				),
@@ -1228,7 +1253,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'plus_continuous_animation',
 			array(
-				'label'       => wp_kses_post( "Continuous Animation <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "continuous-animation-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Continuous Animation', 'tpebl' ),
+						esc_url( $this->tp_doc . 'continuous-animation-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
 				'label_off'   => esc_html__( 'No', 'tpebl' ),
@@ -1239,11 +1270,8 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'plus_continuous_animation_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'plus_continuous_animation' => array( 'yes' ),
 				),
@@ -1252,7 +1280,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'full_width_btn',
 			array(
-				'label'     => wp_kses_post( "Full-Width Button<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "full-width-button-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Full-Width Button', 'tpebl' ),
+						esc_url( $this->tp_doc . 'full-width-button-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
 				'separator' => 'before',
@@ -1261,11 +1295,27 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'btn_hover_effects',
 			array(
-				'label'     => wp_kses_post( "Button Hover Effects <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "button-hover-animation-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Button Hover Effects', 'tpebl' ),
+						esc_url( $this->tp_doc . 'button-hover-animation-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => '',
 				'separator' => 'before',
 				'options'   => l_theplus_get_content_hover_effect_options(),
+			)
+		);
+		$this->add_control(
+			'btn_hover_effects_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'btn_hover_effects' => array( 'grow', 'bounce-in', 'float', 'wobble_horizontal', 'wobble_vertical', 'float_shadow', 'grow_shadow', 'shadow_radial' ),
+				),
 			)
 		);
 		$this->add_control(
@@ -1282,7 +1332,13 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_control(
 			'shake_animate',
 			array(
-				'label'     => wp_kses_post( 'Interval Shake Animate <a class="tp-docs-link" href="' . esc_url( $this->tp_doc ) . 'interval-shake-animation-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Interval Shake Animate', 'tpebl' ),
+						esc_url( $this->tp_doc . 'interval-shake-animation-in-button-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
 				'separator' => 'before',

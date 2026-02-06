@@ -48,6 +48,16 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		}
 
 		/**
+		 * Onbording APi
+		 *
+		 * @since 6.3.17
+		 * @access public
+		 * @static
+		 * @var onbording_api of the class.
+		 */
+		public $onbording_api = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_store_user_data';
+
+		/**
 		 * Define the core functionality of the plugin.
 		 *
 		 * @since    6.0.0
@@ -60,6 +70,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		 * Load the required dependencies for this plugin.
 		 *
 		 * @since 6.0.0
+		 * @version 6.3.17
 		 */
 		public function tpae_dashboard_ajax_call() {
 
@@ -145,7 +156,17 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					$response = apply_filters( 'tpaep_dashboard_ajax_call', 'tpaep_set_whitelabel' );
 					break;
 				case 'tpae_widgets_setting_data':
-					$response = $this->tpae_widgets_setting_data();;
+					$response = $this->tpae_widgets_setting_data();
+
+					break;
+				case 'tpae_onboarding_setup':
+					$response = $this->tpae_onboarding_setup();
+					break;
+				case 'tpae_user_meta_data':
+					$response = $this->tpae_user_meta_data();
+					break;
+				case 'tpae_whats_new_close':
+					$response = $this->tpae_whats_new_close();
 					break;
 			}
 
@@ -208,20 +229,21 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'user_name'  => $user->display_name,
 				'tpae_pro'   => $tpae_pro,
 				'whatsnew'   => $get_whats_new,
+				'user_email' => $user->user_email,
 				// 'used_widgets' => $get_active_widgets,
 				'success'    => true,
 			);
 
-			$tp_form_settings    = get_option( 'theplus_widgets_settings' );
+			$tp_form_settings = get_option( 'theplus_widgets_settings' );
 
 			if ( false === $tp_form_settings ) {
 				$form_default_settings = array(
 					'tp_plus_form' => array(
-						'google_site_key'        => '',
+						'google_site_key'       => '',
 						'google_secret_key'     => '',
 						'cloudflare_site_key'   => '',
 						'cloudflare_secret_key' => '',
-						'active_tab'=> 'google',
+						'active_tab'            => 'google',
 					),
 				);
 
@@ -235,8 +257,16 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$get_custom_css_js  = get_option( 'theplus_styling_data' );
 			$get_performance    = get_option( 'theplus_performance' );
 
-			$wdk_widgets = array();
-			$wdk_widgets = apply_filters( 'wdk_widget_ajax_call', 'wdk_get_widget_ajax' );
+			$wdk_widgets      = array();
+			$wdk_widgets      = apply_filters( 'wdk_widget_ajax_call', 'wdk_get_widget_ajax' );
+			$et_plugin_status = apply_filters( 'tpae_get_plugin_status', 'template-kit-import/template-kit-import.php' );
+
+			$check_onboarding = get_option( 'tpae_onbording_end' );
+
+			$set_onboarding['check_onboarding'] = 'show';
+			if ( $check_onboarding || 'active' === $et_plugin_status || 'inactive' === $et_plugin_status ) {
+				$set_onboarding['check_onboarding'] = 'hide';
+			}
 
 			$response = array(
 				'success'            => true,
@@ -252,6 +282,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'wdk_widgets'        => $wdk_widgets,
 				'elementor_disabled' => $elementor_disabled,
 				'tp_widgets_setting' => $tp_form_settings,
+				'check_onboarding'   => $set_onboarding,
 			);
 
 			if ( defined( 'THEPLUS_VERSION' ) ) {
@@ -651,6 +682,10 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$skin     = new \Automatic_Upgrader_Skin();
 			$upgrader = new \Plugin_Upgrader( $skin );
 
+			if ( 'nexter-extension' === $slug ) {
+				$slug = 'nexter-extension/nexter-extension.php';
+			}
+
 			$plugin_basename = $slug;
 
 			if ( ! isset( $installed_plugins[ $plugin_basename ] ) && empty( $installed_plugins[ $plugin_basename ] ) ) {
@@ -658,15 +693,23 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				$installed         = $upgrader->install( $plugin_info->download_link );
 				$activation_result = activate_plugin( $plugin_basename );
 
+				if ( 'wdesignkit' === $name ) {
+					$this->tpae_wdkit_hook();
+				}
+
 				$success = null === $activation_result;
-				$result  = $this->tpae_set_response( $success, 'Successfully Install', 'Successfully Install', '' );
+				$result  = $this->tpae_set_response( $success, 'Successfully Install', 'Successfully Install');
 
 			} elseif ( isset( $installed_plugins[ $plugin_basename ] ) ) {
 
 				$activation_result = activate_plugin( $plugin_basename );
 
+				if ( 'wdesignkit' === $name ) {
+					$this->tpae_wdkit_hook();
+				}
+
 				$success = null === $activation_result;
-				$result  = $this->tpae_set_response( $success, 'Successfully Activate', 'Successfully Activate', '' );
+				$result  = $this->tpae_set_response( $success, 'Successfully Activate', 'Successfully Activate');
 
 			}
 
@@ -725,7 +768,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			if ( is_wp_error( $response ) ) {
 				$error_message = $response->get_error_message();
 
-				$result = $this->tpae_set_response( false, 'oops', 'oops', '' );
+				$result = $this->tpae_set_response( false, 'oops', 'oops');
 			} else {
 				$theme_info    = unserialize( $response['body'] );
 				$theme_name    = $theme_info->name;
@@ -753,7 +796,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 				$wp_filesystem->delete( WP_CONTENT_DIR . '/themes/' . $theme_slug . '.zip' );
 
-				$result = $this->tpae_set_response( true, "Success $name", "Success $name", '' );
+				$result = $this->tpae_set_response( true, "Success $name", "Success $name");
 			}
 
 			return $result;
@@ -837,13 +880,13 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$key       = isset( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '';
 
 			if ( 'get' === $operation ) {
-				// $data = get_transient( $key );
+				$data = get_transient( $key );
 
-				// if( false === $data ) {
-				// return $this->tpae_set_response( false, 'oops.', 'oops.' );
-				// }
+				if ( false === $data ) {
+					return $this->tpae_set_response( false, 'oops.', 'oops.' );
+				}
 
-				// return $data;
+				return $data;
 			} elseif ( 'delete' === $operation ) {
 				delete_option( $key );
 
@@ -867,7 +910,6 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		 */
 		public function tpae_widgets_setting_data() {
 
-
 			if ( ! check_ajax_referer( 'tpae-db-nonce', 'nonce', false ) ) {
 
 				$response = $this->tpae_set_response( false, 'Invalid nonce.', 'The security check failed. Please refresh the page and try again.' );
@@ -876,20 +918,160 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				wp_die();
 			}
 
-			$settings_json = isset($_POST['tp_widgets_setting']) ? wp_unslash($_POST['tp_widgets_setting']) : '';
-			
-			if (!empty($settings_json)) {
-				$settings = json_decode($settings_json, true); 
-				if (!is_array($settings)) {
-					return $this->tpae_set_response(false, 'Invalid data format.', 'Data is not in correct format.');
+			$settings_json = isset( $_POST['tp_widgets_setting'] ) ? wp_unslash( $_POST['tp_widgets_setting'] ) : '';
+
+			if ( ! empty( $settings_json ) ) {
+				$settings = json_decode( $settings_json, true );
+				if ( ! is_array( $settings ) ) {
+					return $this->tpae_set_response( false, 'Invalid data format.', 'Data is not in correct format.' );
 				}
 
-				update_option('theplus_widgets_settings', $settings);
+				update_option( 'theplus_widgets_settings', $settings );
 
-				return $this->tpae_set_response(true, 'Data Updated.', 'Data Updated Successfully.');
+				return $this->tpae_set_response( true, 'Data Updated.', 'Data Updated Successfully.' );
 			}
 
-			return $this->tpae_set_response(false, 'No data found.', 'Please send valid data.');
+			return $this->tpae_set_response( false, 'No data found.', 'Please send valid data.' );
+		}
+
+		/**
+		 * Get User data
+		 */
+		public function tpae_user_meta_data() {
+
+			$tp_data_allow_onboarding = get_option( 'tpae_onbording_end' );
+
+			if ( ! $tp_data_allow_onboarding ) {
+				update_option( 'tpae_data_allow', true );
+			}
+
+			$user_data = array();
+
+			$s_e_r_v_e_r_s_o_f_t_w_a_r_e     = ! empty( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
+			$user_data['web_server']         = $s_e_r_v_e_r_s_o_f_t_w_a_r_e;
+			$user_data['memory_limit']       = ini_get( 'memory_limit' );
+			$user_data['max_execution_time'] = ini_get( 'max_execution_time' );
+			$user_data['php_version']        = phpversion();
+			$user_data['wp_version']         = get_bloginfo( 'version' );
+
+			// Active Theme.
+			$acthemeobj = wp_get_theme();
+			if ( $acthemeobj->get( 'Name' ) !== null && ! empty( $acthemeobj->get( 'Name' ) ) ) {
+				$user_data['theme'] = $acthemeobj->get( 'Name' );
+			}
+
+			// Active Plugin Name.
+			$act_plugin = array();
+			$actplu     = get_option( 'active_plugins' );
+			if ( ! function_exists( 'get_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+			$plugins = get_plugins();
+			foreach ( $actplu as $p ) {
+				if ( isset( $plugins[ $p ] ) ) {
+					$act_plugin[] = $plugins[ $p ]['Name'];
+				}
+			}
+			$user_data['plugin'] = wp_json_encode( $act_plugin );
+
+			// No Of TPAE Block Used.
+			$get_widgets_list = get_option( 'theplus_options' );
+			$check_elements   = ! empty( $get_widgets_list['check_elements'] ) ? $get_widgets_list['check_elements'] : array();
+			if ( ! empty( $get_widgets_list ) && ! empty( $check_elements ) ) {
+				$user_data['no_block']    = count( $check_elements );
+				$user_data['used_blocks'] = wp_json_encode( $check_elements );
+			} else {
+				$user_data['no_block']    = 0;
+				$user_data['used_blocks'] = array();
+			}
+
+			$user_data['email'] = get_option( 'admin_email' );
+
+			$user_data['site_url'] = get_option( 'siteurl' );
+
+			$user_data['site_language'] = get_bloginfo( 'language' );
+
+			$response = wp_remote_post(
+				$this->onbording_api,
+				array(
+					'method' => 'POST',
+					'body'   => wp_json_encode( $user_data ),
+				)
+			);
+
+			if ( is_wp_error( $response ) ) {
+				wp_send_json( array( 'onBoarding' => false ) );
+			} else {
+				$status_one = wp_remote_retrieve_response_code( $response );
+			}
+		}
+
+		/**
+		 * Onboarding Setup
+		 *
+		 * @since 2.0
+		 */
+		public function tpae_onboarding_setup() {
+
+			$onboarding = get_option( 'tpae_onbording_end' );
+
+			if ( ! $onboarding ) {
+				update_option( 'tpae_onbording_end', 'hide' );
+			}
+
+			$my_array = array(
+				'elementor_builder'  => true,
+				'elementor_template' => true,
+			);
+
+			$builder = array( 'nexter-blocks' );
+			do_action( 'wdkit_active_settings', $my_array, $builder );
+
+			if ( $onboarding ) {
+				$response = $this->tpae_set_response( true, 'Onboarding Setup', 'Onboarding Setup');
+			} else {
+				$response = $this->tpae_set_response( false, 'Onboarding Setup Failed', 'Onboarding Setup Failed');
+			}
+
+			update_option( 'tpae_onboarding_time', current_time( 'mysql' ) );
+			update_option( 'tpae_onboarding_version', L_THEPLUS_VERSION );
+			update_option( 'tpae_menu_notification', TPAE_MENU_NOTIFICETIONS );
+
+			return $response;
+		}
+
+		/**
+		 * Whats New Close
+		 *
+		 * @since 2.0
+		 */
+		public function tpae_whats_new_close() {
+
+			$updated = update_option( 'tpae_whats_new_notification', TPAE_WHATS_NEW_NOTIFICETIONS );
+			update_option( 'tpae_menu_notification', TPAE_MENU_NOTIFICETIONS );
+
+			if ( $updated ) {
+				$response = $this->tpae_set_response( true, 'Whats New Closed', 'Whats New notification status updated successfully.');
+			} else {
+				$response = $this->tpae_set_response( false, 'Onboarding Setup Failed', 'Failed to update Whats New notification option.');
+			}
+
+			wp_send_json( $response );
+		}
+
+		/**
+		 * Tpae Side Wdkit Hook Call after install
+		 *
+		 * @since 6.0.0
+		 */
+		public function tpae_wdkit_hook() {
+			$my_array = array(
+				'elementor_builder'  => true,
+				'elementor_template' => true,
+			);
+
+			$builder = array( 'nexter-blocks' );
+			do_action( 'wdkit_active_settings', $my_array, $builder );
 		}
 
 		/**

@@ -97,20 +97,20 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
-	
+
 	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
@@ -119,7 +119,7 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -2647,7 +2647,7 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 		}
 	}
 
-	
+
 	/**
 	 * Render caldera form.
 	 *
@@ -2733,18 +2733,18 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	function l_theplus_caldera_forms() {
 		if ( class_exists( 'Caldera_Forms' ) ) {
 			$caldera_forms = \Caldera_Forms_Forms::get_forms( true, true );
-			$form_options = ['0' => esc_html__( 'Select Form', 'tpebl' )];
-			$form  = [];
+			$form_options  = array( '0' => esc_html__( 'Select Form', 'tpebl' ) );
+			$form          = array();
 
-			if ( !empty( $caldera_forms ) && !is_wp_error( $caldera_forms ) ) {
+			if ( ! empty( $caldera_forms ) && ! is_wp_error( $caldera_forms ) ) {
 				foreach ( $caldera_forms as $form ) {
-					if ( isset($form['ID']) and isset($form['name'])) {
-						$form_options[$form['ID']] = $form['name'];
-					}   
+					if ( isset( $form['ID'] ) and isset( $form['name'] ) ) {
+						$form_options[ $form['ID'] ] = $form['name'];
+					}
 				}
 			}
 		} else {
-			$form_options = ['0' => esc_html__( 'Form Not Found!', 'tpebl' ) ];
+			$form_options = array( '0' => esc_html__( 'Form Not Found!', 'tpebl' ) );
 		}
 
 		return $form_options;

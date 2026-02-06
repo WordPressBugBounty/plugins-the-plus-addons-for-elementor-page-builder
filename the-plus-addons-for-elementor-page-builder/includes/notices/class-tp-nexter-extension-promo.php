@@ -73,10 +73,14 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 		 * @since 5.6.11
 		 */
 		public function __construct() {
-			add_action( 'admin_notices', array( $this, 'tp_nexter_extension_promo' ) );
+			if ( ! get_option( 'tpae_nexter_extension_notice' ) ) {
+				add_action( 'admin_notices', array( $this, 'tp_nexter_extension_promo' ) );
+			}
 			add_action( 'wp_ajax_theplus_nexter_extension_dismiss_promo', array( $this, 'theplus_nexter_extension_dismiss_promo' ) );
-
-			add_action('admin_footer', array( $this, 'add_theme_builder_popup_notice_script'), 20 );
+				
+			if ( ! get_option( 'tpae_nxt_ext_pnotice' ) ) {
+				// add_action( 'admin_footer', array( $this, 'add_theme_builder_popup_notice_script' ), 20 );
+			}
 			/** TPAE Nexter Ext Popup notice close*/
 			add_action( 'wp_ajax_tpae_nxt_ext_pnotice_dismiss', array( $this, 'tpae_nxt_ext_pnotice_dismiss' ) );
 		}
@@ -94,24 +98,6 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 			$nonce      = wp_create_nonce( 'theplus-nexter-extension' );
 			$pt_exclude = ! empty( $screen->post_type ) && in_array( $screen->post_type, array( 'product' ), true );
 
-			$post_type  = isset( $_GET['post_type'] ) ? sanitize_text_field( $_GET['post_type'] ) : '';
-			$tabs_group = isset( $_GET['tabs_group'] ) ? sanitize_text_field( $_GET['tabs_group'] ) : '';
-
-			$show_notice = ( 'elementor_library' === $post_type && 'library' === $tabs_group );
-			$get_action  = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
- 
-			$notice_dismissed = get_option( 'tpae_nexter_extension_notice' );
-			if ( ! empty( $notice_dismissed ) ) {
-				return;
-			}
-
-			if ( ! $show_notice ) {
-				return;
-			}
-			if ( $pt_exclude ) {
-				return;
-			}
-
 			if ( is_plugin_active( $file_path ) || isset( $installed_plugins[ $file_path ] ) ) {
 				return;
 			}
@@ -120,44 +106,47 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 				return;
 			}
 
-			$install_url = wp_nonce_url(
-				self_admin_url( 'update.php?action=install-plugin&plugin=nexter-extension' ),
-				'install-plugin_nexter-extension'
-			);
+			if( 'elementor_library' === $screen->post_type && 'edit-elementor_library' === $screen->id ) {
+				$install_url = wp_nonce_url(
+					self_admin_url( 'update.php?action=install-plugin&plugin=nexter-extension' ),
+					'install-plugin_nexter-extension'
+				);
 
-			echo '<div class="notice notice-error tpae-nexter-extension-promo is-dismissible" style="border-left-color: #8072fc;">
-                    <div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: center; position: relative; margin-left: 0; flex-direction: row-reverse; justify-content: flex-end; padding: 20px 5px 20px 5px;">
-                        <div style="margin: 0; color: #000;">
-                            <h3 style="margin: 0; font-weight: 600; font-size: 1.030rem; line-height: 1.2; font-family: Roboto, Arial, Helvetica, sans-serif;">' . esc_html__( 'Create Elementor Header, Footer, Single, Archive, 404 etc for FREE!', 'tpebl' ) . '</h3>
-                            <p style="margin: 0; padding: 0; margin-block-start: 8px; line-height: 1.2;">' . wp_kses_post( sprintf(__( 'Install <a href="https://nexterwp.com/nexter-extension/?utm_source=wpbackend&utm_medium=banner&utm_campaign=links" target="_blank" rel="noopener noreferrer" style="font-weight: 500; text-decoration: underline;">%s</a> from The Plus Addons for Elementor to use FREE Theme Builder for Elementor.', 'tpebl' ), 'Nexter Extension Plugin' ) ) . '</p>
+				echo '<div class="notice notice-error tpae-nexter-extension-promo is-dismissible" style="border-left-color: #8072fc;">
+					<div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: center; position: relative; margin-left: 0; flex-direction: row-reverse; justify-content: flex-end; padding: 20px 5px 20px 5px;">
+						<div style="margin: 0; color: #000;">
+							<h3 style="margin: 0; font-weight: 600; font-size: 1.030rem; line-height: 1.2; font-family: Roboto, Arial, Helvetica, sans-serif;">' . esc_html__( 'Create Elementor Header, Footer, Single, Archive, 404 etc for FREE!', 'tpebl' ) . '</h3>
+							<p style="margin: 0; padding: 0; margin-block-start: 8px; line-height: 1.2;">' . wp_kses_post( sprintf( '%s <a href="%s" target="_blank" rel="noopener noreferrer" style="font-weight: 500; text-decoration: underline;">%s</a> %s', esc_html__( 'Install', 'tpebl' ), esc_url( 'https://nexterwp.com/nexter-extension/?utm_source=wpbackend&utm_medium=banner&utm_campaign=links' ), esc_html__( 'Nexter Extension Plugin', 'tpebl' ), esc_html__( 'from The Plus Addons for Elementor to use FREE Theme Builder for Elementor.', 'tpebl' ), ) ) . '</p>
 							<div class="tp-nexter-extension-button" style="display: flex; margin-block-start: 1rem;">
-                          	  <a href="' . esc_url( $install_url ) . '" class="button" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: rgba(255, 255, 255, 1);">' . esc_html__( 'Enable FREE Theme Builder', 'tpebl' ) . '</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>';
-			?>
-			<script>
-				setTimeout(() => {
-					jQuery(document).on('click', '.tpae-nexter-extension-promo .notice-dismiss', function(e) {
-						e.preventDefault();
-						jQuery('.tpae-nexter-extension-promo').hide();
-						jQuery.ajax({
-							url: ajaxurl,
-							type: 'POST',
-							data: {
-								action: 'theplus_nexter_extension_dismiss_promo',
-								security: "<?php echo esc_html( $nonce ); ?>",
-								type: 'nexter_extension_notice',
-							},
-							success: function(response) {
-								jQuery('.tpae-nexter-extension-promo').hide();
-							}
+								<a href="' . esc_url( $install_url ) . '" class="button" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: rgba(255, 255, 255, 1);">' . esc_html__( 'Enable FREE Theme Builder', 'tpebl' ) . '</a>
+							</div>
+						</div>
+					</div>
+				</div>';
+
+				?>
+				<script>
+					setTimeout(() => {
+						jQuery(document).on('click', '.tpae-nexter-extension-promo .notice-dismiss', function(e) {
+							e.preventDefault();
+							jQuery('.tpae-nexter-extension-promo').hide();
+							jQuery.ajax({
+								url: ajaxurl,
+								type: 'POST',
+								data: {
+									action: 'theplus_nexter_extension_dismiss_promo',
+									security: "<?php echo esc_html( $nonce ); ?>",
+									type: 'nexter_extension_notice',
+								},
+								success: function(response) {
+									jQuery('.tpae-nexter-extension-promo').hide();
+								}
+							});
 						});
-					});
-				}, timeout = 1000);
-			</script>
+					}, timeout = 1000);
+				</script>
 			<?php
+			}
 		}
 
 		/**
@@ -192,8 +181,8 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 		public function add_theme_builder_popup_notice_script() {
 			$nonce  = wp_create_nonce( 'tpae-nxt-ext-pnotice' );
 			$screen = get_current_screen();
-			if ($screen->id !== 'edit-elementor_library') {
-			    return;
+			if ( $screen->id !== 'edit-elementor_library' ) {
+				return;
 			}
 
 			$notice_dismissed = get_option( 'tpae_nxt_ext_pnotice' );
@@ -202,9 +191,9 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 			}
 
 			$install_url = wp_nonce_url(
-                self_admin_url( 'update.php?action=install-plugin&plugin=nexter-extension' ),
-                'install-plugin_nexter-extension'
-            );
+				self_admin_url( 'update.php?action=install-plugin&plugin=nexter-extension' ),
+				'install-plugin_nexter-extension'
+			);
 			?>
 			<script type="text/javascript">
 
@@ -330,7 +319,6 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 
 			wp_send_json_success();
 		}
-		
 	}
 
 	Tp_Nexter_Extension_Promo_Notice::instance();

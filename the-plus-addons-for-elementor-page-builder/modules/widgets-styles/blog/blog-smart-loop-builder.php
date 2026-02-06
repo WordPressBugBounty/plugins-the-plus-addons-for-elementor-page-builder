@@ -15,7 +15,8 @@ $template = str_replace( '{{tpae_permalink}}', get_permalink(), $template );
 $template = str_replace( '{{tpae_image_url}}', get_the_post_thumbnail_url(), $template );
 $template = str_replace( '{{tpae_author_meta}}', get_the_author_meta( 'display_name' ), $template );
 $template = str_replace( '{{tpae_author_url}}', get_author_posts_url( get_the_author_meta( 'ID' ) ), $template );
-$template = str_replace( '{{tpae_author_logo}}', get_custom_logo(), $template );
+$template = str_replace( '{{tpae_author_logo}}', get_avatar( get_the_author_meta('user_email')), $template );
+
 
 $f_created_date = get_the_date( 'Y-m-d' );
 $f_created_time = get_the_date( 'H:i:s' );

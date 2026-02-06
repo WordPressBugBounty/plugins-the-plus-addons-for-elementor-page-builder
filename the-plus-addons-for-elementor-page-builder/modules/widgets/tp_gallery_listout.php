@@ -88,7 +88,7 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( '' );
+		return array( 'Gallery Listing', 'Image Gallery', 'Masonry Gallery', 'Metro Gallery', 'Carousel Gallery', 'Filterable Gallery', 'Repeater Gallery', 'ACF Gallery' );
 	}
 
 	/**
@@ -121,18 +121,18 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -143,7 +143,7 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -160,27 +160,48 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 17481,
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'style',
 			array(
-				'label'   => esc_html__( 'Style', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => array(
-					'style-1' => esc_html__( 'Style 1', 'tpebl' ),
-					'style-2' => esc_html__( 'Style 2 ', 'tpebl' ),
-					'style-3' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
-					'style-4' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-1',
+				'options'     => array(
+					'style-1' => array(
+						'title' => esc_html__( 'Style 1', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/gallery-listing/style-1.svg' ),
+					),
+					'style-2' => array(
+						'title' => esc_html__( 'Style 2', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/gallery-listing/style-2.svg' ),
+					),
+					'style-3' => array(
+						'title' => esc_html__( 'Style 3 (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/gallery-listing/style-3-pro.svg' ),
+					),
+					'style-4' => array(
+						'title' => esc_html__( 'Style 4 (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/gallery-listing/style-4-pro.svg' ),
+					),
 				),
+				'columns'     => 4,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
 			'style_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'style!' => array( 'style-1', 'style-2' ),
 				),
@@ -189,21 +210,52 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'layout',
 			array(
-				'label'   => esc_html__( 'Layout', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'grid',
-				'options' => array(
-					'grid'     => esc_html__( 'Grid', 'tpebl' ),
-					'masonry'  => esc_html__( 'Masonry', 'tpebl' ),
-					'metro'    => esc_html__( 'Metro', 'tpebl' ),
-					'carousel' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+				'label'       => esc_html__( 'Layout', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'grid',
+				'options'     => array(
+					'grid'     => array(
+						'title' => esc_html__( 'Grid', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/grid.svg',
+					),
+					'masonry'  => array(
+						'title' => esc_html__( 'Masonry', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/masonry.svg',
+					),
+					'metro'    => array(
+						'title' => esc_html__( 'Metro', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/metro.svg',
+					),
+					'carousel' => array(
+						'title' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+						'image' => L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/carousel-pro.svg',
+					),
+				),
+				'columns'     => 4,
+				'classes'     => 'tpae-visual_choice',
+			)
+		);
+		$this->add_control(
+			'layout_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'layout' => 'carousel',
 				),
 			)
 		);
 		$this->add_control(
 			'how_it_works_masonry',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-elementor-masonry-image-gallery/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'create-elementor-masonry-image-gallery/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => array( 'masonry' ),
@@ -213,7 +265,13 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_grid',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-image-gallery-in-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'create-image-gallery-in-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => array( 'grid' ),
@@ -223,7 +281,13 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_metro',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-elementor-image-gallery-in-metro-layout/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'create-elementor-image-gallery-in-metro-layout/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => array( 'metro' ),
@@ -277,11 +341,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'loop_gallery_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'gallery_options' => array( 'repeater', 'acf_gallery' ),
 				),
@@ -405,6 +467,19 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'display_title_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Turn this on to show image titles directly inside your gallery items.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'post_title_tag',
 			array(
 				'label'     => esc_html__( 'Title Tag', 'tpebl' ),
@@ -412,6 +487,22 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 				'default'   => 'h3',
 				'options'   => l_theplus_get_tags_options(),
 				'condition' => array(
+					'display_title' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'post_title_tag_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Select the proper heading tag for your image titles to keep your design and SEO consistent.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'display_title' => 'yes',
 				),
 			)
@@ -428,24 +519,54 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'display_excerpt_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Show short captions or descriptions below your gallery images for added context.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'display_box_link',
 			array(
-				'label'     => __( 'Box Link', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Box Link', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Enable', 'tpebl' ),
-				'label_off' => __( 'Disable', 'tpebl' ),
+				'label_on'  => __( 'Show', 'tpebl' ),
+				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
 		);
 		$this->add_control(
+			'display_box_link_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( ' Activate this to make each gallery item clickable and lead users to the desired link.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'display_box_link_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'display_box_link' => array( 'yes' ),
 				),
@@ -454,7 +575,13 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'filter_category',
 			array(
-				'label'     => wp_kses_post( "Category Wise Filter <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-filterable-image-gallery-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Category Wise Filter', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-filterable-image-gallery-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -468,11 +595,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'filter_category_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'gallery_options' => 'repeater',
 					'filter_category' => array( 'yes' ),
@@ -527,6 +652,7 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Custom Icon', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
+				'ai'        => false,
 				'default'   => array(
 					'url' => '',
 				),
@@ -655,11 +781,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_repeat_icon_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -732,6 +856,29 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'content_top_space',
+			array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Top Space', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 10,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .gallery-list .post-inner-loop .entry-content' => 'margin-top: {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -781,30 +928,6 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_responsive_control(
-			'content_top_space',
-			array(
-				'type'        => Controls_Manager::SLIDER,
-				'label'       => esc_html__( 'Top Space', 'tpebl' ),
-				'size_units'  => array( 'px' ),
-				'range'       => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 100,
-						'step' => 1,
-					),
-				),
-				'default'     => array(
-					'unit' => 'px',
-					'size' => 10,
-				),
-				'render_type' => 'ui',
-				'separator'   => 'before',
-				'selectors'   => array(
-					'{{WRAPPER}} .gallery-list .post-inner-loop .entry-content' => 'margin-top: {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -954,11 +1077,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_filter_category_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -1148,11 +1269,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_carousel_options_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -1167,10 +1286,17 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'plus_tilt_parallax',
 			array(
-				'label'       => wp_kses_post( "Tilt 3D Parallax <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-3d-tilt-effect-to-elementor-gallery-listing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Tilt 3D Parallax', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_url( $this->tp_doc . 'add-3d-tilt-effect-to-elementor-gallery-listing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
-				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
 				'render_type' => 'template',
 				'separator'   => 'before',
 			)
@@ -1178,11 +1304,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'plus_tilt_parallax_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'plus_tilt_parallax' => array( 'yes' ),
 				),
@@ -1191,10 +1315,17 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'plus_mouse_move_parallax',
 			array(
-				'label'       => wp_kses_post( "Mouse Move Parallax <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-parallax-effect-to-elementor-gallery-listing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>", 'tpebl' ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" /> <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Mouse Move Parallax', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_url( $this->tp_doc . 'add-parallax-effect-to-elementor-gallery-listing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
-				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
 				'render_type' => 'template',
 				'separator'   => 'before',
 			)
@@ -1202,11 +1333,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'plus_mouse_move_parallax_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'plus_mouse_move_parallax' => array( 'yes' ),
 				),
@@ -1215,10 +1344,16 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'messy_column',
 			array(
-				'label'     => esc_html__( 'Messy Columns', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Messy Columns', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -1226,11 +1361,9 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'messy_column_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'messy_column' => array( 'yes' ),
 				),
@@ -1319,6 +1452,8 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'animation_effects!' => 'no-animation',
 				),
@@ -1387,6 +1522,8 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'condition' => array(
 					'animation_effects!'     => 'no-animation',
 					'animation_out_effects!' => 'no-animation',

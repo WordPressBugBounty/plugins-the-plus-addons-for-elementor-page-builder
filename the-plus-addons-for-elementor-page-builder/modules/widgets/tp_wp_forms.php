@@ -83,7 +83,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'WP Forms', 'WordPress Forms', 'Form Builder', 'Elementor Forms', 'Contact Forms', 'Custom Forms', 'Drag and Drop Forms', 'Form Creator', 'Form Designer', 'Form Generator', 'Form Maker', 'Form Plugin', 'Form Widget' );
+		return array( 'wp forms', 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -118,18 +118,18 @@ class ThePlus_Wp_Forms extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -140,7 +140,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -166,18 +166,19 @@ class ThePlus_Wp_Forms extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'wp_forms_notice',
+			'wp_forms_label',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>NOTICE :- Dashboard -> WPForms -> Settings.</i></p>',
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
-			'wp_forms_notice_dec',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Check Load Assets Globally to load form in wordpress backend.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						sprintf(
+							__( 	'Please create your form first from %sDashboard → WPForms → Settings%s. Once the form is created, it will appear here. Also, make sure Load Assets Globally is enabled in WPForms settings so the form loads correctly in the backend and editor.', 'tpebl' ),
+							'<strong>',
+							'</strong>'
+						)
+					)
+				),
 				'label_block' => true,
 			)
 		);
@@ -212,6 +213,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
 			array(
@@ -237,6 +239,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_s_label',
 			array(
@@ -347,7 +350,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .wpforms-container .wpforms-field-description' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator' => 'after',
+				'separator'  => 'after',
 			)
 		);
 		$this->add_responsive_control(
@@ -2290,7 +2293,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
@@ -2316,7 +2319,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
-		$output  = '<div class="pt_plus_wpforms" ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
+		$output = '<div class="pt_plus_wpforms" ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 
 			$output .= do_shortcode( $this->get_shortcode() );
 

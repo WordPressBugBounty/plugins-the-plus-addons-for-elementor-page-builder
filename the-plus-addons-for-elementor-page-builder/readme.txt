@@ -1,14 +1,14 @@
-=== The Plus Addons for Elementor - Elementor Addons, Page Templates, Widgets, Mega Menu, WooCommerce ===
+=== The Plus Addons for Elementor - Addons for Elementor, Page Templates, Widgets, Mega Menu, WooCommerce ===
 Contributors: posimyththemes, nirmalkavaiya, devangvachheta, sagarpatel124
 Tags: elementor, elementor widgets, elementor addons, elementor templates, widgets for elementor
 Requires at least: 6.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.3.16
+Stable tag: 6.4.7
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Best Elementor Addons with 120+ Elementor FREE & Pro Widgets & 1000+ Elementor Templates with Mega Menu, Post Grid, Header Footer Builder, WooCommerce
+Best Addons for Elementor with 120+ Elementor FREE & Pro Widgets & 1000+ Elementor Templates with Mega Menu, Post Grid, Header Footer, WooCommerce
 
 == Description ==
 The Plus Addons for Elementor is the powerful extension for [Elementor Website Builder](https://wordpress.org/plugins/elementor/) with <strong>120+ Powerful Widgets & Extension, 1000+ Elementor Templates</strong>.
@@ -101,7 +101,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[FREE Full Page for Elementor 🔥](https://theplusaddons.com/widgets/best-page-scrolling-options-for-elementor/#full-piling?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[FREE Caldera Forms Styler for Elementor *(Depreciated)* ](https://theplusaddons.com/widgets/caldera-forms/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
+* <strong>[FREEMIUM Form Builder for Elementor](https://theplusaddons.com/elementor-builder/form-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[FREE Contact form 7 Styler for Elementor](https://theplusaddons.com/widgets/contact-form-7/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
@@ -112,6 +112,8 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 * <strong>[FREE Ninja Forms Styler Widget for Elementor](https://theplusaddons.com/widgets/ninja-forms/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[FREE WP Forms Styler Widget for Elementor](https://theplusaddons.com/widgets/wpforms/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+
+* <strong>[Custom Icon Widget for Elementor](https://theplusaddons.com/elementor-widget/custom-icons/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[FREE Blog Posts Listing for Elementor](https://theplusaddons.com/elementor-listing/blog-post/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 [Grid Post Layout](https://theplusaddons.com/plus-blogs/grid-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Masonry Post Layout](https://theplusaddons.com/plus-blogs/masonry-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Metro Post Layout](https://theplusaddons.com/plus-blogs/metro-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Carousel Slider ](https://theplusaddons.com/plus-blogs/carousel-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) |[Stagger Load Layout](https://theplusaddons.com/plus-blogs/blog-stagger-load/) 
@@ -149,6 +151,9 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Blog Builder: Post Navigation & Post Search](https://theplusaddons.com/blog-builder/#blog-single?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
+* <strong>[FREEMIUM Dynamic Tags for Elementor](https://theplusaddons.com/elementor-extras/dynamic-tags/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+
+
 ### 🏆 75+ PREMIUM ELEMENTOR Widgets
 
 * <strong>[Horizontal Scroll for Elementor](https://theplusaddons.com/widgets/elementor-horizontal-scroll/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
@@ -158,6 +163,8 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 * <strong>[Mp3 Audio Player for Elementor](https://theplusaddons.com/elementor-widget/audio-player/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Login, Signup & Registration Elementor Form & Password Reset Form for Elementor](https://theplusaddons.com/widgets/login-signup-password/)</strong> 
+
+* <strong>[RSS Feed Widget for Elementor](https://theplusaddons.com/elementor-widget/rss-feed/)</strong> 
 
 * <strong>[WooCommerce Store Builder for Elementor](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 [My Account Page]( https://theplusaddons.com/plus-builder/woocommerce-builder/my-account-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Order Track Page ](https://theplusaddons.com/plus-builder/woocommerce-builder/order-tracking-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Cart Page](https://theplusaddons.com/plus-builder/woocommerce-builder/cart-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Checkout Page](https://theplusaddons.com/plus-builder/woocommerce-builder/checkout-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Single Product Page](https://theplusaddons.com/plus-builder/woocommerce-builder/product-single-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | | [Thank You Page](https://theplusaddons.com/plus-builder/woocommerce-builder/thank-you-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Search Filters](https://theplusaddons.com/plus-builder/woocommerce-builder/ajax-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
@@ -306,7 +313,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Row Section Scroll Animation  for Elementor](https://theplusaddons.com/plus-extras/row-section-full-scroll-animation/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Custom CSS(Section & Column) for Elementor](https://theplusaddons.com/elementor-extras/custom-css/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
+* <strong>[Custom CSS for Elementor](https://theplusaddons.com/elementor-extras/custom-css/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
 
 ###🔍 OUR PRODUCTS
@@ -333,7 +340,7 @@ https://nexterwp.com/nexter-extension?utm_source=wordpress&utm_medium=readmepage
 4. You may enable/disable widgets & features from The Plus Settings from Dashboard.
 5. Congratulation, Now your site is ⚡ SUPERCHARGED, Get ready to build amazing websites
 
-<em> For Gutenberg Block Editor, check <a href="https://wordpress.org/plugins/the-plus-addons-for-block-editor/">The Plus Addons for Gutenberg</a></em>
+<em> For Gutenberg Block Editor, check <a href="https://wordpress.org/plugins/the-plus-addons-for-block-editor/">Nexter Blocks</a></em>
 
 == Frequently Asked Questions ==
 
@@ -385,12 +392,181 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
+= 6.4.7 =
+Improvement : Breadcrumbs Bar : Condition Improvement
+Improvement : Dashboard : Design Improvement
+Improvement : Dashboard : Language Compatibility
+Improvement : Unused files & code removed from the plugin
+Improvement : Age Gate : Add labels for the options
+Improvement : Contact Form 7 : Add labels for the options
+Improvement : Dark Mode : Add labels for the options
+Improvement : Everest Form : Add labels for the options
+Improvement : Gravity Form : Add labels for the options
+Improvement : Heading Animation : Add labels for the options
+Improvement : Hover Card : Add labels for the options
+Improvement : Meeting Scheduler : Add labels for the options
+Improvement : Ninja Form : Add labels for the options
+Improvement : Post Comment : Add labels for the options
+Improvement : Post Content : Add labels for the options
+Improvement : Post Featured Image : Add labels for the options
+Improvement : Post Meta : Add labels for the options
+Improvement : Post Prev/Next : Add labels for the options
+Improvement : Post Title : Add labels for the options
+Improvement : Progress Bar : Add labels for the options
+Improvement : Smooth Scroll : Add labels for the options
+Improvement : Syntax Highlighter : Add labels for the options
+Improvement : Text Block : Add labels for the options
+Improvement : Video Player : Add labels for the options
+Improvement : WP Form : Add labels for the options
+Fix : Blog Listing : Style5 - Box shadow not working
+Fix : Blog Listing : Translation Issue
+Fix : Post Comment : Translation Issue 
+Fix : Dashboard : Console Errors
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.6 =
+Add : New Extension : Dynamic Tag (Post, Site)
+Add : New Extension : GSAP Scroll Interactions - Basic and Global (Beta)
+Add : New Extension : GSAP Global Text Animation (Beta)
+Add : Text Block : Add GSAP Animation Option (Beta)
+Add : Heading Title : Add GSAP Animation Option (Beta)
+Add : Number Counter : Add Fill/Stroke color option for the Font Awesome 5 Icons
+Add : Stylish List : Add Fill/Stroke color option for the Font Awesome 5 Icons
+Add : Video Player : Icon option Added for the only icon image option
+Improvement : Advanced Shadow : UI Improvements
+Improvement : Equal Height : UI Improvements
+Improvement : Glass Morphism : UI Improvements
+Improvement : Wrapper Link : UI Improvements
+Improvement : White Label Condition Improvement 
+Fix : Post Author : Author link not working in multisite
+Fix : Post Comment : Language Compatibility issue
+Fix : Post Content : Alignment not working while selecting excerpt from the Post Content Type
+Fix : Switcher : Active Padding not working in the second switcher
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.5 =
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.4 =
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.3 =
+Improvement : Heading Animation : Language Compatibility
+Improvement : Preset Option : File Structure Improvement
+Improvement : Smart Loop Builder Option : File Structure Improvement
+Fix : Button : Style8 – Icon issue while enabling Full Width option
+Fix : Compatibility with WordPress Version 6.9
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.2 =
+Add : Button : Add a none option for the Icon
+Add : Button : Add Icon circle size option for the Style-2
+Add : Heading Title : Add Separator Width/Height option for the Vertical Border Style
+Add : Heading Title : Add Spacing option between title & separator for the Classic Style
+Add : Heading Title : Add Spacing option between sub-title & separator for the Classic Style
+Improvement : Blog Listing : Add labels for the options
+Improvement : Clients Listing : Add labels for the options
+Improvement : Form Widget : Add labels for the options
+Improvement : Gallery Listing : Add labels for the options
+Improvement : Social Embed : Add labels for the options
+Improvement : Social Icon : Add labels for the options
+Improvement : Team Member Listing : Add labels for the options
+Improvement : Testimonial : Add labels for the options
+Improvement : Accordion : Add option to create or edit Template
+Improvement : Carousel Anything : Add option to create or edit Template
+Improvement : Navigation Menu Lite : Add option to create or edit Template
+Improvement : Page Scroll : Add option to create or edit Template
+Improvement : Switcher : Add option to create or edit Template
+Improvement : Tabs/Tours : Add option to create or edit Template
+Improvement : Equal Height : Language Compatibility
+Improvement : Dashboard : Design Improvements
+Improvement : Dashboard : Language Compatibility
+Fix : Accordion : Remove unnecessary bottom spacing
+Fix : Breadcrumbs Bar : Separator Global Background color not applying to the Arrow (Style-2)
+Fix : Post Comment : Remove unnecessary bottom & top spacing
+Fix : Post Comment : Reply text not working
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.1 =
+Add : Blog listing : % option added for the content box for the style-5
+Add : Pricing Table : Support Font Awesome 5
+Add : Pricing Table : Image styling option
+Improvement : Accordion : Add labels for the options
+Improvement : Carousel Anything : Add labels for the options
+Improvement : Tabs/Tours : Add labels for the options
+Improvement : Accordion : Language Compatibility
+Improvement : Adv Text Block : Language Compatibility
+Improvement : Age Gate : Language Compatibility
+Improvement : Blockquote : Language Compatibility
+Improvement : Blog Listing : Language Compatibility
+Improvement : Clients Listing : Language Compatibility
+Improvement : Countdown : Language Compatibility
+Improvement : Dark Mode : Language Compatibility
+Improvement : Form widget : Language Compatibility
+Improvement : Gallery Listing : Language Compatibility
+Improvement : Header Meta Content : Language Compatibility
+Improvement : Heading Title : Language Compatibility
+Improvement : Hovercard : Language Compatibility
+Improvement : Info box : Language Compatibility
+Improvement : Meeting Scheduler : Language Compatibility
+Improvement : Message Box : Language Compatibility
+Improvement : Navigation Menu lite : Language Compatibility
+Improvement : Number Counter : Language Compatibility
+Improvement : Pricing Table : Language Compatibility
+Improvement : Progress Bar : Language Compatibility
+Improvement : Social Icon : Language Compatibility
+Improvement : Stylish list : Language Compatibility
+Improvement : Switcher : Language Compatibility
+Improvement : Syntax Highlighter : Language Compatibility
+Improvement : Tabs/Tours : Language Compatibility
+Improvement : Team Member listing : Language Compatibility
+Fix : Form widget : Icon spacing not working
+Fix : Navigation Menu lite : Repeater - Mega menu alignment not working
+Fix : Testimonial : Style-4 layout breaking
+Fix : Testimonial : Carousel Column not working in the responsive
+Fix : Minor Bug Fixes & Performance Improvements
+
+= 6.4.0 =
+New : Revamped Onboarding 
+Add : Blog Listing : Add Preset Option for the Ready design
+Add : Client Listing : Add Preset Option for the Ready design
+Add : Gallery Listing : Add Preset Option for the Ready design
+Add : Form Widget : Add Preset Option for the Ready design
+Add : Team Member Listout : Add Preset Option for the Ready design
+Add : Testimonial : Add Preset Option for the Ready design
+Add : Blog Listing : Style 5 Option
+Add : Blog Listing : Title limit option
+Add : Blog Listing : Content limit option
+Improvement : Adv Text Block : UI Improvements
+Improvement : Client Listing : UI Improvements
+Improvement : Gallery Listing : UI Improvements
+Improvement : Header Meta Content : UI Improvements
+Improvement : Navigation Menu Lite : UI Improvements
+Improvement : Post Author : UI Improvements
+Improvement : Post Meta : UI Improvements
+Improvement : Pricing Table : UI Improvements
+Improvement : Team Member Listing : UI Improvements
+Improvement : Testimonial : UI Improvements
+Improvement : Countdown : Language Compatibility
+Improvement : Table : Added labels for the options
+Improvement : Dashboard : Design Improvements
+Improvement : Dashboard : Language Compatibility
+Fix : Blog Listing : Author Image tag in the Smart Loop builder option
+Fix : Buttton : Style 8 Alignment Issue
+Fix : Minor Bug Fixes & Performance Improvements
+
 = 6.3.16 =
 Fix : SVG Upload : Security Patch (Low Security)
 Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.15 =
-Improvement : WdesignKit 2.0 Compatibility
+Improvement : Client Listing : UI Improvements
+Improvement : Gallery Listing : UI Improvements
+Improvement : Pricing Table : UI Improvements
+Improvement : Team Member Listing : UI Improvements
+Improvement : Testimonial : UI Improvements
+Fix : Blog Listing : Author Image tag in the Smart Loop builder option
+Improvement : Dashboard : Design Improvements
 Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.3.14 =
@@ -788,125 +964,6 @@ Improvement: Code enhanced for better performance and security
 Improvement: Unnecessary files removed, and file structure improved
 Fix: Minor bug fixes and performance improvements
 
-= 5.6.7 =
-Update : File Structures
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.6 =
-Update : The Plus Settings Menu Number Sequence Change Issue
-Update : Plus Extras : Advanced shadow Document Link Update
-Update : Info Box : Responsive Control for Text Align
-Fix : Progress Bar : Controller & UI Improvement  
-Fix : Style List : Controller & UI Improvement
-Fix : Info Box : Backend ( Elementor Editor ) style 4 load Issue
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.5 =
-Add : WDesignKit Elementor Template Integration with The Plus Addons for Elementor
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.4 =
-Fix: Corrected the Text Domain.
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.3 =
-Fix : Video : Security Patch ( Low security )
-Fix : Testimonial : Security Patch ( Low security )
-Fix : Page Scroll : Security Patch ( Low security )
-Fix : WP Dashboard : Security Patch ( Low security )
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.2 =
-Fix : Countdown : Security Patch ( Low security )
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.1 =
-Fix : Video : Security Patch ( Low security )
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.6.0 =
-Add : New Widget : Table
-Add : New Widget : Carousel Anything
-Add : Accordion : Option to add content from elementor Templates
-Add : Accordion : Option to add padding for title background
-Add : Accordion : Option to add box border for title background
-Add : Info Box : Option to add padding for Description
-Add : Pricing Table : Option to add Alignment option for Title, Sub Title, Price & Ribbon
-Add : Pricing Table : Option to add padding for ribbon text
-Add : Pricing Table : Option to change position of pricing button
-Add : Tabs/Tour : Styling options for tabs Navigation area
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.5.6 =
-Fix : Minor Bug Fixes & performance Improvements
-
-= 5.5.5 =
-Fix : Age Gate : Security Patch ( Low security )
-Fix : Hover Card : Security Patch ( Low security )
-Fix : Header Meta content : Security Patch ( Low security )
-
-= 5.5.4 =
-Add : Accordion : Default tab active Option
-Add : Accordion : Option to add space between tabs
-Add : Accordion : Option to style border
-Add : Accordion : Option for content background styling
-Add : Blog Listout : Post load more option
-Add : Blog Listout : Border styling option
-Add : Blog Listout : Social Icon Background color option
-Add : Blog Listout : Box shadow option
-Add : Contact Form 7 : Add option for uncheck radio button color
-Add : Gallery Listing : add style 2 layout
-Add : Info Box : Add Style 4
-Add : Number Counter : Symbol color option
-Add : Navigation Menu Lite : Add Repeater option 
-Add : Pricing Table : Ribbon style 1  
-Add : Pricing Table : Font Awesome icon option 
-Add : Pricing Table : Content style option
-Add : Pricing Table : Button Alignment
-Add : Process Steps widget
-Add : Stylis List widget
-Add : Team Member : Add style 3
-Add : Team Member : Border width option
-Add : Team Member : Box shadow option
-Add : Team Member : Social icon background color option
-Add : Testimonial : Box shadow option
-Add : Testimonial : Alignment for style-4
-Add : Tabs/Tour : Font Awesome 5 icons 
-Add : Tabs/Tour : Option add content via Elementor Template 
-Add : Tabs/Tour : Option to style border 
-Add : Tabs/Tour : Option to style box shadow 
-Add : WP Forms : Display option for hide/show form Name & Description
-Compatibility : Button : Add responsive compatibility for button size and spacing
-compatibility : Info Box : Responsive compatibility for title top/bottom space
-compatibility : Flip Box : Responsive compatibility for Icons size & title top/bottom space
-Fix : Blockquote : Image should not hide when toggle of icon disable
-Fix : Gravity Form : checkbox and radio button not showing
-Fix : Flip Box : Security Patch ( Low security )
-Fix : Info Box : SVG icons css improvement
-Fix : Info Box : Button SVG icon not showing fix
-Fix : Pricing Table : Content Description style 2 alignment not working 
-Fix : Post Featured Image : Css improvement for border radius
-Fix : Progress Bar : Security Patch ( Low security )
-Fix : Scroll Navigation : Security Patch ( Low security )
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 5.5.3 =
-Add : Syntax Highlighter Widget
-Fix : Button : Security Patch ( Low security )
-Fix : Dark Mode : Global color Condition Improvement
-Fix : Meeting schedular : Security Patch ( Low security )
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 5.5.2 =
-Add : Info Box : Button Icon size option
-Add : Post Title : Add Text Alignment Option
-Fix : Post Meta : Post Author name compatibility with Nexter Extension Single Page
-Add : Contact Form 7 : Option to Change checkbox Position
-Fix : Gravity Form : Condition Improvement
-Fix : Condition Improvement for Caching File generating flow
-Fix : Minor Bug Fixes & Performance Improvements
+For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/the-plus-addons-for-elementor-page-builder/assets/changelog.txt) delivered with the plugin.
 
 == Upgrade Notice ==
-
-= 2.0.7 =
-Notice : This is a security update. Update it soon. For More details check Changelog.

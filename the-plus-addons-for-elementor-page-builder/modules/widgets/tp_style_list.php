@@ -115,7 +115,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-	
+
 	/**
 	 * It is use for adds.
 	 *
@@ -124,18 +124,18 @@ class L_ThePlus_Style_List extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -146,7 +146,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -163,13 +163,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16789,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16789,
+				'label_block' => true,
+			)
+		);
 		$repeater = new \Elementor\Repeater();
 
 		$repeater->add_control(
@@ -200,13 +200,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'icon_fs_popover_toggle',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'icon_style' => 'font_awesome',
 				),
 			)
@@ -236,13 +236,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'icon_f5_popover_toggle',
 			array(
-				'label' => esc_html__( 'Font Awesome 5', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome 5', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'icon_style' => 'font_awesome_5',
 				),
 			)
@@ -274,11 +274,8 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'icons_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'icon_style' => 'icon_mind',
 				),
@@ -287,7 +284,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'link',
 			array(
-				'label'   => wp_kses_post( "Link <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "custom-link-to-each-elementor-icon-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Link', 'tpebl' ),
+						esc_url( $this->tp_doc . 'custom-link-to-each-elementor-icon-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::URL,
 				'label_block' => true,
 				'placeholder' => esc_html__( 'https://your-link.com', 'tpebl' ),
@@ -297,7 +300,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'show_pin_hint',
 			array(
-				'label'   => wp_kses_post( "Pin Hint <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-label-tab-to-elementor-stylish-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Pin Hint', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-label-tab-to-elementor-stylish-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -399,7 +408,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'show_background_style',
 			array(
-				'label'   => wp_kses_post( "Interactive Hover Bg Style <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "change-elementor-list-item-background-on-hover/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Interactive Hover Bg Style', 'tpebl' ),
+						esc_url( $this->tp_doc . 'change-elementor-list-item-background-on-hover/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -432,11 +447,8 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'show_tooltip_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'show_tooltips' => 'yes',
 				),
@@ -476,7 +488,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$this->add_control(
 			'read_more_toggle',
 			array(
-				'label'   => wp_kses_post( "Read More Toggle <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-read-more-button-to-elementor-icon-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Read More Toggle', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-read-more-button-to-elementor-icon-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
@@ -502,7 +520,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Expand Section Title', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai'          => false,
+				'ai'        => false,
 				'default'   => esc_html__( '+ Show all options', 'tpebl' ),
 				'separator' => 'before',
 				'dynamic'   => array( 'active' => true ),
@@ -516,7 +534,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Shrink Section Title', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai'          => false,
+				'ai'        => false,
 				'default'   => esc_html__( '- Less options', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -763,7 +781,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$this->add_control(
 			'sl_display_counter',
 			array(
-				'label'   => wp_kses_post( "Display Counter <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-numbered-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Display Counter', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-numbered-list-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -920,6 +944,28 @@ class L_ThePlus_Style_List extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-icon-list-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .plus-icon-list-icon svg' => 'fill: {{VALUE}} !important;',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-icon-list-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .plus-icon-list-icon svg' => 'stroke: {{VALUE}} !important;',
+				),
+			)
+		);
 		$this->end_controls_tab();
 		$this->start_controls_tab(
 			'icon_style_hover',
@@ -936,6 +982,28 @@ class L_ThePlus_Style_List extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .plus-icon-list-item:hover .plus-icon-list-icon i' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .plus-icon-list-item:hover .plus-icon-list-icon svg' => 'fill: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'hicon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-icon-list-icon:hover svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .plus-icon-list-icon:hover svg' => 'fill: {{VALUE}} !important;',
+				),
+			)
+		);
+		$this->add_control(
+			'hicon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-icon-list-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .plus-icon-list-icon svg' => 'stroke: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -1380,7 +1448,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 						'step' => 5,
 					),
 				),
-				'separator' => 'after',
+				'separator'  => 'after',
 				'selectors'  => array(
 					'{{WRAPPER}} .plus-stylist-list-wrapper' => 'height:{{SIZE}}{{UNIT}};',
 				),
@@ -1591,7 +1659,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 						'icon'  => 'eicon-h-align-right',
 					),
 				),
-				'separator' => 'before',
+				'separator'   => 'before',
 				'label_block' => false,
 				'default'     => 'right',
 			)
@@ -1671,7 +1739,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 			)
 		);
 		$this->end_popover();
-		$this->end_controls_section();		
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_extra_option_styling',
 			array(
@@ -1682,7 +1750,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$this->add_control(
 			'hover_inverse_effect',
 			array(
-				'label'   => wp_kses_post( "On Hover Inverse Effect <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "create-interactive-footer-hover-links-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'On Hover Inverse Effect', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-interactive-footer-hover-links-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -2205,12 +2279,14 @@ class L_ThePlus_Style_List extends Widget_Base {
 						?>
 						<div class="plus-icon-list-icon <?php echo esc_attr( $lz2 ); ?>"> 
 							<?php
-							if ( 'font_awesome_5' === $icon_style ) { ?>
+							if ( 'font_awesome_5' === $icon_style ) {
+								?>
 									<span>
 									<?php echo $icons; ?>
 									</span> 
 								<?php
-							} else { ?>
+							} else {
+								?>
 								<i class="<?php echo esc_attr( $icons ); ?>" aria-hidden="true"></i>
 								<?php
 							}
@@ -2219,29 +2295,31 @@ class L_ThePlus_Style_List extends Widget_Base {
 						<?php
 					}
 
-						if ( ! empty( $txt_url ) ) {?>
+					if ( ! empty( $txt_url ) ) {
+						?>
 							</a>
-						<?php }
+						<?php
+					}
 					?>
 				</li>
 				<?php
 					++$i;
 					++$ij;
 					endforeach;
-				?>
+			?>
 		</ul>
 
 		<?php
 			$default_load = $settings['load_show_list_toggle'];
 			$read_more    = ! empty( $settings['read_more_toggle'] ) ? $settings['read_more_toggle'] : '';
 
-			if ( 'yes' === $read_more && $ij > $default_load ) {
-				$expand_txt   = ! empty( $settings['read_show_option'] ) ? $settings['read_show_option'] : '';
-				$shrink_txt   = ! empty( $settings['read_less_option'] ) ? $settings['read_less_option'] : '';
-				$default_load = $default_load - 1;
+		if ( 'yes' === $read_more && $ij > $default_load ) {
+			$expand_txt   = ! empty( $settings['read_show_option'] ) ? $settings['read_show_option'] : '';
+			$shrink_txt   = ! empty( $settings['read_less_option'] ) ? $settings['read_less_option'] : '';
+			$default_load = $default_load - 1;
 
-				echo '<a href="#" class="read-more-options more" data-default-load="' . esc_attr( $default_load ) . '" data-more-text="' . esc_attr( $expand_txt ) . '" data-less-text="' . esc_attr( $shrink_txt ) . '">' . wp_kses_post( $expand_txt ) . '</a>';
-			}
+			echo '<a href="#" class="read-more-options more" data-default-load="' . esc_attr( $default_load ) . '" data-more-text="' . esc_attr( $expand_txt ) . '" data-less-text="' . esc_attr( $shrink_txt ) . '">' . wp_kses_post( $expand_txt ) . '</a>';
+		}
 		?>
 
 		</div>		

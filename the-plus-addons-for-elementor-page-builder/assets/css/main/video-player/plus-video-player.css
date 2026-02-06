@@ -5,6 +5,15 @@
     width: 100%
 }
 
+.pt_plus_video_player.text-center{
+    text-align: center;
+}
+.pt_plus_video_player.text-right{
+    text-align: right;
+}
+.pt_plus_video_player.text-left{
+    text-align: left;
+}
 .pt_plus_video-box-shadow.sticky-active{
     width: 300px;
     height: 175px;

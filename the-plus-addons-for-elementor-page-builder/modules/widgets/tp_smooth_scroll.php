@@ -66,7 +66,7 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-creatives' );
+		return array( 'plus-creative' );
 	}
 
 	/**
@@ -77,7 +77,7 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Smooth Scroll', 'Scroll Widget', 'Elementor Scroll', 'Scroll Animation', 'Smooth Scrolling', 'Scroll Effect', 'Elementor Smooth Scroll', 'Scroll Widget for Elementor', 'Scroll Animation for Elementor', 'Smooth Scrolling for Elementor', 'Elementor Scroll Effect' );
+		return array( 'Smooth Scroll Effect', 'Smooth Scrolling', 'Keyboard Smooth Scrolling', 'Touchpad Smooth Scroll', 'Page Smooth Scroll', 'Scroll Navigation', 'Infinite Scroll', 'Scrolling Effects', 'Scrolling Animation' );
 	}
 
 	/**
@@ -112,18 +112,18 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -134,7 +134,7 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -171,6 +171,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'frameRate_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Controls how smooth the scrolling animation feels.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'animationTime',
 			array(
 				'label'      => esc_html__( 'Animation Time', 'tpebl' ),
@@ -190,6 +203,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'animationTime_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Adjusts how long the scroll animation takes to complete.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'stepSize',
 			array(
 				'label'      => esc_html__( 'Step Size', 'tpebl' ),
@@ -206,6 +232,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'px',
 					'size' => 100,
 				),
+			)
+		);
+		$this->add_control(
+			'stepSize_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Defines how much the page scrolls in each step for smoother movement.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -228,6 +267,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'pulseAlgorithm_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Activate this to make scrolling smoother and more natural. Best for long pages or content-heavy sections', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'pulseScale',
 			array(
 				'label'      => esc_html__( 'Pulse Scale', 'tpebl' ),
@@ -247,6 +299,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'pulseScale_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Adjust how strong the pulse effect feels while scrolling.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'pulseNormalize',
 			array(
 				'label'      => esc_html__( 'Pulse Normalize', 'tpebl' ),
@@ -263,6 +328,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'px',
 					'size' => 1,
 				),
+			)
+		);
+		$this->add_control(
+			'pulseNormalize_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Control how quickly the pulse effect settles for smoother, consistent scrolling.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -293,6 +371,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'accelerationDelta_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Controls how quickly the scroll accelerates when you start scrolling.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'accelerationMax',
 			array(
 				'label'      => esc_html__( 'Acceleration Max', 'tpebl' ),
@@ -309,6 +400,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'px',
 					'size' => 3,
 				),
+			)
+		);
+		$this->add_control(
+			'accelerationMax_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Sets the maximum speed limit for the acceleration effect during scrolling.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -331,6 +435,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'keyboardSupport_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable keyboard navigation so users can scroll using their keyboard.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'arrowScroll',
 			array(
 				'label'      => esc_html__( 'Arrow Scroll', 'tpebl' ),
@@ -347,6 +464,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'px',
 					'size' => 50,
 				),
+			)
+		);
+		$this->add_control(
+			'arrowScroll_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set how far the page scrolls when the up/down arrow keys are pressed.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -369,6 +499,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'touchpadSupport_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this if you want smooth scrolling to work on touch-pad devices like laptops.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'fixedBackground',
 			array(
 				'label'        => esc_html__( 'Fixed Support', 'tpebl' ),
@@ -377,6 +520,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+			)
+		);
+		$this->add_control(
+			'fixedBackground_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Turn this on to support fixed elements during scrolling.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -397,6 +553,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 				'default'  => array(),
 			)
 		);
+		$this->add_control(
+			'browsers_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Select which browsers should have smooth scrolling enabled.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_responsive_section',
@@ -415,13 +584,59 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 				'default'   => 'no',
 			)
 		);
+		$this->add_control(
+			'tablet_off_scroll_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable smooth scrolling on smaller devices for a better mobile experience.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'tpebl_section_needhelp',
+			array(
+				'label' => esc_html__( 'Need Help?', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+		$this->add_control(
+			'tpebl_help_control',
+			array(
+				'label' => __( 'Need Help', 'tpebl' ),
+				'type'  => 'tpae_need_help',
+			)
+		);
+		$this->end_controls_section();
+
+		if ( ! tpae_wl_pluginads_enabled() ) {
+			$this->start_controls_section(
+				'tpae_theme_builder_sec',
+				array(
+					'label' => esc_html__( 'Use with Theme Builder', 'tpebl' ),
+					'tab'   => Controls_Manager::TAB_CONTENT,
+				)
+			);
+			$this->add_control(
+				'tpae_theme_builder',
+				array(
+					'type'        => 'tpae_theme_builder',
+					'notice'      => 'We recommend using this widget in the Single Template to load it globally on all pages.',
+					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
+					'page_type'   => 'tp_singular_page',
+				)
+			);
+			$this->end_controls_section();
+		}
+
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-			include L_THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 			include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
-		} else {
-			include THEPLUS_PATH . 'modules/widgets/theplus-needhelp.php';
 		}
 	}
 
@@ -435,7 +650,7 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	protected function render() {
-		$settings  = $this->get_settings_for_display();
+		$settings = $this->get_settings_for_display();
 
 		$step_size = ! empty( $settings['stepSize']['size'] ) ? $settings['stepSize']['size'] : 100;
 		$pl_algo   = ! empty( $settings['pulseAlgorithm'] ) ? $settings['pulseAlgorithm'] : '';

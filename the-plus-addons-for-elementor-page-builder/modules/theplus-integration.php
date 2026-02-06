@@ -37,6 +37,8 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 				'plus-query' => 'L_Theplus_Query',
 				'tpae-need-help' => 'Tpae_Need_Help_Control',
 				'tpae-preset-controller' => 'Tpae_Preset_Controller',
+				'tpae-pro-features' => 'Tpae_Pro_Feature',
+				'tpae-theme-builder' => 'Tpae_Theme_builder'
 			);
 
 			foreach ( $plus_control as $control_id => $class_name ) {

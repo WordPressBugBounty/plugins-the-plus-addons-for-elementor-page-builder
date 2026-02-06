@@ -12,6 +12,7 @@ namespace TheplusAddons\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -78,7 +79,7 @@ class ThePlus_Video_Player extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'video', 'media', 'player', 'multimedia', 'youtube', 'vimeo', 'mp4', 'embed', 'playback', 'watch', 'stream', 'online', 'clip', 'film', 'movie', 'visual', 'recording', 'motion picture' );
+		return array( 'Video Embed', 'Video Player', 'YouTube Embed', 'Vimeo Video', 'Self‑Hosted Video', 'Sticky Video', 'Video Popup', 'Video Mask', 'Responsive Video Player', 'Video Embedding' );
 	}
 
 	/**
@@ -122,13 +123,13 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 16867,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 16867,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'video_type',
 			array(
@@ -139,6 +140,54 @@ class ThePlus_Video_Player extends Widget_Base {
 					'youtube'     => esc_html__( 'Youtube', 'tpebl' ),
 					'vimeo'       => esc_html__( 'Vimeo', 'tpebl' ),
 					'self-hosted' => esc_html__( 'Self Hosted', 'tpebl' ),
+				),
+			)
+		);
+		$this->add_control(
+			'youtube_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Embed a video hosted on YouTube using its video ID.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'video_type' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
+			'vimeo_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Embed a video hosted on Vimeo using its video ID.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'video_type' => 'vimeo',
+				),
+			)
+		);
+		$this->add_control(
+			'self_hosted_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use a video file hosted on your own site.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'video_type' => 'self-hosted',
 				),
 			)
 		);
@@ -192,17 +241,30 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label'       => esc_html__( 'Sticky Video', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_block' => false,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'sticky_video_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this option to keep the video visible while scrolling the page.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'sticky_video_pos',
 			array(
-				'label'   => esc_html__( 'Position', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'bottom-left',
-				'options' => array(
+				'label'     => esc_html__( 'Position', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'bottom-left',
+				'options'   => array(
 					'bottom-left'  => esc_html__( 'Bottom Left', 'tpebl' ),
 					'bottom-right' => esc_html__( 'Bottom Right', 'tpebl' ),
 					'top-right'    => esc_html__( 'Top Right', 'tpebl' ),
@@ -225,8 +287,8 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'video_autoplay',
 			array(
-				'label' => esc_html__( 'AutoPlay', 'tpebl' ),
-				'type'  => Controls_Manager::SWITCHER,
+				'label'     => esc_html__( 'AutoPlay', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
@@ -235,8 +297,8 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'video_muted',
 			array(
-				'label' => esc_html__( 'Mute', 'tpebl' ),
-				'type'  => Controls_Manager::SWITCHER,
+				'label'     => esc_html__( 'Mute', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
@@ -244,8 +306,8 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'video_loop',
 			array(
-				'label' => esc_html__( 'Loop', 'tpebl' ),
-				'type'  => Controls_Manager::SWITCHER,
+				'label'     => esc_html__( 'Loop', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 			)
@@ -266,12 +328,12 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'showinfo',
 			array(
-				'label'       => esc_html__( 'Video Info', 'tpebl' ),
-				'type'        => Controls_Manager::SWITCHER,
-				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'    => esc_html__( 'Show', 'tpebl' ),
-				'default'     => 'yes',
-				'condition'   => array(
+				'label'     => esc_html__( 'Video Info', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'default'   => 'yes',
+				'condition' => array(
 					'video_type' => array( 'youtube' ),
 				),
 			)
@@ -282,7 +344,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => '<b>Note:</b> Video Info is <a href="https://developers.google.com/youtube/player_parameters#showinfo" class="theplus-btn" target="_blank">deprecated.</a>',
 				'content_classes' => 'tp-controller-notice',
-				'condition'   => array(
+				'condition'       => array(
 					'video_type' => array( 'youtube' ),
 				),
 			)
@@ -298,12 +360,42 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'video_touch_disable_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Disable touch interactions on the video player, useful for background or decorative videos.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'modest_branding',
 			array(
 				'label'     => esc_html__( 'Modest Branding', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'condition' => array(
+					'video_type'     => array( 'youtube' ),
+					'video_controls' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'modest_branding_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Reduce platform branding elements shown on the video player.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition' => array(
 					'video_type'     => array( 'youtube' ),
 					'video_controls' => 'yes',
@@ -334,12 +426,28 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'rel_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Control whether related videos are shown after playback ends.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'video_type' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
 			'relnote',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				'raw'             => '<b>Note:</b> Suggested Videos <a href="https://developers.google.com/youtube/player_parameters#rel" class="theplus-btn" target="_blank">Parameter change.</a>',
 				'content_classes' => 'tp-controller-notice',
-				'condition' => array(
+				'condition'       => array(
 					'video_type' => 'youtube',
 				),
 			)
@@ -360,11 +468,27 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'yt_privacy',
 			array(
-				'label'       => esc_html__( 'Privacy Mode', 'tpebl' ),
-				'type'        => Controls_Manager::SWITCHER,
+				'label'     => esc_html__( 'Privacy Mode', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'condition'   => array(
+				'condition' => array(
+					'video_type' => 'youtube',
+				),
+			)
+		);
+		$this->add_control(
+			'yt_privacy_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this option to reduce tracking by the video platform until the user plays the video.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
 					'video_type' => 'youtube',
 				),
 			)
@@ -453,6 +577,21 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'only_icon_opt',
+			array(
+				'label'     => esc_html__( 'Select Icon Option', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'image',
+				'options'   => array(
+					'image' => esc_html__( 'Image', 'tpebl' ),
+					'icon'  => esc_html__( 'Icon', 'tpebl' ),
+				),
+				'condition' => array(
+					'image_banner' => 'only_icon',
+				),
+			)
+		);
+		$this->add_control(
 			'only_img',
 			array(
 				'label'     => esc_html__( 'Choose Image', 'tpebl' ),
@@ -460,7 +599,8 @@ class ThePlus_Video_Player extends Widget_Base {
 				'ai'        => false,
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
-					'image_banner' => 'only_icon',
+					'image_banner'  => 'only_icon',
+					'only_icon_opt' => 'image',
 				),
 			)
 		);
@@ -471,11 +611,27 @@ class ThePlus_Video_Player extends Widget_Base {
 				'default'   => 'full',
 				'separator' => 'none',
 				'condition' => array(
-					'image_banner' => 'only_icon',
+					'image_banner'  => 'only_icon',
+					'only_icon_opt' => 'image',
 				),
 			)
 		);
 
+		$this->add_control(
+			'select_icon',
+			array(
+				'label'     => esc_html__( 'Choose Icon', 'tpebl' ),
+				'type'      => Controls_Manager::ICONS,
+				'default'   => array(
+					'value'   => 'fas fa-star',
+					'library' => 'fa-solid',
+				),
+				'condition' => array(
+					'image_banner'  => 'only_icon',
+					'only_icon_opt' => 'icon',
+				),
+			)
+		);
 		$this->add_control(
 			'icon_align',
 			array(
@@ -522,7 +678,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'      => Controls_Manager::MEDIA,
 				'ai'        => false,
 				'default'   => array(
-					'url' => L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg',
+					'url' => L_THEPLUS_URL . 'assets/images/tp-placeholder.jpg',
 				),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -622,6 +778,19 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'markupSch_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this option to add structured data for the video, helping search engines better understand and display it.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'video_date',
 			array(
 				'label'     => __( 'Video Date', 'tpebl' ),
@@ -631,7 +800,24 @@ class ThePlus_Video_Player extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'video_date_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the publish or upload date of the video for schema information.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'markupSch' => 'yes',
+				),
+			)
+		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'tpebl_section_needhelp',
 			array(
@@ -657,6 +843,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_styling',
 			array(
@@ -890,8 +1077,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Continuous Animation', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'render_type' => 'template',
 			)
 		);
@@ -919,8 +1106,8 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Hover Animation', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'render_type' => 'template',
 				'condition'   => array(
 					'icon_continuous_animation' => 'yes',
@@ -1024,6 +1211,54 @@ class ThePlus_Video_Player extends Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .pt_plus_video_player .tp-video-icon-inner,{{WRAPPER}} .pt_plus_video_player .tp-video-popup,{{WRAPPER}} .pt_plus_video_player .tp-video-popup-icon' => 'max-width: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};max-height: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pt_plus_video_player .tp-video-only-icon-wrapper > i::before' => 'font-size: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_video_player .tp-video-only-icon-wrapper > i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .pt_plus_video_player .tp-video-only-icon-wrapper > svg' => 'fill: {{VALUE}};',
+				),
+				'condition' => array(
+					'image_banner'  => 'only_icon',
+					'only_icon_opt' => 'icon',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_video_player .tp-video-only-icon-wrapper > svg' => 'fill: {{VALUE}} !important; ',
+
+				),
+				'condition' => array(
+					'image_banner'         => 'only_icon',
+					'only_icon_opt'        => 'icon',
+					'select_icon[library]' => 'svg',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .pt_plus_video_player .tp-video-only-icon-wrapper > svg' => 'stroke: {{VALUE}} !important;',
+
+				),
+				'condition' => array(
+					'image_banner'         => 'only_icon',
+					'only_icon_opt'        => 'icon',
+					'select_icon[library]' => 'svg',
 				),
 			)
 		);
@@ -1039,12 +1274,12 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'mask_image_display',
 			array(
-				'label'       => esc_html__( 'Mask Image Shape', 'tpebl' ),
-				'type'        => Controls_Manager::SWITCHER,
+				'label'     => esc_html__( 'Mask Image Shape', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'default'     => 'no',
-				'separator'   => 'before',
+				'default'   => 'no',
+				'separator' => 'before',
 			)
 		);
 		$this->add_control(
@@ -1129,7 +1364,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			);
 			$this->end_controls_section();
 		}
-		
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
@@ -1220,8 +1455,8 @@ class ThePlus_Video_Player extends Widget_Base {
 		$image_video_url  = '';
 		$icon_align_video = '';
 
-		$vid_title = ! empty( $settings['video_title'] ) ? $settings['video_title'] : '';
-		$video_desc   = ! empty( $settings['video_desc'] ) ? $settings['video_desc'] : '';
+		$vid_title  = ! empty( $settings['video_title'] ) ? $settings['video_title'] : '';
+		$video_desc = ! empty( $settings['video_desc'] ) ? $settings['video_desc'] : '';
 
 		if ( ! empty( $vid_title ) ) {
 			$title = '<div class="ts-video-caption-text" >';
@@ -1238,16 +1473,34 @@ class ThePlus_Video_Player extends Widget_Base {
 
 			$title .= '</div>';
 		}
+
+		$only_icon_opt = ! empty( $settings['only_icon_opt'] ) ? $settings['only_icon_opt'] : 'image';
+
+		if ( 'icon' === $only_icon_opt ) {
+			$select_icon = ! empty( $settings['select_icon'] ) ? $settings['select_icon'] : 'fas fa-star';
+
+			$only_image .= '<div class="tp-video-only-icon-wrapper">';
+				ob_start();
+				\Elementor\Icons_Manager::render_icon( $select_icon, array( 'aria-hidden' => 'true' ) );
+				$only_image .= ob_get_contents();
+				ob_end_clean();
+			$only_image .= '</div>';
+
+			// $only_image .= '<div class="tp-video-only-icon-wrapper ' . esc_attr( $icon_effect ) . '">';
+		}
+
+		if ( 'image' === $only_icon_opt ) {
 			$img_url = ! empty( $settings['only_img'] ) ? $settings['only_img'] : '';
 
-		if ( ! empty( $img_url['url'] ) ) {
+			if ( ! empty( $img_url['url'] ) ) {
 
-			$only_img = $img_url['id'];
+				$only_img = $img_url['id'];
 
-			$img = wp_get_attachment_image_src( $only_img, $settings['only_img_thumbnail_size'] );
+				$img = wp_get_attachment_image_src( $only_img, $settings['only_img_thumbnail_size'] );
 
-			$only_img_icon = isset( $img[0] ) ? $img[0] : '';
-			$only_image   .= '<img class="ts-video-only-icon" src="' . esc_url( $only_img_icon ) . '" alt="' . esc_html__( 'play-icon', 'tpebl' ) . '" />';
+				$only_img_icon = isset( $img[0] ) ? $img[0] : '';
+				$only_image   .= '<img class="ts-video-only-icon" src="' . esc_url( $only_img_icon ) . '" alt="' . esc_html__( 'play-icon', 'tpebl' ) . '" />';
+			}
 		}
 
 		$img_video = ! empty( $settings['image_video']['url'] ) ? $settings['image_video']['url'] : '';
@@ -1282,7 +1535,7 @@ class ThePlus_Video_Player extends Widget_Base {
 
 				$banner_image = $img[0];
 			} else {
-				$banner_image = L_THEPLUS_URL . '/assets/images/tp-placeholder.jpg';
+				$banner_image = L_THEPLUS_URL . 'assets/images/tp-placeholder.jpg';
 			}
 
 			$banner_url .= '<img class="ts-video-image-zoom set-image" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="" /><div class="tp-video-popup-icon"> <div class="tp-video-icon ' . esc_attr( $icon_effect ) . '"><img class="ts-video-caption" src="' . esc_url( $image_video ) . '" alt="' . esc_attr( $image_alt ) . '" /></div></div>' . $title;
@@ -1471,7 +1724,7 @@ class ThePlus_Video_Player extends Widget_Base {
 					$video_space = '';
 				} elseif ( 'youtube' === $video_type ) {
 					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-6" ' . esc_attr( $mainsch ) . ' data-grow=""><div class="ts-video-embed-container" ><img class="ts-video-thumbnail" data-object-fit="" ' . esc_attr( $thumbsch ) . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="' . esc_attr__( 'Video Thumbnail', 'tpebl' ) . '"><h5 class="ts-video-title">' . $title . '</h5><span class="ts-video-lazyload" data-allowfullscreen="" data-class="pt-plus-video-frame fitvidsignore" data-frameborder="0" data-scrolling="no" data-src="https://www.youtube' . esc_attr( $youtube_privacy ) . '.com/embed/' . esc_attr( $youtube_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1' . esc_attr( $youtube_frame_attr ) . '"  data-sandbox="allow-scripts allow-same-origin allow-presentation allow-forms" data-width="480" data-height="270"></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
-					
+
 					if ( ! empty( $markupsch ) ) {
 						$video_content .= '<div class="tp-video-upload" itemprop="uploadDate" content="' . esc_attr( $uploadate ) . '" style="display: none;"></div><div class="tp-video-upload" itemprop="contentUrl" content="https://www.youtube' . esc_attr( $youtube_privacy ) . '.com/embed/' . esc_attr( $youtube_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1' . esc_attr( $youtube_frame_attr ) . '" style="display: none;"></div>';
 					}
@@ -1521,31 +1774,31 @@ class ThePlus_Video_Player extends Widget_Base {
 
 			$uid = uniqid( 'video_player' );
 
-			if ( defined( 'THEPLUS_VERSION' ) ) {
-				$PlusExtra_Class = '';
-				include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
-			}
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			$PlusExtra_Class = '';
+			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
+		}
 
 			$mask_image = '';
 
 			$mask_img = ! empty( $settings['mask_image_display'] ) ? $settings['mask_image_display'] : '';
 
-			if ( 'yes' === $mask_img ) {
-				$mask_image = ' creative-mask-media';
-			}
-			
+		if ( 'yes' === $mask_img ) {
+			$mask_image = ' creative-mask-media';
+		}
+
 			$sticky_video = ! empty( $settings['sticky_video'] ) ? $settings['sticky_video'] : '';
 
 			$stickyparam = '';
-			if( 'yes' === $sticky_video ) {
-				$sticky_video_pos = ! empty( $settings['sticky_video_pos'] ) ? $settings['sticky_video_pos'] : '';
+		if ( 'yes' === $sticky_video ) {
+			$sticky_video_pos = ! empty( $settings['sticky_video_pos'] ) ? $settings['sticky_video_pos'] : '';
 
-				$stickyattr  = array(
-					'sticky'     => esc_attr( $sticky_video ),
-					'sticky-pos' => esc_attr( $sticky_video_pos ),
-				);
-				$stickyparam = 'data-stickyparam= \'' . wp_json_encode( $stickyattr ) . '\' ';
-			}
+			$stickyattr  = array(
+				'sticky'     => esc_attr( $sticky_video ),
+				'sticky-pos' => esc_attr( $sticky_video_pos ),
+			);
+			$stickyparam = 'data-stickyparam= \'' . wp_json_encode( $stickyattr ) . '\' ';
+		}
 
 			$video_player  = '<div class="pt_plus_video-box-shadow ' . esc_attr( $uid ) . ' ' . esc_attr( $animated_class ) . '" ' . esc_attr( $mask_image ) . ' ' . $animation_attr . ' ' . $stickyparam . ' >';
 			$video_player .= '<div class="pt_plus_video_player ' . esc_attr( $video_touchable ) . ' ' . esc_attr( $video_space ) . ' text-' . esc_attr( $icon_align_video ) . '">';
@@ -1583,6 +1836,5 @@ class ThePlus_Video_Player extends Widget_Base {
 		} else {
 			echo $css_rules . $video_player;
 		}
-
 	}
 }

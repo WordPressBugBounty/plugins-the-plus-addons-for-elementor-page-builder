@@ -82,7 +82,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_categories() {
-		return array( 'plus-tabbed' );
+		return array( 'plus-creative' );
 	}
 
 	/**
@@ -92,7 +92,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Switcher', 'Elementor switcher', 'switcher', 'switcher addon', 'switcher plugin', 'switcher elementor addon', 'switcher', 'switcher plus addons', 'switcher plus addons for elementor', 'switcher the plus addons for elementor' );
+		return array( 'Switcher', 'Content Toggle', 'Dual Content' );
 	}
 
 	/**
@@ -113,7 +113,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 	 * @since 6.1.2
 	 */
 	// public function is_dynamic_content(): bool {
-	// 	return false;
+	// return false;
 	// }
 
 	/**
@@ -124,18 +124,18 @@ class L_ThePlus_Switcher extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -146,7 +146,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -163,13 +163,13 @@ class L_ThePlus_Switcher extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 17879,
-                'label_block' => true,
-            )
-        );
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 17879,
+				'label_block' => true,
+			)
+		);
 		$this->add_control(
 			'switch_a_title',
 			array(
@@ -224,14 +224,49 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'content_a_template',
 			array(
-				'label'       => wp_kses_post( "Elementor Templates <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "pricing-table-in-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Elementor Templates', 'tpebl' ),
+						esc_url( $this->tp_doc . 'pricing-table-in-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '0',
 				'options'     => L_theplus_get_templates(),
+				'classes'     => 'tp-template-create-btn',
 				'label_block' => 'true',
 				'condition'   => array(
 					'content_a_source'      => 'template',
 					'content_template_type' => 'dropdown',
+				),
+			)
+		);
+		$this->add_control(
+			'liveeditor',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'content_classes' => 'tp-live-editor-btn',
+				'label_block'     => true,
+				'condition'       => array(
+					'content_a_source'      => 'template',
+					'content_template_type' => 'dropdown',
+					'content_a_template!'   => '0',
+				),
+			)
+		);
+		$this->add_control(
+			'create',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'content_classes' => 'tp-live-create-btn',
+				'label_block'     => true,
+				'condition'       => array(
+					'content_a_source'      => 'template',
+					'content_template_type' => 'dropdown',
+					'content_a_template'    => '0',
 				),
 			)
 		);
@@ -262,7 +297,13 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'con1_hashid',
 			array(
-				'label'       => wp_kses_post( "Unique ID<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "anchor-link-to-elementor-switcher-template/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'       => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Unique ID', 'tpebl' ),
+						esc_url( $this->tp_doc . 'anchor-link-to-elementor-switcher-template/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
 				'default'     => '',
@@ -277,8 +318,8 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'con1_hashid_note',
 			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
 				'content_classes' => 'tp-controller-notice',
 			)
 		);
@@ -350,10 +391,39 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '0',
 				'options'     => L_theplus_get_templates(),
+				'classes'     => 'tp-template-create-btn',
 				'label_block' => 'true',
 				'condition'   => array(
 					'content_b_source'        => 'template',
 					'content_b_template_type' => 'dropdown',
+				),
+			)
+		);
+		$this->add_control(
+			'liveeditor1',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'content_classes' => 'tp-live-editor-btn',
+				'label_block'     => true,
+				'condition'       => array(
+					'content_b_source'        => 'template',
+					'content_b_template_type' => 'dropdown',
+					'content_b_template!'     => '0',
+				),
+			)
+		);
+		$this->add_control(
+			'create1',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'content_classes' => 'tp-live-create-btn',
+				'label_block'     => true,
+				'condition'       => array(
+					'content_b_source'        => 'template',
+					'content_b_template_type' => 'dropdown',
+					'content_b_template'      => '0',
 				),
 			)
 		);
@@ -399,8 +469,8 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'con2_hashid_note',
 			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
 				'content_classes' => 'tp-controller-notice',
 			)
 		);
@@ -416,19 +486,25 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'switcher_unique_id',
 			array(
-				'label'       => wp_kses_post( "Unique Switcher ID <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "connect-carousel-remote-with-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
-				'type'        => Controls_Manager::TEXT,
-				'ai'          => false,
-				'default'     => '',
+				'label'   => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Unique Switcher ID', 'tpebl' ),
+						esc_url( $this->tp_doc . 'connect-carousel-remote-with-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
+				'type'    => Controls_Manager::TEXT,
+				'ai'      => false,
+				'default' => '',
 			)
 		);
 		$this->add_control(
 			'switcher_unique_id_note',
 			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw' => '<b>Note:</b> Keep this blank or Setup Unique id for switcher which you can use with "Carousel Remote" widget.',
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => '<b>Note:</b> Keep this blank or Setup Unique id for switcher which you can use with "Carousel Remote" widget.',
 				'content_classes' => 'tp-controller-notice',
-				'separator'   => 'after',
+				'separator'       => 'after',
 			)
 		);
 		$this->add_control(
@@ -470,11 +546,9 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'layout_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'switcher_style' => array( 'style-3', 'style-4' ),
 				),
@@ -498,7 +572,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Content 1', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai'        => false,  
+				'ai'        => false,
 				'default'   => esc_html__( 'Switch A', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -512,7 +586,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Content 2', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
-				'ai'        => false, 
+				'ai'        => false,
 				'default'   => esc_html__( 'Switch B', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
@@ -744,16 +818,16 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'normal_switcher_head',
 			array(
-				'label'     => esc_html__( 'Switcher Border', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
+				'label' => esc_html__( 'Switcher Border', 'tpebl' ),
+				'type'  => Controls_Manager::HEADING,
 			)
 		);
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			array(
-				'name'      => 'normal_switcher_border',
-				'label'     => esc_html__( 'Switcher Border', 'tpebl' ),
-				'selector'  => '{{WRAPPER}} .switcher-toggle.inactive .switch-slider',
+				'name'     => 'normal_switcher_border',
+				'label'    => esc_html__( 'Switcher Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .switcher-toggle.inactive .switch-slider',
 			)
 		);
 		$this->end_controls_tab();
@@ -797,7 +871,9 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .switch-toggle + .switch-slider,{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-1,{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-2 .switch-label-text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .switch-toggle + .switch-slider,
+					{{WRAPPER}} .theplus-switcher .switcher-toggle.inactive .switch-label-1,
+					{{WRAPPER}} .theplus-switcher .switcher-toggle.active .switch-label-2' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -839,16 +915,16 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'active_switcher_head',
 			array(
-				'label'     => esc_html__( 'Active Switcher Border', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
+				'label' => esc_html__( 'Active Switcher Border', 'tpebl' ),
+				'type'  => Controls_Manager::HEADING,
 			)
 		);
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			array(
-				'name'      => 'active_switcher_border',
-				'label'     => esc_html__( 'Switcher Border', 'tpebl' ),
-				'selector'  => '{{WRAPPER}} .switcher-toggle.active .switch-slider',
+				'name'     => 'active_switcher_border',
+				'label'    => esc_html__( 'Switcher Border', 'tpebl' ),
+				'selector' => '{{WRAPPER}} .switcher-toggle.active .switch-slider',
 			)
 		);
 		$this->end_controls_tab();
@@ -1639,11 +1715,9 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'animation_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -1767,7 +1841,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			if ( 'template' === $content_a_source && 'manually' === $content_template_type ) {
 				$template_status = $this->get_elementor_template_status( $content_template_id );
 
-				if( 'publish' === $template_status ) {
+				if ( 'publish' === $template_status ) {
 					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ) );
 				} else {
 					$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
@@ -1783,12 +1857,12 @@ class L_ThePlus_Switcher extends Widget_Base {
 				} else {
 
 					if ( has_filter( 'wpml_object_id' ) ) {
-						$content_a_template = apply_filters( 'wpml_object_id', $content_a_template, get_post_type( $content_a_template ), true);
+						$content_a_template = apply_filters( 'wpml_object_id', $content_a_template, get_post_type( $content_a_template ), true );
 					}
 
 					$template_a_status = get_post_status( $content_a_template );
 
-					if( 'publish' === $template_a_status ) {
+					if ( 'publish' === $template_a_status ) {
 						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_a_template );
 					} else {
 						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
@@ -1804,38 +1878,38 @@ class L_ThePlus_Switcher extends Widget_Base {
 				$switcher .= '<div class="content-2">' . wp_kses_post( $content_b_desc ) . '</div>';
 			}
 
-				if ( 'template' === $content_b_source && 'manually' === $content_b_template_type && ! empty( $content_b_template_id ) ) {
-					
-					$template_b_status = get_post_status( $content_b_template_id );
+			if ( 'template' === $content_b_source && 'manually' === $content_b_template_type && ! empty( $content_b_template_id ) ) {
 
-					if( 'publish' === $template_b_status ) {
-						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_b_template_id, 24, -2 ) );
-					} else {
-						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
-					}
-				} elseif ( 'template' === $content_b_source ) {
+				$template_b_status = get_post_status( $content_b_template_id );
 
-					if ( empty( $content_b_template ) || '0' === $content_b_template ) {
+				if ( 'publish' === $template_b_status ) {
+					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_b_template_id, 24, -2 ) );
+				} else {
+					$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
+				}
+			} elseif ( 'template' === $content_b_source ) {
 
-						$switcher .= '<div class="tab-preview-template-notice">
+				if ( empty( $content_b_template ) || '0' === $content_b_template ) {
+
+					$switcher .= '<div class="tab-preview-template-notice">
 									<div class="preview-temp-notice-heading">' . esc_html__( 'Select B Template', 'tpebl' ) . '</div>
 									<div class="preview-temp-notice-desc">' . esc_html__( 'Please select a template to display its content.', 'tpebl' ) . '</div>
 								</div>';
+				} else {
+
+					if ( has_filter( 'wpml_object_id' ) ) {
+						$content_b_template = apply_filters( 'wpml_object_id', $content_b_template, get_post_type( $content_b_template ), true );
+					}
+
+					$template_b_status = get_post_status( $content_b_template );
+
+					if ( 'publish' === $template_b_status ) {
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
 					} else {
-
-						if ( has_filter( 'wpml_object_id' ) ) {
-							$content_b_template = apply_filters( 'wpml_object_id', $content_b_template, get_post_type( $content_b_template ), true);
-						}
-
-						$template_b_status = get_post_status( $content_b_template );
-
-						if( 'publish' === $template_b_status ) {
-							$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
-						} else {
-							$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
-						}
+						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}
 				}
+			}
 
 				$switcher .= '</div>';
 
@@ -1867,7 +1941,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				$css_rule .= '</style>';
 			}
 		}
-		echo $css_rule .  $switcher ;
+		echo $css_rule . $switcher;
 	}
 
 	/**
@@ -1879,10 +1953,10 @@ class L_ThePlus_Switcher extends Widget_Base {
 		// Match the ID from the shortcode using regex
 		if ( preg_match( '/id="(\d+)"/', $shortcode, $matches ) ) {
 			$content_template_id = intval( $matches[1] ); // Extract and sanitize the ID
-	
+
 			// Call get_post_status function
 			$template_status = get_post_status( $content_template_id );
-	
+
 			return $template_status;
 		}
 

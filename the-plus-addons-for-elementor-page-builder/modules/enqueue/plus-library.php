@@ -117,11 +117,16 @@ class L_Plus_Library {
 			$merge[] = 'tp-draw-svg';
 		}
 
+		if ( in_array( 'tp-adv-text-block', $elements ) ) {
+			$merge[] = 'tp-text-block-animation';
+		}
+
 		if ( in_array( 'tp-blog-listout', $elements ) ) {
 			$merge[] = 'plus-listing-masonry';
 			$merge[] = 'plus-listing-metro';
 			$merge[] = 'tp-blog-listout';
 			$merge[] = 'tp-bloglistout-style-1';
+			$merge[] = 'tp-bloglistout-style-5';
 		}
 
 		if ( in_array( 'tp-breadcrumbs-bar', $elements ) ) {
@@ -244,6 +249,7 @@ class L_Plus_Library {
 			$merge[] = 'tp-heading-title-style_9';
 			$merge[] = 'tp-heading-title-style_10';
 			$merge[] = 'tp-heading-title-style_11';
+			$merge[] = 'tp-gsap-heading-animation';
 		}
 
 		if ( in_array( 'tp-progress-bar', $elements ) ) {

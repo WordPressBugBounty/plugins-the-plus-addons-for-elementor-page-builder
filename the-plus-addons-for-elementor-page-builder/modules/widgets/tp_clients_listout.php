@@ -87,7 +87,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'client', 'listing' );
+		return array( 'Client Listing', 'Logo Listing', 'Logo Showcase', 'Logo Carousel', 'Logo Grid', 'Logo Masonry', 'Logo Filter', 'Load More Logos', 'Logo Pagination' );
 	}
 
 	/**
@@ -154,10 +154,19 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			array(
-				'label' => esc_html__( 'Content Layout', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
+		$this->add_control(
+			'tpae_preset_controller',
+			array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 17761,
+				'label_block' => true,
+			)
+		);
+		/*
 		$this->add_control(
 			'style',
 			array(
@@ -166,24 +175,53 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 				'default' => 'style-1',
 				'options' => l_theplus_get_style_list( 1 ),
 			)
-		);
+		); */
 		$this->add_control(
 			'layout',
 			array(
-				'label'   => esc_html__( 'Layout', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'grid',
-				'options' => array(
-					'grid'     => esc_html__( 'Grid', 'tpebl' ),
-					'masonry'  => esc_html__( 'Masonry', 'tpebl' ),
-					'carousel' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+				'label'       => esc_html__( 'Layout', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'grid',
+				'options'     => array(
+					'grid'     => array(
+						'title' => esc_html__( 'Grid', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/grid.svg' ),
+					),
+					'masonry'  => array(
+						'title' => esc_html__( 'Masonry', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/masonry.svg' ),
+					),
+					'carousel' => array(
+						'title' => esc_html__( 'Carousel (PRO)', 'tpebl' ),
+						'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/widget-style/listing-layout/carousel-pro.svg' ),
+					),
+				),
+				'columns'     => 3,
+				'classes'     => 'tpae-visual_choice',
+			)
+		);
+		$this->add_control(
+			'plus_pro_layout_options',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'default'     => '',
+				'condition'   => array(
+					'layout' => array( 'carousel' ),
 				),
 			)
 		);
 		$this->add_control(
 			'how_it_works_grid',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "show-elementor-client-logos-in-grid-layout/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'show-elementor-client-logos-in-grid-layout/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => array( 'grid' ),
@@ -193,7 +231,13 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'how_it_works_masonry',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-logo-showcase-in-masonry-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'add-logo-showcase-in-masonry-grid-layout-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'layout' => array( 'masonry' ),
@@ -244,9 +288,28 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'clientContentFrom_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose where your client data comes from. Either manually or through a specific post type.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'how_works_Post_Type',
 			array(
-				'label'     => wp_kses_post( "<a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "add-logo-showcase-from-dynamic-custom-post-type-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> Learn How it works  <i class='eicon-help-o'></i> </a>" ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'add-logo-showcase-from-dynamic-custom-post-type-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn How it works', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
 					'clientContentFrom' => 'clcontent',
@@ -259,6 +322,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 			array(
 				'label'       => esc_html__( 'Client Name', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
 				'dynamic'     => array( 'active' => true ),
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter Client Name', 'tpebl' ),
@@ -280,6 +344,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Client Logo', 'tpebl' ),
 				'type'    => Controls_Manager::MEDIA,
+				'ai'      => false,
 				'dynamic' => array( 'active' => true ),
 			)
 		);
@@ -298,19 +363,6 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 				'title_field' => '{{{ clientLinkMaskLabel }}}',
 				'condition'   => array(
 					'clientContentFrom' => 'clrepeater',
-				),
-			)
-		);
-		$this->add_control(
-			'plus_pro_layout_options',
-			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
-				'condition'   => array(
-					'layout' => array( 'carousel' ),
 				),
 			)
 		);
@@ -334,7 +386,6 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 				'label_block' => true,
 				'multiple'    => true,
 				'options'     => $this->tpae_get_categories(),
-				'separator'   => 'before',
 			)
 		);
 		$this->add_control(
@@ -364,7 +415,12 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 			'post_Note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Hide posts from the beginning of listing.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Hide posts from the beginning of listing.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 			)
 		);
@@ -487,12 +543,31 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'display_post_title_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Toggle this on to show each client’s name below their logo for better identification.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'disable_link',
 			array(
-				'label'     => esc_html__( 'Disable Link', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Disable Link', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -500,11 +575,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'disable_link_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'disable_link' => array( 'yes' ),
 				),
@@ -513,7 +586,13 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_thumbnail',
 			array(
-				'label'     => esc_html__( 'Display Image Size', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Display Image Size', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -524,11 +603,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_thumbnail_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'display_thumbnail' => array( 'yes' ),
 				),
@@ -537,7 +614,13 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'filter_category',
 			array(
-				'label'     => esc_html__( 'Category Wise Filter', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Category Wise Filter', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
@@ -551,11 +634,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'filter_category_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'filter_category' => array( 'yes' ),
 				),
@@ -564,7 +645,13 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_extra_option',
 			array(
-				'label'     => esc_html__( 'More Post Loading Options (Pro)', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'More Post Loading Options', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
+					)
+				),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'none',
 				'options'   => array(
@@ -573,7 +660,6 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 					'load_more'  => esc_html__( 'Load More', 'tpebl' ),
 					'lazy_load'  => esc_html__( 'Lazy Load', 'tpebl' ),
 				),
-				'separator' => 'before',
 				'condition' => array(
 					'layout!'            => array( 'carousel' ),
 					'clientContentFrom!' => 'clrepeater',
@@ -583,11 +669,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_extra_option_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'layout!'            => array( 'carousel' ),
 					'clientContentFrom!' => 'clrepeater',
@@ -695,11 +779,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_filter_category_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -729,11 +811,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'plus_pro_layout_style_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'layout_style' => array( 'layout-style-1' ),
 				),
@@ -774,14 +854,14 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'section_box_loop_styling',
 			array(
-				'label' => esc_html__( 'Individual Client Background', 'tpebl' ),
+				'label' => esc_html__( 'Client Background', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
 		$this->add_responsive_control(
 			'content_inner_padding',
 			array(
-				'label'      => esc_html__( 'Inner Padding', 'tpebl' ),
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -953,7 +1033,14 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->start_controls_section(
 			'section_carousel_options_styling',
 			array(
-				'label'     => esc_html__( 'Carousel Options', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="%s" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Carousel Options', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_attr__( 'PRO', 'tpebl' )
+					)
+				),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'layout' => 'carousel',
@@ -963,11 +1050,9 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'section_carousel_options_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 			)
 		);
 		$this->end_controls_section();
@@ -982,21 +1067,26 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'messy_column',
 			array(
-				'label'     => esc_html__( 'Messy Columns', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <img class="pro-badge-img" src="%s" alt="%s" style="width:32px; vertical-align:middle;" />',
+						esc_html__( 'Messy Columns', 'tpebl' ),
+						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' ),
+						esc_attr__( 'PRO', 'tpebl' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'messy_column_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
 				'condition'   => array(
 					'messy_column' => array( 'yes' ),
 				),

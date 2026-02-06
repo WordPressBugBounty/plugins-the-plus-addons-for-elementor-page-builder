@@ -84,7 +84,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( '' );
+		return array( 'Number Counter', 'Animated Counter', 'Milestone Counter', 'Counter Widget', 'Number Animation', 'Statistics Counter', 'Counter Animation', 'Count-Up Widget', 'KPI Counter', 'Live Counter' );
 	}
 
 	public function get_custom_help_url() {
@@ -110,18 +110,18 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -132,7 +132,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -149,21 +149,21 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			)
 		);
 		$this->add_control(
-            'tpae_preset_controller',
-            array(
-                'type'        => 'tpae_preset_button',
-                'temp_id'     => 12570,
-                'label_block' => true,
-            )
-        );
-		$this->add_control(
-		'style',
+			'tpae_preset_controller',
 			array(
-				'label'        => esc_html__( 'Style', 'tpebl' ),
-				'label_block'  => true,
-				'type'         => Controls_Manager::VISUAL_CHOICE,
-				'default'      => 'style-1',
-				'options'      => array(
+				'type'        => 'tpae_preset_button',
+				'temp_id'     => 12570,
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'style',
+			array(
+				'label'       => esc_html__( 'Style', 'tpebl' ),
+				'label_block' => true,
+				'type'        => Controls_Manager::VISUAL_CHOICE,
+				'default'     => 'style-1',
+				'options'     => array(
 					'style-1' => array(
 						'title' => esc_html__( 'Style 1', 'tpebl' ),
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/number-counter/style-1.svg' ),
@@ -173,8 +173,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 						'image' => esc_url( L_THEPLUS_URL . 'assets/images/widget-style/number-counter/style-2.svg' ),
 					),
 				),
-				'columns'  => 2,
-				'classes'  => 'tpae-visual_choice',
+				'columns'     => 2,
+				'classes'     => 'tpae-visual_choice',
 			)
 		);
 		$this->add_control(
@@ -182,7 +182,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'   => esc_html__( 'Title', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
-				'ai' => false,
+				'ai'      => false,
 				'default' => esc_html__( 'Title', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
 			)
@@ -251,7 +251,13 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'max_number',
 			array(
-				'label'   => wp_kses_post( "Number Value <a class='tp-docs-link' href='" . esc_url( $this->tp_doc ) . "animated-number-counter-for-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' target='_blank' rel='noopener noreferrer'> <i class='eicon-help-o'></i> </a>" ),
+				'label'   => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Number Value', 'tpebl' ),
+						esc_url( $this->tp_doc . 'animated-number-counter-for-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'    => Controls_Manager::NUMBER,
 				'default' => esc_html__( '1000', 'tpebl' ),
 				'dynamic' => array( 'active' => true ),
@@ -339,9 +345,9 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'symbol',
 			array(
-				'label'     => esc_html__( 'Symbol', 'tpebl' ),
-				'type'      => Controls_Manager::TEXT,
-				'ai' => false,
+				'label' => esc_html__( 'Symbol', 'tpebl' ),
+				'type'  => Controls_Manager::TEXT,
+				'ai'    => false,
 			)
 		);
 		$this->add_control(
@@ -409,9 +415,9 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'font_awesome',
 				'options'   => array(
-					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
+					'font_awesome'   => esc_html__( 'Font Awesome', 'tpebl' ),
 					'font_awesome_5' => esc_html__( 'Font Awesome 5', 'tpebl' ),
-					'icon_mind'    => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
+					'icon_mind'      => esc_html__( 'Icons Mind (Pro)', 'tpebl' ),
 				),
 				'condition' => array(
 					'icon_type' => 'icon',
@@ -421,15 +427,15 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'font_awesome_toggle',
 			array(
-				'label' => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type' => Controls_Manager::POPOVER_TOGGLE,
-				'label_off' => esc_html__( 'Default', 'tpebl' ),
-				'label_on' => esc_html__( 'Custom', 'tpebl' ),
+				'label'        => esc_html__( 'Font Awesome', 'tpebl' ),
+				'type'         => Controls_Manager::POPOVER_TOGGLE,
+				'label_off'    => esc_html__( 'Default', 'tpebl' ),
+				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
-				'default' => 'yes',
-				'condition' => array(
+				'default'      => 'yes',
+				'condition'    => array(
 					'icon_type'       => 'icon',
-					'icon_font_style' => array('font_awesome','font_awesome_5'),
+					'icon_font_style' => array( 'font_awesome', 'font_awesome_5' ),
 				),
 			)
 		);
@@ -473,11 +479,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'icons_mind_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'icon_type'       => 'icon',
 					'icon_font_style' => 'icon_mind',
@@ -487,11 +490,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'svg_pro_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 				'condition'   => array(
 					'icon_type' => 'svg',
 				),
@@ -502,7 +502,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Choose Image', 'tpebl' ),
 				'type'      => Controls_Manager::MEDIA,
-				'ai' => false,
+				'ai'        => false,
 				'default'   => array(
 					'url' => Utils::get_placeholder_image_src(),
 				),
@@ -575,11 +575,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'section_svg_styling_options',
 			array(
-				'label'       => esc_html__( 'Unlock more possibilities', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => '',
-				'description' => theplus_pro_ver_notice(),
-				'classes'     => 'plus-pro-version',
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -694,7 +691,6 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'condition' => array(
 					'icon_color_option' => 'solid',
 				),
-				'separator' => 'after',
 			)
 		);
 		$this->add_control(
@@ -811,6 +807,34 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'   => 'gradient',
 				'separator' => 'after',
 
+			)
+		);
+		$this->add_control(
+			'icon_fill_color',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .counter-icon svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .counter-icon svg'      => 'fill: {{VALUE}} !important;',
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .counter-icon svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .counter-icon svg'      => 'stroke: {{VALUE}} !important;',
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -1015,6 +1039,34 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				),
 				'of_type'   => 'gradient',
 				'separator' => 'after',
+			)
+		);
+		$this->add_control(
+			'icon_fill_color_hover',
+			array(
+				'label'     => esc_html__( 'Fill', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .counter-icon:hover svg path' => 'fill: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .counter-icon:hover svg' => 'fill: {{VALUE}} !important;',
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
+			)
+		);
+		$this->add_control(
+			'icon_stroke_color_hover',
+			array(
+				'label'     => esc_html__( 'Stroke', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .counter-icon:hover svg path' => 'stroke: {{VALUE}} !important;; ',
+					'{{WRAPPER}} .counter-icon:hover svg' => 'stroke: {{VALUE}} !important;',
+				),
+				'condition' => array(
+					'icon_font_style' => 'font_awesome_5',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -1666,9 +1718,9 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'separator'   => 'before',
 				'label_block' => false,
 				'default'     => 'color',
-				'condition' => array(
-                    'digit_gradient_color' => 'color',
-                ),
+				'condition'   => array(
+					'digit_gradient_color' => 'color',
+				),
 			)
 		);
 		$this->add_control(
@@ -1683,7 +1735,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'   => 'gradient',
 				'condition' => array(
 					'symbol_gradient_color' => 'gradient',
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 			)
 		);
@@ -1701,7 +1753,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'     => 'gradient',
 				'condition'   => array(
 					'symbol_gradient_color' => 'gradient',
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 			)
 		);
@@ -1717,7 +1769,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'   => 'gradient',
 				'condition' => array(
 					'symbol_gradient_color' => 'gradient',
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 			)
 		);
@@ -1735,7 +1787,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'     => 'gradient',
 				'condition'   => array(
 					'symbol_gradient_color' => 'gradient',
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 			)
 		);
@@ -1748,7 +1800,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'options'   => l_theplus_get_gradient_styles(),
 				'condition' => array(
 					'symbol_gradient_color' => 'gradient',
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -1775,7 +1827,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'condition'  => array(
 					'symbol_gradient_color' => 'gradient',
 					'symbol_gradient_style' => array( 'linear' ),
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 			)
 		);
@@ -1792,7 +1844,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'condition' => array(
 					'symbol_gradient_color' => 'gradient',
 					'symbol_gradient_style' => array( 'radial' ),
-                    'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -1806,7 +1858,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-number .number-counter-symbol' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'digit_gradient_color' => 'color',
+					'digit_gradient_color'  => 'color',
 					'symbol_gradient_color' => 'color',
 				),
 			)
@@ -1981,9 +2033,9 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'separator'   => 'before',
 				'label_block' => false,
 				'default'     => 'color',
-				'condition' => array(
-                    'gradient_hover_color_option' => 'color',
-                ),
+				'condition'   => array(
+					'gradient_hover_color_option' => 'color',
+				),
 			)
 		);
 		$this->add_control(
@@ -1995,7 +2047,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'   => 'gradient',
 				'condition' => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
@@ -2013,7 +2065,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'     => 'gradient',
 				'condition'   => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
@@ -2026,7 +2078,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'   => 'gradient',
 				'condition' => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
@@ -2044,7 +2096,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'     => 'gradient',
 				'condition'   => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
@@ -2058,7 +2110,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'of_type'   => 'gradient',
 				'condition' => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
@@ -2084,7 +2136,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'condition'  => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
 					'symbol_hover_gradient_style'        => array( 'linear' ),
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
@@ -2102,24 +2154,24 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'condition' => array(
 					'symbol_hover_gradient_color_option' => 'gradient',
 					'symbol_hover_gradient_style'        => 'radial',
-                    'gradient_hover_color_option' => 'color',
+					'gradient_hover_color_option'        => 'color',
 				),
 			)
 		);
 		$this->add_control(
-            'symbol_hover_color',
-            array(
-                'label'     => esc_html__( 'Symbol Color', 'tpebl' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => array(
-                    '{{WRAPPER}} .plus-number-counter .number-counter-inner-block:hover .counter-number .number-counter-symbol' => 'color: {{VALUE}}',
-                ),
-                'condition' => array(
-                    'gradient_hover_color_option' => 'color',
-                    'symbol_hover_gradient_color_option' => 'color',
-                ),
-            )
-        );
+			'symbol_hover_color',
+			array(
+				'label'     => esc_html__( 'Symbol Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block:hover .counter-number .number-counter-symbol' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'gradient_hover_color_option'        => 'color',
+					'symbol_hover_gradient_color_option' => 'color',
+				),
+			)
+		);
 		$this->end_controls_tabs();
 		$this->add_responsive_control(
 			'number_top_space',
@@ -2399,6 +2451,16 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'separator' => 'before',
 			)
 		);
+		$this->add_control(
+			'box_hover_effects_pro',
+			array(
+				'type'        => 'tpae_pro_feature',
+				'label_block' => true,
+				'condition'   => array(
+					'box_hover_effects' => array( 'grow', 'bounce-in', 'float', 'wobble_horizontal', 'wobble_vertical', 'float_shadow', 'grow_shadow', 'shadow_radial' ),
+				),
+			)
+		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -2443,6 +2505,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'animation_effects!' => 'no-animation',
@@ -2511,6 +2575,8 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
 					'animation_effects!'     => 'no-animation',
@@ -2583,9 +2649,9 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$icon_style = ! empty( $settings['icon_style'] ) ? $settings['icon_style'] : '';
 		$num_title  = ! empty( $settings['title'] ) ? $settings['title'] : '';
 
-		$icon_fontawesome = ! empty( $settings['icon_fontawesome'] ) ? $settings['icon_fontawesome'] : 'fa fa-download';
+		$icon_fontawesome   = ! empty( $settings['icon_fontawesome'] ) ? $settings['icon_fontawesome'] : 'fa fa-download';
 		$icon_fontawesome_5 = ! empty( $settings['icon_fontawesome_5'] ) ? $settings['icon_fontawesome_5'] : '';
-		$align_center     = ! empty( $settings['vertical_center'] ) ? $settings['vertical_center'] : '';
+		$align_center       = ! empty( $settings['vertical_center'] ) ? $settings['vertical_center'] : '';
 
 		if ( 'no-animation' === $animation_effects ) {
 			$animated_class = '';

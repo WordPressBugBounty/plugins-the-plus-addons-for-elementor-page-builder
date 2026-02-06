@@ -80,7 +80,7 @@ class ThePlus_Everest_form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Everest Forms', 'contact form', 'form builder', 'form plugin', 'form creator', 'form designer', 'form element', 'form widget', 'form generator', 'form maker', 'form editor', 'form module', 'form addon', 'form extension' );
+		return array( 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -116,18 +116,18 @@ class ThePlus_Everest_form extends Widget_Base {
 	public function get_upsale_data() {
 		$val = false;
 
-		if( ! defined( 'THEPLUS_VERSION' ) ) {
+		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			$val = true;
 		}
 
-		return [
-			'condition' => $val,
-			'image' => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt' => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title' => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url' => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
+		return array(
+			'condition'    => $val,
+			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
+			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
+			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
+			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
 			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		];
+		);
 	}
 
 	/**
@@ -138,7 +138,7 @@ class ThePlus_Everest_form extends Widget_Base {
 	public function has_widget_inner_wrapper(): bool {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
-	
+
 	/**
 	 * Register controls.
 	 *
@@ -161,6 +161,19 @@ class ThePlus_Everest_form extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => $this->l_theplus_get_everest_form_post(),
+			)
+		);
+		$this->add_control(
+			'everest_form_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Create an Everest Form first, then you’ll be able to select and display it here.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -190,6 +203,7 @@ class ThePlus_Everest_form extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_s_label',
 			array(
@@ -1975,7 +1989,6 @@ class ThePlus_Everest_form extends Widget_Base {
 		} else {
 			echo $output;
 		}
-
 	}
 
 	/**
@@ -2015,7 +2028,7 @@ class ThePlus_Everest_form extends Widget_Base {
 		$EverestForm = array();
 
 		$ev_form = get_posts( 'post_type="everest_form"&numberposts=-1' );
-		
+
 		if ( ! empty( $ev_form ) ) {
 			$EverestForm['none'] = esc_html__( 'No Forms Selected', 'tpebl' );
 
@@ -2030,7 +2043,7 @@ class ThePlus_Everest_form extends Widget_Base {
 		} else {
 			$EverestForm['none'] = esc_html__( 'No everest forms found', 'tpebl' );
 		}
-		
+
 		return $EverestForm;
 	}
 }
