@@ -144,25 +144,58 @@ function l_theplus_loading_bg_image( $postid = '' ) {
  * @since 6.0.4
  */
 function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
-	// you may change these values to your own
-	$tppk      = get_option( 'theplus_purchase_code' );
-	$generated = ! empty( get_option( 'tp_key_random_generate' ) ) ? get_option( 'tp_key_random_generate' ) : 'PO$_key';
+	
+	$option_name_key = 'tp_key_random_generate';
+    $secret_key = get_option( $option_name_key );
+	
+	if ( empty( $secret_key ) ) {
+        $secret_key = wp_generate_password( 32, true, true );
+        add_option( $option_name_key, $secret_key, '', 'no' );
+    }
 
-	$secret_key = ( isset( $tppk['tp_api_key'] ) && ! empty( $tppk['tp_api_key'] ) ) ? $tppk['tp_api_key'] : $generated;
-	$secret_iv  = 'PO$_iv';
+	$key = hash( 'sha256', $secret_key, true );
+    $cipher = 'aes-256-gcm';
 
-	$output         = false;
-	$encrypt_method = 'AES-128-CBC';
-	$key            = hash( 'sha256', $secret_key );
-	$iv             = substr( hash( 'sha256', $secret_iv ), 0, 16 );
+	if ( $action === 'ey' ) {
+        $iv = random_bytes(12); 
+        $tag = '';
 
-	if ( $action == 'ey' ) {
-		$output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-	} elseif ( $action == 'dy' ) {
-		$output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+        $ciphertext = openssl_encrypt( $string, $cipher, $key, OPENSSL_RAW_DATA, $iv, $tag);
+
+        if ( false === $ciphertext ) {
+            return false;
+        }
+
+        $encoded = base64_encode( $iv . $tag . $ciphertext );
+		$encoded = str_replace( ['+', '/', '='], ['-', '_', ''], $encoded );
+		return $encoded;
+    } elseif ( $action === 'dy' ) {
+
+		$string = str_replace( ['-', '_'], ['+', '/'], $string );
+
+		$padding = strlen($string) % 4;
+		if ($padding) {
+			$string .= str_repeat('=', 4 - $padding);
+		}
+
+        $decoded = base64_decode( $string, true );
+		
+        if ( false === $decoded || strlen($decoded) < 28 ) {
+			return false;
+		}
+
+        $iv  = substr( $decoded, 0, 12 );
+        $tag = substr( $decoded, 12, 16 );
+        $ciphertext = substr( $decoded, 28 );
+
+		if ( empty( $iv ) || empty( $tag ) || empty( $ciphertext ) ) {
+            return false;
+        }
+
+        return openssl_decrypt( $ciphertext, $cipher, $key, OPENSSL_RAW_DATA, $iv, $tag );
 	}
 
-	return $output;
+	return false;
 }
 
 /**
