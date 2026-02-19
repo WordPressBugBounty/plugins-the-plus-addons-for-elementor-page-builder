@@ -105,7 +105,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Carousel Anything', 'Template Carousel', 'Vertical Carousel', 'Infinite Loop Slider', 'Multi-Column Carousel', 'Autoplay Carousel', 'Draggable Slider', 'Horizontal Carousel', 'Slider', 'Autoplay Slideshow', 'Slideshow', 'Mousewheel Slider' );
+		return array( 'Tp Carousel Anything', 'Template Carousel', 'Vertical Carousel', 'Infinite Loop Slider', 'Multi-Column Carousel', 'Autoplay Carousel', 'Draggable Slider', 'Horizontal Carousel', 'Slider', 'Autoplay Slideshow', 'Slideshow', 'Mousewheel Slider' );
 	}
 
 	/**
@@ -307,6 +307,12 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Turn this on to shuffle your slides automatically every time the page loads. It helps keep your carousel content fresh and engaging for returning visitors.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -470,12 +476,17 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'slide_fade_inout_notice',
+			'fadeinout_note',
 			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : Just for single column layout.',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Just for single column layout.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
 					'slider_direction' => 'horizontal',
 					'slide_fade_inout' => 'fadeinout',
 				),
@@ -634,6 +645,14 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Enable endless looping of slides.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'carousel-infinite-loop-scroll-in-elementor-slider/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -660,6 +679,12 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Pause autoplay when users hover over the carousel.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(

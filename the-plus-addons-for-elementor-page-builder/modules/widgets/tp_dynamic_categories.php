@@ -86,7 +86,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Dynamic Categories', 'Category Listing', 'Taxonomy Listing', 'Taxonomy Grid', 'Category Carousel', 'Taxonomy Carousel', 'Category Masonry Layout', 'Category Metro Layout' );
+		return array( 'Tp Dynamic Categories', 'Category Listing', 'Taxonomy Listing', 'Taxonomy Grid', 'Category Carousel', 'Taxonomy Carousel', 'Category Masonry Layout', 'Category Metro Layout' );
 	}
 
 	/**
@@ -388,14 +388,12 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'max'     => 50,
 				'step'    => 1,
 				'default' => '',
-			)
-		);
-		$this->add_control(
-			'post_offset_Note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Hide categories from the beginning of listing.',
-				'content_classes' => 'tp-controller-notice',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Hide categories from the beginning of listing.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -2405,14 +2403,12 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
 				'label_off' => esc_html__( 'No', 'tpebl' ),
 				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'plus_mouse_move_parallax_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> This effect will be parallax on scroll effect. It will move image as you scroll your page.',
-				'content_classes' => 'tp-controller-notice',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'This effect will be parallax on scroll effect. It will move image as you scroll your page.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(

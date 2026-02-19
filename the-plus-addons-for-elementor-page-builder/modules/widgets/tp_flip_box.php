@@ -79,7 +79,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Flip Box', 'Horizontal Flip Box', 'Vertical Flip Box', 'Flip Box Carousel', 'Flip-Box Grid', 'Interactive Flip Box', 'Flip Box with Button', 'Animated Flip Box' );
+		return array( 'Tp Flip Box', 'Horizontal Flip Box', 'Vertical Flip Box', 'Flip Box Carousel', 'Flip-Box Grid', 'Interactive Flip Box', 'Flip Box with Button', 'Animated Flip Box' );
 	}
 
 	/**
@@ -264,6 +264,22 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'title_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the heading text displayed on the front side of the flip box.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
 
 		$this->add_control(
 			'image_icon',
@@ -280,14 +296,6 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
 				),
-			)
-		);
-		$this->add_control(
-			'icon_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can select Icon, Custom Image or SVG using this option.</i></p>',
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -500,6 +508,22 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
+				'condition' => array(
+					'info_box_layout' => 'single_layout',
+				),
+			)
+		);
+		$this->add_control(
+			'button_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable a button on the back side of the flip box for call-to-action or navigation.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition' => array(
 					'info_box_layout' => 'single_layout',
 				),

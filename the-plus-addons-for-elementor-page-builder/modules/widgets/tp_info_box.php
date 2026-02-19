@@ -84,7 +84,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Info Box', 'Infobox Layout', 'Info Box Carousel', 'Info Box Listing', 'Animated Info Box', 'Lottie Info Box', 'SVG Info Box', 'Linked Info Box', 'Icon Info Box', 'Image Info Box' );
+		return array( 'Tp Info Box', 'Infobox Layout', 'Info Box Carousel', 'Info Box Listing', 'Animated Info Box', 'Lottie Info Box', 'SVG Info Box', 'Linked Info Box', 'Icon Info Box', 'Image Info Box' );
 	}
 
 	/**
@@ -175,18 +175,20 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'how_it_works_single_layout',
+			'single_layout_label',
 			array(
-				'label'     => wp_kses_post(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
 					sprintf(
-						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s <i class="eicon-help-o"></i></a>',
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
+						esc_html__( 'Display info boxes in a clean vertical or grid layout, ideal for feature lists, services, or content that needs clear readability.', 'tpebl' ),
 						esc_url( $this->tp_doc . 'show-services-box-in-wordpress-using-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'How it works', 'tpebl' )
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => array(
-					'info_box_layout' => array( 'single_layout' ),
+				'label_block' => true,
+				'condition'   => array(
+					'info_box_layout' => 'single_layout',
 				),
 			)
 		);
@@ -382,18 +384,6 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				),
 				'condition' => array(
 					'image_icon' => 'text',
-				),
-			)
-		);
-		$this->add_control(
-			'img_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can select Icon, Custom Image or SVG using this option.</i></p>',
-				'label_block' => true,
-				'condition'   => array(
-					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
 			)
 		);
@@ -759,31 +749,21 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'full_infobox_switch',
 			array(
-				'label'     => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Full Infobox Link', 'tpebl' ),
-						esc_url( $this->tp_doc . 'add-link-to-the-info-box-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'     => esc_html__( 'Full Infobox Link', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
+						esc_html__( 'Enable this to make the entire Info Box clickable using a single link.When enabled, all other individual links inside the Info Box will be removed.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-link-to-the-info-box-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
 				),
-			)
-		);
-		$this->add_control(
-			'full_infobox_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : If you enable this option, There will be only one link for whole infobox. Rest links will be removed.</i></p>',
-				'label_block' => true,
-				'condition'   => array(
+				'condition' => array(
 					'info_box_layout' => 'single_layout',
 					'main_style'      => array( 'style_1', 'style_3', 'style_4' ),
 				),
@@ -1225,14 +1205,12 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'border_check_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>By checking up this option you can turn on underline/border under the title.</i></p>',
-				'label_block' => true,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'By checking up this option you can turn on underline/border under the title.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(

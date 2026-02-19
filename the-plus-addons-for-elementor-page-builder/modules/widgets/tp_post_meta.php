@@ -81,7 +81,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Content', 'Blog Content', 'Dynamic Post Content', 'Post Excerpt' );
+		return array( 'Tp Post Meta', 'Post Content', 'Blog Content', 'Dynamic Post Content', 'Post Excerpt' );
 	}
 
 	/**

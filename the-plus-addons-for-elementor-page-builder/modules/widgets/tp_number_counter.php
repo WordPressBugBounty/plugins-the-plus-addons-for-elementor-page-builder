@@ -84,7 +84,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Number Counter', 'Animated Counter', 'Milestone Counter', 'Counter Widget', 'Number Animation', 'Statistics Counter', 'Counter Animation', 'Count-Up Widget', 'KPI Counter', 'Live Counter' );
+		return array( 'Tp Number Counter', 'Animated Counter', 'Milestone Counter', 'Counter Widget', 'Number Animation', 'Statistics Counter', 'Counter Animation', 'Count-Up Widget', 'KPI Counter', 'Live Counter' );
 	}
 
 	public function get_custom_help_url() {
@@ -251,68 +251,58 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'max_number',
 			array(
-				'label'   => wp_kses_post(
+				'label'       => esc_html__( 'Number Value', 'tpebl' ),
+				'type'        => Controls_Manager::NUMBER,
+				'default'     => esc_html__( '1000', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
 					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Number Value', 'tpebl' ),
-						esc_url( $this->tp_doc . 'animated-number-counter-for-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Enter the value of number you want to showcase in icon counter.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'animated-number-counter-for-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => esc_html__( '1000', 'tpebl' ),
-				'dynamic' => array( 'active' => true ),
-			)
-		);
-		$this->add_control(
-			'max_num_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Enter the value of number/digits you want to showcase in icon counter. E.g, 100,999,etc..</i></p>',
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'min_number',
 			array(
-				'label'   => esc_html__( 'Animation Starting Number Value', 'tpebl' ),
-				'type'    => Controls_Manager::NUMBER,
-				'default' => esc_html__( '0', 'tpebl' ),
-				'dynamic' => array( 'active' => true ),
-			)
-		);
-		$this->add_control(
-			'min_num_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Enter the digit from which you want to start the animation on scroll. E.g. 0,10,80, etc</i></p>',
-				'label_block' => true,
+				'label'       => esc_html__( 'Animation Starting Number Value', 'tpebl' ),
+				'type'        => Controls_Manager::NUMBER,
+				'default'     => esc_html__( '0', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set the number from which the counter animation should begin when it comes into view.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
 			'increment_number',
 			array(
-				'type'    => Controls_Manager::SLIDER,
-				'label'   => esc_html__( 'Number gap for animation', 'tpebl' ),
-				'default' => array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Number gap for animation', 'tpebl' ),
+				'default'     => array(
 					'unit' => '',
 					'size' => 5,
 				),
-				'range'   => array(
+				'range'       => array(
 					'' => array(
 						'min'  => 0,
 						'max'  => 5000,
 						'step' => 5,
 					),
 				),
-				'dynamic' => array( 'active' => true ),
-			)
-		);
-		$this->add_control(
-			'increment_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Enter the value of number you want while animation.</i></p>',
-				'label_block' => true,
+				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Define how much the number increases in each animation step while counting.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -332,6 +322,12 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 					),
 				),
 				'dynamic' => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set the delay time between each number increase to control the animation speed.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -345,37 +341,33 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'symbol',
 			array(
-				'label' => esc_html__( 'Symbol', 'tpebl' ),
-				'type'  => Controls_Manager::TEXT,
-				'ai'    => false,
-			)
-		);
-		$this->add_control(
-			'symbol_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can add any value in this option which will be setup as prefix or postfix on Digits. e.g. +,%,etc.</i></p>',
-				'label_block' => true,
+				'label'       => esc_html__( 'Symbol', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add a symbol or text to display as a prefix or suffix with the number, such as %, +, or any custom value.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
 			'symbol_position',
 			array(
-				'label'   => esc_html__( 'Symbol Position', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'after',
-				'options' => array(
+				'label'       => esc_html__( 'Symbol Position', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'after',
+				'options'     => array(
 					'after'  => esc_html__( 'After Number', 'tpebl' ),
 					'before' => esc_html__( 'Before Number', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'symbol_pos_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can Select Symbol position using this option.</i></p>',
-				'label_block' => true,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'You can Select Symbol position using this option.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -398,14 +390,6 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 					'image' => esc_html__( 'Image', 'tpebl' ),
 					'svg'   => esc_html__( 'Svg (Pro)', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'icon_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can select Icon, Custom Image or SVG using this option.</i></p>',
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -630,7 +614,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
+		$this->add_responsive_control(
 			'icon_width',
 			array(
 				'type'        => Controls_Manager::SLIDER,

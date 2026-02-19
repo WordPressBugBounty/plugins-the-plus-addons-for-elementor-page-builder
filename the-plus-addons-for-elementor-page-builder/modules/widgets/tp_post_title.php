@@ -84,7 +84,7 @@ class ThePlus_Post_Title extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Title', 'Dynamic Title', 'Post Heading', 'Blog Title' );
+		return array( 'Tp Post Title', 'Dynamic Title', 'Post Heading', 'Blog Title' );
 	}
 
 	/**

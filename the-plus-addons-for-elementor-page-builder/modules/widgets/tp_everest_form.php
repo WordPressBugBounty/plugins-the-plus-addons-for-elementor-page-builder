@@ -80,7 +80,7 @@ class ThePlus_Everest_form extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
+		return array( 'Tp Everest Form','Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -161,19 +161,12 @@ class ThePlus_Everest_form extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => $this->l_theplus_get_everest_form_post(),
-			)
-		);
-		$this->add_control(
-			'everest_form_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Create an Everest Form first, then you’ll be able to select and display it here.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();

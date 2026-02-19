@@ -79,7 +79,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Dark Mode Toggle', 'Night Mode Switcher', 'Mix Blend Dark Mode', 'Global Color Dark Theme', 'Dark Theme', 'Night Theme' );
+		return array( 'Tp Dark Mode Toggle', 'Night Mode Switcher', 'Mix Blend Dark Mode', 'Global Color Dark Theme', 'Dark Theme', 'Night Theme' );
 	}
 
 

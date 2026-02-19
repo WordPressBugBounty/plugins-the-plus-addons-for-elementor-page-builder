@@ -75,7 +75,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Advanced Text Block', 'Text Block', 'Word Limit Text', 'Character Limit Text', 'Text Ellipsis' );
+		return array( 'Advanced Text Block', 'Tp Text Block', 'Word Limit Text', 'Character Limit Text', 'Text Ellipsis' );
 	}
 
 	/**
@@ -211,13 +211,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'display_count_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
 						esc_html__( 'Enable this option to limit the amount of text shown in the content.', 'tpebl' ),
@@ -225,7 +219,6 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -406,10 +399,11 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'default'   => 'normal',
 				'options'   => array(
-					'normal'   => esc_html__( 'Normal', 'tpebl' ),
-					'explode'  => esc_html__( 'Explode / Scatter', 'tpebl' ),
-					'scramble' => esc_html__( 'Scramble Text', 'tpebl' ),
-					'typing'   => esc_html__( 'Typing Effect', 'tpebl' ),
+					'normal'       => esc_html__( 'Normal', 'tpebl' ),
+					'explode'      => esc_html__( 'Explode / Scatter', 'tpebl' ),
+					'scramble'     => esc_html__( 'Scramble Text', 'tpebl' ),
+					'typing'       => esc_html__( 'Typing Effect', 'tpebl' ),
+					'tp_text_swap' => esc_html__( 'Text Style Swap', 'tpebl' ),
 				),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
@@ -777,6 +771,32 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+		$this->start_controls_section(
+			'section_swap_styling',
+			array(
+				'label' => esc_html__( 'Text Swap Style', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'   => 'swap_txt_typography',
+				'label'  => esc_html__( 'Typography', 'tpebl' ),
+				'global' => array(
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				),
+			)
+		);
+		$this->add_control(
+			'swap_txt_color',
+			array(
+				'label'   => esc_html__( 'Text Color', 'tpebl' ),
+				'type'    => Controls_Manager::COLOR,
+				'default' => '#0885f2ff',
+			)
+		);
+		$this->end_controls_section();
 
 		if ( defined( 'THEPLUS_VERSION' ) ) {
 			$this->start_controls_section(
@@ -878,6 +898,42 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				foreach ( $text_global_list as $ani ) {
 
 					if ( isset( $ani['_id'] ) && $ani['_id'] === $selected_global ) {
+
+							$swap_typography = array();
+							$typo_prefix     = 'swap_txt_typography_';
+
+						if ( ! empty( $ani[ $typo_prefix . 'font_family' ] ) ) {
+							$swap_typography['fontFamily'] = $ani[ $typo_prefix . 'font_family' ];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'font_weight' ] ) ) {
+							$swap_typography['fontWeight'] = $ani[ $typo_prefix . 'font_weight' ];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'font_style' ] ) ) {
+							$swap_typography['fontStyle'] = $ani[ $typo_prefix . 'font_style' ];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'font_size' ]['size'] ) ) {
+							$swap_typography['fontSize'] = $ani[ $typo_prefix . 'font_size' ]['size'] . $ani[ $typo_prefix . 'font_size' ]['unit'];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'text_transform' ] ) ) {
+							$swap_typography['textTransform'] = $ani[ $typo_prefix . 'text_transform' ];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'text_decoration' ] ) ) {
+							$swap_typography['textDecoration'] = $ani[ $typo_prefix . 'text_decoration' ];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'line_height' ]['size'] ) ) {
+							$swap_typography['lineHeight'] = $ani[ $typo_prefix . 'line_height' ]['size'] . $ani[ $typo_prefix . 'line_height' ]['unit'];
+						}
+
+						if ( ! empty( $ani[ $typo_prefix . 'letter_spacing' ]['size'] ) ) {
+							$swap_typography['letterSpacing'] = $ani[ $typo_prefix . 'letter_spacing' ]['size'] . $ani[ $typo_prefix . 'letter_spacing' ]['unit'];
+						}
+
 							$gsap_config = array(
 								// Basic Animation
 								'tp_enable_ani'      => $settings['enable_text_animation'] ?? 'no',
@@ -890,6 +946,8 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 								'tp_ease'            => $ani['text_ease'] ?? 'power3.out',
 								'tp_repeat'          => $ani['text_repeat'] ?? 'no',
 								'tp_scrub'           => $ani['tp_scrub'] ?? '',
+								'tp_swap_txt_color'  => isset( $ani['swap_txt_color'] ) ? $ani['swap_txt_color'] : '',
+								'tp_swap_typography' => $swap_typography,
 
 								// Transform Options
 								'transform_toggle'   => $ani['tp_tansformtion_toggel'] ?? 'no',
@@ -907,6 +965,42 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					}
 				}
 			} else {
+
+				$swap_typography = array();
+				$typo_prefix     = 'swap_txt_typography_';
+
+				if ( ! empty( $settings[ $typo_prefix . 'font_family' ] ) ) {
+					$swap_typography['fontFamily'] = $settings[ $typo_prefix . 'font_family' ];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'font_weight' ] ) ) {
+					$swap_typography['fontWeight'] = $settings[ $typo_prefix . 'font_weight' ];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'font_style' ] ) ) {
+					$swap_typography['fontStyle'] = $settings[ $typo_prefix . 'font_style' ];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'font_size' ]['size'] ) ) {
+					$swap_typography['fontSize'] = $settings[ $typo_prefix . 'font_size' ]['size'] . $settings[ $typo_prefix . 'font_size' ]['unit'];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'text_transform' ] ) ) {
+					$swap_typography['textTransform'] = $settings[ $typo_prefix . 'text_transform' ];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'text_decoration' ] ) ) {
+					$swap_typography['textDecoration'] = $settings[ $typo_prefix . 'text_decoration' ];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'line_height' ]['size'] ) ) {
+					$swap_typography['lineHeight'] = $settings[ $typo_prefix . 'line_height' ]['size'] . $settings[ $typo_prefix . 'line_height' ]['unit'];
+				}
+
+				if ( ! empty( $settings[ $typo_prefix . 'letter_spacing' ]['size'] ) ) {
+					$swap_typography['letterSpacing'] = $settings[ $typo_prefix . 'letter_spacing' ]['size'] . $settings[ $typo_prefix . 'letter_spacing' ]['unit'];
+				}
+
 				$gsap_config = array(
 
 					'tp_enable_ani'      => $settings['enable_text_animation'] ?? 'no',
@@ -919,6 +1013,8 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					'tp_ease'            => $settings['text_ease'] ?? 'power3.out',
 					'tp_repeat'          => $settings['text_repeat'] ?? 'no',
 					'tp_scrub'           => $settings['tp_scrub'] ?? '',
+					'tp_swap_txt_color'  => isset( $settings['swap_txt_color'] ) ? $settings['swap_txt_color'] : '',
+					'tp_swap_typography' => $swap_typography,
 
 					'transform_toggle'   => $settings['tp_tansformtion_toggel'] ?? 'no',
 					'transform_x'        => ! empty( $settings['transform_x']['size'] ) ? $settings['transform_x']['size'] : 0,

@@ -123,6 +123,7 @@ class Wdk_Widget_Api {
 			);
 		}
 
+		/* translators: %d: HTTP status code */
 		$error_message = sprintf( esc_html__( 'Server error: %d', 'tpebl' ), absint( $status_code ) );
 
 		if ( isset( $error_data->message ) ) {

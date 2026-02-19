@@ -92,7 +92,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Switcher', 'Content Toggle', 'Dual Content' );
+		return array( 'Tp Switcher', 'Content Toggle', 'Dual Content' );
 	}
 
 	/**
@@ -173,11 +173,17 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'switch_a_title',
 			array(
-				'label'   => esc_html__( 'Title', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'ai'      => false,
-				'default' => esc_html__( 'Switch A', 'tpebl' ),
-				'dynamic' => array( 'active' => true ),
+				'label'       => esc_html__( 'Title', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => esc_html__( 'Switch A', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the label text shown for this switcher option.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -203,6 +209,22 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
 					'content_a_source' => array( 'content' ),
+				),
+			)
+		);
+		$this->add_control(
+			'template_a_label',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Load content from a saved Elementor template.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'content_a_source' => 'template',
 				),
 			)
 		);
@@ -297,13 +319,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'con1_hashid',
 			array(
-				'label'       => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Unique ID', 'tpebl' ),
-						esc_url( $this->tp_doc . 'anchor-link-to-elementor-switcher-template/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'       => esc_html__( 'Unique ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
 				'default'     => '',
@@ -313,14 +329,14 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'title'       => __( 'Add custom ID WITHOUT the Pound key. e.g: tab-id', 'tpebl' ),
 				'label_block' => false,
 				'separator'   => 'before',
-			)
-		);
-		$this->add_control(
-			'con1_hashid_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
-				'content_classes' => 'tp-controller-notice',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Assign a unique anchor ID to this switcher option for linking or navigation.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'anchor-link-to-elementor-switcher-template/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -335,11 +351,17 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'switch_b_title',
 			array(
-				'label'   => esc_html__( 'Title', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'ai'      => false,
-				'default' => esc_html__( 'Switch B', 'tpebl' ),
-				'dynamic' => array( 'active' => true ),
+				'label'       => esc_html__( 'Title', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => esc_html__( 'Switch B', 'tpebl' ),
+				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the label text shown for this switcher option.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -354,7 +376,6 @@ class L_ThePlus_Switcher extends Widget_Base {
 				),
 			)
 		);
-
 		$this->add_control(
 			'content_b_desc',
 			array(
@@ -366,6 +387,22 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
 					'content_b_source' => array( 'content' ),
+				),
+			)
+		);
+		$this->add_control(
+			'template_b_label',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Load content from a saved Elementor template.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'content_b_source' => 'template',
 				),
 			)
 		);
@@ -464,14 +501,12 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'title'       => __( 'Add custom ID WITHOUT the Pound key. e.g: tab-id', 'tpebl' ),
 				'label_block' => false,
 				'separator'   => 'before',
-			)
-		);
-		$this->add_control(
-			'con2_hashid_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Use this option to give anchor id to individual switcher.',
-				'content_classes' => 'tp-controller-notice',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Assign a unique anchor ID to this switcher option for linking or navigation.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -486,25 +521,18 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'switcher_unique_id',
 			array(
-				'label'   => wp_kses_post(
+				'label'       => esc_html__( 'Unique Switcher ID', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => '',
+				'description' => wp_kses_post(
 					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Unique Switcher ID', 'tpebl' ),
-						esc_url( $this->tp_doc . 'connect-carousel-remote-with-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Use this ID to connect the switcher with the Carousel Remote widget.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'connect-carousel-remote-with-elementor-switcher/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'    => Controls_Manager::TEXT,
-				'ai'      => false,
-				'default' => '',
-			)
-		);
-		$this->add_control(
-			'switcher_unique_id_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Keep this blank or Setup Unique id for switcher which you can use with "Carousel Remote" widget.',
-				'content_classes' => 'tp-controller-notice',
-				'separator'       => 'after',
 			)
 		);
 		$this->add_control(
@@ -516,6 +544,12 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'description'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Show or hide the switch toggle control.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -562,6 +596,22 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
+				'condition' => array(
+					'switcher_style!' => array( 'style-4', 'style-3' ),
+				),
+			)
+		);
+		$this->add_control(
+			'show_tooltip_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable a tooltip to display additional information on hover.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 				'condition' => array(
 					'switcher_style!' => array( 'style-4', 'style-3' ),
 				),

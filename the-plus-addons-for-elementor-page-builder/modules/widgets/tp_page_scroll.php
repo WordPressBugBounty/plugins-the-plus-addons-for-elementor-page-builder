@@ -81,7 +81,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Full Page Scroll', 'Vertical Scroll Sections', 'Page Piling', 'Multi-Scroll', 'Horizontal Scrolling Page', 'Scroll-Based Navigation', 'Slide-by-Slide Scrolling', 'Full-Screen Slides', 'Scrolling Transitions', 'Interactive Page Scroll', 'Dot Navigation Scroll', 'Next/Prev Scrolling', 'Smooth Scrolling' );
+		return array( 'Tp Page Scroll','Full Page Scroll', 'Vertical Scroll Sections', 'Page Piling', 'Multi-Scroll', 'Horizontal Scrolling Page', 'Scroll-Based Navigation', 'Slide-by-Slide Scrolling', 'Full-Screen Slides', 'Scrolling Transitions', 'Interactive Page Scroll', 'Dot Navigation Scroll', 'Next/Prev Scrolling', 'Smooth Scrolling' );
 	}
 
 	/**
@@ -164,6 +164,72 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'full_page_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use this option to scroll the page one section at a time. Just add separate sections or templates in the content are, each will act as a full-page slide.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'page_scroll_opt' => 'tp_full_page',
+				),
+			)
+		);
+		$this->add_control(
+			'page_pilling_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this to switch between sections in place by stacking them over each other like slides, allowing you to add section templates that pile up one by one.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'page_scroll_opt' => 'tp_page_pilling',
+				),
+			)
+		);
+		$this->add_control(
+			'multi_scroll_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Split the page into left and right scroll sections that move together. Best for storytelling, product comparisons, or two-column showcase layouts.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'page_scroll_opt' => 'tp_multi_scroll',
+				),
+			)
+		);
+		$this->add_control(
+			'horizontal_scroll_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'For better control and styling in horizontal scrolling, we recommend using the Horizontal Scroll widget of the Plus Addons for Elementor.', 'tpebl' ),
+						esc_url( 'https://theplusaddons.com/elementor-widget/horizontal-scroll/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Check Demos', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'page_scroll_opt' => 'tp_horizontal_scroll',
+				),
+			)
+		);
+		$this->add_control(
 			'page_scroll_opt_pro',
 			array(
 				'type'        => 'tpae_pro_feature',
@@ -186,10 +252,19 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'fit_screen_note',
+			'full_page_content_label',
 			array(
-				'label' => esc_html__( 'Make sure your templates have full width On and It will suitable to screen height.', 'tpebl' ),
-				'type'  => \Elementor\Controls_Manager::HEADING,
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add your templates here, one per repeater item. Make sure your templates are full-width and fit the screen height for best results.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'page_scroll_opt' => 'tp_full_page',
+				),
 			)
 		);
 		$repeater = new \Elementor\Repeater();
@@ -338,11 +413,19 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'dots_Note',
+			'show_dots_label',
 			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Works only on the frontend.</i></p>',
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Show navigation dots on the page to jump between each section.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
+				'condition'   => array(
+					'page_scroll_opt' => 'tp_full_page',
+				),
 			)
 		);
 		$this->add_control(
@@ -373,12 +456,20 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'dots_toolti_Note',
+			'nav_dots_tooltips_label',
 			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Add Multiple text separated by comma \',\'</i></p>',
-
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add tooltip names for each dot, separate multiple text with commas.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
+				'condition'   => array(
+					'page_scroll_opt' => 'tp_full_page',
+					'show_dots'       => 'yes',
+				),
 			)
 		);
 		$this->add_control(

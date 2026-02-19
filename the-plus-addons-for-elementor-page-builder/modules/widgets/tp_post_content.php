@@ -93,7 +93,7 @@ class ThePlus_Post_Content extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Content', 'Blog Content', 'Dynamic Post Content', 'Post Excerpt' );
+		return array( 'Tp Post Content', 'Blog Content', 'Dynamic Post Content', 'Post Excerpt' );
 	}
 
 	/**
@@ -342,6 +342,110 @@ class ThePlus_Post_Content extends Widget_Base {
 					'{{WRAPPER}} .tp-post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'separator'  => 'after',
+			)
+		);
+		$this->add_control(
+			'content_icon_color',
+			array(
+				'label'     => esc_html__( 'Content Icon Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'separator' => 'after',
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .tp-post-content i' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->add_control(
+			'heading_typography_heading',
+			array(
+				'label'     => esc_html__( 'Heading', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'heading_typography',
+				'label'    => esc_html__( 'Typography', 'tpebl' ),
+				'global'   => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+				'selector' => '{{WRAPPER}} .tp-post-content h1, {{WRAPPER}} .tp-post-content h2, {{WRAPPER}} .tp-post-content h3, {{WRAPPER}} .tp-post-content h4, {{WRAPPER}} .tp-post-content h5, {{WRAPPER}} .tp-post-content h6',
+			)
+		);
+		$this->start_controls_tabs( 'tabs_heading_style' );
+		$this->start_controls_tab(
+			'tab_heading_normal',
+			array(
+				'label' => esc_html__( 'Normal', 'tpebl' ),
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+			)
+		);
+		$this->add_control(
+			'heading_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'separator' => 'after',
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .tp-post-content h1, {{WRAPPER}} .tp-post-content h2, {{WRAPPER}} .tp-post-content h3, {{WRAPPER}} .tp-post-content h4, {{WRAPPER}} .tp-post-content h5, {{WRAPPER}} .tp-post-content h6' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'tab_heading_hover',
+			array(
+				'label' => esc_html__( 'Hover', 'tpebl' ),
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+			)
+		);
+		$this->add_control(
+			'heading_hover_color',
+			array(
+				'label'     => esc_html__( 'Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'separator' => 'after',
+				'condition' => array(
+					'posttype' => 'singlepage',
+					'postContentEditorType' => 'wordpress'
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .tp-post-content:hover h1, {{WRAPPER}} .tp-post-content:hover h2, {{WRAPPER}} .tp-post-content:hover h3, {{WRAPPER}} .tp-post-content:hover h4, {{WRAPPER}} .tp-post-content:hover h5, {{WRAPPER}} .tp-post-content:hover h6' => 'color: {{VALUE}};',
+				),
+			)
+		);
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		$this->add_control(
+			'excerptstypography_heading',
+			array(
+				'label'     => esc_html__( 'Excerpts', 'tpebl' ),
+				'type'      => Controls_Manager::HEADING,
+				'separator' => 'before',
 			)
 		);
 		$this->add_group_control(

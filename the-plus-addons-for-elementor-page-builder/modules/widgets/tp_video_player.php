@@ -79,7 +79,7 @@ class ThePlus_Video_Player extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Video Embed', 'Video Player', 'YouTube Embed', 'Vimeo Video', 'Self‑Hosted Video', 'Sticky Video', 'Video Popup', 'Video Mask', 'Responsive Video Player', 'Video Embedding' );
+		return array( 'Video Embed', 'Tp Video Player', 'YouTube Embed', 'Vimeo Video', 'Self‑Hosted Video', 'Sticky Video', 'Video Popup', 'Video Mask', 'Responsive Video Player', 'Video Embedding' );
 	}
 
 	/**
@@ -333,19 +333,16 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'default'   => 'yes',
-				'condition' => array(
-					'video_type' => array( 'youtube' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" class="theplus-btn" target="_blank">%s</a></i></p>',
+						esc_html__( 'Video Info is deprecated.', 'tpebl' ),
+						esc_url( 'https://developers.google.com/youtube/player_parameters#showinfo' ),
+						esc_html__( 'Check here', 'tpebl' ),
+					)
 				),
-			)
-		);
-		$this->add_control(
-			'showinf_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Video Info is <a href="https://developers.google.com/youtube/player_parameters#showinfo" class="theplus-btn" target="_blank">deprecated.</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
-					'video_type' => array( 'youtube' ),
+				'condition' => array(
+					'video_type' => 'youtube',
 				),
 			)
 		);
@@ -420,6 +417,12 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Control whether related videos are shown after playback ends.', 'tpebl' ),
+					)
+				),
 				'condition' => array(
 					'video_type' => 'youtube',
 				),
@@ -431,8 +434,10 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'        => Controls_Manager::RAW_HTML,
 				'raw'         => wp_kses_post(
 					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Control whether related videos are shown after playback ends.', 'tpebl' ),
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" class="theplus-btn" target="_blank">%s</a></i></p>',
+						esc_html__( 'Suggested Videos', 'tpebl' ),
+						esc_url( 'https://developers.google.com/youtube/player_parameters#rel' ),
+						esc_html__( 'Parameter change.', 'tpebl' ),
 					)
 				),
 				'label_block' => true,
@@ -442,21 +447,15 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'relnote',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Suggested Videos <a href="https://developers.google.com/youtube/player_parameters#rel" class="theplus-btn" target="_blank">Parameter change.</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
-					'video_type' => 'youtube',
-				),
-			)
-		);
-		$this->add_control(
 			'rel_nots',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Choose from Related or Random videos at the end.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose from Related or Random videos at the end.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
 				'condition'   => array(
 					'video_type' => 'youtube',
@@ -472,34 +471,29 @@ class ThePlus_Video_Player extends Widget_Base {
 				'type'      => Controls_Manager::SWITCHER,
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'condition' => array(
-					'video_type' => 'youtube',
-				),
-			)
-		);
-		$this->add_control(
-			'yt_privacy_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Enable this option to reduce tracking by the video platform until the user plays the video.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 				'condition' => array(
 					'video_type' => 'youtube',
 				),
 			)
 		);
 		$this->add_control(
-			'privacy_nots',
+			'yt_privacy_note',
 			array(
 				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>When you turn on privacy mode, YouTube won\'t store information about visitors on your website unless they play the video.</i></p>',
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'When you turn on privacy mode, YouTube won\'t store information about visitors on your website unless they play the video.', 'tpebl' ),
+					)
+				),
 				'label_block' => true,
-				'condition'   => array(
+				'condition' => array(
 					'video_type' => 'youtube',
 					'yt_privacy' => 'yes',
 				),
@@ -1283,14 +1277,6 @@ class ThePlus_Video_Player extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'mask_image_display_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> Use PNG image with the shape you want to mask around Media.',
-				'content_classes' => 'tp-controller-notice',
-			)
-		);
-		$this->add_control(
 			'mask_shape_image',
 			array(
 				'label'     => esc_html__( 'Mask Image', 'tpebl' ),
@@ -1301,6 +1287,12 @@ class ThePlus_Video_Player extends Widget_Base {
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_video-box-shadow.creative-mask-media' => 'mask-image: url({{URL}});-webkit-mask-image: url({{URL}});',
+				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use PNG image with the shape you want to mask around Media.', 'tpebl' ),
+					)
 				),
 				'condition' => array(
 					'mask_image_display' => 'yes',

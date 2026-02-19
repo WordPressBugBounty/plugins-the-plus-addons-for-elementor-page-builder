@@ -83,7 +83,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Navigation', 'Blog Post Nav', 'Prev Next Buttons', 'Post Prev Next', 'Blog Post Navigation', 'Next Post Button', 'Previous Post Button', 'Blog Navigation Buttons' );
+		return array( 'Tp Post Prev/Next', 'Post Navigation', 'Blog Post Nav', 'Prev Next Buttons', 'Post Prev Next', 'Blog Post Navigation', 'Next Post Button', 'Previous Post Button', 'Blog Navigation Buttons' );
 	}
 
 	/**

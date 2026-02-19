@@ -78,7 +78,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Quotes', 'Quote box', 'Quote widget', 'Testimonials', 'Testimonial box', 'Testimonial widget', 'Customer reviews', 'Review box', 'Review widget', 'Feedback box', 'Feedback widget', 'Comment box', 'Comment widget', 'Opinion box', 'Opinion widget', 'Recommendation box', 'Recommendation widget', 'Rating box', 'Rating box' );
+		return array( 'Tp blockquote', 'Quote box', 'Quote widget', 'Testimonials', 'Testimonial box', 'Testimonial widget', 'Customer reviews', 'Review box', 'Review widget', 'Feedback box', 'Feedback widget', 'Comment box', 'Comment widget', 'Opinion box', 'Opinion widget', 'Recommendation box', 'Recommendation widget', 'Rating box', 'Rating box' );
 	}
 
 	/**
@@ -382,22 +382,15 @@ class ThePlus_Block_Quote extends Widget_Base {
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'If disabled, it will tweet content of blockquote instead of current page URL.', 'tpebl' ),
+					)
+				),
 				'condition' => array(
 					'quote_tweet' => 'yes',
 				),
-			)
-		);
-		$this->add_control(
-			'tweet_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-notice"><i>%s</i></p>',
-						esc_html__( 'Note : If disabled, it will tweet content of blockquote instead of current page URL.', 'tpebl' )
-					)
-				),
-				'label_block' => true,
 			)
 		);
 		$this->end_popover();

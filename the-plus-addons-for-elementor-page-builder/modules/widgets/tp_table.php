@@ -105,7 +105,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Table', 'Data Table', 'Table Widget', 'Table', 'Table Addon', 'Table Plugin', 'Elementor Table', 'Elementor Data Table', 'Table Design', 'Table Layout' );
+		return array( 'Tp Table', 'Data Table', 'Table Widget', 'Table', 'Table Addon', 'Table Plugin', 'Elementor Table', 'Elementor Data Table', 'Table Design', 'Table Layout' );
 	}
 
 	/**

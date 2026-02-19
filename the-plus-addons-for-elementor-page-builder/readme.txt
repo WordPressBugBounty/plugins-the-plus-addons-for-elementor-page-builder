@@ -4,7 +4,8 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.8
+Stable tag: 6.4.9
+
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -391,6 +392,38 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.9 =
+Add : Dynamic Tag : Post Category Image, Description & Category post count tag support
+Add : Dynamic Tag : Post Tag Description & Tag post count tag support
+Add : Number Counter : Responsive support for the icon width
+Add : Text Block : Add option for the Text Swap Style
+Add : Social Icon : Add option for the Font Awesome 5 Icons & Fill/Stroke color
+Improvement : Breadcrumbs Bar : Add labels for the options
+Improvement : Countdown : Add labels for the options
+Improvement : Flip box : Add labels for the options
+Improvement : Header Meta Content : Add labels for the options
+Improvement : Heading Title : Add labels for the options
+Improvement : Info Box : Add labels for the options
+Improvement : Navigation Menu Lite : Add labels for the options
+Improvement : Number Counter : Add labels for the options
+Improvement : Page Scroll : Add labels for the options
+Improvement : Pricing Table : Add labels for the options
+Improvement : Process Steps : Add labels for the options
+Improvement : Scroll Navigation : Add labels for the options
+Improvement : Stylish List : Add labels for the options
+Improvement : Switcher : Add labels for the options
+Improvement : Blockquote : Language Compatibility
+Improvement : Button : Language Compatibility
+Improvement : Carousel Anything : Language Compatibility
+Improvement : Dynamic Categories : Language Compatibility
+Improvement : Info Box : Language Compatibility
+Improvement : Social Embed : Language Compatibility
+Improvement : Stylish List : Language Compatibility
+Improvement : Tabs/Tours : Language Compatibility
+Improvement : Video Player : Language Compatibility
+Fix : Dashboard : Translation Issue
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.8 =
 Fix : Encrypt/Decrypt Data Handling : Security Patch (Low Security)

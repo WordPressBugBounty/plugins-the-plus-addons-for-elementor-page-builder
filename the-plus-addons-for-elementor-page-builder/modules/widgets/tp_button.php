@@ -76,7 +76,7 @@ class L_ThePlus_Button extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Button', 'CTA Button', 'Hover-Text Button', 'Icon Button', 'Tooltip Button', 'Parallax Button', 'Continuous Animation Button', 'Shake Animation Button', 'Full-Width Button', 'Scroll-Animation Button' );
+		return array( 'Tp Button', 'CTA Button', 'Hover-Text Button', 'Icon Button', 'Tooltip Button', 'Parallax Button', 'Continuous Animation Button', 'Shake Animation Button', 'Full-Width Button', 'Scroll-Animation Button' );
 	}
 
 	public function get_custom_help_url() {
@@ -214,7 +214,7 @@ class L_ThePlus_Button extends Widget_Base {
 				'default'     => esc_html__( 'Click Here', 'tpebl' ),
 				'placeholder' => esc_html__( 'Click Here', 'tpebl' ),
 				'condition'   => array(
-					'button_style' => array( 'style-24' ),
+					'button_style' => 'style-24',
 				),
 			)
 		);
@@ -305,7 +305,7 @@ class L_ThePlus_Button extends Widget_Base {
 					'hover-bottom' => esc_html__( 'On Bottom', 'tpebl' ),
 				),
 				'condition' => array(
-					'button_style' => array( 'style-17' ),
+					'button_style' => 'style-17',
 				),
 			)
 		);
@@ -516,14 +516,12 @@ class L_ThePlus_Button extends Widget_Base {
 				'default'     => '',
 				'title'       => esc_html__( 'Add your custom id WITHOUT the Pound key. e.g: my-id', 'tpebl' ),
 				'label_block' => false,
-			)
-		);
-		$this->add_control(
-			'btn_id_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces..</i></p>',
-				'label_block' => true,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows A-z 0-9 & underscore chars without spaces..', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->end_controls_section();

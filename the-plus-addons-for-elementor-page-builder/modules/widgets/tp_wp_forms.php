@@ -83,7 +83,7 @@ class ThePlus_Wp_Forms extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'wp forms', 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
+		return array( 'Tp wp forms', 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -163,23 +163,17 @@ class ThePlus_Wp_Forms extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => '0',
 				'options' => $this->l_theplus_wpforms_forms(),
-			)
-		);
-		$this->add_control(
-			'wp_forms_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'decription' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						sprintf(
-							__( 	'Please create your form first from %sDashboard → WPForms → Settings%s. Once the form is created, it will appear here. Also, make sure Load Assets Globally is enabled in WPForms settings so the form loads correctly in the backend and editor.', 'tpebl' ),
+							/* translators: 1: Opening <strong> tag, 2: Closing </strong> tag */
+							__( 'Please create your form first from %1$sDashboard → WPForms → Settings%2$s. Once the form is created, it will appear here. Also, make sure Load Assets Globally is enabled in WPForms settings so the form loads correctly in the backend and editor.', 'tpebl' ),
 							'<strong>',
 							'</strong>'
 						)
 					)
 				),
-				'label_block' => true,
 			)
 		);
 

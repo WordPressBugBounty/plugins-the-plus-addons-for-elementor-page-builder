@@ -3,6 +3,7 @@ namespace ThePlusAddons\Elementor\Text;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Tab_Base;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Repeater;
 use Elementor\Plugin;
 
@@ -61,30 +62,185 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'normal',
 				'options' => array(
-					'normal'   => esc_html__( 'Normal', 'tpebl' ),
-					'explode'  => esc_html__( 'Explode / Scatter', 'tpebl' ),
-					'scramble' => esc_html__( 'Scramble Text', 'tpebl' ),
-					'typing'   => esc_html__( 'Typing Effect', 'tpebl' ),
+					'normal'       => esc_html__( 'Normal', 'tpebl' ),
+					'explode'      => esc_html__( 'Explode / Scatter', 'tpebl' ),
+					'scramble'     => esc_html__( 'Scramble Text', 'tpebl' ),
+					'typing'       => esc_html__( 'Typing Effect', 'tpebl' ),
+					'tp_text_swap' => esc_html__( 'Text Style Swap', 'tpebl' ),
 				),
 			)
 		);
-		// $repeater->add_control(
-		// 'tp_tansformtion_toggel',
-		// array(
-		// 'label'        => esc_html__( 'Transform Effects ', 'tpebl' ),
-		// 'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-		// 'label_off'    => esc_html__( 'Default', 'tpebl' ),
-		// 'label_on'     => esc_html__( 'Custom', 'tpebl' ),
-		// 'return_value' => 'yes',
-		// 'default'      => 'no',
-				// 'condition'    => array(
-				// 'text_animation_type' => 'normal',
-				// ),
-		// )
-		// );
+		$repeater->add_control(
+			'swap_txt_color',
+			array(
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#0885f2ff',
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
 
-		// $repeater->start_popover();
+		$repeater->add_control(
+			'swap_txt_typography_font_family',
+			array(
+				'label'     => esc_html__( 'Font Family', 'tpebl' ),
+				'type'      => Controls_Manager::FONT,
+				'default'   => '',
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
 
+		$repeater->add_control(
+			'swap_txt_typography_font_size',
+			array(
+				'label'      => esc_html__( 'Size', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem', 'vw' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 1,
+						'max' => 200,
+					),
+					'vw' => array(
+						'min'  => 0.1,
+						'max'  => 10,
+						'step' => 0.1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+				),
+				'condition'  => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'swap_txt_typography_font_weight',
+			array(
+				'label'     => esc_html__( 'Weight', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					'100'     => '100',
+					'200'     => '200',
+					'300'     => '300',
+					'400'     => '400',
+					'500'     => '500',
+					'600'     => '600',
+					'700'     => '700',
+					'800'     => '800',
+					'900'     => '900',
+					'normal'  => 'Normal',
+					'bold'    => 'Bold',
+					'bolder'  => 'Bolder',
+					'lighter' => 'Lighter',
+				),
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'swap_txt_typography_text_transform',
+			array(
+				'label'     => esc_html__( 'Transform', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					'uppercase'  => 'Uppercase',
+					'lowercase'  => 'Lowercase',
+					'capitalize' => 'Capitalize',
+					'none'       => 'Normal',
+				),
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'swap_txt_typography_font_style',
+			array(
+				'label'     => esc_html__( 'Style', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					'normal'  => 'Normal',
+					'italic'  => 'Italic',
+					'oblique' => 'Oblique',
+				),
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'swap_txt_typography_text_decoration',
+			array(
+				'label'     => esc_html__( 'Decoration', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					'underline'    => 'Underline',
+					'overline'     => 'Overline',
+					'line-through' => 'Line Through',
+					'none'         => 'None',
+				),
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'swap_txt_typography_line_height',
+			array(
+				'label'      => esc_html__( 'Line-Height', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem', 'vw' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'em',
+				),
+				'condition'  => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'swap_txt_typography_letter_spacing',
+			array(
+				'label'      => esc_html__( 'Letter Spacing', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem', 'vw' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -5,
+						'max'  => 10,
+						'step' => 0.1,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+				),
+				'condition'  => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
+			)
+		);
 		$repeater->add_control(
 			'transform_x',
 			array(
@@ -229,8 +385,6 @@ class TP_GSAP_Text_Global extends Tab_Base {
 
 			)
 		);
-
-		// $repeater->end_popover();
 		$repeater->add_control(
 			'split_type',
 			array(

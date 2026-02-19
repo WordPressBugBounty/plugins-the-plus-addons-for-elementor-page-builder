@@ -159,6 +159,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 						'tpae_nonce'        => wp_create_nonce( 'tpae-db-nonce' ),
 					);
 
+					wp_set_script_translations( 'nexter-theme-builder', 'tpebl', L_THEPLUS_PATH . 'languages' );
 					wp_localize_script( 'nexter-theme-builder', 'nexter_theme_builder_config', $nexter_theme_builder_config );
 			}
 

@@ -75,7 +75,7 @@ class L_Theplus_Ele_Heading_Title extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Heading Title', 'Styled Heading', 'Animated Heading', 'Split Title', 'Split Heading', 'Prefix Title', 'Postfix Title', 'Subtitle Heading', 'Extra Title' );
+		return array( 'Tp Heading Title', 'Styled Heading', 'Animated Heading', 'Split Title', 'Split Heading', 'Prefix Title', 'Postfix Title', 'Subtitle Heading', 'Extra Title' );
 	}
 
 	/**
@@ -159,6 +159,134 @@ class L_Theplus_Ele_Heading_Title extends Widget_Base {
 					'style_7' => esc_html__( 'Dashing Dots', 'tpebl' ),
 					'style_8' => esc_html__( 'Unique', 'tpebl' ),
 					'style_9' => esc_html__( 'Stylish', 'tpebl' ),
+				),
+			)
+		);
+		$this->add_control(
+			'style1_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Display the heading with a clean and modern design style.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_1',
+				),
+			)
+		);
+		$this->add_control(
+			'style2_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Display the heading with a minimal and simple layout.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_2',
+				),
+			)
+		);
+		$this->add_control(
+			'style4_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Display the heading with a traditional, classic look.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_4',
+				),
+			)
+		);
+		$this->add_control(
+			'style5_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add a double border style around the heading.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_5',
+				),
+			)
+		);
+		$this->add_control(
+			'style6_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Add a vertical border design to the heading.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_6',
+				),
+			)
+		);
+		$this->add_control(
+			'style7_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Display the heading with dotted decorative styling.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_7',
+				),
+			)
+		);
+		$this->add_control(
+			'style8_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Apply a unique visual style to highlight the heading.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_8',
+				),
+			)
+		);
+		$this->add_control(
+			'style9_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Display the heading with a stylish and eye-catching design.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'heading_style' => 'style_9',
 				),
 			)
 		);

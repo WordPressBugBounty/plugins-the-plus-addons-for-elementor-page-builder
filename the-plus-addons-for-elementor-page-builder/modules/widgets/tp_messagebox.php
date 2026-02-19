@@ -87,7 +87,7 @@ class ThePlus_MessageBox extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Message Box', 'Alert Box', 'Notification Box', 'Info Box', 'Callout Box', 'Warning Box', 'Success Box', 'Error Box', 'Message Widget', 'Alert Widget', 'Notification Widget', 'Info Widget', 'Callout Widget', 'Warning Widget', 'Success Widget', 'Error Widget' );
+		return array( 'Tp Message Box', 'Alert Box', 'Notification Box', 'Info Box', 'Callout Box', 'Warning Box', 'Success Box', 'Error Box', 'Message Widget', 'Alert Widget', 'Notification Widget', 'Info Widget', 'Callout Widget', 'Warning Widget', 'Success Widget', 'Error Widget' );
 	}
 
 	/**

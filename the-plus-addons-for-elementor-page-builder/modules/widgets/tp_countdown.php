@@ -79,7 +79,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Countdown Timer', 'Scarcity Countdown', 'Evergreen Countdown', 'Fake-Number Counter', 'Content Swap Timer', 'WooCommerce Timer', 'FOMO Countdown', 'Inline Countdown', 'Marketing Countdown Timer', 'Urgency Countdown', 'Event Countdown', 'Offer Countdown' );
+		return array( 'Tp Countdown Timer', 'Scarcity Countdown', 'Evergreen Countdown', 'Fake-Number Counter', 'Content Swap Timer', 'WooCommerce Timer', 'FOMO Countdown', 'Inline Countdown', 'Marketing Countdown Timer', 'Urgency Countdown', 'Event Countdown', 'Offer Countdown' );
 	}
 
 	public function get_custom_help_url() {
@@ -165,18 +165,20 @@ class L_ThePlus_Countdown extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'how_it_works_normal',
+			'cdtype_normal_label',
 			array(
-				'label'     => wp_kses_post(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
 					sprintf(
-						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
-						esc_url( $this->tp_doc ) . 'create-a-sticky-countdown-timer-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
-						esc_html__( 'How it works', 'tpebl' )
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Use this when you want to run a countdown to a fixed date and time, like an event launch, sale end, or webinar start. The timer ends for everyone at the same time.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-a-sticky-countdown-timer-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => array(
-					'CDType' => array( 'normal' ),
+				'label_block' => true,
+				'condition'   => array(
+					'CDType' => 'normal',
 				),
 			)
 		);
@@ -225,24 +227,14 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'type'        => Controls_Manager::DATE_TIME,
 				'label_block' => false,
 				'default'     => gmdate( 'Y-m-d H:i', strtotime( '+1 month' ) + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ),
-				'condition'   => array(
-					'CDType' => 'normal',
-				),
-			)
-		);
-		$this->add_control(
-			'count_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
-						esc_html__( 'Date set according to your timezone: %s.', 'tpebl' ),
-						esc_html( Utils::get_timezone_string() )
+						'<p class="tp-controller-label-text"><i>%s %s</i></p>',
+						esc_html__( 'Date set according to your timezone:', 'tpebl' ),
+						Utils::get_timezone_string()
 					)
 				),
-				'content_classes' => 'tp-controller-notice',
-				// 'label_block' => true,
-				'condition'       => array(
+				'condition'   => array(
 					'CDType' => 'normal',
 				),
 			)
@@ -442,6 +434,12 @@ class L_ThePlus_Countdown extends Widget_Base {
 				'label_on'     => esc_html__( 'Enable', 'tpebl' ),
 				'label_off'    => esc_html__( 'Disable', 'tpebl' ),
 				'return_value' => 'yes',
+				'description'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Turn this on if you want to control what happens after the countdown ends. This is useful for limited-time offers, events, or deadlines where the content should change once time is over.', 'tpebl' ),
+					)
+				),
 				'default'      => '',
 			)
 		);

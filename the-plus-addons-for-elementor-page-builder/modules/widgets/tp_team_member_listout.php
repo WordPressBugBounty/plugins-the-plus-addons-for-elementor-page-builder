@@ -93,7 +93,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Team Member Listing', 'Team Listing', 'Team Profile', 'Team Carousel', 'Team Grid', 'Team Masonry', 'Team Profile Filter', 'Team Bio' );
+		return array( 'Tp Team Member Listing', 'Team Listing', 'Team Profile', 'Team Carousel', 'Team Grid', 'Team Masonry', 'Team Profile Filter', 'Team Bio' );
 	}
 
 	/**

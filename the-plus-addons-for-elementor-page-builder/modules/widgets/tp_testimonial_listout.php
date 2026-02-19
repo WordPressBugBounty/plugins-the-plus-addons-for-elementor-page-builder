@@ -99,6 +99,15 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 	}
 
 	/**
+	 * Get Keywords.
+	 *
+	 * @since 6.4.8
+	 */
+	public function get_keywords() {
+		return array( 'Tp Testimonial Listout', 'Testimonial Listing', 'Testimonial Carousel', 'Testimonial Grid', 'Testimonial Masonry', 'Testimonial Profile Filter', 'Testimonial Bio' );
+	}
+
+	/**
 	 * Update is_reload_preview_required.
 	 *
 	 * @since 1.0.0

@@ -104,7 +104,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Stylist List', 'Stylist Widget', 'Stylist', 'Stylist Addon', 'Stylist Plus Addon', 'Stylist Plugin', 'Elementor Stylist', 'Elementor Stylist List', 'Elementor Stylist Widget', 'Elementor Stylist Addon', 'Elementor Stylist Plus Addon', 'Elementor Stylist Plugin' );
+		return array( 'Tp Stylist List', 'Stylist Widget', 'Stylist', 'Stylist Addon', 'Stylist Plus Addon', 'Stylist Plugin', 'Elementor Stylist', 'Elementor Stylist List', 'Elementor Stylist Widget', 'Elementor Stylist Addon', 'Elementor Stylist Plus Addon', 'Elementor Stylist Plugin' );
 	}
 
 	/**
@@ -300,18 +300,20 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'show_pin_hint',
 			array(
-				'label'     => wp_kses_post(
+				'label'       => esc_html__( 'Pin Hint', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'separator'   => 'before',
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Pin Hint', 'tpebl' ),
-						esc_url( $this->tp_doc . 'add-label-tab-to-elementor-stylish-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Keep the list item highlighted or pinned for emphasis.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-label-tab-to-elementor-stylish-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'separator' => 'before',
-				'default'   => 'no',
 			)
 		);
 		$repeater->add_control(
@@ -408,18 +410,20 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$repeater->add_control(
 			'show_background_style',
 			array(
-				'label'     => wp_kses_post(
+				'label'       => esc_html__( 'Interactive Hover Bg Style', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'separator'   => 'before',
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Interactive Hover Bg Style', 'tpebl' ),
-						esc_url( $this->tp_doc . 'change-elementor-list-item-background-on-hover/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Apply a background style that appears when hovering over the list item.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'change-elementor-list-item-background-on-hover/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'separator' => 'before',
-				'default'   => 'no',
 			)
 		);
 		$repeater->add_group_control(
@@ -442,6 +446,12 @@ class L_ThePlus_Style_List extends Widget_Base {
 				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
 				'render_type' => 'template',
 				'separator'   => 'before',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s</i></p>',
+						esc_html__( 'Show additional information when the user hovers over the list item.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$repeater->add_control(
@@ -488,17 +498,19 @@ class L_ThePlus_Style_List extends Widget_Base {
 		$this->add_control(
 			'read_more_toggle',
 			array(
-				'label'       => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Read More Toggle', 'tpebl' ),
-						esc_url( $this->tp_doc . 'add-read-more-button-to-elementor-icon-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'       => esc_html__( 'Read More Toggle', 'tpebl' ),
 				'type'        => Controls_Manager::SWITCHER,
 				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
 				'render_type' => 'template',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Enable this option to add a button that lets users show or hide extra list items. Ideal when you have longer lists and want to keep the layout clean.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-read-more-button-to-elementor-icon-list/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -1822,19 +1834,13 @@ class L_ThePlus_Style_List extends Widget_Base {
 				'label'     => esc_html__( 'Global List Connection Id', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
 				'default'   => '',
-				'condition' => array(
-					'hover_inverse_effect' => 'yes',
-					'hover_effect_area'    => 'global',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use unique id here and put same in all connected lists.', 'tpebl' ),
+					)
 				),
-			)
-		);
-		$this->add_control(
-			'global_hover_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>Note : Use unique id here and put same in all connected lists.</i></p>',
-				'label_block' => true,
-				'condition'   => array(
+				'condition' => array(
 					'hover_inverse_effect' => 'yes',
 					'hover_effect_area'    => 'global',
 				),

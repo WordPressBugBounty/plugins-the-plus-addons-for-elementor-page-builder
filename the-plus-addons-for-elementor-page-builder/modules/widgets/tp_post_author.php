@@ -84,7 +84,7 @@ class ThePlus_Post_Author extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Author Box', 'Author Bio', 'Author Information', 'Post Author Profile', 'Blog Author Details', 'Author Image', 'Author Name', 'Author Social Links', 'Customized Author Box', 'Author Info', 'Blog Post Author', 'Author Box' );
+		return array( 'Tp Post Author Box', 'Author Bio', 'Author Information', 'Post Author Profile', 'Blog Author Details', 'Author Image', 'Author Name', 'Author Social Links', 'Customized Author Box', 'Author Info', 'Blog Post Author', 'Author Box' );
 	}
 
 	/**

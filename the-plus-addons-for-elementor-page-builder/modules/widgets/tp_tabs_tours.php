@@ -103,7 +103,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Tabs Tours', 'Content Tabs', 'Tab Navigation', 'Tab Layout', 'Vertical Tab', 'Horizontal Tab', 'Swipe Tab', 'Autoplay Tabs', 'Hover Tabs', 'Carousel Tab' );
+		return array( 'Tp Tabs Tours', 'Content Tabs', 'Tab Navigation', 'Tab Layout', 'Vertical Tab', 'Horizontal Tab', 'Swipe Tab', 'Autoplay Tabs', 'Hover Tabs', 'Carousel Tab' );
 	}
 
 	/**
@@ -460,20 +460,14 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'If disabled, Template will not visible/load in the backend for better page loading performance.', 'tpebl' ),
+					)
+				),
 				'condition' => array(
 					'content_source' => 'page_template',
-				),
-			)
-		);
-		$repeater->add_control(
-			'connection__Note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> If disabled, Template will not visible/load in the backend for better page loading performance.',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
-					'content_source'           => 'page_template',
-					'backend_preview_template' => 'yes',
 				),
 			)
 		);
@@ -678,17 +672,19 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		$this->add_control(
 			'on_hover_tabs',
 			array(
-				'label'     => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'On Hover Tab', 'tpebl' ),
-						esc_url( $this->tp_doc . 'elementor-tab-on-hover?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'     => esc_html__( 'On Hover Tab', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'You can enable this if you want tabs to change when someone hovers over them. It’s great for creating a smoother, more interactive browsing experience.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'elementor-tab-on-hover/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -717,7 +713,13 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		$this->add_control(
 			'tabs_swiper',
 			array(
-				'label'     => esc_html__( 'Swiper Effect', 'tpebl' ),
+				'label'     => wp_kses_post(
+					sprintf(
+						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
+						esc_html__( 'Swiper Effect', 'tpebl' ),
+						esc_url( $this->tp_doc . 'swipe-or-slide-effect-on-elementor-tabs/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+					)
+				),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
@@ -746,6 +748,14 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'You can select which tab should be open by default when the page loads. It helps guide visitors to the most important content first.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'openclose-specific-tab-by-default-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(

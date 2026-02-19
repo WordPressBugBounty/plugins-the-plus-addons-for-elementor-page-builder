@@ -24,7 +24,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
         }
 
         function TP_getTextEls($this, tp_text_finder, tp_widget_type) {
-            
+
             let $targets = $this.find(`.${tp_text_finder}`);
 
             if ($targets.length === 0) {
@@ -96,9 +96,9 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
             var transformOrigin = config.transform_origin || "50% 50%";
 
             var repeat = config.tp_repeat || 'no';
-            // var repeat_yoyo = config.tp_repeat_yoyo || 'no';
             var trigger = config.tp_trigger || "onload";
-
+            var tp_swap_txt_color = config.tp_swap_txt_color || "";
+            var tp_swap_typography = config.tp_swap_typography || {};
         }
 
 
@@ -226,12 +226,28 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
 
                     break;
                 }
+                case "tp_text_swap": {
+                    var split = getSplit(el);
 
+                    var animConfig = {
+                        color: tp_swap_txt_color,
+                        duration: duration,
+                        stagger: stagger,
+                        ease: ease,
+                        repeat: repeat === 'yes' ? -1 : 0,
+                        yoyo: repeat === 'yes' ? true : false,
+                        delay: delay,
+                    };
+
+                    if (tp_swap_typography) {
+                        Object.assign(animConfig, tp_swap_typography);
+                    }
+
+                    gsap.to(split.chars, animConfig);
+                    break;
+                }
             }
         };
-
-        /* TRIGGERS */
-
 
         if (trigger === "onload") {
             gsap.delayedCall(0.05, () => {
@@ -249,28 +265,46 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
 
                 const splitInstance = getSplit(el);
 
-                if ((effect === 'normal' || effect === 'explode') && tp_scrub === 'yes') {
+                if ((effect === 'normal' || effect === 'explode' || effect === 'tp_text_swap') && tp_scrub === 'yes') {
 
-                    gsap.from(splitInstance[splitType], {
-                        x: effect === 'normal' ? x : "random(-200,200)",
-                        y: effect === 'normal' ? y : "random(-200,200)",
-                        rotation: effect === 'normal' ? rotation : "random(-360,360)",
-                        scale: effect === 'normal' ? scale : 0,
-                        skewX: effect === 'normal' ? skewX : 0,
-                        skewY: effect === 'normal' ? skewY : 0,
-                        transformOrigin,
-                        opacity: 0,
-                        ease,
-                        duration,
-                        stagger,
-                        scrollTrigger: {
-                            trigger: $this[0],
-                            start: "top 70%",
-                            end: "bottom 30%",
-                            scrub: true,
+                    if (effect === 'tp_text_swap') {
+                        var scrollAnimConfig = {
+                            color: tp_swap_txt_color,
+                            ease: ease,
+                            stagger: stagger,
+                            scrollTrigger: {
+                                trigger: $this[0],
+                                start: "top 70%",
+                                end: "bottom 30%",
+                                scrub: true,
+                            }
+                        };
+
+                        if (tp_swap_typography) {
+                            Object.assign(scrollAnimConfig, tp_swap_typography);
                         }
-                    });
 
+                        gsap.to(splitInstance[splitType], scrollAnimConfig);
+                    } else {
+                        gsap.from(splitInstance[splitType], {
+                            x: effect === 'normal' ? x : "random(-200,200)",
+                            y: effect === 'normal' ? y : "random(-200,200)",
+                            rotation: effect === 'normal' ? rotation : "random(-360,360)",
+                            scale: effect === 'normal' ? scale : 0,
+                            skewX: effect === 'normal' ? skewX : 0,
+                            skewY: effect === 'normal' ? skewY : 0,
+                            transformOrigin,
+                            opacity: 0,
+                            ease,
+                            stagger,
+                            scrollTrigger: {
+                                trigger: $this[0],
+                                start: "top 70%",
+                                end: "bottom 30%",
+                                scrub: true,
+                            }
+                        });
+                    }
                 } else {
 
                     ScrollTrigger.create({
@@ -283,18 +317,6 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                 }
 
             });
-
-
-            // ScrollTrigger.create({
-            //     trigger: $this[0],
-            //     start: "top 70%",
-            //     once: true,
-            //     onEnter: () => {
-            //         $textEls.each(function () {
-            //             runEffect(this);
-            //         });
-            //     }
-            // });
         }
 
         else if (trigger === "onhover") {

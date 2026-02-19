@@ -83,7 +83,7 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
+		return array( 'Tp Form Style', 'Contact Form 7 Style', 'WPForms Style', 'Ninja Forms Design', 'Gravity Forms Style', 'Everest Forms Design', 'Form Design', 'Form Customization' );
 	}
 
 	/**
@@ -163,19 +163,12 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => $this->l_theplus_get_contact_form_post(),
-			)
-		);
-		$this->add_control(
-			'contact_form_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Choose the contact form you want to display inside this widget.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		// $this->add_control(
@@ -229,19 +222,12 @@ class ThePlus_Contact_Form_7 extends Widget_Base {
 					'label'  => esc_html__( 'Default Label Field', 'tpebl' ),
 					'custom' => esc_html__( 'Custom Class (.tp-cf7-outer)', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'outer_field_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'For Outer Section you can select styling option values to Label or to Custom class.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();

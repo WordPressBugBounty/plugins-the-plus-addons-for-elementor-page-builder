@@ -76,6 +76,7 @@ if ( ! class_exists( 'Tp_Notices_Remove' ) ) {
 			delete_option( 'tpae_bfsale_notice_dismissed' );
 			delete_option( 'tpae_cmsale_notice_dismissed' );
 			delete_option( 'tpae_wintersale_notice_dismissed' );
+			delete_option( 'tpae_pluginfeatures_notice_dismissed' );
 		}
 	}
 

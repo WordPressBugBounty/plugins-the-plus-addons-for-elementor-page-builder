@@ -84,7 +84,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 	 * @since 6.0.4
 	 */
 	public function get_keywords() {
-		return array( 'Form Builder', 'Contact Form', 'Free Form', 'CAPTCHA Form', 'Google reCAPTCHA Form', 'Cloudflare Turnstile Form', 'Email Notification Form', 'Database Entry Form', 'Redirect Form', 'Brevo Form', 'Mailchimp Form', 'GetResponse Form', 'ConvertKit Form', 'Slack Form', 'Discord Form', 'WebHook Form', 'Drip Form' );
+		return array( 'Tp Form', 'Form Builder', 'Contact Form', 'Free Form', 'CAPTCHA Form', 'Google reCAPTCHA Form', 'Cloudflare Turnstile Form', 'Email Notification Form', 'Database Entry Form', 'Redirect Form', 'Brevo Form', 'Mailchimp Form', 'GetResponse Form', 'ConvertKit Form', 'Slack Form', 'Discord Form', 'WebHook Form', 'Drip Form' );
 	}
 
 	/**
@@ -474,19 +474,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'          => array(
 					'active' => false,
 				),
-			)
-		);
-		$repeater->add_control(
-			'unique_id_notice',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Ensure the ID is unique and not duplicated anywhere else on the page displaying this form. Valid entries include uppercase and lowercase letters (A-Z, a-z), numbers (0-9), and underscores, but spaces are not allowed.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$repeater->add_control(
@@ -804,16 +797,7 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'        => array(
 					'active' => false,
 				),
-				'condition' => array(
-					'add_action' => 'email',
-				),
-			)
-		);
-		$this->add_control(
-			'email_set_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
 						esc_html__( 'To make sure you receive every form submission in your email, please set up SMTP on your site. SMTP ensures your emails are delivered reliably instead of going to spam. You can also do this using the Nexter Extension.', 'tpebl' ),
@@ -821,7 +805,9 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
+				'condition' => array(
+					'add_action' => 'email',
+				),
 			)
 		);
 		$this->start_controls_tabs( 'tabs_email' );
@@ -976,19 +962,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'      => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'email_message_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'The email message you write here will be sent to the email address added in the ‘To’ field, and you can also include form data inside it. To display all submitted fields together, simply use the <code>[all-values]</code> shortcode. If you want to show only specific fields, you can use their individual shortcodes, which you can find under each field inside the <b>Data Shortcode</b> option in the Advanced tab', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 
@@ -1003,19 +982,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'      => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'email_from_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can set the sender email here. If you leave this empty, the emails will be sent from your admin email.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -1029,19 +1001,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'      => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'email_from_name_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can add the name here, so the email is received from this name.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -1055,19 +1020,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'      => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'email_reply_to_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can add the reply-to email address here, so when the person who receives the form submission replies, their response will go directly to this address instead of the default admin email. This makes it easier to manage replies.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -1098,19 +1056,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'          => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'redirect_to_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can add a URL here, so after submitting the form, the person will be redirected to this page', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -1223,19 +1174,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'      => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'form_id_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Enter a unique ID for this form using letters, numbers, or underscores (no spaces). Make sure it’s not duplicated anywhere else on the page. The ID you set here will also appear as the form name inside the Table widget when you want to display the data collected from this form.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 

@@ -72,7 +72,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Social Media Embed', 'Facebook Embed', 'X (Twitter) Embed', 'Instagram Embed', 'YouTube Embed', 'Vimeo Embed', 'Google Maps Embed', 'Social Feed', 'Facebook Comments', 'Facebook Post', 'Facebook Video', 'Facebook Page', 'Facebook Like Button', 'Twitter Profile', 'Instagram Reels', 'YouTube Playlist', 'Google Maps', 'Vimeo Video', 'Tweets', 'Retweet Button', 'Twitter Follow Button', 'Twitter Likes Timeline' );
+		return array( 'Tp Social Embed', 'Social Media Embed', 'Facebook Embed', 'X (Twitter) Embed', 'Instagram Embed', 'YouTube Embed', 'Vimeo Embed', 'Google Maps Embed', 'Social Feed', 'Facebook Comments', 'Facebook Post', 'Facebook Video', 'Facebook Page', 'Facebook Like Button', 'Twitter Profile', 'Instagram Reels', 'YouTube Playlist', 'Google Maps', 'Vimeo Video', 'Tweets', 'Retweet Button', 'Twitter Follow Button', 'Twitter Likes Timeline' );
 	}
 
 	/**
@@ -1265,20 +1265,15 @@ class ThePlus_Social_Embed extends Widget_Base {
 					'is_external' => true,
 					'nofollow'    => true,
 				),
-				'condition'     => array(
-					'EmbedType' => 'twitter',
-					'TweetType' => 'timelines',
-					'TwGuides'  => 'Collection',
+				'description'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'How to ', 'tpebl' ),
+						esc_url( 'https://tweetdeck.twitter.com/' ),
+						esc_html__( 'Create Collections?', 'tpebl' ),
+					)
 				),
-			)
-		);
-		$this->add_control(
-			'TwCollectionNote',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => 'Note : How to <a href="https://tweetdeck.twitter.com/"  target="_blank" rel="noopener noreferrer">Create Collections ?</a>',
-				'content_classes' => 'tp-controller-notice',
-				'condition'       => array(
+				'condition'     => array(
 					'EmbedType' => 'twitter',
 					'TweetType' => 'timelines',
 					'TwGuides'  => 'Collection',

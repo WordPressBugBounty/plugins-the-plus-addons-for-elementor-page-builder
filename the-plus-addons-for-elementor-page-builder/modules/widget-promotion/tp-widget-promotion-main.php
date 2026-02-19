@@ -55,6 +55,7 @@ if ( ! class_exists( 'TP_Widgets_Promotion_Main' ) ) {
 			if ( ! defined( 'THEPLUS_VERSION' ) ) {
 				$this->init();
 			}
+			$this->tp_load_ajax_files();
 		}
 
 		/**
@@ -75,6 +76,13 @@ if ( ! class_exists( 'TP_Widgets_Promotion_Main' ) ) {
 		public function add_widgets( $widgets_manager ) {
 			if ( ! defined( 'THEPLUS_VERSION' ) ) {
 				include L_THEPLUS_PATH . 'modules/widget-promotion/tp-widget-promotion/class-tp-widget-promotion.php';
+			}
+		}
+
+		public function tp_load_ajax_files() {
+			$file_path = L_THEPLUS_PATH . 'modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php';
+			if ( file_exists( $file_path ) ) {
+				include_once $file_path;
 			}
 		}
 	}

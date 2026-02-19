@@ -79,7 +79,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 	 * @since 5.3.5
 	 */
 	public function get_keywords() {
-		return array( 'Age Verification', 'Birthdate Verification', 'Age Restriction', '18+ Verification', 'Adult Content Lock', 'Age Popup', 'Age Restricted Content', 'Minimum Age Limit' );
+		return array( 'Tp Age gate Verification', 'Birthdate Verification', 'Age Restriction', '18+ Verification', 'Adult Content Lock', 'Age Popup', 'Age Restricted Content', 'Minimum Age Limit' );
 	}
 
 	/**
@@ -243,21 +243,11 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'tempNotice',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Keep this disabled, If you do not want that to load on editor page. Either It will highjack your whole page.', 'tpebl' ),
 					)
-				),
-				'label_block' => true,
-				'condition'   => array(
-					'backend_preview' => 'yes',
 				),
 			)
 		);
@@ -678,22 +668,12 @@ class ThePlus_Age_Gate extends Widget_Base {
 				'min'       => 1,
 				'max'       => 365,
 				'default'   => 10,
-				'condition' => array(
-					'age_cookies' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'age_cookies_days_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Set how many days the cookie should be stored before it automatically expires.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 				'condition' => array(
 					'age_cookies' => 'yes',
 				),
@@ -1618,7 +1598,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 					'{{WRAPPER}} .tp-method-1 .tp-agegate-boxes .tp-agegate-method .age_vmb i,{{WRAPPER}} .tp-method-2 .tp-agegate-boxes .tp-agegate-method .age_verify_method_btnsubmit i,{{WRAPPER}} .tp-method-3 .tp-agegate-boxes .tp-agegate-method .tp-age-btn-yes i,{{WRAPPER}} .tp-method-1 .tp-agegate-boxes .tp-agegate-method .age_vmb svg,{{WRAPPER}} .tp-method-2 .tp-agegate-boxes .tp-agegate-method .age_verify_method_btnsubmit svg,{{WRAPPER}} .tp-method-3 .tp-agegate-boxes .tp-agegate-method .tp-age-btn-yes svg' => 'margin-left: {{SIZE}}{{UNIT}}',
 				),
 				'condition'   => array(
-					'icon_position' => array( 'age_icon_postfix' ),
+					'icon_position' => 'age_icon_postfix',
 				),
 			)
 		);
@@ -1649,7 +1629,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 					'{{WRAPPER}} .tp-method-1 .tp-agegate-boxes .tp-agegate-method .age_vmb i,{{WRAPPER}} .tp-method-2 .tp-agegate-boxes .tp-agegate-method .age_verify_method_btnsubmit i,{{WRAPPER}} .tp-method-3 .tp-agegate-boxes .tp-agegate-method .tp-age-btn-yes i,{{WRAPPER}} .tp-method-1 .tp-agegate-boxes .tp-agegate-method .age_vmb svg,{{WRAPPER}} .tp-method-2 .tp-agegate-boxes .tp-agegate-method .age_verify_method_btnsubmit svg,{{WRAPPER}} .tp-method-3 .tp-agegate-boxes .tp-agegate-method .tp-age-btn-yes svg' => 'margin-right: {{SIZE}}{{UNIT}}',
 				),
 				'condition'   => array(
-					'icon_position' => array( 'age_icon_prefix' ),
+					'icon_position' => 'age_icon_prefix',
 				),
 			)
 		);
@@ -1949,7 +1929,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 					'{{WRAPPER}} .tp-method-3 .tp-agegate-boxes .tp-agegate-method .tp-age-btn-no i,{{WRAPPER}} .tp-method-3 .tp-agegate-boxes .tp-agegate-method .tp-age-btn-no svg' => 'margin-right: {{SIZE}}{{UNIT}}',
 				),
 				'condition'   => array(
-					'second_icon_position' => array( 'age_scnd_icon_prefix' ),
+					'second_icon_position' => 'age_scnd_icon_prefix',
 				),
 			)
 		);

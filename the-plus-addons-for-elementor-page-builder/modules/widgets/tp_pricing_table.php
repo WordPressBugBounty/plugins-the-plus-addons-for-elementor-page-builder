@@ -100,7 +100,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Pricing List', 'Menu Price List', 'Modern Pricing List', 'Food Menu', 'Menu List', 'Flip-Box Pricing' );
+		return array( 'Tp Pricing Table', 'Pricing List', 'Menu Price List', 'Modern Pricing List', 'Food Menu', 'Menu List', 'Flip-Box Pricing' );
 	}
 
 	/**
@@ -263,14 +263,6 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 					'image' => esc_html__( 'Image', 'tpebl' ),
 					'svg'   => esc_html__( 'Svg (PRO)', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'image_icon_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<p class="tp-controller-notice"><i>You can select Icon, Custom Image or SVG using this option.</i></p>',
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -461,6 +453,12 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'default'     => esc_html__( '59.99', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter value of Price.. Ex. 49,69...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s</i></p>',
+						esc_html__( 'Enter the main price amount you want to display.', 'tpebl' ),
+					)
+				),
 				'condition'   => array(
 					'price_style' => 'style-1',
 				),
@@ -494,10 +492,16 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'show_previous_price',
 			array(
-				'label'     => esc_html__( 'Display Previous Price', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
+				'label'       => esc_html__( 'Display Previous Price', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
+				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s</i></p>',
+						esc_html__( 'Turn this on to show the old/original price (usually used to highlight discounts).', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -523,6 +527,12 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 				'default'     => esc_html__( '59.99', 'tpebl' ),
 				'placeholder' => esc_html__( 'Enter value of Price.. Ex. 49,69...', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s</i></p>',
+						esc_html__( 'Set the previous price value that you want to display.', 'tpebl' ),
+					)
+				),
 				'condition'   => array(
 					'show_previous_price' => 'yes',
 				),
@@ -566,18 +576,34 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'how_it_works_stylist',
+			'stylist_list_label',
 			array(
-				'label'     => wp_kses_post(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => wp_kses_post(
 					sprintf(
-						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
-						esc_url( $this->tp_doc . 'add-show-more-button-for-features-in-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'Learn How it works', 'tpebl' )
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Displays the content as a clean, styled list. Best for feature highlights, FAQs, or step-based information.', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => array(
+				'label_block' => true,
+				'condition'   => array(
 					'content_style' => 'stylist_list',
+				),
+			)
+		);
+		$this->add_control(
+			'wysiwyg_content_label',
+			array(
+				'type' => Controls_Manager::RAW_HTML,
+				'raw'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Shows content exactly as written in the editor.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'content_style' => 'wysiwyg_content',
 				),
 			)
 		);
@@ -999,29 +1025,25 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 		$this->add_control(
 			'display_ribbon_pin',
 			array(
-				'label'     => wp_kses_post(
+				'label'       => esc_html__( 'Display Ribbon', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Yes', 'tpebl' ),
+				'label_off'   => esc_html__( 'No', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Display Ribbon', 'tpebl' ),
-						esc_url( $this->tp_doc . 'add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Turn this on to show a ribbon badge on the element, useful for highlighting special content like New, Featured, or Sale items.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Yes', 'tpebl' ),
-				'label_off' => esc_html__( 'No', 'tpebl' ),
-				'default'   => 'no',
 			)
 		);
 		$this->add_control(
 			'ribbon_pin_style',
 			array(
-				'label'     => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Style', 'tpebl' ),
-						esc_url( $this->tp_doc . 'add-a-ribbon-to-an-elementor-pricing-table/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'     => esc_html__( 'Style', 'tpebl' ),
 				'type'      => Controls_Manager::SELECT,
 				'default'   => 'style-1',
 				'options'   => array(

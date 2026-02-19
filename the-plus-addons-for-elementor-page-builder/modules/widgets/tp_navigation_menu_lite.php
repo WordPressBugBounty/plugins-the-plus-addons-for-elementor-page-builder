@@ -102,7 +102,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Navigation Menu', 'Horizontal Menu', 'Vertical Menu', 'Mobile Menu', 'Responsive Navigation', 'Custom Navigation', 'Horizontal Navigation', 'Vertical Navigation', 'Responsive Mobile Menu', 'Mobile-Friendly Menu', 'Free Menu', 'Dropdown Menu' );
+		return array( 'Tp Navigation Menu', 'Horizontal Menu', 'Vertical Menu', 'Mobile Menu', 'Responsive Navigation', 'Custom Navigation', 'Horizontal Navigation', 'Vertical Navigation', 'Responsive Mobile Menu', 'Mobile-Friendly Menu', 'Free Menu', 'Dropdown Menu' );
 	}
 
 	/**
@@ -163,6 +163,43 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				),
 			)
 		);
+		$type_menu_label = esc_html__( 'Choose between Default or Repeater to define how your navigation menu is structured. The Default option displays a standard WordPress menu, while the Repeater allows you to add custom menu items.', 'tpebl' );
+		$this->add_control(
+			'TypeMenu_standard_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						$type_menu_label,
+						esc_url( $this->tp_doc . 'navigation-menu-widget-settings-overview/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'TypeMenu' => 'standard',
+				),
+			)
+		);
+		$this->add_control(
+			'TypeMenu_custom_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						$type_menu_label,
+						esc_url( $this->tp_doc . 'create-a-menu-with-repeater-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'TypeMenu' => 'custom',
+				),
+			)
+		);
 		$this->add_control(
 			'navbar_menu_type',
 			array(
@@ -185,18 +222,36 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'how_it_works_vertical',
+			'horizontal_label',
 			array(
-				'label'     => wp_kses_post(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
 					sprintf(
-						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
-						esc_url( $this->tp_doc . 'create-a-vertical-navigation-menu-in-elementor-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'How it works', 'tpebl' ),
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use this layout to display your menu items horizontally, perfect for top navigation bars or any navigation where you want the items to be aligned in a single row.', 'tpebl' ),
 					)
 				),
-				'type'      => Controls_Manager::HEADING,
+				'label_block' => true,
 				'condition' => array(
-					'navbar_menu_type' => array( 'vertical' ),
+					'navbar_menu_type' => 'horizontal',
+				),
+			)
+		);
+		$this->add_control(
+			'vertical_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
+						esc_html__( 'Choose this layout for a vertical display of your menu items, commonly used for side navigation. This setup helps save horizontal space while still showing a full list of items.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-a-vertical-mega-menu-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition' => array(
+					'navbar_menu_type' => 'vertical',
 				),
 			)
 		);
@@ -240,6 +295,14 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					'5' => esc_html__( '5 Level', 'tpebl' ),
 					'6' => esc_html__( '6 Level', 'tpebl' ),
 				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
+						esc_html__( 'Choose the menu item level. Level 0 is for main items (e.g., Home), and Level 1, 2, etc., are for submenus.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-a-menu-with-repeater-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$repeater->add_control(
@@ -254,6 +317,40 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				),
 				'condition' => array(
 					'depth' => '1',
+				),
+			)
+		);
+		$repeater->add_control(
+			'link_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use this option to add a simple link. Enter the Menu Text and provide the link URL. This will create a standard menu item with a clickable link.', 'tpebl' )
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'SmenuType' => 'link',
+					'depth'     => '1',
+				),
+			)
+		);
+		$repeater->add_control(
+			'mega_menu_label',
+			array(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( ' Select this option for a more advanced menu item. It allows you to choose a template.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+				'condition'   => array(
+					'SmenuType' => 'mega-menu',
+					'depth'     => '1',
 				),
 			)
 		);
@@ -426,6 +523,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .plus-navigation-wrap .plus-navigation-inner .navbar-nav li.plus-dropdown-default ul.dropdown-menu' => 'max-width: {{SIZE}}{{UNIT}};min-width: {{SIZE}}{{UNIT}};',
 				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'This option allows you to set the width of the menu content.', 'tpebl' ),
+					)
+				),
 				'condition'  => array(
 					'megaMType' => 'default',
 				),
@@ -440,6 +543,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'options'   => array(
 					'default' => esc_html__( 'Default', 'tpebl' ),
 					'center'  => esc_html__( 'Center', 'tpebl' ),
+				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Control how your dropdown menu aligns within the menu structure. You can choose the default alignment, which aligns the dropdown according to the overall menu, or opt for center alignment to center the dropdown relative to its parent item, giving it a more balanced, centered look.', 'tpebl' ),
+					)
 				),
 				'condition' => array(
 					'megaMType' => 'default',
@@ -512,6 +621,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .plus-navigation-menu .navbar-nav li{{CURRENT_ITEM}} > ul.dropdown-menu' => 'min-width: {{SIZE}}{{UNIT}};',
 				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'This setting allows you to define the minimum width of the submenu. Adjust the value to ensure your submenu content fits properly without overflowing or becoming too compressed. ', 'tpebl' ),
+					)
+				),
 				'condition'  => array(
 					'megaMType' => 'default',
 				),
@@ -525,6 +640,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use the Label field to provide a custom label for each menu item. This can help clarify the purpose of the item, especially for menu options that may not be as self-explanatory.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$repeater->add_control(
@@ -810,6 +931,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					'active' => true,
 				),
 				'label_block' => true,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Use the Custom Class field to assign a specific CSS class to the menu item, allowing you to apply custom styles via CSS. This option provides the flexibility to customize the look and feel of the menu item to match your design preferences.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -879,14 +1006,14 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			array(
 				'label'     => wp_kses_post(
 					sprintf(
-						'<a class="tp-docs-link" href="%s"> %s <i class="eicon-help-o"></i></a>',
-						esc_url( $this->tp_doc . 'open-elementor-submenu-dropdown-on-hover-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget" target="_blank" rel="noopener noreferrer' ),
-						esc_html__( 'How it works ', 'tpebl' ),
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s <i class="eicon-help-o"></i></a>',
+						esc_url( $this->tp_doc . 'open-elementor-submenu-dropdown-on-hover-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'How it works', 'tpebl' ),
 					)
 				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
-					'menu_hover_click' => array( 'hover' ),
+					'menu_hover_click' => 'hover',
 				),
 			)
 		);
@@ -895,14 +1022,14 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			array(
 				'label'     => wp_kses_post(
 					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'How it works', 'tpebl' ),
+						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s <i class="eicon-help-o"></i></a>',
 						esc_url( $this->tp_doc . 'open-elementor-submenu-dropdown-on-click-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'How it works', 'tpebl' ),
 					)
 				),
 				'type'      => Controls_Manager::HEADING,
 				'condition' => array(
-					'menu_hover_click' => array( 'click' ),
+					'menu_hover_click' => 'click',
 				),
 			)
 		);
@@ -917,17 +1044,19 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'show_mobile_menu',
 			array(
-				'label'     => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Responsive Mobile Menu', 'tpebl' ),
-						esc_url( $this->tp_doc . 'create-an-elementor-hamburger-toggle-menu-for-mobile-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'     => esc_html__( 'Responsive Mobile Menu', 'tpebl' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'label_on'  => __( 'Show', 'tpebl' ),
 				'label_off' => __( 'Hide', 'tpebl' ),
 				'default'   => 'yes',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
+						esc_html__( 'Enables a dedicated mobile navigation menu, optimized for smaller screens to improve usability on phones and tablets.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'create-an-elementor-hamburger-toggle-menu-for-mobile-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -946,6 +1075,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'default'    => array(
 					'unit' => 'px',
 					'size' => 991,
+				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set the screen width at which the mobile menu activates. ', 'tpebl' ),
+					)
 				),
 				'condition'  => array(
 					'show_mobile_menu' => 'yes',
@@ -1037,6 +1172,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'options'   => array(
 					'normal-menu'   => __( 'Normal Menu', 'tpebl' ),
 					'template-menu' => __( 'Template Menu', 'tpebl' ),
+				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose whether to display a Normal Menu or advanced Mega Menu layout for mobile users.', 'tpebl' ),
+					)
 				),
 				'condition' => array(
 					'show_mobile_menu' => 'yes',

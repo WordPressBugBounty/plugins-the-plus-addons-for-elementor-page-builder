@@ -84,7 +84,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Process Steps', 'Step-by-Step Flow', 'Horizontal Steps', 'Vertical Steps', 'Numbered Steps', 'Icon Steps', 'Image Steps', 'Lottie Steps', 'Interactive Process Steps', 'Custom Process Steps' );
+		return array( 'Tp Process Steps', 'Step-by-Step Flow', 'Horizontal Steps', 'Vertical Steps', 'Numbered Steps', 'Icon Steps', 'Image Steps', 'Lottie Steps', 'Interactive Process Steps', 'Custom Process Steps' );
 	}
 
 	/**
@@ -178,11 +178,17 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$this->add_control(
 			'pro_ste_display_counter',
 			array(
-				'label'     => esc_html__( 'Display Counter', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
+				'label'       => esc_html__( 'Display Counter', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Show or hide a counter indicator for each item.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -296,10 +302,10 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$this->add_control(
 			'default_active',
 			array(
-				'label'   => esc_html__( 'Default Active', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '0',
-				'options' => array(
+				'label'       => esc_html__( 'Default Active', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => '0',
+				'options'     => array(
 					'0'      => esc_html__( '1', 'tpebl' ),
 					'1'      => esc_html__( '2', 'tpebl' ),
 					'2'      => esc_html__( '3', 'tpebl' ),
@@ -312,6 +318,12 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 					'9'      => esc_html__( '10', 'tpebl' ),
 					'50'     => esc_html__( 'None', 'tpebl' ),
 					'custom' => esc_html__( 'Custom', 'tpebl' ),
+				),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Choose which item should be active or highlighted by default when the page loads.', 'tpebl' ),
+					)
 				),
 			)
 		);
@@ -373,14 +385,6 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 					'text'   => esc_html__( 'Text', 'tpebl' ),
 					'lottie' => esc_html__( 'Lottie', 'tpebl' ),
 				),
-			)
-		);
-		$repeater->add_control(
-			'loop_image_icon_note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> You can select Icon, Custom Image or Text using this option.',
-				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$repeater->add_control(
@@ -649,6 +653,12 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this option to connect the process steps with the Carousel Anything widget, allowing to connect each step with a slide for detailed and clearer user experience.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(

@@ -87,7 +87,7 @@ class ThePlus_Hovercard extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Hover Card', 'Interactive Card', 'Animated Hover Card', 'Custom Hover Layout', 'Responsive Hover Card', 'Customizable Card' );
+		return array( 'Tp Hover Card', 'Interactive Card', 'Animated Hover Card', 'Custom Hover Layout', 'Responsive Hover Card', 'Customizable Card' );
 	}
 
 	/**

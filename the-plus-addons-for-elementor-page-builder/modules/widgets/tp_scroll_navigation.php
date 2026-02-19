@@ -81,7 +81,7 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Scroll Animation', 'Scroll Sequence', 'Image Gallery Animation', 'Dynamic Scroll Effects', 'Interactive Image Sequences', 'Image Sequence Animation', 'Sequence Scrolling' );
+		return array( 'Tp Scroll Animation', 'Scroll Sequence', 'Image Gallery Animation', 'Dynamic Scroll Effects', 'Interactive Image Sequences', 'Image Sequence Animation', 'Sequence Scrolling' );
 	}
 
 	/**
@@ -224,16 +224,29 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 		$this->add_control(
 			'scroll_navigation_direction_st4',
 			array(
-				'label'     => esc_html__( 'Direction', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'right',
-				'options'   => array(
+				'label'       => esc_html__( 'Direction', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'right',
+				'options'     => array(
 					'left'  => esc_html__( 'Middle Left (Pro)', 'tpebl' ),
 					'right' => esc_html__( 'Middle Right (Pro)', 'tpebl' ),
 				),
-				'condition' => array(
+				'condition'   => array(
 					'scroll_navigation_style' => array( 'style-2', 'style-4' ),
 				),
+			)
+		);
+		$this->add_control(
+			'nav_direction_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set where the scroll navigation appears on the screen (left, right, center, etc.) based on your layout preference.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -310,22 +323,33 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 		$repeater->add_control(
 			'scroll_navigation_section_id',
 			array(
-				'label'   => esc_html__( 'Section ID', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'ai'      => false,
-				'default' => 'section-id',
+				'label'       => esc_html__( 'Section ID', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => 'section-id',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enter the section ID of the page section you want to link with this navigation item. Make sure the same ID is added to the target section.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$repeater->add_control(
 			'display_tool_tip',
 			array(
-				'label'     => esc_html__( 'Tooltip', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-
+				'label'       => esc_html__( 'Tooltip', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'separator'   => 'before',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this to show helpful text when users hover over the navigation item.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$repeater->add_control(
@@ -484,6 +508,12 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Enable this to link the element with a page scroll interaction so it reacts or syncs based on how the page is scrolled.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(

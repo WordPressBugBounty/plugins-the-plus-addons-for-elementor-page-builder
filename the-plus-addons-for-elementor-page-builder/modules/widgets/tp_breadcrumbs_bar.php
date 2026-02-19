@@ -82,7 +82,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 	 * @since 6.1.0
 	 */
 	public function get_keywords() {
-		return array( 'Breadcrumb', 'Breadcrumb Navigation', 'Breadcrumb Trail', 'SEO Breadcrumb', 'Full-Width Breadcrumb', 'Home Icon Breadcrumb', 'Responsive Breadcrumb', 'Navigation Path' );
+		return array( 'Tp Breadcrumb', 'Breadcrumb Navigation', 'Breadcrumb Trail', 'SEO Breadcrumb', 'Full-Width Breadcrumb', 'Home Icon Breadcrumb', 'Responsive Breadcrumb', 'Navigation Path' );
 	}
 
 	/**
@@ -179,7 +179,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'label_off' => esc_html__( 'Disable', 'tpebl' ),
 				'default'   => 'no',
 				'condition' => array(
-					'breadcrumbs_style' => array( 'style_1' ),
+					'breadcrumbs_style' => 'style_1',
 				),
 			)
 		);
@@ -224,10 +224,16 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'home_title',
 			array(
-				'label'   => esc_html__( 'Home Title', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'ai'      => false,
-				'default' => esc_html__( 'Home', 'tpebl' ),
+				'label'       => esc_html__( 'Home Title', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => esc_html__( 'Home', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Set the text for the first breadcrumb item.', 'tpebl' ),
+					)
+				),
 			)
 		);
 
@@ -379,14 +385,6 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					''         => esc_html__( 'None', 'tpebl' ),
 					'sep_icon' => esc_html__( 'Icon', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'spe_select_Note',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<b>Note:</b> You can select Icon or Image using this option.',
-				'content_classes' => 'tp-controller-notice',
 			)
 		);
 		$this->add_control(
@@ -595,23 +593,31 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'description'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Show or hide the Home page in the breadcrumb.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
 			'breadcrumbs_on_off_parent',
 			array(
-				'label'        => wp_kses_post(
-					sprintf(
-						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
-						esc_html__( 'Parent', 'tpebl' ),
-						esc_url( $this->tp_doc . 'add-breadcrumbs-with-parent-page-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
-					)
-				),
+				'label'        => esc_html__( 'Parent', 'tpebl' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Show', 'tpebl' ),
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'description'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Show or hide the parent page the breadcrumb trail.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-breadcrumbs-with-parent-page-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -623,6 +629,12 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'description'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Show or hide the current page or item in the breadcrumb.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -688,7 +700,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs a,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs .current .current_tab_sec,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs .current_active .current_tab_sec' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'breadcrumbs_style' => array( 'style_2' ),
+					'breadcrumbs_style' => 'style_2',
 				),
 			)
 		);
@@ -702,7 +714,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs a,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs .current .current_tab_sec,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs .current_active .current_tab_sec' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'breadcrumbs_style' => array( 'style_2' ),
+					'breadcrumbs_style' => 'style_2',
 				),
 			)
 		);
@@ -767,7 +779,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'default'   => 'orange',
 				'condition' => array(
 					'bred_text_color_option' => 'gradient',
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'breadcrumbs_style'      => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -785,7 +797,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'render_type' => 'ui',
 				'condition'   => array(
 					'bred_text_color_option' => 'gradient',
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'breadcrumbs_style!'     => 'style_2',
 				),
 				'of_type'     => 'gradient',
 			)
@@ -798,7 +810,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'default'   => 'cyan',
 				'condition' => array(
 					'bred_text_color_option' => 'gradient',
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'breadcrumbs_style!'     => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -816,7 +828,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'render_type' => 'ui',
 				'condition'   => array(
 					'bred_text_color_option' => 'gradient',
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'breadcrumbs_style!'     => 'style_2',
 				),
 				'of_type'     => 'gradient',
 			)
@@ -830,7 +842,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'options'   => l_theplus_get_gradient_styles(),
 				'condition' => array(
 					'bred_text_color_option' => 'gradient',
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'breadcrumbs_style!'     => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -855,8 +867,8 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				),
 				'condition'  => array(
 					'bred_text_color_option' => 'gradient',
-					'text_gradient_style'    => array( 'linear' ),
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'text_gradient_style'    => 'linear',
+					'breadcrumbs_style!'     => 'style_2',
 				),
 				'of_type'    => 'gradient',
 			)
@@ -874,7 +886,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'condition' => array(
 					'bred_text_color_option' => 'gradient',
 					'text_gradient_style'    => 'radial',
-					'breadcrumbs_style!'     => array( 'style_2' ),
+					'breadcrumbs_style!'     => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -958,7 +970,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'default'   => 'orange',
 				'condition' => array(
 					'bred_text_hover_color_option' => 'gradient',
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -976,7 +988,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'render_type' => 'ui',
 				'condition'   => array(
 					'bred_text_hover_color_option' => 'gradient',
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'     => 'gradient',
 			)
@@ -989,7 +1001,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'default'   => 'cyan',
 				'condition' => array(
 					'bred_text_hover_color_option' => 'gradient',
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -1007,7 +1019,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'render_type' => 'ui',
 				'condition'   => array(
 					'bred_text_hover_color_option' => 'gradient',
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'     => 'gradient',
 			)
@@ -1021,7 +1033,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'options'   => l_theplus_get_gradient_styles(),
 				'condition' => array(
 					'bred_text_hover_color_option' => 'gradient',
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -1046,8 +1058,8 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				),
 				'condition'  => array(
 					'bred_text_hover_color_option' => 'gradient',
-					'text_hover_gradient_style'    => array( 'linear' ),
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'text_hover_gradient_style'    => 'linear',
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'    => 'gradient',
 			)
@@ -1065,7 +1077,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'condition' => array(
 					'bred_text_hover_color_option' => 'gradient',
 					'text_hover_gradient_style'    => 'radial',
-					'breadcrumbs_style!'           => array( 'style_2' ),
+					'breadcrumbs_style!'           => 'style_2',
 				),
 				'of_type'   => 'gradient',
 			)
@@ -1119,7 +1131,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs i.bread-home-icon,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs i.bread-home-icon' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'icon_font_style' => array( 'font_awesome' ),
+					'icon_font_style' => 'font_awesome',
 				),
 			)
 		);
@@ -1129,7 +1141,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Normal', 'tpebl' ),
 				'condition' => array(
-					'icon_font_style' => array( 'font_awesome' ),
+					'icon_font_style' => 'font_awesome',
 				),
 			)
 		);
@@ -1142,7 +1154,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs i.bread-home-icon,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs i.bread-home-icon' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'icon_font_style' => array( 'font_awesome' ),
+					'icon_font_style' => 'font_awesome',
 				),
 			)
 		);
@@ -1152,7 +1164,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Hover', 'tpebl' ),
 				'condition' => array(
-					'icon_font_style' => array( 'font_awesome' ),
+					'icon_font_style' => 'font_awesome',
 				),
 			)
 		);
@@ -1165,7 +1177,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs a:hover i.bread-home-icon,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs a:hover i.bread-home-icon' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'icon_font_style' => array( 'font_awesome' ),
+					'icon_font_style' => 'font_awesome',
 				),
 			)
 		);
@@ -1245,7 +1257,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs i.bread-sep-icon:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs i.bread-sep-icon:before' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'sep_icon_font_style' => array( 'sep_font_awesome' ),
+					'sep_icon_font_style' => 'sep_font_awesome',
 				),
 			)
 		);
@@ -1273,7 +1285,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Normal', 'tpebl' ),
 				'condition' => array(
-					'sep_icon_font_style' => array( 'sep_font_awesome' ),
+					'sep_icon_font_style' => 'sep_font_awesome',
 				),
 			)
 		);
@@ -1286,7 +1298,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs i.bread-sep-icon:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs i.bread-sep-icon:before' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'sep_icon_font_style' => array( 'sep_font_awesome' ),
+					'sep_icon_font_style' => 'sep_font_awesome',
 				),
 			)
 		);
@@ -1296,7 +1308,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Hover', 'tpebl' ),
 				'condition' => array(
-					'sep_icon_font_style' => array( 'sep_font_awesome' ),
+					'sep_icon_font_style' => 'sep_font_awesome',
 				),
 			)
 		);
@@ -1309,7 +1321,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs a:hover i.bread-sep-icon:before,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_2 nav#breadcrumbs a:hover i.bread-sep-icon:before' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
-					'sep_icon_font_style' => array( 'sep_font_awesome' ),
+					'sep_icon_font_style' => 'sep_font_awesome',
 				),
 			)
 		);
@@ -1344,7 +1356,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'label'     => esc_html__( 'Content Background', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'breadcrumbs_style' => array( 'style_1' ),
+					'breadcrumbs_style' => 'style_1',
 				),
 			)
 		);
@@ -1423,7 +1435,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs a,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs .current_tab_sec' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'breadcrumbs_style' => array( 'style_1' ),
+					'breadcrumbs_style' => 'style_1',
 				),
 			)
 		);
@@ -1437,7 +1449,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 					'{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs a,{{WRAPPER}} .pt_plus_breadcrumbs_bar .pt_plus_breadcrumbs_bar_inner.bred_style_1 nav#breadcrumbs .current_tab_sec' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'condition'  => array(
-					'breadcrumbs_style' => array( 'style_1' ),
+					'breadcrumbs_style' => 'style_1',
 				),
 			)
 		);
@@ -1662,12 +1674,21 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 			$text['home'] = '';
 		}
 
+		/* translators: %s: Category name */
 		$text['category']  = esc_html__( 'Archive by "%s"', 'tpebl' );
+
+		/* translators: %s: Category name */
 		$text['category1'] = esc_html__( '%s', 'tpebl' );
 
+		/* translators: %s: Search query */
 		$text['search'] = esc_html__( 'Search Results for "%s"', 'tpebl' );
+
+		/* translators: %s: Tag name */
 		$text['tag']    = esc_html__( 'Posts Tagged "%s"', 'tpebl' );
+
+		/* translators: %s: Author name */
 		$text['author'] = esc_html__( 'Articles Posted by %s', 'tpebl' );
+
 		$text['404']    = esc_html__( 'Error 404', 'tpebl' );
 
 		$show_current = 1;

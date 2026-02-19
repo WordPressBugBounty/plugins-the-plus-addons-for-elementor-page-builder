@@ -88,7 +88,7 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Gallery Listing', 'Image Gallery', 'Masonry Gallery', 'Metro Gallery', 'Carousel Gallery', 'Filterable Gallery', 'Repeater Gallery', 'ACF Gallery' );
+		return array( 'Tp Gallery Listing', 'Image Gallery', 'Masonry Gallery', 'Metro Gallery', 'Carousel Gallery', 'Filterable Gallery', 'Repeater Gallery', 'ACF Gallery' );
 	}
 
 	/**

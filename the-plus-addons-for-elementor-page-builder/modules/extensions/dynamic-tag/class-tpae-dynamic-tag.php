@@ -81,7 +81,11 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
             'post-terms'    => 'ThePlus_Dynamic_Tag_Post_Terms',
             'post-status'   => 'ThePlus_Dynamic_Tag_Post_Status',
             'post-type'     => 'ThePlus_Dynamic_Tag_Post_Type',
+            'post-cat-desc' => 'ThePlus_Dynamic_Tag_Post_Category_Description',
+            'post-tag-desc' => 'ThePlus_Dynamic_Tag_Post_Tag_Description',
 
+            'post-cat-post-count' => 'ThePlus_Dynamic_Tag_Post_Category_Post_Count',
+            'post-tag-post-count' => 'ThePlus_Dynamic_Tag_Post_Tag_Post_Count',
             'post-featured-image' => 'ThePlus_Dynamic_Tag_Post_Featured_Image_Data',
 
             /** Site Tags*/
@@ -101,6 +105,8 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
         private $tp_dynamic_tags_image = [
             'post-featured-image' => 'ThePlus_Dynamic_Tag_Post_Featured_Image',
             'post-author-avatar'  => 'ThePlus_Dynamic_Tag_Post_Author_Avatar',
+
+            'post-cat-image' => 'ThePlus_Dynamic_Tag_Post_Category_Image',
 
             /** Site Tags*/
             'site-logo' => 'ThePlus_Dynamic_Tag_Site_Logo',

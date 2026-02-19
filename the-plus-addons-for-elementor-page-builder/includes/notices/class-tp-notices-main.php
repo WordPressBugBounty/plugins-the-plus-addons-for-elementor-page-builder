@@ -209,9 +209,9 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 				$check_license = $license_data ? $license_data['expires'] : '';
 
 				/** Plugin Features Banner*/
-				if ( ! get_option( 'tpae_pluginfeatures_notice_dismissed' ) ) {
-					include L_THEPLUS_PATH . 'includes/notices/class-tp-plugin-features-banner.php';
-				}
+				// if ( ! get_option( 'tpae_pluginfeatures_notice_dismissed' ) ) {
+				// 	include L_THEPLUS_PATH . 'includes/notices/class-tp-plugin-features-banner.php';
+				// }
 
 				if ( ! empty( $ele_pro_details[0]['status'] ) && 'unavailable' == $ele_pro_details[0]['status'] ) {
 					if ( ! empty( $nxt_ext_details[0]['status'] ) && 'unavailable' == $nxt_ext_details[0]['status'] ) {

@@ -144,7 +144,7 @@ function l_theplus_loading_bg_image( $postid = '' ) {
  * @since 6.0.4
  */
 function L_tp_plus_simple_decrypt( $string, $action = 'dy' ) {
-	
+
 	$option_name_key = 'tp_key_random_generate';
     $secret_key = get_option( $option_name_key );
 	

@@ -348,8 +348,8 @@ final class L_Theplus_Element_Load {
 			add_action( 'admin_footer', array( $this, 'tpae_add_notificetion' ) );
 		}
 
-		add_option( 'tpae_menu_notification', '2' );
-		add_option( 'tpae_whats_new_notification', '2' );
+		add_option( 'tpae_menu_notification', '3' );
+		add_option( 'tpae_whats_new_notification', '3' );
 	}
 
 	/**
@@ -372,9 +372,8 @@ final class L_Theplus_Element_Load {
 
 		if ( ! defined( 'THEPLUS_VERSION' ) ) {
 			require L_THEPLUS_PATH . 'modules/theplus-integration.php';
-
-			include L_THEPLUS_PATH . 'modules/widget-promotion/tp-widget-promotion-main.php';
 		}
+		include L_THEPLUS_PATH . 'modules/widget-promotion/tp-widget-promotion-main.php';
 
 		require L_THEPLUS_PATH . 'modules/query-control/module.php';
 

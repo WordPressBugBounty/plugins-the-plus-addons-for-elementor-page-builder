@@ -77,7 +77,7 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Smooth Scroll Effect', 'Smooth Scrolling', 'Keyboard Smooth Scrolling', 'Touchpad Smooth Scroll', 'Page Smooth Scroll', 'Scroll Navigation', 'Infinite Scroll', 'Scrolling Effects', 'Scrolling Animation' );
+		return array( 'Tp Smooth Scroll Effect', 'Smooth Scrolling', 'Keyboard Smooth Scrolling', 'Touchpad Smooth Scroll', 'Page Smooth Scroll', 'Scroll Navigation', 'Infinite Scroll', 'Scrolling Effects', 'Scrolling Animation' );
 	}
 
 	/**

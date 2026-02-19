@@ -74,7 +74,7 @@ class ThePlus_Post_Comment extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Post Comment', 'Comment Section', 'Blog Comments', 'User Feedback', 'Comment Form' );
+		return array( 'Tp Post Comment', 'Comment Section', 'Blog Comments', 'User Feedback', 'Comment Form' );
 	}
 
 	/**
@@ -1388,7 +1388,8 @@ class ThePlus_Post_Comment extends Widget_Base {
 			'title_reply'          => esc_html( $post_title ),
 			// Translators: %s is replaced with the title of the post being replied to.
 			// 'title_reply_to'       => esc_html( $leave_txt ) . sprintf( esc_html__( 'Reply to %s', 'tpebl' ), esc_html( $post_title ) ),
-			'title_reply_to'       => $parent_id ? sprintf( esc_html__( '%s %s', 'tpebl' ), esc_html( $leave_txt ), esc_html( $parent_author ) ) : esc_html( $leave_txt ),
+			'title_reply_to'       => $parent_id ? sprintf( /* translators: 1: Leave reply text, 2: Parent comment author name */ esc_html__( '%1$s %2$s', 'tpebl' ), esc_html( $leave_txt ), esc_html( $parent_author ) ) : esc_html( $leave_txt ),
+
 			'cancel_reply_link'    => esc_html( $cancel_txt ),
 			'label_submit'         => esc_html( $btn_title ),
 			'comment_field'        => '<div class="tp-row"><div class="tp-col-md-12 tp-col"><label><textarea id="comment" name="comment" cols="45" rows="6" placeholder="' . esc_html( $placeholder_txt ) . '" aria-required="true"></textarea></label></div></div>',

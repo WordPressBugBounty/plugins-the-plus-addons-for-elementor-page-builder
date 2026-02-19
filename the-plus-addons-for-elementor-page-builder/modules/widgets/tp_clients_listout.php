@@ -87,7 +87,7 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Client Listing', 'Logo Listing', 'Logo Showcase', 'Logo Carousel', 'Logo Grid', 'Logo Masonry', 'Logo Filter', 'Load More Logos', 'Logo Pagination' );
+		return array( 'Tp Client Listing', 'Logo Listing', 'Logo Showcase', 'Logo Carousel', 'Logo Grid', 'Logo Masonry', 'Logo Filter', 'Load More Logos', 'Logo Pagination' );
 	}
 
 	/**
