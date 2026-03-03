@@ -740,15 +740,15 @@ class ThePlus_Post_Title extends Widget_Base {
 		$lz2 = function_exists( 'tp_has_lazyload' ) ? tp_bg_lazyLoad( $settings['prepostboxBg_image'] ) : '';
 
 		if ( 'yes' === $title_link ) {
-			$output .= '<a class="' . esc_attr( $lz1 ) . '" href="' . get_the_permalink() . '" >';
+			$output .= '<a class="' . esc_attr( $lz1 ) . '" href="' . esc_url( get_the_permalink() ) . '" >';
 		}
 
-			$output .= '<' . l_theplus_validate_html_tag( $titletag ) . ' class="tp-entry-title ' . esc_attr( $lz1 ) . '">';
+		$output .= '<' . l_theplus_validate_html_tag( $titletag ) . ' class="tp-entry-title ' . esc_attr( $lz1 ) . '">';
 
 		if ( ! empty( $titleprefix ) ) {
 			$output .= '<span class="tp-post-title-prepost tp-prefix ' . esc_attr( $lz2 ) . ' ">' . wp_kses_post( $titleprefix ) . '</span>';
 		}
-					$output .= $title;
+					$output .= esc_html( $title );
 
 		if ( ! empty( $titlepostfix ) ) {
 			$output .= '<span class="tp-post-title-prepost tp-postfix">' . esc_html( $titlepostfix ) . '</span>';

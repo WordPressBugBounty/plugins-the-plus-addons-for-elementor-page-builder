@@ -553,7 +553,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 		} elseif ( has_post_thumbnail( $post_id ) ) {
 			$image_content = tp_get_image_rander( $post_id, $image_size, array( 'class' => 'tp-featured-img' ), 'post' );
 		} else {
-			$image_content = '<img src="' . L_THEPLUS_URL . 'assets/images/tp-placeholder.jpg" alt="' . get_the_title() . '" class="tp-featured-img" />';
+			$image_content = '<img src="' . esc_url( L_THEPLUS_URL . 'assets/images/tp-placeholder.jpg' ) . '" alt="' . esc_attr( get_the_title() ) . '" class="tp-featured-img" />';
 		}
 
 		// if ( has_post_thumbnail( $post_id ) ) {

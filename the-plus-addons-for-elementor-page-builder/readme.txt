@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.9
+Stable tag: 6.4.10
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.10 =
+Fix : Progress Bar : Stored XSS Security Patch (Medium Security)
+Fix : Navigation Menu Lite : Repeater - SVG icon not showing
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.9 =
 Add : Dynamic Tag : Post Category Image, Description & Category post count tag support

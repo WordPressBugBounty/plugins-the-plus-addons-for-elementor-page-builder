@@ -376,13 +376,14 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'number',
 			array(
-				'label'       => esc_html__( 'Number', 'tpebl' ),
-				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( '59', 'tpebl' ),
-				'placeholder' => esc_html__( 'Enter Number Ex. 50 , 60', 'tpebl' ),
-				'separator'   => 'before',
-				'dynamic'     => array( 'active' => false ),
-				'ai'          => array( 'active' => false ),
+				'label'     => esc_html__( 'Number', 'tpebl' ),
+				'type'      => Controls_Manager::NUMBER,
+				'default'   => 59,
+				'min'       => 0,
+				'step'      => 1,
+				'separator' => 'before',
+				'dynamic'   => array( 'active' => false ),
+				'ai'        => array( 'active' => false ),
 			)
 		);
 		$this->add_control(
@@ -1388,12 +1389,12 @@ class ThePlus_Progress_Bar extends Widget_Base {
 			$sym_pois = ! empty( $settings['symbol_position'] ) ? $settings['symbol_position'] : '';
 
 			if ( 'after' === $sym_pois ) {
-				$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . esc_attr( $num ) . '">' . wp_kses_post( $num ) . '</span><span class="theserivce-milestone-symbol">' . wp_kses_post( $sym ) . '</span>';
+				$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . esc_attr( $num ) . '">' . esc_html( $num ) . '</span><span class="theserivce-milestone-symbol">' . wp_kses_post( $sym ) . '</span>';
 			} elseif ( 'before' === $sym_pois ) {
-				$symbol2 = '<span class="theserivce-milestone-symbol">' . wp_kses_post( $sym ) . '</span><span class="theserivce-milestone-number" data-counterup-nums="' . esc_attr( $num ) . '">' . wp_kses_post( $num ) . '</span>';
+				$symbol2 = '<span class="theserivce-milestone-symbol">' . wp_kses_post( $sym ) . '</span><span class="theserivce-milestone-number" data-counterup-nums="' . esc_attr( $num ) . '">' . esc_html( $num ) . '</span>';
 			}
 		} else {
-			$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . wp_kses_post( $num ) . '">' . esc_html( $num ) . '</span>';
+			$symbol2 = '<span class="theserivce-milestone-number icon-milestone" data-counterup-nums="' . esc_attr( $num ) . '">' . esc_html( $num ) . '</span>';
 		}
 
 		if ( 'gradient' === $pi_fill ) {

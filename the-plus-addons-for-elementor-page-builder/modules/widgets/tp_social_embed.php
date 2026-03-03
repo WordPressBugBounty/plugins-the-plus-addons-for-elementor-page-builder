@@ -3591,7 +3591,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 					$TwMassage   = ! empty( $Tweet['TwMassage'] ) ? $Tweet['TwMassage'] : '';
 					$output     .= '<blockquote class="twitter-tweet" data-theme="' . esc_attr( $TwColor ) . '" data-width="' . esc_attr( $Twwidth ) . '" data-cards="' . esc_attr( $TwCards ) . '" data-align="' . esc_attr( $TwAlign ) . '" data-conversation="' . esc_attr( $Twconver ) . '" >';
 						$output .= '<p lang="en" dir="ltr">' . wp_kses_post( $TwMassage ) . '</p>';
-						$output .= '<a href="' . esc_attr( $TwURl ) . '"></a>';
+						$output .= '<a href="' . esc_url( $TwURl ) . '"></a>';
 					$output     .= '</blockquote>';
 				}
 			}
@@ -3727,7 +3727,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 				$YtUsername = ! empty( $settings['YtUsername'] ) ? $settings['YtUsername'] : '';
 				$YtSrc      = 'https://www.youtube.com/embed?listType=user_uploads&list=' . esc_attr( $YtUsername ) . '&' . esc_attr( $YT_Parameters );
 			}
-			$output .= '<iframe class="tp-frame-set" width="' . esc_attr( $ExWidth ) . '" height="' . esc_attr( $ExHeight ) . '" src="' . esc_attr( $YtSrc ) . '" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+			$output .= '<iframe class="tp-frame-set" width="' . esc_attr( $ExWidth ) . '" height="' . esc_attr( $ExHeight ) . '" src="' . esc_url( $YtSrc ) . '" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 		} elseif ( $EmbedType == 'googlemap' ) {
 			$Mapaccesstoken = ! empty( $settings['Mapaccesstoken'] ) ? $settings['Mapaccesstoken'] : 'default';
 			$GSearchText    = ! empty( $settings['GSearchText'] ) ? $settings['GSearchText'] : 'Goa+India';

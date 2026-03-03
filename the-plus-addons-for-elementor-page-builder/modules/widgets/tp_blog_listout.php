@@ -4318,7 +4318,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				$html_custom  = ! empty( $settings['content_html'] ) ? $settings['content_html'] : '';
 
 				if ( ! empty( $style_custom ) ) {
-					echo '<style>' . $style_custom . '</style>';
+					echo '<style>' . wp_strip_all_tags( $style_custom ) . '</style>';
 				}
 
 				if ( empty( $html_custom ) ) {

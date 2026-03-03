@@ -2678,7 +2678,13 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				// Get Prefix Icon
 				$preicon = '';
 				if ( $item['menuiconTy'] !== '' && $item['menuiconTy'] == 'icon' ) {
-					$preicon .= '<span class="plus-navicon-wrap"><i class="' . $item['preicon']['value'] . ' plus-nav-icon-menu"> </i></span>';
+					$preicon .= '<span class="plus-navicon-wrap">';
+					if ( ! empty( $item['preicon'] ) ) {
+						ob_start();
+						\Elementor\Icons_Manager::render_icon( $item['preicon'], array( 'aria-hidden' => 'true', 'class' => 'plus-nav-icon-menu' ) );
+						$preicon .= ob_get_clean();
+					}
+					$preicon .= '</span>';
 				} elseif ( $item['menuiconTy'] !== '' && $item['menuiconTy'] == 'img' ) {
 					if ( ! empty( $item['menuImg'] ) && ! empty( $item['menuImg']['id'] ) ) {
 						$preicon .= '<span class="plus-navicon-wrap">' . wp_get_attachment_image( $item['menuImg']['id'], 'full', true, array( 'class' => 'plus-nav-icon-menu' ) ) . '</span>';
@@ -2696,7 +2702,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				// Get Descroption
 				$navdesc = '';
 				if ( ! empty( $item['navDesc'] ) ) {
-					$navdesc .= '<span class="tp-navigation-description">' . $item['navDesc'] . '</span>';
+					$navdesc .= '<span class="tp-navigation-description">' . esc_html( $item['navDesc'] ) . '</span>';
 				}
 				$LinkFilter = ! empty( $item['LinkFilter']['url'] ) ? $item['LinkFilter']['url'] : '#';
 
@@ -2724,7 +2730,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				}
 
 				if ( ( $depth != '1' ) || ! empty( $item['SmenuType'] ) && $item['SmenuType'] != 'mega-menu' && $item['SmenuType'] == 'link' ) {
-					$name = '<a href="' . esc_attr( $itemUrl ) . '" ' . $itemTarget . $itemNofollow . ' title="' . esc_attr( $menuName ) . '" data-text="' . esc_attr( $menuName ) . '" >' . $preicon . '<span class="plus-title-wrap">' . esc_html( $menuName ) . '' . $txtLabel . '' . $navdesc . '</span></a>';
+					$name = '<a href="' . esc_url( $itemUrl ) . '" ' . $itemTarget . $itemNofollow . ' title="' . esc_attr( $menuName ) . '" data-text="' . esc_attr( $menuName ) . '" >' . $preicon . '<span class="plus-title-wrap">' . esc_html( $menuName ) . '' . $txtLabel . '' . $navdesc . '</span></a>';
 				}
 				$dropdownClass = ( $Nextdepth >= 2 && ( $Nextdepth > $depth ) ) ? 'dropdown-submenu menu-item-has-children' : ( ( $Nextdepth > $depth ) ? 'dropdown menu-item-has-children' : '' );
 
@@ -2757,7 +2763,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						$MegaMenuClass .= ' plus-dropdown-' . esc_attr( $NextMenu['megaMAlign'] );
 					}
 				}
-				$start_Li = "<li class='menu-item depth-" . esc_attr( $depth ) . ' ' . esc_attr( $dropdownClass ) . ' ' . esc_attr( $MegaMenuClass ) . ' ' . ( ! empty( $item['classTxt'] ) ? $item['classTxt'] : '' ) . ' elementor-repeater-item-' . esc_attr( $item['_id'] ) . $current_active . "' >";
+				$start_Li = "<li class='menu-item depth-" . esc_attr( $depth ) . ' ' . esc_attr( $dropdownClass ) . ' ' . esc_attr( $MegaMenuClass ) . ' ' . ( ! empty( $item['classTxt'] ) ? esc_attr( $item['classTxt'] ) : '' ) . ' elementor-repeater-item-' . esc_attr( $item['_id'] ) . $current_active . "' >";
 
 				if ( $depth == '1' && $item['SmenuType'] == 'mega-menu' ) {
 					if ( empty( $sett ) || empty( $item['moblieMmenu'] && $item['moblieMmenu'] == 'no' ) ) {
@@ -2789,7 +2795,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						$MitemUrl    = ! empty( $item['MLinkFilter']['url'] ) ? $item['MLinkFilter']['url'] : '#';
 						$Target      = ! empty( $item['MLinkFilter']['is_external'] ) ? ' target="_blank"' : '';
 						$Nofollow    = ! empty( $item['MLinkFilter']['nofollow'] ) ? ' rel="nofollow"' : '';
-						$start_Li   .= '<a href="' . esc_attr( $MitemUrl ) . '" ' . $Target . $Nofollow . ' title="' . esc_attr( $MmenuName ) . '" data-text="' . $MmenuName . '" >' . $preicon . '' . $MmenuName . '' . $txtLabel . '</a>';
+						$start_Li   .= '<a href="' . esc_url( $MitemUrl ) . '" ' . $Target . $Nofollow . ' title="' . esc_attr( $MmenuName ) . '" data-text="' . esc_attr( $MmenuName ) . '" >' . $preicon . '' . esc_html( $MmenuName ) . '' . $txtLabel . '</a>';
 					}
 				}
 				$end_Li = '';

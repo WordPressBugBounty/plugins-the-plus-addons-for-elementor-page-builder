@@ -1140,7 +1140,7 @@ class L_ThePlus_Post_Search extends Widget_Base {
 				$output     .= '<form action="' . esc_url( home_url() ) . '" method="get" class="theplus-post-search-form ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . '">';
 					$output .= '<div class="plus-newsletter-input-wrapper">';
 		if ( ! empty( $search_icon ) ) {
-			$output .= '<span class="prefix-icon"><i class="' . wp_kses_post( $search_icon ) . '"></i></span>';
+			$output .= '<span class="prefix-icon"><i class="' . esc_attr( $search_icon ) . '"></i></span>';
 		}
 						$output .= '<input type="text" name="s" placeholder="' . esc_attr( $s_placeholder ) . '" required class="form-control" />';
 						$output .= '<button class="search-btn-submit">' . $this->render_text( $settings ) . '</button>';

@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.4.9\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.4.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-19T06:05:32+00:00\n"
+"POT-Creation-Date: 2026-03-02T12:10:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
@@ -627,7 +627,7 @@ msgstr ""
 #: modules/widgets/tp_post_title.php:332
 #: modules/widgets/tp_pricing_table.php:1088
 #: modules/widgets/tp_process_steps.php:680
-#: modules/widgets/tp_progress_bar.php:596
+#: modules/widgets/tp_progress_bar.php:597
 #: modules/widgets/tp_scroll_navigation.php:535
 #: modules/widgets/tp_smooth_scroll.php:605
 #: modules/widgets/tp_social_embed.php:2776
@@ -914,7 +914,7 @@ msgstr ""
 #: modules/widgets/tp_post_title.php:343
 #: modules/widgets/tp_pricing_table.php:1099
 #: modules/widgets/tp_process_steps.php:691
-#: modules/widgets/tp_progress_bar.php:607
+#: modules/widgets/tp_progress_bar.php:608
 #: modules/widgets/tp_scroll_navigation.php:546
 #: modules/widgets/tp_social_embed.php:2787
 #: modules/widgets/tp_social_icon.php:730
@@ -967,7 +967,7 @@ msgstr ""
 #: modules/widgets/tp_post_title.php:347
 #: modules/widgets/tp_pricing_table.php:1103
 #: modules/widgets/tp_process_steps.php:695
-#: modules/widgets/tp_progress_bar.php:611
+#: modules/widgets/tp_progress_bar.php:612
 #: modules/widgets/tp_scroll_navigation.php:549
 #: modules/widgets/tp_social_embed.php:2790
 #: modules/widgets/tp_social_icon.php:734
@@ -1097,7 +1097,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:3095
 #: modules/widgets/tp_process_steps.php:319
 #: modules/widgets/tp_process_steps.php:382
-#: modules/widgets/tp_progress_bar.php:443
+#: modules/widgets/tp_progress_bar.php:444
 #: modules/widgets/tp_social_embed.php:3266
 #: modules/widgets/tp_social_icon.php:222
 #: modules/widgets/tp_social_icon.php:938
@@ -2103,7 +2103,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2126
 #: modules/widgets/tp_process_steps.php:1377
 #: modules/widgets/tp_process_steps.php:1569
-#: modules/widgets/tp_progress_bar.php:750
+#: modules/widgets/tp_progress_bar.php:751
 #: modules/widgets/tp_scroll_navigation.php:628
 #: modules/widgets/tp_scroll_navigation.php:662
 #: modules/widgets/tp_social_embed.php:2879
@@ -2696,8 +2696,8 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:1219
 #: modules/widgets/tp_process_steps.php:1401
 #: modules/widgets/tp_process_steps.php:1939
-#: modules/widgets/tp_progress_bar.php:497
-#: modules/widgets/tp_progress_bar.php:534
+#: modules/widgets/tp_progress_bar.php:498
+#: modules/widgets/tp_progress_bar.php:535
 #: modules/widgets/tp_scroll_navigation.php:402
 #: modules/widgets/tp_scroll_navigation.php:439
 #: modules/widgets/tp_social_embed.php:321
@@ -2964,8 +2964,8 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:492
 #: modules/widgets/tp_process_steps.php:1218
 #: modules/widgets/tp_process_steps.php:1938
-#: modules/widgets/tp_progress_bar.php:496
-#: modules/widgets/tp_progress_bar.php:533
+#: modules/widgets/tp_progress_bar.php:497
+#: modules/widgets/tp_progress_bar.php:534
 #: modules/widgets/tp_scroll_navigation.php:305
 #: modules/widgets/tp_scroll_navigation.php:401
 #: modules/widgets/tp_scroll_navigation.php:438
@@ -3547,7 +3547,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:569
 #: modules/widgets/tp_pricing_table.php:872
 #: modules/widgets/tp_process_steps.php:395
-#: modules/widgets/tp_progress_bar.php:588
+#: modules/widgets/tp_progress_bar.php:589
 #: modules/widgets/tp_social_icon.php:314
 msgid "https://www.demo-link.com"
 msgstr ""
@@ -3560,7 +3560,7 @@ msgstr ""
 #: modules/widgets/tp_accordion.php:2042
 #: modules/widgets/tp_accordion.php:2068
 #: modules/widgets/tp_carousel_anything.php:1323
-#: modules/widgets/tp_navigation_menu_lite.php:2780
+#: modules/widgets/tp_navigation_menu_lite.php:2786
 #: modules/widgets/tp_page_scroll.php:1188
 #: modules/widgets/tp_tabs_tours.php:2518
 msgid "Select Template"
@@ -4315,8 +4315,8 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:262
 #: modules/widgets/tp_pricing_table.php:927
 #: modules/widgets/tp_process_steps.php:383
-#: modules/widgets/tp_progress_bar.php:432
-#: modules/widgets/tp_progress_bar.php:444
+#: modules/widgets/tp_progress_bar.php:433
+#: modules/widgets/tp_progress_bar.php:445
 #: modules/widgets/tp_scroll_navigation.php:372
 #: modules/widgets/tp_social_icon.php:282
 #: modules/widgets/tp_style_list.php:920
@@ -5364,8 +5364,8 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:652
 #: modules/widgets/tp_process_steps.php:1340
 #: modules/widgets/tp_process_steps.php:1351
-#: modules/widgets/tp_progress_bar.php:1149
-#: modules/widgets/tp_progress_bar.php:1160
+#: modules/widgets/tp_progress_bar.php:1150
+#: modules/widgets/tp_progress_bar.php:1161
 #: modules/widgets/tp_scroll_navigation.php:274
 #: modules/widgets/tp_scroll_navigation.php:343
 #: modules/widgets/tp_scroll_navigation.php:374
@@ -5694,8 +5694,8 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:653
 #: modules/widgets/tp_process_steps.php:1341
 #: modules/widgets/tp_process_steps.php:1352
-#: modules/widgets/tp_progress_bar.php:1150
-#: modules/widgets/tp_progress_bar.php:1161
+#: modules/widgets/tp_progress_bar.php:1151
+#: modules/widgets/tp_progress_bar.php:1162
 #: modules/widgets/tp_scroll_navigation.php:275
 #: modules/widgets/tp_scroll_navigation.php:344
 #: modules/widgets/tp_scroll_navigation.php:375
@@ -5935,7 +5935,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:641
 #: modules/widgets/tp_pricing_table.php:885
 #: modules/widgets/tp_process_steps.php:475
-#: modules/widgets/tp_progress_bar.php:479
+#: modules/widgets/tp_progress_bar.php:480
 #: modules/widgets/tp_scroll_navigation.php:383
 #: modules/widgets/tp_style_list.php:189
 #: modules/widgets/tp_table.php:365
@@ -5980,9 +5980,9 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:479
 #: modules/widgets/tp_process_steps.php:490
 #: modules/widgets/tp_process_steps.php:506
-#: modules/widgets/tp_progress_bar.php:483
-#: modules/widgets/tp_progress_bar.php:494
-#: modules/widgets/tp_progress_bar.php:510
+#: modules/widgets/tp_progress_bar.php:484
+#: modules/widgets/tp_progress_bar.php:495
+#: modules/widgets/tp_progress_bar.php:511
 #: modules/widgets/tp_scroll_navigation.php:387
 #: modules/widgets/tp_scroll_navigation.php:399
 #: modules/widgets/tp_scroll_navigation.php:415
@@ -6017,9 +6017,9 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:350
 #: modules/widgets/tp_pricing_table.php:366
 #: modules/widgets/tp_pricing_table.php:646
-#: modules/widgets/tp_progress_bar.php:484
-#: modules/widgets/tp_progress_bar.php:531
-#: modules/widgets/tp_progress_bar.php:547
+#: modules/widgets/tp_progress_bar.php:485
+#: modules/widgets/tp_progress_bar.php:532
+#: modules/widgets/tp_progress_bar.php:548
 #: modules/widgets/tp_scroll_navigation.php:388
 #: modules/widgets/tp_scroll_navigation.php:436
 #: modules/widgets/tp_scroll_navigation.php:452
@@ -6068,8 +6068,8 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:654
 #: modules/widgets/tp_pricing_table.php:691
 #: modules/widgets/tp_process_steps.php:514
-#: modules/widgets/tp_progress_bar.php:518
-#: modules/widgets/tp_progress_bar.php:555
+#: modules/widgets/tp_progress_bar.php:519
+#: modules/widgets/tp_progress_bar.php:556
 #: modules/widgets/tp_scroll_navigation.php:423
 #: modules/widgets/tp_scroll_navigation.php:460
 #: modules/widgets/tp_style_list.php:226
@@ -6268,7 +6268,7 @@ msgstr ""
 #: modules/widgets/tp_post_title.php:339
 #: modules/widgets/tp_pricing_table.php:1095
 #: modules/widgets/tp_process_steps.php:687
-#: modules/widgets/tp_progress_bar.php:603
+#: modules/widgets/tp_progress_bar.php:604
 #: modules/widgets/tp_scroll_navigation.php:542
 #: modules/widgets/tp_smooth_scroll.php:612
 #: modules/widgets/tp_social_embed.php:2783
@@ -6320,7 +6320,7 @@ msgstr ""
 #: modules/widgets/tp_post_search.php:337
 #: modules/widgets/tp_pricing_table.php:1169
 #: modules/widgets/tp_process_steps.php:821
-#: modules/widgets/tp_progress_bar.php:1004
+#: modules/widgets/tp_progress_bar.php:1005
 #: modules/widgets/tp_style_list.php:1028
 #: modules/widgets/tp_switcher.php:1065
 #: modules/widgets/tp_syntax_highlighter.php:781
@@ -6346,7 +6346,7 @@ msgstr ""
 #: modules/widgets/tp_plus_form.php:2137
 #: modules/widgets/tp_pricing_table.php:1371
 #: modules/widgets/tp_pricing_table.php:1594
-#: modules/widgets/tp_progress_bar.php:974
+#: modules/widgets/tp_progress_bar.php:975
 #: modules/widgets/tp_social_icon.php:368
 #: modules/widgets/tp_style_list.php:962
 #: modules/widgets/tp_style_list.php:1003
@@ -6368,7 +6368,7 @@ msgstr ""
 #: modules/widgets/tp_plus_form.php:2152
 #: modules/widgets/tp_pricing_table.php:1385
 #: modules/widgets/tp_pricing_table.php:1608
-#: modules/widgets/tp_progress_bar.php:989
+#: modules/widgets/tp_progress_bar.php:990
 #: modules/widgets/tp_social_icon.php:383
 #: modules/widgets/tp_style_list.php:973
 #: modules/widgets/tp_style_list.php:1014
@@ -6630,10 +6630,10 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2549
 #: modules/widgets/tp_pricing_table.php:2560
 #: modules/widgets/tp_process_steps.php:930
-#: modules/widgets/tp_progress_bar.php:799
-#: modules/widgets/tp_progress_bar.php:854
-#: modules/widgets/tp_progress_bar.php:881
-#: modules/widgets/tp_progress_bar.php:930
+#: modules/widgets/tp_progress_bar.php:800
+#: modules/widgets/tp_progress_bar.php:855
+#: modules/widgets/tp_progress_bar.php:882
+#: modules/widgets/tp_progress_bar.php:931
 #: modules/widgets/tp_scroll_navigation.php:1012
 #: modules/widgets/tp_switcher.php:1308
 #: modules/widgets/tp_switcher.php:1510
@@ -6681,7 +6681,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1449
 #: modules/widgets/tp_pricing_table.php:1785
 #: modules/widgets/tp_pricing_table.php:1938
-#: modules/widgets/tp_progress_bar.php:732
+#: modules/widgets/tp_progress_bar.php:733
 #: modules/widgets/tp_tabs_tours.php:1058
 #: modules/widgets/tp_tabs_tours.php:1211
 msgid "Classic"
@@ -6717,7 +6717,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1453
 #: modules/widgets/tp_pricing_table.php:1789
 #: modules/widgets/tp_pricing_table.php:1942
-#: modules/widgets/tp_progress_bar.php:736
+#: modules/widgets/tp_progress_bar.php:737
 #: modules/widgets/tp_tabs_tours.php:1062
 #: modules/widgets/tp_tabs_tours.php:1215
 msgid "Gradient"
@@ -6751,7 +6751,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1479
 #: modules/widgets/tp_pricing_table.php:1814
 #: modules/widgets/tp_pricing_table.php:1967
-#: modules/widgets/tp_progress_bar.php:763
+#: modules/widgets/tp_progress_bar.php:764
 #: modules/widgets/tp_tabs_tours.php:1087
 #: modules/widgets/tp_tabs_tours.php:1240
 msgid "Color 1"
@@ -6819,7 +6819,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1508
 #: modules/widgets/tp_pricing_table.php:1843
 #: modules/widgets/tp_pricing_table.php:1996
-#: modules/widgets/tp_progress_bar.php:776
+#: modules/widgets/tp_progress_bar.php:777
 #: modules/widgets/tp_tabs_tours.php:1116
 #: modules/widgets/tp_tabs_tours.php:1269
 msgid "Color 2"
@@ -6966,7 +6966,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1911
 #: modules/widgets/tp_pricing_table.php:2064
 #: modules/widgets/tp_pricing_table.php:3033
-#: modules/widgets/tp_progress_bar.php:415
+#: modules/widgets/tp_progress_bar.php:416
 #: modules/widgets/tp_scroll_navigation.php:255
 #: modules/widgets/tp_style_list.php:928
 #: modules/widgets/tp_switcher.php:1237
@@ -7756,7 +7756,7 @@ msgstr ""
 #: modules/widgets/tp_accordion.php:2043
 #: modules/widgets/tp_accordion.php:2069
 #: modules/widgets/tp_carousel_anything.php:1324
-#: modules/widgets/tp_navigation_menu_lite.php:2781
+#: modules/widgets/tp_navigation_menu_lite.php:2787
 #: modules/widgets/tp_page_scroll.php:1189
 #: modules/widgets/tp_switcher.php:1905
 #: modules/widgets/tp_switcher.php:1946
@@ -7769,7 +7769,7 @@ msgstr ""
 #: modules/widgets/tp_carousel_anything.php:1316
 #: modules/widgets/tp_carousel_anything.php:1336
 #: modules/widgets/tp_navigation_menu_lite.php:2603
-#: modules/widgets/tp_navigation_menu_lite.php:2776
+#: modules/widgets/tp_navigation_menu_lite.php:2782
 #: modules/widgets/tp_page_scroll.php:1180
 #: modules/widgets/tp_switcher.php:1897
 #: modules/widgets/tp_switcher.php:1918
@@ -7788,7 +7788,7 @@ msgstr ""
 #: modules/widgets/tp_carousel_anything.php:1316
 #: modules/widgets/tp_carousel_anything.php:1336
 #: modules/widgets/tp_navigation_menu_lite.php:2603
-#: modules/widgets/tp_navigation_menu_lite.php:2776
+#: modules/widgets/tp_navigation_menu_lite.php:2782
 #: modules/widgets/tp_page_scroll.php:1180
 #: modules/widgets/tp_switcher.php:1897
 #: modules/widgets/tp_switcher.php:1918
@@ -7807,7 +7807,7 @@ msgstr ""
 #: modules/widgets/tp_carousel_anything.php:1316
 #: modules/widgets/tp_carousel_anything.php:1336
 #: modules/widgets/tp_navigation_menu_lite.php:2603
-#: modules/widgets/tp_navigation_menu_lite.php:2776
+#: modules/widgets/tp_navigation_menu_lite.php:2782
 #: modules/widgets/tp_page_scroll.php:1180
 #: modules/widgets/tp_switcher.php:1897
 #: modules/widgets/tp_switcher.php:1918
@@ -8202,7 +8202,7 @@ msgstr ""
 #: modules/widgets/tp_heading_title.php:2502
 #: modules/widgets/tp_ninja_form.php:2065
 #: modules/widgets/tp_post_search.php:1086
-#: modules/widgets/tp_progress_bar.php:1237
+#: modules/widgets/tp_progress_bar.php:1238
 #: modules/widgets/tp_video_player.php:1353
 #: modules/widgets/tp_wp_forms.php:2284
 msgid "Plus Extras"
@@ -8381,7 +8381,7 @@ msgstr ""
 #: modules/widgets/tp_plus_form.php:644
 #: modules/widgets/tp_post_search.php:269
 #: modules/widgets/tp_pricing_table.php:954
-#: modules/widgets/tp_progress_bar.php:571
+#: modules/widgets/tp_progress_bar.php:572
 #: modules/widgets/tp_table.php:2401
 msgid "Icon Position"
 msgstr ""
@@ -8396,7 +8396,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:657
 #: modules/widgets/tp_plus_form.php:649
 #: modules/widgets/tp_pricing_table.php:959
-#: modules/widgets/tp_progress_bar.php:575
+#: modules/widgets/tp_progress_bar.php:576
 #: modules/widgets/tp_style_list.php:931
 #: modules/widgets/tp_table.php:2405
 #: modules/widgets/tp_table.php:2480
@@ -8413,7 +8413,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:656
 #: modules/widgets/tp_plus_form.php:648
 #: modules/widgets/tp_pricing_table.php:958
-#: modules/widgets/tp_progress_bar.php:576
+#: modules/widgets/tp_progress_bar.php:577
 #: modules/widgets/tp_style_list.php:932
 #: modules/widgets/tp_table.php:2406
 #: modules/widgets/tp_table.php:2481
@@ -8546,7 +8546,7 @@ msgstr ""
 #: modules/widgets/tp_post_navigation.php:680
 #: modules/widgets/tp_pricing_table.php:263
 #: modules/widgets/tp_process_steps.php:384
-#: modules/widgets/tp_progress_bar.php:445
+#: modules/widgets/tp_progress_bar.php:446
 #: modules/widgets/tp_table.php:332
 #: modules/widgets/tp_table.php:802
 #: modules/widgets/tp_table.php:2440
@@ -8862,7 +8862,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2620
 #: modules/widgets/tp_process_steps.php:847
 #: modules/widgets/tp_process_steps.php:865
-#: modules/widgets/tp_progress_bar.php:960
+#: modules/widgets/tp_progress_bar.php:961
 #: modules/widgets/tp_social_icon.php:346
 #: modules/widgets/tp_syntax_highlighter.php:822
 #: modules/widgets/tp_syntax_highlighter.php:888
@@ -9213,7 +9213,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1698
 #: modules/widgets/tp_process_steps.php:1302
 #: modules/widgets/tp_progress_bar.php:293
-#: modules/widgets/tp_progress_bar.php:1111
+#: modules/widgets/tp_progress_bar.php:1112
 #: modules/widgets/tp_social_embed.php:578
 #: modules/widgets/tp_social_embed.php:674
 #: modules/widgets/tp_social_embed.php:763
@@ -9900,7 +9900,7 @@ msgstr ""
 #: modules/widgets/tp_meeting_scheduler.php:551
 #: modules/widgets/tp_pricing_table.php:1675
 #: modules/widgets/tp_process_steps.php:1284
-#: modules/widgets/tp_progress_bar.php:1093
+#: modules/widgets/tp_progress_bar.php:1094
 #: modules/widgets/tp_social_embed.php:553
 #: modules/widgets/tp_social_embed.php:650
 #: modules/widgets/tp_social_embed.php:739
@@ -9928,7 +9928,7 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:1965
 #: modules/widgets/tp_hovercard.php:644
 #: modules/widgets/tp_post_navigation.php:555
-#: modules/widgets/tp_progress_bar.php:901
+#: modules/widgets/tp_progress_bar.php:902
 #: modules/widgets/tp_style_list.php:580
 #: modules/widgets/tp_style_list.php:599
 msgid "Space Between"
@@ -10038,7 +10038,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:833
 #: modules/widgets/tp_number_counter.php:1166
 #: modules/widgets/tp_pricing_table.php:1781
-#: modules/widgets/tp_progress_bar.php:806
+#: modules/widgets/tp_progress_bar.php:807
 #: modules/widgets/tp_team_member_listout.php:876
 #: modules/widgets/tp_team_member_listout.php:894
 #: modules/widgets/tp_testimonial_listout.php:1113
@@ -10203,7 +10203,7 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:384
 #: modules/widgets/tp_pricing_table.php:257
 #: modules/widgets/tp_process_steps.php:377
-#: modules/widgets/tp_progress_bar.php:439
+#: modules/widgets/tp_progress_bar.php:440
 msgid "Select Icon"
 msgstr ""
 
@@ -10228,7 +10228,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:405
 #: modules/widgets/tp_pricing_table.php:281
 #: modules/widgets/tp_process_steps.php:446
-#: modules/widgets/tp_progress_bar.php:453
+#: modules/widgets/tp_progress_bar.php:454
 #: modules/widgets/tp_table.php:339
 msgid "Use Image As icon"
 msgstr ""
@@ -11781,7 +11781,7 @@ msgid "Second"
 msgstr ""
 
 #: modules/widgets/tp_countdown.php:1194
-#: modules/widgets/tp_progress_bar.php:888
+#: modules/widgets/tp_progress_bar.php:889
 #: modules/widgets/tp_syntax_highlighter.php:539
 msgid "Number Color"
 msgstr ""
@@ -13102,7 +13102,7 @@ msgstr ""
 #: modules/widgets/tp_post_comment.php:282
 #: modules/widgets/tp_post_featured_image.php:206
 #: modules/widgets/tp_process_steps.php:890
-#: modules/widgets/tp_progress_bar.php:1026
+#: modules/widgets/tp_progress_bar.php:1027
 #: modules/widgets/tp_table.php:2451
 msgid "Image Size"
 msgstr ""
@@ -13631,37 +13631,37 @@ msgid "Set how the hover card is positioned relative to other elements."
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:508
-#: modules/widgets/tp_progress_bar.php:1078
+#: modules/widgets/tp_progress_bar.php:1079
 msgid "Display"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:511
-#: modules/widgets/tp_progress_bar.php:1081
+#: modules/widgets/tp_progress_bar.php:1082
 msgid "Block"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:512
-#: modules/widgets/tp_progress_bar.php:1082
+#: modules/widgets/tp_progress_bar.php:1083
 msgid "Inline Block"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:513
-#: modules/widgets/tp_progress_bar.php:1083
+#: modules/widgets/tp_progress_bar.php:1084
 msgid "Flex"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:514
-#: modules/widgets/tp_progress_bar.php:1084
+#: modules/widgets/tp_progress_bar.php:1085
 msgid "Inline Flex"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:515
-#: modules/widgets/tp_progress_bar.php:1085
+#: modules/widgets/tp_progress_bar.php:1086
 msgid "Initial"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:516
-#: modules/widgets/tp_progress_bar.php:1086
+#: modules/widgets/tp_progress_bar.php:1087
 msgid "Inherit"
 msgstr ""
 
@@ -13908,7 +13908,7 @@ msgstr ""
 #: modules/widgets/tp_icon.php:460
 #: modules/widgets/tp_pricing_table.php:3567
 #: modules/widgets/tp_process_steps.php:1349
-#: modules/widgets/tp_progress_bar.php:1158
+#: modules/widgets/tp_progress_bar.php:1159
 #: modules/widgets/tp_social_icon.php:581
 #: modules/widgets/tp_video_player.php:1101
 msgid "Hover Animation"
@@ -14606,7 +14606,7 @@ msgstr ""
 msgid "Alignment Border Adjust"
 msgstr ""
 
-#: modules/widgets/tp_navigation_menu_lite.php:2686
+#: modules/widgets/tp_navigation_menu_lite.php:2692
 msgid "icon_img"
 msgstr ""
 
@@ -14696,12 +14696,12 @@ msgid "Symbol Position"
 msgstr ""
 
 #: modules/widgets/tp_number_counter.php:362
-#: modules/widgets/tp_progress_bar.php:419
+#: modules/widgets/tp_progress_bar.php:420
 msgid "After Number"
 msgstr ""
 
 #: modules/widgets/tp_number_counter.php:363
-#: modules/widgets/tp_progress_bar.php:420
+#: modules/widgets/tp_progress_bar.php:421
 msgid "Before Number"
 msgstr ""
 
@@ -16510,13 +16510,13 @@ msgstr ""
 
 #: modules/widgets/tp_process_steps.php:386
 #: modules/widgets/tp_process_steps.php:1277
-#: modules/widgets/tp_progress_bar.php:446
-#: modules/widgets/tp_progress_bar.php:1069
+#: modules/widgets/tp_progress_bar.php:447
+#: modules/widgets/tp_progress_bar.php:1070
 msgid "Lottie"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:393
-#: modules/widgets/tp_progress_bar.php:586
+#: modules/widgets/tp_progress_bar.php:587
 msgid "Lottie URL"
 msgstr ""
 
@@ -16590,12 +16590,12 @@ msgid "Backdrop Filter"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:1320
-#: modules/widgets/tp_progress_bar.php:1129
+#: modules/widgets/tp_progress_bar.php:1130
 msgid "Speed"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:1338
-#: modules/widgets/tp_progress_bar.php:1147
+#: modules/widgets/tp_progress_bar.php:1148
 msgid "Loop Animation"
 msgstr ""
 
@@ -16637,7 +16637,7 @@ msgid "Horizontal Background"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:2171
-#: modules/widgets/tp_progress_bar.php:1345
+#: modules/widgets/tp_progress_bar.php:1346
 msgid "Opps!! Please Enter Only JSON File Extension."
 msgstr ""
 
@@ -16681,111 +16681,103 @@ msgstr ""
 msgid "Set the progress value percentage that will be visually filled in the bar."
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:381
-msgid "59"
-msgstr ""
-
-#: modules/widgets/tp_progress_bar.php:382
-msgid "Enter Number Ex. 50 , 60"
-msgstr ""
-
-#: modules/widgets/tp_progress_bar.php:395
+#: modules/widgets/tp_progress_bar.php:396
 msgid "Enter the numeric value you want to display."
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:404
+#: modules/widgets/tp_progress_bar.php:405
 msgid "Prefix/Postfix Symbol"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:406
+#: modules/widgets/tp_progress_bar.php:407
 msgid "%"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:407
+#: modules/widgets/tp_progress_bar.php:408
 msgid "Enter Symbol"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:621
+#: modules/widgets/tp_progress_bar.php:622
 msgid "Pie Chart Setting"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:631
+#: modules/widgets/tp_progress_bar.php:632
 msgid "Dynamic Value (0-1)"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:656
+#: modules/widgets/tp_progress_bar.php:657
 msgid "Pie Chart Circle Size"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:683
+#: modules/widgets/tp_progress_bar.php:684
 msgid "Thickness"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:705
+#: modules/widgets/tp_progress_bar.php:706
 msgid "Pie Empty Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:717
+#: modules/widgets/tp_progress_bar.php:718
 msgid "pie Chart Empty Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:728
+#: modules/widgets/tp_progress_bar.php:729
 msgid "Chart Fill Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:791
+#: modules/widgets/tp_progress_bar.php:792
 msgid "Title Setting"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:821
+#: modules/widgets/tp_progress_bar.php:822
 msgid "Title Left Margin"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:846
+#: modules/widgets/tp_progress_bar.php:847
 msgid "Sub Title Setting"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:861
+#: modules/widgets/tp_progress_bar.php:862
 msgid "Sub Title Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:873
+#: modules/widgets/tp_progress_bar.php:874
 msgid "Number Setting"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:922
+#: modules/widgets/tp_progress_bar.php:923
 msgid "Number Prefix/Postfix"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:937
+#: modules/widgets/tp_progress_bar.php:938
 msgid "Prefix/Postfix Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:949
+#: modules/widgets/tp_progress_bar.php:950
 msgid "Icon/Image Setting"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:1052
+#: modules/widgets/tp_progress_bar.php:1053
 msgid "Image Border Radius"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:1171
+#: modules/widgets/tp_progress_bar.php:1172
 msgid "Progress Bar Setting"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:1181
+#: modules/widgets/tp_progress_bar.php:1182
 msgid "Progress Bar Top Margin"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:1203
+#: modules/widgets/tp_progress_bar.php:1204
 msgid "Filled Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:1211
+#: modules/widgets/tp_progress_bar.php:1212
 msgid "Empty Color"
 msgstr ""
 
-#: modules/widgets/tp_progress_bar.php:1221
+#: modules/widgets/tp_progress_bar.php:1222
 msgid "Seprator Color"
 msgstr ""
 
@@ -20202,7 +20194,7 @@ msgstr ""
 msgid "Enable Theme Builder"
 msgstr ""
 
-#: modules/controls/theme-builder/theplus-editor-theme-builder.js:178
+#: modules/controls/theme-builder/theplus-editor-theme-builder.js:179
 msgid "Install WooCommerce"
 msgstr ""
 

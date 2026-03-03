@@ -2666,7 +2666,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 								if ( 'yes' === $settings['cl_hover_content_swich'] ) {
 									$output .= '<div class="extra-wcc-inn">';
 								}
-								$output .= '<div class="dynamic-cat-bg-image-metro" style="background:url(' . $cat_img . ') center/cover"></div>';
+								$output .= '<div class="dynamic-cat-bg-image-metro" style="background:url(' . esc_url( $cat_img ) . ') center/cover"></div>';
 							} else {
 								$output .= '<a href="' . esc_url( $category_link ) . '">';
 								if ( 'yes' === $settings['cl_hover_content_swich'] ) {
@@ -2679,13 +2679,13 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 
 							$output .= '<div class="pt-dynamic-hover-content-inner ">';
 
-							$output .= '<div class="pt-dynamic-hover-cat-name">' . esc_attr( $category_name ) . ' </div>';
+								$output .= '<div class="pt-dynamic-hover-cat-name">' . esc_html( $category_name ) . ' </div>';
 
 							if ( ! empty( $settings['hide_pro_count'] ) && 'yes' === $settings['hide_pro_count'] ) {
 								$output .= '<div class="pt-dynamic-hover-cat-count">' . $category_product_count . '';
 
 								if ( ! empty( $settings['count_extra_text'] ) ) {
-									$output .= '<span class="count_extra_txt">' . $settings['count_extra_text'] . '</span>';
+										$output .= '<span class="count_extra_txt">' . esc_html( $settings['count_extra_text'] ) . '</span>';
 								}
 
 								$output .= '</div>';
@@ -2694,7 +2694,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 							$output .= '</div>';
 
 							if ( ! empty( $settings['display_description'] ) && 'yes' === $settings['display_description'] ) {
-								$output .= '<div class="pt-dynamic-hover-cat-desc ' . esc_attr( $cdclass ) . '">' . $category_description . ' </div>';
+									$output .= '<div class="pt-dynamic-hover-cat-desc ' . esc_attr( $cdclass ) . '">' . wp_kses_post( $category_description ) . ' </div>';
 							}
 
 							$output .= '</div>';
@@ -2713,12 +2713,12 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 						} elseif ( 'style_2' === $style ) {
 							$output .= '<div class="pt-dynamic-wrapper-main " >';
 
-							$output .= '<div class="pt-dynamic-wrapper ' . $style . '">';
+							$output .= '<div class="pt-dynamic-wrapper ' . esc_attr( $style ) . '">';
 
 							$output .= '<div class="pt-dynamic-content">';
 
 							if ( 'metro' === $layout ) {
-								$output .= '<a href="' . esc_url( $category_link ) . '"> <div class="dynamic-cat-bg-image-metro" style="background:url(' . $cat_img . ') center/cover"></div>';
+								$output .= '<a href="' . esc_url( $category_link ) . '"> <div class="dynamic-cat-bg-image-metro" style="background:url(' . esc_url( $cat_img ) . ') center/cover"></div>';
 							} else {
 								$output .= '<a href="' . esc_url( $category_link ) . '"> ' . $featured_image . ' ';
 							}
@@ -2727,12 +2727,12 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 
 							$output .= '<div class="pt-dynamic-hover-content-inner " >';
 
-							$output .= '<div class="pt-dynamic-hover-cat-name">' . esc_attr( $category_name ) . ' </div>';
+							$output .= '<div class="pt-dynamic-hover-cat-name">' . esc_html( $category_name ) . ' </div>';
 
 							if ( ! empty( $settings['hide_pro_count'] ) && 'yes' === $settings['hide_pro_count'] ) {
 								$output .= '<div class="pt-dynamic-hover-cat-count">' . $category_product_count . '';
 								if ( ! empty( $settings['count_extra_text'] ) ) {
-									$output .= '<span class="count_extra_txt">' . wp_kses_post( $settings['count_extra_text'] ) . '</span>';
+									$output .= '<span class="count_extra_txt">' . esc_html( $settings['count_extra_text'] ) . '</span>';
 								}
 
 								$output .= '</div>';
@@ -2757,12 +2757,12 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 						} elseif ( 'style_3' === $style ) {
 							$output .= '<div class="pt-dynamic-wrapper-main " >';
 
-							$output .= '<div class="pt-dynamic-wrapper ' . esc_attr( $style ) . '" data-bgimage="' . $cat_img . '">';
+								$output .= '<div class="pt-dynamic-wrapper ' . esc_attr( $style ) . '" data-bgimage="' . esc_url( $cat_img ) . '">';
 
 							$output .= '<div class="pt-dynamic-content">';
 
 							if ( 'metro' === $layout ) {
-								$output .= '<a href="' . esc_url( $category_link ) . '"> <div class="dynamic-cat-bg-image-metro" style="background:url(' . $cat_img . ') center/cover"></div>';
+								$output .= '<a href="' . esc_url( $category_link ) . '"> <div class="dynamic-cat-bg-image-metro" style="background:url(' . esc_url( $cat_img ) . ') center/cover"></div>';
 							} else {
 								$output .= '<a href="' . esc_url( $category_link ) . '">';
 							}
@@ -2771,13 +2771,13 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 
 							$output .= '<div class="pt-dynamic-hover-content-inner " >';
 
-							$output .= '<div class="pt-dynamic-hover-cat-name">' . $category_name . ' </div>';
+								$output .= '<div class="pt-dynamic-hover-cat-name">' . esc_html( $category_name ) . ' </div>';
 
 							if ( ! empty( $settings['hide_pro_count'] ) && 'yes' === $settings['hide_pro_count'] ) {
 								$output .= '<div class="pt-dynamic-hover-cat-count">' . $category_product_count . '';
 
 								if ( ! empty( $settings['count_extra_text'] ) ) {
-									$output .= '<span class="count_extra_txt">' . wp_kses_post( $settings['count_extra_text'] ) . '</span>';
+										$output .= '<span class="count_extra_txt">' . esc_html( $settings['count_extra_text'] ) . '</span>';
 								}
 
 								$output .= '</div>';

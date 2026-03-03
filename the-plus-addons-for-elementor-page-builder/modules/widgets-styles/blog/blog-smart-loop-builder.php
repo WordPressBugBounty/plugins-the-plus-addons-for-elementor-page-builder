@@ -82,7 +82,7 @@ if ( ! empty( $matches[1] ) ) {
 		for ( $i = 0; $i < $match; $i++ ) {
 
 			if ( ! empty( $category_object[ $i ]->name ) ) {
-				array_push( $category_names, '<a href="'.get_category_link( $category_object[ $i ]->cat_ID ).'"><span class="tpae-slb-category">' . wp_kses_post( $category_object[ $i ]->name ) . '</span></a>' );
+				array_push( $category_names, '<a href="' . esc_url( get_category_link( $category_object[ $i ]->cat_ID ) ) . '"><span class="tpae-slb-category">' . wp_kses_post( $category_object[ $i ]->name ) . '</span></a>' );
 			}
 		}
 
@@ -94,7 +94,7 @@ if ( ! empty( $matches[1] ) ) {
 $category_name = '';
 foreach ( $category_object as $category ) {
 	if ( ! empty( $category->name ) ) {
-		$category_name .= '<a href="'.get_category_link( $category->cat_ID).'"><span class="tpae-slb-category">' . wp_kses_post( $category->name ) . '</span></a>';
+		$category_name .= '<a href="' . esc_url( get_category_link( $category->cat_ID ) ) . '"><span class="tpae-slb-category">' . wp_kses_post( $category->name ) . '</span></a>';
 	}
 }
 
@@ -133,7 +133,7 @@ if ( ! empty( $tag_matches[1] ) ) {
 	foreach ( $tag_matches[1] as $match ) {
 		for ( $i = 0; $i < $match; $i++ ) {
 			if ( ! empty( $tag_object[ $i ]->name ) ) {
-				$tag_names[] = '<a href="'.get_tag_link( $tag_object[ $i ]->term_id ).'"><span class="tpae-slb-tag">' . wp_kses_post( $tag_object[ $i ]->name ) . '</span></a>';
+				$tag_names[] = '<a href="' . esc_url( get_tag_link( $tag_object[ $i ]->term_id ) ) . '"><span class="tpae-slb-tag">' . wp_kses_post( $tag_object[ $i ]->name ) . '</span></a>';
 			}
 		}
 		$tags_string = implode( ' ', $tag_names );
@@ -145,11 +145,11 @@ $tag_name = '';
 if ( ! empty( $tag_object ) ) {
 	foreach ( $tag_object as $_tag ) {
 		if ( ! empty( $_tag->name ) ) {
-			$tag_name .= '<a href="'.get_tag_link( $_tag->term_id ).'"><span class="tpae-slb-tag">' . wp_kses_post( $_tag->name ) . '</span></a>';
+			$tag_name .= '<a href="' . esc_url( get_tag_link( $_tag->term_id ) ) . '"><span class="tpae-slb-tag">' . wp_kses_post( $_tag->name ) . '</span></a>';
 		}
 	}
 }
 
 $template = str_replace( '{{tpae_tag}}', trim( $tag_name ), $template );
 
-echo $template;
+echo wp_kses_post( $template );

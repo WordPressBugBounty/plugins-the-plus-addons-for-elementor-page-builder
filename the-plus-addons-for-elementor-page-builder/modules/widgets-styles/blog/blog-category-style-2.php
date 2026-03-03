@@ -16,7 +16,7 @@ $postid = get_the_ID(); ?>
 	<?php
 	$categories = get_the_category( $postid );
 	foreach ( $categories as $category ) {
-		echo '<span><a href="' . get_category_link( $category->cat_ID ) . '">' . $category->name . '</a></span>';
+		echo '<span><a href="' . esc_url( get_category_link( $category->cat_ID ) ) . '">' . esc_html( $category->name ) . '</a></span>';
 	}
 	?>
 </div>

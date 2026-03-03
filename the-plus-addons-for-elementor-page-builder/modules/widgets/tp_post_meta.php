@@ -1796,7 +1796,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 							foreach ( $terms as $term ) {
 								if ( $cate_display_no >= $i ) {
 									// Translators: %s is the name of the term.
-									$category_list .= '<a class="tp-meta-value" href="' . esc_url( get_term_link( $term ) ) . '" alt="' . esc_attr( sprintf( __( '%s', 'tpebl' ), $term->name ) ) . '">' . $term->name . '</a>';
+									$category_list .= '<a class="tp-meta-value" href="' . esc_url( get_term_link( $term ) ) . '" alt="' . esc_attr( sprintf( __( '%s', 'tpebl' ), $term->name ) ) . '">' . esc_html( $term->name ) . '</a>';
 								}
 								++$i;
 							}
@@ -1804,7 +1804,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 
 						$output .= '<span class="tp-meta-category ' . esc_attr( $cate_style ) . '" >';
 						if ( ! empty( $cate_prefix ) ) {
-							$output .= '<span class="tp-meta-category-label tp-meta-label">' . $cate_prefix . '</span>';
+							$output .= '<span class="tp-meta-category-label tp-meta-label">' . esc_html( $cate_prefix ) . '</span>';
 						}
 						$output .= '<span class="tp-meta-category-list">' . $category_list . '</span></span>';
 					}
@@ -1827,7 +1827,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 
 						$post            = get_queried_object();
 						$author_page_url = get_author_posts_url( $post->post_author );
-						$output         .= '<span class="tp-meta-author" ><span class="tp-meta-author-label tp-meta-label" >' . esc_html( $author_prefix ) . '</span><a class="tp-meta-value" href="' . esc_url( $author_page_url ) . '" rel="' . esc_attr__( 'author', 'tpebl' ) . '">' . $iconauthor . get_the_author_meta( 'display_name', $author_id ) . '</a></span>';
+						$output         .= '<span class="tp-meta-author" ><span class="tp-meta-author-label tp-meta-label" >' . esc_html( $author_prefix ) . '</span><a class="tp-meta-value" href="' . esc_url( $author_page_url ) . '" rel="' . esc_attr__( 'author', 'tpebl' ) . '">' . $iconauthor . esc_html( get_the_author_meta( 'display_name', $author_id ) ) . '</a></span>';
 					}
 				}
 
@@ -1842,7 +1842,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 						$post_ic = ! empty( $settings['commentIcon'] ) ? $settings['commentIcon'] : '';
 
 						if ( 'none' !== $post_ic ) {
-							$comment_icon = '<i class="' . $post_ic . '"></i>';
+							$comment_icon = '<i class="' . esc_attr( $post_ic ) . '"></i>';
 						}
 
 						if ( ! empty( $comments_count ) ) {

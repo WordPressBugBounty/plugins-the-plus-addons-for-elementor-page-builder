@@ -488,7 +488,11 @@ class ThePlus_Icon extends Widget_Base {
 		echo '<div class="tp-icon-wrapper">';
 
 		if ( ! empty( $tp_icon_url ) ) {
-			echo '<a class="' . esc_attr( $icon_class ) . '" href="' . $tp_icon_url . '">';
+			// echo '<a class="' . esc_attr( $icon_class ) . '" href="' . esc_url( $tp_icon_url ) . '">';
+			$this->add_link_attributes( 'tp_icon_link', $settings['tp_icon_link'] );
+			$this->add_render_attribute( 'tp_icon_link', 'class', $icon_class );
+
+			echo '<a ' . $this->get_render_attribute_string( 'tp_icon_link' ) . '>';
 			Icons_Manager::render_icon( $select_icon, array( 'aria-hidden' => 'true' ) );
 			echo '</a>';
 		} else {

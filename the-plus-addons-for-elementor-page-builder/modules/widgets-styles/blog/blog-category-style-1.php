@@ -22,14 +22,13 @@ $postid = get_the_ID(); ?>
 	}
 	foreach ( $categories as $category ) {
 		if ( ! empty( $dpc_all ) && 'yes' === $dpc_all ) {
-				echo '<span><a href="' . get_category_link( $category->cat_ID ) . '">' . $category->name . '</a></span>';
+			echo '<span><a href="' . esc_url( get_category_link( $category->cat_ID ) ) . '">' . esc_html( $category->name ) . '</a></span>';
 		} else {
 			if ( $i == 0 ) {
-				echo '<span><a href="' . get_category_link( $category->cat_ID ) . '">' . $category->name . '</a></span>';
+				echo '<span><a href="' . esc_url( get_category_link( $category->cat_ID ) ) . '">' . esc_html( $category->name ) . '</a></span>';
 			}
 			++$i;
 		}
 	}
 	?>
 </div>
-
