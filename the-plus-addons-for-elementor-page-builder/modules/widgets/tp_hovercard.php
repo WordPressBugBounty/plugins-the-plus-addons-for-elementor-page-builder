@@ -546,10 +546,10 @@ class ThePlus_Hovercard extends Widget_Base {
 				'label'     => esc_html__( 'Flex Direction', 'tpebl' ),
 				'default'   => 'unset',
 				'options'   => array(
-					'column'         => esc_html__( 'column', 'tpebl' ),
-					'column-reverse' => esc_html__( 'column-reverse', 'tpebl' ),
-					'row'            => esc_html__( 'row', 'tpebl' ),
-					'unset'          => esc_html__( 'unset', 'tpebl' ),
+					'column'         => esc_html__( 'Column', 'tpebl' ),
+					'column-reverse' => esc_html__( 'Column Reverse', 'tpebl' ),
+					'row'            => esc_html__( 'Row', 'tpebl' ),
+					'unset'          => esc_html__( 'Unset', 'tpebl' ),
 				),
 				'selectors' => array(
 					'{{WRAPPER}} {{CURRENT_ITEM}} ' => 'flex-direction: {{VALUE}}',
@@ -2938,15 +2938,15 @@ class ThePlus_Hovercard extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/hover-card/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=wRZlRe_H5_U',
 					),
 				),

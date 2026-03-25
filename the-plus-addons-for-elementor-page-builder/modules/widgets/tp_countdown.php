@@ -79,7 +79,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 	 * @since 1.0.0
 	 */
 	public function get_keywords() {
-		return array( 'Tp Countdown Timer', 'Scarcity Countdown', 'Evergreen Countdown', 'Fake-Number Counter', 'Content Swap Timer', 'WooCommerce Timer', 'FOMO Countdown', 'Inline Countdown', 'Marketing Countdown Timer', 'Urgency Countdown', 'Event Countdown', 'Offer Countdown' );
+		return array( 'Tp Countdown Timer','Tp Count Down', 'Scarcity Countdown', 'Evergreen Countdown', 'Fake-Number Counter', 'Content Swap Timer', 'WooCommerce Timer', 'FOMO Countdown', 'Inline Countdown', 'Marketing Countdown Timer', 'Urgency Countdown', 'Event Countdown', 'Offer Countdown' );
 	}
 
 	public function get_custom_help_url() {
@@ -583,15 +583,15 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/count-down/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=RdPTAGc3PMY',
 					),
 				),

@@ -71,6 +71,9 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 			'plus_tilt_parallax'        => array( 'plus_tilt_parallax' ),
 			'plus_overlay_effect'       => array( 'plus_overlay_effect' ),
 			'plus_continuous_animation' => array( 'plus_continuous_animation' ),
+			'plus_text_global_animation'   => array( 'text_animations', 'tp_text_global_gsap_list' ),
+			'plus_image_global_animation'  => array( 'image_animations', 'tp_image_global_gsap_list' ),
+			'plus_adv_scroll_interactions' => array( 'plus_gsap_animation_type' ),
 		);
 
 		/**
@@ -227,6 +230,10 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 				if ( in_array( 'plus_cross_cp', $extras_elements, true ) ) {
 					$this->add_data['plus_cross_cp'] = array( 'plus_cross_cp' );
 				}
+
+				if ( in_array( 'plus_dynamic_tag', $extras_elements, true ) ) {
+					$this->add_data['plus_dynamic_tag'] = array( 'plus_dynamic_tag' );
+				}
 			}
 
 			$output['message']        = '* ' . $val1 . ' Unused Extension Found!';
@@ -268,6 +275,10 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 				}
 			} elseif ( isset( $this->add_data['plus_event_tracker'] ) && in_array( $id, $this->add_data['plus_event_tracker'], true ) ) {
 					$query_value = "\"{$id}\":\"yes\"";
+			} elseif ( in_array( $id, array( 'text_animations', 'image_animations' ), true ) ) {
+				$query_value = "\"{$id}\":\"tp_global\"";
+			} elseif ( 'plus_gsap_animation_type' === $id ) {
+				$query_value = "\"{$id}\":\"tp_";
 			}
 
 			return get_posts(

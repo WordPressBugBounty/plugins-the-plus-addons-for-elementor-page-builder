@@ -3876,9 +3876,15 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			$pimg_url = ! empty( $settings['select_image'] ) ? $settings['select_image'] : '';
 
 			$img_src = '';
-			if ( ! empty( $pimg_url ) ) {
+			if ( ! empty( $pimg_url['url'] ) ) {
 				$image_id = $pimg_url['id'];
-				$img_src  = tp_get_image_rander( $image_id, 'full', array( 'class' => 'pricing-icon-img' ) );
+
+				if ( ! empty( $image_id ) ) {
+					$img_src = tp_get_image_rander( $image_id, 'full', array( 'class' => 'pricing-icon-img' ) );
+				} else {
+					$image_alt = ! empty( $pimg_url['alt'] ) ? $pimg_url['alt'] : '';
+					$img_src   = '<img src="' . esc_url( $pimg_url['url'] ) . '" class="pricing-icon-img" alt="' . esc_attr( $image_alt ) . '">';
+				}
 			}
 
 			$icons_content = '<div class="pricing-icon">' . $img_src . '</div>';

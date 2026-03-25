@@ -648,15 +648,15 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/breadcrumbs-bar/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=Bzbl0LmNZ1s',
 					),
 				),
@@ -676,7 +676,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend adding this widget to the Header Template so it loads globally before any page content appears.',
+					'notice'      => esc_html__( 'We recommend adding this widget to the Header Template so it loads globally before any page content appears.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Header Template', 'tpebl' ),
 					'page_type'   => 'tp_header',
 				)

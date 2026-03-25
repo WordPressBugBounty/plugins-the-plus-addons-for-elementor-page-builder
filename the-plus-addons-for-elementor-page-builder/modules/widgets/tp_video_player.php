@@ -198,7 +198,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label'       => esc_html__( 'YouTube Id', 'tpebl' ),
 				'label_block' => true,
 				'ai'          => false,
-				'default'     => esc_html__( 'TJ1SDXbij8Y', 'tpebl' ),
+				'default'     => __( 'TJ1SDXbij8Y', 'tpebl' ),
 				'placeholder' => esc_html__( 'YouTube ID : TJ1SDXbij8Y', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
@@ -213,7 +213,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label'       => esc_html__( 'Vimeo Id', 'tpebl' ),
 				'label_block' => true,
 				'ai'          => false,
-				'default'     => esc_html__( '27246366', 'tpebl' ),
+				'default'     => __( '27246366', 'tpebl' ),
 				'placeholder' => esc_html__( 'Vimeo ID : 27246366', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
@@ -730,7 +730,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label_block' => true,
 				'ai'          => false,
 				'separator'   => 'before',
-				'default'     => esc_html__( 'Video Title', 'tpebl' ),
+				'default'     => __( 'Video Title', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
 					'display_banner_image' => 'yes',
@@ -1191,7 +1191,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Icon Size', 'tpebl' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => 'px',
+				'size_units' => array( 'px' ),
 				'range'      => array(
 					'px' => array(
 						'min'  => 20,
@@ -1307,7 +1307,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'default'   => 'center center',
 				'options'   => l_theplus_get_image_position_options(),
 				'selectors' => array(
-					'{{WRAPPER}} .pt_plus_video-box-shadow.creative-mask-media' => '-webkit-mask-position:{{VALUE}};',
+					'{{WRAPPER}} .pt_plus_video-box-shadow.creative-mask-media' => 'mask-position:{{VALUE}};-webkit-mask-position:{{VALUE}};',
 				),
 				'condition' => array(
 					'mask_image_display' => 'yes',
@@ -1482,16 +1482,21 @@ class ThePlus_Video_Player extends Widget_Base {
 		}
 
 		if ( 'image' === $only_icon_opt ) {
-			$img_url = ! empty( $settings['only_img'] ) ? $settings['only_img'] : '';
+			$img_url_val = ! empty( $settings['only_img'] ) ? $settings['only_img'] : '';
 
-			if ( ! empty( $img_url['url'] ) ) {
+			if ( ! empty( $img_url_val['url'] ) ) {
+				$only_img_id = ! empty( $img_url_val['id'] ) ? $img_url_val['id'] : '';
 
-				$only_img = $img_url['id'];
+				if ( ! empty( $only_img_id ) ) {
+					$img = wp_get_attachment_image_src( $only_img_id, $settings['only_img_thumbnail_size'] );
+					$only_img_icon = isset( $img[0] ) ? $img[0] : '';
+				} else {
+					$only_img_icon = $img_url_val['url'];
+				}
 
-				$img = wp_get_attachment_image_src( $only_img, $settings['only_img_thumbnail_size'] );
-
-				$only_img_icon = isset( $img[0] ) ? $img[0] : '';
-				$only_image   .= '<img class="ts-video-only-icon" src="' . esc_url( $only_img_icon ) . '" alt="' . esc_html__( 'play-icon', 'tpebl' ) . '" />';
+				if ( ! empty( $only_img_icon ) ) {
+					$only_image .= '<img class="ts-video-only-icon" src="' . esc_url( $only_img_icon ) . '" alt="' . esc_html__( 'play-icon', 'tpebl' ) . '" />';
+				}
 			}
 		}
 
@@ -1521,12 +1526,13 @@ class ThePlus_Video_Player extends Widget_Base {
 		if ( ! empty( $ban_img ) ) {
 
 			if ( ! empty( $ban_om_id ) ) {
-				$banner_image = $ban_om_id;
-
-				$img = wp_get_attachment_image_src( $banner_image, $settings['banner_image_thumbnail_size'] );
-
-				$banner_image = $img[0];
+				$img          = wp_get_attachment_image_src( $ban_om_id, $settings['banner_image_thumbnail_size'] );
+				$banner_image = isset( $img[0] ) ? $img[0] : '';
 			} else {
+				$banner_image = $ban_img;
+			}
+
+			if ( empty( $banner_image ) ) {
 				$banner_image = L_THEPLUS_URL . 'assets/images/tp-placeholder.jpg';
 			}
 
@@ -1792,7 +1798,7 @@ class ThePlus_Video_Player extends Widget_Base {
 			$stickyparam = 'data-stickyparam= \'' . wp_json_encode( $stickyattr ) . '\' ';
 		}
 
-			$video_player  = '<div class="pt_plus_video-box-shadow ' . esc_attr( $uid ) . ' ' . esc_attr( $animated_class ) . '" ' . esc_attr( $mask_image ) . ' ' . $animation_attr . ' ' . $stickyparam . ' >';
+			$video_player  = '<div class="pt_plus_video-box-shadow ' . esc_attr( $uid ) . ' ' . esc_attr( $animated_class ) . esc_attr( $mask_image ) . '" ' . $animation_attr . ' ' . $stickyparam . ' >';
 			$video_player .= '<div class="pt_plus_video_player ' . esc_attr( $video_touchable ) . ' ' . esc_attr( $video_space ) . ' text-' . esc_attr( $icon_align_video ) . '">';
 
 			$video_player .= $video_content;

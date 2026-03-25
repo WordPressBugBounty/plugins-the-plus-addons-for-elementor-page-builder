@@ -199,7 +199,9 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					),
 				),
 				'devices'      => array( 'desktop', 'tablet', 'mobile' ),
-				'prefix_class' => 'text-%s',
+				'selectors'    => array(
+					'{{WRAPPER}} .pt-plus-text-block-wrapper .text-content-block' => 'text-align: {{VALUE}};',
+				),
 			)
 		);
 		$this->add_control(
@@ -313,6 +315,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'label_off'    => esc_html__( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( 'Toggle to enable GSAP-powered text animations for the block.', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -325,7 +328,8 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					'tp_basic'  => esc_html__( 'Basic', 'tpebl' ),
 					'tp_global' => esc_html__( 'Global', 'tpebl' ),
 				),
-				'condition' => array(
+				'description' => esc_html__( 'Select between basic animation global animations defined in Site Settings.', 'tpebl' ),
+				'condition'   => array(
 					'enable_text_animation' => 'yes',
 				),
 			)
@@ -347,7 +351,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 			if ( ! empty( $global_animations ) ) {
 				foreach ( $global_animations as $animation ) {
 					$id                    = $animation['_id'] ?? '';
-					$name                  = $animation['name'] ?? 'Unnamed';
+					$name                  = $animation['name'] ?? esc_html__( 'Unnamed', 'tpebl' );
 					$global_options[ $id ] = $name;
 				}
 			}
@@ -361,6 +365,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					'type'      => \Elementor\Controls_Manager::SELECT,
 					'options'   => $global_options,
 					'default'   => '',
+					'description' => esc_html__( 'Choose a text animation previously created in the Global Scroll Interactions section of Site Settings.', 'tpebl' ),
 					'condition' => array(
 						'text_animations'       => 'tp_global',
 						'enable_text_animation' => 'yes',
@@ -405,7 +410,8 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					'typing'       => esc_html__( 'Typing Effect', 'tpebl' ),
 					'tp_text_swap' => esc_html__( 'Text Style Swap', 'tpebl' ),
 				),
-				'condition' => array(
+				'description' => esc_html__( 'Select the desired animation style, ranging from simple transitions to complex scatter effects.', 'tpebl' ),
+				'condition'   => array(
 					'enable_text_animation' => 'yes',
 					'text_animations!'      => 'tp_global',
 				),
@@ -414,12 +420,13 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 		$this->add_control(
 			'tp_tansformtion_toggel',
 			array(
-				'label'        => esc_html__( 'Transform Effects 	', 'tpebl' ),
+				'label'        => esc_html__( 'Transform Effects', 'tpebl' ),
 				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
 				'label_off'    => esc_html__( 'Default', 'tpebl' ),
 				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( "Enable custom transformation properties like position, scale, and rotation for the 'Normal' animation type.", 'tpebl' ),
 				'condition'    => array(
 					'text_animation_type'   => 'normal',
 					'enable_text_animation' => 'yes',
@@ -536,15 +543,15 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => '50% 50%',
 				'options' => array(
-					'0% 0%'     => 'Top Left',
-					'50% 0%'    => 'Top Center',
-					'100% 0%'   => 'Top Right',
-					'0% 50%'    => 'Center Left',
-					'50% 50%'   => 'Center',
-					'100% 50%'  => 'Center Right',
-					'0% 100%'   => 'Bottom Left',
-					'50% 100%'  => 'Bottom Center',
-					'100% 100%' => 'Bottom Right',
+					'0% 0%'     => esc_html__( 'Top Left', 'tpebl' ),
+					'50% 0%'    => esc_html__( 'Top Center', 'tpebl' ),
+					'100% 0%'   => esc_html__( 'Top Right', 'tpebl' ),
+					'0% 50%'    => esc_html__( 'Center Left', 'tpebl' ),
+					'50% 50%'   => esc_html__( 'Center', 'tpebl' ),
+					'100% 50%'  => esc_html__( 'Center Right', 'tpebl' ),
+					'0% 100%'   => esc_html__( 'Bottom Left', 'tpebl' ),
+					'50% 100%'  => esc_html__( 'Bottom Center', 'tpebl' ),
+					'100% 100%' => esc_html__( 'Bottom Right', 'tpebl' ),
 				),
 			)
 		);
@@ -560,6 +567,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					'chars' => esc_html__( 'Characters', 'tpebl' ),
 					'words' => esc_html__( 'Words', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Determine how the text is divided for the animation (by characters or by words).', 'tpebl' ),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
 					'text_animation_type!'  => array( 'typing', 'scramble' ),
@@ -578,6 +586,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 					'onscroll' => esc_html__( 'On Scroll', 'tpebl' ),
 					'onhover'  => esc_html__( 'On Hover', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Set when the animation starts: on initial page load, as the user scrolls, or when hovering.', 'tpebl' ),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
 					'text_animations!'      => 'tp_global',
@@ -587,12 +596,13 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 		$this->add_control(
 			'tp_scrub',
 			array(
-				'label'        => __( 'Enable Scroll Scrub', 'tpebl' ),
+				'label'        => esc_html__( 'Enable Scroll Scrub', 'tpebl' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'tpebl' ),
-				'label_off'    => __( 'No', 'tpebl' ),
+				'label_on'     => esc_html__( 'Yes', 'tpebl' ),
+				'label_off'    => esc_html__( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( 'Enable this to sync the animation progress directly with the page scroll speed.', 'tpebl' ),
 				'condition'    => array(
 					'enable_text_animation' => 'yes',
 					'text_trigger'          => 'onscroll',
@@ -604,12 +614,13 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 		$this->add_control(
 			'text_animation_controls',
 			array(
-				'label'        => __( 'Animation Controls', 'tpebl' ),
+				'label'        => esc_html__( 'Animation Controls', 'tpebl' ),
 				'type'         => Controls_Manager::POPOVER_TOGGLE,
-				'label_off'    => __( 'Enable', 'tpebl' ),
-				'label_on'     => __( 'Disable', 'tpebl' ),
+				'label_off'    => esc_html__( 'Enable', 'tpebl' ),
+				'label_on'     => esc_html__( 'Disable', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( 'Enable custom duration, delay, and stagger timing for basic presets.', 'tpebl' ),
 				'condition'    => array(
 					'enable_text_animation' => 'yes',
 					'text_animations!'      => 'tp_global',
@@ -623,6 +634,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'label'     => esc_html__( 'Duration', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::NUMBER,
 				'default'   => 1.2,
+				'description' => esc_html__( 'Total time in seconds for the animation to complete.', 'tpebl' ),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
 					'text_animations!'      => 'tp_global',
@@ -635,6 +647,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'label'     => esc_html__( 'Delay', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::NUMBER,
 				'default'   => 0.3,
+				'description' => esc_html__( 'Idle time in seconds before the animation begins.', 'tpebl' ),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
 					'text_animations!'      => 'tp_global',
@@ -647,6 +660,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'label'     => esc_html__( 'Stagger', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::NUMBER,
 				'default'   => 0.04,
+				'description' => esc_html__( 'Time interval between each individual part (character or word) of the animation.', 'tpebl' ),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
 					'text_animation_type!'  => array( 'typing', 'scramble' ),
@@ -679,17 +693,18 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'default'   => 'power1.out',
 				'options'   => array(
-					'power1.out'  => 'Power 1 Out',
-					'power2.out'  => 'Power 2 Out',
-					'power3.out'  => 'Power 3 Out',
-					'power4.out'  => 'Power 4 Out',
-					'sine.out'    => 'Sine Out',
-					'expo.out'    => 'Expo Out',
-					'circ.out'    => 'Circular Out',
-					'back.out'    => 'Back Out',
-					'elastic.out' => 'Elastic Out',
-					'bounce.out'  => 'Bounce Out',
+					'power1.out'  => esc_html__( 'Power 1 Out', 'tpebl' ),
+					'power2.out'  => esc_html__( 'Power 2 Out', 'tpebl' ),
+					'power3.out'  => esc_html__( 'Power 3 Out', 'tpebl' ),
+					'power4.out'  => esc_html__( 'Power 4 Out', 'tpebl' ),
+					'sine.out'    => esc_html__( 'Sine Out', 'tpebl' ),
+					'expo.out'    => esc_html__( 'Expo Out', 'tpebl' ),
+					'circ.out'    => esc_html__( 'Circular Out', 'tpebl' ),
+					'back.out'    => esc_html__( 'Back Out', 'tpebl' ),
+					'elastic.out' => esc_html__( 'Elastic Out', 'tpebl' ),
+					'bounce.out'  => esc_html__( 'Bounce Out', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Define the acceleration and deceleration curve for the animation movement.', 'tpebl' ),
 				'condition' => array(
 					'enable_text_animation' => 'yes',
 					'text_animation_type!'  => 'typing',
@@ -706,6 +721,7 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 				'label_off'    => esc_html__( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( 'Allow the animation to play every time the trigger condition is met.', 'tpebl' ),
 				'condition'    => array(
 					'enable_text_animation' => 'yes',
 					// 'text_animation_type!'  => 'typing',
@@ -725,15 +741,15 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/advanced-text/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=SsyUaK_f3pQ&t',
 					),
 				),
@@ -776,6 +792,9 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 			array(
 				'label' => esc_html__( 'Text Swap Style', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'text_animation_type' => 'tp_text_swap',
+				),
 			)
 		);
 		$this->add_group_control(

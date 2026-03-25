@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.10
+Stable tag: 6.4.11
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,40 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.11 =
+Add : Smooth Scroll : Lenis Smooth Scroll option Added
+Add : Scroll Navigation : Option to set position of the navigation dots
+Add : Testimonials : Author Image hide/show option
+Add : Global option : Box-shadow global option (Beta)
+Add : Global option : Gradient color global option (Beta)
+Add : Global option : Dimensions global option (Beta)
+Add : Global option : Button Styles global option (Beta)
+Improvement : Age Gate : Controller Improvement
+Improvement : Blog Listing : Controller Improvement
+Improvement : Button : Controller Improvement
+Improvement : Dark Mode : Controller Improvement
+Improvement : Dynamic Categories : Controller Improvement
+Improvement : Gallery Listing : Controller Improvement 
+Improvement : Icon : Controller Improvement
+Improvement : Info Box : Controller Improvement
+Improvement : Navigation Menu : Controller Improvement
+Improvement : Number Counter : Controller Improvement
+Improvement : Post Content : Controller Improvement
+Improvement : Post Prev/Next : Controller Improvement
+Improvement : Progress Bar : Controller Improvement
+Improvement : Team Member listing : Controller Improvement
+Improvement : Global Text Animation : Add labels for the options
+Improvement : Global Image Animation : Add labels for the options
+Improvement : Global GSAP Animation : Add labels for the options
+Fix : Accordion : PHP Warning
+Fix : Post Title : Title limit option not working properly
+Fix : Progress Bar : Chart fill color not working 
+Fix : Progress Bar : Icon title before/after not working
+Fix : Text Block : Alignment not working 
+Fix : Video Player : Mask Image not working
+Fix : Translation Issue : String are not Translatable
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.10 =
 Fix : Progress Bar : Stored XSS Security Patch (Medium Security)

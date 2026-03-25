@@ -229,7 +229,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			'liveeditor',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">' . esc_html__( 'Edit Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -242,7 +242,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 			'create',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">' . esc_html__( 'Create Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -385,15 +385,15 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/carousel-anything/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=yszLgc0TJPA',
 					),
 				),

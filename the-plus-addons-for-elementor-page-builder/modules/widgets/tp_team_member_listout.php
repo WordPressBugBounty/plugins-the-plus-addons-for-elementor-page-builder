@@ -387,7 +387,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 				'ai'          => false,
 				'default'     => '',
 				'placeholder' => esc_html__( 'e.g. Category1, Category2', 'tpebl' ),
-				'title'       => 'you can add multiple with separated by comma.',
+				'title'       => esc_html__( 'you can add multiple with separated by comma.', 'tpebl' ),
 				'label_block' => true,
 			)
 		);
@@ -1287,7 +1287,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		$this->add_responsive_control(
 			'ImageOverlayHover',
 			array(
-				'label'      => esc_html__( 'Overlay Hover Background Color', 'tpebl' ),
+				'label'      => esc_html__( 'Overlay Background Color', 'tpebl' ),
 				'type'       => Controls_Manager::COLOR,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1907,6 +1907,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 
 					$tm_title = ! empty( $item['memberTitle'] ) ? $item['memberTitle'] : '';
 					$img_id   = ! empty( $item['tmImage']['id'] ) ? $item['tmImage']['id'] : '';
+					$tmImage  = ! empty( $item['tmImage'] ) ? $item['tmImage'] : '';
 
 					$output .= '<div class="grid-item ' . $desktop_class . ' ' . $tablet_class . ' ' . $mobile_class . ' ' . esc_attr( $animated_columns ) . '">';
 

@@ -103,7 +103,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	public function get_keywords() {
-		return array( 'Tp Tabs Tours', 'Content Tabs', 'Tab Navigation', 'Tab Layout', 'Vertical Tab', 'Horizontal Tab', 'Swipe Tab', 'Autoplay Tabs', 'Hover Tabs', 'Carousel Tab' );
+		return array( 'Tp Tabs/Tours', 'Content Tabs', 'Tab Navigation', 'Tab Layout', 'Vertical Tab', 'Horizontal Tab', 'Swipe Tab', 'Autoplay Tabs', 'Hover Tabs', 'Carousel Tab' );
 	}
 
 	/**
@@ -313,7 +313,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				'label'      => esc_html__( 'Title', 'tpebl' ),
 				'type'       => Controls_Manager::TEXT,
 				'ai'         => false,
-				'default'    => esc_html__( 'Tab Title', 'tpebl' ),
+				'default'    => __( 'Tab Title', 'tpebl' ),
 				'dynamic'    => array(
 					'active' => true,
 				),
@@ -363,7 +363,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 			array(
 				'label'      => esc_html__( 'Content', 'tpebl' ),
 				'type'       => Controls_Manager::WYSIWYG,
-				'default'    => esc_html__( 'Content', 'tpebl' ),
+				'default'    => __( 'Content', 'tpebl' ),
 				'show_label' => false,
 				'ai'         => false,
 				'dynamic'    => array( 'active' => true ),
@@ -412,7 +412,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 			'liveeditor',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-editor" id="tp-live-editor-button">%s</a>', esc_html__( 'Edit Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -426,7 +426,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 			'create',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-create" id="tp-live-create-button">%s</a>', esc_html__( 'Create Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -644,12 +644,12 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				'fields'      => $repeater->get_controls(),
 				'default'     => array(
 					array(
-						'tab_title'   => esc_html__( 'Tab #1', 'tpebl' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'tpebl' ),
+						'tab_title'   => __( 'Tab #1', 'tpebl' ),
+						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'tpebl' ),
 					),
 					array(
-						'tab_title'   => esc_html__( 'Tab #2', 'tpebl' ),
-						'tab_content' => esc_html__( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'tpebl' ),
+						'tab_title'   => __( 'Tab #2', 'tpebl' ),
+						'tab_content' => __( 'I am item content. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'tpebl' ),
 					),
 				),
 				'title_field' => '{{{ tab_title }}}',

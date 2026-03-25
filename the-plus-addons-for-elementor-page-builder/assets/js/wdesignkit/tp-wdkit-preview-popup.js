@@ -10,7 +10,7 @@
 
         if (0 < templateAddSection.length) {
             var oldTemplateButton = templateAddSection.html();
-                oldTemplateButton = oldTemplateButton.replace('<div class="elementor-add-section-drag-title', '<div data-mode="dark" class="elementor-add-section-area-button elementor-action-tp-wdkit-button" title="' + __("WDesignKit") + '"><a href="#" class="tp-wkit-main-logo-div"></a></div><div class="elementor-add-section-drag-title');
+                oldTemplateButton = oldTemplateButton.replace('<div class="elementor-add-section-drag-title', '<div data-mode="dark" class="elementor-add-section-area-button elementor-action-tp-wdkit-button" title="' + __("WDesignKit", "tpebl") + '"><a href="#" class="tp-wkit-main-logo-div"></a></div><div class="elementor-add-section-drag-title');
                 templateAddSection.html(oldTemplateButton);
         }
 

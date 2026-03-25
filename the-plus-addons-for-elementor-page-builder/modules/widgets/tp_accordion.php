@@ -296,7 +296,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 			'liveeditor',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button" data-template-id="">Edit Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-editor" id="tp-live-editor-button" data-template-id="">%s</a>', esc_html__( 'Edit Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -309,7 +309,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 			'create',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-create" id="tp-live-create-button">%s</a>', esc_html__( 'Create Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -1917,7 +1917,10 @@ class L_ThePlus_Accordion extends Widget_Base {
 		?>
 		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo $animation_attr; ?>  role="tablist">
 			<?php
-			foreach ( $settings['tabs'] as $index => $item ) {
+
+			$acc_tabs = ! empty( $settings['tabs'] ) ? $settings['tabs'] : [];
+
+			foreach ( $acc_tabs as $index => $item ) {
 				$content_source = ! empty( $item['content_source'] ) ? $item['content_source'] : '';
 				$tab_content    = ! empty( $item['tab_content'] ) ? wp_kses_post( $item['tab_content'] ) : '';
 
@@ -2060,7 +2063,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 										}
 									}
 
-									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">Selected Template : <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
+									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Selected Template :', 'tpebl' ) . ' <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
 								}
 							} elseif ( 'page_template' === $content_source ) {
 								if ( empty( $content_template ) || '0' === $content_template ) {
@@ -2103,7 +2106,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 	public function l_theplus_get_numbers() {
 		$options = array();
 
-		$options['all-open'] = 'All Open';
+		$options['all-open'] = esc_html__( 'All Open', 'tpebl' );
 
 		for ( $i = 0;$i <= 20;$i++ ) {
 			$options[ $i ] = $i;

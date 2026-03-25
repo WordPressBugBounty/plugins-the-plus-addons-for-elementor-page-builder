@@ -341,7 +341,6 @@ class ThePlus_Post_Content extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .tp-post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_control(

@@ -113,8 +113,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
         const getSplit = (el) => {
 
             if (el.splitInstance) {
-                el.splitInstance.revert();
-                el.splitInstance = null;
+                return el.splitInstance;
             }
             el.style.whiteSpace = "pre-wrap";
 
@@ -142,7 +141,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
             });
         };
 
-        const runEffect = (el) => {
+        const runEffect = (el, stConfig = null) => {
             const $el = $(el);
             const finalText = $el.data("tp-original-text");
 
@@ -164,6 +163,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                         delay,
                         repeat: repeat === 'yes' ? -1 : 0,
                         yoyo: repeat === 'yes' ? true : false,
+                        scrollTrigger: stConfig,
                     });
                     break;
                 }
@@ -181,6 +181,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                         delay,
                         repeat: repeat === 'yes' ? -1 : 0,
                         yoyo: repeat === 'yes' ? true : false,
+                        scrollTrigger: stConfig,
                     });
                     break;
                 }
@@ -197,6 +198,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                         },
                         ease,
                         repeat: repeat === 'yes' ? -1 : 0,
+                        scrollTrigger: stConfig,
                         // yoyo: repeat_yoyo === 'yes',
                     });
                     break;
@@ -222,6 +224,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                         text: text,
                         ease: "none",
                         repeat: repeat === 'yes' ? -1 : 0,
+                        scrollTrigger: stConfig,
                     });
 
                     break;
@@ -243,6 +246,7 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                         Object.assign(animConfig, tp_swap_typography);
                     }
 
+                    animConfig.scrollTrigger = stConfig;
                     gsap.to(split.chars, animConfig);
                     break;
                 }
@@ -307,11 +311,10 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
                     }
                 } else {
 
-                    ScrollTrigger.create({
+                    runEffect(el, {
                         trigger: $this[0],
                         start: "top 70%",
                         once: true,
-                        onEnter: () => runEffect(el)
                     });
 
                 }

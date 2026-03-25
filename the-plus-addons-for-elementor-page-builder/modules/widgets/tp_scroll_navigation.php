@@ -294,6 +294,110 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'scroll_navigation_popover',
+			array(
+				'label'     => esc_html__( 'Navigation Position', 'tpebl' ),
+				'type'      => Controls_Manager::POPOVER_TOGGLE,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'no',
+			)
+		);
+		$this->start_popover();
+		$this->add_responsive_control(
+			'navigation_left',
+			array(
+				'label'      => esc_html__( 'Left', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -500,
+						'max'  => 500,
+						'step' => 1,
+					),
+					'%'  => array(
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-scroll-navigation' => 'left: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'navigation_right',
+			array(
+				'label'      => esc_html__( 'Right', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -500,
+						'max'  => 500,
+						'step' => 1,
+					),
+					'%'  => array(
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-scroll-navigation' => 'right: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'navigation_top',
+			array(
+				'label'      => esc_html__( 'Top', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -500,
+						'max'  => 500,
+						'step' => 1,
+					),
+					'%'  => array(
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-scroll-navigation' => 'top: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'navigation_bottom',
+			array(
+				'label'      => esc_html__( 'Bottom', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => -500,
+						'max'  => 500,
+						'step' => 1,
+					),
+					'%'  => array(
+						'min'  => -100,
+						'max'  => 100,
+						'step' => 1,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .theplus-scroll-navigation' => 'bottom: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+		$this->end_popover();
+		$this->add_control(
 			'scroll_navigation_tooltip_display_style',
 			array(
 				'label'     => esc_html__( 'Tooltip Display Style', 'tpebl' ),
@@ -326,7 +430,7 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 				'label'       => esc_html__( 'Section ID', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
-				'default'     => 'section-id',
+				'default'     => __( 'section-id', 'tpebl' ),
 				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',

@@ -52,6 +52,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label'   => esc_html__( 'Animation Name', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => esc_html__( 'My Animation', 'tpebl' ),
+				'description' => esc_html__( 'Enter a unique name for this text animation to identify it easily.', 'tpebl' ),
 				'ai'      => false,
 			)
 		);
@@ -68,6 +69,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'typing'       => esc_html__( 'Typing Effect', 'tpebl' ),
 					'tp_text_swap' => esc_html__( 'Text Style Swap', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Select the style of text animation: Normal, Explode, Scramble, Typing, or Style Swap.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -76,6 +78,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label'     => esc_html__( 'Text Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#0885f2ff',
+				'description' => esc_html__( 'Choose the color for the text style swap animation.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -88,6 +91,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label'     => esc_html__( 'Font Family', 'tpebl' ),
 				'type'      => Controls_Manager::FONT,
 				'default'   => '',
+				'description' => esc_html__( 'Select the font family for the text style swap.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -114,6 +118,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'default'    => array(
 					'unit' => 'px',
 				),
+				'description' => esc_html__( 'Adjust the font size for the text style swap.', 'tpebl' ),
 				'condition'  => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -141,6 +146,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'bolder'  => 'Bolder',
 					'lighter' => 'Lighter',
 				),
+				'description' => esc_html__( 'Select the font weight for the text style swap.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -159,6 +165,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'capitalize' => 'Capitalize',
 					'none'       => 'Normal',
 				),
+				'description' => esc_html__( 'Choose a text transform style (e.g., Uppercase, Lowercase) for the style swap.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -176,6 +183,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'italic'  => 'Italic',
 					'oblique' => 'Oblique',
 				),
+				'description' => esc_html__( 'Select the font style (e.g., Italic, Oblique) for the style swap.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -194,6 +202,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'line-through' => 'Line Through',
 					'none'         => 'None',
 				),
+				'description' => esc_html__( 'Choose a text decoration style (e.g., Underline, Line Through) for the style swap.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -214,6 +223,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'default'    => array(
 					'unit' => 'em',
 				),
+				'description' => esc_html__( 'Adjust the line height for the text style swap.', 'tpebl' ),
 				'condition'  => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -236,6 +246,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'default'    => array(
 					'unit' => 'px',
 				),
+				'description' => esc_html__( 'Set the letter spacing for the text style swap.', 'tpebl' ),
 				'condition'  => array(
 					'text_animation_type' => 'tp_text_swap',
 				),
@@ -263,6 +274,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'size' => 0,
 					'unit' => 'px',
 				),
+				'description' => esc_html__( 'Adjust the horizontal starting position of the text.', 'tpebl' ),
 				'condition'  => array(
 					'text_animation_type' => 'normal',
 				),
@@ -290,6 +302,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'size' => 0,
 					'unit' => 'px',
 				),
+				'description' => esc_html__( 'Adjust the vertical starting position of the text.', 'tpebl' ),
 				'condition'  => array(
 					'text_animation_type' => 'normal',
 				),
@@ -306,6 +319,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'step' => 1,
 				),
 				'default'   => array( 'size' => 0 ),
+				'description' => esc_html__( 'Apply a horizontal skew effect to the text.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'normal',
 				),
@@ -322,6 +336,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'step' => 1,
 				),
 				'default'   => array( 'size' => 0 ),
+				'description' => esc_html__( 'Apply a vertical skew effect to the text.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'normal',
 				),
@@ -339,6 +354,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'step' => 0.01,
 				),
 				'default'   => array( 'size' => 1 ),
+				'description' => esc_html__( 'Set the initial scale factor of the text.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'normal',
 				),
@@ -356,6 +372,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'step' => 1,
 				),
 				'default'   => array( 'size' => 0 ),
+				'description' => esc_html__( 'Set the rotation angle for the text animation.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type' => 'normal',
 				),
@@ -382,6 +399,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'condition' => array(
 					'text_animation_type' => 'normal',
 				),
+				'description' => esc_html__( 'Specify the pivot point for transformations like scale and rotation.', 'tpebl' ),
 
 			)
 		);
@@ -395,6 +413,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'chars' => esc_html__( 'Characters', 'tpebl' ),
 					'words' => esc_html__( 'Words', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Choose whether to split the text by individual characters or words for the animation.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type!' => array( 'typing', 'scramble' ),
 				),
@@ -411,6 +430,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'onscroll' => esc_html__( 'On Scroll', 'tpebl' ),
 					'onhover'  => esc_html__( 'On Hover', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Choose when the text animation should trigger: when the page loads, as the user scrolls, or on mouse hover.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -422,6 +442,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label_off'    => __( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( 'Enable this to link the text animation progress directly to the scrollbar movement.', 'tpebl' ),
 				'condition'    => array(
 					'text_trigger'         => 'onscroll',
 					'text_animation_type!' => array( 'typing', 'scramble' ),
@@ -434,6 +455,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label'   => esc_html__( 'Duration', 'tpebl' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => 1.2,
+				'description' => esc_html__( 'Set the length of the animation in seconds.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -442,6 +464,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label'   => esc_html__( 'Delay', 'tpebl' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => 0.3,
+				'description' => esc_html__( 'Set a delay before the animation starts in seconds.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -450,6 +473,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label'     => esc_html__( 'Stagger', 'tpebl' ),
 				'type'      => \Elementor\Controls_Manager::NUMBER,
 				'default'   => 0.04,
+				'description' => esc_html__( 'Control the time delay between animated text parts (characters or words).', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type!' => array( 'typing', 'scramble' ),
 				),
@@ -473,6 +497,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 					'elastic.out' => 'Elastic Out',
 					'bounce.out'  => 'Bounce Out',
 				),
+				'description' => esc_html__( 'Choose the acceleration curve (easing) for the text animation.', 'tpebl' ),
 				'condition' => array(
 					'text_animation_type!' => 'typing',
 				),
@@ -487,6 +512,7 @@ class TP_GSAP_Text_Global extends Tab_Base {
 				'label_off'    => esc_html__( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description' => esc_html__( 'Toggle this to allow the text animation to re-trigger upon subsequent visits.', 'tpebl' ),
 				'condition'    => array(
 					'text_animation_type!' => 'typing',
 				),

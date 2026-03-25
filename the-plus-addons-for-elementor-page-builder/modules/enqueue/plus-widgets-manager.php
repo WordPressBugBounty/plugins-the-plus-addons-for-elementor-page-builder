@@ -307,6 +307,13 @@ class Plus_Widgets_Manager {
 				}
 			}
 
+			if('tp-smooth-scroll' === $widget_name){
+				$scroll_option_type = ! empty( $options['scroll_option_type'] ) ? $options['scroll_option_type'] : 'basic';
+				if('advanced' === $scroll_option_type){
+					$this->transient_widgets[] = 'tp-smooth-scroll-lenis';
+				}
+			}
+
 			if ( 'tp-blog-listout' === $widget_name ) {
 
 				$blog_style                = ! empty( $options['style'] ) ? $options['style'] : 'style-1';

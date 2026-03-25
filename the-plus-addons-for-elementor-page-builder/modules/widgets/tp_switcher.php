@@ -176,7 +176,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label'       => esc_html__( 'Title', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
-				'default'     => esc_html__( 'Switch A', 'tpebl' ),
+				'default'     => __( 'Switch A', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'description' => wp_kses_post(
 					sprintf(
@@ -204,7 +204,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label'       => esc_html__( 'Content', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
 				'ai'          => false,
-				'default'     => esc_html__( 'I am text block. Click edit button to change this text.', 'tpebl' ),
+				'default'     => __( 'I am text block. Click edit button to change this text.', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
@@ -268,7 +268,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			'liveeditor',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-editor" id="tp-live-editor-button">%s</a>', esc_html__( 'Edit Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -282,7 +282,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			'create',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-create" id="tp-live-create-button">%s</a>', esc_html__( 'Create Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -354,7 +354,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label'       => esc_html__( 'Title', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
-				'default'     => esc_html__( 'Switch B', 'tpebl' ),
+				'default'     => __( 'Switch B', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'description' => wp_kses_post(
 					sprintf(
@@ -382,7 +382,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label'       => esc_html__( 'Content', 'tpebl' ),
 				'type'        => Controls_Manager::WYSIWYG,
 				'ai'          => false,
-				'default'     => esc_html__( 'I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'tpebl' ),
+				'default'     => __( 'I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 'tpebl' ),
 				'placeholder' => esc_html__( 'Type your description here', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
@@ -440,7 +440,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			'liveeditor1',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-editor" id="tp-live-editor-button">%s</a>', esc_html__( 'Edit Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -454,7 +454,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 			'create1',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => sprintf( '<a class="tp-live-create" id="tp-live-create-button">%s</a>', esc_html__( 'Create Template', 'tpebl' ) ),
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -623,7 +623,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label'     => esc_html__( 'Content 1', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
 				'ai'        => false,
-				'default'   => esc_html__( 'Switch A', 'tpebl' ),
+				'default'   => __( 'Switch A', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
 					'switcher_style!' => 'style-4',
@@ -637,7 +637,7 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'label'     => esc_html__( 'Content 2', 'tpebl' ),
 				'type'      => Controls_Manager::TEXT,
 				'ai'        => false,
-				'default'   => esc_html__( 'Switch B', 'tpebl' ),
+				'default'   => __( 'Switch B', 'tpebl' ),
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
 					'switcher_style!' => 'style-4',

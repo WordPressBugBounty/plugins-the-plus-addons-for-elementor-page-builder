@@ -138,7 +138,7 @@ class ThePlus_Icon extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label' => __( 'Need Help', 'tpebl' ),
+				'label' => esc_html__( 'Need Help', 'tpebl' ),
 				'type'  => 'tpae_need_help',
 			)
 		);
@@ -149,6 +149,24 @@ class ThePlus_Icon extends Widget_Base {
 			array(
 				'label' => esc_html__( 'Icon Style', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'tp_icon_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'tpebl' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'default'    => array(
+					'top'    => 10,
+					'right'  => 10,
+					'bottom' => 10,
+					'left'   => 10,
+					'unit'   => 'px',
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .tp-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
 			)
 		);
 		$this->add_responsive_control(
@@ -215,24 +233,6 @@ class ThePlus_Icon extends Widget_Base {
 				),
 				'selectors'      => array(
 					'{{WRAPPER}} .tp-icon svg' => 'transform: rotate({{SIZE}}{{UNIT}});',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'tp_icon_padding',
-			array(
-				'label'      => esc_html__( 'Padding', 'tpebl' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
-				'default'    => array(
-					'top'    => 10,
-					'right'  => 10,
-					'bottom' => 10,
-					'left'   => 10,
-					'unit'   => 'px',
-				),
-				'selectors'  => array(
-					'{{WRAPPER}} .tp-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);

@@ -199,7 +199,7 @@ class ThePlus_Post_Title extends Widget_Base {
 				),
 			)
 		);
-		$this->add_responsive_control(
+		/* $this->add_responsive_control(
 			'textAlignment',
 			array(
 				'label'     => esc_html__( 'Text Alignment', 'tpebl' ),
@@ -227,7 +227,7 @@ class ThePlus_Post_Title extends Widget_Base {
 					'{{WRAPPER}} .tp-post-title' => 'text-align: {{VALUE}};',
 				),
 			)
-		);
+		); */
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_section',
@@ -295,6 +295,12 @@ class ThePlus_Post_Title extends Widget_Base {
 				'default'   => 'no',
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'If enabled, a post single page link will be attached to the title.', 'tpebl' )
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -563,7 +569,6 @@ class ThePlus_Post_Title extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .tp-post-title .tp-post-title-prepost' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 			)
 		);
 		$this->add_responsive_control(
@@ -580,6 +585,7 @@ class ThePlus_Post_Title extends Widget_Base {
 					),
 				),
 				'render_type' => 'ui',
+				'separator'   => 'before',
 				'selectors'   => array(
 					'{{WRAPPER}} .tp-post-title .tp-post-title-prepost.tp-prefix' => 'margin-right: {{SIZE}}{{UNIT}}',
 				),
@@ -714,22 +720,18 @@ class ThePlus_Post_Title extends Widget_Base {
 		}
 
 		if ( ! empty( $posttype ) ) {
-			if ( 'limitByWord' === $limit_count_type ) {
-				if ( 'singlepage' === $posttype ) {
-					$title = wp_trim_words( get_the_title( $post_id ), $text_limit );
-				} elseif ( 'archivepage' === $posttype ) {
-					$title = wp_trim_words( get_the_archive_title(), $text_limit );
-				}
-			} elseif ( 'limitByLetter' === $limit_count_type ) {
-				if ( 'singlepage' === $posttype ) {
-					$title = substr( wp_trim_words( get_the_title( $post_id ) ), 0, $text_limit ) . '...';
-				} elseif ( 'archivepage' === $posttype ) {
-					$title = substr( wp_trim_words( get_the_archive_title() ), 0, $text_limit ) . '...';
-				}
-			} elseif ( 'singlepage' === $posttype ) {
-					$title = get_the_title( $post_id );
+			if ( 'singlepage' === $posttype ) {
+				$title = get_the_title( $post_id );
 			} elseif ( 'archivepage' === $posttype ) {
 				$title = get_the_archive_title();
+			}
+
+			if ( 'limitByWord' === $limit_count_type ) {
+				$title = wp_trim_words( $title, $text_limit );
+			} elseif ( 'limitByLetter' === $limit_count_type ) {
+				if ( strlen( $title ) > $text_limit ) {
+					$title = substr( $title, 0, $text_limit ) . '...';
+				}
 			}
 		}
 

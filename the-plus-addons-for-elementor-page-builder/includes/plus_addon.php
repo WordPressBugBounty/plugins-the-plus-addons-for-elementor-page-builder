@@ -745,6 +745,13 @@ function l_registered_widgets() {
 					),
 				),
 			),
+			'tp-smooth-scroll-lenis'=> array(
+				'dependency' => array(
+					'js' => array(
+						L_THEPLUS_PATH . DIRECTORY_SEPARATOR . 'assets/js/extra/lenis/lenis.min.js',
+					),
+				),
+			),
 			'tp-style-list'=> array(
 				'dependency' => array(
 					'css' => array(

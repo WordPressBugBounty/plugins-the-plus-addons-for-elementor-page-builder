@@ -542,8 +542,8 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 					)
 				),
 				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => __( 'Show', 'tpebl' ),
-				'label_off' => __( 'Hide', 'tpebl' ),
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
 			)
@@ -615,15 +615,15 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/gallery-listing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=tw7aIjUKbIk',
 					),
 				),
@@ -688,6 +688,33 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'icon_bottom_space',
+			array(
+				'type'        => Controls_Manager::SLIDER,
+				'label'       => esc_html__( 'Bottom Space', 'tpebl' ),
+				'size_units'  => array( 'px' ),
+				'range'       => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 80,
+						'step' => 1,
+					),
+				),
+				'default'     => array(
+					'unit' => 'px',
+					'size' => 12,
+				),
+				'render_type' => 'ui',
+				'selectors'   => array(
+					'{{WRAPPER}} .gallery-list .meta-search-icon' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+				),
+				'separator'   => 'before',
+				'condition'   => array(
+					'display_icon_zoom' => 'yes',
+				),
+			)
+		);
 
 		$this->start_controls_tabs( 'tabs_icon_style' );
 		$this->start_controls_tab(
@@ -739,33 +766,6 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_responsive_control(
-			'icon_bottom_space',
-			array(
-				'type'        => Controls_Manager::SLIDER,
-				'label'       => esc_html__( 'Bottom Space', 'tpebl' ),
-				'size_units'  => array( 'px' ),
-				'range'       => array(
-					'px' => array(
-						'min'  => 0,
-						'max'  => 80,
-						'step' => 1,
-					),
-				),
-				'default'     => array(
-					'unit' => 'px',
-					'size' => 12,
-				),
-				'render_type' => 'ui',
-				'selectors'   => array(
-					'{{WRAPPER}} .gallery-list .meta-search-icon' => 'margin-bottom: {{SIZE}}{{UNIT}}',
-				),
-				'separator'   => 'before',
-				'condition'   => array(
-					'display_icon_zoom' => 'yes',
-				),
-			)
-		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(

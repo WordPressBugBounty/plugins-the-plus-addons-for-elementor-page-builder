@@ -187,6 +187,10 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			'plus_text_global_animation',
 			'plus_image_global_animation',
 			'plus_adv_scroll_interactions',
+			'plus_global_box_shadow',
+			'plus_global_gradient_color',
+			'plus_global_dimensions',
+			'plus_global_button',
 		);
 
 		/**
@@ -228,7 +232,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			$default_load = get_option( 'theplus_options' );
 			if ( empty( $default_load ) ) {
 				$theplus_options['check_elements']  = array( 'tp_accordion', 'tp_adv_text_block', 'tp_blockquote', 'tp_blog_listout', 'tp_button', 'tp_contact_form_7', 'tp_countdown', 'tp_clients_listout', 'tp_gallery_listout', 'tp_flip_box', 'tp_heading_animation', 'tp_header_extras', 'tp_heading_title', 'tp_info_box', 'tp_navigation_menu_lite', 'tp_page_scroll', 'tp_progress_bar', 'tp_number_counter', 'tp_pricing_table', 'tp_scroll_navigation', 'tp_social_icon', 'tp_tabs_tours', 'tp_team_member_listout', 'tp_testimonial_listout', 'tp_video_player', 'tp_plus_form' );
-				$theplus_options['extras_elements'] = array();
+				$theplus_options['extras_elements'] = array( 'plus_cross_cp', 'plus_global_box_shadow', 'plus_global_gradient_color', 'plus_global_dimensions', 'plus_global_button' );
 
 				add_option( 'theplus_options', $theplus_options, '', 'on' );
 			} elseif ( ! is_array( $default_load['check_elements'] ) || ! is_array( $default_load['extras_elements'] ) ) {

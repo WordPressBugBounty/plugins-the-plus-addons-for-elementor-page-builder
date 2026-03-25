@@ -243,7 +243,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
 				'default'     => 'Previous Post',
-				'placeholder' => 'Previous Post',
+				'placeholder' => esc_html__( 'Previous Post', 'tpebl' ),
 				'label_block' => false,
 			)
 		);
@@ -254,7 +254,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
 				'default'     => 'Next Post',
-				'placeholder' => 'Next Post',
+				'placeholder' => esc_html__( 'Next Post', 'tpebl' ),
 				'label_block' => false,
 			)
 		);
@@ -486,7 +486,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'label'     => esc_html__( 'Prev/Next Content', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'style!' => array( 'style-3', 'style-4' ),
+					'style' => 'style-1',
 				),
 			)
 		);
@@ -563,8 +563,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 					),
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .tp-nav-style-1 .tp-post-nav .post-prev' => 'padding-right: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .tp-nav-style-1 .tp-post-nav .post-next' => 'padding-left: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .tp-post-navigation .tp-post-nav' => 'flex-wrap: nowrap;justify-content: space-between;gap: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);

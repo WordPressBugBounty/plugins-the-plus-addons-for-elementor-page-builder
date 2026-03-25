@@ -1145,6 +1145,68 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
+		$this->add_responsive_control(
+			'title_top_space',
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Title Top Space', 'tpebl' ),
+				'range'           => array(
+					'px' => array(
+						'step' => 2,
+						'min'  => -150,
+						'max'  => 150,
+					),
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'tablet_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'mobile_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'render_type'     => 'ui',
+				'selectors'       => array(
+					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-title' => 'margin-top : {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'title_btm_space',
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Title Bottom Space', 'tpebl' ),
+				'range'           => array(
+					'px' => array(
+						'step' => 2,
+						'min'  => -150,
+						'max'  => 150,
+					),
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'tablet_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'mobile_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'render_type'     => 'ui',
+				'selectors'       => array(
+					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-title' => 'margin-bottom : {{SIZE}}{{UNIT}}',
+				),
+			)
+		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
@@ -1316,7 +1378,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'title_hover_color_option',
 			array(
-				'label'       => esc_html__( 'Title Hover Color', 'tpebl' ),
+				'label'       => esc_html__( 'Title Color', 'tpebl' ),
 				'type'        => Controls_Manager::CHOOSE,
 				'options'     => array(
 					'solid'    => array(
@@ -1335,7 +1397,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'title_hover_color',
 			array(
-				'label'     => esc_html__( 'Hover Color', 'tpebl' ),
+				'label'     => esc_html__( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#3351a6',
 				'selectors' => array(
@@ -1461,74 +1523,43 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
-		$this->add_responsive_control(
-			'title_top_space',
-			array(
-				'type'            => Controls_Manager::SLIDER,
-				'label'           => esc_html__( 'Title Top Space', 'tpebl' ),
-				'range'           => array(
-					'px' => array(
-						'step' => 2,
-						'min'  => -150,
-						'max'  => 150,
-					),
-				),
-				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default' => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'tablet_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'mobile_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'render_type'     => 'ui',
-				'selectors'       => array(
-					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-title' => 'margin-top : {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
-		$this->add_responsive_control(
-			'title_btm_space',
-			array(
-				'type'            => Controls_Manager::SLIDER,
-				'label'           => esc_html__( 'Title Bottom Space', 'tpebl' ),
-				'range'           => array(
-					'px' => array(
-						'step' => 2,
-						'min'  => -150,
-						'max'  => 150,
-					),
-				),
-				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default' => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'tablet_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'mobile_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'render_type'     => 'ui',
-				'selectors'       => array(
-					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-title' => 'margin-bottom : {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_digit_option',
 			array(
 				'label' => esc_html__( 'Digit			', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$this->add_responsive_control(
+			'number_top_space',
+			array(
+				'type'            => Controls_Manager::SLIDER,
+				'label'           => esc_html__( 'Number Top Space', 'tpebl' ),
+				'range'           => array(
+					'px' => array(
+						'step' => 2,
+						'min'  => -150,
+						'max'  => 150,
+					),
+				),
+				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
+				'desktop_default' => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'tablet_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'mobile_default'  => array(
+					'unit' => 'px',
+					'size' => 0,
+				),
+				'render_type'     => 'ui',
+				'selectors'       => array(
+					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-number' => 'margin-top : {{SIZE}}{{UNIT}}',
+				),
 			)
 		);
 		$this->add_group_control(
@@ -1905,7 +1936,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$this->add_control(
 			'hover_gradient_color2',
 			array(
-				'label'     => esc_html__( 'Color 2', 'thepltpeblus' ),
+				'label'     => esc_html__( 'Color 2', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => 'cyan',
 				'condition' => array(
@@ -2157,37 +2188,6 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 			)
 		);
 		$this->end_controls_tabs();
-		$this->add_responsive_control(
-			'number_top_space',
-			array(
-				'type'            => Controls_Manager::SLIDER,
-				'label'           => esc_html__( 'Number Top Space', 'tpebl' ),
-				'range'           => array(
-					'px' => array(
-						'step' => 2,
-						'min'  => -150,
-						'max'  => 150,
-					),
-				),
-				'devices'         => array( 'desktop', 'tablet', 'mobile' ),
-				'desktop_default' => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'tablet_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'mobile_default'  => array(
-					'unit' => 'px',
-					'size' => 0,
-				),
-				'render_type'     => 'ui',
-				'selectors'       => array(
-					'{{WRAPPER}} .plus-number-counter .number-counter-inner-block .counter-number' => 'margin-top : {{SIZE}}{{UNIT}}',
-				),
-			)
-		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'section_bg_option_styling',

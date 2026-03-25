@@ -541,16 +541,15 @@ final class L_Theplus_Element_Load {
 		}
 
 		$plus_categories = array(
-            'plus-essential'   => array( 'title' => 'Plus Essential', 'icon'  => 'fa fa-plug' ),
-            'plus-advanced'    => array( 'title' => 'Plus Advanced', 'icon'  => 'fa fa-plug' ),
-            'plus-creative'    => array( 'title' => 'Plus Creative', 'icon'  => 'fa fa-plug' ),
-            'plus-listing'     => array( 'title' => 'Plus Listing', 'icon'  => 'fa fa-plug' ),
-            'plus-social'      => array( 'title' => 'Plus Social', 'icon'  => 'fa fa-plug' ),
-            'plus-forms'   	   => array( 'title' => 'Plus Forms', 'icon'  => 'fa fa-plug' ),
-            'plus-woo-builder' => array( 'title' => 'Plus WooCommerce', 'icon'  => 'fa fa-plug' ),
-            'plus-depreciated' => array( 'title' => 'Plus Depreciated', 'icon'  => 'fa fa-plug' ),
-            // 'plus-header'      => array( 'title' => 'Plus Header', 'icon'  => 'fa fa-plug' ),
-        );
+			'plus-essential'   => array( 'title' => esc_html__( 'Plus Essential', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-advanced'    => array( 'title' => esc_html__( 'Plus Advanced', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-creative'    => array( 'title' => esc_html__( 'Plus Creative', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-listing'     => array( 'title' => esc_html__( 'Plus Listing', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-social'      => array( 'title' => esc_html__( 'Plus Social', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-forms'       => array( 'title' => esc_html__( 'Plus Forms', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-woo-builder' => array( 'title' => esc_html__( 'Plus WooCommerce', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-depreciated' => array( 'title' => esc_html__( 'Plus Depreciated', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+		);
 
 		if ( $post_id ) {
 			$post_type = get_post_type( $post_id );

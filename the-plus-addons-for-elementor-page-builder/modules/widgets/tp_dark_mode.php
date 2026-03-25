@@ -531,11 +531,11 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'dm_ignore',
 			array(
-				'label'       => __( 'Ignore Dark Mode Classes', 'tpebl' ),
+				'label'       => esc_html__( 'Ignore Dark Mode Classes', 'tpebl' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 10,
 				'ai'          => false,
-				'placeholder' => __( 'Enter All Classes with Comma to ignore those in Dark Mode', 'tpebl' ),
+				'placeholder' => esc_html__( 'Enter All Classes with Comma to ignore those in Dark Mode', 'tpebl' ),
 				'condition'   => array(
 					'dm_ignore_class' => 'yes',
 				),
@@ -600,15 +600,15 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/dark-mode/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=gvA8Y2D4DSk',
 					),
 				),
@@ -628,7 +628,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend using this widget to the Header or Footer Template to load dark mode toggle on all pages.',
+					'notice'      => esc_html__( 'We recommend using this widget to the Header or Footer Template to load dark mode toggle on all pages.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Header Template', 'tpebl' ),
 					'page_type'   => 'tp_header',
 				)
@@ -929,7 +929,7 @@ class ThePlus_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'si_switch_normal_border_color',
 			array(
-				'label'     => esc_html__( 'Box Shadow color', 'tpebl' ),
+				'label'     => esc_html__( 'Box Shadow Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'.tp_dm_style2 .darkmode-toggle .tp-dark-mode-slider' => 'box-shadow:0 0 1px {{VALUE}};',

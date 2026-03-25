@@ -576,7 +576,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'sep_pre_ste_background_n_head',
 			array(
-				'label'     => 'Normal Background Option',
+				'label'     => esc_html__( 'Normal Background Option', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -592,7 +592,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'sep_pre_ste_background_h_head',
 			array(
-				'label'     => 'Hover Background Option',
+				'label'     => esc_html__( 'Hover Background Option', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -609,7 +609,7 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 		$repeater->add_control(
 			'dis_counter_custom_text_head',
 			array(
-				'label'     => 'Display Counter Custom Text',
+				'label'     => esc_html__( 'Display Counter Custom Text', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -2159,7 +2159,12 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 						$loop_img_src1 = '';
 						if ( ! empty( $item['loop_select_image']['url'] ) ) {
 							$loop_select_image = $item['loop_select_image']['id'];
-							$loop_img_src1     = tp_get_image_rander( $loop_select_image, $item['thumbnail_size'], array( 'class' => 'tp-icon-img' ) );
+							if ( ! empty( $loop_select_image ) ) {
+								$loop_img_src1 = tp_get_image_rander( $loop_select_image, $item['thumbnail_size'], array( 'class' => 'tp-icon-img' ) );
+							} else {
+								$image_alt     = ! empty( $item['loop_select_image']['alt'] ) ? $item['loop_select_image']['alt'] : '';
+								$loop_img_src1 = '<img src="' . esc_url( $item['loop_select_image']['url'] ) . '" class="tp-icon-img" alt="' . esc_attr( $image_alt ) . '">';
+							}
 						}
 
 						$list_img = '<div class="tp-ps-icon-img tp-pro-step-icon-img" >' . $loop_img_src1 . '</div>';
@@ -2222,7 +2227,12 @@ class L_ThePlus_Process_Steps extends Widget_Base {
 				if ( ! empty( $settings['seprator_border_style_n'] ) && 'border_img_custom' === $settings['seprator_border_style_n'] ) {
 					if ( ! empty( $settings['seprator_cusom_img']['url'] ) ) {
 						$seprator_cusom_img = $settings['seprator_cusom_img']['id'];
-						$sepimg1            = tp_get_image_rander( $seprator_cusom_img, 'full', array( 'class' => 'tp-sep-custom-img-inner' ) );
+						if ( ! empty( $seprator_cusom_img ) ) {
+							$sepimg1 = tp_get_image_rander( $seprator_cusom_img, 'full', array( 'class' => 'tp-sep-custom-img-inner' ) );
+						} else {
+							$image_alt = ! empty( $settings['seprator_cusom_img']['alt'] ) ? $settings['seprator_cusom_img']['alt'] : '';
+							$sepimg1   = '<img src="' . esc_url( $settings['seprator_cusom_img']['url'] ) . '" class="tp-sep-custom-img-inner" alt="' . esc_attr( $image_alt ) . '">';
+						}
 						$dis_sep_custom_img = '<span class="separator_custom_img">' . $sepimg1 . '</span>';
 					}
 				}

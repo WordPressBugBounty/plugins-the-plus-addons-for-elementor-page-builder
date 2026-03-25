@@ -150,6 +150,19 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'widget_notice',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Avoid using other widgets on the same page as Page Scroll to prevent unexpected behavior.', 'tpebl' ),
+					)
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
 			'page_scroll_opt',
 			array(
 				'label'   => esc_html__( 'Option', 'tpebl' ),

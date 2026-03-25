@@ -51,6 +51,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 				'label'   => esc_html__( 'Animation Name', 'tpebl' ),
 				'type'    => Controls_Manager::TEXT,
 				'default' => esc_html__( 'My Animation', 'tpebl' ),
+				'description' => esc_html__( 'Enter a unique name for this image animation to identify it easily.', 'tpebl' ),
 				'ai'      => false,
 			)
 		);
@@ -65,6 +66,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					'onscroll' => esc_html__( 'On Scroll', 'tpebl' ),
 					'onhover'  => esc_html__( 'On Hover', 'tpebl' ),
 				),
+				'description' => esc_html__( 'Choose when the animation should trigger: when the page loads, as the user scrolls, or on mouse hover.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -76,6 +78,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 				'label_off'    => __( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'description'  => esc_html__( 'Enable this to link the animation progress directly to the scrollbar movement.', 'tpebl' ),
 				'condition'    => array(
 					'image_trigger' => 'onscroll',
 				),
@@ -87,6 +90,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 				'label'   => esc_html__( 'Duration', 'tpebl' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => 1.2,
+				'description' => esc_html__( 'Set the length of the animation in seconds.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -95,6 +99,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 				'label'   => esc_html__( 'Delay', 'tpebl' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => 0.3,
+				'description' => esc_html__( 'Set a delay before the animation starts in seconds.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -109,6 +114,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 0 ),
+				'description' => esc_html__( 'Adjust the horizontal translation of the image.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -123,6 +129,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 0 ),
+				'description' => esc_html__( 'Adjust the vertical translation of the image.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -137,6 +144,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 0 ),
+				'description' => esc_html__( 'Apply a horizontal skew effect to the image.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -151,6 +159,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 0 ),
+				'description' => esc_html__( 'Apply a vertical skew effect to the image.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -166,6 +175,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 1 ),
+				'description' => esc_html__( 'Set the initial scale factor of the image.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -180,6 +190,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 0 ),
+				'description' => esc_html__( 'Set the rotation angle in degrees.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -195,6 +206,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					),
 				),
 				'default' => array( 'size' => 1 ),
+				'description' => esc_html__( 'Adjust the starting opacity of the image.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -210,6 +222,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					'0% 100%'   => 'Bottom Left',
 					'100% 100%' => 'Bottom Right',
 				),
+				'description' => esc_html__( 'Specify the pivot point for transformations like scale and rotation.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -245,6 +258,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					'corner_round'        => 'Rounded Corners',
 					'custom'              => 'Custom Clip Path',
 				),
+				'description' => esc_html__( 'Select a predefined or custom clip-path shape for the entrance effect.', 'tpebl' ),
 			)
 		);
 		$repeater->add_control(
@@ -252,8 +266,8 @@ class TP_GSAP_Image_Global extends Tab_Base {
 			array(
 				'label'       => esc_html__( 'Custom Clip Path Value', 'tpebl' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'placeholder' => 'polygon(50% 0%, 0% 100%, 100% 100%)',
-				'description' => 'Enter any valid CSS clip-path value',
+				'placeholder' => esc_html__( 'polygon(50% 0%, 0% 100%, 100% 100%)', 'tpebl' ),
+				'description' => esc_html__( 'Enter any valid CSS clip-path value', 'tpebl' ),
 				'condition'   => array(
 					'tp_clip_path_type' => 'custom',
 				),
@@ -305,6 +319,7 @@ class TP_GSAP_Image_Global extends Tab_Base {
 					'bounce.out'          => 'Bounce',
 					'none'                => 'Linear',
 				),
+				'description' => esc_html__( 'Choose the acceleration curve for your animation.', 'tpebl' ),
 			)
 		);
 		$this->add_control(

@@ -17,6 +17,8 @@ if ( 'tlrepeater' === $con_from ) {
 	$feat_id = $testi_image_id;
 	if ( ! empty( $feat_id ) ) {
 		$featured_image = tp_get_image_rander( $feat_id, $tsize );
+	} elseif ( ! empty( $testi_image['url'] ) ) {
+		$featured_image = '<img src="' . esc_url( $testi_image['url'] ) . '" alt="' . esc_attr( $testi_label ) . '">';
 	} else {
 		$featured_image = l_theplus_get_thumb_url();
 		$featured_image = '<img src="' . esc_url( $featured_image ) . '" alt="' . esc_attr( $testi_label ) . '">';

@@ -1088,20 +1088,6 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'mobile_menu_toggle_style',
-			array(
-				'label'     => __( 'Toggle Style', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'style-1',
-				'options'   => array(
-					'style-1' => __( 'Style 1', 'tpebl' ),
-				),
-				'condition' => array(
-					'show_mobile_menu' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
 			'mobile_toggle_alignment',
 			array(
 				'label'       => __( 'Toggle Alignment', 'tpebl' ),
@@ -1259,7 +1245,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'default' => array(
 					array(
 						'label' => __( 'Read Docs', 'tpebl' ),
-						'url'   => 'https://theplusaddons.com/help/navigation-menu/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
+						'url'   => 'https://theplusaddons.com/help/navigation-menu-lite/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
 						'label' => __( 'Watch Video', 'tpebl' ),
@@ -1307,7 +1293,6 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					'none'    => __( 'None', 'tpebl' ),
 					'style-1' => __( 'Style 1', 'tpebl' ),
 				),
-				'separator' => 'after',
 			)
 		);
 		$this->add_responsive_control(
@@ -1316,6 +1301,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'label'      => __( 'Outer Padding', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px' ),
+				'separator'  => 'before',
 				'default'    => array(
 					'top'      => '5',
 					'right'    => '5',
@@ -1365,7 +1351,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_normal_color',
 			array(
-				'label'     => __( 'Normal Color', 'tpebl' ),
+				'label'     => __( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -1489,7 +1475,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_hover_color',
 			array(
-				'label'     => __( 'Hover Color', 'tpebl' ),
+				'label'     => __( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ff5a6e',
 				'selectors' => array(
@@ -1500,7 +1486,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_hover_icon_color',
 			array(
-				'label'     => __( 'Hover Icon Color', 'tpebl' ),
+				'label'     => __( 'Icon Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -1514,7 +1500,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_hover_border_color',
 			array(
-				'label'     => __( 'Hover Border Color', 'tpebl' ),
+				'label'     => __( 'Border Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#252525',
 				'selectors' => array(
@@ -1528,7 +1514,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_responsive_control(
 			'main_menu_hover_radius',
 			array(
-				'label'      => __( 'Hover Border Radius', 'tpebl' ),
+				'label'      => __( 'Border Radius', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1562,7 +1548,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_active_color',
 			array(
-				'label'     => __( 'Active Color', 'tpebl' ),
+				'label'     => __( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ff5a6e',
 				'selectors' => array(
@@ -1573,7 +1559,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_active_icon_color',
 			array(
-				'label'     => __( 'Hover Icon Color', 'tpebl' ),
+				'label'     => __( 'Icon Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -1587,7 +1573,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'main_menu_active_border_color',
 			array(
-				'label'     => __( 'Active Border Color', 'tpebl' ),
+				'label'     => __( 'Border Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#252525',
 				'selectors' => array(
@@ -1601,7 +1587,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_responsive_control(
 			'main_menu_active_radius',
 			array(
-				'label'      => __( 'Active Border Radius', 'tpebl' ),
+				'label'      => __( 'Border Radius', 'tpebl' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -1833,7 +1819,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'sub_menu_normal_color',
 			array(
-				'label'     => __( 'Normal Color', 'tpebl' ),
+				'label'     => __( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -1876,7 +1862,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'sub_menu_hover_color',
 			array(
-				'label'     => __( 'Hover Color', 'tpebl' ),
+				'label'     => __( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ff5a6e',
 				'selectors' => array(
@@ -1887,7 +1873,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'sub_menu_hover_icon_color',
 			array(
-				'label'     => __( 'Hover Icon Color', 'tpebl' ),
+				'label'     => __( 'Icon Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -1919,7 +1905,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'sub_menu_active_color',
 			array(
-				'label'     => __( 'Active Color', 'tpebl' ),
+				'label'     => __( 'Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ff5a6e',
 				'selectors' => array(
@@ -1930,7 +1916,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'sub_menu_active_icon_color',
 			array(
-				'label'     => __( 'Active Icon Color', 'tpebl' ),
+				'label'     => __( 'Icon Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -2178,7 +2164,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'mobile_main_menu_active_icon_color',
 			array(
-				'label'     => __( 'Active Icon Color', 'tpebl' ),
+				'label'     => __( 'Icon Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -2313,7 +2299,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$this->add_control(
 			'mobile_sub_menu_active_icon_color',
 			array(
-				'label'     => __( 'Active Icon Color', 'tpebl' ),
+				'label'     => __( 'Icon Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#313131',
 				'selectors' => array(
@@ -2490,8 +2476,6 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$menu_size = ! empty( $settings['open_mobile_menu']['size'] ) ? $settings['open_mobile_menu']['size'] : 991;
 		$menu_unit = ! empty( $settings['open_mobile_menu']['unit'] ) ? $settings['open_mobile_menu']['unit'] : 'px';
 
-		$mobile_menu_toggle_style = ! empty( $settings['mobile_menu_toggle_style'] ) ? $settings['mobile_menu_toggle_style'] : 'style-1';
-
 		$menu_hover_click = 'menu-' . $menu_hover;
 		$navbar_menu_type = 'menu-' . $navbar_menu;
 		$menu_attr       .= ' data-menu_transition="' . esc_attr( $effects ) . '"';
@@ -2562,16 +2546,14 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					</div>
 				</div>
 
-				<?php if ( 'yes' === $mob_menu && ! empty( $mobile_menu_toggle_style ) ) { ?>
+				<?php if ( 'yes' === $mob_menu ) { ?>
 				
 					<div class="plus-mobile-nav-toggle navbar-header mobile-toggle">
-						<div class="mobile-plus-toggle-menu plus-collapsed toggle-<?php echo esc_attr( $mobile_menu_toggle_style ); ?>" data-target="#plus-mobile-nav-toggle-<?php echo esc_attr( $uid ); ?>">
-							<?php if ( 'style-1' === $mobile_menu_toggle_style ) { ?>
+						<div class="mobile-plus-toggle-menu plus-collapsed toggle-style-1" data-target="#plus-mobile-nav-toggle-<?php echo esc_attr( $uid ); ?>">
 							<ul class="toggle-lines">
 								<li class="toggle-line"></li>
 								<li class="toggle-line"></li>
 							</ul>
-							<?php } ?>
 						</div>
 					</div>
 				

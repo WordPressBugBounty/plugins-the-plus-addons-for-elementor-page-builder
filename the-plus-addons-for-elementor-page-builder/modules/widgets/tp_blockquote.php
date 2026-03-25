@@ -482,15 +482,15 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/blockquote/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=Ma7YtFHXIrs',
 					),
 				),
@@ -805,7 +805,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'author_desc_heading',
 			array(
-				'label'     => 'Author Description',
+				'label'     => esc_html__( 'Author Description', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -1948,7 +1948,7 @@ class ThePlus_Block_Quote extends Widget_Base {
 		$this->add_control(
 			'bl2o_bg_hover_heading',
 			array(
-				'label'     => 'Hover',
+				'label'     => esc_html__( 'Hover', 'tpebl' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -2396,8 +2396,8 @@ class ThePlus_Block_Quote extends Widget_Base {
 					$urldata = 'https://';
 				}
 
-				$urldata = ! empty( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
-				$urldata = ! empty( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+				$urldata .= ! empty( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+				$urldata .= ! empty( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
 				$udata .= ' ' . urlencode( $urldata );
 			}

@@ -406,12 +406,25 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 			)
 		);
 		$repeater->add_control(
+			'show_author_image',
+			array(
+				'label'     => esc_html__( 'Show Author Image', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
+			)
+		);
+		$repeater->add_control(
 			'testiImage',
 			array(
 				'label'   => esc_html__( 'Author Image', 'tpebl' ),
 				'type'    => Controls_Manager::MEDIA,
 				'ai'      => false,
 				'dynamic' => array( 'active' => true ),
+				'condition' => array(
+					'show_author_image' => 'yes',
+				),
 			)
 		);
 		$repeater->add_control(
@@ -444,22 +457,22 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 				'fields'      => $repeater->get_controls(),
 				'default'     => array(
 					array(
-						'testiAuthor' => 'I have been using the software from XYZ Business for a few weeks now and it has exceeded my expectations. It is user-friendly, efficient, and the customer support team is always available to help. Highly recommend this software!',
-						'testiTitle'  => 'Outstanding Support',
-						'testiLabel'  => 'Emily Thompson',
-						'testiDesign' => 'CEO of CodeCraft Inc.',
+						'testiAuthor' => esc_html__( 'I have been using the software from XYZ Business for a few weeks now and it has exceeded my expectations. It is user-friendly, efficient, and the customer support team is always available to help. Highly recommend this software!', 'tpebl' ),
+						'testiTitle'  => esc_html__( 'Outstanding Support', 'tpebl' ),
+						'testiLabel'  => esc_html__( 'Emily Thompson', 'tpebl' ),
+						'testiDesign' => esc_html__( 'CEO of CodeCraft Inc.', 'tpebl' ),
 					),
 					array(
-						'testiAuthor' => 'I have been using the software from XYZ Business for a few weeks now and it has exceeded my expectations. It is user-friendly, efficient, and the customer support team is always available to help. Highly recommend this software!',
-						'testiTitle'  => 'Improved Productivity',
-						'testiLabel'  => 'Benjamin Reed',
-						'testiDesign' => 'Founder of X Community',
+						'testiAuthor' => esc_html__( 'I have been using the software from XYZ Business for a few weeks now and it has exceeded my expectations. It is user-friendly, efficient, and the customer support team is always available to help. Highly recommend this software!', 'tpebl' ),
+						'testiTitle'  => esc_html__( 'Improved Productivity', 'tpebl' ),
+						'testiLabel'  => esc_html__( 'Benjamin Reed', 'tpebl' ),
+						'testiDesign' => esc_html__( 'Founder of X Community', 'tpebl' ),
 					),
 					array(
-						'testiAuthor' => 'I have been using the software from XYZ Business for a few weeks now and it has exceeded my expectations. It is user-friendly, efficient, and the customer support team is always available to help. Highly recommend this software!',
-						'testiTitle'  => 'Highly recommend',
-						'testiLabel'  => 'Rachel Johnson',
-						'testiDesign' => 'COO of AppFinity Solutions',
+						'testiAuthor' => esc_html__( 'I have been using the software from XYZ Business for a few weeks now and it has exceeded my expectations. It is user-friendly, efficient, and the customer support team is always available to help. Highly recommend this software!', 'tpebl' ),
+						'testiTitle'  => esc_html__( 'Highly recommend', 'tpebl' ),
+						'testiLabel'  => esc_html__( 'Rachel Johnson', 'tpebl' ),
+						'testiDesign' => esc_html__( 'COO of AppFinity Solutions', 'tpebl' ),
 					),
 				),
 				'title_field' => '{{{ testiLabel }}}',
@@ -649,6 +662,16 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 				'label_on'  => esc_html__( 'Show', 'tpebl' ),
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
+			)
+		);
+		$this->add_control(
+			'show_author_image',
+			array(
+				'label'     => esc_html__( 'Display Author Image', 'tpebl' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label_off' => esc_html__( 'Hide', 'tpebl' ),
+				'default'   => 'yes',
 			)
 		);
 		$this->add_control(
@@ -2410,6 +2433,8 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 		$title_by_limit = ! empty( $settings['titleByLimit'] ) ? $settings['titleByLimit'] : 'default';
 		$title_limit    = ! empty( $settings['titleLimit'] ) ? $settings['titleLimit'] : 30;
 
+		$show_author_image = ! empty( $settings['show_author_image'] ) ? $settings['show_author_image'] : '';
+
 		$redmor_txt = ! empty( $settings['redmorTxt'] ) ? $settings['redmorTxt'] : '';
 		$redles_txt = ! empty( $settings['redlesTxt'] ) ? $settings['redlesTxt'] : '';
 
@@ -2518,7 +2543,10 @@ class L_ThePlus_Testimonial_ListOut extends Widget_Base {
 						$testi_label    = ! empty( $item['testiLabel'] ) ? $item['testiLabel'] : '';
 						$testi_design   = ! empty( $item['testiDesign'] ) ? $item['testiDesign'] : '';
 						$testi_image_id = ! empty( $item['testiImage']['id'] ) ? $item['testiImage']['id'] : '';
+						$testi_image    = ! empty( $item['testiImage'] ) ? $item['testiImage'] : '';
 						$testi_logo     = ! empty( $item['testiLogo']['url'] ) ? $item['testiLogo']['url'] : '';
+
+						$show_author_image = ! empty( $item['show_author_image'] ) ? $item['show_author_image'] : '';
 
 						$output .= '<div class="grid-item ' . $desktop_class . ' ' . $tablet_class . ' ' . $mobile_class . '">';
 						if ( ! empty( $style ) ) {

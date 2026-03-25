@@ -142,9 +142,9 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 	protected function register_controls() {
 
 		$this->start_controls_section(
-			'content_section',
+			'section_flipbox_type_layout',
 			array(
-				'label' => esc_html__( 'Content', 'tpebl' ),
+				'label' => esc_html__( 'Layout', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -154,6 +154,40 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'type'        => 'tpae_preset_button',
 				'temp_id'     => 12274,
 				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'flipbox_type',
+			array(
+				'label'   => esc_html__( 'Type', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'basic',
+				'options' => array(
+					'basic'    => esc_html__( 'Basic', 'tpebl' ),
+					// 'advanced' => esc_html__( 'Advanced (Pro)', 'tpebl' ),
+				),
+			)
+		);
+		// $this->add_control(
+		// 	'plus_pro_flipbox_type_options',
+		// 	array(
+		// 		'type'        => 'tpae_pro_feature',
+		// 		'label_block' => true,
+		// 		'default'     => '',
+		// 		'condition'   => array(
+		// 			'flipbox_type' => 'advanced',
+		// 		),
+		// 	)
+		// );
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'content_section',
+			array(
+				'label' => esc_html__( 'Content', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+				'condition'   => array(
+					'flipbox_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -245,6 +279,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'label'     => esc_html__( 'Front Side', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => array(
+					'flipbox_type' => 'basic',
 					'info_box_layout' => 'single_layout',
 				),
 			)
@@ -482,6 +517,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 				'label'     => esc_html__( 'Back Side', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => array(
+					'flipbox_type' => 'basic',
 					'info_box_layout' => 'single_layout',
 				),
 			)
@@ -1305,15 +1341,15 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/flip-box/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=rbasfNo7K_E',
 					),
 				),
@@ -2600,7 +2636,13 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		}
 		if ( 'image' === $image_icon ) {
 			if ( ! empty( $img_url ) ) {
-				$img_src = tp_get_image_rander( $image_id, $settings['select_image_thumbnail_size'], array( 'class' => 'service-img' ) );
+				$image_id = ! empty( $settings['select_image']['id'] ) ? $settings['select_image']['id'] : '';
+				if ( ! empty( $image_id ) ) {
+					$img_src = tp_get_image_rander( $image_id, $settings['select_image_thumbnail_size'], array( 'class' => 'service-img' ) );
+				} else {
+					$image_alt = ! empty( $settings['select_image']['alt'] ) ? $settings['select_image']['alt'] : '';
+					$img_src   = '<img src="' . esc_url( $img_url ) . '" class="service-img" alt="' . esc_attr( $image_alt ) . '">';
+				}
 			} else {
 				$img_src = '';
 			}

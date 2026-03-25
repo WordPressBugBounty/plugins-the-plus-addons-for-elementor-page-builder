@@ -596,9 +596,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 						'image' => L_THEPLUS_URL . 'assets/images/widget-style/listing-layout/lazy-load-pro.svg',
 					),
 				),
-				'condition'   => array(
-					'layout!' => array( 'carousel' ),
-				),
 				'columns'     => 4,
 				'classes'     => 'tpae-visual_choice',
 			)
@@ -614,9 +611,60 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition'   => array(
-					'layout!' => array( 'carousel' ),
+			)
+		);
+		$this->add_control(
+			'pagination_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Display your posts in multiple pages with numbered navigation below the listing.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-pagination-in-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
 				),
+				'condition' => array(
+					'post_extra_option' => 'pagination',
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'load_more_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Add a Load More button that lets visitors reveal more posts without refreshing the page.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-read-more-button-in-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'condition' => array(
+					'post_extra_option' => 'load_more',
+				),
+				'label_block' => true,
+			)
+		);
+		$this->add_control(
+			'lazy_load_label',
+			array(
+				'type'  => Controls_Manager::RAW_HTML,
+				'raw'   => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Automatically load more posts as users scroll down, creating a smooth infinite scrolling effect.', 'tpebl' ),
+						esc_url( $this->tp_doc . 'add-infinite-scroll-for-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
+						esc_html__( 'Learn More', 'tpebl' ),
+					)
+				),
+				'condition' => array(
+					'post_extra_option' => 'lazy_load',
+				),
+				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -627,22 +675,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'default'     => '',
 				'condition'   => array(
 					'post_extra_option!' => array( 'none', 'load_more' ),
-				),
-			)
-		);
-		$this->add_control(
-			'how_it_works_load_more',
-			array(
-				'label'     => wp_kses_post(
-					sprintf(
-						'<a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s <i class="eicon-help-o"></i></a>',
-						esc_url( $this->tp_doc . 'add-read-more-button-in-blog-posts-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'Learn How it works', 'tpebl' )
-					)
-				),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => array(
-					'post_extra_option' => array( 'load_more' ),
 				),
 			)
 		);
@@ -876,7 +908,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .ajax_load_more .post-load-more:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 				'condition'  => array(
 					'layout!'           => array( 'carousel' ),
 					'post_extra_option' => 'load_more',
@@ -929,7 +960,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .plus-all-posts-loaded' => 'color: {{VALUE}}',
 				),
-				'separator' => 'after',
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
 					'post_extra_option' => array( 'load_more', 'lazy_load' ),
@@ -942,18 +972,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'name'      => 'load_more_background',
 				'types'     => array( 'classic', 'gradient' ),
 				'selector'  => '{{WRAPPER}} .ajax_load_more .post-load-more',
-				'condition' => array(
-					'layout!'           => array( 'carousel' ),
-					'post_extra_option' => 'load_more',
-				),
-			)
-		);
-		$this->add_control(
-			'load_more_shadow_options',
-			array(
-				'label'     => esc_html__( 'Box Shadow Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
 					'post_extra_option' => 'load_more',
@@ -985,13 +1003,12 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'load_more_color_hover',
 			array(
-				'label'     => esc_html__( 'Text Hover Color', 'tpebl' ),
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .ajax_load_more .post-load-more:hover' => 'color: {{VALUE}}',
 				),
-				'separator' => 'after',
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
 					'post_extra_option' => 'load_more',
@@ -1004,19 +1021,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'name'      => 'load_more_hover_background',
 				'types'     => array( 'classic', 'gradient' ),
 				'selector'  => '{{WRAPPER}} .ajax_load_more .post-load-more:hover',
-				'separator' => 'after',
-				'condition' => array(
-					'layout!'           => array( 'carousel' ),
-					'post_extra_option' => 'load_more',
-				),
-			)
-		);
-		$this->add_control(
-			'load_more_shadow_hover_options',
-			array(
-				'label'     => esc_html__( 'Hover Shadow Options', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
 				'condition' => array(
 					'layout!'           => array( 'carousel' ),
 					'post_extra_option' => 'load_more',
@@ -1520,15 +1524,15 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/blog-listing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=o2a8zVx2ztc',
 					),
 				),
@@ -2577,7 +2581,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'blog_category_post',
 			array(
-				'label'        => __( 'Category Post', 'tpebl' ),
+				'label'        => esc_html__( 'Category Post', 'tpebl' ),
 				'type'         => \Elementor\Controls_Manager::POPOVER_TOGGLE,
 				'label_off'    => esc_html__( 'Default', 'tpebl' ),
 				'label_on'     => esc_html__( 'Custom', 'tpebl' ),
@@ -3589,7 +3593,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$this->add_control(
 			'btn_text_hover_color',
 			array(
-				'label'     => esc_html__( 'Text Hover Color', 'tpebl' ),
+				'label'     => esc_html__( 'Text Color', 'tpebl' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .pt_plus_button .button-link-wrap:hover' => 'color: {{VALUE}};',

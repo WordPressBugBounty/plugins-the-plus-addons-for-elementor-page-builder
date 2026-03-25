@@ -340,6 +340,15 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'hide_parent_cat',
+			array(
+				'label'        => esc_html__( 'Hide Parent Categories', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'default'      => 'no',
+				'return_value' => 'yes',
+			)
+		);
+		$this->add_control(
 			'hide_sub_cat',
 			array(
 				'label'        => esc_html__( 'Hide Sub Categories', 'tpebl' ),
@@ -355,7 +364,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'type'        => Controls_Manager::TEXTAREA,
 				'ai'          => false,
 				'label_block' => true,
-				'placeholder' => 'Use Terms Id,if you want to use multiple id so use comma as separator.',
+				'placeholder' => esc_html__( 'Use Terms Id,if you want to use multiple id so use comma as separator.', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -365,7 +374,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'type'        => Controls_Manager::TEXTAREA,
 				'label_block' => true,
 				'ai'          => false,
-				'placeholder' => 'Use Terms Id,if you want to use multiple id so use comma as separator.',
+				'placeholder' => esc_html__( 'Use Terms Id,if you want to use multiple id so use comma as separator.', 'tpebl' ),
 			)
 		);
 		$this->add_control(
@@ -643,16 +652,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'hide_parent_cat',
-			array(
-				'label'        => esc_html__( 'Hide Parent Categories', 'tpebl' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'default'      => 'no',
-				'separator'    => 'before',
-				'return_value' => 'yes',
-			)
-		);
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -665,15 +664,15 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 		$this->add_control(
 			'tpebl_help_control',
 			array(
-				'label'   => __( 'Need Help', 'tpebl' ),
+				'label'   => esc_html__( 'Need Help', 'tpebl' ),
 				'type'    => 'tpae_need_help',
 				'default' => array(
 					array(
-						'label' => __( 'Read Docs', 'tpebl' ),
+						'label' => esc_html__( 'Read Docs', 'tpebl' ),
 						'url'   => 'https://theplusaddons.com/help/dynamic-categories/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget',
 					),
 					array(
-						'label' => __( 'Watch Video', 'tpebl' ),
+						'label' => esc_html__( 'Watch Video', 'tpebl' ),
 						'url'   => 'https://www.youtube.com/watch?v=Atp_gVyWko8',
 					),
 				),
@@ -693,7 +692,7 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend using this widget in the Post Archive Template to display categories or tags dynamically.',
+					'notice'      => esc_html__( 'We recommend using this widget in the Post Archive Template to display categories or tags dynamically.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Archive Page', 'tpebl' ),
 					'page_type'   => 'tp_archives',
 				)
@@ -793,7 +792,6 @@ class L_ThePlus_Dynamic_Categories extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .dynamic-cat-list .pt-dynamic-wrapper .pt-dynamic-hover-cat-name' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
-				'separator'  => 'after',
 				'condition'  => array(
 					'title_bg' => 'yes',
 				),

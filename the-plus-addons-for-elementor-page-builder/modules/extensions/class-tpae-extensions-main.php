@@ -71,6 +71,8 @@ if ( ! class_exists( 'L_Tpae_Extensions_Main' ) ) {
             if ( in_array( 'plus_dynamic_tag', $extras_elements ) ) {
                 include L_THEPLUS_PATH . 'modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php';
 			}
+
+            include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-controller-main.php';
         }
     }
 }

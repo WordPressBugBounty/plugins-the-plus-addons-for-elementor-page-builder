@@ -152,6 +152,18 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'scroll_option_type',
+			array(
+				'label'   => esc_html__( 'Scroll Type', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'basic',
+				'options' => array(
+					'basic'    => esc_html__( 'Basic', 'tpebl' ),
+					'advanced' => esc_html__( 'Lenis Smooth Scroll', 'tpebl' ),
+				),
+			)
+		);
+		$this->add_control(
 			'frameRate',
 			array(
 				'label'      => esc_html__( 'Frame Rate', 'tpebl' ),
@@ -168,6 +180,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'Hz',
 					'size' => 150,
 				),
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -181,6 +196,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -200,6 +218,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'ms',
 					'size' => 1000,
 				),
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -213,6 +234,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -232,6 +256,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'unit' => 'px',
 					'size' => 100,
 				),
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -245,14 +272,20 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_pulse_section',
 			array(
-				'label' => esc_html__( 'Pulse ratio of "Tail" to "Acceleration" ', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
+				'label'     => esc_html__( 'Pulse ratio of "Tail" to "Acceleration" ', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -347,8 +380,11 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 		$this->start_controls_section(
 			'content_acceleration_section',
 			array(
-				'label' => esc_html__( 'Acceleration', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
+				'label'     => esc_html__( 'Acceleration', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -419,8 +455,11 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 		$this->start_controls_section(
 			'content_keyboard_settings_section',
 			array(
-				'label' => esc_html__( 'Keyboard Settings', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_CONTENT,
+				'label'     => esc_html__( 'Keyboard Settings', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -480,11 +519,183 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'content_lenis_options_section',
+			array(
+				'label'     => esc_html__( 'Lenis Options', 'tpebl' ),
+				'tab'       => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'scroll_option_type' => 'advanced',
+				),
+			)
+		);
+		$this->add_control(
+			'lenis_duration',
+			array(
+				'label'      => esc_html__( 'Scroll Duration', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 's' ),
+				'range'      => array(
+					's' => array(
+						'min'  => 0.1,
+						'max'  => 10,
+						'step' => 0.1,
+					),
+				),
+				'default'    => array(
+					'unit' => 's',
+					'size' => 1.2,
+				),
+				'description' => esc_html__( 'Set the time (in seconds) it takes for a scroll to finish. Higher values create more "weight" or longer glide.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_lerp',
+			array(
+				'label'      => esc_html__( 'Smoothing (Lerp)', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ), 
+				'range'      => array(
+					'px' => array(
+						'min'  => 0.01,
+						'max'  => 1.0,
+						'step' => 0.01,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => 0.1,
+				),
+				'description' => esc_html__( 'Interpolation factor. Lower values (e.g., 0.05) make the scroll feel smoother and heavier. Higher values (e.g., 0.2) make it more responsive but less smooth.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_orientation',
+			array(
+				'label'   => esc_html__( 'Scroll Orientation', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'vertical',
+				'options' => array(
+					'vertical'   => esc_html__( 'Vertical', 'tpebl' ),
+					'horizontal' => esc_html__( 'Horizontal', 'tpebl' ),
+				),
+				'description' => esc_html__( 'Choose whether you want the page to scroll vertically or horizontally.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_gestureOrientation',
+			array(
+				'label'   => esc_html__( 'Gesture Orientation', 'tpebl' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'vertical',
+				'options' => array(
+					'vertical'   => esc_html__( 'Vertical', 'tpebl' ),
+					'horizontal' => esc_html__( 'Horizontal', 'tpebl' ),
+					'both'       => esc_html__( 'Both', 'tpebl' ),
+				),
+				'description' => esc_html__( 'Defines which gesture direction (touch/trackpad) will trigger the scroll.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_smoothWheel',
+			array(
+				'label'        => esc_html__( 'Smooth Wheel', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'tpebl' ),
+				'label_off'    => esc_html__( 'Off', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Enable smooth scrolling for mouse wheel input.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_wheelMultiplier',
+			array(
+				'label'      => esc_html__( 'Wheel Multiplier', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => array(
+					'px' => array(
+						'min'  => 0.1,
+						'max'  => 5,
+						'step' => 0.1,
+					),
+				),
+				'default'    => array(
+					'size' => 1,
+				),
+				'condition' => array(
+					'lenis_smoothWheel' => 'yes',
+				),
+				'description' => esc_html__( 'Modify the speed of the mouse wheel scroll. 1 is default, 2 is double speed.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_smoothTouch',
+			array(
+				'label'        => esc_html__( 'Smooth Touch', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'tpebl' ),
+				'label_off'    => esc_html__( 'Off', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'description'  => esc_html__( 'Enable smooth scrolling for touch devices (Mobile/Tablets). WARNING: This breaks native mobile scroll feel.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_touchMultiplier',
+			array(
+				'label'      => esc_html__( 'Touch Multiplier', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => array(
+					'px' => array(
+						'min'  => 0.1,
+						'max'  => 5,
+						'step' => 0.1,
+					),
+				),
+				'default'    => array(
+					'size' => 1.2,
+				),
+				'condition' => array(
+					'lenis_smoothTouch' => 'yes',
+				),
+				'description' => esc_html__( 'Modify the speed of touch-based scrolling.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_infinite',
+			array(
+				'label'        => esc_html__( 'Infinite Scroll', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'tpebl' ),
+				'label_off'    => esc_html__( 'Off', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'no',
+				'description'  => esc_html__( 'Enable infinite looping of page content. Requires specific layout setup.', 'tpebl' ),
+			)
+		);
+		$this->add_control(
+			'lenis_autoResize',
+			array(
+				'label'        => esc_html__( 'Auto Resize', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'On', 'tpebl' ),
+				'label_off'    => esc_html__( 'Off', 'tpebl' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => esc_html__( 'Automatically recalculate scroll dimensions when content or window size changes.', 'tpebl' ),
+			)
+		);
+		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_other_section',
 			array(
 				'label' => esc_html__( 'Other Settings', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -496,6 +707,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -509,6 +723,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -520,6 +737,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 				'label_off'    => esc_html__( 'Hide', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -533,6 +753,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -551,6 +774,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					'other'   => __( 'Other', 'tpebl' ),
 				),
 				'default'  => array(),
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->add_control(
@@ -564,6 +790,9 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
+				'condition' => array(
+					'scroll_option_type' => 'basic',
+				),
 			)
 		);
 		$this->end_controls_section();
@@ -652,6 +881,8 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
+		$scroll_type = ! empty( $settings['scroll_option_type'] ) ? $settings['scroll_option_type'] : 'basic';
+
 		$step_size = ! empty( $settings['stepSize']['size'] ) ? $settings['stepSize']['size'] : 100;
 		$pl_algo   = ! empty( $settings['pulseAlgorithm'] ) ? $settings['pulseAlgorithm'] : '';
 
@@ -679,6 +910,19 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 
 		$smooth_scroll_data = htmlspecialchars( wp_json_encode( $smooth_scroll_array ), ENT_QUOTES, 'UTF-8' );
 
+		// Lenis Settings
+		$lenis_duration        = ! empty( $settings['lenis_duration']['size'] ) ? $settings['lenis_duration']['size'] : 1.2;
+		$lenis_orientation     = ! empty( $settings['lenis_orientation'] ) ? $settings['lenis_orientation'] : 'vertical';
+		$lenis_smoothWheel     = ! empty( $settings['lenis_smoothWheel'] ) ? $settings['lenis_smoothWheel'] : 'yes';
+		$lenis_smoothTouch     = ! empty( $settings['lenis_smoothTouch'] ) ? $settings['lenis_smoothTouch'] : 'no';
+		$lenis_touchMultiplier = ! empty( $settings['lenis_touchMultiplier']['size'] ) ? $settings['lenis_touchMultiplier']['size'] : 1.5;
+		$lenis_infinite        = ! empty( $settings['lenis_infinite'] ) ? $settings['lenis_infinite'] : 'no';
+
+        $lenis_lerp               = ! empty( $settings['lenis_lerp']['size'] ) ? $settings['lenis_lerp']['size'] : 0.1;
+        $lenis_wheelMultiplier    = ! empty( $settings['lenis_wheelMultiplier']['size'] ) ? $settings['lenis_wheelMultiplier']['size'] : 1;
+        $lenis_gestureOrientation = ! empty( $settings['lenis_gestureOrientation'] ) ? $settings['lenis_gestureOrientation'] : 'vertical';
+        $lenis_autoResize         = ! empty( $settings['lenis_autoResize'] ) ? $settings['lenis_autoResize'] : 'yes';
+
 		$tbl_on = ! empty( $settings['tablet_off_scroll'] ) ? $settings['tablet_off_scroll'] : '';
 
 		if ( 'yes' === $tbl_on ) {
@@ -687,9 +931,40 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 			$tablet_off = ' data-tablet-off="no"';
 		}
 
-		echo '<div class="plus-smooth-scroll" data-frameRate="' . esc_attr( $frame_rate ) . '" data-animationTime="' . esc_attr( $animation_time ) . '" data-stepSize="' . esc_attr( $step_size ) . '" data-pulseAlgorithm="' . esc_attr( $pulse_algorithm ) . '" data-pulseScale="' . esc_attr( $pulse_scale ) . '" data-pulseNormalize="' . esc_attr( $pulse_normalize ) . '" data-accelerationDelta="' . esc_attr( $acceleration_delta ) . '" data-accelerationMax="' . esc_attr( $acceleration_max ) . '" data-keyboardSupport="' . esc_attr( $keyboard_support ) . '" data-arrowScroll="' . esc_attr( $arrow_scroll ) . '" data-touchpadSupport="' . esc_attr( $touchpad_support ) . '" data-fixedBackground="' . esc_attr( $fixed_background ) . '" ' . esc_attr( $tablet_off ) . ' data-basicdata= "' . esc_attr( $smooth_scroll_data ) . '" >';
+		$output_attributes = 'data-scroll-type="' . esc_attr( $scroll_type ) . '" ';
 
-		echo '<script>var smoothAllowedBrowsers = ' . $browsers . '</script>';
+		if ( 'advanced' === $scroll_type ) {
+			$output_attributes .= 'data-lenis-duration="' . esc_attr( $lenis_duration ) . '" ';
+			$output_attributes .= 'data-lenis-orientation="' . esc_attr( $lenis_orientation ) . '" ';
+			$output_attributes .= 'data-lenis-smoothWheel="' . esc_attr( $lenis_smoothWheel ) . '" ';
+			$output_attributes .= 'data-lenis-smoothTouch="' . esc_attr( $lenis_smoothTouch ) . '" ';
+			$output_attributes .= 'data-lenis-touchMultiplier="' . esc_attr( $lenis_touchMultiplier ) . '" ';
+			$output_attributes .= 'data-lenis-infinite="' . esc_attr( $lenis_infinite ) . '" ';
+            $output_attributes .= 'data-lenis-lerp="' . esc_attr( $lenis_lerp ) . '" ';
+            $output_attributes .= 'data-lenis-wheelMultiplier="' . esc_attr( $lenis_wheelMultiplier ) . '" ';
+            $output_attributes .= 'data-lenis-gestureOrientation="' . esc_attr( $lenis_gestureOrientation ) . '" ';
+            $output_attributes .= 'data-lenis-autoResize="' . esc_attr( $lenis_autoResize ) . '" ';
+		} else {
+			$output_attributes .= 'data-frameRate="' . esc_attr( $frame_rate ) . '" ';
+			$output_attributes .= 'data-animationTime="' . esc_attr( $animation_time ) . '" ';
+			$output_attributes .= 'data-stepSize="' . esc_attr( $step_size ) . '" ';
+			$output_attributes .= 'data-pulseAlgorithm="' . esc_attr( $pulse_algorithm ) . '" ';
+			$output_attributes .= 'data-pulseScale="' . esc_attr( $pulse_scale ) . '" ';
+			$output_attributes .= 'data-pulseNormalize="' . esc_attr( $pulse_normalize ) . '" ';
+			$output_attributes .= 'data-accelerationDelta="' . esc_attr( $acceleration_delta ) . '" ';
+			$output_attributes .= 'data-accelerationMax="' . esc_attr( $acceleration_max ) . '" ';
+			$output_attributes .= 'data-keyboardSupport="' . esc_attr( $keyboard_support ) . '" ';
+			$output_attributes .= 'data-arrowScroll="' . esc_attr( $arrow_scroll ) . '" ';
+			$output_attributes .= 'data-touchpadSupport="' . esc_attr( $touchpad_support ) . '" ';
+			$output_attributes .= 'data-fixedBackground="' . esc_attr( $fixed_background ) . '" ';
+			$output_attributes .= 'data-basicdata="' . esc_attr( $smooth_scroll_data ) . '" ';
+		}
+
+		echo '<div class="plus-smooth-scroll" ' . $output_attributes . ' ' . esc_attr( $tablet_off ) . ' >';
+
+		if ( 'basic' === $scroll_type ) {
+			echo '<script>var smoothAllowedBrowsers = ' . $browsers . '</script>';
+		}
 
 		echo '</div>';
 	}

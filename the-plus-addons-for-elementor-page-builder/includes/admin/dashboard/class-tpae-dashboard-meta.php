@@ -58,6 +58,27 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 				add_action( 'admin_enqueue_scripts', array( $this, 'tpae_enqueue_scripts' ) );
 			}
 
+			if ( defined( 'THEPLUS_VERSION' ) ) {
+				$theplus_options = get_option( 'theplus_options' );
+				$get_widget = ! empty( $theplus_options['check_elements'] ) ? $theplus_options['check_elements'] : [];
+
+				if ( ! empty( $get_widget ) ) {
+					if ( in_array( 'tp_plus_form', $get_widget ) ) {
+						add_action( 'admin_init', function () {
+							$export_path = THEPLUS_PATH . 'modules/extensions/form-submissions/class-tpaep-export-submissions.php';
+							if ( file_exists( $export_path ) ) {
+								include_once $export_path;
+							}
+							
+							$edit_path = THEPLUS_PATH . 'modules/extensions/form-submissions/view-submission/class-tpaep-edit-submission.php';
+							if ( file_exists( $edit_path ) ) {
+								include_once $edit_path;
+							}
+						} );
+					}
+				}
+			}
+
 			if ( is_admin() ) {
 				add_filter(
 					'admin_body_class',
@@ -229,6 +250,94 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 				add_submenu_page( 'theplus_welcome_page', esc_html__( 'Starter Templates', 'tpebl' ), esc_html__( 'Starter Templates', 'tpebl' ), 'manage_options', 'theplus_welcome_page#/elementor_templates', array( $this, 'tpae_admin_page_display' ) );
 			}
 
+			if ( defined( 'THEPLUS_VERSION' ) ) {
+
+				$theplus_options = get_option( 'theplus_options' );
+				$get_widget = ! empty( $theplus_options['check_elements'] ) ? $theplus_options['check_elements'] : [];
+
+				if ( ! empty( $get_widget ) ) {
+					if ( in_array( 'tp_plus_form', $get_widget ) ) {
+						$submissions_title_menu = esc_html__( 'Submissions', 'tpebl' );
+						if ( empty( $options ) ) {
+							$submissions_title_menu .= ' <span style="background-color: #058645; color: #fff; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 5px; vertical-align: middle; line-height: 1; font-weight: 500;">' . esc_html__( 'NEW', 'tpebl' ) . '</span>';
+						}
+
+						$submissions_hook = add_submenu_page( 
+							'theplus_welcome_page', 
+							esc_html__( 'Submissions', 'tpebl' ), 
+							$submissions_title_menu, 
+							'manage_options', 
+							'tpae-form-submissions', 
+							array( $this, 'tpae_render_submissions_page' ) 
+						);
+
+						/* -------------------------------------------------
+						* HANDLE ROW ACTIONS (Mark as read & Trash)
+						* ------------------------------------------------- */
+						add_action( "load-$submissions_hook", function () {
+
+							global $wpdb;
+							$table = $wpdb->prefix . 'tpaep_formsmeta';
+
+							// ✅ MARK AS READ
+							if ( isset( $_GET['mark_read'], $_GET['_wpnonce'] ) ) {
+
+								check_admin_referer( 'tpae_mark_read' );
+
+								$wpdb->update(
+									$table,
+									[ 'is_read' => 1 ],
+									[ 'id' => absint( $_GET['mark_read'] ) ],
+									[ '%d' ],
+									[ '%d' ]
+								);
+
+								wp_safe_redirect(
+									admin_url( 'admin.php?page=tpae-form-submissions' )
+								);
+								exit;
+							}
+
+							// ✅ MARK AS UNREAD
+							if ( isset( $_GET['mark_unread'], $_GET['_wpnonce'] ) ) {
+
+								check_admin_referer( 'tpae_mark_unread' );
+
+								$wpdb->update(
+									$table,
+									[ 'is_read' => 0 ],
+									[ 'id' => absint( $_GET['mark_unread'] ) ],
+									[ '%d' ],
+									[ '%d' ]
+								);
+
+								wp_safe_redirect(
+									admin_url( 'admin.php?page=tpae-form-submissions' )
+								);
+								exit;
+							}
+
+							// ✅ TRASH (DELETE)
+							if ( isset( $_GET['delete'], $_GET['_wpnonce'] ) ) {
+
+								check_admin_referer( 'tpae_delete_submission' );
+
+								$wpdb->delete(
+									$table,
+									[ 'id' => absint( $_GET['delete'] ) ],
+									[ '%d' ]
+								);
+
+								wp_safe_redirect(
+									admin_url( 'admin.php?page=tpae-form-submissions' )
+								);
+								exit;
+							}
+						});
+					}
+				}
+			}
+
 			add_submenu_page( 'theplus_welcome_page', esc_html__( 'Settings', 'tpebl' ), esc_html__( 'Settings', 'tpebl' ), 'manage_options', 'theplus_welcome_page#/settings', array( $this, 'tpae_admin_page_display' ) );
 
 			if ( ! defined( 'THEPLUS_VERSION' ) ) {
@@ -352,6 +461,46 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		 */
 		public function tpae_admin_page_display() {
 			echo '<div id="theplus-app"></div>';
+		}
+
+		public function tpae_render_submissions_page() {
+
+			if ( isset( $_GET['view'] ) ) {
+				$view_path = THEPLUS_PATH . 'modules/extensions/form-submissions/view-submission/class-tpaep-view-submission.php';
+				if ( file_exists( $view_path ) ) {
+					include $view_path;
+				}
+				return;
+			}
+
+			$form_path = THEPLUS_PATH . 'modules/extensions/form-submissions/class-tpaep-form-submissions.php';
+			if ( file_exists( $form_path ) ) {
+				include $form_path;
+			}
+
+			if ( class_exists( 'Tpaep_Submission_List_Table' ) ) {
+				$table = new Tpaep_Submission_List_Table();
+				$table->prepare_items();
+
+				echo '<div class="wrap" id="tpae-submissions-page">';
+					echo '<h1 class="wp-heading-inline">';
+						esc_html_e( 'Form Submissions', 'tpebl' );
+					echo '</h1>';
+					echo '<hr class="wp-header-end">';
+
+					$table->views();
+
+					echo '<form method="get">';
+						echo '<input type="hidden" name="page" value="tpae-form-submissions" />';
+						wp_nonce_field( 'bulk-submissions' );
+
+						echo '<div class="tpae-table-card">';
+							$table->display();
+						echo '</div>';
+
+					echo '</form>';
+				echo '</div>';
+			}
 		}
 	}
 

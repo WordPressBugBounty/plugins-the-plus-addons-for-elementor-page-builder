@@ -148,7 +148,7 @@ if ( ! class_exists( 'Tp_Activate_License_Notice' ) ) {
 			$get_security = ! empty( $_POST['security'] ) ? sanitize_text_field( wp_unslash( $_POST['security'] ) ) : '';
 
 			if ( ! isset( $get_security ) || empty( $get_security ) || ! wp_verify_nonce( $get_security, 'tpae-activate-license' ) ) {
-				die( 'Security checked!' );
+				die( esc_html__( 'Security checked!', 'tpebl' ) );
 			}
 
 			if ( ! current_user_can( 'manage_options' ) ) {
