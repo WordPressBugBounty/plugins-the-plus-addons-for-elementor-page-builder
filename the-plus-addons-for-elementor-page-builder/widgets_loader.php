@@ -336,6 +336,10 @@ final class L_Theplus_Element_Load {
 			add_action( 'wp_enqueue_scripts', array( $this, 'theplus_frontend_styles' ) );
 		}
 
+		if(defined('THEPLUS_VERSION') && !empty($plus_extras) && is_array($plus_extras) && in_array('plus_adv_scroll_interactions', $plus_extras)) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'theplus_frontend_styles' ) );
+		}
+
 		add_filter( 'upload_mimes', array( $this, 'theplus_mime_types' ) );
 		add_filter( 'wp_handle_upload_prefilter', array( $this, 'theplus_sanitize_svg_upload' ) );
 
@@ -407,6 +411,27 @@ final class L_Theplus_Element_Load {
 
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_style( 'theplus-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
+
+		$white_label_options = get_option( 'theplus_white_label', array() );
+
+		if ( is_array( $white_label_options ) ) {
+			$wl_logo = ! empty( $white_label_options['tp_plus_logo'] ) ? $white_label_options['tp_plus_logo'] : '';
+			$wl_name = ! empty( $white_label_options['tp_plugin_name'] ) ? $white_label_options['tp_plugin_name'] : '';
+			$wl_name = ! empty( $wl_name ) ? $wl_name : ( ! empty( $white_label_options['l_tp_plugin_name'] ) ? $white_label_options['l_tp_plugin_name'] : '' );
+
+			if ( ! empty( $wl_logo ) || ! empty( $wl_name ) ) {
+				$inline_css = '';
+
+				if ( ! empty( $wl_logo ) ) {
+					$wl_logo_escaped = esc_url( $wl_logo );
+					$inline_css .= '.elementor-element .icon i.tpae-editor-logo:after { background-image: url("' . $wl_logo_escaped . '"); background-size: contain; background-repeat: no-repeat; }';
+				} else {
+					$inline_css .= '.elementor-element .icon i.tpae-editor-logo:after { background-image: none; }';
+				}
+
+				wp_add_inline_style( 'theplus-ele-admin', $inline_css );
+			}
+		}
 
 		$ui_theme = SettingsManager::get_settings_managers( 'editorPreferences' )->get_model()->get_settings( 'ui_theme' );
 

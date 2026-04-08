@@ -14,6 +14,7 @@ use Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Tab_Base;
 use Elementor\Repeater;
 use Elementor\Plugin;
+use ThePlusAddons\Elementor\BoxShadow\TP_Box_Shadow_Global;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -27,6 +28,28 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since v6.5.0
  */
 class TP_Button_Style_Global extends Tab_Base {
+
+	protected function ensure_global_box_shadow_controller() {
+		if ( class_exists( '\ThePlusAddons\Elementor\BoxShadow\TP_Box_Shadow_Global' ) ) {
+			return;
+		}
+
+		$path = L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-box-shadow-controller.php';
+
+		if ( file_exists( $path ) ) {
+			include_once $path;
+		}
+	}
+
+	protected function get_global_box_shadow_options() {
+		$this->ensure_global_box_shadow_controller();
+
+		if ( class_exists( '\ThePlusAddons\Elementor\BoxShadow\TP_Box_Shadow_Global' ) ) {
+			return TP_Box_Shadow_Global::get_preset_options();
+		}
+
+		return array( '' => esc_html__( 'Select Global Shadow', 'tpebl' ) );
+	}
 
 	public function get_id() {
 		return 'tp-global-button-styles';
@@ -78,7 +101,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'margin',
 			array(
 				'label'      => esc_html__( 'Margin', 'tpebl' ),
@@ -95,7 +118,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'padding',
 			array(
 				'label'      => esc_html__( 'Padding', 'tpebl' ),
@@ -108,134 +131,6 @@ class TP_Button_Style_Global extends Tab_Base {
 					'left'     => '30',
 					'unit'     => 'px',
 					'isLinked' => false,
-				),
-			)
-		);
-
-		$repeater->add_control(
-			'typography_heading',
-			array(
-				'label'     => esc_html__( 'Typography', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-			)
-		);
-
-		$repeater->add_control(
-			'font_family',
-			array(
-				'label' => esc_html__( 'Font Family', 'tpebl' ),
-				'type'  => Controls_Manager::FONT,
-			)
-		);
-
-		$repeater->add_control(
-			'font_size',
-			array(
-				'label'      => esc_html__( 'Font Size', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em', 'rem' ),
-				'range'      => array(
-					'px' => array(
-						'min' => 1,
-						'max' => 100,
-					),
-					'em' => array(
-						'min'  => 0.1,
-						'max'  => 10,
-						'step' => 0.1,
-					),
-					'rem' => array(
-						'min'  => 0.1,
-						'max'  => 10,
-						'step' => 0.1,
-					),
-				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => 16,
-				),
-			)
-		);
-
-		$repeater->add_control(
-			'font_weight',
-			array(
-				'label'   => esc_html__( 'Font Weight', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '600',
-				'options' => array(
-					''    => esc_html__( 'Default', 'tpebl' ),
-					'100' => '100',
-					'200' => '200',
-					'300' => '300',
-					'400' => '400',
-					'500' => '500',
-					'600' => '600',
-					'700' => '700',
-					'800' => '800',
-					'900' => '900',
-				),
-			)
-		);
-
-		$repeater->add_control(
-			'text_transform',
-			array(
-				'label'   => esc_html__( 'Text Transform', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '',
-				'options' => array(
-					''           => esc_html__( 'Default', 'tpebl' ),
-					'uppercase'  => esc_html__( 'Uppercase', 'tpebl' ),
-					'lowercase'  => esc_html__( 'Lowercase', 'tpebl' ),
-					'capitalize' => esc_html__( 'Capitalize', 'tpebl' ),
-					'none'       => esc_html__( 'Normal', 'tpebl' ),
-				),
-			)
-		);
-
-		$repeater->add_control(
-			'line_height',
-			array(
-				'label'      => esc_html__( 'Line Height', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em', 'rem' ),
-				'range'      => array(
-					'px' => array(
-						'min' => 1,
-						'max' => 120,
-					),
-					'em' => array(
-						'min'  => 0.1,
-						'max'  => 10,
-						'step' => 0.1,
-					),
-					'rem' => array(
-						'min'  => 0.1,
-						'max'  => 10,
-						'step' => 0.1,
-					),
-				),
-			)
-		);
-
-		$repeater->add_control(
-			'letter_spacing',
-			array(
-				'label'      => esc_html__( 'Letter Spacing', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em' ),
-				'range'      => array(
-					'px' => array(
-						'min' => -10,
-						'max' => 20,
-					),
-					'em' => array(
-						'min'  => -1,
-						'max'  => 2,
-						'step' => 0.1,
-					),
 				),
 			)
 		);
@@ -290,7 +185,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'border_width',
 			array(
 				'label'      => esc_html__( 'Border Width', 'tpebl' ),
@@ -321,7 +216,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'border_radius',
 			array(
 				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
@@ -446,6 +341,17 @@ class TP_Button_Style_Global extends Tab_Base {
 		);
 
 		$repeater->add_control(
+			'shadow_global_preset',
+			array(
+				'label'     => esc_html__( 'Global Shadow', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => $this->get_global_box_shadow_options(),
+				'default'   => '',
+				'separator' => 'before',
+			)
+		);
+
+		$repeater->add_control(
 			'hover_heading',
 			array(
 				'label'     => esc_html__( 'Hover State', 'tpebl' ),
@@ -495,7 +401,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'hover_border_width',
 			array(
 				'label'      => esc_html__( 'Border Width', 'tpebl' ),
@@ -526,7 +432,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'hover_border_radius',
 			array(
 				'label'      => esc_html__( 'Border Radius', 'tpebl' ),
@@ -650,14 +556,25 @@ class TP_Button_Style_Global extends Tab_Base {
 			)
 		);
 
+		$repeater->add_control(
+			'hover_shadow_global_preset',
+			array(
+				'label'     => esc_html__( 'Global Hover Shadow', 'tpebl' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => $this->get_global_box_shadow_options(),
+				'default'   => '',
+				'separator' => 'before',
+			)
+		);
+
 		$this->add_control(
 			'tp_global_button_style_list',
 			array(
-				'label'       => esc_html__( 'Button Style Presets', 'tpebl' ),
-				'type'        => Controls_Manager::REPEATER,
-				'fields'      => $repeater->get_controls(),
-				'default'     => array(),
-				'title_field' => '{{{ name }}}',
+				'type'          => Controls_Manager::REPEATER,
+				'fields'        => $repeater->get_controls(),
+				'title_field'   => '{{{ name }}}',
+				'default'       => array(),
+				'prevent_empty' => false,
 			)
 		);
 
@@ -671,22 +588,13 @@ class TP_Button_Style_Global extends Tab_Base {
 	 * @return array
 	 */
 	public static function get_global_button_style_list() {
-		static $cache = null;
-
-		if ( null !== $cache ) {
-			return $cache;
-		}
-
 		$kit = Plugin::$instance->kits_manager->get_active_kit();
 		if ( ! $kit ) {
-			$cache = array();
-			return $cache;
+			return array();
 		}
 
-		$list  = $kit->get_settings( 'tp_global_button_style_list' );
-		$cache = ! empty( $list ) ? $list : array();
-
-		return $cache;
+		$list = $kit->get_settings( 'tp_global_button_style_list' );
+		return ! empty( $list ) ? $list : array();
 	}
 
 	/**
@@ -696,13 +604,17 @@ class TP_Button_Style_Global extends Tab_Base {
 	 * @return array
 	 */
 	public static function get_preset_options() {
-		$options = array( '' => esc_html__( 'Select Preset', 'tpebl' ) );
+		$presets = array();
 
 		foreach ( self::get_global_button_style_list() as $preset ) {
-			$options[ $preset['_id'] ] = ! empty( $preset['name'] ) ? $preset['name'] : esc_html__( 'Unnamed', 'tpebl' );
+			$id = isset( $preset['_id'] ) ? (string) $preset['_id'] : '';
+			if ( '' === $id ) {
+				continue;
+			}
+			$presets[ $id ] = ! empty( $preset['name'] ) ? $preset['name'] : esc_html__( 'Unnamed', 'tpebl' );
 		}
 
-		return $options;
+		return array( '' => esc_html__( 'Select Global Button', 'tpebl' ) ) + $presets;
 	}
 
 	/**

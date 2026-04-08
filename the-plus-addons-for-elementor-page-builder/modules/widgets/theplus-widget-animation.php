@@ -24,6 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$tp_enable_global_scroll_animation = ! empty( $tp_enable_global_scroll_animation );
+$tp_animation_basic_condition      = array();
+$tp_animation_plus_listing_condition = ! empty( $tp_animation_plus_listing_condition ) ? $tp_animation_plus_listing_condition : array();
+
 $this->start_controls_section(
 	'section_animation_styling',
 	array(
@@ -31,6 +35,51 @@ $this->start_controls_section(
 		'tab'   => Controls_Manager::TAB_STYLE,
 	)
 );
+
+if ( $tp_enable_global_scroll_animation ) {
+	if ( ! class_exists( '\ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper' ) ) {
+		include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-scroll-animation-helper.php';
+	}
+
+	$this->add_control(
+		'plus_scroll_animation_type',
+		array(
+			'label'       => esc_html__( 'Animation Type', 'tpebl' ),
+			'type'        => Controls_Manager::CHOOSE,
+			'toggle'      => false,
+			'default'     => 'basic',
+			'label_block' => false,
+			'options'     => array(
+				'basic'  => array(
+					'title' => esc_html__( 'Basic', 'tpebl' ),
+					'icon'  => 'eicon-animation',
+				),
+				'global' => array(
+					'title' => esc_html__( 'Global', 'tpebl' ),
+					'icon'  => 'eicon-globe',
+				),
+			),
+		)
+	);
+
+	$this->add_control(
+		'tp_select_scroll_global_animation',
+		array(
+			'label'       => esc_html__( 'Global Animation', 'tpebl' ),
+			'type'        => Controls_Manager::SELECT,
+			'label_block' => false,
+			'default'     => '',
+			'options'     => \ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper::get_preset_options(),
+			'condition'   => array(
+				'plus_scroll_animation_type' => 'global',
+			),
+		)
+	);
+
+	$tp_animation_basic_condition = array(
+		'plus_scroll_animation_type' => 'basic',
+	);
+}
 $this->add_control(
 	'animation_effects',
 	array(
@@ -38,6 +87,7 @@ $this->add_control(
 		'type'    => Controls_Manager::SELECT,
 		'default' => 'no-animation',
 		'options' => l_theplus_get_animation_options(),
+		'condition' => $tp_animation_basic_condition,
 	)
 );
 $this->add_control(
@@ -56,26 +106,41 @@ $this->add_control(
 				'step' => 15,
 			),
 		),
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!' => 'no-animation',
+			)
 		),
 	)
 );
 
+$tp_hide_columns_animation = ! empty( $tp_hide_columns_animation );
+
 if ( ! empty( $Plus_Listing_block ) && 'Plus_Listing_block' === $Plus_Listing_block ) {
+
+	$tp_animated_column_list_options = array(
+		''        => esc_html__( 'Content Animation Block', 'tpebl' ),
+		'stagger' => esc_html__( 'Stagger Based Animation', 'tpebl' ),
+	);
+
+	if ( ! $tp_hide_columns_animation ) {
+		$tp_animated_column_list_options['columns'] = esc_html__( 'Columns Based Animation', 'tpebl' );
+	}
+
 	$this->add_control(
 		'animated_column_list',
 		array(
 			'label'     => esc_html__( 'List Load Animation', 'tpebl' ),
 			'type'      => Controls_Manager::SELECT,
 			'default'   => '',
-			'options'   => array(
-				''        => esc_html__( 'Content Animation Block', 'tpebl' ),
-				'stagger' => esc_html__( 'Stagger Based Animation', 'tpebl' ),
-				'columns' => esc_html__( 'Columns Based Animation', 'tpebl' ),
-			),
-			'condition' => array(
+			'options'   => $tp_animated_column_list_options,
+			'condition' => array_merge(
+				$tp_animation_basic_condition,
+				$tp_animation_plus_listing_condition,
+				array(
 				'animation_effects!' => array( 'no-animation' ),
+				)
 			),
 		)
 	);
@@ -95,9 +160,13 @@ if ( ! empty( $Plus_Listing_block ) && 'Plus_Listing_block' === $Plus_Listing_bl
 					'step' => 10,
 				),
 			),
-			'condition' => array(
+			'condition' => array_merge(
+				$tp_animation_basic_condition,
+				$tp_animation_plus_listing_condition,
+				array(
 				'animation_effects!'   => array( 'no-animation' ),
 				'animated_column_list' => 'stagger',
+				)
 			),
 		)
 	);
@@ -109,8 +178,11 @@ $this->add_control(
 		'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
 		'type'      => Controls_Manager::SWITCHER,
 		'default'   => 'no',
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!' => 'no-animation',
+			)
 		),
 	)
 );
@@ -130,9 +202,12 @@ $this->add_control(
 				'step' => 100,
 			),
 		),
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!'         => 'no-animation',
 			'animation_duration_default' => 'yes',
+			)
 		),
 	)
 );
@@ -144,8 +219,11 @@ $this->add_control(
 		'default'   => 'no-animation',
 		'options'   => l_theplus_get_out_animation_options(),
 		'separator' => 'before',
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!' => 'no-animation',
+			)
 		),
 	)
 );
@@ -165,9 +243,12 @@ $this->add_control(
 				'step' => 15,
 			),
 		),
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!'     => 'no-animation',
 			'animation_out_effects!' => 'no-animation',
+			)
 		),
 	)
 );
@@ -177,9 +258,12 @@ $this->add_control(
 		'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
 		'type'      => Controls_Manager::SWITCHER,
 		'default'   => 'no',
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!'     => 'no-animation',
 			'animation_out_effects!' => 'no-animation',
+			)
 		),
 	)
 );
@@ -199,10 +283,13 @@ $this->add_control(
 				'step' => 100,
 			),
 		),
-		'condition' => array(
+		'condition' => array_merge(
+			$tp_animation_basic_condition,
+			array(
 			'animation_effects!'             => 'no-animation',
 			'animation_out_effects!'         => 'no-animation',
 			'animation_out_duration_default' => 'yes',
+			)
 		),
 	)
 );

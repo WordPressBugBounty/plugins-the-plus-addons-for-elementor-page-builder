@@ -145,7 +145,7 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 			}
 
 			if ( empty( $post_ids ) ) {
-				$output['message'] = 'All Unused Widgets Found!';
+				$output['message'] = __( 'All Unused Widgets Found!', 'tpebl' );
 				$output['widgets'] = $tp_widgets_list;
 
 				return $output;
@@ -177,7 +177,8 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 			$val2   = count( $countwidgets );
 			$val3   = $val1 - $val2;
 
-			$output['message'] = '* ' . $val3 . ' Unused Widgets Found!';
+			/* translators: %d: Number of unused widgets */
+			$output['message'] = sprintf( __( '* %d Unused Widgets Found!', 'tpebl' ), $val3 );
 			$output['widgets'] = $countwidgets;
 
 			$this->countwidgets = $countwidgets;
@@ -236,7 +237,8 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 				}
 			}
 
-			$output['message']        = '* ' . $val1 . ' Unused Extension Found!';
+			/* translators: %d: Number of unused extensions */
+			$output['message']        = sprintf( __( '* %d Unused Extension Found!', 'tpebl' ), $val1 );
 			$output['used_extension'] = array_keys( $this->add_data );
 
 			return $output;

@@ -257,83 +257,96 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 
 				if ( ! empty( $get_widget ) ) {
 					if ( in_array( 'tp_plus_form', $get_widget ) ) {
-						$submissions_title_menu = esc_html__( 'Submissions', 'tpebl' );
-						if ( empty( $options ) ) {
-							$submissions_title_menu .= ' <span style="background-color: #058645; color: #fff; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 5px; vertical-align: middle; line-height: 1; font-weight: 500;">' . esc_html__( 'NEW', 'tpebl' ) . '</span>';
+						global $wpdb;
+						$table_name      = $wpdb->prefix . 'tpaep_formsmeta';
+						$has_submissions = false;
+
+						if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) === $table_name ) {
+							$submission_count = (int) $wpdb->get_var( "SELECT COUNT(id) FROM {$table_name}" );
+							if ( $submission_count > 0 ) {
+								$has_submissions = true;
+							}
 						}
 
-						$submissions_hook = add_submenu_page( 
-							'theplus_welcome_page', 
-							esc_html__( 'Submissions', 'tpebl' ), 
-							$submissions_title_menu, 
-							'manage_options', 
-							'tpae-form-submissions', 
-							array( $this, 'tpae_render_submissions_page' ) 
-						);
-
-						/* -------------------------------------------------
-						* HANDLE ROW ACTIONS (Mark as read & Trash)
-						* ------------------------------------------------- */
-						add_action( "load-$submissions_hook", function () {
-
-							global $wpdb;
-							$table = $wpdb->prefix . 'tpaep_formsmeta';
-
-							// ✅ MARK AS READ
-							if ( isset( $_GET['mark_read'], $_GET['_wpnonce'] ) ) {
-
-								check_admin_referer( 'tpae_mark_read' );
-
-								$wpdb->update(
-									$table,
-									[ 'is_read' => 1 ],
-									[ 'id' => absint( $_GET['mark_read'] ) ],
-									[ '%d' ],
-									[ '%d' ]
-								);
-
-								wp_safe_redirect(
-									admin_url( 'admin.php?page=tpae-form-submissions' )
-								);
-								exit;
+						if ( $has_submissions ) {
+							$submissions_title_menu = esc_html__( 'Submissions', 'tpebl' );
+							if ( empty( $options ) ) {
+								$submissions_title_menu .= ' <span style="background-color: #058645; color: #fff; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 5px; vertical-align: middle; line-height: 1; font-weight: 500;">' . esc_html__( 'NEW', 'tpebl' ) . '</span>';
 							}
 
-							// ✅ MARK AS UNREAD
-							if ( isset( $_GET['mark_unread'], $_GET['_wpnonce'] ) ) {
+							$submissions_hook = add_submenu_page( 
+								'theplus_welcome_page', 
+								esc_html__( 'Submissions', 'tpebl' ), 
+								$submissions_title_menu, 
+								'manage_options', 
+								'tpae-form-submissions', 
+								array( $this, 'tpae_render_submissions_page' ) 
+							);
 
-								check_admin_referer( 'tpae_mark_unread' );
+							/* -------------------------------------------------
+							* HANDLE ROW ACTIONS (Mark as read & Trash)
+							* ------------------------------------------------- */
+							add_action( "load-$submissions_hook", function () {
 
-								$wpdb->update(
-									$table,
-									[ 'is_read' => 0 ],
-									[ 'id' => absint( $_GET['mark_unread'] ) ],
-									[ '%d' ],
-									[ '%d' ]
-								);
+								global $wpdb;
+								$table = $wpdb->prefix . 'tpaep_formsmeta';
 
-								wp_safe_redirect(
-									admin_url( 'admin.php?page=tpae-form-submissions' )
-								);
-								exit;
-							}
+								// ✅ MARK AS READ
+								if ( isset( $_GET['mark_read'], $_GET['_wpnonce'] ) ) {
 
-							// ✅ TRASH (DELETE)
-							if ( isset( $_GET['delete'], $_GET['_wpnonce'] ) ) {
+									check_admin_referer( 'tpae_mark_read' );
 
-								check_admin_referer( 'tpae_delete_submission' );
+									$wpdb->update(
+										$table,
+										[ 'is_read' => 1 ],
+										[ 'id' => absint( $_GET['mark_read'] ) ],
+										[ '%d' ],
+										[ '%d' ]
+									);
 
-								$wpdb->delete(
-									$table,
-									[ 'id' => absint( $_GET['delete'] ) ],
-									[ '%d' ]
-								);
+									wp_safe_redirect(
+										admin_url( 'admin.php?page=tpae-form-submissions' )
+									);
+									exit;
+								}
 
-								wp_safe_redirect(
-									admin_url( 'admin.php?page=tpae-form-submissions' )
-								);
-								exit;
-							}
-						});
+								// ✅ MARK AS UNREAD
+								if ( isset( $_GET['mark_unread'], $_GET['_wpnonce'] ) ) {
+
+									check_admin_referer( 'tpae_mark_unread' );
+
+									$wpdb->update(
+										$table,
+										[ 'is_read' => 0 ],
+										[ 'id' => absint( $_GET['mark_unread'] ) ],
+										[ '%d' ],
+										[ '%d' ]
+									);
+
+									wp_safe_redirect(
+										admin_url( 'admin.php?page=tpae-form-submissions' )
+									);
+									exit;
+								}
+
+								// ✅ TRASH (DELETE)
+								if ( isset( $_GET['delete'], $_GET['_wpnonce'] ) ) {
+
+									check_admin_referer( 'tpae_delete_submission' );
+
+									$wpdb->delete(
+										$table,
+										[ 'id' => absint( $_GET['delete'] ) ],
+										[ '%d' ]
+									);
+
+									wp_safe_redirect(
+										admin_url( 'admin.php?page=tpae-form-submissions' )
+									);
+									exit;
+								}
+							});
+						}
 					}
 				}
 			}

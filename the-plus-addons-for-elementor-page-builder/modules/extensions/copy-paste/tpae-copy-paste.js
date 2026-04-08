@@ -357,6 +357,9 @@
                 insertOptions
         });
 
+        // Restore dynamic tag bindings for the created element and all nested children
+        // tpae_applyDynamicSettings( createdElement, sourceElementData );
+
         if (containsImage) {
             jQuery.ajax({
                 url: theplus_cross_cp.ajax_url,
@@ -378,6 +381,10 @@
                     }
                     $e.run("document/elements/delete", { container: createdElement });
                     $e.run("document/elements/create", { model: elementModel, container: targetContainer, options: insertOptions });
+
+                    // var reimportedElement = $e.run("document/elements/create", { model: elementModel, container: targetContainer, options: insertOptions });
+                    // // Restore dynamic tag bindings after media-import re-creation
+                    // tpae_applyDynamicSettings( reimportedElement, importedData );
                 }
             });
         }
@@ -386,6 +393,45 @@
     function tpae_parseElements(elements) {
         return elements ? elements.map(el => ({ ...el })) : [];
     }
+
+    /**
+     * Recursively applies settings (including dynamic tags) to a created element and its children.
+     *
+     * After document/elements/create, dynamic tag bindings stored in settings.__dynamic__
+     * are not always activated by Elementor's model constructor. Re-applying settings via
+     * document/elements/settings with { external: true } ensures __dynamic__ is properly
+     * registered for the element and all nested children.
+     *
+     * @param {Object} container   Elementor container object for the created element.
+     * @param {Object} elementData Source element data (from toJSON) including settings and elements.
+     */
+    // const tpae_applyDynamicSettings = ( container, elementData ) => {
+    //     if ( ! container || ! elementData || ! elementData.settings ) {
+    //         return;
+    //     }
+
+    //     try {
+    //         $e.run( 'document/elements/settings', {
+    //             container: container,
+    //             settings: elementData.settings,
+    //             options: { external: true },
+    //         } );
+    //     } catch ( err ) {
+    //         console.warn( 'TPAE: Could not restore dynamic settings', err );
+    //     }
+
+    //     if ( Array.isArray( elementData.elements ) && elementData.elements.length > 0 ) {
+    //         var childModels = ( container.children && container.children.models ) ? container.children.models : [];
+    //         elementData.elements.forEach( function( childData, index ) {
+    //             if ( childModels[ index ] ) {
+    //                 var childContainer = typeof childModels[ index ].getContainer === 'function'
+    //                     ? childModels[ index ].getContainer()
+    //                     : childModels[ index ];
+    //                 tpae_applyDynamicSettings( childContainer, childData );
+    //             }
+    //         } );
+    //     }
+    // };
 
     function tpae_isJSON(str) {
         try {

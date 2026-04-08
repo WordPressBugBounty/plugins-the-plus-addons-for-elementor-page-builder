@@ -332,9 +332,9 @@ a.plus-menu-icon-thumbnail.button.change-icon {
 .tp-update-popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgb(0 0 0 / 33%);backdrop-filter:blur(4px);display:flex;justify-content:center;align-items:center;z-index:99999;visibility:visible;opacity:1;transition:all 0.3s ease}.tp-update-popup-inner{position:relative;width:70%;max-width:900px;background:#fff;border-radius:10px;padding:30px 20px 20px 20px;display:flex;flex-direction:column;aspect-ratio:16 / 9;box-shadow:0 10px 25px rgb(0 0 0 / .2)}.tp-update-popup-inner>.theplus-i-cross{position:absolute;font-weight:700;color:#000;right:2%;top:3%;cursor:pointer}.tp-popup-header{display:flex;justify-content:center;align-items:center;margin-bottom:25px;position:relative}.tp-popup-header h2{margin:0;font-size:20px}#tp-popup-close{cursor:pointer;font-size:24px;font-weight:700;color:#444}.tp-popup-body>iframe{border-radius:10px}
 
 /** Global Controller tp-logo css*/
-.elementor-panel-menu-item-tp-global-gradient-color,.elementor-panel-menu-item-tp-box-shadow-global,.elementor-panel-menu-item-tp-global-dimensions,.elementor-panel-menu-item-tp-global-button-styles{position: relative;}
+.elementor-panel-menu-item-tp-global-gradient-color,.elementor-panel-menu-item-tp-box-shadow-global,.elementor-panel-menu-item-tp-global-dimensions,.elementor-panel-menu-item-tp-global-button-styles,.elementor-panel-menu-item-tp-global-scroll-animation{position: relative;}
 
-.elementor-panel-menu-item-tp-global-gradient-color:before,.elementor-panel-menu-item-tp-box-shadow-global:before,.elementor-panel-menu-item-tp-global-dimensions:before,.elementor-panel-menu-item-tp-global-button-styles:before{
+.elementor-panel-menu-item-tp-global-gradient-color:before,.elementor-panel-menu-item-tp-box-shadow-global:before,.elementor-panel-menu-item-tp-global-dimensions:before,.elementor-panel-menu-item-tp-global-button-styles:before,.elementor-panel-menu-item-tp-global-scroll-animation:before{
     content: "";
     position: absolute;
     height: 23px;

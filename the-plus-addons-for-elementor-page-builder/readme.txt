@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.11
+Stable tag: 6.4.12
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,40 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.12 =
+Add : Global option : Scroll Animation global option
+Add : Flip Box : Add option for the Global Button Styles
+Add : Info Box : Add option for the Global Button Styles
+Add : Pricing Table : Add option for the Global Button Styles
+Add : Blog Listing : Add option for the Global Button Styles in the Load More Button
+Add : Form Widget : Add option for the Global Button Styles
+Add : Blog Listing : Add option for the Global Scroll Animation
+Add : Client Listing : Add option for the Global Scroll Animation
+Add : Gallery Listing : Add option for the Global Scroll Animation
+Add : Stylish List : Add option for the Global Scroll Animation
+Add : Social Icon : Add option for the Global Scroll Animation
+Add : Team Member Listing : Add option for the Global Scroll Animation
+Add : Testimonials : Add option for the Global Scroll Animation
+Add : Social Icon : Add Stagger option in the On Scroll Animation
+Improvements : Global Button Styles : Responsive option for the Margin, Padding, Border Width and Border Radius
+Improvements : Global Button Styles : Styles Improved
+Improvements : Button : Icon Option for the global
+Improvements : On Scroll Animation : File Structure Improved
+Fix : Global Button Styles : Global color not working
+Fix : Dynamic Tag : Post featured image not working on the container
+Fix : Dynamic Tag : Improved permission handling for dismiss notice feature
+Fix : Global Box Shadow : Improved output handling for box shadow CSS values
+Fix : Global Gradient Color : Improved output handling for gradient CSS values
+Fix : Button : Improved Custom Attributes handling for better compatibility
+Fix : Countdown : Improved data attribute handling for labels
+Fix : Cross Copy Paste : Improved permission handling for live paste feature
+Fix : Heading Title : Improved output handling for title text
+Fix : Navigation Menu Lite : Stored Cross-Site Scripting (XSS) Security Patch (Medium Security)
+Fix : Table : On Scroll Animation not working
+Fix : Table : Improved output handling for header heading text
+Fix : Translation Issue : Strings are not Translatable
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.11 =
 Add : Smooth Scroll : Lenis Smooth Scroll option Added

@@ -289,7 +289,7 @@ class ThePlus_Post_Author extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend adding this widget in the Post Single Page to show author info under each blog post',
+					'notice'      => esc_html__( 'We recommend adding this widget in the Post Single Page to show author info under each blog post', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
 					'page_type'   => 'tp_singular_page',
 				)

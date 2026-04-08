@@ -457,7 +457,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			'liveeditor',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">' . esc_html__( 'Edit Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -471,7 +471,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			'create',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">' . esc_html__( 'Create Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -1205,7 +1205,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			'liveeditor1',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">Edit Template</a>',
+				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button">' . esc_html__( 'Edit Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -1219,7 +1219,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 			'create1',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">' . esc_html__( 'Create Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -1268,7 +1268,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend using this widget in the Header Template to display your site menu across all pages.',
+					'notice'      => esc_html__( 'We recommend using this widget in the Header Template to display your site menu across all pages.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Header Template', 'tpebl' ),
 					'page_type'   => 'tp_header',
 				)
@@ -2528,7 +2528,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		?>
 
 		<div class="plus-navigation-wrap <?php echo esc_attr( $nav_alignment ); ?> <?php echo esc_attr( $uid ); ?>">
-			<div class="plus-navigation-inner <?php echo ( $menu_hover_click ); ?> <?php echo esc_attr( $main_menu_indicator_style ); ?> <?php echo esc_attr( $sub_menu_indicator_style ); ?> " <?php echo $menu_attr; ?>>
+			<div class="plus-navigation-inner <?php echo esc_attr( $menu_hover_click ); ?> <?php echo esc_attr( $main_menu_indicator_style ); ?> <?php echo esc_attr( $sub_menu_indicator_style ); ?> " <?php echo $menu_attr; ?>>
 				<div id="theplus-navigation-normal-menu" class="collapse navbar-collapse navbar-ex1-collapse">
 	
 					<div class="plus-navigation-menu <?php echo esc_attr( $navbar_menu_type ); ?>">
@@ -2596,12 +2596,12 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 		$css_rule = '';
 		if ( 'yes' === $mob_menu && ! empty( $menu_size ) ) {
-			$open_mobile_menu  = $menu_size . $menu_unit;
-			$close_mobile_menu = ( $menu_size + 1 ) . $menu_unit;
+			$open_mobile_menu  = absint( $menu_size ) . sanitize_key( $menu_unit );
+			$close_mobile_menu = ( absint( $menu_size ) + 1 ) . sanitize_key( $menu_unit );
 
-			$css_rule .= '@media (min-width:' . esc_attr( $close_mobile_menu ) . '){.plus-navigation-wrap.' . esc_attr( $uid ) . ' #theplus-navigation-normal-menu{display: block!important;}.plus-navigation-wrap.' . esc_attr( $uid ) . ' #plus-mobile-nav-toggle-' . esc_attr( $uid ) . '.collapse.in{display:none;}}';
+			$css_rule .= '@media (min-width:' . $close_mobile_menu . '){.plus-navigation-wrap.' . esc_attr( $uid ) . ' #theplus-navigation-normal-menu{display: block!important;}.plus-navigation-wrap.' . esc_attr( $uid ) . ' #plus-mobile-nav-toggle-' . esc_attr( $uid ) . '.collapse.in{display:none;}}';
 
-			$css_rule .= '@media (max-width:' . esc_attr( $open_mobile_menu ) . '){.plus-navigation-wrap.' . esc_attr( $uid ) . ' #theplus-navigation-normal-menu{display:none !important;}.plus-navigation-wrap.' . esc_attr( $uid ) . ' .plus-mobile-nav-toggle.mobile-toggle{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: flex;-webkit-align-items: center;-moz-align-items: center;-ms-align-items: center;align-items: center;-webkit-justify-content: flex-end;-moz-justify-content: flex-end;-ms-justify-content: flex-end;justify-content: flex-end;}}';
+			$css_rule .= '@media (max-width:' . $open_mobile_menu . '){.plus-navigation-wrap.' . esc_attr( $uid ) . ' #theplus-navigation-normal-menu{display:none !important;}.plus-navigation-wrap.' . esc_attr( $uid ) . ' .plus-mobile-nav-toggle.mobile-toggle{display: -webkit-flex;display: -moz-flex;display: -ms-flex;display: flex;-webkit-align-items: center;-moz-align-items: center;-ms-align-items: center;align-items: center;-webkit-justify-content: flex-end;-moz-justify-content: flex-end;-ms-justify-content: flex-end;justify-content: flex-end;}}';
 		} else {
 			$css_rule .= '.plus-navigation-wrap.' . esc_attr( $uid ) . ' #theplus-navigation-normal-menu{display: block!important;}';
 		}
@@ -2725,19 +2725,20 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 							$MegaMenuClass .= ' plus-dropdown-' . $NextMenu['megaMType'];
 						}
 						if ( $NextMenu != '' && $NextMenu['megaMType'] == 'default' ) {
-							$unit = isset( $NextMenu['megaMwid']['unit'] ) && ! empty( $NextMenu['megaMwid']['unit'] ) ? $NextMenu['megaMwid']['unit'] : '';
+							$unit        = isset( $NextMenu['megaMwid']['unit'] ) && ! empty( $NextMenu['megaMwid']['unit'] ) ? sanitize_key( $NextMenu['megaMwid']['unit'] ) : '';
+							$repeater_id = sanitize_key( $item['_id'] );
 
 							// Desktop
 							if ( isset( $NextMenu['megaMwid']['size'] ) && ! empty( $NextMenu['megaMwid']['size'] ) ) {
-								$stylecss .= '@media (min-width: 1024px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid']['size'] . $unit . '!important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+								$stylecss .= '@media (min-width: 1024px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid']['size'] ) . $unit . '!important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 							// Tablet
 							if ( isset( $NextMenu['megaMwid_tablet']['size'] ) && ! empty( $NextMenu['megaMwid_tablet']['size'] ) ) {
-								$stylecss .= '@media (max-width: 1024px) and (min-width:768px){ .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid_tablet']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid_tablet']['size'] . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+								$stylecss .= '@media (max-width: 1024px) and (min-width:768px){ .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid_tablet']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid_tablet']['size'] ) . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 							// Mobile
 							if ( isset( $NextMenu['megaMwid_mobile']['size'] ) && ! empty( $NextMenu['megaMwid_mobile']['size'] ) ) {
-								$stylecss .= '@media (max-width: 767px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $item['_id'] . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . $NextMenu['megaMwid_mobile']['size'] . $unit . ' !important; min-width: ' . $NextMenu['megaMwid_mobile']['size'] . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+								$stylecss .= '@media (max-width: 767px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid_mobile']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid_mobile']['size'] ) . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 						}
 					}

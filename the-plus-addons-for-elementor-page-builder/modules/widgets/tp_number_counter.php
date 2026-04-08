@@ -2447,151 +2447,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		);
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'Choose Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
@@ -2723,7 +2579,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 
 			$icon_bg = tp_bg_lazyLoad( $settings['icon_background_image'], $settings['icon_hover_background_image'] );
 
-			$icon_img_ic .= '<div class="counter-icon-inner shape-icon-' . esc_attr( $icon_style ) . ' ' . $icon_bg . '">';
+			$icon_img_ic .= '<div class="counter-icon-inner shape-icon-' . esc_attr( $icon_style ) . ' ' . esc_attr( $icon_bg ) . '">';
 
 			if ( 'font_awesome_5' === $icon_font ) {
 				$icon_img_ic .= '<span class="counter-icon">' . $icons . '</span>';
@@ -2750,7 +2606,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		}
 
 		$icon_bg1        = tp_bg_lazyLoad( $settings['box_background_image'], $settings['box_hover_background_image'] );
-		$counter_content = '<div class="number-counter-inner-block ' . esc_attr( $vertical_center ) . ' ' . $icon_bg1 . '">';
+		$counter_content = '<div class="number-counter-inner-block ' . esc_attr( $vertical_center ) . ' ' . esc_attr( $icon_bg1 ) . '">';
 
 		if ( 'style-1' === $style ) {
 			$counter_content .= '<div class="counter-wrap-content" >';

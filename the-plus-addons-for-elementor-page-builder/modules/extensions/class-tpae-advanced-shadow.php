@@ -131,8 +131,8 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 					'label'     => esc_html__( 'Apply to', 'tpebl' ),
 					'type'      => Controls_Manager::SELECT,
 					'options'   => array(
-						'default'     => 'Default',
-						'customclass' => 'Add Custom Class',
+						'default'     => esc_html__( 'Default', 'tpebl' ),
+						'customclass' => esc_html__( 'Add Custom Class', 'tpebl' ),
 					),
 					'default'   => 'default',
 					'condition' => array(
@@ -188,8 +188,8 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 					'label'   => esc_html__( 'Type', 'tpebl' ),
 					'type'    => Controls_Manager::SELECT,
 					'options' => array(
-						'bst_inset'  => 'Inset',
-						'bst_outset' => 'Outset',
+						'bst_inset'  => esc_html__( 'Inset', 'tpebl' ),
+						'bst_outset' => esc_html__( 'Outset', 'tpebl' ),
 					),
 					'default' => 'bst_outset',
 				)
@@ -329,8 +329,8 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 					'label'   => esc_html__( 'Type', 'tpebl' ),
 					'type'    => Controls_Manager::SELECT,
 					'options' => array(
-						'bst_inset'  => 'Inset',
-						'bst_outset' => 'Outset',
+						'bst_inset'  => esc_html__( 'Inset', 'tpebl' ),
+						'bst_outset' => esc_html__( 'Outset', 'tpebl' ),
 					),
 					'default' => 'bst_outset',
 				)
@@ -461,8 +461,8 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 					'label'     => esc_html__( 'Apply to', 'tpebl' ),
 					'type'      => Controls_Manager::SELECT,
 					'options'   => array(
-						'default'     => 'Default',
-						'customclass' => 'Add Custom Class',
+						'default'     => esc_html__( 'Default', 'tpebl' ),
+						'customclass' => esc_html__( 'Add Custom Class', 'tpebl' ),
 					),
 					'default'   => 'default',
 					'condition' => array(
@@ -732,8 +732,8 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 					'label'     => esc_html__( 'Apply to', 'tpebl' ),
 					'type'      => Controls_Manager::SELECT,
 					'options'   => array(
-						'default'     => 'Default',
-						'customclass' => 'Add Custom Class',
+						'default'     => esc_html__( 'Default', 'tpebl' ),
+						'customclass' => esc_html__( 'Add Custom Class', 'tpebl' ),
 					),
 					'default'   => 'default',
 					'condition' => array(

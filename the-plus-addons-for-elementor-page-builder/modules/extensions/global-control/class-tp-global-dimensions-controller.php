@@ -113,14 +113,21 @@ class TP_Dimensions_Global extends Tab_Base {
 			return $cache;
 		}
 
-		$kit = Plugin::$instance->kits_manager->get_active_kit();
+		$kit = Plugin::$instance->kits_manager->get_active_kit_for_frontend();
+
 		if ( ! $kit ) {
-			$cache = array();
-			return $cache;
+			// Do not cache empty — Kit may not be ready yet during early hooks.
+			return array();
 		}
 
-		$list  = $kit->get_settings( 'tp_global_dimensions_list' );
-		$cache = ! empty( $list ) ? $list : array();
+		$list = $kit->get_settings_for_display( 'tp_global_dimensions_list' );
+
+		if ( empty( $list ) ) {
+			// Do not cache empty — settings may not be initialized yet.
+			return array();
+		}
+
+		$cache = $list;
 
 		return $cache;
 	}
@@ -134,7 +141,7 @@ class TP_Dimensions_Global extends Tab_Base {
 	 * @return array  [ '' => 'Select Preset', '_id' => 'Name', ... ]
 	 */
 	public static function get_preset_options() {
-		$options = array( '' => esc_html__( 'Select Preset', 'tpebl' ) );
+		$options = array( '' => esc_html__( 'Select Global', 'tpebl' ) );
 		foreach ( self::get_global_dimensions_list() as $preset ) {
 			$options[ $preset['_id'] ] = ! empty( $preset['name'] ) ? $preset['name'] : 'Unnamed';
 		}
@@ -235,10 +242,10 @@ class TP_Dimensions_Global extends Tab_Base {
 			$val = isset( $preset['tdm_values'] ) ? $preset['tdm_values'] : array();
 
 			return array(
-				'top'      => isset( $val['top'] ) ? $val['top'] : '',
-				'right'    => isset( $val['right'] ) ? $val['right'] : '',
-				'bottom'   => isset( $val['bottom'] ) ? $val['bottom'] : '',
-				'left'     => isset( $val['left'] ) ? $val['left'] : '',
+				'top'      => ( isset( $val['top'] ) && '' !== $val['top'] ) ? $val['top'] : '0',
+				'right'    => ( isset( $val['right'] ) && '' !== $val['right'] ) ? $val['right'] : '0',
+				'bottom'   => ( isset( $val['bottom'] ) && '' !== $val['bottom'] ) ? $val['bottom'] : '0',
+				'left'     => ( isset( $val['left'] ) && '' !== $val['left'] ) ? $val['left'] : '0',
 				'unit'     => ! empty( $val['unit'] ) ? $val['unit'] : 'px',
 				'isLinked' => ! empty( $val['isLinked'] ),
 			);

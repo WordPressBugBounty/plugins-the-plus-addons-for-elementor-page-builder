@@ -232,7 +232,7 @@ class TP_Gradient_Global extends Tab_Base {
 	 * @return array  [ '' => 'Select Preset', '_id' => 'Name', ... ]
 	 */
 	public static function get_preset_options() {
-		$options = array( '' => esc_html__( 'Select Preset', 'tpebl' ) );
+		$options = array( '' => esc_html__( 'Select Global', 'tpebl' ) );
 		foreach ( self::get_global_gradient_list() as $preset ) {
 			$options[ $preset['_id'] ] = ! empty( $preset['name'] ) ? $preset['name'] : 'Unnamed';
 		}

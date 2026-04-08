@@ -1803,144 +1803,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'Choose Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'   => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'    => Controls_Manager::SWITCHER,
-				'default' => 'no',
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
@@ -2029,10 +1892,10 @@ class L_ThePlus_Countdown extends Widget_Base {
 
 		$output .= '<div class="tp-countdown tp-widget-' . esc_attr( $widget_id ) . ' ' . esc_attr( $style_class ) . '" data-basic="' . esc_attr( $cd_data ) . '" >';
 
-			$data_attr .= ' data-days=' . wp_json_encode( $text_days ) . '';
-			$data_attr .= ' data-hours=' . wp_json_encode( $text_hours ) . '';
-			$data_attr .= ' data-minutes=' . wp_json_encode( $text_minutes ) . '';
-			$data_attr .= ' data-seconds=' . wp_json_encode( $text_seconds ) . '';
+			$data_attr .= ' data-days="' . esc_attr( $text_days ) . '"';
+			$data_attr .= ' data-hours="' . esc_attr( $text_hours ) . '"';
+			$data_attr .= ' data-minutes="' . esc_attr( $text_minutes ) . '"';
+			$data_attr .= ' data-seconds="' . esc_attr( $text_seconds ) . '"';
 
 			$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
 			$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;

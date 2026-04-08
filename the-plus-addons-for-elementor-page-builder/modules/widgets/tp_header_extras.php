@@ -2895,10 +2895,10 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 					if ( $woocommerce ) {
 
 						$cart_icon_style = ! empty( $settings['cart_icon_style'] ) ? $settings['cart_icon_style'] : 'style-1';
-						$meta_content   .= '<li class="mini-cart-icon ' . $cart_icon_style . ' elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' ' . esc_attr( $responsive_class_attr ) . '">';
+						$meta_content   .= '<li class="mini-cart-icon ' . esc_attr( $cart_icon_style ) . ' elementor-repeater-item-' . esc_attr( $item['_id'] ) . ' ' . esc_attr( $responsive_class_attr ) . '">';
 						$meta_content   .= '<div class="content-icon-list">';
 
-							$meta_content .= '<a href="' . wc_get_cart_url() . '" class="plus-cart-icon ' . esc_attr( $cart_icon_style ) . ' ' . esc_attr( $cart_icon ) . '">';
+							$meta_content .= '<a href="' . esc_url( wc_get_cart_url() ) . '" class="plus-cart-icon ' . esc_attr( $cart_icon_style ) . ' ' . esc_attr( $cart_icon ) . '">';
 						if ( 'style-1' === $cart_icon_style ) {
 							if ( 'default' === $cart_icon ) {
 								$meta_content .= '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 96 96" height="100%" id="bag" version="1.1" viewBox="0 0 96 96" width="100%" xml:space="preserve" style="&#10;"><path d="M68,24v-4C68,8.954,59.046,0,48,0S28,8.954,28,20v4H12v60c0,6.63,5.37,12,12,12h48c6.63,0,12-5.37,12-12V24H68z M36,20  c0-6.627,5.373-12,12-12c6.627,0,12,5.373,12,12v4H36V20z M76,84c0,2.21-1.79,4-4,4H24c-2.21,0-4-1.79-4-4V32h56V84z"/></svg>';

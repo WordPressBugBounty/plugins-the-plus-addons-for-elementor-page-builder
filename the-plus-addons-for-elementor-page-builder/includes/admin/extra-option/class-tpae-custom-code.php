@@ -56,8 +56,13 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 		public function __construct() {
 			$this->db_data = get_option( 'theplus_styling_data' );
 
-			add_action( 'wp_head', array( $this, 'tpae_css_option' ) );
-			add_action( 'wp_footer', array( $this, 'tpae_js_option' ) );
+			if ( ! empty( $this->db_data['theplus_custom_css_editor'] ) ) {
+				add_action( 'wp_head', array( $this, 'tpae_css_option' ) );
+			}
+
+			if ( ! empty( $this->db_data['theplus_custom_js_editor'] ) ) {
+				add_action( 'wp_footer', array( $this, 'tpae_js_option' ) );
+			}
 		}
 
 		/**

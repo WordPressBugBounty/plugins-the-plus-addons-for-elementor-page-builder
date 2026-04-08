@@ -80,9 +80,11 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
 
                             $css = ThePlusAddons\Elementor\BoxShadow\TP_Box_Shadow_Global::get_preset_css( $value );
                             if ( ! $css ) {
-                                break;
+                                continue;
                             }
 
+                            // $key example: "box_shadow_tp_bs_global_preset"
+                            // Strip the 20-char suffix "_tp_bs_global_preset" to get the group name prefix.
                             $base_name    = substr( $key, 0, -20 );
                             $selector_key = $base_name . '_' . $base_name . '_tp_bs_selector_store';
 
@@ -91,8 +93,7 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
                             $wrapper_class = '.elementor-element-' . $element_id;
                             $selector      = str_replace( '{{WRAPPER}}', $wrapper_class, $selector_tmpl );
 
-                            echo '<style>' . $selector . '{box-shadow:' . $css . ' !important;}</style>';
-                            break;
+                            echo '<style>' . wp_strip_all_tags( $selector ) . '{box-shadow:' . wp_strip_all_tags( $css ) . ' !important;}</style>';
                         }
                     },
                     10
@@ -136,9 +137,11 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
 
                             $css = ThePlusAddons\Elementor\Gradient\TP_Gradient_Global::get_preset_css( $value );
                             if ( ! $css ) {
-                                break;
+                                continue;
                             }
 
+                            // $key example: "bg_tp_gg_global_preset"
+                            // Strip the 20-char suffix "_tp_gg_global_preset" to get the group name prefix.
                             $base_name    = substr( $key, 0, -20 );
                             $selector_key = $base_name . '_' . $base_name . '_tp_gg_selector_store';
 
@@ -147,8 +150,7 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
                             $wrapper_class = '.elementor-element-' . $element_id;
                             $selector      = str_replace( '{{WRAPPER}}', $wrapper_class, $selector_tmpl );
 
-                            echo '<style>' . $selector . '{background-image:' . $css . ' !important;}</style>';
-                            break;
+                            echo '<style>' . wp_strip_all_tags( $selector ) . '{background-image:' . wp_strip_all_tags( $css ) . ' !important;}</style>';
                         }
                     },
                     10
@@ -186,6 +188,71 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
                     },
                     100
                 );
+
+                // Inject global-preset SELECT into Elementor's native Image Box widget
+                // (its image_border_radius uses SLIDER, not DIMENSIONS, so the
+                // TP_Control_Dimensions override cannot reach it).
+                add_action(
+                    'elementor/element/image-box/section_style_image/before_section_end',
+                    function ( $element ) {
+                        if ( ! class_exists( 'ThePlusAddons\Elementor\Dimensions\TP_Dimensions_Global' ) ) {
+                            return;
+                        }
+                        $presets = \ThePlusAddons\Elementor\Dimensions\TP_Dimensions_Global::get_preset_options();
+                        // get_preset_options() always includes the empty '' placeholder, so
+                        // skip if there are no real presets yet.
+                        if ( count( $presets ) <= 1 ) {
+                            return;
+                        }
+                        $element->add_control(
+                            'image_border_radius_tp_global_preset',
+                            array(
+                                'label'       => esc_html__( 'Global Border Radius', 'tpebl' ),
+                                'type'        => \Elementor\Controls_Manager::SELECT,
+                                'options'     => $presets,
+                                'default'     => '',
+                                'description' => esc_html__( 'Select a Global Dimensions preset to override the Border Radius slider above.', 'tpebl' ),
+                            ),
+                            array(
+                                'position' => array(
+                                    'type' => 'control',
+                                    'at'   => 'after',
+                                    'of'   => 'image_border_radius',
+                                ),
+                            )
+                        );
+                    },
+                    10,
+                    1
+                );
+
+                // Output inline CSS for the Image Box global border-radius preset.
+                add_action(
+                    'elementor/frontend/before_render',
+                    function ( $element ) {
+                        if ( 'image-box' !== $element->get_name() ) {
+                            return;
+                        }
+                        if ( ! class_exists( 'ThePlusAddons\Elementor\Dimensions\TP_Dimensions_Global' ) ) {
+                            return;
+                        }
+                        $settings  = $element->get_settings_for_display();
+                        $preset_id = ! empty( $settings['image_border_radius_tp_global_preset'] )
+                            ? $settings['image_border_radius_tp_global_preset']
+                            : '';
+                        if ( empty( $preset_id ) ) {
+                            return;
+                        }
+                        $css = \ThePlusAddons\Elementor\Dimensions\TP_Dimensions_Global::get_preset_css( $preset_id );
+                        if ( empty( $css ) ) {
+                            return;
+                        }
+                        $element_id = $element->get_id();
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo '<style>.elementor-element-' . esc_attr( $element_id ) . ' .elementor-image-box-img img{border-radius:' . esc_attr( $css ) . ' !important;}</style>';
+                    },
+                    10
+                );
             }
         }
 
@@ -219,6 +286,11 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
 					'key'   => 'tp-global-button-styles',
 					'class' => 'ThePlusAddons\Elementor\ButtonStyle\TP_Button_Style_Global',
 				),
+				'plus_global_scroll_animation' => array(
+					'file'  => 'modules/extensions/global-control/class-tp-global-scroll-animation-controller.php',
+					'key'   => 'tp-global-scroll-animation',
+					'class' => 'ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Controller',
+				),
 			);
 
 			$styles_tabs = array();
@@ -241,89 +313,6 @@ if ( ! class_exists( 'Tpae_Global_Controllers_Main' ) ) {
                     $tabs_manager->register_tab( $tab['key'], $tab['class'] );
                 }
 			}
-        }
-
-        /**
-         * Get the computed global box shadow rule for an element.
-         *
-         * @since v6.5.0
-         *
-         * @param array  $settings         Element settings.
-         * @param string $wrapper_selector Wrapper selector replacement.
-         * @return array
-         */
-        protected function get_global_box_shadow_rule( $settings, $wrapper_selector ) {
-            if ( ! class_exists( 'ThePlusAddons\\Elementor\\BoxShadow\\TP_Box_Shadow_Global' ) ) {
-                return array();
-            }
-
-            foreach ( $settings as $key => $value ) {
-                if ( empty( $value ) || substr( $key, -20 ) !== '_tp_bs_global_preset' ) {
-                    continue;
-                }
-
-                $css = ThePlusAddons\Elementor\BoxShadow\TP_Box_Shadow_Global::get_preset_css( $value );
-                if ( ! $css ) {
-                    break;
-                }
-
-                $base_name     = substr( $key, 0, -20 );
-                $selector_key  = $base_name . '_' . $base_name . '_tp_bs_selector_store';
-                $selector_tmpl = ! empty( $settings[ $selector_key ] ) ? $settings[ $selector_key ] : '{{WRAPPER}}';
-                $selector      = str_replace( '{{WRAPPER}}', $wrapper_selector, $selector_tmpl );
-
-                return array(
-                    'selector' => $selector,
-                    'css'      => $css,
-                );
-            }
-
-            return array();
-        }
-
-        /**
-         * Render global box shadow preset CSS on frontend output.
-         *
-         * @since v6.5.0
-         *
-         * @param object $element Elementor element instance.
-         * @return void
-         */
-        public function render_global_box_shadow_css( $element ) {
-            $settings = $element->get_settings();
-            $rule     = $this->get_global_box_shadow_rule( $settings, '.elementor-element-' . $element->get_id() );
-
-            if ( empty( $rule['selector'] ) || empty( $rule['css'] ) ) {
-                return;
-            }
-
-            echo '<style>' . $rule['selector'] . '{box-shadow:' . $rule['css'] . ' !important;}</style>';
-        }
-
-        /**
-         * Add global box shadow preset CSS to Elementor generated stylesheets.
-         *
-         * This keeps the preset visible inside the editor preview as well.
-         *
-         * @since v6.5.0
-         *
-         * @param object $post_css Elementor CSS file object.
-         * @param object $element  Elementor element instance.
-         * @return void
-         */
-        public function parse_global_box_shadow_css( $post_css, $element ) {
-            if ( ! method_exists( $post_css, 'get_stylesheet' ) || ! method_exists( $post_css, 'get_element_unique_selector' ) ) {
-                return;
-            }
-
-            $settings = $element->get_settings();
-            $rule     = $this->get_global_box_shadow_rule( $settings, $post_css->get_element_unique_selector( $element ) );
-
-            if ( empty( $rule['selector'] ) || empty( $rule['css'] ) ) {
-                return;
-            }
-
-            $post_css->get_stylesheet()->add_raw_css( $rule['selector'] . '{box-shadow:' . $rule['css'] . ' !important;}' );
         }
     }
 }

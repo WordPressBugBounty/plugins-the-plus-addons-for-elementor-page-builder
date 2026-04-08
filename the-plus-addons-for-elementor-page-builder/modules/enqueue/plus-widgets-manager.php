@@ -274,6 +274,10 @@ class Plus_Widgets_Manager {
 			$this->transient_widgets[] = 'plus-velocity';
 		}
 
+		if ( ! empty( $options['tp_select_scroll_global_animation'] ) ) {
+			$this->transient_widgets[] = 'plus-velocity';
+		}
+
 		if ( ! empty( $widget_name ) ) {
 
 			if ( 'tp-heading-title' === $widget_name || 'tp-button' === $widget_name || 'tp-contact-form-7' === $widget_name || 'tp-post-search' === $widget_name || 'tp-flip-box' === $widget_name || 'tp-info-box' === $widget_name || 'tp-navigation-menu-lite' === $widget_name || 'tp-tabs-tours' === $widget_name || 'tp-social-icon' === $widget_name ) {
@@ -297,8 +301,14 @@ class Plus_Widgets_Manager {
 
 			if ( 'tp-button' === $widget_name ) {
 
-				$hover_effect = ! empty( $options['btn_hover_effects'] ) ? $options['btn_hover_effects'] : '';
-				$button_style = ! empty( $options['button_style'] ) ? $options['button_style'] : 'style-1';
+				$button_type_switch = ! empty( $options['button_type_switch'] ) ? $options['button_type_switch'] : '';
+
+				if( 'global' === $button_type_switch ){
+					$button_style = 'style-8';
+				} else {
+					$hover_effect = ! empty( $options['btn_hover_effects'] ) ? $options['btn_hover_effects'] : '';
+					$button_style = ! empty( $options['button_style'] ) ? $options['button_style'] : 'style-1';
+				}
 
 				$this->tp_button_style( $button_style );
 

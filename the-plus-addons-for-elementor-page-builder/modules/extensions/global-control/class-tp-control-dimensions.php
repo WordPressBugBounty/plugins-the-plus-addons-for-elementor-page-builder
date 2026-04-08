@@ -73,8 +73,19 @@ if ( ! class_exists( 'ThePlusAddons\Elementor\Dimensions\TP_Control_Dimensions' 
 					$dimension_key = strtolower( $css_property );
 
 					if ( isset( $preset_values[ $dimension_key ] ) ) {
-						return $preset_values[ $dimension_key ];
+						$val = $preset_values[ $dimension_key ];
+
+						// Ensure 0 and '0' are returned as '0', not as empty string.
+						// Elementor skips CSS generation when get_style_value returns ''.
+						if ( '' === $val || null === $val ) {
+							return '0';
+						}
+
+						return $val;
 					}
+
+					// Dimension key not found in preset — default to 0.
+					return '0';
 				}
 			}
 

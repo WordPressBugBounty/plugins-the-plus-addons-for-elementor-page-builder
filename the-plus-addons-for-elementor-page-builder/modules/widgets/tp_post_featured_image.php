@@ -309,7 +309,7 @@ class ThePlus_Featured_Image extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend placing this widget in the Post Single Page Template to show the featured image of the post.',
+					'notice'      => esc_html__( 'We recommend placing this widget in the Post Single Page Template to show the featured image of the post.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
 					'page_type'   => 'tp_singular_page',
 				)

@@ -110,6 +110,20 @@ class ThePlus_Dynamic_Tag_Post_Featured_Image extends Data_Tag {
 		
 		$post_id = get_the_ID();
 
+		// Fallback for Dynamic CSS context: CSS is generated during wp_head (before the loop starts),
+		// so get_the_ID() returns 0. get_queried_object_id() works even outside the loop.
+		if ( ! $post_id ) {
+			$queried_id = get_queried_object_id();
+			if ( $queried_id && get_post( $queried_id ) ) {
+				$post_id = $queried_id;
+			}
+		}
+
+		// Elementor editor / AJAX context fallback (e.g. dynamic CSS preview request).
+		if ( ! $post_id && ! empty( $_REQUEST['post_id'] ) ) {
+			$post_id = absint( $_REQUEST['post_id'] );
+		}
+
 		if ( ! $post_id ) {
 			return false;
 		}

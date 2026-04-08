@@ -59,6 +59,26 @@ if ( ! class_exists( 'Tpae_Create_Template' ) ) {
 		 * @since 6.4.2
 		 */
         public function enqueue_editor_scripts() {
+            $white_label_options = get_option( 'theplus_white_label', array() );
+            $wl_enabled          = false;
+            $white_label_data    = array(
+                'wl_enabled' => false,
+                'wl_name'    => '',
+                'wl_logo'    => '',
+            );
+
+            if ( is_array( $white_label_options ) ) {
+                $wl_name = ! empty( $white_label_options['tp_plugin_name'] ) ? $white_label_options['tp_plugin_name'] : '';
+                $wl_name = ! empty( $wl_name ) ? $wl_name : ( ! empty( $white_label_options['l_tp_plugin_name'] ) ? $white_label_options['l_tp_plugin_name'] : '' );
+                $wl_logo = ! empty( $white_label_options['tp_plus_logo'] ) ? $white_label_options['tp_plus_logo'] : '';
+
+                $wl_enabled = ! empty( $wl_name ) || ! empty( $wl_logo );
+
+                $white_label_data['wl_enabled'] = $wl_enabled;
+                $white_label_data['wl_name']    = $wl_name;
+                $white_label_data['wl_logo']    = $wl_logo;
+            }
+
             wp_enqueue_style( 'tp-create-temp-editor-css', L_THEPLUS_URL . 'modules/widgets-feature/template-editor/tp-create-temp-editor.min.css', array(), L_THEPLUS_VERSION);
 
             wp_enqueue_script( 'tp-create-temp-editor-js', L_THEPLUS_URL . 'modules/widgets-feature/template-editor/tp-create-temp-editor.min.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION, true );
@@ -70,7 +90,8 @@ if ( ! class_exists( 'Tpae_Create_Template' ) ) {
                     'L_THEPLUS_ASSETS_URL' => L_THEPLUS_ASSETS_URL,
 
                     'ajax_url' => admin_url( 'admin-ajax.php' ),
-                    'nonce'    => wp_create_nonce('live_editor')
+                    'nonce'    => wp_create_nonce('live_editor'),
+                    'is_white_label' => $white_label_data,
                 )
             );
         }

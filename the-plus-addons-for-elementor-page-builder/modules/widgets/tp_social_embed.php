@@ -2288,7 +2288,7 @@ class ThePlus_Social_Embed extends Widget_Base {
 			'YtLangNote',
 			array(
 				'type'      => Controls_Manager::RAW_HTML,
-				'raw'       => 'Note : <a href="" target="_blank" rel="noopener noreferrer"></a>',
+				'raw'       => esc_html__( 'Note :', 'tpebl' ) . ' <a href="" target="_blank" rel="noopener noreferrer"></a>',
 				'raw'       => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',

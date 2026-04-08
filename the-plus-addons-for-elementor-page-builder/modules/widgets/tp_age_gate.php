@@ -2609,7 +2609,7 @@ class ThePlus_Age_Gate extends Widget_Base {
 					$img_src = tp_get_image_rander( $image_id, 'full', array( 'class' => 'tp-agegate-image' ) );
 					$output .= '<div class="tp-age-ii">' . $img_src . '</div>';
 				} else {
-					$output .= '<div class="tp-age-ii"><img src=' . esc_url( $age_head_img ) . ' class="tp-agegate-image"></div>';
+					$output .= '<div class="tp-age-ii"><img src="' . esc_url( $age_head_img ) . '" class="tp-agegate-image"></div>';
 				}
 			}
 

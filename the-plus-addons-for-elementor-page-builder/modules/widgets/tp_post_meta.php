@@ -412,7 +412,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 				'tpae_theme_builders',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend using this widget in the Post Single Page Template to display date, category, author, and other meta details. ',
+					'notice'      => esc_html__( 'We recommend using this widget in the Post Single Page Template to display date, category, author, and other meta details.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
 					'page_type'   => 'tp_singular_page',
 				)

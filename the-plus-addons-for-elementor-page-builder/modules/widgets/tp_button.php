@@ -15,7 +15,11 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
-use ThePlusAddons\Elementor\ButtonStyle\TP_Button_Style_Global;
+use ThePlusAddons\Elementor\ButtonStyle\TP_Global_Button_Style_Helper;
+
+if ( ! trait_exists( '\ThePlusAddons\Elementor\ButtonStyle\TP_Global_Button_Style_Helper' ) ) {
+	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-button-style-helper.php';
+}
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -25,6 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class L_ThePlus_Button
  */
 class L_ThePlus_Button extends Widget_Base {
+	use TP_Global_Button_Style_Helper;
 
 	public $tp_doc = L_THEPLUS_TPDOC;
 
@@ -95,28 +100,6 @@ class L_ThePlus_Button extends Widget_Base {
 		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
-	protected function ensure_global_button_style_controller() {
-		if ( class_exists( '\ThePlusAddons\Elementor\ButtonStyle\TP_Button_Style_Global' ) ) {
-			return;
-		}
-
-		$path = L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-button-style-controller.php';
-
-		if ( file_exists( $path ) ) {
-			include_once $path;
-		}
-	}
-
-	protected function get_global_button_style_options() {
-		$this->ensure_global_button_style_controller();
-
-		if ( class_exists( '\ThePlusAddons\Elementor\ButtonStyle\TP_Button_Style_Global' ) ) {
-			return TP_Button_Style_Global::get_preset_options();
-		}
-
-		return array( '' => esc_html__( 'Select Button Styles', 'tpebl' ) );
-	}
-
 	protected function get_is_simple_button( $settings ) {
 		return ! empty( $settings['button_type_switch'] ) && in_array( $settings['button_type_switch'], array( 'basic' ), true );
 	}
@@ -127,206 +110,6 @@ class L_ThePlus_Button extends Widget_Base {
 		}
 
 		return ! empty( $settings['button_style'] ) ? $settings['button_style'] : 'style-1';
-	}
-
-	protected function format_dimensions_css( $value ) {
-		if ( empty( $value ) || ! is_array( $value ) ) {
-			return '';
-		}
-
-		$unit = ! empty( $value['unit'] ) ? sanitize_text_field( $value['unit'] ) : 'px';
-		$keys = array( 'top', 'right', 'bottom', 'left' );
-		$out  = array();
-
-		foreach ( $keys as $key ) {
-			$out[] = ( '' === (string) ( $value[ $key ] ?? '' ) ? '0' : (float) $value[ $key ] ) . $unit;
-		}
-
-		return implode( ' ', $out );
-	}
-
-	protected function format_slider_css( $value ) {
-		if ( empty( $value ) || ! is_array( $value ) || ! isset( $value['size'] ) || '' === (string) $value['size'] ) {
-			return '';
-		}
-
-		$unit = ! empty( $value['unit'] ) ? sanitize_text_field( $value['unit'] ) : 'px';
-
-		return (float) $value['size'] . $unit;
-	}
-
-	protected function format_box_shadow_css( $preset, $prefix = '' ) {
-		$type_key   = $prefix . 'shadow_type';
-		$x_key      = $prefix . 'shadow_x';
-		$y_key      = $prefix . 'shadow_y';
-		$blur_key   = $prefix . 'shadow_blur';
-		$spread_key = $prefix . 'shadow_spread';
-		$color_key  = $prefix . 'shadow_color';
-
-		$x      = $this->format_slider_css( $preset[ $x_key ] ?? array() );
-		$y      = $this->format_slider_css( $preset[ $y_key ] ?? array() );
-		$blur   = $this->format_slider_css( $preset[ $blur_key ] ?? array() );
-		$spread = $this->format_slider_css( $preset[ $spread_key ] ?? array() );
-		$color  = ! empty( $preset[ $color_key ] ) ? sanitize_text_field( $preset[ $color_key ] ) : '';
-
-		if ( '' === $x && '' === $y && '' === $blur && '' === $spread && '' === $color ) {
-			return '';
-		}
-
-		$parts = array();
-
-		if ( ! empty( $preset[ $type_key ] ) && 'bst_inset' === $preset[ $type_key ] ) {
-			$parts[] = 'inset';
-		}
-
-		$parts[] = '' !== $x ? $x : '0px';
-		$parts[] = '' !== $y ? $y : '0px';
-		$parts[] = '' !== $blur ? $blur : '0px';
-		$parts[] = '' !== $spread ? $spread : '0px';
-
-		if ( '' !== $color ) {
-			$parts[] = $color;
-		}
-
-		return implode( ' ', $parts );
-	}
-
-	protected function build_global_button_style_css( $preset_id, $scope ) {
-		$this->ensure_global_button_style_controller();
-
-		if ( ! class_exists( '\ThePlusAddons\Elementor\ButtonStyle\TP_Button_Style_Global' ) ) {
-			return '';
-		}
-
-		$preset = TP_Button_Style_Global::get_preset( $preset_id );
-
-		if ( empty( $preset ) ) {
-			return '';
-		}
-
-		$normal = array();
-		$hover  = array();
-
-		if ( ! empty( $preset['margin'] ) ) {
-			$normal[] = 'margin:' . $this->format_dimensions_css( $preset['margin'] );
-		}
-
-		if ( ! empty( $preset['padding'] ) ) {
-			$normal[] = 'padding:' . $this->format_dimensions_css( $preset['padding'] );
-		}
-
-		if ( ! empty( $preset['font_family'] ) ) {
-			$normal[] = 'font-family:' . sanitize_text_field( $preset['font_family'] );
-		}
-
-		if ( ! empty( $preset['font_size'] ) ) {
-			$font_size = $this->format_slider_css( $preset['font_size'] );
-			if ( '' !== $font_size ) {
-				$normal[] = 'font-size:' . $font_size;
-			}
-		}
-
-		if ( ! empty( $preset['font_weight'] ) ) {
-			$normal[] = 'font-weight:' . sanitize_text_field( $preset['font_weight'] );
-		}
-
-		if ( isset( $preset['text_transform'] ) && '' !== $preset['text_transform'] ) {
-			$normal[] = 'text-transform:' . sanitize_text_field( $preset['text_transform'] );
-		}
-
-		if ( ! empty( $preset['line_height'] ) ) {
-			$line_height = $this->format_slider_css( $preset['line_height'] );
-			if ( '' !== $line_height ) {
-				$normal[] = 'line-height:' . $line_height;
-			}
-		}
-
-		if ( ! empty( $preset['letter_spacing'] ) ) {
-			$letter_spacing = $this->format_slider_css( $preset['letter_spacing'] );
-			if ( '' !== $letter_spacing ) {
-				$normal[] = 'letter-spacing:' . $letter_spacing;
-			}
-		}
-
-		if ( ! empty( $preset['text_color'] ) ) {
-			$normal[] = 'color:' . sanitize_text_field( $preset['text_color'] );
-		}
-
-		if ( ! empty( $preset['background_color'] ) ) {
-			$normal[] = 'background-color:' . sanitize_text_field( $preset['background_color'] );
-		}
-
-		if ( isset( $preset['border_style'] ) && '' !== $preset['border_style'] ) {
-			$normal[] = 'border-style:' . sanitize_text_field( $preset['border_style'] );
-		}
-
-		if ( ! empty( $preset['border_width'] ) ) {
-			$normal[] = 'border-width:' . $this->format_dimensions_css( $preset['border_width'] );
-		}
-
-		if ( ! empty( $preset['border_color'] ) ) {
-			$normal[] = 'border-color:' . sanitize_text_field( $preset['border_color'] );
-		}
-
-		if ( ! empty( $preset['border_radius'] ) ) {
-			$normal[] = 'border-radius:' . $this->format_dimensions_css( $preset['border_radius'] );
-		}
-
-		$normal_shadow = $this->format_box_shadow_css( $preset );
-		if ( '' !== $normal_shadow ) {
-			$normal[] = 'box-shadow:' . $normal_shadow;
-		}
-
-		if ( ! empty( $preset['hover_text_color'] ) ) {
-			$hover[] = 'color:' . sanitize_text_field( $preset['hover_text_color'] );
-		}
-
-		if ( ! empty( $preset['hover_background_color'] ) ) {
-			$hover[] = 'background-color:' . sanitize_text_field( $preset['hover_background_color'] );
-		}
-
-		if ( isset( $preset['hover_border_style'] ) && '' !== $preset['hover_border_style'] ) {
-			$hover[] = 'border-style:' . sanitize_text_field( $preset['hover_border_style'] );
-		}
-
-		if ( ! empty( $preset['hover_border_width'] ) ) {
-			$hover[] = 'border-width:' . $this->format_dimensions_css( $preset['hover_border_width'] );
-		}
-
-		if ( ! empty( $preset['hover_border_color'] ) ) {
-			$hover[] = 'border-color:' . sanitize_text_field( $preset['hover_border_color'] );
-		}
-
-		if ( ! empty( $preset['hover_border_radius'] ) ) {
-			$hover[] = 'border-radius:' . $this->format_dimensions_css( $preset['hover_border_radius'] );
-		}
-
-		$hover_shadow = $this->format_box_shadow_css( $preset, 'hover_' );
-		if ( '' !== $hover_shadow ) {
-			$hover[] = 'box-shadow:' . $hover_shadow;
-		}
-
-		$css = '';
-
-		if ( ! empty( $normal ) ) {
-			$css .= $scope . ' .pt_plus_button .button-link-wrap{' . implode( ';', $normal ) . ';}';
-		}
-
-		if ( ! empty( $preset['icon_color'] ) ) {
-			$icon_color = sanitize_text_field( $preset['icon_color'] );
-			$css       .= $scope . ' .pt_plus_button .button-link-wrap .btn-icon,' . $scope . ' .pt_plus_button .button-link-wrap svg{color:' . $icon_color . ';fill:' . $icon_color . ';}';
-		}
-
-		if ( ! empty( $hover ) ) {
-			$css .= $scope . ' .pt_plus_button .button-link-wrap:hover{' . implode( ';', $hover ) . ';}';
-		}
-
-		if ( ! empty( $preset['hover_icon_color'] ) ) {
-			$hover_icon_color = sanitize_text_field( $preset['hover_icon_color'] );
-			$css             .= $scope . ' .pt_plus_button .button-link-wrap:hover .btn-icon,' . $scope . ' .pt_plus_button .button-link-wrap:hover svg{color:' . $hover_icon_color . ';fill:' . $hover_icon_color . ';}';
-		}
-
-		return $css;
 	}
 
 	/**
@@ -354,7 +137,7 @@ class L_ThePlus_Button extends Widget_Base {
 				'options' => array(
 					'basic'  => array(
 						'title' => esc_html__( 'Basic', 'tpebl' ),
-						'icon'  => 'eicon-button',
+						'icon'  => 'theplus-i-button',
 					),
 					'global' => array(
 						'title' => esc_html__( 'Global', 'tpebl' ),
@@ -362,6 +145,12 @@ class L_ThePlus_Button extends Widget_Base {
 					),
 				),
 				'toggle'  => false,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Choose Basic to customize styles from the Style tab, or select Global to use a predefined button style.', 'tpebl' ),
+					)
+				),
 			)
 		);
 		$this->add_control(
@@ -564,47 +353,34 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->end_popover();
 		$this->end_controls_section();
 		$this->start_controls_section(
-			'section_adv_btn_icon_styling',
-			array(
-				'label'     => esc_html__( 'Button Icon', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_CONTENT,
-				'condition' => array(
-					'button_type_switch' => array( 'basic', 'global' ),
-				),
-			)
-		);
-		$this->add_control(
-			'adv_button_icon_5',
-			array(
-				'label'   => esc_html__( 'Icon Library', 'tpebl' ),
-				'type'    => Controls_Manager::ICONS,
-				'default' => array(
-					'value'   => 'fas fa-chevron-right',
-					'library' => 'solid',
-				),
-			)
-		);
-		$this->add_control(
-			'adv_before_after',
-			array(
-				'label'   => esc_html__( 'Icon Position', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'after',
-				'options' => array(
-					'after'  => esc_html__( 'After', 'tpebl' ),
-					'before' => esc_html__( 'Before', 'tpebl' ),
-				),
-			)
-		);
-		$this->end_controls_section();
-		$this->start_controls_section(
 			'section_button_icon_styling',
 			array(
-				'label'     => esc_html__( 'Icon Settings', 'tpebl' ),
-				'tab'       => Controls_Manager::TAB_CONTENT,
-				'condition' => array(
-					'button_type_switch' => 'basic',
-					'button_style!' => array( 'style-3', 'style-6', 'style-7', 'style-9' ),
+				'label'      => esc_html__( 'Icon Settings', 'tpebl' ),
+				'tab'        => Controls_Manager::TAB_CONTENT,
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'button_type_switch',
+							'operator' => '==',
+							'value'    => 'global',
+						),
+						array(
+							'relation' => 'and',
+							'terms'    => array(
+								array(
+									'name'     => 'button_type_switch',
+									'operator' => '==',
+									'value'    => 'basic',
+								),
+								array(
+									'name'     => 'button_style',
+									'operator' => '!=',
+									'value'    => array( 'style-3', 'style-6', 'style-7', 'style-9' ),
+								),
+							),
+						),
+					),
 				),
 			)
 		);
@@ -765,7 +541,6 @@ class L_ThePlus_Button extends Widget_Base {
 					'before' => esc_html__( 'Before', 'tpebl' ),
 				),
 				'condition' => array(
-					'button_type_switch!' => array( 'basic', 'global' ),
 					'button_style!'      => array( 'style-3', 'style-6', 'style-7', 'style-9', 'style-17' ),
 					'button_icon_style!' => array( '', 'none' ),
 				),
@@ -864,6 +639,26 @@ class L_ThePlus_Button extends Widget_Base {
 			)
 		);
 		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_typography_styling',
+			array(
+				'label' => esc_html__( 'Typography', 'tpebl' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'button_type_switch' => 'global',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'selector' => '{{WRAPPER}} .pt_plus_button .button-link-wrap',
+			)
+		);
+		$this->end_controls_section();
+
 		$this->start_controls_section(
 			'section_styling',
 			array(
@@ -1831,6 +1626,10 @@ class L_ThePlus_Button extends Widget_Base {
 		$uid        = uniqid( 'btn' );
 		$data_class = $uid;
 
+		if ( 'global' === $is_simple_button) {
+			$button_style = 'style-8';
+		}
+
 		$data_class .= ' button-' . $button_style . ' ';
 
 		if ( 'style-11' === $button_style || 'style-13' === $button_style ) {
@@ -1863,9 +1662,27 @@ class L_ThePlus_Button extends Widget_Base {
 			$global_button_css = $this->build_global_button_style_css( $button_global_style_preset, '#' . $uid_button );
 		}
 
-		$cst_att = '';
+		$safe_custom_attrs = '';
 		if ( 'yes' === $button_custom_attributes && ! empty( $custom_attributes ) ) {
-			$cst_att = $custom_attributes;
+			$blocked_attrs = array( 'style', 'class', 'id', 'href', 'src', 'action', 'formaction', 'srcdoc', 'data' );
+			$pairs         = explode( "\n", $custom_attributes );
+
+			foreach ( $pairs as $pair ) {
+				$pair = trim( $pair );
+				if ( empty( $pair ) ) {
+					continue;
+				}
+
+				$kv  = explode( '|', $pair, 2 );
+				$key = sanitize_key( trim( $kv[0] ) );
+				$val = isset( $kv[1] ) ? esc_attr( trim( $kv[1] ) ) : '';
+
+				if ( empty( $key ) || preg_match( '/^on/i', $key ) || in_array( $key, $blocked_attrs, true ) ) {
+					continue;
+				}
+
+				$safe_custom_attrs .= ' ' . $key . '="' . $val . '"';
+			}
 		}
 
 		$the_button = '<div class="pt-plus-button-wrapper  ' . esc_attr( $button_align ) . ' ">';
@@ -1878,7 +1695,7 @@ class L_ThePlus_Button extends Widget_Base {
 
 						$the_button .= '<div class="animted-content-inner ' . esc_attr( $continuous_animation ) . '">';
 
-							$the_button .= '<a ' . $this->get_render_attribute_string( 'button' ) . ' ' . tp_senitize_js_input( $cst_att ) . ' >';
+							$the_button .= '<a ' . $this->get_render_attribute_string( 'button' ) . $safe_custom_attrs . ' >';
 
 							$the_button .= $this->render_text();
 
@@ -1922,11 +1739,6 @@ class L_ThePlus_Button extends Widget_Base {
 
 		$is_simple_button = ! empty( $settings['button_type_switch'] ) ? $settings['button_type_switch'] : 'basic';
 
-		if ( 'global' === $is_simple_button ) {
-			$before_after = ! empty( $settings['adv_before_after'] ) ? $settings['adv_before_after'] : 'after';
-			$icon_style   = 'font_awesome_5';
-		}
-
 		$icons = '';
 
 		$btn_icon = ! empty( $settings['button_icon'] ) ? $settings['button_icon'] : '';
@@ -1935,9 +1747,6 @@ class L_ThePlus_Button extends Widget_Base {
 		} elseif ( 'font_awesome_5' === $icon_style ) {
 
 			$btn_i5 = ! empty( $settings['button_icon_5'] ) ? $settings['button_icon_5'] : '';
-			if ( 'global' === $is_simple_button ) {
-				$btn_i5 = ! empty( $settings['adv_button_icon_5'] ) ? $settings['adv_button_icon_5'] : '';
-			}
 			ob_start();
 			\Elementor\Icons_Manager::render_icon( $btn_i5, array( 'aria-hidden' => 'true' ) );
 			$icons = ob_get_contents();

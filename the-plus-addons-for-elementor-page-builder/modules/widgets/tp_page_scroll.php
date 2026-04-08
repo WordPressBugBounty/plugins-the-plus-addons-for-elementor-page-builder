@@ -296,7 +296,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			'liveeditor',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button" >Edit Template</a>',
+				'raw'             => '<a class="tp-live-editor" id="tp-live-editor-button" >' . esc_html__( 'Edit Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-editor-btn',
 				'label_block'     => true,
 				'condition'       => array(
@@ -308,7 +308,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			'create',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">Create Template</a>',
+				'raw'             => '<a class="tp-live-create" id="tp-live-create-button">' . esc_html__( 'Create Template', 'tpebl' ) . '</a>',
 				'content_classes' => 'tp-live-create-btn',
 				'label_block'     => true,
 				'condition'       => array(

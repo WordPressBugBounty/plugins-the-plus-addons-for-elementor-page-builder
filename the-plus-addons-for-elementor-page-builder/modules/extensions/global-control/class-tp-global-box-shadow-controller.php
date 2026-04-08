@@ -204,10 +204,10 @@ class TP_Box_Shadow_Global extends Tab_Base {
 	 * Usage: 'options' => TP_Box_Shadow_Global::get_preset_options()
 	 *
 	 * @since v6.5.0
-	 * @return array  [ '' => 'Select Preset', '_id' => 'Name', ... ]
+	 * @return array  [ '' => 'Select Box Shadow', '_id' => 'Name', ... ]
 	 */
 	public static function get_preset_options() {
-		$options = array( '' => esc_html__( 'Select Preset', 'tpebl' ) );
+		$options = array( '' => esc_html__( 'Select Box Shadow', 'tpebl' ) );
 
 		foreach ( self::get_global_box_shadow_list() as $preset ) {
 			$options[ $preset['_id'] ] = ! empty( $preset['name'] ) ? $preset['name'] : 'Unnamed';

@@ -191,6 +191,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			'plus_global_gradient_color',
 			'plus_global_dimensions',
 			'plus_global_button',
+			'plus_global_scroll_animation',
 		);
 
 		/**

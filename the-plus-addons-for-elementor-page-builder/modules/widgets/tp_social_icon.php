@@ -14,6 +14,11 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
+use ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper;
+
+if ( ! class_exists( '\ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper' ) ) {
+	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-scroll-animation-helper.php';
+}
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -1076,149 +1081,10 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 		$this->end_controls_tabs();
 		$this->end_controls_section();
 
-		$this->start_controls_section(
-			'section_animation_styling',
-			array(
-				'label' => esc_html__( 'On Scroll View Animation', 'tpebl' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'animation_effects',
-			array(
-				'label'   => esc_html__( 'Choose Animation Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'no-animation',
-				'options' => l_theplus_get_animation_options(),
-			)
-		);
-		$this->add_control(
-			'animation_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_duration_default',
-			array(
-				'label'     => esc_html__( 'Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animate_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'         => 'no-animation',
-					'animation_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_effects',
-			array(
-				'label'     => esc_html__( 'Out Animation Effect', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'no-animation',
-				'options'   => l_theplus_get_out_animation_options(),
-				'separator' => 'before',
-				'condition' => array(
-					'animation_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_delay',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Out Animation Delay', 'tpebl' ),
-				'default'   => array(
-					'unit' => '',
-					'size' => 50,
-				),
-				'range'     => array(
-					'' => array(
-						'min'  => 0,
-						'max'  => 4000,
-						'step' => 15,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration_default',
-			array(
-				'label'     => esc_html__( 'Out Animation Duration', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'no',
-				'condition' => array(
-					'animation_effects!'     => 'no-animation',
-					'animation_out_effects!' => 'no-animation',
-				),
-			)
-		);
-		$this->add_control(
-			'animation_out_duration',
-			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => esc_html__( 'Duration Speed', 'tpebl' ),
-				'default'   => array(
-					'unit' => 'px',
-					'size' => 50,
-				),
-				'range'     => array(
-					'px' => array(
-						'min'  => 100,
-						'max'  => 10000,
-						'step' => 100,
-					),
-				),
-				'condition' => array(
-					'animation_effects!'             => 'no-animation',
-					'animation_out_effects!'         => 'no-animation',
-					'animation_out_duration_default' => 'yes',
-				),
-			)
-		);
-		$this->end_controls_section();
+		$Plus_Listing_block        = 'Plus_Listing_block';
+		$tp_hide_columns_animation = true;
+		$tp_enable_global_scroll_animation = true;
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation.php';
 
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
@@ -1231,6 +1097,7 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+		$settings = TP_Global_Scroll_Animation_Helper::resolve_widget_settings( $settings );
 
 		$styles        = ! empty( $settings['styles'] ) ? $settings['styles'] : '';
 		$social_align  = $settings['social_align'];
@@ -1268,7 +1135,9 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 
 		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
 		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
+		$animation_stagger = ! empty( $settings['animation_stagger']['size'] ) ? $settings['animation_stagger']['size'] : 150;
 		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
+		$animated_columns  = '';
 
 		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
 		$out_effect   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
@@ -1284,6 +1153,16 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 			$animated_class  = 'animate-general';
 			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
 			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
+			$ani_column_list = ! empty( $settings['animated_column_list'] ) ? $settings['animated_column_list'] : '';
+
+			if ( 'stagger' === $ani_column_list ) {
+				$animated_columns = 'animated-columns';
+				$animation_attr  .= ' data-animate-columns="stagger"';
+				$animation_attr  .= ' data-animate-stagger="' . esc_attr( $animation_stagger ) . '"';
+			} elseif ( 'columns' === $ani_column_list ) {
+				$animated_columns = 'animated-columns';
+				$animation_attr  .= ' data-animate-columns="columns"';
+			}
 
 			if ( 'yes' === $ani_duration ) {
 				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
@@ -1386,11 +1265,11 @@ class L_ThePlus_Social_Icon extends Widget_Base {
 
 					$uid_social = uniqid( 'social' ) . $network['_id'];
 
-					$social .= '<li id="' . esc_attr( $uid_social ) . '" class="elementor-repeater-item-' . esc_attr( $network['_id'] ) . ' ' . esc_attr( $styles ) . '  social-' . esc_attr( $icon ) . ' social-' . esc_attr( $id ) . ' ' . esc_attr( $continuous_animation ) . '" ' . $this->get_render_attribute_string( '_tooltip' ) . '>';
+					$social .= '<li id="' . esc_attr( $uid_social ) . '" class="elementor-repeater-item-' . esc_attr( $network['_id'] ) . ' ' . esc_attr( $styles ) . ' social-' . esc_attr( $icon ) . ' social-' . esc_attr( $id ) . ' ' . esc_attr( $continuous_animation ) . '" ' . $this->get_render_attribute_string( '_tooltip' ) . '>';
 
-						$social .= '<div class="social-loop-inner ">';
-
-							$social .= '<a ' . $link_atts_url . ' ' . esc_attr( $link_atts_title ) . ' ' . esc_attr( $link_atts_target ) . '>' . $icon_html . $social_text . $hover_style . '</a>';
+						$social .= '<div class="social-loop-inner ' . esc_attr( $animated_columns ) . '">';
+							
+							$social .= '<a ' . $link_atts_url . ' ' . esc_attr( $link_atts_title ) . ' ' . esc_attr( $link_atts_target ) . '>' . $icon_html  . $social_text . $hover_style . '</a>';
 
 						$social .= '</div>';
 

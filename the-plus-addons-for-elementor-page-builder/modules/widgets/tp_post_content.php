@@ -317,7 +317,7 @@ class ThePlus_Post_Content extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend using this widget in the Post Single Page Template to render the main content dynamically.',
+					'notice'      => esc_html__( 'We recommend using this widget in the Post Single Page Template to render the main content dynamically.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
 					'page_type'   => 'tp_singular_page',
 				)

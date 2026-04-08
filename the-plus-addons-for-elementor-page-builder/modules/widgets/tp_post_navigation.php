@@ -242,7 +242,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'label'       => esc_html__( 'Previous Post', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
-				'default'     => 'Previous Post',
+				'default'     => esc_html__( 'Previous Post', 'tpebl' ),
 				'placeholder' => esc_html__( 'Previous Post', 'tpebl' ),
 				'label_block' => false,
 			)
@@ -253,7 +253,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'label'       => esc_html__( 'Next Post', 'tpebl' ),
 				'type'        => Controls_Manager::TEXT,
 				'ai'          => false,
-				'default'     => 'Next Post',
+				'default'     => esc_html__( 'Next Post', 'tpebl' ),
 				'placeholder' => esc_html__( 'Next Post', 'tpebl' ),
 				'label_block' => false,
 			)
@@ -298,7 +298,7 @@ class ThePlus_Post_Navigation extends Widget_Base {
 				'tpae_theme_builder',
 				array(
 					'type'        => 'tpae_theme_builder',
-					'notice'      => 'We recommend using this widget in the Post Single Page Template to allow users to move between posts.',
+					'notice'      => esc_html__( 'We recommend using this widget in the Post Single Page Template to allow users to move between posts.', 'tpebl' ),
 					'button_text' => esc_html__( 'Create Single Page', 'tpebl' ),
 					'page_type'   => 'tp_singular_page',
 				)

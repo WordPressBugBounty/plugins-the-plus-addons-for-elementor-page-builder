@@ -220,6 +220,13 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 				wp_die();
 			}
 
+			if ( ! current_user_can( 'manage_options' ) ) {
+				$response = $this->tpae_set_response( false, 'Insufficient permissions.', 'You do not have permission to perform this action.' );
+				wp_send_json( $response );
+				wp_die();
+			}
+
+
 			$type = isset( $_POST['type'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['type'] ) ) ) : false;
 
 			switch ( $type ) {

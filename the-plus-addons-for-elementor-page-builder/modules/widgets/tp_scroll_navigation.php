@@ -1442,9 +1442,10 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 				}
 
 				$tt_title = ! empty( $item['tooltip_menu_title'] ) ? $item['tooltip_menu_title'] : '';
+				$tt_align = ! empty( $item['scroll_navigation_tooltip_align'] ) ? $item['scroll_navigation_tooltip_align'] : '';
 
 				if ( ! empty( $tt_title || $icons ) ) {
-					$tooltip_title = '<span class="tooltiptext ' . esc_attr( $direction_class ) . ' ' . esc_attr( $tooltip_arrow ) . ' ' . $settings['scroll_navigation_tooltip_align'] . ' ' . esc_attr( $display_tooltip_style_class ) . '">' . $s_icon_img . ' ' . esc_html( $tt_title ) . '</span>';
+					$tooltip_title = '<span class="tooltiptext ' . esc_attr( $direction_class ) . ' ' . esc_attr( $tooltip_arrow ) . ' ' . esc_attr( $tt_align ) . ' ' . esc_attr( $display_tooltip_style_class ) . '">' . $s_icon_img . ' ' . esc_html( $tt_title ) . '</span>';
 				}
 
 				$scroll_navigation .= '<div class="theplus-scroll-navigation__dot">' . $tooltip_title . '</div>';
