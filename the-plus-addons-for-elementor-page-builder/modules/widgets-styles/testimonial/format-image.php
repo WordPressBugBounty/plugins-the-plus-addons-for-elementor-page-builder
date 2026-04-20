@@ -12,6 +12,11 @@ $tp_border_reduis = ! empty( $settings['featured_image_radius'] ) ? $settings['f
 
 $has_border_radius = ! empty( $tp_border_reduis['top'] ) || ! empty( $tp_border_reduis['right'] ) || ! empty( $tp_border_reduis['bottom'] ) || ! empty( $tp_border_reduis['left'] );
 
+// Check if a Global Dimensions preset is selected — if so, it has border-radius values.
+if ( ! $has_border_radius && ! empty( $tp_border_reduis['tp_global_preset'] ) ) {
+	$has_border_radius = true;
+}
+
 if ( 'tlrepeater' === $con_from ) {
 	$tsize   = '';
 	$feat_id = $testi_image_id;
@@ -49,14 +54,12 @@ if ( 'tlrepeater' === $con_from ) {
 		<?php
 	} else {
 		?>
-		<span class="thumb-wrap" style="
+		<span class="thumb-wrap tpae-mask-image" style="
 			display: inline-block;
 			-webkit-mask-image: url('<?php echo esc_url( L_THEPLUS_ASSETS_URL . 'svg/testimonial-mask.svg' ); ?>');
 			-webkit-mask-repeat: no-repeat;
 			mask-image: url('<?php echo esc_url( L_THEPLUS_ASSETS_URL . 'svg/testimonial-mask.svg' ); ?>');
 			mask-size: contain;
-			width: 75px;
-            height: 90px;
 		">
 			<?php echo $featured_image; ?>
 		</span>

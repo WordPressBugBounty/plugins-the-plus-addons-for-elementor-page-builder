@@ -126,6 +126,15 @@ class ThePlus_Post_Title extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -152,26 +161,19 @@ class ThePlus_Post_Title extends Widget_Base {
 		$this->add_control(
 			'posttype',
 			array(
-				'label'   => esc_html__( 'Types', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'singlepage',
-				'options' => array(
+				'label'       => esc_html__( 'Types', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'singlepage',
+				'options'     => array(
 					'singlepage'  => esc_html__( 'Single Page', 'tpebl' ),
 					'archivepage' => esc_html__( 'Archive Page', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'posttype_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose whether to show the title for a single post/page or for an archive page.', 'tpebl' ),
+						esc_html__( 'Choose whether to show the title for a single post/page or for an archive page.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_responsive_control(

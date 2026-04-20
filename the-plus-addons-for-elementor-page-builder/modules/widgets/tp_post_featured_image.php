@@ -123,6 +123,15 @@ class ThePlus_Featured_Image extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -148,56 +157,42 @@ class ThePlus_Featured_Image extends Widget_Base {
 		$this->add_control(
 			'pfi_type',
 			array(
-				'label'   => esc_html__( 'Type', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'pfi-default',
-				'options' => array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'pfi-default',
+				'options'     => array(
 					'pfi-default'    => esc_html__( 'Standard Image', 'tpebl' ),
 					'pfi-background' => esc_html__( 'As a Background', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'pfi_type_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose how you want to display the featured image, either as a normal image inside your layout or as a background behind your content.', 'tpebl' ),
+						esc_html__( 'Choose how you want to display the featured image, either as a normal image inside your layout or as a background behind your content.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'bg_in',
 			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Location', 'tpebl' ),
-				'default'   => 'tp-fibg-section',
-				'options'   => array(
+				'type'        => Controls_Manager::SELECT,
+				'label'       => esc_html__( 'Location', 'tpebl' ),
+				'default'     => 'tp-fibg-section',
+				'options'     => array(
 					'tp-fibg-section'       => esc_html__( 'Section', 'tpebl' ),
 					'tp-fibg-inner-section' => esc_html__( 'Inner Section', 'tpebl' ),
 					'tp-fibg-container'     => esc_html__( 'Container', 'tpebl' ),
 					'tp-fibg-column'        => esc_html__( 'Column', 'tpebl' ),
 				),
-				'condition' => array(
-					'pfi_type' => 'pfi-background',
-				),
-			)
-		);
-		$this->add_control(
-			'bg_in_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Select where the featured image should appear.', 'tpebl' ),
+						esc_html__( 'Select where the featured image should appear.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
+				'condition'   => array(
+					'pfi_type' => 'pfi-background',
+				),
 			)
 		);
 		$this->add_control(

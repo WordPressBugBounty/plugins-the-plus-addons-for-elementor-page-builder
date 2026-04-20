@@ -70,7 +70,7 @@ if ( 'metro' !== $layout ) {
 
 	if ( 'yes' === $tp_meta_overflow && 'yes' === $show_author_name ) {
 				echo '<span class="tpae-blog-author">';
-					echo $author_prefix . ' ';
+					echo esc_html( $author_prefix ) . ' ';
 					echo '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" class="fn">';
 						echo esc_html( get_the_author() );
 					echo '</a>';
@@ -96,7 +96,7 @@ if ( 'yes' === $show_date_time && 'yes' !== $tp_date_overflow ) {
 
 if ( 'yes' === $show_author_name && 'yes' !== $tp_meta_overflow ) {
 	echo '<span class="tpae-blog-author">';
-		echo $author_prefix . ' ';
+		echo esc_html( $author_prefix ) . ' ';
 		echo '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" class="fn">';
 			echo esc_html( get_the_author() );
 		echo '</a>';

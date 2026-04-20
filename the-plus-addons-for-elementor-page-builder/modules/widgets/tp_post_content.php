@@ -167,55 +167,38 @@ class ThePlus_Post_Content extends Widget_Base {
 		$this->add_control(
 			'posttype',
 			array(
-				'label'   => esc_html__( 'Post Types', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'singlepage',
-				'options' => array(
+				'label'       => esc_html__( 'Post Types', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'singlepage',
+				'options'     => array(
 					'singlepage'  => esc_html__( 'Single Page', 'tpebl' ),
 					'archivepage' => esc_html__( 'Archive Page', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'posttype_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Select Single Page to show the same content style across all single post pages, or choose Archive Page to display uniform content for all posts in listings.', 'tpebl' ),
+						esc_html__( 'Select Single Page to show the same content style across all single post pages, or choose Archive Page to display uniform content for all posts in listings.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'postContentType',
 			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Content Type', 'tpebl' ),
-				'default'   => 'default',
-				'options'   => array(
+				'type'        => Controls_Manager::SELECT,
+				'label'       => esc_html__( 'Content Type', 'tpebl' ),
+				'default'     => 'default',
+				'options'     => array(
 					'default' => esc_html__( 'Full Content', 'tpebl' ),
 					'excerpt' => esc_html__( 'Excerpt', 'tpebl' ),
 				),
-				'condition' => array(
-					'posttype' => 'singlepage',
-				),
-			)
-		);
-		$this->add_control(
-			'postContentType_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose whether to show the full post content or only a short excerpt.', 'tpebl' ),
+						esc_html__( 'Choose whether to show the full post content or only a short excerpt.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'posttype' => 'singlepage',
 				),
 			)
@@ -223,30 +206,20 @@ class ThePlus_Post_Content extends Widget_Base {
 		$this->add_control(
 			'postContentEditorType',
 			array(
-				'type'      => Controls_Manager::SELECT,
-				'label'     => esc_html__( 'Content', 'tpebl' ),
-				'default'   => 'default',
-				'options'   => array(
+				'type'        => Controls_Manager::SELECT,
+				'label'       => esc_html__( 'Content', 'tpebl' ),
+				'default'     => 'default',
+				'options'     => array(
 					'default'   => esc_html__( 'Elementor', 'tpebl' ),
 					'wordpress' => esc_html__( 'Wordpress', 'tpebl' ),
 				),
-				'condition' => array(
-					'posttype' => 'singlepage',
-				),
-			)
-		);
-		$this->add_control(
-			'postContentEditorType_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose whether to display post content created using Elementor or the default WordPress editor.', 'tpebl' ),
+						esc_html__( 'Choose whether to display post content created using Elementor or the default WordPress editor.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'posttype' => 'singlepage',
 				),
 			)

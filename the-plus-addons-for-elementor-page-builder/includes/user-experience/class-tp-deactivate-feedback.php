@@ -227,7 +227,7 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 							<input type="radio" name="issue_type" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $reason['label'] ); ?>" hidden />
 
 							<label for="<?php echo esc_attr( $id ); ?>" class="tp-feedback-option">
-								<span class="tp-feedback-icon"><?php echo $reason['svg']; ?></span>
+								<span class="tp-feedback-icon"><?php echo wp_kses( $reason['svg'], array( 'svg' => array( 'xmlns' => true, 'fill' => true, 'viewbox' => true, 'width' => true, 'height' => true ), 'g' => array( 'stroke' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'stroke-width' => true, 'clip-path' => true, 'fill' => true ), 'path' => array( 'fill' => true, 'd' => true, 'fill-rule' => true, 'clip-rule' => true, 'stroke' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'stroke-width' => true ), 'defs' => array(), 'clippath' => array( 'id' => true ) ) ); ?></span>
 								<span class="tp-feedback-label"><?php echo esc_html( $reason['label'] ); ?></span>
 							</label>
 						<?php } ?>
@@ -293,6 +293,12 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 				'reason_key'         => $issue_type,
 				'reason_tp_other'    => $issue_text,
 			);
+
+			// $tp_data_allow = get_option( 'tpae_data_allow' );
+
+			// if ( $tp_data_allow ) {
+			// 	$api_params['site_url'] = get_option( 'siteurl' );
+			// }
 
 			if( 'on' === $collect_email ) {
 				$current_user = wp_get_current_user();

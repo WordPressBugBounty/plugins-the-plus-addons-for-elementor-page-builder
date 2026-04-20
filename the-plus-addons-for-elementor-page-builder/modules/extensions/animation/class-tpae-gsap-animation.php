@@ -152,6 +152,8 @@ if ( ! class_exists( 'Tpae_Gsap_animation' ) ) {
 				'tp_ease'           => $settings['tp_ease'] ?? 'power2.out',
 				'tp_fade_offset'    => $settings['tp_fade_offset'] ?? '',
 				'tp_stagger'        => $settings['tp_stagger'] ?? '',
+				'tp_stagger_target' => ! empty( $settings['tp_stagger_target'] ) ? $settings['tp_stagger_target'] : 'container',
+				'tp_stagger_depth'  => ! empty( $settings['tp_stagger_depth'] ) ? $settings['tp_stagger_depth'] : 'child',
 				'tp_repeat'         => $settings['tp_repeat'] ?? '',
 				'tp_ani_type'         => $settings['tp_ani_type'] ?? '',
 				// 'tp_yoyo'           => $settings['tp_yoyo'] ?? '',

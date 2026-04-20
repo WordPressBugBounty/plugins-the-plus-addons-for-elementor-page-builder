@@ -4091,38 +4091,7 @@ class L_ThePlus_Pricing_Table extends Widget_Base {
 			$pricing_output .= '<div class="pricing-overlay-color"></div>';
 		}
 
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-
-		$out_duration    = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$animation_delay = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$out_effect   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay    = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$output = '<div id="plus-pricing-table" class="plus-pricing-table pricing-' . esc_attr( $pricing_style ) . ' ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 

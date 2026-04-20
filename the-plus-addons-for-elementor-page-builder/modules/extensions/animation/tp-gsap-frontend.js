@@ -4,6 +4,17 @@
 	if (typeof gsap === 'undefined') return;
 	if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
 
+	function tpGetStaggerTargets(tp_wrap, tp_stagger_target, tp_stagger_depth) {
+		const tp_target = tp_stagger_target || 'container';
+		const tp_depth = tp_stagger_depth || 'child';
+		const tp_selector = tp_target === 'container' ? '.e-con' : '.elementor-widget';
+
+		if (tp_depth === 'multi_child') {
+			return tp_wrap.querySelectorAll(tp_selector);
+		}
+
+		return tp_wrap.querySelectorAll(':scope > ' + tp_selector + ', :scope > .e-con-inner > ' + tp_selector);
+	}
 
 	function tpPlayGSAPAnimation(tp_wrap, tp_gsap_options) {
 
@@ -20,15 +31,13 @@
 		const tp_stagger_switch = tp_gsap_options.tp_stagger || '';
 		const tp_repeat = tp_gsap_options.tp_repeat || '';
 		const tp_ani_type = tp_gsap_options.tp_ani_type || '';
+		const tp_stagger_target = tp_gsap_options?.tp_stagger_target || 'container';
+		const tp_stagger_depth = tp_gsap_options?.tp_stagger_depth || 'child';
 
 		let tp_targets = tp_wrap;
 
 		if (tp_stagger_switch === 'yes') {
-			tp_targets = tp_wrap.querySelectorAll('.elementor-widget');
-			tp_targets.forEach(function (widget) {
-				widget.classList.add('tp-standard-gsap');
-			});
-			tp_targets = tp_wrap.querySelectorAll('.tp-standard-gsap');
+			tp_targets = tpGetStaggerTargets(tp_wrap, tp_stagger_target, tp_stagger_depth);
 		}
 
 		let fromVars = {};
@@ -78,7 +87,7 @@
 			toVars.scale = 1
 		}
 
-		if (tp_stagger_switch === 'yes') {
+		if (tp_stagger_switch === 'yes' && tp_targets.length > 1) {
 			toVars.stagger = tp_delay;
 		}
 

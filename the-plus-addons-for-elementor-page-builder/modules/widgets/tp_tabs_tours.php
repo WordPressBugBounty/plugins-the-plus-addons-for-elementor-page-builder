@@ -231,22 +231,12 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 				),
 				'default'     => 'top',
 				'label_block' => false,
-				'condition'   => array(
-					'tabs_type' => array( 'horizontal' ),
-				),
-			)
-		);
-		$this->add_control(
-			'tabs_align_hor_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose whether the tabs appear above or below your content. This gives you control over how users interact with the section.', 'tpebl' ),
+						esc_html__( 'Choose whether the tabs appear above or below your content. This gives you control over how users interact with the section.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'tabs_type' => array( 'horizontal' ),
 				),
@@ -310,52 +300,38 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		$repeater->add_control(
 			'tab_title',
 			array(
-				'label'      => esc_html__( 'Title', 'tpebl' ),
-				'type'       => Controls_Manager::TEXT,
-				'ai'         => false,
-				'default'    => __( 'Tab Title', 'tpebl' ),
-				'dynamic'    => array(
+				'label'       => esc_html__( 'Title', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => __( 'Tab Title', 'tpebl' ),
+				'dynamic'     => array(
 					'active' => true,
 				),
-				'show_label' => true,
-			)
-		);
-		$repeater->add_control(
-			'tab_title_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'show_label'  => true,
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Add the tab title here, this is what users will click to switch between different tabs.', 'tpebl' ),
+						esc_html__( 'Add the tab title here, this is what users will click to switch between different tabs.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$repeater->add_control(
 			'content_source',
 			array(
-				'label'   => esc_html__( 'Type', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'content',
-				'options' => array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'content',
+				'options'     => array(
 					'content'       => esc_html__( 'Content', 'tpebl' ),
 					'page_template' => esc_html__( 'Page Template', 'tpebl' ),
 				),
-			)
-		);
-		$repeater->add_control(
-			'content_source_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'If you want to write text directly inside the tab, keep the type as Content. To display other widgets or designs, create an Elementor template, design it as you like, then select Page Template and choose that template here.', 'tpebl' ),
+						esc_html__( 'If you want to write text directly inside the tab, keep the type as Content. To display other widgets or designs, create an Elementor template, design it as you like, then select Page Template and choose that template here.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$repeater->add_control(
@@ -2037,25 +2013,19 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		$this->add_control(
 			'tab_nav_responsive',
 			array(
-				'label'   => esc_html__( 'Tab Navigation Responsive', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '',
-				'options' => array(
+				'label'       => esc_html__( 'Tab Navigation Responsive', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => '',
+				'options'     => array(
 					''              => esc_html__( 'None', 'tpebl' ),
 					'nav_full'      => esc_html__( 'Full Width (PRO) ', 'tpebl' ),
 					'nav_one'       => esc_html__( 'One By One (PRO)', 'tpebl' ),
 					'tab_accordion' => esc_html__( 'Force Accordion', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'tab_nav_responsive_Note',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'These options are for making your tabs look different in small devices. You can select none, If you want to keep your settings.', 'tpebl' ),
+						esc_html__( 'These options are for making your tabs look different in small devices. You can select none, If you want to keep your settings.', 'tpebl' )
 					)
 				),
 			)
@@ -2148,33 +2118,7 @@ class L_ThePlus_Tabs_Tours extends Widget_Base {
 		$nav_vertical_align = $settings['nav_vertical_align'];
 		$uid                = uniqid( 'tabs' );
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration      = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_effect        = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay         = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration      = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed         = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$tab_nav      = '<div class="theplus-tabs-nav-wrapper elementor-tabs-wrapper ' . esc_attr( $nav_align ) . ' ' . esc_attr( $nav_vertical_align ) . ' ">';
 			$tab_nav .= '<ul class="plus-tabs-nav">';

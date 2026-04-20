@@ -188,7 +188,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'main_style' => 'progressbar',
 				),
 			)
@@ -206,7 +206,7 @@ class ThePlus_Progress_Bar extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'main_style' => 'pie_chart',
 				),
 			)
@@ -308,39 +308,29 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'value_width',
 			array(
-				'label'      => esc_html__( 'Dynamic Value (0-100)', 'tpebl' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( '%' ),
-				'range'      => array(
+				'label'       => esc_html__( 'Dynamic Value (0-100)', 'tpebl' ),
+				'type'        => Controls_Manager::SLIDER,
+				'size_units'  => array( '%' ),
+				'range'       => array(
 					'%' => array(
 						'min'  => 0,
 						'max'  => 100,
 						'step' => 1,
 					),
 				),
-				'condition'  => array(
-					'main_style' => array( 'progressbar' ),
-				),
-				'default'    => array(
+				'default'     => array(
 					'unit' => '%',
 					'size' => 59,
 				),
-				'separator'  => 'before',
-			)
-		);
-		$this->add_control(
-			'value_width_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'separator'   => 'before',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Set the progress value percentage that will be visually filled in the bar.', 'tpebl' ),
+						esc_html__( 'Set the progress value percentage that will be visually filled in the bar.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition'  => array(
-					'main_style' => 'progressbar' ,
+				'condition'   => array(
+					'main_style' => array( 'progressbar' ),
 				),
 			)
 		);
@@ -376,27 +366,20 @@ class ThePlus_Progress_Bar extends Widget_Base {
 		$this->add_control(
 			'number',
 			array(
-				'label'     => esc_html__( 'Number', 'tpebl' ),
-				'type'      => Controls_Manager::NUMBER,
-				'default'   => 59,
-				'min'       => 0,
-				'step'      => 1,
-				'separator' => 'before',
-				'dynamic'   => array( 'active' => false ),
-				'ai'        => array( 'active' => false ),
-			)
-		);
-		$this->add_control(
-			'number_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Number', 'tpebl' ),
+				'type'        => Controls_Manager::NUMBER,
+				'default'     => 59,
+				'min'         => 0,
+				'step'        => 1,
+				'separator'   => 'before',
+				'dynamic'     => array( 'active' => false ),
+				'ai'          => array( 'active' => false ),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enter the numeric value you want to display.', 'tpebl' ),
+						esc_html__( 'Enter the numeric value you want to display.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(

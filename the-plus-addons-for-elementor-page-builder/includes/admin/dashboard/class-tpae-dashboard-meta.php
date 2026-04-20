@@ -435,10 +435,6 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 			}
 		}
 
-		public function tpae_render_settings_page() {
-			echo '<div class="wrap"><h1>' . esc_html__( 'Plugin Settings', 'tpebl' ) . '</h1></div>';
-		}
-
 		/**
 		 * Open Link in New Tab WordPress Menu
 		 *

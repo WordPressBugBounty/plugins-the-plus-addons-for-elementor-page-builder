@@ -328,50 +328,36 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slide_overflow_hidden',
 			array(
-				'label'     => esc_html__( 'Overflow Hidden', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'On', 'tpebl' ),
-				'label_off' => esc_html__( 'Off', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'overflow_hidden_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Overflow Hidden', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'On', 'tpebl' ),
+				'label_off'   => esc_html__( 'Off', 'tpebl' ),
+				'default'     => 'no',
+				'separator'   => 'before',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enable this if any part of your content goes outside the carousel section or overlaps with other elements. It keeps your design neat and visually contained.', 'tpebl' ),
+						esc_html__( 'Enable this if any part of your content goes outside the carousel section or overlaps with other elements. It keeps your design neat and visually contained.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'carousel_unique_id',
 			array(
-				'label'     => esc_html__( 'Unique Carousel ID', 'tpebl' ),
-				'type'      => Controls_Manager::TEXT,
-				'default'   => '',
-				'ai'        => false,
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'unique_id_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Unique Carousel ID', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
+				'ai'          => false,
+				'separator'   => 'before',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
 						esc_html__( 'Add a unique ID here if you want to connect this carousel with the Carousel Remote widget for synced navigation.', 'tpebl' ),
 						esc_url( $this->tp_doc . 'connect-infobox-with-carousel-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'Learn More', 'tpebl' ),
+						esc_html__( 'Learn More', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();
@@ -541,26 +527,19 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'steps_slide',
 			array(
-				'label'   => esc_html__( 'Next Previous', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '1',
-				'options' => array(
+				'label'       => esc_html__( 'Next Previous', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => '1',
+				'options'     => array(
 					'1' => esc_html__( 'One Column', 'tpebl' ),
 					'2' => esc_html__( 'All Visible Columns', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'steps_slide_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose how many columns move per navigation click.', 'tpebl' ),
+						esc_html__( 'Choose how many columns move per navigation click.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_responsive_control(
@@ -585,50 +564,36 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slider_draggable',
 			array(
-				'label'     => esc_html__( 'Draggable', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'slider_draggable_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Draggable', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'yes',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Allow users to drag slides manually.', 'tpebl' ),
+						esc_html__( 'Allow users to drag slides manually.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'multi_drag',
 			array(
-				'label'     => esc_html__( 'Multi Drag', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'condition' => array(
-					'slider_draggable' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'multi_drag_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Multi Drag', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Let users drag multiple slides at once.', 'tpebl' ),
+						esc_html__( 'Let users drag multiple slides at once.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
+				'condition'   => array(
+					'slider_draggable' => 'yes',
+				),
 			)
 		);
 		$this->add_control(
@@ -700,24 +665,17 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		$this->add_control(
 			'slider_adaptive_height',
 			array(
-				'label'     => esc_html__( 'Adaptive Height', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-			)
-		);
-		$this->add_control(
-			'adaptive_height_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Adaptive Height', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Adjust slide height automatically based on content.', 'tpebl' ),
+						esc_html__( 'Adjust slide height automatically based on content.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -1284,7 +1242,7 @@ class L_ThePlus_Carousel_Anything extends Widget_Base {
 		}
 		?>
  
-		<div id="<?php echo esc_attr( $uid ); ?>" class="theplus-carousel-anything-wrapper <?php echo esc_attr( $isotope ); ?> <?php echo esc_attr( $arrow_class ); ?> <?php echo esc_attr( $data_carousel ); ?> <?php echo esc_attr( $uid ); ?> "data-id="<?php echo esc_attr( $uid ); ?>" data-connection="<?php echo esc_attr( $tab_id ); ?>" <?php echo $carousel_slider; ?> dir=<?php echo esc_attr( $carousel_direction ); ?> <?php echo $data_slider; ?> <?php echo $carousel_bg_conn; ?>>
+		<div id="<?php echo esc_attr( $uid ); ?>" class="theplus-carousel-anything-wrapper <?php echo esc_attr( $isotope ); ?> <?php echo esc_attr( $arrow_class ); ?> <?php echo esc_attr( $data_carousel ); ?> <?php echo esc_attr( $uid ); ?> "data-id="<?php echo esc_attr( $uid ); ?>" data-connection="<?php echo esc_attr( $tab_id ); ?>" <?php echo wp_kses_post( $carousel_slider ); ?> dir=<?php echo esc_attr( $carousel_direction ); ?> <?php echo wp_kses_post( $data_slider ); ?> <?php echo wp_kses_post( $carousel_bg_conn ); ?>>
 			<div class="plus-carousel-inner post-inner-loop">
 			<?php
 			if ( ! empty( $settings['carousel_content'] ) ) {

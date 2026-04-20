@@ -406,6 +406,74 @@ $widget->add_control(
 	)
 );
 $widget->add_control(
+	'tp_stagger_target',
+	array(
+		'label' => esc_html__('Stagger Items', 'tpebl'),
+		'type' => Controls_Manager::SELECT,
+		'default' => 'container',
+		'options' => array(
+			'widget' => esc_html__('Widgets', 'tpebl'),
+			'container' => esc_html__('Containers', 'tpebl'),
+		),
+		'condition' => array(
+			'plus_gsap_animation_type' => array('tp_basic'),
+			'tp_stagger' => 'yes',
+		),
+		'frontend_available' => true,
+	)
+);
+$widget->add_control(
+	'tp_stagger_target_label',
+	array(
+		'type' => Controls_Manager::RAW_HTML,
+		'raw' => wp_kses_post(
+			sprintf(
+				'<p class="tp-controller-label-text"> %s </p>',
+				esc_html__('Choose whether the stagger animation should run one by one on widgets or on inner containers inside this element.', 'tpebl')
+			)
+		),
+		'condition' => array(
+			'plus_gsap_animation_type' => array('tp_basic'),
+			'tp_stagger' => 'yes',
+		),
+		'label_block' => true,
+	)
+);
+$widget->add_control(
+	'tp_stagger_depth',
+	array(
+		'label' => esc_html__('Stagger Depth Level', 'tpebl'),
+		'type' => Controls_Manager::SELECT,
+		'default' => 'child',
+		'options' => array(
+			'child' => esc_html__('Child', 'tpebl'),
+			'multi_child' => esc_html__('Multi Child', 'tpebl'),
+		),
+		'condition' => array(
+			'plus_gsap_animation_type' => array('tp_basic'),
+			'tp_stagger' => 'yes',
+		),
+		'frontend_available' => true,
+	)
+);
+$widget->add_control(
+	'tp_stagger_depth_label',
+	array(
+		'type' => Controls_Manager::RAW_HTML,
+		'raw' => wp_kses_post(
+			sprintf(
+				'<p class="tp-controller-label-text"> %s </p>',
+				esc_html__('Choose Child to stagger only direct child items, or Multi Child to include matching items inside nested containers as well.', 'tpebl')
+			)
+		),
+		'condition' => array(
+			'plus_gsap_animation_type' => array('tp_basic'),
+			'tp_stagger' => 'yes',
+		),
+		'label_block' => true,
+	)
+);
+$widget->add_control(
 	'tp_repeat',
 	array(
 		'label' => esc_html__('Repeat', 'tpebl'),

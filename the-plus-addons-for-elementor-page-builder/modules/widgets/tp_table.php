@@ -2940,7 +2940,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 		$showEntries = ! empty( $settings['show_entries'] ) ? $settings['show_entries'] : '';
 
 		$tableSelection  = ! empty( $settings['table_selection'] ) ? $settings['table_selection'] : '';
-		$searchableLabel = ! empty( $settings['searchable_label'] ) ? tp_senitize_js_input( $settings['searchable_label'] ) : '';
+		$searchableLabel = ! empty( $settings['searchable_label'] ) ? $settings['searchable_label'] : '';
 
 		$cell_align_head_desktop = ! empty( $settings['cell_align_head_normal'] ) ? $settings['cell_align_head_normal'] : '';
 		$cell_align_head_tablet  = ! empty( $settings['cell_align_head_normal_tablet'] ) ? $settings['cell_align_head_normal_tablet'] : '';
@@ -3213,11 +3213,13 @@ class L_ThePlus_Data_Table extends Widget_Base {
 
 										/*button attributes start*/
 										$button_custom_attributes = $row['button_custom_attributes'];
-										$custom_attributes        = tp_senitize_js_input( $row['custom_attributes'] );
+										$raw_custom_attributes    = ! empty( $row['custom_attributes'] ) ? $row['custom_attributes'] : '';
 
-										$cst_att = '';
-										if ( ( ! empty( $button_custom_attributes ) && 'yes' === $button_custom_attributes ) && ! empty( $custom_attributes ) ) {
-											$cst_att = $custom_attributes;
+										if ( ! empty( $button_custom_attributes ) && 'yes' === $button_custom_attributes && ! empty( $raw_custom_attributes ) ) {
+											$safe_attrs = $this->sanitize_custom_attributes( $raw_custom_attributes );
+											foreach ( $safe_attrs as $attr_key => $attr_val ) {
+												$this->add_render_attribute( $link_key, $attr_key, $attr_val );
+											}
 										}
 										/*button attributes end*/
 
@@ -3228,7 +3230,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 										$data_class  .= ' button-' . esc_attr( $button_style ) . ' ';
 										$button      .= '<div class="pt_plus_button ' . esc_attr( $data_class ) . '">';
 
-											$button .= '<a ' . $this->get_render_attribute_string( $link_key ) . ' ' . $cst_att . ' >';
+											$button .= '<a ' . $this->get_render_attribute_string( $link_key ) . '>';
 											$button .= esc_html( $button_text );
 											$button .= '</a>';
 
@@ -3330,7 +3332,7 @@ class L_ThePlus_Data_Table extends Widget_Base {
 														}
 
 														if ( isset( $header_text[ $cell_counter_c ]['heading_text'] ) && $header_text[ $cell_counter_c ]['heading_text'] ) {
-															echo '<span class="mob-heading-text">' . $header_text[ $cell_counter_c ]['heading_text'] . '</span>';
+															echo '<span class="mob-heading-text">' . esc_html( $header_text[ $cell_counter_c ]['heading_text'] ) . '</span>';
 														}
 
 														if ( 'icon' === $header_text[ $cell_counter_c ]['icon_image'] ) {
@@ -3504,28 +3506,39 @@ class L_ThePlus_Data_Table extends Widget_Base {
 	}
 
 	/**
-	 * Function to It is use for call api
+	 * Parse user-defined "key|value" attribute lines into a safe associative array.
 	 *
-	 * If yes returns Array Data
+	 * Blocks dangerous attribute names (event handlers, sensitive attrs) and
+	 * sanitizes keys via sanitize_key(). Values are left raw here because
+	 * Elementor's add_render_attribute escapes them via esc_attr().
 	 *
-	 * @since 1.4.0
-	 * @version 5.4.2
+	 * @since 6.4.13
+	 *
+	 * @param string $raw_attributes Newline-separated "key|value" pairs.
+	 * @return array<string, string> Sanitized attribute key => value pairs.
 	 */
-	protected function tp_table_api( $a_p_i ) {
-		$settings = $this->get_settings_for_display();
-		$final    = array();
+	private function sanitize_custom_attributes( $raw_attributes ) {
+		$blocked_attrs = array( 'id', 'class', 'href', 'src', 'action', 'formaction', 'srcdoc', 'style', 'xlink:href' );
+		$attr_lines    = explode( "\n", $raw_attributes );
+		$safe_attrs    = array();
 
-		$u_r_l      = wp_remote_get( $a_p_i );
-		$statuscode = wp_remote_retrieve_response_code( $u_r_l );
-		$getdataone = wp_remote_retrieve_body( $u_r_l );
-		$statuscode = array( 'HTTP_CODE' => $statuscode );
+		foreach ( $attr_lines as $attr_line ) {
+			$attr_line = trim( $attr_line );
+			if ( empty( $attr_line ) ) {
+				continue;
+			}
 
-		$response = json_decode( $getdataone, true );
-		if ( is_array( $statuscode ) && is_array( $response ) ) {
-			$final = array_merge( $statuscode, $response );
+			$attr_parts = explode( '|', $attr_line, 2 );
+			$attr_key   = sanitize_key( trim( $attr_parts[0] ) );
+
+			if ( empty( $attr_key ) || preg_match( '/^on/i', $attr_key ) || in_array( $attr_key, $blocked_attrs, true ) ) {
+				continue;
+			}
+
+			$safe_attrs[ $attr_key ] = isset( $attr_parts[1] ) ? trim( $attr_parts[1] ) : '';
 		}
 
-		return $final;
+		return $safe_attrs;
 	}
 
 	/**
@@ -3535,14 +3548,4 @@ class L_ThePlus_Data_Table extends Widget_Base {
 	 * @version 5.4.2
 	 */
 	protected function content_template() {}
-
-	/**
-	 * Prevent JS senitizer
-	 * */
-	public function tpae_senitize_js_input( $input ) {
-
-		$input = preg_replace( '/(on|hr)\w+=/', '', $input );
-
-		return $input;
-	}
 }

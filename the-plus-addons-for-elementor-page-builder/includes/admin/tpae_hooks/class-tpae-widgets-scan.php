@@ -215,7 +215,7 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 					}
 				}
 
-				if ( $check_key == false ) {
+				if ( false === $check_key ) {
 					unset( $this->add_data[ $key ] );
 				}
 

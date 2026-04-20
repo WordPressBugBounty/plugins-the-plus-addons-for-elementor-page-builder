@@ -154,31 +154,21 @@ class L_ThePlus_Countdown extends Widget_Base {
 		$this->add_control(
 			'CDType',
 			array(
-				'label'   => esc_html__( 'Countdown Setup', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'normal',
-				'options' => array(
+				'label'       => esc_html__( 'Countdown Setup', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'normal',
+				'options'     => array(
 					'normal'   => esc_html__( 'Normal Countdown', 'tpebl' ),
 					'scarcity' => esc_html__( 'Scarcity Countdown (Evergreen) (Pro)', 'tpebl' ),
 					'numbers'  => esc_html__( 'Fake Numbers Counter (Pro)', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'cdtype_normal_label',
-			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
 						esc_html__( 'Use this when you want to run a countdown to a fixed date and time, like an event launch, sale end, or webinar start. The timer ends for everyone at the same time.', 'tpebl' ),
 						esc_url( $this->tp_doc . 'create-a-sticky-countdown-timer-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'Learn More', 'tpebl' ),
+						esc_html__( 'Learn More', 'tpebl' )
 					)
-				),
-				'label_block' => true,
-				'condition'   => array(
-					'CDType' => 'normal',
 				),
 			)
 		);
@@ -1897,37 +1887,7 @@ class L_ThePlus_Countdown extends Widget_Base {
 			$data_attr .= ' data-minutes="' . esc_attr( $text_minutes ) . '"';
 			$data_attr .= ' data-seconds="' . esc_attr( $text_seconds ) . '"';
 
-			$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-			$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-
-			$ani_duration     = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-			$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-			$out_effect       = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-			$out_delay        = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-			$out_duration     = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-			$out_speed        = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+			include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$inline_style = ( ! empty( $settings['inline_style'] ) && 'yes' === $settings['inline_style'] ) ? 'count-inline-style' : '';
 

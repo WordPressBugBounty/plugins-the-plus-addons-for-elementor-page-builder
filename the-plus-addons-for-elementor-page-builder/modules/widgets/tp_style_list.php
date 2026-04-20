@@ -1911,46 +1911,10 @@ class L_ThePlus_Style_List extends Widget_Base {
 			$hover_inverse_id      = ( 'global' === $hover_effect_area && ! empty( $glb_item ) ) ? 'hover-' . esc_attr( $glb_item ) : '';
 		}
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : 'no-animation';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$animation_stagger = ! empty( $settings['animation_stagger']['size'] ) ? $settings['animation_stagger']['size'] : 150;
-		$animated_columns  = '';
+		$Plus_Listing_block = 'Plus_Listing_block';
+		$animated_columns   = '';
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			$ani_column_list = ! empty( $settings['animated_column_list'] ) ? $settings['animated_column_list'] : '';
-
-			if ( 'stagger' === $ani_column_list ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="stagger"';
-				$animation_attr  .= ' data-animate-stagger="' . esc_attr( $animation_stagger ) . '"';
-			}
-			$ami_dura = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-			if ( 'yes' === $ami_dura ) {
-				$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-				$animation_attr  .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-			$ani_oeffect   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : 'no-animation';
-			$ani_out_delay = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-
-			if ( 'no-animation' !== $ani_oeffect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $ani_oeffect ) . '" data-animate-out-delay="' . esc_attr( $ani_out_delay ) . '"';
-
-				$ani_oduration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-
-				if ( 'yes' === $ani_oduration ) {
-					$duration_ospeed = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $duration_ospeed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$hover_bgstyle = ! empty( $settings['hover_background_style'] ) ? $settings['hover_background_style'] : '';
 		if ( 'yes' === $hover_bgstyle ) {
@@ -2012,7 +1976,7 @@ class L_ThePlus_Style_List extends Widget_Base {
 
 		?>
 
-		<div class="plus-stylist-list-wrapper <?php echo esc_attr( $animated_class ); ?> <?php echo esc_attr( $hover_inverse_effect ); ?> <?php echo esc_attr( $hover_inverse_id ); ?> <?php // echo esc_attr($layout_class); ?>" <?php echo $animation_attr; ?> <?php echo $hover_inverse_attr_id; ?> data-layout="<?php echo esc_attr( $layout_attr ); ?>" >
+		<div class="plus-stylist-list-wrapper <?php echo esc_attr( $animated_class ); ?> <?php echo esc_attr( $hover_inverse_effect ); ?> <?php echo esc_attr( $hover_inverse_id ); ?> <?php // echo esc_attr($layout_class); ?>" <?php echo wp_kses_post( $animation_attr ); ?> <?php echo wp_kses_post( $hover_inverse_attr_id ); ?> data-layout="<?php echo esc_attr( $layout_attr ); ?>" >
 			
 		<ul class="plus-icon-list-items <?php echo esc_attr( $vertical_center ); ?>">
 			<?php

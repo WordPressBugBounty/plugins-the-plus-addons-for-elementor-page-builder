@@ -85,6 +85,15 @@ class ThePlus_Icon extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Disable default inner wrapper.
 	 *
 	 * @since 6.3.11

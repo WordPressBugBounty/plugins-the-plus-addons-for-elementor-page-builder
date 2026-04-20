@@ -241,26 +241,19 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$repeater->add_control(
 			'content_source',
 			array(
-				'label'   => esc_html__( 'Type', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'content',
-				'options' => array(
+				'label'       => esc_html__( 'Type', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'content',
+				'options'     => array(
 					'content'       => esc_html__( 'Content', 'tpebl' ),
 					'page_template' => esc_html__( 'Page Template', 'tpebl' ),
 				),
-			)
-		);
-		$repeater->add_control(
-			'content_source_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'If you want to write text directly inside the tab, keep the type as Content. To display other widgets or designs, create an Elementor template, design it as you like, then select Page Template and choose that template here.', 'tpebl' ),
+						esc_html__( 'If you want to write text directly inside the tab, keep the type as Content. To display other widgets or designs, create an Elementor template, design it as you like, then select Page Template and choose that template here.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$repeater->add_control(
@@ -792,7 +785,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 				),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '1',
-				'options' => $this->L_theplus_get_numbers(),
+				'options' => $this->l_theplus_get_numbers(),
 			)
 		);
 		$this->add_control(
@@ -1736,46 +1729,15 @@ class L_ThePlus_Accordion extends Widget_Base {
 		$id_int    = substr( $this->get_id_int(), 0, 3 );
 		$uid       = uniqid( 'accordion' );
 
-		$ani_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$ani_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$out_ani     = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$oani_delay  = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-
-		$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-
-		$oani_duration  = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$duratiom_speed = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-		$ani_duration   = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$title_tag    = ! empty( $settings['title_html_tag'] ) ? $settings['title_html_tag'] : 'div';
 		$display_icon = ! empty( $settings['display_icon'] ) ? $settings['display_icon'] : '';
 		$icon_style   = ! empty( $settings['icon_style'] ) ? $settings['icon_style'] : '';
 		$icon_allig   = ! empty( $settings['icon_align'] ) ? $settings['icon_align'] : '';
 
-		if ( 'no-animation' === $ani_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $ani_effects ) . '" data-animate-delay="' . esc_attr( $ani_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_ani ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_ani ) . '" data-animate-out-delay="' . esc_attr( $oani_delay ) . '"';
-
-				if ( 'yes' === $oani_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $duratiom_speed ) . '"';
-				}
-			}
-		}
-
 		?>
-		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo $animation_attr; ?>  role="tablist">
+		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo wp_kses_post( $animation_attr ); ?>  role="tablist">
 			<?php
 
 			$acc_tabs = ! empty( $settings['tabs'] ) ? $settings['tabs'] : [];
@@ -1786,9 +1748,9 @@ class L_ThePlus_Accordion extends Widget_Base {
 
 				$tab_count = $index + 1;
 
-				if ( $settings['active_accordion'] == $tab_count || 'all-open' === $settings['active_accordion'] ) {
+				if ( (string) $settings['active_accordion'] === (string) $tab_count || 'all-open' === $settings['active_accordion'] ) {
 					$active_default = 'active-default';
-				} elseif ( $settings['active_accordion'] == 0 ) {
+				} elseif ( '0' === (string) $settings['active_accordion'] ) {
 					$active_default = '0';
 				} else {
 					$active_default = 'no';
@@ -1917,7 +1879,7 @@ class L_ThePlus_Accordion extends Widget_Base {
 									$get_template_name = '';
 									if ( ! empty( $templates ) ) {
 										foreach ( $templates as $value ) {
-											if ( $value['template_id'] == $content_template ) {
+											if ( (string) $value['template_id'] === (string) $content_template ) {
 												$get_template_name = $value['title'];
 											}
 										}

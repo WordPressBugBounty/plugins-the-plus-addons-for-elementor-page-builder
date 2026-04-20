@@ -98,6 +98,15 @@ class ThePlus_Video_Player extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -150,7 +159,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'raw'         => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Embed a video hosted on YouTube using its video ID.', 'tpebl' ),
+						esc_html__( 'Embed a video hosted on YouTube using its video ID.', 'tpebl' )
 					)
 				),
 				'label_block' => true,
@@ -166,7 +175,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'raw'         => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Embed a video hosted on Vimeo using its video ID.', 'tpebl' ),
+						esc_html__( 'Embed a video hosted on Vimeo using its video ID.', 'tpebl' )
 					)
 				),
 				'label_block' => true,
@@ -182,7 +191,7 @@ class ThePlus_Video_Player extends Widget_Base {
 				'raw'         => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Use a video file hosted on your own site.', 'tpebl' ),
+						esc_html__( 'Use a video file hosted on your own site.', 'tpebl' )
 					)
 				),
 				'label_block' => true,
@@ -243,19 +252,12 @@ class ThePlus_Video_Player extends Widget_Base {
 				'label_block' => false,
 				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
 				'label_on'    => esc_html__( 'Show', 'tpebl' ),
-			)
-		);
-		$this->add_control(
-			'sticky_video_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enable this option to keep the video visible while scrolling the page.', 'tpebl' ),
+						esc_html__( 'Enable this option to keep the video visible while scrolling the page.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -349,51 +351,33 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'video_touch_disable',
 			array(
-				'label'     => esc_html__( 'Video Touch Disable', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'default'   => 'no',
-			)
-		);
-		$this->add_control(
-			'video_touch_disable_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Video Touch Disable', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Disable touch interactions on the video player, useful for background or decorative videos.', 'tpebl' ),
+						esc_html__( 'Disable touch interactions on the video player, useful for background or decorative videos.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'modest_branding',
 			array(
-				'label'     => esc_html__( 'Modest Branding', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'condition' => array(
-					'video_type'     => array( 'youtube' ),
-					'video_controls' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'modest_branding_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Modest Branding', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Reduce platform branding elements shown on the video player.', 'tpebl' ),
+						esc_html__( 'Reduce platform branding elements shown on the video player.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'video_type'     => array( 'youtube' ),
 					'video_controls' => 'yes',
 				),
@@ -413,53 +397,22 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'rel',
 			array(
-				'label'     => esc_html__( 'Related Videos', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label'       => esc_html__( 'Related Videos', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'description' => wp_kses_post(
 					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						'<p class="tp-controller-label-text"><i>%s</i><br><i> %s <a href="%s" class="theplus-btn" target="_blank">%s</a></i><br><i>%s</i></p>',
 						esc_html__( 'Control whether related videos are shown after playback ends.', 'tpebl' ),
-					)
-				),
-				'condition' => array(
-					'video_type' => 'youtube',
-				),
-			)
-		);
-		$this->add_control(
-			'rel_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i> %s <a href="%s" class="theplus-btn" target="_blank">%s</a></i></p>',
 						esc_html__( 'Suggested Videos', 'tpebl' ),
 						esc_url( 'https://developers.google.com/youtube/player_parameters#rel' ),
 						esc_html__( 'Parameter change.', 'tpebl' ),
+						esc_html__( 'Choose from Related or Random videos at the end.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
-					'video_type' => 'youtube',
-				),
-			)
-		);
-		$this->add_control(
-			'rel_nots',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose from Related or Random videos at the end.', 'tpebl' ),
-					)
-				),
-				'label_block' => true,
 				'condition'   => array(
 					'video_type' => 'youtube',
-					'rel'        => 'yes',
 				),
 			)
 		);
@@ -467,35 +420,19 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'yt_privacy',
 			array(
-				'label'     => esc_html__( 'Privacy Mode', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
+				'label'       => esc_html__( 'Privacy Mode', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
 				'description' => wp_kses_post(
 					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						'<p class="tp-controller-label-text"><i>%s</i><br><i>%s</i></p>',
 						esc_html__( 'Enable this option to reduce tracking by the video platform until the user plays the video.', 'tpebl' ),
+						esc_html__( 'When you turn on privacy mode, YouTube won\'t store information about visitors on your website unless they play the video.', 'tpebl' )
 					)
 				),
-				'condition' => array(
+				'condition'   => array(
 					'video_type' => 'youtube',
-				),
-			)
-		);
-		$this->add_control(
-			'yt_privacy_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'When you turn on privacy mode, YouTube won\'t store information about visitors on your website unless they play the video.', 'tpebl' ),
-					)
-				),
-				'label_block' => true,
-				'condition' => array(
-					'video_type' => 'youtube',
-					'yt_privacy' => 'yes',
 				),
 			)
 		);
@@ -764,47 +701,30 @@ class ThePlus_Video_Player extends Widget_Base {
 		$this->add_control(
 			'markupSch',
 			array(
-				'label'     => esc_html__( 'Schema Markup', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'default'   => 'no',
-			)
-		);
-		$this->add_control(
-			'markupSch_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Schema Markup', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enable this option to add structured data for the video, helping search engines better understand and display it.', 'tpebl' ),
+						esc_html__( 'Enable this option to add structured data for the video, helping search engines better understand and display it.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'video_date',
 			array(
-				'label'     => __( 'Video Date', 'tpebl' ),
-				'type'      => Controls_Manager::DATE_TIME,
-				'condition' => array(
-					'markupSch' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'video_date_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => __( 'Video Date', 'tpebl' ),
+				'type'        => Controls_Manager::DATE_TIME,
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enter the publish or upload date of the video for schema information.', 'tpebl' ),
+						esc_html__( 'Enter the publish or upload date of the video for schema information.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'markupSch' => 'yes',
 				),

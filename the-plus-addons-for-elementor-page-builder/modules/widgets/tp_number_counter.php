@@ -2465,16 +2465,7 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 
 		$alignment = 'text-' . ( ! empty( $settings['alignment'] ) ? $settings['alignment'] : '' );
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-
-		$ani_duration     = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-
-		$out_effect   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay    = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$symbol       = ! empty( $settings['symbol'] ) ? $settings['symbol'] : '';
 		$max_number   = isset( $settings['max_number'] ) ? $settings['max_number'] : '';
@@ -2492,25 +2483,6 @@ class L_ThePlus_Number_Counter extends Widget_Base {
 		$icon_fontawesome   = ! empty( $settings['icon_fontawesome'] ) ? $settings['icon_fontawesome'] : 'fa fa-download';
 		$icon_fontawesome_5 = ! empty( $settings['icon_fontawesome_5'] ) ? $settings['icon_fontawesome_5'] : '';
 		$align_center       = ! empty( $settings['vertical_center'] ) ? $settings['vertical_center'] : '';
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
 
 		$hover_class  = '';
 		$hover_uniqid = uniqid( 'hover-effect' );

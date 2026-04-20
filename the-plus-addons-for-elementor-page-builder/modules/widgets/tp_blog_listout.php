@@ -19,6 +19,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use ThePlusAddons\Elementor\ButtonStyle\TP_Global_Button_Style_Helper;
 use ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper;
+use ThePlusAddons\Elementor\PostTypeOptions\TP_Post_Type_Options_Helper;
 
 if ( ! trait_exists( '\ThePlusAddons\Elementor\ButtonStyle\TP_Global_Button_Style_Helper' ) ) {
 	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-button-style-helper.php';
@@ -26,6 +27,10 @@ if ( ! trait_exists( '\ThePlusAddons\Elementor\ButtonStyle\TP_Global_Button_Styl
 
 if ( ! class_exists( '\ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper' ) ) {
 	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-scroll-animation-helper.php';
+}
+
+if ( ! trait_exists( '\ThePlusAddons\Elementor\PostTypeOptions\TP_Post_Type_Options_Helper' ) ) {
+	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-post-type-options-helper.php';
 }
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -37,6 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class L_ThePlus_Blog_ListOut extends Widget_Base {
 	use TP_Global_Button_Style_Helper;
+	use TP_Post_Type_Options_Helper;
 
 	/**
 	 * Document Link For Need help.
@@ -339,16 +345,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'condition' => array(
 					'style' => array( 'smart-loop-builder' ),
 				),
-			)
-		);
-
-		$this->add_control(
-			'smart-loop-builder-button',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => '<a class="tp-loopbuilder-editor-raw" id="tp-loopbuilder-editor-raw" data-tp_name="Blog Listing" data-tp_filter_visible="true" data-wd_type="tp-blog-listout">' . esc_html__( 'Ready Presets', 'tpebl' ) . '</a>',
-				// 'content_classes' => 'tp-preset-editor-btn',
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -4080,21 +4076,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$post_meta_tag_style = ! empty( $settings['post_meta_tag_style'] ) ? $settings['post_meta_tag_style'] : 'style-1';
 
 		$post_excerpt_count = ! empty( $settings['post_excerpt_count'] ) ? $settings['post_excerpt_count'] : 30;
-		$animation_stagger  = ! empty( $settings['animation_stagger']['size'] ) ? $settings['animation_stagger']['size'] : 150;
-		$ani_out_duration   = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
 		$display_excerpt = ! empty( $settings['display_excerpt'] ) ? $settings['display_excerpt'] : '';
-		$out_duration    = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
 		$metro_col       = ! empty( $settings['metro_column'] ) ? $settings['metro_column'] : '3';
-
-		$ani_effect = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : 'no-animation';
-		$ani_delay  = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$out_delay  = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-
-		$ani_list     = ! empty( $settings['animated_column_list'] ) ? $settings['animated_column_list'] : '';
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$ani_speed    = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_effect   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : 'no-animation';
 
 		$tp_absolute_layout = ! empty( $settings['tp_absolute_layout'] ) ? $settings['tp_absolute_layout'] : 'no';
 
@@ -4122,39 +4105,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 		$display_title_input  = $settings['display_title_input'];
 		$display_title_3_dots = $settings['display_title_3_dots'];
 
-		$animated_columns = '';
+		$Plus_Listing_block = 'Plus_Listing_block';
+		$animated_columns   = '';
 
-		if ( 'no-animation' === $ani_effect ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $ani_effect ) . '" data-animate-delay="' . esc_attr( $ani_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'stagger' === $ani_list ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="stagger"';
-				$animation_attr  .= ' data-animate-stagger="' . esc_attr( $animation_stagger ) . '"';
-			} elseif ( 'columns' === $ani_list ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="columns"';
-			}
-
-			if ( 'yes' === $ani_duration ) {
-				$animate_duration = $ani_speed;
-				$animation_attr  .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $ani_out_duration ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$desktop_class = '';
 		$tablet_class  = '';
@@ -4217,7 +4171,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				}
 
 				if ( empty( $html_custom ) ) {
-					$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please enter values in both HTML & CSS to enable the Smart Loop Builder feature. If you don’t want to write your own, choose from Ready Presets.', 'tpebl' ) . '</h3>';
+					$output .= '<h3 class="theplus-posts-not-found">' . esc_html__( 'Please enter values in both HTML & CSS to enable the Smart Loop Builder feature.', 'tpebl' ) . '</h3>';
 				}
 			}
 
@@ -4299,14 +4253,14 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				$post_tags = '';
 			}
 
-			if ( $query->found_posts != '' ) {
+			if ( '' !== $query->found_posts ) {
 				$total_posts   = $query->found_posts;
 				$post_offset   = ! empty( $settings['post_offset'] ) ? $settings['post_offset'] : 0;
 				$display_posts = ! empty( $settings['display_posts'] ) ? $settings['display_posts'] : 0;
 				$offset_posts  = intval( $display_posts + $post_offset );
 				$total_posts   = intval( $total_posts - $offset_posts );
 
-				if ( $total_posts != 0 && $settings['load_more_post'] != 0 ) {
+				if ( 0 !== (int) $total_posts && 0 !== (int) $settings['load_more_post'] ) {
 					$load_page = ceil( intval( $total_posts ) / intval( $settings['load_more_post'] ) );
 				} else {
 					$load_page = 1;
@@ -4321,7 +4275,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			$tp_loading_text   = ! empty( $settings['tp_loading_text'] ) ? $settings['tp_loading_text'] : 'Loading...';
 
 			$data_loadkey = '';
-			if ( ( 'load_more' == $settings['post_extra_option'] || 'lazy_load' == $settings['post_extra_option'] ) && 'carousel' != $layout ) {
+			if ( ( 'load_more' === $settings['post_extra_option'] || 'lazy_load' === $settings['post_extra_option'] ) && 'carousel' !== $layout ) {
 				$postattr = array(
 					'load'                => 'blogs',
 					'post_type'           => 'post',
@@ -4354,7 +4308,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				$data_loadkey = L_tp_plus_simple_decrypt( wp_json_encode( $postattr ), 'ey' );
 			}
 
-			if ( $settings['post_extra_option'] == 'load_more' && $layout != 'carousel' ) {
+			if ( 'load_more' === $settings['post_extra_option'] && 'carousel' !== $layout ) {
 				if ( ! empty( $total_posts ) && $total_posts > 0 ) {
 					$load_more_btn_type_switch         = ! empty( $settings['load_more_btn_type_switch'] ) ? $settings['load_more_btn_type_switch'] : 'basic';
 					$load_more_btn_global_style_preset = ! empty( $settings['load_more_btn_global_style_preset'] ) ? $settings['load_more_btn_global_style_preset'] : '';
@@ -4433,19 +4387,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			$query_args['tag__in'] = $post_tags;
 		}
 
-		global $paged;
-
-		$paged_custom = 1;
-		$paged_custom = $paged;
-		if ( get_query_var( 'paged' ) ) {
-			$paged_custom = get_query_var( 'paged' );
-		} elseif ( get_query_var( 'page' ) ) {
-			$paged_custom = get_query_var( 'page' );
-		} else {
-			$paged_custom = 1;
-		}
-
-		$query_args['paged'] = $paged_custom;
+		$query_args['paged'] = self::get_current_page_number();
 
 		return $query_args;
 	}

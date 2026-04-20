@@ -275,21 +275,12 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
-				'condition'   => array(
-					'scheduler_select' => 'calendly',
-				),
-			)
-		);
-		$this->add_control(
-			'calendly_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s <a href="%s" class="theplus-btn" target="_blank"> %s</a></i></p>',
 						esc_html__( 'How to get Username from Calendly?', 'tpebl' ),
 						esc_url( 'https://help.calendly.com/hc/en-us' ),
-						esc_html__( 'Get Steps!', 'tpebl' ),
+						esc_html__( 'Get Steps!', 'tpebl' )
 					)
 				),
 				'condition'   => array(
@@ -369,24 +360,14 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter URL', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'scheduler_select' => 'freebusy',
-				),
-			)
-		);
-		$this->add_control(
-			'freebusy_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s <a href="%s" class="theplus-btn" target="_blank"> %s</a></i></p>',
 						esc_html__( 'How to get Freebusy URL?', 'tpebl' ),
 						esc_url( 'https://help.freebusy.io/en/articles/3313368-how-to-share-your-availability-by-generating-a-link-though-your-freebusy-account' ),
-						esc_html__( 'Get Steps!', 'tpebl' ),
+						esc_html__( 'Get Steps!', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'scheduler_select' => 'freebusy',
 				),
@@ -460,24 +441,14 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter URL', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'scheduler_select' => 'meetingbird',
-				),
-			)
-		);
-		$this->add_control(
-			'meetingbird_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s <a href="%s" class="theplus-btn" target="_blank"> %s</a></i></p>',
 						esc_html__( 'How to get Meeting Bird URL?', 'tpebl' ),
 						esc_url( 'https://help.meetingbird.com/en/collections/168865-getting-started' ),
-						esc_html__( 'Get Steps!', 'tpebl' ),
+						esc_html__( 'Get Steps!', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'scheduler_select' => 'meetingbird',
 				),
@@ -521,24 +492,14 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter URL', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'scheduler_select' => 'vyte',
-				),
-			)
-		);
-		$this->add_control(
-			'vyte_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s <a href="%s" class="theplus-btn" target="_blank"> %s</a></i></p>',
 						esc_html__( 'If you need help getting details.', 'tpebl' ),
 						esc_url( 'https://support.vyte.in/en/' ),
-						esc_html__( 'Helpdesk!', 'tpebl' ),
+						esc_html__( 'Helpdesk!', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'scheduler_select' => 'vyte',
 				),
@@ -599,24 +560,14 @@ class ThePlus_Meeting_Scheduler extends Widget_Base {
 				'default'     => '',
 				'placeholder' => esc_html__( 'Enter User Name', 'tpebl' ),
 				'dynamic'     => array( 'active' => true ),
-				'condition'   => array(
-					'scheduler_select' => 'xai',
-				),
-			)
-		);
-		$this->add_control(
-			'xai_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s <a href="%s" class="theplus-btn" target="_blank"> %s</a></i></p>',
 						esc_html__( 'If you need help getting details.', 'tpebl' ),
 						esc_url( 'https://help.x.ai/en/' ),
-						esc_html__( 'Helpdesk!', 'tpebl' ),
+						esc_html__( 'Helpdesk!', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'scheduler_select' => 'xai',
 				),

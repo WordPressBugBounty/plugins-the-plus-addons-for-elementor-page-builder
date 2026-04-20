@@ -200,13 +200,19 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 				),
 			)
 		);
+		$nav_direction_desc = wp_kses_post(
+			sprintf(
+				'<p class="tp-controller-label-text"><i>%s</i></p>',
+				esc_html__( 'Set where the scroll navigation appears on the screen (left, right, center, etc.) based on your layout preference.', 'tpebl' )
+			)
+		);
 		$this->add_control(
 			'scroll_navigation_direction',
 			array(
-				'label'     => esc_html__( 'Direction', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'right',
-				'options'   => array(
+				'label'       => esc_html__( 'Direction', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'right',
+				'options'     => array(
 					'left'         => esc_html__( 'Middle Left', 'tpebl' ),
 					'right'        => esc_html__( 'Middle Right', 'tpebl' ),
 					'top'          => esc_html__( 'Top', 'tpebl' ),
@@ -216,7 +222,8 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 					'bottom_left'  => esc_html__( 'Bottom Left', 'tpebl' ),
 					'bottom_right' => esc_html__( 'Bottom Right', 'tpebl' ),
 				),
-				'condition' => array(
+				'description' => $nav_direction_desc,
+				'condition'   => array(
 					'scroll_navigation_style' => array( 'style-1' ),
 				),
 			)
@@ -231,22 +238,10 @@ class L_ThePlus_Scroll_Navigation extends Widget_Base {
 					'left'  => esc_html__( 'Middle Left (Pro)', 'tpebl' ),
 					'right' => esc_html__( 'Middle Right (Pro)', 'tpebl' ),
 				),
+				'description' => $nav_direction_desc,
 				'condition'   => array(
 					'scroll_navigation_style' => array( 'style-2', 'style-4' ),
 				),
-			)
-		);
-		$this->add_control(
-			'nav_direction_label',
-			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Set where the scroll navigation appears on the screen (left, right, center, etc.) based on your layout preference.', 'tpebl' ),
-					)
-				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(

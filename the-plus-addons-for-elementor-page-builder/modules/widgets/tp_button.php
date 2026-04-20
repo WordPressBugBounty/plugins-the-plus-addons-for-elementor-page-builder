@@ -92,6 +92,15 @@ class L_ThePlus_Button extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -102,14 +111,6 @@ class L_ThePlus_Button extends Widget_Base {
 
 	protected function get_is_simple_button( $settings ) {
 		return ! empty( $settings['button_type_switch'] ) && in_array( $settings['button_type_switch'], array( 'basic' ), true );
-	}
-
-	protected function get_effective_button_style( $settings ) {
-		if ( $this->get_is_simple_button( $settings ) ) {
-			return 'style-8';
-		}
-
-		return ! empty( $settings['button_style'] ) ? $settings['button_style'] : 'style-1';
 	}
 
 	/**
@@ -653,7 +654,7 @@ class L_ThePlus_Button extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			array(
-				'name'     => 'button_typography',
+				'name'     => 'global_button_typography',
 				'selector' => '{{WRAPPER}} .pt_plus_button .button-link-wrap',
 			)
 		);

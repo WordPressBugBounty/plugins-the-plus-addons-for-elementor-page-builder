@@ -126,6 +126,15 @@ class ThePlus_Post_Author extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3

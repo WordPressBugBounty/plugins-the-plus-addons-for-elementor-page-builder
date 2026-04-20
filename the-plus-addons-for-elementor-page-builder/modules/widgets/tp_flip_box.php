@@ -293,30 +293,20 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$this->add_control(
 			'title',
 			array(
-				'label'     => esc_html__( 'Title', 'tpebl' ),
-				'type'      => Controls_Manager::TEXT,
-				'ai'        => false,
-				'default'   => esc_html__( 'The Plus', 'tpebl' ),
-				'dynamic'   => array(
+				'label'       => esc_html__( 'Title', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'ai'          => false,
+				'default'     => esc_html__( 'The Plus', 'tpebl' ),
+				'dynamic'     => array(
 					'active' => true,
 				),
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_control(
-			'title_label',
-			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enter the heading text displayed on the front side of the flip box.', 'tpebl' ),
+						esc_html__( 'Enter the heading text displayed on the front side of the flip box.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'info_box_layout' => 'single_layout',
 				),
 			)
@@ -544,29 +534,19 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$this->add_control(
 			'display_button',
 			array(
-				'label'     => esc_html__( 'Button', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-				'condition' => array(
-					'info_box_layout' => 'single_layout',
-				),
-			)
-		);
-		$this->add_control(
-			'button_label',
-			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
+				'label'       => esc_html__( 'Button', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'separator'   => 'before',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enable a button on the back side of the flip box for call-to-action or navigation.', 'tpebl' ),
+						esc_html__( 'Enable a button on the back side of the flip box for call-to-action or navigation.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'info_box_layout' => 'single_layout',
 				),
 			)
@@ -2507,16 +2487,8 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 			$hover_class .= 'content_hover_push';
 		}
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$ani_speed    = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_effects  = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay    = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-
-		$out_speed  = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
 		$border_box = ! empty( $settings['box_border'] ) ? $settings['box_border'] : '';
 		$image_icon = ! empty( $settings['image_icon'] ) ? $settings['image_icon'] : '';
 		$icon_style = ! empty( $settings['icon_style'] ) ? $settings['icon_style'] : '';
@@ -2532,25 +2504,6 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		$respo_visible = ! empty( $settings['responsive_visible_opt'] ) ? $settings['responsive_visible_opt'] : '';
 
 		$img_url = ! empty( $settings['select_image']['url'] ) ? $settings['select_image']['url'] : '';
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $ani_speed ) . '"';
-			}
-			if ( 'no-animation' !== $out_effects ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effects ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
 
 		$description        = '';
 		$service_img        = '';
@@ -2798,7 +2751,7 @@ class L_ThePlus_Flip_Box extends Widget_Base {
 		}
 
 		if ( 'style-8' === $button_style ) {
-			$button_text = $icons_before . esc_attr( $button_text ) . $icons_after;
+			$button_text = $icons_before . wp_kses_post( $button_text ) . $icons_after;
 		}
 
 		return $button_text;

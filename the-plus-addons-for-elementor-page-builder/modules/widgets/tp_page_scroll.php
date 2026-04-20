@@ -152,8 +152,8 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 		$this->add_control(
 			'widget_notice',
 			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
+				'type'        => Controls_Manager::RAW_HTML,
+				'raw'         => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Avoid using other widgets on the same page as Page Scroll to prevent unexpected behavior.', 'tpebl' ),
@@ -187,7 +187,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'page_scroll_opt' => 'tp_full_page',
 				),
 			)
@@ -203,7 +203,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'page_scroll_opt' => 'tp_page_pilling',
 				),
 			)
@@ -219,7 +219,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'page_scroll_opt' => 'tp_multi_scroll',
 				),
 			)
@@ -237,7 +237,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 					)
 				),
 				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'page_scroll_opt' => 'tp_horizontal_scroll',
 				),
 			)
@@ -415,27 +415,17 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 		$this->add_control(
 			'show_dots',
 			array(
-				'label'     => esc_html__( 'Dots', 'tpebl' ),
-				'type'      => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
-				'default'   => 'yes',
-				'condition' => array(
-					'page_scroll_opt' => 'tp_full_page',
-				),
-			)
-		);
-		$this->add_control(
-			'show_dots_label',
-			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
+				'label'       => esc_html__( 'Dots', 'tpebl' ),
+				'type'        => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Enable', 'tpebl' ),
+				'label_off'   => esc_html__( 'Disable', 'tpebl' ),
+				'default'     => 'yes',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Show navigation dots on the page to jump between each section.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'page_scroll_opt' => 'tp_full_page',
 				),
@@ -1250,7 +1240,7 @@ class L_ThePlus_Page_Scroll extends Widget_Base {
 			}
 		}
 
-		echo '<div id="' . esc_attr( $uid_widget ) . '" class="tp-page-scroll-wrapper ' . esc_attr( $uid_widget ) . ' ' . esc_attr( $page_scroll_opt ) . '" data-id="' . esc_attr( $uid_widget ) . '" data-option="' . esc_attr( $page_scroll_opt ) . '" ' . $data_attr . '>';
+		echo '<div id="' . esc_attr( $uid_widget ) . '" class="tp-page-scroll-wrapper ' . esc_attr( $uid_widget ) . ' ' . esc_attr( $page_scroll_opt ) . '" data-id="' . esc_attr( $uid_widget ) . '" data-option="' . esc_attr( $page_scroll_opt ) . '" ' . wp_kses_post( $data_attr ) . '>';
 
 		if ( 'tp_full_page' === $page_scroll_opt ) {
 			echo $full_page_content;

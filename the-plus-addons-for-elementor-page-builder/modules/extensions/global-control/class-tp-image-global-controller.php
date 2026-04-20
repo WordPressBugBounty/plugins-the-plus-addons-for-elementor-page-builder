@@ -267,31 +267,19 @@ class TP_GSAP_Image_Global extends Tab_Base {
 				'label'       => esc_html__( 'Custom Clip Path Value', 'tpebl' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'placeholder' => esc_html__( 'polygon(50% 0%, 0% 100%, 100% 100%)', 'tpebl' ),
-				'description' => esc_html__( 'Enter any valid CSS clip-path value', 'tpebl' ),
-				'condition'   => array(
-					'tp_clip_path_type' => 'custom',
-				),
-			)
-		);
-		$repeater->add_control(
-			'tp_custom_clip_path_info',
-			[
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw'  => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
-						'<p class="tp-controller-label-text"><i>%s 
-							<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>
-						</i></p>',
+						'<p class="tp-controller-label-text"><i>%s</i><br><i>%s <a href="%s" target="_blank" rel="noopener noreferrer">%s</a></i></p>',
+						esc_html__( 'Enter any valid CSS clip-path value', 'tpebl' ),
 						esc_html__( 'If you want to create more custom clip-path shapes, you can generate them here:', 'tpebl' ),
 						esc_url( 'https://bennettfeely.com/clippy/' ),
 						esc_html__( 'Open Clip-Path Generator', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition'   => [
+				'condition'   => array(
 					'tp_clip_path_type' => 'custom',
-				],
-			]
+				),
+			)
 		);
 		// $repeater->add_control(
 		// 	'img_stagger',

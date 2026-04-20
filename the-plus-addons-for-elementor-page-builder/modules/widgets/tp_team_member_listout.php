@@ -20,9 +20,14 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper;
+use ThePlusAddons\Elementor\PostTypeOptions\TP_Post_Type_Options_Helper;
 
 if ( ! class_exists( '\ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper' ) ) {
 	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-scroll-animation-helper.php';
+}
+
+if ( ! trait_exists( '\ThePlusAddons\Elementor\PostTypeOptions\TP_Post_Type_Options_Helper' ) ) {
+	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-post-type-options-helper.php';
 }
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -33,6 +38,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class L_ThePlus_Team_Member_ListOut
  */
 class L_ThePlus_Team_Member_ListOut extends Widget_Base {
+
+	use TP_Post_Type_Options_Helper;
 
 	/**
 	 * Document Link For Need help.
@@ -180,26 +187,19 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		$this->add_control(
 			'selctSource',
 			array(
-				'label'   => esc_html__( 'Select Source', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'post',
-				'options' => array(
+				'label'       => esc_html__( 'Select Source', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'post',
+				'options'     => array(
 					'post'     => esc_html__( 'Post Type', 'tpebl' ),
 					'repeater' => esc_html__( 'Repeater', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'selctSource_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose how you want to add your team members, either dynamically from a Post Type or manually using the Repeater option.', 'tpebl' ),
+						esc_html__( 'Choose how you want to add your team members, either dynamically from a Post Type or manually using the Repeater option.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -612,25 +612,18 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_offset',
 			array(
-				'label'   => esc_html__( 'Offset Posts', 'tpebl' ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 0,
-				'max'     => 50,
-				'step'    => 1,
-				'default' => '',
-			)
-		);
-		$this->add_control(
-			'post_offset_note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Offset Posts', 'tpebl' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 50,
+				'step'        => 1,
+				'default'     => '',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Hide posts from the beginning of listing.', 'tpebl' ),
+						esc_html__( 'Hide posts from the beginning of listing.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -1640,50 +1633,10 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 
 		$content_alignment = ! empty( $settings['post_category'] ) ? 'text-' . $settings['content_alignment'] : '';
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
+		$Plus_Listing_block = 'Plus_Listing_block';
+		$animated_columns   = '';
 
-		$animation_delay = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration    = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$out_effect      = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay       = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration    = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed       = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		$animation_stagger = ! empty( $settings['animation_stagger']['size'] ) ? $settings['animation_stagger']['size'] : 150;
-
-		$ani_col_l = ! empty( $settings['animated_column_list'] ) ? $settings['animated_column_list'] : '';
-
-		$animated_columns = '';
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'stagger' === $ani_col_l ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="stagger"';
-				$animation_attr  .= ' data-animate-stagger="' . esc_attr( $animation_stagger ) . '"';
-			} elseif ( 'columns' === $ani_col_l ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="columns"';
-			}
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$desktop_class = '';
 		$tablet_class  = '';
@@ -1862,19 +1815,7 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 			$query_args['offset'] = $offset;
 		}
 
-		global $paged;
-
-		$paged_custom = 1;
-		$paged_custom = $paged;
-
-		if ( get_query_var( 'paged' ) ) {
-			$paged_custom = get_query_var( 'paged' );
-		} elseif ( get_query_var( 'page' ) ) {
-			$paged_custom = get_query_var( 'page' );
-		} else {
-			$paged_custom = 1;
-		}
-		$query_args['paged'] = $paged_custom;
+		$query_args['paged'] = self::get_current_page_number();
 
 		return $query_args;
 	}
@@ -2002,102 +1943,36 @@ class L_ThePlus_Team_Member_ListOut extends Widget_Base {
 	}
 
 	/**
-	 * Get Team-Member-categories
-	 *
-	 * @since 5.6.9
-	 */
-	public function tpae_get_categories() {
-
-		$teams = $this->tpae_get_post_cat();
-
-		if ( ! empty( $teams ) ) {
-			$categories = get_categories(
-				array(
-					'taxonomy'   => $teams,
-					'hide_empty' => 0,
-				)
-			);
-
-			if ( empty( $categories ) || ! is_array( $categories ) ) {
-				return array();
-			}
-		}
-
-		return wp_list_pluck( $categories, 'name', 'term_id' );
-	}
-
-	/**
-	 * Get Team-Member-post
+	 * Get team member taxonomy name.
 	 *
 	 * @since 5.6.9
 	 */
 	public function tpae_get_post_cat() {
-		$post_type_options = get_option( 'post_type_options' );
-		$team_post_type    = ! empty( $post_type_options['team_member_post_type'] ) ? $post_type_options['team_member_post_type'] : '';
-
-		$taxonomy_name = 'theplus_team_member_cat';
-		if ( isset( $team_post_type ) && ! empty( $team_post_type ) ) {
-			if ( 'themes' === $team_post_type ) {
-				$taxonomy_name = $this->tpae_get_options( 'team_member_category_name' );
-			} elseif ( 'plugin' === $team_post_type ) {
-				$get_name = $this->tpae_get_options( 'team_member_category_plugin_name' );
-				if ( isset( $get_name ) && ! empty( $get_name ) ) {
-					$taxonomy_name = $this->tpae_get_options( 'team_member_category_plugin_name' );
-				}
-			} elseif ( 'themes_pro' === $team_post_type ) {
-				$taxonomy_name = 'team_member_category';
-			}
-		} else {
-			$taxonomy_name = 'theplus_team_member_cat';
-		}
-
-		return $taxonomy_name;
+		return $this->tpae_get_taxonomy_name(
+			array(
+				'post_type_key'    => 'team_member_post_type',
+				'default'          => 'theplus_team_member_cat',
+				'themes_option'    => 'team_member_category_name',
+				'plugin_option'    => 'team_member_category_plugin_name',
+				'themes_pro_value' => 'team_member_category',
+			)
+		);
 	}
 
 	/**
-	 * Get tp options
-	 *
-	 * @since 5.6.9
-	 *
-	 * @param string $field use for get type.
-	 */
-	public function tpae_get_options( $field ) {
-
-		$post_type_options = get_option( 'post_type_options' );
-
-		if ( isset( $post_type_options[ $field ] ) && ! empty( $post_type_options[ $field ] ) ) {
-			return $post_type_options[ $field ];
-		}
-
-		return '';
-	}
-
-	/**
-	 * Get post-type name
+	 * Get team member post type name.
 	 *
 	 * @since 6.0.5
 	 */
 	public function l_theplus_team_member_post_name() {
-		$post_type_options = get_option( 'post_type_options' );
-		$team_post_type    = ! empty( $post_type_options['team_member_post_type'] ) ? $post_type_options['team_member_post_type'] : '';
-
-		$post_name = 'theplus_team_member';
-
-		if ( isset( $team_post_type ) && ! empty( $team_post_type ) ) {
-			if ( 'themes' === $team_post_type ) {
-				$post_name = l_theplus_get_option( 'post_type', 'team_member_theme_name' );
-			} elseif ( 'plugin' === $team_post_type ) {
-				$get_name = l_theplus_get_option( 'post_type', 'team_member_plugin_name' );
-				if ( isset( $get_name ) && ! empty( $get_name ) ) {
-					$post_name = l_theplus_get_option( 'post_type', 'team_member_plugin_name' );
-				}
-			} elseif ( 'themes_pro' === $team_post_type ) {
-					$post_name = 'team_member';
-			}
-		} else {
-			$post_name = 'theplus_team_member';
-		}
-
-		return $post_name;
+		return $this->tpae_get_post_type_name(
+			array(
+				'post_type_key'    => 'team_member_post_type',
+				'default'          => 'theplus_team_member',
+				'themes_option'    => 'team_member_theme_name',
+				'plugin_option'    => 'team_member_plugin_name',
+				'themes_pro_value' => 'team_member',
+			)
+		);
 	}
 }

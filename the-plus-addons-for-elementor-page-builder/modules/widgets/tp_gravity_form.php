@@ -124,6 +124,15 @@ class ThePlus_Gravity_Form extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -162,25 +171,18 @@ class ThePlus_Gravity_Form extends Widget_Base {
 		$this->add_control(
 			'gravity_form_dm',
 			array(
-				'label'     => esc_html__( 'Select Form', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'options'   => $this->l_theplus_gravity_form_using_dm(),
-				'condition' => array(
-					'select' => 'gf_dmp',
-				),
-			)
-		);
-		$this->add_control(
-			'gravity_form_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Select Form', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'options'     => $this->l_theplus_gravity_form_using_dm(),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Create a Gravity Form first, then you’ll be able to select and display it here.', 'tpebl' ),
+						esc_html__( 'Create a Gravity Form first, then you’ll be able to select and display it here.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
+				'condition'   => array(
+					'select' => 'gf_dmp',
+				),
 			)
 		);
 		$this->add_control(

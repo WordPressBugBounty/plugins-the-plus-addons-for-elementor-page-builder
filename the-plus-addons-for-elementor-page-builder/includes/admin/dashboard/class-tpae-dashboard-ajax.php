@@ -464,7 +464,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$theplus_styling_data['theplus_custom_css_editor'] = $css;
 			$theplus_styling_data['theplus_custom_js_editor']  = $js;
 
-			if ( false == $theplus_styling_data ) {
+			if ( false === $theplus_styling_data ) {
 				add_option( 'theplus_styling_data', $theplus_styling_data, '', 'yes' );
 			} else {
 				update_option( 'theplus_styling_data', $theplus_styling_data );
@@ -484,7 +484,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$listing_data = isset( $_POST['listing_data'] ) ? sanitize_text_field( wp_unslash( $_POST['listing_data'] ) ) : '';
 			$listing_data = json_decode( $listing_data, true );
 
-			if ( false == $get_listing ) {
+			if ( false === $get_listing ) {
 				add_option( 'post_type_options', $listing_data, '', 'yes' );
 			} else {
 				update_option( 'post_type_options', $listing_data );
@@ -655,27 +655,23 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 			include_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
 
-			$result   = array();
-			$response = wp_remote_post(
-				'http://api.wordpress.org/plugins/info/1.0/',
+			$result = array();
+
+			if ( ! function_exists( 'plugins_api' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			}
+
+			$plugin_info = plugins_api(
+				'plugin_information',
 				array(
-					'body' => array(
-						'action'  => 'plugin_information',
-						'request' => serialize(
-							(object) array(
-								'slug'   => $name,
-								'fields' => array(
-									'version' => false,
-								),
-							)
-						),
+					'slug'   => $name,
+					'fields' => array(
+						'version' => false,
 					),
 				)
 			);
 
-			$plugin_info = unserialize( wp_remote_retrieve_body( $response ) );
-
-			if ( ! $plugin_info ) {
+			if ( is_wp_error( $plugin_info ) || ! $plugin_info ) {
 				wp_send_json_error( array( 'content' => __( 'Failed to retrieve plugin information.', 'tpebl' ) ) );
 			}
 
@@ -730,47 +726,40 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 			$name = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
 
-			$theme_slug    = $name;
-			$theme_api_url = 'https://api.wordpress.org/themes/info/1.0/';
+			$theme_slug = $name;
 
-			// Parameters for the request
-			$args = array(
-				'body' => array(
-					'action'  => 'theme_information',
-					'request' => serialize(
-						(object) array(
-							'slug'   => $name,
-							'fields' => array(
-								'description'     => false,
-								'sections'        => false,
-								'rating'          => true,
-								'ratings'         => false,
-								'downloaded'      => true,
-								'download_link'   => true,
-								'last_updated'    => true,
-								'homepage'        => true,
-								'tags'            => true,
-								'template'        => true,
-								'active_installs' => false,
-								'parent'          => false,
-								'versions'        => false,
-								'screenshot_url'  => true,
-								'active_installs' => false,
-							),
-						)
+			if ( ! function_exists( 'themes_api' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/theme.php';
+			}
+
+			$theme_info = themes_api(
+				'theme_information',
+				array(
+					'slug'   => $name,
+					'fields' => array(
+						'description'     => false,
+						'sections'        => false,
+						'rating'          => true,
+						'ratings'         => false,
+						'downloaded'      => true,
+						'download_link'   => true,
+						'last_updated'    => true,
+						'homepage'        => true,
+						'tags'            => true,
+						'template'        => true,
+						'active_installs' => false,
+						'parent'          => false,
+						'versions'        => false,
+						'screenshot_url'  => true,
 					),
-				),
+				)
 			);
 
-			// Make the request
-			$response = wp_remote_post( $theme_api_url, $args );
-			// Check for errors
-			if ( is_wp_error( $response ) ) {
-				$error_message = $response->get_error_message();
+			if ( is_wp_error( $theme_info ) ) {
+				$error_message = $theme_info->get_error_message();
 
 				$result = $this->tpae_set_response( false, 'oops', 'oops');
 			} else {
-				$theme_info    = unserialize( $response['body'] );
 				$theme_name    = $theme_info->name;
 				$theme_zip_url = $theme_info->download_link;
 

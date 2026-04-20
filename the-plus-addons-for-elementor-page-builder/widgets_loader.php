@@ -170,6 +170,11 @@ final class L_Theplus_Element_Load {
 		}
 
 		$this->include_widgets();
+		$tpae_s_options = get_option( 'theplus_api_connection_data' );
+		$theplus_ability_switch = ! empty( $tpae_s_options['theplus_ability_switch'] ) ? $tpae_s_options['theplus_ability_switch'] : '';
+		if('on' === $theplus_ability_switch){
+			include L_THEPLUS_PATH . 'modules/ability/class-tp-ability-main.php';
+		}
 	}
 
 	public function tpae_elementor_ajax_call() {
@@ -192,22 +197,19 @@ final class L_Theplus_Element_Load {
 
 		$installed_plugins = get_plugins();
 
-		$response = wp_remote_post(
-			'http://api.wordpress.org/plugins/info/1.0/',
+		if ( ! function_exists( 'plugins_api' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+		}
+
+		$plugin_info = plugins_api(
+			'plugin_information',
 			[
-				'body' => [
-					'action'  => 'plugin_information',
-					'request' => serialize((object) [
-						'slug'   => $tp_slug,
-						'fields' => ['version' => false],
-					]),
-				],
+				'slug'   => $tp_slug,
+				'fields' => ['version' => false],
 			]
 		);
 
-		$plugin_info = unserialize(wp_remote_retrieve_body($response));
-
-		if (!$plugin_info) {
+		if ( is_wp_error( $plugin_info ) || ! $plugin_info ) {
 			wp_send_json_error([
 				'message' => __('Failed to retrieve plugin information.', 'tpebl')
 			]);
@@ -302,7 +304,6 @@ final class L_Theplus_Element_Load {
 		include L_THEPLUS_PATH . 'includes/user-experience/class-tp-user-experience-main.php';
 		include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-main.php';
 
-		include L_THEPLUS_PATH . 'includes/smart-loop-builder/class-tpae-loop-builder.php';
 		include L_THEPLUS_PATH . 'includes/preset/class-wdkit-preset.php';
 		include L_THEPLUS_PATH . 'modules/controls/theme-builder/tpae-class-nxt-download.php';
 
@@ -412,24 +413,26 @@ final class L_Theplus_Element_Load {
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_style( 'theplus-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
 
-		$white_label_options = get_option( 'theplus_white_label', array() );
+		if ( defined( 'THEPLUS_VERSION' ) ) {
+			$white_label_options = get_option( 'theplus_white_label', array() );
 
-		if ( is_array( $white_label_options ) ) {
-			$wl_logo = ! empty( $white_label_options['tp_plus_logo'] ) ? $white_label_options['tp_plus_logo'] : '';
-			$wl_name = ! empty( $white_label_options['tp_plugin_name'] ) ? $white_label_options['tp_plugin_name'] : '';
-			$wl_name = ! empty( $wl_name ) ? $wl_name : ( ! empty( $white_label_options['l_tp_plugin_name'] ) ? $white_label_options['l_tp_plugin_name'] : '' );
+			if ( is_array( $white_label_options ) ) {
+				$wl_logo = ! empty( $white_label_options['tp_plus_logo'] ) ? $white_label_options['tp_plus_logo'] : '';
+				$wl_name = ! empty( $white_label_options['tp_plugin_name'] ) ? $white_label_options['tp_plugin_name'] : '';
+				$wl_name = ! empty( $wl_name ) ? $wl_name : ( ! empty( $white_label_options['l_tp_plugin_name'] ) ? $white_label_options['l_tp_plugin_name'] : '' );
 
-			if ( ! empty( $wl_logo ) || ! empty( $wl_name ) ) {
-				$inline_css = '';
+				if ( ! empty( $wl_logo ) || ! empty( $wl_name ) ) {
+					$inline_css = '';
 
-				if ( ! empty( $wl_logo ) ) {
-					$wl_logo_escaped = esc_url( $wl_logo );
-					$inline_css .= '.elementor-element .icon i.tpae-editor-logo:after { background-image: url("' . $wl_logo_escaped . '"); background-size: contain; background-repeat: no-repeat; }';
-				} else {
-					$inline_css .= '.elementor-element .icon i.tpae-editor-logo:after { background-image: none; }';
+					if ( ! empty( $wl_logo ) ) {
+						$wl_logo_escaped = esc_url( $wl_logo );
+						$inline_css .= '.elementor-element .icon i.tpae-editor-logo:after { background-image: url("' . $wl_logo_escaped . '"); background-size: contain; background-repeat: no-repeat; }';
+					} else {
+						$inline_css .= '.elementor-element .icon i.tpae-editor-logo:after { background-image: none; }';
+					}
+
+					wp_add_inline_style( 'theplus-ele-admin', $inline_css );
 				}
-
-				wp_add_inline_style( 'theplus-ele-admin', $inline_css );
 			}
 		}
 

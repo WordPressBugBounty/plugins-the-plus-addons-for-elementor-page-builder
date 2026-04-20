@@ -16,15 +16,6 @@ class L_Plus_Library {
 
 	public $l_registered_widgets;
 	/**
-	 *  Return array of registered elements.
-	 *
-	 * @todo filter output
-	 */
-	public function get_l_registered_widgets() {
-		return array_keys( $this->l_registered_widgets );
-	}
-
-	/**
 	 * Return saved settings
 	 *
 	 * @since 2.0

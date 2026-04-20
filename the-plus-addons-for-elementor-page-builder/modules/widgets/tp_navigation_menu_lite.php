@@ -128,6 +128,15 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -2528,7 +2537,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		?>
 
 		<div class="plus-navigation-wrap <?php echo esc_attr( $nav_alignment ); ?> <?php echo esc_attr( $uid ); ?>">
-			<div class="plus-navigation-inner <?php echo esc_attr( $menu_hover_click ); ?> <?php echo esc_attr( $main_menu_indicator_style ); ?> <?php echo esc_attr( $sub_menu_indicator_style ); ?> " <?php echo $menu_attr; ?>>
+			<div class="plus-navigation-inner <?php echo esc_attr( $menu_hover_click ); ?> <?php echo esc_attr( $main_menu_indicator_style ); ?> <?php echo esc_attr( $sub_menu_indicator_style ); ?> " <?php echo wp_kses_post( $menu_attr ); ?>>
 				<div id="theplus-navigation-normal-menu" class="collapse navbar-collapse navbar-ex1-collapse">
 	
 					<div class="plus-navigation-menu <?php echo esc_attr( $navbar_menu_type ); ?>">
@@ -2537,7 +2546,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						if ( defined( 'JUPITERX_VERSION' ) ) {
 
 							wp_nav_menu( $nav_menu_args );
-						} elseif ( ! empty( $TypeMenu ) && $TypeMenu == 'custom' ) {
+						} elseif ( ! empty( $TypeMenu ) && $TypeMenu === 'custom' ) {
 							echo $this->tp_mega_menu( $settings );
 						} else {
 							wp_nav_menu( apply_filters( 'widget_nav_menu_args', $nav_menu_args, $nav_menu, $settings, '' ) );
@@ -2568,7 +2577,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 							} else {
 								wp_nav_menu( apply_filters( 'widget_nav_menu_args', $mobile_nav_menu_args, $nav_menu, $settings, '' ) );
 							}
-						} elseif ( ! empty( $TypeMenu ) && $TypeMenu == 'custom' ) {
+						} elseif ( ! empty( $TypeMenu ) && $TypeMenu === 'custom' ) {
 							echo $this->tp_mega_menu( $settings );
 						}
 						?>
@@ -2621,7 +2630,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 		$stylecss   = '';
 
 		if ( ! empty( $settings['ItemMenu'] ) ) {
-			$CustomMenu .= '<ul class="nav navbar-nav ' . ( $settings['main_menu_hover_style'] == 'style-1' ? 'menu-hover-style-1' : ( $settings['main_menu_hover_style'] == 'style-2' ? 'menu-hover-style-2' : '' ) ) . ' ">';
+			$CustomMenu .= '<ul class="nav navbar-nav ' . ( $settings['main_menu_hover_style'] === 'style-1' ? 'menu-hover-style-1' : ( $settings['main_menu_hover_style'] === 'style-2' ? 'menu-hover-style-2' : '' ) ) . ' ">';
 
 			$menuArray = $settings['ItemMenu'];
 
@@ -2633,7 +2642,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 				$st_child_Li = '';
 				if ( $depth > 0 ) {
-					if ( ( $Nextdepth == $depth || $Nextdepth > $depth || $Nextdepth < $depth ) && $Prevdepth != $depth && $Prevdepth < $depth ) {
+					if ( ( $Nextdepth === $depth || $Nextdepth > $depth || $Nextdepth < $depth ) && $Prevdepth !== $depth && $Prevdepth < $depth ) {
 						$level       = $level + 1;
 						$st_child_Li = '<ul role="menu" class="dropdown-menu">';
 					}
@@ -2659,7 +2668,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 				// Get Prefix Icon
 				$preicon = '';
-				if ( $item['menuiconTy'] !== '' && $item['menuiconTy'] == 'icon' ) {
+				if ( $item['menuiconTy'] !== '' && $item['menuiconTy'] === 'icon' ) {
 					$preicon .= '<span class="plus-navicon-wrap">';
 					if ( ! empty( $item['preicon'] ) ) {
 						ob_start();
@@ -2667,7 +2676,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						$preicon .= ob_get_clean();
 					}
 					$preicon .= '</span>';
-				} elseif ( $item['menuiconTy'] !== '' && $item['menuiconTy'] == 'img' ) {
+				} elseif ( $item['menuiconTy'] !== '' && $item['menuiconTy'] === 'img' ) {
 					if ( ! empty( $item['menuImg'] ) && ! empty( $item['menuImg']['id'] ) ) {
 						$preicon .= '<span class="plus-navicon-wrap">' . wp_get_attachment_image( $item['menuImg']['id'], 'full', true, array( 'class' => 'plus-nav-icon-menu' ) ) . '</span>';
 					} elseif ( ! empty( $item['menuImg']['url'] ) ) {
@@ -2677,7 +2686,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 
 				// Get Label
 				$txtLabel = '';
-				if ( ! empty( $item['showlabel'] ) && $item['labeltxt'] != '' ) {
+				if ( ! empty( $item['showlabel'] ) && ! empty( $item['labeltxt'] ) ) {
 					$txtLabel .= '<span class="plus-nav-label-text">' . esc_html( $item['labeltxt'] ) . '</span>';
 				}
 
@@ -2711,7 +2720,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 					$itemUrl = '#';
 				}
 
-				if ( ( $depth != '1' ) || ! empty( $item['SmenuType'] ) && $item['SmenuType'] != 'mega-menu' && $item['SmenuType'] == 'link' ) {
+				if ( ( $depth !== '1' ) || ! empty( $item['SmenuType'] ) && $item['SmenuType'] !== 'mega-menu' && $item['SmenuType'] === 'link' ) {
 					$name = '<a href="' . esc_url( $itemUrl ) . '" ' . $itemTarget . $itemNofollow . ' title="' . esc_attr( $menuName ) . '" data-text="' . esc_attr( $menuName ) . '" >' . $preicon . '<span class="plus-title-wrap">' . esc_html( $menuName ) . '' . $txtLabel . '' . $navdesc . '</span></a>';
 				}
 				$dropdownClass = ( $Nextdepth >= 2 && ( $Nextdepth > $depth ) ) ? 'dropdown-submenu menu-item-has-children' : ( ( $Nextdepth > $depth ) ? 'dropdown menu-item-has-children' : '' );
@@ -2719,37 +2728,37 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 				$MegaMenuClass = '';
 				if ( $Nextdepth === 1 ) {
 					$NextMenu = ( ! empty( $menuArray[ $index + 1 ] ) ) ? $menuArray[ $index + 1 ] : '';
-					if ( $NextMenu != '' && $NextMenu['SmenuType'] == 'mega-menu' ) {
+					if ( ! empty( $NextMenu ) && $NextMenu['SmenuType'] === 'mega-menu' ) {
 						$MegaMenuClass .= ' plus-fw';
-						if ( $NextMenu != '' && $NextMenu['megaMType'] != '' ) {
+						if ( ! empty( $NextMenu ) && $NextMenu['megaMType'] !== '' ) {
 							$MegaMenuClass .= ' plus-dropdown-' . $NextMenu['megaMType'];
 						}
-						if ( $NextMenu != '' && $NextMenu['megaMType'] == 'default' ) {
+						if ( ! empty( $NextMenu ) && $NextMenu['megaMType'] === 'default' ) {
 							$unit        = isset( $NextMenu['megaMwid']['unit'] ) && ! empty( $NextMenu['megaMwid']['unit'] ) ? sanitize_key( $NextMenu['megaMwid']['unit'] ) : '';
 							$repeater_id = sanitize_key( $item['_id'] );
 
 							// Desktop
 							if ( isset( $NextMenu['megaMwid']['size'] ) && ! empty( $NextMenu['megaMwid']['size'] ) ) {
-								$stylecss .= '@media (min-width: 1024px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid']['size'] ) . $unit . '!important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+								$stylecss .= '@media (min-width: 1024px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid']['size'] ) . $unit . '!important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] === 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 							// Tablet
 							if ( isset( $NextMenu['megaMwid_tablet']['size'] ) && ! empty( $NextMenu['megaMwid_tablet']['size'] ) ) {
-								$stylecss .= '@media (max-width: 1024px) and (min-width:768px){ .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid_tablet']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid_tablet']['size'] ) . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+								$stylecss .= '@media (max-width: 1024px) and (min-width:768px){ .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid_tablet']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid_tablet']['size'] ) . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] === 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 							// Mobile
 							if ( isset( $NextMenu['megaMwid_mobile']['size'] ) && ! empty( $NextMenu['megaMwid_mobile']['size'] ) ) {
-								$stylecss .= '@media (max-width: 767px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid_mobile']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid_mobile']['size'] ) . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'default' ? 'right: auto;' : '' ) . '} } ';
+								$stylecss .= '@media (max-width: 767px) { .plus-navigation-wrap .plus-navigation-inner .navbar-nav>li.elementor-repeater-item-' . $repeater_id . '.plus-dropdown-default:not(.plus-dropdown-center)>ul.dropdown-menu{ max-width: ' . absint( $NextMenu['megaMwid_mobile']['size'] ) . $unit . ' !important; min-width: ' . absint( $NextMenu['megaMwid_mobile']['size'] ) . $unit . ' !important; ' . ( isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] === 'default' ? 'right: auto;' : '' ) . '} } ';
 							}
 						}
 					}
-					if ( $NextMenu != '' && $NextMenu['megaMType'] == 'default' && isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] == 'center' ) {
+					if ( ! empty( $NextMenu ) && $NextMenu['megaMType'] === 'default' && isset( $NextMenu['megaMAlign'] ) && $NextMenu['megaMAlign'] === 'center' ) {
 						$MegaMenuClass .= ' plus-dropdown-' . esc_attr( $NextMenu['megaMAlign'] );
 					}
 				}
 				$start_Li = "<li class='menu-item depth-" . esc_attr( $depth ) . ' ' . esc_attr( $dropdownClass ) . ' ' . esc_attr( $MegaMenuClass ) . ' ' . ( ! empty( $item['classTxt'] ) ? esc_attr( $item['classTxt'] ) : '' ) . ' elementor-repeater-item-' . esc_attr( $item['_id'] ) . $current_active . "' >";
 
-				if ( $depth == '1' && $item['SmenuType'] == 'mega-menu' ) {
-					if ( empty( $sett ) || empty( $item['moblieMmenu'] && $item['moblieMmenu'] == 'no' ) ) {
+				if ( $depth === '1' && $item['SmenuType'] === 'mega-menu' ) {
+					if ( empty( $sett ) || empty( $item['moblieMmenu'] && $item['moblieMmenu'] === 'no' ) ) {
 						$start_Li .= '<div class="plus-megamenu-content">';
 						// if ( ( $item['blockTemp'] ) && $item['blockTemp'] != '0' ) {
 						if ( ( $item['blockTemp'] ) && ! empty( $item['blockTemp'] ) ) {
@@ -2772,7 +2781,7 @@ class ThePlus_Navigation_Menu_Lite extends Widget_Base {
 						}
 						$start_Li .= '</div>';
 					}
-					if ( ! empty( $item['moblieMmenu'] && $item['moblieMmenu'] == 'yes' ) && ! empty( $sett ) ) {
+					if ( ! empty( $item['moblieMmenu'] && $item['moblieMmenu'] === 'yes' ) && ! empty( $sett ) ) {
 						$MLinkFilter = (array) $item['MLinkFilter']['url'];
 						$MmenuName   = ! empty( $MLinkFilter ) && ! empty( $item['Mfilterlabel'] ) ? $item['Mfilterlabel'] : '';
 						$MitemUrl    = ! empty( $item['MLinkFilter']['url'] ) ? $item['MLinkFilter']['url'] : '#';

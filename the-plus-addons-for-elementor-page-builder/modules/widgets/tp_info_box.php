@@ -171,30 +171,20 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		$this->add_control(
 			'info_box_layout',
 			array(
-				'label'   => esc_html__( 'Select Layout', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'single_layout',
-				'options' => array(
+				'label'       => esc_html__( 'Select Layout', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'single_layout',
+				'options'     => array(
 					'single_layout'   => esc_html__( 'Listing', 'tpebl' ),
 					'carousel_layout' => esc_html__( 'Carousel (Pro)', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'single_layout_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
 						esc_html__( 'Display info boxes in a clean vertical or grid layout, ideal for feature lists, services, or content that needs clear readability.', 'tpebl' ),
 						esc_url( $this->tp_doc . 'show-services-box-in-wordpress-using-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'Learn More', 'tpebl' ),
+						esc_html__( 'Learn More', 'tpebl' )
 					)
-				),
-				'label_block' => true,
-				'condition'   => array(
-					'info_box_layout' => 'single_layout',
 				),
 			)
 		);
@@ -2815,7 +2805,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .service-icon-text:hover' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon-text' => 'color: {{VALUE}}',
 				),
 				'condition' => array(
 					'image_icon' => 'text',
@@ -2827,7 +2817,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			array(
 				'name'     => 'wl_btn_background_h',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .service-icon-text:hover',
+				'selector' => '{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon-text',
 			)
 		);
 		$this->add_group_control(
@@ -2838,7 +2828,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'default'  => array(
 					'color' => '#666666',
 				),
-				'selector' => '{{WRAPPER}} .service-icon-text:hover',
+				'selector' => '{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon-text',
 			)
 		);
 		$this->add_responsive_control(
@@ -2848,7 +2838,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .service-icon-text:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+					'{{WRAPPER}} .pt_plus_info_box .info-box-inner:hover .service-icon-text' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				),
 				'condition'  => array(
 					'image_icon' => 'text',
@@ -3086,39 +3076,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 			$hover_class .= 'content_hover_push';
 		}
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-
-		$animation_delay = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-
-		$out_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-
-		$out_effect = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay  = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_speed  = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$service_title  = '';
 		$description    = '';
@@ -3509,7 +3467,7 @@ class L_ThePlus_Info_Box extends Widget_Base {
 		}
 
 		if ( 'style-8' === $button_style ) {
-			$button_text = $icons_before . $button_text . $icons_after;
+			$button_text = $icons_before . wp_kses_post( $button_text ) . $icons_after;
 		}
 
 		return $button_text;

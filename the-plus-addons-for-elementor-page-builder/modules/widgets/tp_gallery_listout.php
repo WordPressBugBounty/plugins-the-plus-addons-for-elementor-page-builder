@@ -141,6 +141,15 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -464,49 +473,32 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_title',
 			array(
-				'label'     => esc_html__( 'Display Title', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'display_title_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Display Title', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'yes',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text">%s</p>',
-						esc_html__( 'Turn this on to show image titles directly inside your gallery items.', 'tpebl' ),
+						esc_html__( 'Turn this on to show image titles directly inside your gallery items.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'post_title_tag',
 			array(
-				'label'     => esc_html__( 'Title Tag', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'h3',
-				'options'   => l_theplus_get_tags_options(),
-				'condition' => array(
-					'display_title' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'post_title_tag_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Title Tag', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'h3',
+				'options'     => l_theplus_get_tags_options(),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text">%s</p>',
-						esc_html__( 'Select the proper heading tag for your image titles to keep your design and SEO consistent.', 'tpebl' ),
+						esc_html__( 'Select the proper heading tag for your image titles to keep your design and SEO consistent.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'display_title' => 'yes',
 				),
@@ -515,55 +507,41 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_excerpt',
 			array(
-				'label'     => esc_html__( 'Display Excerpt/Content', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'display_excerpt_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Display Excerpt/Content', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'yes',
+				'separator'   => 'before',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text">%s</p>',
-						esc_html__( 'Show short captions or descriptions below your gallery images for added context.', 'tpebl' ),
+						esc_html__( 'Show short captions or descriptions below your gallery images for added context.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
 			'display_box_link',
 			array(
-				'label'     => wp_kses_post(
+				'label'       => wp_kses_post(
 					sprintf(
 						'%s <img class="pro-badge-img" src="%s" alt="PRO" style="width:32px; vertical-align:middle;" />',
 						esc_html__( 'Box Link', 'tpebl' ),
 						esc_url( L_THEPLUS_URL . 'assets/images/pro-features/pro-tag.svg' )
 					)
 				),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-			)
-		);
-		$this->add_control(
-			'display_box_link_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'separator'   => 'before',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text">%s</p>',
-						esc_html__( ' Activate this to make each gallery item clickable and lead users to the desired link.', 'tpebl' ),
+						esc_html__( ' Activate this to make each gallery item clickable and lead users to the desired link.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -1411,46 +1389,10 @@ class L_ThePlus_Gallery_ListOut extends Widget_Base {
 		$display_icon_zoom = ! empty( $settings['display_icon_zoom'] ) ? $settings['display_icon_zoom'] : '';
 		$display_excerpt   = ! empty( $settings['display_excerpt'] ) ? $settings['display_excerpt'] : '';
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$animation_stagger = ! empty( $settings['animation_stagger']['size'] ) ? $settings['animation_stagger']['size'] : 150;
-		$animated_columns  = '';
+		$Plus_Listing_block = 'Plus_Listing_block';
+		$animated_columns   = '';
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			$ani_column       = ! empty( $settings['animated_column_list'] ) ? $settings['animated_column_list'] : '';
-			$ani_duration     = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-			$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-			$out_effect       = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-			$ani_delay        = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-			$out_duration     = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-			$out_speed        = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-			if ( 'stagger' === $ani_column ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="stagger"';
-				$animation_attr  .= ' data-animate-stagger="' . esc_attr( $animation_stagger ) . '"';
-			} elseif ( 'columns' === $ani_column ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="columns"';
-			}
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $ani_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$desktop_class = '';
 		$tablet_class  = '';

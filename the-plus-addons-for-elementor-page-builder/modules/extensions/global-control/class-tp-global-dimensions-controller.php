@@ -69,7 +69,7 @@ class TP_Dimensions_Global extends Tab_Base {
 			)
 		);
 
-		$repeater->add_control(
+		$repeater->add_responsive_control(
 			'tdm_values',
 			array(
 				'label'      => esc_html__( 'Values', 'tpebl' ),
@@ -159,29 +159,23 @@ class TP_Dimensions_Global extends Tab_Base {
 	 *
 	 * @since v6.5.0
 	 * @param  string $preset_id  The _id value stored in the widget setting.
+	 * @param  string $device     Device key: '' or 'desktop', 'tablet', 'mobile'.
 	 * @return string             e.g. "10px 20px 10px 20px"  or '' if not found.
 	 */
-	public static function get_preset_css( $preset_id ) {
-		if ( empty( $preset_id ) ) {
+	public static function get_preset_css( $preset_id, $device = '' ) {
+		$raw = self::get_preset_raw_values( $preset_id, $device );
+
+		if ( empty( $raw ) ) {
 			return '';
 		}
 
-		foreach ( self::get_global_dimensions_list() as $preset ) {
-			if ( ! isset( $preset['_id'] ) || $preset['_id'] !== $preset_id ) {
-				continue;
-			}
+		$unit   = ! empty( $raw['unit'] ) ? $raw['unit'] : 'px';
+		$top    = (float) $raw['top'];
+		$right  = (float) $raw['right'];
+		$bottom = (float) $raw['bottom'];
+		$left   = (float) $raw['left'];
 
-			$val    = isset( $preset['tdm_values'] ) ? $preset['tdm_values'] : array();
-			$unit   = ! empty( $val['unit'] )   ? $val['unit']   : 'px';
-			$top    = isset( $val['top'] )    ? (float) $val['top']    : 0;
-			$right  = isset( $val['right'] )  ? (float) $val['right']  : 0;
-			$bottom = isset( $val['bottom'] ) ? (float) $val['bottom'] : 0;
-			$left   = isset( $val['left'] )   ? (float) $val['left']   : 0;
-
-			return $top . $unit . ' ' . $right . $unit . ' ' . $bottom . $unit . ' ' . $left . $unit;
-		}
-
-		return '';
+		return $top . $unit . ' ' . $right . $unit . ' ' . $bottom . $unit . ' ' . $left . $unit;
 	}
 
 	/**
@@ -191,31 +185,25 @@ class TP_Dimensions_Global extends Tab_Base {
 	 *
 	 * @since v6.5.0
 	 * @param  string $preset_id
+	 * @param  string $device    Device key: '' or 'desktop', 'tablet', 'mobile'.
 	 * @return array  [ 'top' => '10px', 'right' => '20px', 'bottom' => '10px', 'left' => '20px' ]
 	 *                or empty array if not found.
 	 */
-	public static function get_preset_values( $preset_id ) {
-		if ( empty( $preset_id ) ) {
+	public static function get_preset_values( $preset_id, $device = '' ) {
+		$raw = self::get_preset_raw_values( $preset_id, $device );
+
+		if ( empty( $raw ) ) {
 			return array();
 		}
 
-		foreach ( self::get_global_dimensions_list() as $preset ) {
-			if ( ! isset( $preset['_id'] ) || $preset['_id'] !== $preset_id ) {
-				continue;
-			}
+		$unit = ! empty( $raw['unit'] ) ? $raw['unit'] : 'px';
 
-			$val  = isset( $preset['tdm_values'] ) ? $preset['tdm_values'] : array();
-			$unit = ! empty( $val['unit'] ) ? $val['unit'] : 'px';
-
-			return array(
-				'top'    => ( isset( $val['top'] )    ? (float) $val['top']    : 0 ) . $unit,
-				'right'  => ( isset( $val['right'] )  ? (float) $val['right']  : 0 ) . $unit,
-				'bottom' => ( isset( $val['bottom'] ) ? (float) $val['bottom'] : 0 ) . $unit,
-				'left'   => ( isset( $val['left'] )   ? (float) $val['left']   : 0 ) . $unit,
-			);
-		}
-
-		return array();
+		return array(
+			'top'    => ( (float) $raw['top'] ) . $unit,
+			'right'  => ( (float) $raw['right'] ) . $unit,
+			'bottom' => ( (float) $raw['bottom'] ) . $unit,
+			'left'   => ( (float) $raw['left'] ) . $unit,
+		);
 	}
 
 	/**
@@ -227,9 +215,10 @@ class TP_Dimensions_Global extends Tab_Base {
 	 * @since v6.5.0
 	 *
 	 * @param string $preset_id Preset ID.
+	 * @param string $device    Device key: '' or 'desktop' for desktop, 'tablet', 'mobile'.
 	 * @return array
 	 */
-	public static function get_preset_raw_values( $preset_id ) {
+	public static function get_preset_raw_values( $preset_id, $device = '' ) {
 		if ( empty( $preset_id ) ) {
 			return array();
 		}
@@ -239,7 +228,30 @@ class TP_Dimensions_Global extends Tab_Base {
 				continue;
 			}
 
-			$val = isset( $preset['tdm_values'] ) ? $preset['tdm_values'] : array();
+			$val = null;
+
+			// Try device-specific values first (tablet / mobile).
+			if ( ! empty( $device ) && 'desktop' !== $device ) {
+				$device_key = 'tdm_values_' . $device;
+
+				if ( ! empty( $preset[ $device_key ] ) && is_array( $preset[ $device_key ] ) ) {
+					$dv = $preset[ $device_key ];
+
+					// Only use device values if at least one dimension is filled in.
+					if ( ( isset( $dv['top'] ) && '' !== $dv['top'] )
+						|| ( isset( $dv['right'] ) && '' !== $dv['right'] )
+						|| ( isset( $dv['bottom'] ) && '' !== $dv['bottom'] )
+						|| ( isset( $dv['left'] ) && '' !== $dv['left'] )
+					) {
+						$val = $dv;
+					}
+				}
+			}
+
+			// Fallback to desktop values.
+			if ( null === $val ) {
+				$val = isset( $preset['tdm_values'] ) ? $preset['tdm_values'] : array();
+			}
 
 			return array(
 				'top'      => ( isset( $val['top'] ) && '' !== $val['top'] ) ? $val['top'] : '0',

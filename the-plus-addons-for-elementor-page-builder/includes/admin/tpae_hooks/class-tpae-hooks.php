@@ -232,7 +232,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			// Get Widget List.
 			$default_load = get_option( 'theplus_options' );
 			if ( empty( $default_load ) ) {
-				$theplus_options['check_elements']  = array( 'tp_accordion', 'tp_adv_text_block', 'tp_blockquote', 'tp_blog_listout', 'tp_button', 'tp_contact_form_7', 'tp_countdown', 'tp_clients_listout', 'tp_gallery_listout', 'tp_flip_box', 'tp_heading_animation', 'tp_header_extras', 'tp_heading_title', 'tp_info_box', 'tp_navigation_menu_lite', 'tp_page_scroll', 'tp_progress_bar', 'tp_number_counter', 'tp_pricing_table', 'tp_scroll_navigation', 'tp_social_icon', 'tp_tabs_tours', 'tp_team_member_listout', 'tp_testimonial_listout', 'tp_video_player', 'tp_plus_form' );
+				$theplus_options['check_elements']  = array( 'tp_accordion', 'tp_adv_text_block','tp_blog_listout', 'tp_button','tp_clients_listout', 'tp_heading_title', 'tp_info_box', 'tp_navigation_menu_lite','tp_progress_bar', 'tp_number_counter', 'tp_pricing_table','tp_social_icon', 'tp_tabs_tours', 'tp_team_member_listout', 'tp_testimonial_listout', 'tp_video_player', 'tp_plus_form' );
 				$theplus_options['extras_elements'] = array( 'plus_cross_cp', 'plus_global_box_shadow', 'plus_global_gradient_color', 'plus_global_dimensions', 'plus_global_button' );
 
 				add_option( 'theplus_options', $theplus_options, '', 'on' );
@@ -308,6 +308,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 					'theplus_woo_countdown_switch'       => 'on',
 					'theplus_woo_thank_you_page_select'  => '',
 					'bodymovin_load_js_check'            => 'on',
+					'theplus_ability_switch'             => 'on',
 				);
 
 				add_option( 'theplus_api_connection_data', $set_extra_option, '', 'on' );
@@ -627,27 +628,23 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 			include_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
 
-			$result   = array();
-			$response = wp_remote_post(
-				'http://api.wordpress.org/plugins/info/1.0/',
+			$result = array();
+
+			if ( ! function_exists( 'plugins_api' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			}
+
+			$plugin_info = plugins_api(
+				'plugin_information',
 				array(
-					'body' => array(
-						'action'  => 'plugin_information',
-						'request' => serialize(
-							(object) array(
-								'slug'   => $tp_slug,
-								'fields' => array(
-									'version' => false,
-								),
-							)
-						),
+					'slug'   => $tp_slug,
+					'fields' => array(
+						'version' => false,
 					),
 				)
 			);
 
-			$plugin_info = unserialize( wp_remote_retrieve_body( $response ) );
-
-			if ( ! $plugin_info ) {
+			if ( is_wp_error( $plugin_info ) || ! $plugin_info ) {
 				wp_send_json_error( array( 'content' => __( 'Failed to retrieve plugin information.', 'tpebl' ) ) );
 			}
 

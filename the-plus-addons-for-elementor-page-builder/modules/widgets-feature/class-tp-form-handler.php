@@ -52,17 +52,15 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 
 			$email_data = isset( $_POST['email_data'] ) ? wp_unslash( $_POST['email_data'] ) : '';
 			if ( empty( $email_data ) ) {
-				ob_get_contents();
-				exit;
 				ob_end_clean();
+				exit;
 			}
 
 			$email_data = L_tp_plus_simple_decrypt( sanitize_text_field( $email_data ), 'dy' );
 			$email_data = json_decode( $email_data, true );
 			if ( ! is_array( $email_data ) ) {
-				ob_get_contents();
-				exit;
 				ob_end_clean();
+				exit;
 			}
 
 			$security_nonce = $email_data['nonce'];

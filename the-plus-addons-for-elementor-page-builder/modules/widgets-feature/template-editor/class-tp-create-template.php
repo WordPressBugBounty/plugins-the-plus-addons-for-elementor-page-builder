@@ -47,10 +47,8 @@ if ( ! class_exists( 'Tpae_Create_Template' ) ) {
 		    add_action( 'elementor/editor/before_enqueue_scripts', array($this, 'enqueue_editor_scripts') );
 
             add_action( 'wp_ajax_tpae_template_create', array( $this, 'tpae_template_create' ) );
-			add_action( 'wp_ajax_nopriv_tpae_template_create', array( $this, 'tpae_template_create' ) );
 
 			add_action( 'wp_ajax_change_current_template_title', array( $this, 'change_current_template_title' ) );
-			add_action( 'wp_ajax_nopriv_change_current_template_title', array( $this, 'change_current_template_title' ) );            
 		}
 
 		/**

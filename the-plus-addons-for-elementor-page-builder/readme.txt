@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.12
+Stable tag: 6.4.13
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,34 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.13 =
+Add : MCP Integration : Added support to control widgets and their settings through MCP setup.
+Add : GSAP Scroll Animation : Add option for the Stagger Effect
+Add : Testimonials : Add Stagger option in the On Scroll Animation
+Improvements : TPAE Widgets causing issues sometimes while using in the loop-items Templates
+Improvements : Global Dimensions : Responsiveness and Conditions Improvements
+Improvements : On Scroll Animation : File Structure Improvements
+Improvements : Info Box : Text hover style changes - now styles applies on the hover of the box instead of the text
+Improvements : White Label : Condition Improvements
+Improvements : Accordion : Condition Improvements
+Improvements : Blog Listing : Condition Improvements
+Improvements : Hovercard : Condition Improvements
+Improvements : Navigation Menu Lite : Condition Improvements
+Improvements : Social Embed : Condition Improvements
+Fix : TPAE Widgets are not working with the Elementor Popup
+Fix : Blog Listing : Stored Cross-Site Scripting (XSS) Security Patch (Medium Security)
+Fix : Table : Stored Cross-Site Scripting (XSS) via Button Custom Attributes Security Patch (Medium Security)
+Fix : Table : Stored Cross-Site Scripting (XSS) via Mobile Heading Text Security Patch (Medium Security)
+Fix : Post Meta : Icon not showing correctly
+Fix : Testimonials : Border Radius Causing issue when Global Border Radius selected
+Fix : Accordion : Fixed security issue
+Fix : Carousel Anything : Fixed security issue
+Fix : Page Scroll : Fixed security issue
+Fix : Stylish List : Fixed security issue
+Fix : Navigation Menu Lite : Fixed security issue
+Removed : Smart Loop Builder : Removed ready preset button
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.12 =
 Add : Global option : Scroll Animation global option

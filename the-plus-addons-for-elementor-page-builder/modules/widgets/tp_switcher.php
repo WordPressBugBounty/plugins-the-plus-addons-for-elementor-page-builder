@@ -213,22 +213,6 @@ class L_ThePlus_Switcher extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'template_a_label',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Load content from a saved Elementor template.', 'tpebl' ),
-					)
-				),
-				'label_block' => true,
-				'condition'   => array(
-					'content_a_source' => 'template',
-				),
-			)
-		);
-		$this->add_control(
 			'content_template_type',
 			array(
 				'label'     => esc_html__( 'Content Type', 'tpebl' ),
@@ -387,22 +371,6 @@ class L_ThePlus_Switcher extends Widget_Base {
 				'dynamic'     => array( 'active' => true ),
 				'condition'   => array(
 					'content_b_source' => array( 'content' ),
-				),
-			)
-		);
-		$this->add_control(
-			'template_b_label',
-			array(
-				'type' => Controls_Manager::RAW_HTML,
-				'raw'  => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Load content from a saved Elementor template.', 'tpebl' ),
-					)
-				),
-				'label_block' => true,
-				'condition'   => array(
-					'content_b_source' => 'template',
 				),
 			)
 		);
@@ -591,28 +559,18 @@ class L_ThePlus_Switcher extends Widget_Base {
 		$this->add_control(
 			'show_tooltip',
 			array(
-				'label'     => esc_html__( 'Tooltip', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'condition' => array(
-					'switcher_style!' => array( 'style-4', 'style-3' ),
-				),
-			)
-		);
-		$this->add_control(
-			'show_tooltip_label',
-			array(
-				'type'  => Controls_Manager::RAW_HTML,
-				'raw'   => wp_kses_post(
+				'label'       => esc_html__( 'Tooltip', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Enable a tooltip to display additional information on hover.', 'tpebl' ),
+						esc_html__( 'Enable a tooltip to display additional information on hover.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
-				'condition' => array(
+				'condition'   => array(
 					'switcher_style!' => array( 'style-4', 'style-3' ),
 				),
 			)

@@ -115,6 +115,15 @@ class ThePlus_Post_Comment extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -190,24 +199,17 @@ class ThePlus_Post_Comment extends Widget_Base {
 		$this->add_control(
 			'cmtcount',
 			array(
-				'label'     => esc_html__( 'Comment Count', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'default'   => 'yes',
-				'label_on'  => esc_html__( 'Enable', 'tpebl' ),
-				'label_off' => esc_html__( 'Disable', 'tpebl' ),
-			)
-		);
-		$this->add_control(
-			'cmtcount_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Comment Count', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'default'     => 'yes',
+				'label_on'    => esc_html__( 'Enable', 'tpebl' ),
+				'label_off'   => esc_html__( 'Disable', 'tpebl' ),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'Enable this to show the total number of comments on the post.', 'tpebl' ),
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->end_controls_section();

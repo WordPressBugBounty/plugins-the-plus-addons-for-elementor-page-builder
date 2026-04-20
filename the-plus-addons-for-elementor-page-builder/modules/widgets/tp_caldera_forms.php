@@ -112,6 +112,15 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -2517,40 +2526,7 @@ class L_ThePlus_Caldera_Forms extends Widget_Base {
 	public function render() {
 		$settings = $this->get_settings_for_display();
 
-		$ani_out = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-
-		$ani_delay  = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$ani_effect = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : 'no-animation';
-
-		$ani_effects  = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : 'no-animation';
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-
-		$duration_size  = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-		$duration_speed = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-
-		$animation_delay = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-
-		if ( 'no-animation' === $ani_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $ani_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animate_duration = $duration_speed;
-				$animation_attr  .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $ani_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $ani_effect ) . '" data-animate-out-delay="' . esc_attr( $ani_delay ) . '"';
-				if ( 'yes' === $ani_out ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $duration_size ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$output      = '<div class="pt_plus_caldera_forms ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 			$output .= do_shortcode( $this->get_shortcode() );

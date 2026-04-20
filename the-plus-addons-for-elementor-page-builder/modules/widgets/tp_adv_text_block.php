@@ -241,27 +241,17 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 		$this->add_control(
 			'display_count_input',
 			array(
-				'label'     => esc_html__( 'Count', 'tpebl' ),
-				'type'      => Controls_Manager::NUMBER,
-				'min'       => 1,
-				'max'       => 1000,
-				'step'      => 1,
-				'condition' => array(
-					'display_count' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'display_count_input_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Count', 'tpebl' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 1,
+				'max'         => 1000,
+				'step'        => 1,
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Set the maximum number of characters or words to display.', 'tpebl' ),
+						esc_html__( 'Set the maximum number of characters or words to display.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'display_count' => 'yes',
 				),
@@ -270,27 +260,17 @@ class ThePlus_Adv_Text_Block extends Widget_Base {
 		$this->add_control(
 			'display_3_dots',
 			array(
-				'label'     => esc_html__( 'Display Dots', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-				'condition' => array(
-					'display_count' => 'yes',
-				),
-			)
-		);
-		$this->add_control(
-			'display_dots_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Display Dots', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'yes',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Show ellipsis (...) at the end of the text.', 'tpebl' ),
+						esc_html__( 'Show ellipsis (...) at the end of the text.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 				'condition'   => array(
 					'display_count' => 'yes',
 				),

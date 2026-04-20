@@ -132,27 +132,23 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 			include_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
 
-			$result   = array();
-			$response = wp_remote_post(
-				'http://api.wordpress.org/plugins/info/1.0/',
+			$result = array();
+
+			if ( ! function_exists( 'plugins_api' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			}
+
+			$plugin_info = plugins_api(
+				'plugin_information',
 				array(
-					'body' => array(
-						'action'  => 'plugin_information',
-						'request' => serialize(
-							(object) array(
-								'slug'   => 'wdesignkit',
-								'fields' => array(
-									'version' => false,
-								),
-							)
-						),
+					'slug'   => 'wdesignkit',
+					'fields' => array(
+						'version' => false,
 					),
 				)
 			);
 
-			$plugin_info = unserialize( wp_remote_retrieve_body( $response ) );
-
-			if ( ! $plugin_info ) {
+			if ( is_wp_error( $plugin_info ) || ! $plugin_info ) {
 				wp_send_json_error( array( 'content' => __( 'Failed to retrieve plugin information.', 'tpebl' ) ) );
 			}
 
@@ -253,13 +249,13 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 					<div class="wkit-cb-data">
 						<div class="wkit-tp-preset-checkbox">
 							<span class="wkit-preset-checkbox-content">
-								<?php echo $tp_check_svg; ?>
+								<?php echo wp_kses( $tp_check_svg, array( 'svg' => array( 'xmlns' => true, 'width' => true, 'height' => true, 'fill' => true ), 'path' => array( 'fill' => true, 'd' => true ) ) ); ?>
 								<p class="wkit-preset-label">
 								<?php echo esc_html__( 'Start Quickly Without Designing from Scratch', 'tpebl' ); ?>
 							</p>
 						</span>
 						<span class="wkit-preset-checkbox-content">
-								<?php echo $tp_check_svg; ?>
+								<?php echo wp_kses( $tp_check_svg, array( 'svg' => array( 'xmlns' => true, 'width' => true, 'height' => true, 'fill' => true ), 'path' => array( 'fill' => true, 'd' => true ) ) ); ?>
 								<p class="wkit-preset-label">
 									<?php echo esc_html__( 'Fully Customizable for Any Style', 'tpebl' ); ?>
 								</p>
@@ -267,13 +263,13 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 						</div>
 						<div class="wkit-tp-preset-checkbox">
 							<span class="wkit-preset-checkbox-content">
-									<?php echo $tp_check_svg; ?>
+									<?php echo wp_kses( $tp_check_svg, array( 'svg' => array( 'xmlns' => true, 'width' => true, 'height' => true, 'fill' => true ), 'path' => array( 'fill' => true, 'd' => true ) ) ); ?>
 									<p class="wkit-preset-label">
 									<?php echo esc_html__( 'Time-Saving and Efficient Workflow', 'tpebl' ); ?>
 								</p>
 							</span>
 							<span class="wkit-preset-checkbox-content">
-								<?php echo $tp_check_svg; ?>
+								<?php echo wp_kses( $tp_check_svg, array( 'svg' => array( 'xmlns' => true, 'width' => true, 'height' => true, 'fill' => true ), 'path' => array( 'fill' => true, 'd' => true ) ) ); ?>
 								<p class="wkit-preset-label">
 									<?php echo esc_html__( 'Explore Versatile Layout Options', 'tpebl' ); ?>
 								</p>

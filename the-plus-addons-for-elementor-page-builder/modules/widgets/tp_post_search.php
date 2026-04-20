@@ -116,6 +116,15 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -966,35 +975,9 @@ class L_ThePlus_Post_Search extends Widget_Base {
 		$content_align_mobile = ! empty( $settings['content_align_mobile'] ) ? ' text--mobile' . $settings['content_align_mobile'] : '';
 		$s_placeholder        = ! empty( $settings['search_field_placeholder'] ) ? $settings['search_field_placeholder'] : '';
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration      = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-		$animate_duration  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_effect        = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_delay         = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-		$out_duration      = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed         = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-		$search_icon       = ! empty( $settings['search_icon_fontawesome'] ) ? $settings['search_icon_fontawesome'] : 'fa fa-search';
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_effect ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_effect ) . '" data-animate-out-delay="' . esc_attr( $out_delay ) . '"';
-				if ( 'yes' === $out_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		$search_icon = ! empty( $settings['search_icon_fontawesome'] ) ? $settings['search_icon_fontawesome'] : 'fa fa-search';
 
 			$output          = '<div class="theplus-post-search-wrapper form-' . esc_attr( $style ) . ' ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 				$output     .= '<form action="' . esc_url( home_url() ) . '" method="get" class="theplus-post-search-form ' . esc_attr( $content_align ) . ' ' . esc_attr( $content_align_tablet ) . ' ' . esc_attr( $content_align_mobile ) . '">';

@@ -101,7 +101,6 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 			add_action( 'wp_ajax_tp_install_wdkit', array( $this, 'tp_install_wdkit' ) );
 
 			add_action( 'wp_ajax_tp_dont_show_again', array( $this, 'tp_dont_show_again' ) );
-			add_action( 'wp_ajax_nopriv_tp_dont_show_again', array( $this, 'tp_dont_show_again' ) );
 
 			add_action( 'elementor/editor/footer', array( $this, 'tp_wdkit_preview_html_popup' ) );
 		}
@@ -166,27 +165,23 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 			include_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
 
-			$result   = array();
-			$response = wp_remote_post(
-				'http://api.wordpress.org/plugins/info/1.0/',
+			$result = array();
+
+			if ( ! function_exists( 'plugins_api' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			}
+
+			$plugin_info = plugins_api(
+				'plugin_information',
 				array(
-					'body' => array(
-						'action'  => 'plugin_information',
-						'request' => serialize(
-							(object) array(
-								'slug'   => 'wdesignkit',
-								'fields' => array(
-									'version' => false,
-								),
-							)
-						),
+					'slug'   => 'wdesignkit',
+					'fields' => array(
+						'version' => false,
 					),
 				)
 			);
 
-			$plugin_info = unserialize( wp_remote_retrieve_body( $response ) );
-
-			if ( ! $plugin_info ) {
+			if ( is_wp_error( $plugin_info ) || ! $plugin_info ) {
 				wp_send_json_error( array( 'content' => __( 'Failed to retrieve plugin information.', 'tpebl' ) ) );
 			}
 
@@ -240,6 +235,10 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 		public function tp_dont_show_again() {
 
 			check_ajax_referer( 'tp_wdkit_preview_popup', 'security' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid permissions.', 'tpebl' ) ) );
+			}
 
 			$option_value = get_option( $this->db_preview_popup_key );
 			if ( ! empty( $option_value ) && 'yes' === $option_value ) {

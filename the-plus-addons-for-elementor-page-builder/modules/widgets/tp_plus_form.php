@@ -179,21 +179,14 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 				'ai'          => array(
 					'active' => false,
 				),
-			)
-		);
-		$this->add_control(
-			'plusform_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i> %s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"> %s </a></i></p>',
 						esc_html__( 'Add new form fields below and choose the ones you want to include in your form.', 'tpebl' ),
 						esc_url( $this->tp_doc . 'create-an-elementor-form-for-free/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' ),
-						esc_html__( 'Learn More', 'tpebl' ),
+						esc_html__( 'Learn More', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$repeater = new \Elementor\Repeater();
@@ -796,19 +789,6 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'submitactions_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
-					sprintf(
-						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'You can select one or more actions here to decide what happens after someone submits the form.', 'tpebl' )
-					)
-				),
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
 			'add_action',
 			array(
 				'label'       => esc_html__( 'Add Action', 'tpebl' ),
@@ -820,6 +800,12 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 					'Redirect' => esc_html__( 'Redirect', 'tpebl' ),
 				),
 				'label_block' => true,
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'You can select one or more actions here to decide what happens after someone submits the form.', 'tpebl' )
+					)
+				),
 			)
 		);
 
@@ -858,28 +844,21 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'email_to_label',
+			'email_to',
 			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Email Address', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array(
+					'active' => false,
+				),
+				'ai'          => array(
+					'active' => false,
+				),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can add the email address here where you want to receive all form submissions, so every new entry instantly notifies you.', 'tpebl' )
 					)
-				),
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
-			'email_to',
-			array(
-				'label'   => esc_html__( 'Email Address', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => array(
-					'active' => false,
-				),
-				'ai'      => array(
-					'active' => false,
 				),
 			)
 		);
@@ -893,28 +872,21 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'email_cc_label',
+			'email_cc',
 			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Email Address', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array(
+					'active' => false,
+				),
+				'ai'          => array(
+					'active' => false,
+				),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can add additional email here, so others also stay notified whenever a form is submitted.', 'tpebl' )
 					)
-				),
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
-			'email_cc',
-			array(
-				'label'   => esc_html__( 'Email Address', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => array(
-					'active' => false,
-				),
-				'ai'      => array(
-					'active' => false,
 				),
 			)
 		);
@@ -928,28 +900,21 @@ class L_ThePlus_Plus_Form extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'email_bcc_label',
+			'email_bcc',
 			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Email Address', 'tpebl' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array(
+					'active' => false,
+				),
+				'ai'          => array(
+					'active' => false,
+				),
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
 						esc_html__( 'You can add hidden email here, so they receive the form submissions without being visible to receivers.', 'tpebl' )
 					)
-				),
-				'label_block' => true,
-			)
-		);
-		$this->add_control(
-			'email_bcc',
-			array(
-				'label'   => esc_html__( 'Email Address', 'tpebl' ),
-				'type'    => Controls_Manager::TEXT,
-				'dynamic' => array(
-					'active' => false,
-				),
-				'ai'      => array(
-					'active' => false,
 				),
 			)
 		);

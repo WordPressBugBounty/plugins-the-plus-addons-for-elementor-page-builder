@@ -17,9 +17,14 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper;
+use ThePlusAddons\Elementor\PostTypeOptions\TP_Post_Type_Options_Helper;
 
 if ( ! class_exists( '\ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_Animation_Helper' ) ) {
 	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-global-scroll-animation-helper.php';
+}
+
+if ( ! trait_exists( '\ThePlusAddons\Elementor\PostTypeOptions\TP_Post_Type_Options_Helper' ) ) {
+	include_once L_THEPLUS_PATH . 'modules/extensions/global-control/class-tp-post-type-options-helper.php';
 }
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -30,6 +35,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class L_ThePlus_Clients_ListOut.
  */
 class L_ThePlus_Clients_ListOut extends Widget_Base {
+
+	use TP_Post_Type_Options_Helper;
 
 	/**
 	 * Document Link For Need help.
@@ -283,26 +290,19 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'clientContentFrom',
 			array(
-				'label'   => esc_html__( 'Select Source', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'clcontent',
-				'options' => array(
+				'label'       => esc_html__( 'Select Source', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'clcontent',
+				'options'     => array(
 					'clcontent'  => esc_html__( 'Post Type', 'tpebl' ),
 					'clrepeater' => esc_html__( 'Repeater', 'tpebl' ),
 				),
-			)
-		);
-		$this->add_control(
-			'clientContentFrom_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Choose where your client data comes from. Either manually or through a specific post type.', 'tpebl' ),
+						esc_html__( 'Choose where your client data comes from. Either manually or through a specific post type.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -408,25 +408,18 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'post_offset',
 			array(
-				'label'   => esc_html__( 'Offset Posts', 'tpebl' ),
-				'type'    => Controls_Manager::NUMBER,
-				'min'     => 0,
-				'max'     => 50,
-				'step'    => 1,
-				'default' => '',
-			)
-		);
-		$this->add_control(
-			'post_Note',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Offset Posts', 'tpebl' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 50,
+				'step'        => 1,
+				'default'     => '',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Hide posts from the beginning of listing.', 'tpebl' ),
+						esc_html__( 'Hide posts from the beginning of listing.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -540,24 +533,17 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$this->add_control(
 			'display_post_title',
 			array(
-				'label'     => esc_html__( 'Display Client Title', 'tpebl' ),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'yes',
-			)
-		);
-		$this->add_control(
-			'display_post_title_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'label'       => esc_html__( 'Display Client Title', 'tpebl' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'yes',
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Toggle this on to show each client’s name below their logo for better identification.', 'tpebl' ),
+						esc_html__( 'Toggle this on to show each client’s name below their logo for better identification.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -1135,50 +1121,10 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 		$content_from  = ! empty( $settings['clientContentFrom'] ) ? $settings['clientContentFrom'] : 'clcontent';
 		$link_masklist = ! empty( $settings['clientLinkMaskList'] ) ? $settings['clientLinkMaskList'] : array();
 
-		$ani_effects  = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$ani_delay    = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_stagger  = ! empty( $settings['animation_stagger']['size'] ) ? $settings['animation_stagger']['size'] : 150;
-		$ani_col_list = ! empty( $settings['animated_column_list'] ) ? $settings['animated_column_list'] : '';
-		$ani_duration = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
+		$Plus_Listing_block = 'Plus_Listing_block';
+		$animated_columns   = '';
 
-		$ani_out_effects = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$out_ani_delay   = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : 50;
-
-		$animate_duration = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_ani_duration = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_ani_speed    = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
-		$animated_columns = '';
-		if ( 'no-animation' === $ani_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $ani_effects ) . '" data-animate-delay="' . esc_attr( $ani_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'stagger' === $ani_col_list ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="stagger"';
-				$animation_attr  .= ' data-animate-stagger="' . esc_attr( $ani_stagger ) . '"';
-			} elseif ( 'columns' === $ani_col_list ) {
-				$animated_columns = 'animated-columns';
-				$animation_attr  .= ' data-animate-columns="columns"';
-			}
-
-			if ( 'yes' === $ani_duration ) {
-				$animation_attr .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $ani_out_effects ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $ani_out_effects ) . '" data-animate-out-delay="' . esc_attr( $out_ani_delay ) . '"';
-
-				if ( 'yes' === $out_ani_duration ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_ani_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$desktop_class = '';
 		$tablet_class  = '';
@@ -1344,122 +1290,43 @@ class L_ThePlus_Clients_ListOut extends Widget_Base {
 
 		$offset = ! empty( $settings['post_offset'] ) ? absint( $settings['post_offset'] ) : 0;
 
-		global $paged;
-
-		$paged_custom = 1;
-		$paged_custom = $paged;
-
-		if ( get_query_var( 'paged' ) ) {
-			$paged_custom = get_query_var( 'paged' );
-		} elseif ( get_query_var( 'page' ) ) {
-			$paged_custom = get_query_var( 'page' );
-		} else {
-			$paged_custom = 1;
-		}
-
+		$query_args['paged']  = self::get_current_page_number();
 		$query_args['offset'] = $offset;
 
 		return $query_args;
 	}
 
 	/**
-	 * Get Clients-categories
-	 *
-	 * @since 5.6.9
-	 */
-	public function tpae_get_categories() {
-
-		$clients = $this->tpae_get_post_cat();
-
-		if ( ! empty( $clients ) ) {
-			$categories = get_categories(
-				array(
-					'taxonomy'   => $clients,
-					'hide_empty' => 0,
-				)
-			);
-
-			if ( empty( $categories ) || ! is_array( $categories ) ) {
-				return array();
-			}
-		}
-
-		return wp_list_pluck( $categories, 'name', 'term_id' );
-	}
-
-	/**
-	 * Get Clents-post
+	 * Get client taxonomy name.
 	 *
 	 * @since 5.6.9
 	 */
 	public function tpae_get_post_cat() {
-		$post_type_options = get_option( 'post_type_options' );
-		$client_post_type  = ! empty( $post_type_options['client_post_type'] ) ? $post_type_options['client_post_type'] : '';
-
-		$post_name = 'theplus_clients_cat';
-
-		if ( isset( $client_post_type ) && ! empty( $client_post_type ) ) {
-			if ( 'themes' === $client_post_type ) {
-				$post_name = $this->tpae_get_options( 'client_category_name' );
-			} elseif ( 'plugin' === $client_post_type ) {
-				$get_name = $this->tpae_get_options( 'client_category_plugin_name' );
-				if ( isset( $get_name ) && ! empty( $get_name ) ) {
-					$post_name = $this->tpae_get_options( 'client_category_plugin_name' );
-				}
-			} elseif ( 'themes_pro' === $client_post_type ) {
-				$post_name = 'clients_category';
-			}
-		} else {
-			$post_name = 'theplus_clients_cat';
-		}
-
-		return $post_name;
+		return $this->tpae_get_taxonomy_name(
+			array(
+				'post_type_key'    => 'client_post_type',
+				'default'          => 'theplus_clients_cat',
+				'themes_option'    => 'client_category_name',
+				'plugin_option'    => 'client_category_plugin_name',
+				'themes_pro_value' => 'clients_category',
+			)
+		);
 	}
 
 	/**
-	 * Get tp options
-	 *
-	 * @since 5.6.9
-	 *
-	 * @param string $field use for get type.
-	 */
-	public function tpae_get_options( $field ) {
-
-		$post_type_options = get_option( 'post_type_options' );
-
-		if ( isset( $post_type_options[ $field ] ) && ! empty( $post_type_options[ $field ] ) ) {
-			return $post_type_options[ $field ];
-		}
-
-		return '';
-	}
-
-	/**
-	 * Get post-type name
+	 * Get client post type name.
 	 *
 	 * @since 6.0.5
 	 */
 	public function l_theplus_client_post_name() {
-		$post_type_options = get_option( 'post_type_options' );
-		$client_post_type  = ! empty( $post_type_options['client_post_type'] ) ? $post_type_options['client_post_type'] : '';
-
-		$post_name = 'theplus_clients';
-
-		if ( isset( $client_post_type ) && ! empty( $client_post_type ) ) {
-			if ( 'themes' === $client_post_type ) {
-				$post_name = l_theplus_get_option( 'post_type', 'client_theme_name' );
-			} elseif ( 'plugin' === $client_post_type ) {
-				$get_name = l_theplus_get_option( 'post_type', 'client_plugin_name' );
-				if ( isset( $get_name ) && ! empty( $get_name ) ) {
-					$post_name = l_theplus_get_option( 'post_type', 'client_plugin_name' );
-				}
-			} elseif ( 'themes_pro' === $client_post_type ) {
-				$post_name = 'clients';
-			}
-		} else {
-			$post_name = 'theplus_clients';
-		}
-
-		return $post_name;
+		return $this->tpae_get_post_type_name(
+			array(
+				'post_type_key'    => 'client_post_type',
+				'default'          => 'theplus_clients',
+				'themes_option'    => 'client_theme_name',
+				'plugin_option'    => 'client_plugin_name',
+				'themes_pro_value' => 'clients',
+			)
+		);
 	}
 }

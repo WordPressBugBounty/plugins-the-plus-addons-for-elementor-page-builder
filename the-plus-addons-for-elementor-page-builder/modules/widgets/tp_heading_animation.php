@@ -200,19 +200,12 @@ class ThePlus_Heading_Animation extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
-			)
-		);
-		$this->add_control(
-			'prefix_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Add text that appears before the animated heading and stays visible at all times.', 'tpebl' ),
+						esc_html__( 'Add text that appears before the animated heading and stays visible at all times.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -227,19 +220,12 @@ class ThePlus_Heading_Animation extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
-			)
-		);
-		$this->add_control(
-			'ani_title_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Add the text that will animate in this heading. You can enter multiple lines, each line will animate one by one. Use Ctrl + Enter or Shift + Enter to add a new line.', 'tpebl' ),
+						esc_html__( 'Add the text that will animate in this heading. You can enter multiple lines, each line will animate one by one. Use Ctrl + Enter or Shift + Enter to add a new line.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_control(
@@ -263,19 +249,12 @@ class ThePlus_Heading_Animation extends Widget_Base {
 				'dynamic'     => array(
 					'active' => true,
 				),
-			)
-		);
-		$this->add_control(
-			'postfix_label',
-			array(
-				'type'        => Controls_Manager::RAW_HTML,
-				'raw'         => wp_kses_post(
+				'description' => wp_kses_post(
 					sprintf(
 						'<p class="tp-controller-label-text"><i>%s</i></p>',
-						esc_html__( 'Add text that appears after the animated heading and remains visible once the animation plays.', 'tpebl' ),
+						esc_html__( 'Add text that appears after the animated heading and remains visible once the animation plays.', 'tpebl' )
 					)
 				),
-				'label_block' => true,
 			)
 		);
 		$this->add_responsive_control(

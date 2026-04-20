@@ -123,6 +123,15 @@ class ThePlus_Post_Meta extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return true;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -1757,8 +1766,10 @@ class ThePlus_Post_Meta extends Widget_Base {
 
 						$category_taxonomies = ! empty( $item['category_taxonomies'] ) ? $item['category_taxonomies'] : 'category';
 
+						$category_prefix = ! empty( $settings['catePrefix'] ) ? $settings['catePrefix'] : '';
+
 						if ( 'pttext' === $cate_prefix_type ) {
-							$cate_prefix = $settings['catePrefix'];
+							$cate_prefix = esc_html( $category_prefix );
 						} elseif ( 'pticon' === $cate_prefix_type ) {
 							ob_start();
 							\Elementor\Icons_Manager::render_icon( $settings['catePrefixIcon'], array( 'aria-hidden' => 'true' ) );
@@ -1804,7 +1815,7 @@ class ThePlus_Post_Meta extends Widget_Base {
 
 						$output .= '<span class="tp-meta-category ' . esc_attr( $cate_style ) . '" >';
 						if ( ! empty( $cate_prefix ) ) {
-							$output .= '<span class="tp-meta-category-label tp-meta-label">' . esc_html( $cate_prefix ) . '</span>';
+							$output .= '<span class="tp-meta-category-label tp-meta-label">' . $cate_prefix . '</span>';
 						}
 						$output .= '<span class="tp-meta-category-list">' . $category_list . '</span></span>';
 					}

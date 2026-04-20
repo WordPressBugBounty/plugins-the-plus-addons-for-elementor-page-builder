@@ -194,6 +194,40 @@ class TP_GSAP_Global extends Tab_Base {
 			)
 		);
 		$repeater->add_control(
+			'tp_stagger_target',
+			array(
+				'label'              => esc_html__( 'Stagger Items', 'tpebl' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => 'container',
+				'options'            => array(
+					'widget'    => esc_html__( 'Widgets', 'tpebl' ),
+					'container' => esc_html__( 'Containers', 'tpebl' ),
+				),
+				'condition'          => array(
+					'tp_stagger' => 'yes',
+				),
+				'description'        => esc_html__( 'Choose whether the stagger animation should run on widgets or inner containers.', 'tpebl' ),
+				'frontend_available' => true,
+			)
+		);
+		$repeater->add_control(
+			'tp_stagger_depth',
+			array(
+				'label'              => esc_html__( 'Stagger Depth Level', 'tpebl' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => 'child',
+				'options'            => array(
+					'child'       => esc_html__( 'Child', 'tpebl' ),
+					'multi_child' => esc_html__( 'Multi Child', 'tpebl' ),
+				),
+				'condition'          => array(
+					'tp_stagger' => 'yes',
+				),
+				'description'        => esc_html__( 'Use Child for direct items only, or Multi Child to include nested matching items as well.', 'tpebl' ),
+				'frontend_available' => true,
+			)
+		);
+		$repeater->add_control(
 			'tp_repeat',
 			array(
 				'label'              => esc_html__( 'Repeat', 'tpebl' ),

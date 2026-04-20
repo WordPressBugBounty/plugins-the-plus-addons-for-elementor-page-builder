@@ -112,6 +112,15 @@ class L_Theplus_Ele_Heading_Title extends Widget_Base {
 	}
 
 	/**
+	 * It is use for widget add in catch or not.
+	 *
+	 * @since 6.4.13
+	 */
+	public function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
 	 * Disable Elementor's default inner wrapper for custom HTML control.
 	 *
 	 * @since 6.3.3
@@ -2533,16 +2542,6 @@ class L_Theplus_Ele_Heading_Title extends Widget_Base {
 		$ex_color  = ! empty( $settings['ex_title_color'] ) ? $settings['ex_title_color'] : '';
 		$sub_color = ! empty( $settings['sub_title_color'] ) ? $settings['sub_title_color'] : '';
 
-		$animation_effects = ! empty( $settings['animation_effects'] ) ? $settings['animation_effects'] : '';
-		$animation_delay   = ! empty( $settings['animation_delay']['size'] ) ? $settings['animation_delay']['size'] : 50;
-		$ani_duration      = ! empty( $settings['animation_duration_default'] ) ? $settings['animation_duration_default'] : '';
-
-		$ani_size  = ! empty( $settings['animate_duration']['size'] ) ? $settings['animate_duration']['size'] : 50;
-		$out_ani   = ! empty( $settings['animation_out_effects'] ) ? $settings['animation_out_effects'] : '';
-		$ani_delay = ! empty( $settings['animation_out_delay']['size'] ) ? $settings['animation_out_delay']['size'] : '';
-		$out_d_ani = ! empty( $settings['animation_out_duration_default'] ) ? $settings['animation_out_duration_default'] : '';
-		$out_speed = ! empty( $settings['animation_out_duration']['size'] ) ? $settings['animation_out_duration']['size'] : 50;
-
 		$sub_title_count = ! empty( $settings['display_sub_title_input'] ) ? $settings['display_sub_title_input'] : '';
 		$mobaile_align   = ! empty( $settings['mobile_center_align'] ) ? $settings['mobile_center_align'] : '';
 		$sub_limit_by    = ! empty( $settings['display_sub_title_by'] ) ? $settings['display_sub_title_by'] : 'char';
@@ -2614,28 +2613,7 @@ class L_Theplus_Ele_Heading_Title extends Widget_Base {
 			$sub_gradient_cass = 'heading-title-gradient';
 		}
 
-		if ( 'no-animation' === $animation_effects ) {
-			$animated_class = '';
-			$animation_attr = '';
-		} else {
-			$animate_offset  = '85%';
-			$animated_class  = 'animate-general';
-			$animation_attr  = ' data-animate-type="' . esc_attr( $animation_effects ) . '" data-animate-delay="' . esc_attr( $animation_delay ) . '"';
-			$animation_attr .= ' data-animate-offset="' . esc_attr( $animate_offset ) . '"';
-
-			if ( 'yes' === $ani_duration ) {
-				$animate_duration = $ani_size;
-				$animation_attr  .= ' data-animate-duration="' . esc_attr( $animate_duration ) . '"';
-			}
-
-			if ( 'no-animation' !== $out_ani ) {
-				$animation_attr .= ' data-animate-out-type="' . esc_attr( $out_ani ) . '" data-animate-out-delay="' . esc_attr( $ani_delay ) . '"';
-
-				if ( 'yes' === $out_d_ani ) {
-					$animation_attr .= ' data-animate-out-duration="' . esc_attr( $out_speed ) . '"';
-				}
-			}
-		}
+		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$style_class = '';
 		if ( 'style_1' === $heading_style ) {
