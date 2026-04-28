@@ -101,6 +101,11 @@ if ( ! class_exists( 'Tp_Nexter_Notice' ) ) {
 		 * @since 6.3.11
 		 */
 		public function theplus_blocks_promo_install_plugin() {
+
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
 			$installed_plugins = get_plugins();
 
 			$notice_dismissed = get_option( 'tpae_nexter_block_notice' );

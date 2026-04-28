@@ -91,6 +91,11 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 		 * @since 5.6.11
 		 */
 		public function tp_nexter_extension_promo() {
+
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
 			$installed_plugins = get_plugins();
 
 			$file_path  = $this->t_p_a_g_slug;

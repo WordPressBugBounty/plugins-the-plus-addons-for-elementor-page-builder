@@ -10,7 +10,8 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
+use TheplusAddons\Widgets\Base\Reload_Preview_Trait;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
@@ -40,25 +41,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class L_ThePlus_Blog_ListOut
  */
-class L_ThePlus_Blog_ListOut extends Widget_Base {
+class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
+	use Reload_Preview_Trait;
 	use TP_Global_Button_Style_Helper;
 	use TP_Post_Type_Options_Helper;
 
-	/**
-	 * Document Link For Need help.
-	 *
-	 * @since 5.3.3
-	 *
-	 * @var tp_doc of the class.
-	 */
-	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -103,58 +90,6 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 	 */
 	public function get_keywords() {
 		return array( 'Tp Blog Listing', 'Post Listing', 'Post Grid', 'Masonry Blog', 'Metro Blog Layout', 'Post Carousel', 'Post Filter', 'Load More Posts', 'Post Pagination', 'Lazy Load Posts', 'Smart Loop Post', 'Order Posts' );
-	}
-
-	/**
-	 * Get Docs Url.
-	 *
-	 * @since 1.0.0
-	 */
-	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
-
-		return esc_url( $help_url );
-	}
-
-	/**
-	 * Update is_reload_preview_required.
-	 *
-	 * @since 1.0.0
-	 * @version 5.4.2
-	 */
-	public function is_reload_preview_required() {
-		return true;
-	}
-
-	/**
-	 * It is use for adds.
-	 *
-	 * @since 6.1.0
-	 */
-	public function get_upsale_data() {
-		$val = false;
-
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			$val = true;
-		}
-
-		return array(
-			'condition'    => $val,
-			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
-			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		);
-	}
-
-	/**
-	 * Disable Elementor's default inner wrapper for custom HTML control.
-	 *
-	 * @since 6.3.3
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	/**
@@ -1354,6 +1289,45 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 			)
 		);
 		$this->add_control(
+			'button_type_switch',
+			array(
+				'label'       => esc_html__( 'Button Type', 'tpebl' ),
+				'type'        => Controls_Manager::CHOOSE,
+				'toggle'      => false,
+				'default'     => 'basic',
+				'label_block' => false,
+				'options'     => array(
+					'basic'  => array(
+						'title' => esc_html__( 'Basic', 'tpebl' ),
+						'icon'  => 'eicon-button',
+					),
+					'global' => array(
+						'title' => esc_html__( 'Global', 'tpebl' ),
+						'icon'  => 'eicon-globe',
+					),
+				),
+				'condition'   => array(
+					'style'          => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button' => 'yes',
+				),
+			)
+		);
+		$this->add_control(
+			'button_global_style_preset',
+			array(
+				'label'       => esc_html__( 'Global Style', 'tpebl' ),
+				'type'        => Controls_Manager::SELECT,
+				'label_block' => true,
+				'default'     => '',
+				'options'     => $this->get_global_button_style_options(),
+				'condition'   => array(
+					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button'     => 'yes',
+					'button_type_switch' => 'global',
+				),
+			)
+		);
+		$this->add_control(
 			'button_style',
 			array(
 				'type'      => Controls_Manager::SELECT,
@@ -1365,8 +1339,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'style-9' => esc_html__( 'Style 3', 'tpebl' ),
 				),
 				'condition' => array(
-					'style'          => array( 'style-2', 'style-3', 'style-5' ),
-					'display_button' => 'yes',
+					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button'     => 'yes',
+					'button_type_switch' => 'basic',
 				),
 			)
 		);
@@ -1398,9 +1373,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
 				),
 				'condition' => array(
-					'style'          => array( 'style-2', 'style-3', 'style-5' ),
-					'button_style!'  => array( 'style-7', 'style-9' ),
-					'display_button' => 'yes',
+					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'button_style!'      => array( 'style-7', 'style-9' ),
+					'display_button'     => 'yes',
+					'button_type_switch' => 'basic',
 				),
 			)
 		);
@@ -1411,10 +1387,11 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'type'      => Controls_Manager::ICON,
 				'default'   => 'fa fa-chevron-right',
 				'condition' => array(
-					'style'             => array( 'style-2', 'style-3', 'style-5' ),
-					'display_button'    => 'yes',
-					'button_style!'     => array( 'style-7', 'style-9' ),
-					'button_icon_style' => 'font_awesome',
+					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'display_button'     => 'yes',
+					'button_style!'      => array( 'style-7', 'style-9' ),
+					'button_icon_style'  => 'font_awesome',
+					'button_type_switch' => 'basic',
 				),
 			)
 		);
@@ -1433,6 +1410,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style!' => '',
+					'button_type_switch' => 'basic',
 				),
 			)
 		);
@@ -1451,6 +1429,7 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style!' => '',
+					'button_type_switch' => 'basic',
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .button-link-wrap i.button-after' => 'margin-left: {{SIZE}}{{UNIT}};',
@@ -1769,10 +1748,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'size' => 50,
 					'unit' => '%',
 				),
-				'condition'      => array( 'wrap_flex_direction' => array( 'row', 'row-reverse' ) ),
 				'selectors'      => array(
 					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-image' => 'width: {{SIZE}}%;',
 				),
+				'condition'  => array( 'wrap_flex_direction' => array( 'row', 'row-reverse' ) ),
 			)
 		);
 		$this->add_responsive_control(
@@ -1793,10 +1772,10 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					'size' => 50,
 					'unit' => '%',
 				),
-				'condition'      => array( 'wrap_flex_direction' => array( 'row', 'row-reverse' ) ),
 				'selectors'      => array(
 					'{{WRAPPER}} .tpae-compect-blog-wrap .tpae-blog-content' => 'width: {{SIZE}}%;',
 				),
+				'condition'  => array( 'wrap_flex_direction' => array( 'row', 'row-reverse' ) ),
 			)
 		);
 		$this->add_responsive_control(
@@ -3423,6 +3402,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'label_off'    => esc_html__( 'No', 'tpebl' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
+				'selectors'    => array(
+					'{{WRAPPER}} .blog-list.blog-style-5 .tpae-blog-content' => 'z-index: 2;',
+				),
 				'condition'    => array(
 					'style' => 'style-5',
 				),
@@ -3470,8 +3452,9 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 				'label'     => esc_html__( 'Button Style', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'style'          => array( 'style-5' ),
-					'display_button' => 'yes',
+					'style'              => array( 'style-5' ),
+					'display_button'     => 'yes',
+					'button_type_switch' => 'basic',
 				),
 			)
 		);
@@ -4196,12 +4179,34 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 					$this->add_render_attribute( $button_attr, 'class', 'button-link-wrap' );
 					$this->add_render_attribute( $button_attr, 'role', 'button' );
 
+					$button_type_switch = ! empty( $settings['button_type_switch'] ) ? $settings['button_type_switch'] : 'basic';
+					$button_text        = $settings['button_text'];
+					$overflow_class     = ( ! empty( $settings['button_overflow'] ) && 'yes' === $settings['button_overflow'] ) ? ' overflow' : '';
+
+					if ( 'global' === $button_type_switch ) {
+						$button_global_style_preset = ! empty( $settings['button_global_style_preset'] ) ? $settings['button_global_style_preset'] : '';
+						$btn_uid                    = uniqid( 'btn' );
+						$button_global_css          = ! empty( $button_global_style_preset ) ? $this->build_global_button_style_css( $button_global_style_preset, '#' . $btn_uid ) : '';
+
+						$the_button                      = '<div id="' . esc_attr( $btn_uid ) . '" class="pt-plus-button-wrapper' . $overflow_class . '">';
+							if ( ! empty( $button_global_css ) ) {
+								$the_button .= '<style>' . wp_strip_all_tags( $button_global_css ) . '</style>';
+							}
+							$the_button                 .= '<div class="button_parallax">';
+								$the_button             .= '<div class="ts-button">';
+									$the_button         .= '<div class="pt_plus_button button-style-8">';
+										$the_button     .= '<div class="animted-content-inner">';
+											$the_button .= '<a ' . $this->get_render_attribute_string( $button_attr ) . '>' . esc_html( $button_text ) . '</a>';
+										$the_button     .= '</div>';
+									$the_button         .= '</div>';
+								$the_button             .= '</div>';
+							$the_button                 .= '</div>';
+						$the_button                     .= '</div>';
+					} else {
 					$button_style   = $settings['button_style'];
-					$button_text    = $settings['button_text'];
 					$btn_uid        = uniqid( 'btn' );
 					$data_class     = $btn_uid;
 					$data_class    .= ' button-' . $button_style . ' ';
-					$overflow_class = ( ! empty( $settings['button_overflow'] ) && 'yes' === $settings['button_overflow'] ) ? ' overflow' : '';
 
 					$the_button                      = '<div class="pt-plus-button-wrapper' . $overflow_class . '">';
 						$the_button                 .= '<div class="button_parallax">';
@@ -4216,7 +4221,8 @@ class L_ThePlus_Blog_ListOut extends Widget_Base {
 							$the_button             .= '</div>';
 						$the_button                 .= '</div>';
 					$the_button                     .= '</div>';
-				}
+				}				
+			}
 
 				if ( 'metro' === $layout ) {
 

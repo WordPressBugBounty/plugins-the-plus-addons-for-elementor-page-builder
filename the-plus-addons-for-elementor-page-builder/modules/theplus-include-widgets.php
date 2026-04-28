@@ -172,7 +172,7 @@ if ( ! class_exists( 'L_Theplus_Widgets_Include' ) ) {
 				return false;
 			}
 
-			require L_THEPLUS_PATH . $filename;
+			require_once L_THEPLUS_PATH . $filename;
 
 			return true;
 		}

@@ -10,7 +10,7 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
 use Elementor\Group_Control_Background;
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class ThePlus Icon
  */
-class ThePlus_Icon extends Widget_Base {
+class ThePlus_Icon extends Plus_Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -52,21 +52,6 @@ class ThePlus_Icon extends Widget_Base {
 	}
 
 	/**
-	 * Get Widget Custom Help Url.
-	 *
-	 * @since 6.3.11
-	 */
-	public function get_custom_help_url() {
-		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-			$help_url = L_THEPLUS_HELP;
-		} else {
-			$help_url = THEPLUS_HELP;
-		}
-
-		return esc_url( $help_url );
-	}
-
-	/**
 	 * Get widget category.
 	 *
 	 * @since 6.3.11
@@ -91,15 +76,6 @@ class ThePlus_Icon extends Widget_Base {
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
-	}
-
-	/**
-	 * Disable default inner wrapper.
-	 *
-	 * @since 6.3.11
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	/**

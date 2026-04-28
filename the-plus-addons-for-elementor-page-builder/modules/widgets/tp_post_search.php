@@ -10,7 +10,7 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class L_ThePlus_Post_Search
  */
-class L_ThePlus_Post_Search extends Widget_Base {
+class L_ThePlus_Post_Search extends Plus_Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -34,14 +34,6 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	public function get_name() {
 		return 'tp-post-search';
 	}
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
-
 	/**
 	 * Get Widget Title.
 	 *
@@ -81,40 +73,6 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	public function get_keywords() {
 		return array( 'Tp Posts Search','Post search bar', 'search bar', 'post search', 'search widget', 'post widget', 'elementor search bar', 'elementor search widget', 'search bar', 'search widget', 'search', 'post search widget', 'post search', 'search addon', 'search elementor addon' );
 	}
-
-	/**
-	 * Get Widget Custom Help Url.
-	 *
-	 * @version 5.4.2
-	 */
-	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
-
-		return esc_url( $help_url );
-	}
-
-	/**
-	 * It is use for adds.
-	 *
-	 * @since 6.1.0
-	 */
-	public function get_upsale_data() {
-		$val = false;
-
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			$val = true;
-		}
-
-		return array(
-			'condition'    => $val,
-			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
-			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		);
-	}
-
 	/**
 	 * It is use for widget add in catch or not.
 	 *
@@ -123,16 +81,6 @@ class L_ThePlus_Post_Search extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return false;
 	}
-
-	/**
-	 * Disable Elementor's default inner wrapper for custom HTML control.
-	 *
-	 * @since 6.3.3
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-	}
-
 	/**
 	 * Register controls.
 	 *

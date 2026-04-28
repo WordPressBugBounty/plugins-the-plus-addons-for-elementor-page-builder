@@ -41,6 +41,26 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
 		private static $instance = null;
 
 		/**
+		 * Queued hover background-image rules collected during element rendering.
+		 * Each entry: [ 'token' => string, 'url' => string ]. Printed as a single
+		 * <style> block at wp_footer by tpae_print_hover_bg_styles().
+		 *
+		 * @since 6.4.14
+		 * @var   array
+		 */
+		private $hover_bg_queue = [];
+
+		/**
+		 * Monotonic counter used to generate unique per-element classes for
+		 * hover backgrounds, so the :hover rule works correctly even when the
+		 * same element ID is rendered multiple times inside a loop/archive.
+		 *
+		 * @since 6.4.14
+		 * @var   int
+		 */
+		private $hover_bg_counter = 0;
+
+		/**
 		 * Returns a singleton instance of the class.
 		 *
 		 * Ensures only one instance is created during execution.
@@ -170,6 +190,8 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
              * always preserves the `__dynamic__` entries as the editor stored them.
              */
             add_action( 'elementor/element/after_add_attributes', [ $this, 'tpae_inject_featured_image_bg_style' ] );
+
+            add_action( 'wp_footer', [ $this, 'tpae_print_hover_bg_styles' ], 100 );
 
             if ( ! defined( 'THEPLUS_VERSION' ) ) {
                 add_action( 'elementor/editor/after_enqueue_scripts', [ $this, 'tpae_pro_dynamic_tags_show' ] );
@@ -634,14 +656,25 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
 
             /*
              * Background image control keys Elementor registers on sections,
-             * columns, and containers. Covers: main background, overlay background,
-             * and hover-state background.
+             * columns, and containers.
+             *
+             * Default-state keys can be rendered as an inline `style="background-image:…"`
+             * on the wrapper because their CSS selector is the wrapper itself.
+             *
+             * Hover-state keys CANNOT be expressed as an inline style (there is no
+             * `:hover` for inline styles), so they are queued and printed later as a
+             * scoped <style> block targeting a unique per-element class.
              */
-            $bg_image_keys = [
+            $default_bg_keys = [
                 'background_image',
                 'background_overlay_image',
+            ];
+
+            $hover_bg_keys = [
                 'background_hover_image',
             ];
+
+            $bg_image_keys = array_merge( $default_bg_keys, $hover_bg_keys );
 
             /*
              * TPAE image tag slugs this method handles. Add new slugs here as
@@ -704,6 +737,29 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
                     continue;
                 }
 
+                if ( in_array( $key, $hover_bg_keys, true ) ) {
+                    /*
+                     * Hover-state: an inline `style` attribute on the wrapper would
+                     * apply to the DEFAULT state (no `:hover` support for inline
+                     * styles), which is exactly the bug this branch fixes.
+                     *
+                     * Instead, tag the wrapper with a unique class and queue a CSS
+                     * rule that targets `.<token>:hover`. The class is unique per
+                     * render invocation, so this also works inside loops/archives
+                     * where the same element ID is rendered multiple times.
+                     */
+                    $token = 'tpae-dyn-hover-bg-' . ( ++$this->hover_bg_counter );
+
+                    $element->add_render_attribute( '_wrapper', 'class', $token );
+
+                    $this->hover_bg_queue[] = [
+                        'token' => $token,
+                        'url'   => $image_url,
+                    ];
+
+                    continue;
+                }
+
                 // Inject the inline style. add_render_attribute() appends to any
                 // existing style value, so other background-* properties set by
                 // Elementor controls are not wiped out.
@@ -713,6 +769,35 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
                     'background-image: url("' . esc_url( $image_url ) . '");'
                 );
             }
+        }
+
+        /**
+         * Print queued hover background-image rules as a single <style> block
+         * in the footer.
+         *
+         * Inline styles on `_wrapper` cannot express `:hover`, so hover-state
+         * dynamic background images are collected during element rendering and
+         * emitted here with a unique per-element class selector.
+         *
+         * @since 6.4.14
+         */
+        public function tpae_print_hover_bg_styles() {
+
+            if ( empty( $this->hover_bg_queue ) ) {
+                return;
+            }
+
+            $css = '';
+
+            foreach ( $this->hover_bg_queue as $item ) {
+                $css .= '.' . $item['token'] . ':hover{background-image:url("' . esc_url( $item['url'] ) . '") !important;}';
+            }
+
+            // URLs are run through esc_url() above; tokens are generated from an
+            // internal counter so they contain only [a-z0-9-].
+            echo '<style id="tpae-dynamic-hover-bg-styles">' . $css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+            $this->hover_bg_queue = [];
         }
     }
 }

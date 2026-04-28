@@ -28,7 +28,7 @@
                         actions: [
                             {
                                 name: "tp_plus_copy",
-                                title: "Plus Copy",
+                                title: __("Plus Copy", "tpebl"),
                                 icon: "eicon-copy",
                                 callback: function () {
                                     var b = {};
@@ -57,7 +57,7 @@
                             },
                             {
                                 name: "tp_plus_paste",
-                                title: "Plus Paste",
+                                title: __("Plus Paste", "tpebl"),
                                 icon: "eicon-import-kit",
                                 callback: function () {
 
@@ -100,7 +100,7 @@
                                                     }
 
                                                     var parsedData = JSON.parse(pastedData);
-                                                    clearContentKeys( parsedData, keysToClear );
+                                                    clearContentKeys(parsedData, keysToClear);
 
                                                     if (!parsedData.tpelecode || typeof parsedData !== 'object') {
                                                         alert(elementor_json_error);
@@ -153,7 +153,7 @@
                                                 }
 
                                                 var parsedData = JSON.parse(pastedData);
-                                                clearContentKeys( parsedData, keysToClear );
+                                                clearContentKeys(parsedData, keysToClear);
 
                                                 if (!parsedData.tpelecode || typeof parsedData !== 'object') {
                                                     alert(elementor_json_error);
@@ -182,10 +182,10 @@
 
     const tpae_manage_paste = async (parsedData, h) => {
 
-        let message1 = __('We are pasting your design' , "tpebl");
-        let message2 = __('We have pasted your design' , "tpebl");
-        let message3 = __('Now we are importing your design' , "tpebl");
-        let message4 = __('We have successfully imported the design' , "tpebl");
+        let message1 = __('We are pasting your design', "tpebl");
+        let message2 = __('We have pasted your design', "tpebl");
+        let message3 = __('Now we are importing your design', "tpebl");
+        let message4 = __('We have successfully imported the design', "tpebl");
 
         showTpaePopup(message1);
 
@@ -231,7 +231,7 @@
 
         await tpae_createWidgetElements(parsedData, h);
 
-        showTpaePopup( message4, [], true );
+        showTpaePopup(message4, [], true);
 
         await new Promise(resolve => setTimeout(resolve, 5000));
 
@@ -498,7 +498,7 @@
             storedIconImg.src = theplus_cross_cp.asset_url + 'assets/svg/tp_loader.svg';
             storedIconImg.width = 60;
             storedIconImg.height = 60;
-            storedIconImg.alt = "Loading...";
+            storedIconImg.alt = __("Loading...", "tpebl");
             storedIconImg.className = "tpae-spinner";
         }
     };
@@ -571,21 +571,21 @@
 
 })(jQuery);
 
-function clearContentKeys( obj, keysToClear ) {
-    if ( typeof obj !== 'object' || obj === null ) {
+function clearContentKeys(obj, keysToClear) {
+    if (typeof obj !== 'object' || obj === null) {
         return;
     }
 
-    if ( Array.isArray( obj ) ) {
-        obj.forEach( item => clearContentKeys( item, keysToClear ) );
+    if (Array.isArray(obj)) {
+        obj.forEach(item => clearContentKeys(item, keysToClear));
     } else {
-        for ( let key in obj ) {
-            if ( !obj.hasOwnProperty( key ) ) continue;
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) continue;
 
-            if ( keysToClear.includes( key ) ) {
+            if (keysToClear.includes(key)) {
                 obj[key] = '';
             } else if (typeof obj[key] === 'object') {
-                clearContentKeys( obj[key], keysToClear );
+                clearContentKeys(obj[key], keysToClear);
             }
         }
     }

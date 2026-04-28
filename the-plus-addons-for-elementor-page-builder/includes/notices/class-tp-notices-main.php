@@ -263,9 +263,6 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-join-community-notice.php';
 				}
 
-				/** Allow Data Tracking*/
-				// include L_THEPLUS_PATH . 'includes/notices/class-tp-data-tracking-notice.php';
-
 			}
 
 			// $envato_details = $this->tpae_check_plugins_depends( $envato_plugins );

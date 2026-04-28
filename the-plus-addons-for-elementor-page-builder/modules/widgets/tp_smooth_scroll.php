@@ -10,7 +10,7 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
 use Elementor\Group_Control_Typography;
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class ThePlus_Smooth_Scroll
  */
-class ThePlus_Smooth_Scroll extends Widget_Base {
+class ThePlus_Smooth_Scroll extends Plus_Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -79,22 +79,6 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	public function get_keywords() {
 		return array( 'Tp Smooth Scroll Effect', 'Smooth Scrolling', 'Keyboard Smooth Scrolling', 'Touchpad Smooth Scroll', 'Page Smooth Scroll', 'Scroll Navigation', 'Infinite Scroll', 'Scrolling Effects', 'Scrolling Animation' );
 	}
-
-	/**
-	 * Get Widget Custom Help Url.
-	 *
-	 * @version 5.4.2
-	 */
-	public function get_custom_help_url() {
-		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-			$help_url = L_THEPLUS_HELP;
-		} else {
-			$help_url = THEPLUS_HELP;
-		}
-
-		return esc_url( $help_url );
-	}
-
 	/**
 	 * It is use for widget add in catch or not.
 	 *
@@ -102,37 +86,6 @@ class ThePlus_Smooth_Scroll extends Widget_Base {
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
-	}
-
-	/**
-	 * It is use for adds.
-	 *
-	 * @since 6.1.0
-	 */
-	public function get_upsale_data() {
-		$val = false;
-
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			$val = true;
-		}
-
-		return array(
-			'condition'    => $val,
-			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
-			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		);
-	}
-
-	/**
-	 * Disable Elementor's default inner wrapper for custom HTML control.
-	 *
-	 * @since 6.3.3
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	/**

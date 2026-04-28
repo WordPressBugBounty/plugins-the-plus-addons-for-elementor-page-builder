@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.13
+Stable tag: 6.4.14
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.14 =
+Add : Blog Listing : Style-5 - Added global button style option for the Submit button
+Update : Post Comment : Added global button style option for the Submit button
+Improvement : Unused code removed from the plugin
+Fix : Plus Copy Paste Button : String are not Translatable
+Fix : Dynamic Tag : Featured Image tag not working in the Container hover Background Style
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.13 =
 Add : MCP Integration : Added support to control widgets and their settings through MCP setup.

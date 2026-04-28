@@ -9,7 +9,7 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
@@ -24,16 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class L_ThePlus_Header_Extras
  */
-class L_ThePlus_Header_Extras extends Widget_Base {
-
-	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
+class L_ThePlus_Header_Extras extends Plus_Widget_Base {
 
 	/**
 	 * Get Widget Name.
@@ -86,54 +77,12 @@ class L_ThePlus_Header_Extras extends Widget_Base {
 	}
 
 	/**
-	 * Get Widget categories.
-	 *
-	 * @version 6.1.0
-	 */
-	public function get_custom_help_url() {
-		$help_url = $this->tp_help;
-
-		return esc_url( $help_url );
-	}
-
-	/**
 	 * It is use for widget add in catch or not.
 	 *
 	 * @since 6.1.0
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
-	}
-
-	/**
-	 * It is use for adds.
-	 *
-	 * @since 6.1.0
-	 */
-	public function get_upsale_data() {
-		$val = false;
-
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			$val = true;
-		}
-
-		return array(
-			'condition'    => $val,
-			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
-			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		);
-	}
-
-	/**
-	 * Disable Elementor's default inner wrapper for custom HTML control.
-	 *
-	 * @since 6.3.3
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	/**

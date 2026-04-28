@@ -297,6 +297,10 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 		 */
 		public function tpae_check_plugin_status() {
 
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
 			$installed_plugins = get_plugins();
 
 			$installed = 'false';

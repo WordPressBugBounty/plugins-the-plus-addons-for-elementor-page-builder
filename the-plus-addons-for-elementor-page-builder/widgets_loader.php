@@ -18,6 +18,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Autoload the shared widget base class and reload-preview trait on demand.
+ *
+ * Registered here (rather than in the main plugin file) so the plugin bootstrap
+ * stays clean. The callback only fires when one of the listed FQCNs is actually
+ * referenced — typically from inside a migrated widget's `extends` clause or
+ * `use` statement during `elementor/widgets/register`.
+ *
+ * @since 6.4.13
+ */
+spl_autoload_register(
+	function ( $class ) {
+		if ( 'TheplusAddons\\Widgets\\Base\\Plus_Widget_Base' === $class ) {
+			require_once L_THEPLUS_PATH . 'modules/widgets/base/class-plus-widget-base.php';
+		}
+		if ( 'TheplusAddons\\Widgets\\Base\\Reload_Preview_Trait' === $class ) {
+			require_once L_THEPLUS_PATH . 'modules/widgets/base/trait-reload-preview.php';
+		}
+	}
+);
+
+/**
  * It Is load all widget and dashbord
  *
  * @since 1.0.0

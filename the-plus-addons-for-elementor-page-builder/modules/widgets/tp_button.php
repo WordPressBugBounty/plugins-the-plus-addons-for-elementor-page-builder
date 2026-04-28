@@ -10,7 +10,7 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Background;
@@ -28,17 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class L_ThePlus_Button
  */
-class L_ThePlus_Button extends Widget_Base {
+class L_ThePlus_Button extends Plus_Widget_Base {
 	use TP_Global_Button_Style_Helper;
-
-	public $tp_doc = L_THEPLUS_TPDOC;
-
-	/**
-	 * Helpdesk Link For Need help.
-	 *
-	 * @var tp_help of the class.
-	 */
-	public $tp_help = L_THEPLUS_HELP;
 
 	/**
 	 * Get Widget Name.
@@ -85,12 +76,6 @@ class L_ThePlus_Button extends Widget_Base {
 		return array( 'Tp Button', 'CTA Button', 'Hover-Text Button', 'Icon Button', 'Tooltip Button', 'Parallax Button', 'Continuous Animation Button', 'Shake Animation Button', 'Full-Width Button', 'Scroll-Animation Button' );
 	}
 
-	public function get_custom_help_url() {
-		$doc_url = $this->tp_help;
-
-		return esc_url( $doc_url );
-	}
-
 	/**
 	 * It is use for widget add in catch or not.
 	 *
@@ -98,15 +83,6 @@ class L_ThePlus_Button extends Widget_Base {
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
-	}
-
-	/**
-	 * Disable Elementor's default inner wrapper for custom HTML control.
-	 *
-	 * @since 6.3.3
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	protected function get_is_simple_button( $settings ) {
@@ -433,14 +409,6 @@ class L_ThePlus_Button extends Widget_Base {
 		);
 		$this->start_popover();
 		$this->add_control(
-			'icon_fs_options',
-			array(
-				'label'     => esc_html__( 'Font Awesome', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'after',
-			)
-		);
-		$this->add_control(
 			'button_icon',
 			array(
 				'label'       => esc_html__( 'Icon', 'tpebl' ),
@@ -469,14 +437,6 @@ class L_ThePlus_Button extends Widget_Base {
 			)
 		);
 		$this->start_popover();
-		$this->add_control(
-			'icon_f5_options',
-			array(
-				'label'     => esc_html__( 'Font Awesome 5', 'tpebl' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'after',
-			)
-		);
 		$this->add_control(
 			'button_icon_5',
 			array(

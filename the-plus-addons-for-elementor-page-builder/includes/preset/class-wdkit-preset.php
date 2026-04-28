@@ -187,6 +187,10 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 */
 		public function tpae_check_plugin_status() {
 
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
 			$installed_plugins = get_plugins();
 
 			$plugin_page_url = add_query_arg( array( 'page' => 'wdesign-kit' ), admin_url( 'admin.php' ) );

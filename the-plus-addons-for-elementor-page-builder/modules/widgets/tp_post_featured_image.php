@@ -10,7 +10,7 @@
 
 namespace TheplusAddons\Widgets;
 
-use Elementor\Widget_Base;
+use TheplusAddons\Widgets\Base\Plus_Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -22,18 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class ThePlus_Featured_Image
  */
-class ThePlus_Featured_Image extends Widget_Base {
-
-	/**
-	 * Document Link For Need help.
-	 *
-	 * @since 1.0.1
-	 * @version 5.4.2
-	 *
-	 * @var TpDoc of the class.
-	 */
-	public $tp_doc = L_THEPLUS_TPDOC;
-
+class ThePlus_Featured_Image extends Plus_Widget_Base {
 	/**
 	 * Get Widget Name.
 	 *
@@ -83,45 +72,6 @@ class ThePlus_Featured_Image extends Widget_Base {
 	public function get_keywords() {
 		return array( 'Tp Post Featured Image', 'Featured Image', 'Image Widget', 'Image Gallery', 'Image Slider', 'Image Carousel', 'Image Grid', 'Image Showcase', 'Image Viewer', 'Image Display', 'Image Preview', 'Image Thumbnail', 'Image Container', 'Image Box', 'Image Block', 'Image Frame', 'Image Holder', 'Image Wrapper', 'Image Placeholder', 'Image Slider Widget', 'Image Carousel Widget', 'Image Grid Widget', 'Image Showcase Widget', 'Image Viewer Widget', 'Image Display Widget', 'Image Preview Widget', 'Image Thumbnail Widget', 'Image Container Widget', 'Image Box Widget', 'Image Block' );
 	}
-
-	/**
-	 * Get Custom Url.
-	 *
-	 * @since 1.0.1
-	 * @version 5.4.2
-	 */
-	public function get_custom_help_url() {
-		if ( defined( 'L_THEPLUS_VERSION' ) && ! defined( 'THEPLUS_VERSION' ) ) {
-			$help_url = L_THEPLUS_HELP;
-		} else {
-			$help_url = THEPLUS_HELP;
-		}
-
-		return esc_url( $help_url );
-	}
-
-	/**
-	 * It is use for adds.
-	 *
-	 * @since 6.1.0
-	 */
-	public function get_upsale_data() {
-		$val = false;
-
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			$val = true;
-		}
-
-		return array(
-			'condition'    => $val,
-			'image'        => esc_url( L_THEPLUS_ASSETS_URL . 'images/pro-features/upgrade-proo.png' ),
-			'image_alt'    => esc_attr__( 'Upgrade', 'tpebl' ),
-			'title'        => esc_html__( 'Unlock all Features', 'tpebl' ),
-			'upgrade_url'  => esc_url( 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links' ),
-			'upgrade_text' => esc_html__( 'Upgrade to Pro!', 'tpebl' ),
-		);
-	}
-
 	/**
 	 * It is use for widget add in catch or not.
 	 *
@@ -130,16 +80,6 @@ class ThePlus_Featured_Image extends Widget_Base {
 	public function is_dynamic_content(): bool {
 		return true;
 	}
-
-	/**
-	 * Disable Elementor's default inner wrapper for custom HTML control.
-	 *
-	 * @since 6.3.3
-	 */
-	public function has_widget_inner_wrapper(): bool {
-		return ! \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
-	}
-
 	/**
 	 * Get Widget Custom Help Url.
 	 *
