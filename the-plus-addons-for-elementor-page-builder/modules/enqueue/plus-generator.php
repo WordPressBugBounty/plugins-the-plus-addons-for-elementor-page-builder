@@ -400,7 +400,7 @@ class L_Plus_Generator {
 		$js_inline1 = 'var theplus_ajax_url = "' . admin_url( 'admin-ajax.php' ) . '";
 		var theplus_ajax_post_url = "' . admin_url( 'admin-post.php' ) . '";
 		var theplus_nonce = "' . wp_create_nonce( 'theplus-addons' ) . '";';
-		echo wp_print_inline_script_tag( $js_inline1 );
+		wp_print_inline_script_tag( $js_inline1 );
 	}
 
 	// Plus Addons Scripts

@@ -132,8 +132,13 @@ if ( ! class_exists( 'ThePlusAddons\Elementor\Dimensions\TP_Control_Dimensions' 
 			if ( ! empty( $preset_id ) ) {
 				// Store for child controls (tablet / mobile) to inherit.
 				self::$resolved_presets[ $base_name ] = $preset_id;
-			} elseif ( empty( $preset_id ) && 'desktop' !== $device ) {
-				// Tablet / Mobile with no preset — inherit from desktop if available.
+			} elseif ( 'desktop' === $device ) {
+				// Desktop with no preset — clear any stale entry left by a previous widget
+				// sharing the same base control name (e.g. two widgets both using `border_radius`).
+				// Without this, that widget's tablet/mobile would silently inherit the prior preset.
+				unset( self::$resolved_presets[ $base_name ] );
+			} else {
+				// Tablet / Mobile with no preset — inherit from this widget's desktop if available.
 				$preset_id = isset( self::$resolved_presets[ $base_name ] ) ? self::$resolved_presets[ $base_name ] : '';
 			}
 

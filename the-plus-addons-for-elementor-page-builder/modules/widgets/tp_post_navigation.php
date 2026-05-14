@@ -1239,6 +1239,9 @@ class ThePlus_Post_Navigation extends Plus_Widget_Base {
 
 		$showcsttexonomy = isset( $settings['showcsttexonomy'] ) ? $settings['showcsttexonomy'] : 'no';
 
+		$prev_post = null;
+		$next_post = null;
+
 		if ( isset( $showcsttexonomy ) && 'yes' === $showcsttexonomy ) {
 			$showcsttexonomy_select = ! empty( $settings['showcsttexonomy_select'] ) ? $settings['showcsttexonomy_select'] : '';
 			if ( $showcsttexonomy_select ) {
@@ -1357,7 +1360,7 @@ class ThePlus_Post_Navigation extends Plus_Widget_Base {
 					}
 
 					$nextnav .= '<a href="' . esc_url( get_permalink( $next_post->ID ) ) . '" class="post_nav_link next tp-nav-trans" rel="' . esc_attr__( 'next', 'tpebl' ) . '">';
-					$nextnav .= '<div class="tp-post-nav-hover-con ' . esc_attr( $lazyclass ) . '" style="background-image: url(' . esc_url( $img1[0] ) . ');background-size: cover;background-attachment: fixed;background-position: center center;background-repeat:no-repeat;">' . $nextpostcon . '</div></a>';
+					$nextnav .= '<div class="tp-post-nav-hover-con ' . esc_attr( $lazyclass ) . '" style="background-image: url(' . esc_url( ! empty( $img1[0] ) ? $img1[0] : '' ) . ');background-size: cover;background-attachment: fixed;background-position: center center;background-repeat:no-repeat;">' . $nextpostcon . '</div></a>';
 				} elseif ( 'style-4' === $style ) {
 					$nextnav .= '<a href="' . esc_url( get_permalink( $next_post->ID ) ) . '" class="post_nav_link next tp-nav-trans" rel="' . esc_attr__( 'next', 'tpebl' ) . '">';
 

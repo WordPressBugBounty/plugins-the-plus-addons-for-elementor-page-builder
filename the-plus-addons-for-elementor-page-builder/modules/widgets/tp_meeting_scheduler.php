@@ -626,7 +626,7 @@ class ThePlus_Meeting_Scheduler extends Plus_Widget_Base {
 				}
 				$output .= '<div class="calendly-inline-widget" data-url="https://calendly.com/' . esc_attr( $calendly_uname ) . esc_attr( $time_output ) . '?' . esc_attr( $calendly_event ) . esc_attr( $calendly_text_color ) . esc_attr( $calendly_primary_color ) . esc_attr( $calendly_background_color ) . '">';
 				$output .= '</div>';
-				$output .= ' <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>';
+				wp_enqueue_script( 'tpae-calendly-widget', 'https://assets.calendly.com/assets/external/widget.js', array(), L_THEPLUS_VERSION, true );
 				if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
 					$output .= '<div class="calendly-wrapper" style="width:100%; position:absolute; top:0; left:0; z-index:100;"></div>';
 				}

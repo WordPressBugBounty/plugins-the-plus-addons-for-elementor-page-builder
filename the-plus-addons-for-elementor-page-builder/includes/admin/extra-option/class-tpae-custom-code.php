@@ -74,13 +74,11 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 
 			$css_rules = '';
 			if ( ! empty( $this->db_data['theplus_custom_css_editor'] ) ) {
-				$css_rules .= '<style>';
+				$theplus_custom_css_editor = (string) $this->db_data['theplus_custom_css_editor'];
 
-					$theplus_custom_css_editor = $this->db_data['theplus_custom_css_editor'];
+				$theplus_custom_css_editor = preg_replace( '#</\s*(style|script)#i', '<\\/\\1', $theplus_custom_css_editor );
 
-					$css_rules .= $theplus_custom_css_editor;
-
-				$css_rules .= '</style>';
+				$css_rules .= '<style>' . $theplus_custom_css_editor . '</style>';
 			}
 
 			echo $css_rules;
@@ -98,7 +96,7 @@ if ( ! class_exists( 'Tpae_Custom_Code' ) ) {
 
 				$js_rules = $this->db_data['theplus_custom_js_editor'];
 
-				echo wp_print_inline_script_tag( $js_rules );
+				wp_print_inline_script_tag( $js_rules );
 			}
 		}
 	}

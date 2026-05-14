@@ -90,26 +90,39 @@ class ThePlus_Dynamic_Tag_Post_Category_Image extends Data_Tag {
 	 */
 	public function get_value( array $options = [] ) {
 
-		$post_id = get_the_ID();
+		$term = null;
 
-		// Elementor editor fallback
-		if ( ! $post_id && isset( $_REQUEST['post_id'] ) ) {
-			$post_id = absint( $_REQUEST['post_id'] );
+		// On a category archive, use the queried category directly.
+		if ( is_category() ) {
+			$queried = get_queried_object();
+			if ( $queried instanceof \WP_Term ) {
+				$term = $queried;
+			}
+		} else {
+			$post_id = get_the_ID();
+
+			// Elementor editor fallback.
+			if ( ! $post_id && ! empty( $_REQUEST['post_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview only, value is cast via absint().
+				$post_id = absint( wp_unslash( $_REQUEST['post_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview only.
+			}
+
+			if ( ! $post_id ) {
+				return null;
+			}
+
+			$terms = get_the_terms( $post_id, 'category' );
+
+			if ( empty( $terms ) || is_wp_error( $terms ) ) {
+				return null;
+			}
+
+			$term = $terms[0];
 		}
 
-		if ( ! $post_id ) {
+		if ( empty( $term ) ) {
 			return null;
 		}
 
-		$terms = get_the_terms( $post_id, 'category' );
-
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
-			return null;
-		}
-
-		$term = $terms[0];
-
-		// YOUR ACTUAL SAVED META KEY
 		$image_id = get_term_meta( $term->term_id, 'tp_taxonomy_image_id', true );
 
 		if ( empty( $image_id ) ) {

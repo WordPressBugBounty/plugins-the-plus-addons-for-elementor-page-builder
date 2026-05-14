@@ -71,7 +71,6 @@ if ( ! class_exists( 'Tpae_Update_Popup' ) ) {
 			if ( $get_notification !== TPAE_MENU_NOTIFICETIONS && get_option('tpae_onbording_end') ) {
 				add_action( 'adminmenu', array( $this, 'tpae_update_form' ) );
 
-				add_action( 'wp_enqueue_scripts', array( $this, 'tpae_update_form_scripts' ) );
 				add_action( 'admin_enqueue_scripts', array( $this, 'tpae_update_form_scripts' ) );
 			}
 

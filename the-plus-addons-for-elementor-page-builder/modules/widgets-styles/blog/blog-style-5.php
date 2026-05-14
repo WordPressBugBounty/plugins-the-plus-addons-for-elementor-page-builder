@@ -8,6 +8,10 @@
  * @package Theplus
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $tp_absolute_class = '';
 $wrap_classes      = '';
 

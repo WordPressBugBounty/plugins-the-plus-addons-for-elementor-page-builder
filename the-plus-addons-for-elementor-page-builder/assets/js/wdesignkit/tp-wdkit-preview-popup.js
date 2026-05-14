@@ -71,7 +71,7 @@
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.log('Response:', xhr.responseText);
+                        console.error('TPAE wdkit preview popup dismiss failed:', status, error);
                     }
                 });
             });

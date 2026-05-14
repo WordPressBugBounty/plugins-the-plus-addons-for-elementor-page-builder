@@ -230,7 +230,7 @@ class Wdk_Widget_Api {
 
 		$array_data = array(
 			'CurrentPage' => isset( $_POST['page'] ) ? (int) $_POST['page'] : 1,
-			'builder'     => isset( $_POST['buildertype'] ) ? wp_unslash( $_POST['buildertype'] ) : '["elementor"]',
+			'builder'     => isset( $_POST['buildertype'] ) ? sanitize_text_field( wp_unslash( $_POST['buildertype'] ) ) : '["elementor"]',
 			'category'    => isset( $_POST['category'] ) ? sanitize_text_field( wp_unslash( $_POST['category'] ) ) : '',
 			'ParPage'     => isset( $_POST['perpage'] ) ? (int) $_POST['perpage'] : 1000,
 			'search'      => isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '',

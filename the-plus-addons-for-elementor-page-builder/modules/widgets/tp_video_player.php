@@ -1692,7 +1692,7 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 				'sticky'     => esc_attr( $sticky_video ),
 				'sticky-pos' => esc_attr( $sticky_video_pos ),
 			);
-			$stickyparam = 'data-stickyparam= \'' . wp_json_encode( $stickyattr ) . '\' ';
+			$stickyparam = 'data-stickyparam="' . esc_attr( wp_json_encode( $stickyattr ) ) . '" ';
 		}
 
 			$video_player  = '<div class="pt_plus_video-box-shadow ' . esc_attr( $uid ) . ' ' . esc_attr( $animated_class ) . esc_attr( $mask_image ) . '" ' . $animation_attr . ' ' . $stickyparam . ' >';
@@ -1711,6 +1711,9 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 
 		$vi_transform  = ! empty( $settings['video_transform'] ) ? $settings['video_transform'] : '';
 		$hov_transform = ! empty( $settings['hover_video_transform'] ) ? $settings['hover_video_transform'] : '';
+
+		$vi_transform  = preg_replace( '/[^A-Za-z0-9_\s\(\)\.,\-\+%]/', '', $vi_transform );
+		$hov_transform = preg_replace( '/[^A-Za-z0-9_\s\(\)\.,\-\+%]/', '', $hov_transform );
 
 		if ( ! empty( $vi_transform ) || ! empty( $hov_transform ) ) {
 

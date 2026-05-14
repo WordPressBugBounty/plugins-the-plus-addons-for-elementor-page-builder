@@ -91,7 +91,9 @@ class ThePlus_Dynamic_Tag_Post_Terms extends Tag {
 				'label'   => esc_html__( 'Separator', 'tpebl' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => ', ',
-				'ai'      => 'false',
+				'ai'      => [
+					'active' => false,
+				],
 			]
 		);
 	}

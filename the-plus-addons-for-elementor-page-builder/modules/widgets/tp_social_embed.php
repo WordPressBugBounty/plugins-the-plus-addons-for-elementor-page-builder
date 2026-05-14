@@ -3468,7 +3468,7 @@ class ThePlus_Social_Embed extends Plus_Widget_Base {
 					} else {
 						$output .= '<div class="fb-comments tp-fb-iframe" data-href="' . esc_url( $FBCommentAdd ) . '" data-width="" data-numposts="' . esc_attr( $settings['CountC'] ) . '" data-order-by="' . esc_attr( $settings['OrderByC'] ) . '" ></div>';
 					}
-					$output .= '<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>';
+					wp_enqueue_script( 'tpae-fb-sdk', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2', array(), L_THEPLUS_VERSION, true );
 				}
 			}
 			if ( $Type === 'posts' ) {
@@ -3530,7 +3530,7 @@ class ThePlus_Social_Embed extends Plus_Widget_Base {
 				$SaveURL = ! empty( $settings['SaveURL'] ) && ! empty( $settings['SaveURL']['url'] ) ? $settings['SaveURL']['url'] : '';
 
 				$output .= '<div class="fb-save" data-uri="' . esc_url( $SaveURL ) . '" data-size="' . esc_attr( $SizeBtn ) . '"></div>';
-				$output .= '<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>';
+				wp_enqueue_script( 'tpae-fb-sdk', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2', array(), L_THEPLUS_VERSION, true );
 			}
 			if ( $Type === 'share' ) {
 				$ShareURL = ! empty( $settings['ShareURL'] ) && ! empty( $settings['ShareURL']['url'] ) ? $settings['ShareURL']['url'] : '';
@@ -3573,7 +3573,7 @@ class ThePlus_Social_Embed extends Plus_Widget_Base {
 						$DesignBTN[] = $value;
 					}
 				}
-				$TwDesign = json_encode( $DesignBTN );
+				$TwDesign = wp_json_encode( $DesignBTN );
 				if ( $TwGuides === 'Profile' ) {
 					$TwURl = 'https://twitter.com/' . esc_attr( $Twname );
 				} elseif ( $TwGuides === 'List' ) {
@@ -3616,7 +3616,7 @@ class ThePlus_Social_Embed extends Plus_Widget_Base {
 					$output .= '<a class="tw-button ' . esc_attr( $lz1 ) . '" href="https://twitter.com/intent/retweet?tweet_id=' . esc_attr( $TwTweetId ) . '">' . wp_kses_post( $Twicon . ' ' . $settings['RetweetBtn'] ) . '</a>';
 				}
 			}
-			$output .= '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+			wp_enqueue_script( 'tpae-twitter-widgets', 'https://platform.twitter.com/widgets.js', array(), L_THEPLUS_VERSION, true );
 		} elseif ( $EmbedType === 'vimeo' ) {
 			$VmId     = ! empty( $settings['ViId'] ) ? $settings['ViId'] : '';
 			$VmStime  = ! empty( $settings['VmStime'] ) ? $settings['VmStime'] : '';
@@ -3657,7 +3657,8 @@ class ThePlus_Social_Embed extends Plus_Widget_Base {
 			} elseif ( $IGType === 'igtv' ) {
 				$IG_id = 'tv/' . $IGId;
 			}
-			$output .= '<blockquote class="instagram-media" ' . esc_attr( $IGCap ) . ' data-instgrm-version="13" data-instgrm-permalink="https://www.instagram.com/' . esc_attr( $IG_id ) . '/?utm_source=ig_embed"></blockquote><script async src="//www.instagram.com/embed.js"></script>';
+			$output .= '<blockquote class="instagram-media" ' . esc_attr( $IGCap ) . ' data-instgrm-version="13" data-instgrm-permalink="https://www.instagram.com/' . esc_attr( $IG_id ) . '/?utm_source=ig_embed"></blockquote>';
+			wp_enqueue_script( 'tpae-instagram-embed', 'https://www.instagram.com/embed.js', array(), L_THEPLUS_VERSION, true );
 		} elseif ( $EmbedType === 'youtube' ) {
 			$YtType     = ! empty( $settings['YtType'] ) ? $settings['YtType'] : 'YtSV';
 			$YtOption   = ! empty( $settings['YtOption'] ) ? $settings['YtOption'] : array();

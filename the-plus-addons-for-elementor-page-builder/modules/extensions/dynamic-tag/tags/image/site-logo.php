@@ -54,8 +54,9 @@ class ThePlus_Dynamic_Tag_Site_Logo extends Data_Tag  {
      * @return array
      */
 	public function get_categories() {
-		return [ 
-			Module::IMAGE_CATEGORY 
+		return [
+			Module::IMAGE_CATEGORY,
+			Module::MEDIA_CATEGORY,
 		];
 	}
 

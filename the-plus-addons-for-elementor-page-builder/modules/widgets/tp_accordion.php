@@ -1665,7 +1665,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 		$icon_allig   = ! empty( $settings['icon_align'] ) ? $settings['icon_align'] : '';
 
 		?>
-		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo wp_kses_post( $animation_attr ); ?>  role="tablist">
+		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo $animation_attr; ?>  role="tablist">
 			<?php
 
 			$acc_tabs = ! empty( $settings['tabs'] ) ? $settings['tabs'] : [];
@@ -1798,7 +1798,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 									} else {
 										$template_status = get_post_status( $content_template );
 										if ( 'publish' === $template_status ) {
-											echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+											echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template, true ) . '</div>';
 										} else {
 											echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 										}
@@ -1829,7 +1829,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 
 									$template_status = get_post_status( $content_template );
 									if ( 'publish' === $template_status ) {
-										echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+										echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template, true ) . '</div>';
 									} else {
 										echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 									}

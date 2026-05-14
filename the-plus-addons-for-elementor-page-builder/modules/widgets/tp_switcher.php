@@ -1792,7 +1792,7 @@ class L_ThePlus_Switcher extends Plus_Widget_Base {	// public $tp_doc = '';
 				$template_status = $this->get_elementor_template_status( $content_template_id );
 
 				if ( 'publish' === $template_status ) {
-					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ) );
+					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_template_id, 24, -2 ), true );
 				} else {
 					$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 				}
@@ -1813,7 +1813,7 @@ class L_ThePlus_Switcher extends Plus_Widget_Base {	// public $tp_doc = '';
 					$template_a_status = get_post_status( $content_a_template );
 
 					if ( 'publish' === $template_a_status ) {
-						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_a_template );
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_a_template, true );
 					} else {
 						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}
@@ -1833,7 +1833,7 @@ class L_ThePlus_Switcher extends Plus_Widget_Base {	// public $tp_doc = '';
 				$template_b_status = get_post_status( $content_b_template_id );
 
 				if ( 'publish' === $template_b_status ) {
-					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_b_template_id, 24, -2 ) );
+					$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $content_b_template_id, 24, -2 ), true );
 				} else {
 					$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 				}
@@ -1854,7 +1854,7 @@ class L_ThePlus_Switcher extends Plus_Widget_Base {	// public $tp_doc = '';
 					$template_b_status = get_post_status( $content_b_template );
 
 					if ( 'publish' === $template_b_status ) {
-						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template );
+						$switcher .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_b_template, true );
 					} else {
 						$switcher .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}

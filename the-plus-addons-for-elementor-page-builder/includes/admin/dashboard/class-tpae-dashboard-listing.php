@@ -135,8 +135,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 			}
 
 			$labels = array(
-				'name'                  => $client_post_title,
-				'singular_name'         => $client_post_title,
+				'name'                  => esc_html( $client_post_title ),
+				'singular_name'         => esc_html( $client_post_title ),
 				'menu_name'             => esc_html( $client_post_title ),
 				'name_admin_bar'        => esc_html( $client_post_title ),
 				'archives'              => esc_html__( 'Item Archives', 'tpebl' ),
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 				'capability_type'     => 'page',
 			);
 
-			register_post_type( $post_name, $args );
+			register_post_type( sanitize_key( $post_name ), $args );
 		}
 
 		/**
@@ -280,8 +280,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 			}
 
 			$labels = array(
-				'name'                  => $tp_testimonial_post_title,
-				'singular_name'         => $tp_testimonial_post_title,
+				'name'                  => esc_html( $tp_testimonial_post_title ),
+				'singular_name'         => esc_html( $tp_testimonial_post_title ),
 				'menu_name'             => esc_html( $tp_testimonial_post_title ),
 				'name_admin_bar'        => esc_html( $tp_testimonial_post_title ),
 				'archives'              => esc_html__( 'Item Archives', 'tpebl' ),
@@ -327,7 +327,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 				'capability_type'     => 'page',
 			);
 
-			register_post_type( $post_name, $args );
+			register_post_type( sanitize_key( $post_name ), $args );
 		}
 
 		/**
@@ -426,8 +426,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 			}
 
 			$labels = array(
-				'name'                  => $team_member_title,
-				'singular_name'         => $team_member_title,
+				'name'                  => esc_html( $team_member_title ),
+				'singular_name'         => esc_html( $team_member_title ),
 				'menu_name'             => esc_html( $team_member_title ),
 				'name_admin_bar'        => esc_html( $team_member_title ),
 				'archives'              => esc_html__( 'Item Archives', 'tpebl' ),
@@ -475,7 +475,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 				'capability_type'     => 'page',
 			);
 
-			register_post_type( $post_name, $args );
+			register_post_type( sanitize_key( $post_name ), $args );
 		}
 
 		/**

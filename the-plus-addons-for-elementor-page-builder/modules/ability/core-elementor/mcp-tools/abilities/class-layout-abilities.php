@@ -595,6 +595,7 @@ class Tpae_Elementor_MCP_Layout_Abilities {
 			if ( ! isset( $children_by_id[ $eid ] ) ) {
 				return new \WP_Error(
 					'invalid_element_id',
+					/* translators: %s: element ID that is not a direct child of the container. */
 					sprintf( __( 'Element "%s" is not a direct child of the container.', 'tpebl' ), $eid )
 				);
 			}

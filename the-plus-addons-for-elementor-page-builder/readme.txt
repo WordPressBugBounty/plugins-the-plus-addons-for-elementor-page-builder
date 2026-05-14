@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 6.4.14
+Stable tag: 6.4.15
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,28 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.15 =
+Add : Stylish List : Added Gap & Alignment options
+Improved : Dashboard : Category switcher support added
+Improved : Security hardening for output escaping across Blog Listing, Gallery, Team Member, Table, Post Search, Video Player, Testimonials, Stylish List, Accordion, Navigation Menu Lite, Carousel Anything, Hovercard, Client Listing, Form Widget, White Label, Social Embed & Dashboard Listing
+Improved : Security enhancements for input sanitization and URL validation across Form Handler, Load More, Theme Builder Downloader, Wdkit API, Dynamic Categories & Custom CSS/JS
+Improved : Dashboard AJAX security with allowlisted option/transient keys, external API URL validation & stricter capability/nonce checks
+Improved : SVG/SVGZ upload security with malformed file rejection and capability-based MIME validation
+Improved : Capability checks across Plus Copy/Paste upload, Wdkit Preset install, Deactivation Feedback, Create Temp AJAX, Dynamic Tag notice & Theme Builder editor notice
+Improved : SQL identifier handling and query security
+Improved : Update Popup performance by removing unused frontend asset loading
+Improved : Social Embed & Meeting Scheduler script loading via WordPress standard wp_enqueue_script
+Improved : Dynamic Categories updated to latest WordPress term query API
+Improved : Translation function handling across Breadcrumbs Bar, Widget Category names & other interface strings
+Improved : Code quality cleanup with labeled error logging across Template Editor, Wdkit Preview popup, Install Elementor & Nxt Extension notices
+Fix : Dynamic Tags : Multiple tags showing wrong term on archive pages, deprecation notices and AI flag
+Fix : Dynamic Tags : Tag/Category description and post count showing wrong term on archive pages
+Fix : Global Dimensions : Preset leaks across widgets on tablet/mobile
+Fix : Dynamic Categories : Image Resolution not working
+Fix : Post Navigation : PHP Warning on missing featured image and undefined post vars
+Fix : Template Widgets : Content template CSS missing on initial load with Elementor External File CSS
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.14 =
 Add : Blog Listing : Style-5 - Added global button style option for the Submit button

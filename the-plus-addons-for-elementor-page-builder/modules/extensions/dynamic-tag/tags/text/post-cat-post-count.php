@@ -86,21 +86,35 @@ class ThePlus_Dynamic_Tag_Post_Category_Post_Count extends Tag {
      */
 	public function render(): void {
 
-		$post_id = get_the_ID();
+		$category = null;
 
-		if ( ! $post_id ) {
-			return;
+		if ( is_category() ) {
+			$queried = get_queried_object();
+			if ( $queried instanceof \WP_Term ) {
+				$category = $queried;
+			}
+		} else {
+			$post_id = get_the_ID();
+
+			// Elementor editor fallback.
+			if ( ! $post_id && ! empty( $_REQUEST['post_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview only, value is cast via absint().
+				$post_id = absint( wp_unslash( $_REQUEST['post_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview only.
+			}
+
+			if ( ! $post_id ) {
+				return;
+			}
+
+			$terms = get_the_terms( $post_id, 'category' );
+
+			if ( empty( $terms ) || is_wp_error( $terms ) ) {
+				return;
+			}
+
+			$category = $terms[0];
 		}
 
-		$terms = get_the_terms( $post_id, 'category' );
-
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
-			return;
-		}
-
-		$category = $terms[0];
-
-		if ( ! isset( $category->count ) ) {
+		if ( empty( $category ) || ! isset( $category->count ) ) {
 			return;
 		}
 

@@ -41,7 +41,7 @@
 
                                     b.tpelecode = h.model.toJSON();
 
-                                    console.log(b);
+                                    // console.log(b);
 
                                     // Create a textarea element
                                     var textarea = document.createElement('textarea');
@@ -92,7 +92,9 @@
                                                 inputArea.addEventListener('paste', async function (event) {
                                                     event.preventDefault();
                                                     var pastedData = event.clipboardData.getData("text");
-                                                    console.log(pastedData);
+
+                                                    // TODO: gate behind a debug flag before re-enabling.
+                                                    // console.log(pastedData);
 
                                                     if (tpae_isJSON(pastedData) == false) {
                                                         alert(Json_error);

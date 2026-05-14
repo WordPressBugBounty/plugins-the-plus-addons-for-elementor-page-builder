@@ -262,7 +262,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 						$has_submissions = false;
 
 						if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) === $table_name ) {
-							$submission_count = (int) $wpdb->get_var( "SELECT COUNT(id) FROM {$table_name}" );
+							$submission_count = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(id) FROM %i', $table_name ) );
 							if ( $submission_count > 0 ) {
 								$has_submissions = true;
 							}

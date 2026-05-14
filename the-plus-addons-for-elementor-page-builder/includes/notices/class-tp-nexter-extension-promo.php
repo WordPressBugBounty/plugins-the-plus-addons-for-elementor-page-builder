@@ -291,8 +291,6 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 								} else if (attempts < maxAttempts) {
 									attempts++;
 									setTimeout( checkIframeLoaded, 1000 );
-								} else {
-									console.log('3 attempts');
 								}
 							}
 

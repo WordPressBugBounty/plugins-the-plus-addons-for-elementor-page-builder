@@ -187,6 +187,12 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 		 */
 		public function tpae_check_plugin_status() {
 
+			check_ajax_referer( 'tp_wdkit_preview_popup', 'security' );
+
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( array( 'message' => 'Insufficient permissions.' ), 403 );
+			}
+
 			if ( ! function_exists( 'is_plugin_active' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/plugin.php';
 			}

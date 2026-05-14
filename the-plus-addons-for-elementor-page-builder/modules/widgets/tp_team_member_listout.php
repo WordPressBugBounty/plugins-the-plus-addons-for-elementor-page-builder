@@ -1862,10 +1862,10 @@ class L_ThePlus_Team_Member_ListOut extends Plus_Widget_Base {
 				$team_social_contnet .= '<li class="linkedin-link"><a rel="' . esc_attr( $linked_link_nofollow ) . '" href="' . esc_url( $linked_link ) . '" target="' . esc_attr( $linked_link_blank ) . '"><i class="fa fa-linkedin" aria-hidden="true"></i></a>';
 			}
 			if ( ! empty( $email_link ) ) {
-				$team_social_contnet .= '<li class="team-profile-link"><a rel="' . esc_attr( $email_link_nofollow ) . '" href="mailto:' . esc_attr( $email_link ) . '" target="' . esc_attr( $email_link_blank ) . '"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>';
+				$team_social_contnet .= '<li class="team-profile-link"><a rel="' . esc_attr( $email_link_nofollow ) . '" href="' . esc_url( 'mailto:' . sanitize_email( $email_link ), array( 'mailto' ) ) . '" target="' . esc_attr( $email_link_blank ) . '"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>';
 			}
 			if ( ! empty( $phone_link ) ) {
-				$team_social_contnet .= '<li class="team-profile-link"><a rel="' . esc_attr( $phone_link_nofollow ) . '" href="tel:' . esc_attr( $phone_link ) . '" target="' . esc_attr( $phone_link_blank ) . '"><i class="fa fa-phone" aria-hidden="true"></i></a>';
+				$team_social_contnet .= '<li class="team-profile-link"><a rel="' . esc_attr( $phone_link_nofollow ) . '" href="' . esc_url( 'tel:' . preg_replace( '/[^0-9+\-\s()]/', '', $phone_link ), array( 'tel' ) ) . '" target="' . esc_attr( $phone_link_blank ) . '"><i class="fa fa-phone" aria-hidden="true"></i></a>';
 			}
 
 				$team_social_contnet .= '</ul>';

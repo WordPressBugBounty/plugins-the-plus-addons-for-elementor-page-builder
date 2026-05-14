@@ -1127,7 +1127,7 @@ class L_ThePlus_Page_Scroll extends Plus_Widget_Base {
 
 							$template_status = get_post_status( $elem_templates );
 						if ( 'publish' === $template_status ) {
-							$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates );
+							$full_page_content .= L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $elem_templates, true );
 						} else {
 							$full_page_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 						}
@@ -1189,7 +1189,7 @@ class L_ThePlus_Page_Scroll extends Plus_Widget_Base {
 			}
 		}
 
-		echo '<div id="' . esc_attr( $uid_widget ) . '" class="tp-page-scroll-wrapper ' . esc_attr( $uid_widget ) . ' ' . esc_attr( $page_scroll_opt ) . '" data-id="' . esc_attr( $uid_widget ) . '" data-option="' . esc_attr( $page_scroll_opt ) . '" ' . wp_kses_post( $data_attr ) . '>';
+		echo '<div id="' . esc_attr( $uid_widget ) . '" class="tp-page-scroll-wrapper ' . esc_attr( $uid_widget ) . ' ' . esc_attr( $page_scroll_opt ) . '" data-id="' . esc_attr( $uid_widget ) . '" data-option="' . esc_attr( $page_scroll_opt ) . '" ' . $data_attr . '>';
 
 		if ( 'tp_full_page' === $page_scroll_opt ) {
 			echo $full_page_content;

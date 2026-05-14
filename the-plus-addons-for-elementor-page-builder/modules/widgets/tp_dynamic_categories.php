@@ -583,9 +583,7 @@ class L_ThePlus_Dynamic_Categories extends Plus_Widget_Base {
 			array(
 				'name'      => 'thumbnail',
 				'default'   => 'full',
-				'separator' => 'none',
 				'separator' => 'after',
-				'exclude'   => array( 'custom' ),
 				'condition' => array(
 					'display_thumbnail' => 'yes',
 				),
@@ -2428,6 +2426,12 @@ class L_ThePlus_Dynamic_Categories extends Plus_Widget_Base {
 
 		$thumbnail = $settings['thumbnail_size'];
 
+		if ( 'custom' === $thumbnail ) {
+			$custom_w  = ! empty( $settings['thumbnail_custom_dimension']['width'] ) ? absint( $settings['thumbnail_custom_dimension']['width'] ) : 300;
+			$custom_h  = ! empty( $settings['thumbnail_custom_dimension']['height'] ) ? absint( $settings['thumbnail_custom_dimension']['height'] ) : 300;
+			$thumbnail = array( $custom_w, $custom_h );
+		}
+
 		$post_taxonomies = ! empty( $settings['post_taxonomies'] ) ? $settings['post_taxonomies'] : 'category';
 		$hide_parent_cat = isset( $settings['hide_parent_cat'] ) ? $settings['hide_parent_cat'] : 'no';
 
@@ -2583,7 +2587,7 @@ class L_ThePlus_Dynamic_Categories extends Plus_Widget_Base {
 						} else {
 							$category_description = $prod_cat->description;
 						}
-						$category_product_count = $prod_cat->count;
+						$category_product_count = (int) $prod_cat->count;
 
 						if ( 'metro' === $layout ) {
 							$metro_columns = $settings['metro_column'];
@@ -2780,8 +2784,8 @@ class L_ThePlus_Dynamic_Categories extends Plus_Widget_Base {
 		$post_category_exc = $settings['post_category_exc'] ? explode( ',', $settings['post_category_exc'] ) : array();
 
 		$dynamic_categories = get_terms(
-			$post_taxonomies,
 			array(
+				'taxonomy'   => $post_taxonomies,
 				'orderby'    => $settings['post_order_by'],
 				'order'      => $settings['post_order'],
 				'number'     => $display_posts,

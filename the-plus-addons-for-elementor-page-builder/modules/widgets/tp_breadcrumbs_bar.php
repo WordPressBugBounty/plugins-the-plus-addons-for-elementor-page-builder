@@ -1603,8 +1603,8 @@ class L_ThePlus_Breadcrumbs_Bar extends Plus_Widget_Base {
 		/* translators: %s: Category name */
 		$text['category']  = esc_html__( 'Archive by "%s"', 'tpebl' );
 
-		/* translators: %s: Category name */
-		$text['category1'] = esc_html__( '%s', 'tpebl' );
+		// %s alone has no translatable content; pass through as a sprintf format only.
+		$text['category1'] = '%s';
 
 		/* translators: %s: Search query */
 		$text['search'] = esc_html__( 'Search Results for "%s"', 'tpebl' );

@@ -157,7 +157,7 @@ class ThePlus_Dynamic_Tag_Post_Date extends Tag {
 
 		if ( 'human' === $settings['tp_format_type'] ) {
 
-			$value = human_time_diff( $timestamp, current_time( 'timestamp' ) ) . ' ' . esc_html__( 'ago', 'tpebl' );
+			$value = human_time_diff( $timestamp, time() ) . ' ' . esc_html__( 'ago', 'tpebl' );
 
 		} elseif ( 'default' === $settings['tp_format_type'] ) {
 

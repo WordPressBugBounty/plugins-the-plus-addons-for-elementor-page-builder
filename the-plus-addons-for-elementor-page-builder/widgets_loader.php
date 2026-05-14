@@ -508,40 +508,86 @@ final class L_Theplus_Element_Load {
 	 * @since 1.0.0
 	 */
 	public function theplus_mime_types( $mimes ) {
-			$mimes['svg']  = 'image/svg+xml';
-			$mimes['svgz'] = 'image/svg+xml';
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return $mimes;
+		}
+
+		$mimes['svg']  = 'image/svg+xml';
+		$mimes['svgz'] = 'image/svg+xml';
 
 		return $mimes;
-
 	}
 
 	/**
 	 * Sanitize uploaded SVGs
-	 * 
+	 *
 	 * @since 6.3.16
 	 */
 	public function theplus_sanitize_svg_upload( $file ) {
 
 		$ext = strtolower( pathinfo( $file['name'], PATHINFO_EXTENSION ) );
 
-		if ( $ext === 'svg' ) {
-			$contents = file_get_contents( $file['tmp_name'] );
+		if ( 'svg' !== $ext && 'svgz' !== $ext ) {
+			return $file;
+		}
 
-			$bad_patterns = [
-				'/<\s*script/i',
-				'/\son[a-z]+\s*=/i',
-				'/<\s*foreignObject/i',
-				'/<\s*(iframe|embed|object)/i',
-				'/javascript:/i',
-				'/data:/i',
-			];
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$file['error'] = __( 'You are not allowed to upload SVG files.', 'tpebl' );
+			return $file;
+		}
 
-			foreach ( $bad_patterns as $re ) {
-				if ( preg_match( $re, $contents ) ) {
-					$file['error'] = __( 'SVG contains unsafe content', 'tpebl' );
+		$contents = file_get_contents( $file['tmp_name'] );
 
-					return $file;
-				}
+		if ( false === $contents || '' === $contents ) {
+			$file['error'] = __( 'SVG file could not be read.', 'tpebl' );
+			return $file;
+		}
+
+		if ( 'svgz' === $ext ) {
+			if ( ! function_exists( 'gzdecode' ) ) {
+				$file['error'] = __( 'SVGZ uploads are not supported on this server (zlib unavailable).', 'tpebl' );
+				return $file;
+			}
+
+			$decoded = @gzdecode( $contents );
+
+			if ( false === $decoded || '' === $decoded ) {
+				$file['error'] = __( 'Malformed SVGZ file rejected.', 'tpebl' );
+				return $file;
+			}
+
+			$contents = $decoded;
+		}
+
+		// After decompression (if any) the payload must look like an SVG.
+		// Reject anything that doesn't start with whitespace + `<` and contain a root <svg> tag.
+		if ( ! preg_match( '/<\s*svg\b/i', $contents ) ) {
+			$file['error'] = __( 'File does not appear to be a valid SVG.', 'tpebl' );
+			return $file;
+		}
+
+		$bad_patterns = array(
+			'/<\s*script/i',
+			'/\son[a-z]+\s*=/i',
+			'/<\s*foreignObject/i',
+			'/<\s*(iframe|embed|object|frame|frameset)/i',
+			'/<\s*(animate|animateMotion|animateTransform|set)\b/i',
+			'/<\s*use\b[^>]*\b(?:xlink:)?href\s*=\s*["\']?\s*(?:https?:|\/\/|data:)/i',
+			'/<!ENTITY/i',
+			'/<!DOCTYPE[^>]*\[/i',
+			'/SYSTEM\s+["\']/i',
+			'/<\?xml-stylesheet/i',
+			'/@import\b/i',
+			'/expression\s*\(/i',
+			'/javascript\s*:/i',
+			'/vbscript\s*:/i',
+			'/data\s*:\s*(?:text\/html|application\/(?:javascript|ecmascript|xhtml))/i',
+		);
+
+		foreach ( $bad_patterns as $re ) {
+			if ( preg_match( $re, $contents ) ) {
+				$file['error'] = __( 'SVG contains unsafe content', 'tpebl' );
+				return $file;
 			}
 		}
 
@@ -720,7 +766,7 @@ final class L_Theplus_Element_Load {
             $elementor->elements_manager->add_category(
                 $index,
                 array(
-                    'title' => esc_html__( $plus_widgets['title'], 'tpebl' ),
+                    'title' => $plus_widgets['title'],
                     'icon'  => $plus_widgets['icon'],
                 ),
                 1

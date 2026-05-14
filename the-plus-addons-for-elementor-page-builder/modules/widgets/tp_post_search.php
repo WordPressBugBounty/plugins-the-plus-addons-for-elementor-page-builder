@@ -958,7 +958,7 @@ class L_ThePlus_Post_Search extends Plus_Widget_Base {
 		$btn_istyle = ! empty( $settings['button_icon_style'] ) ? $settings['button_icon_style'] : '';
 		$font_aws   = ! empty( $settings['button_icon_fontawesome'] ) ? $settings['button_icon_fontawesome'] : '';
 		$icon_align = ! empty( $settings['icon_align'] ) ? $settings['icon_align'] : 'right';
-		$btn_text   = ! empty( $settings['button_text'] ) ? $settings['button_text'] : '';
+		$btn_text   = ! empty( $settings['button_text'] ) ? esc_html( $settings['button_text'] ) : '';
 
 		$btn_icon = '';
 		if ( 'none' !== $btn_istyle ) {

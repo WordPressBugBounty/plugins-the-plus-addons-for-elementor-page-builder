@@ -29,12 +29,12 @@ jQuery(document).on("click", ".tpae-ele-btn", function (e) {
             if (response.success) {
                 location.reload();
             } else {
-                console.log(response.data?.message || __("Failed!", "tpebl"));
+                console.error('TPAE Elementor install failed:', response?.data?.message || __("Failed!", "tpebl"));
                 btn.text(currentText);
             }
         },
-        error: function () {
-            console.log(__("Something went wrong!", "tpebl"));
+        error: function (xhr, status, error) {
+            console.error('TPAE Elementor install request error:', status, error);
             btn.text(currentText);
         }
     });

@@ -243,6 +243,11 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
 
                 add_action( 'wp_ajax_tp_mark_dynamic_tag_seen', function () {
                     check_ajax_referer( 'tp_dynamic_tag_nonce', 'nonce' );
+
+                    if ( ! current_user_can( 'manage_options' ) ) {
+                        wp_send_json_error( array( 'message' => 'Insufficient permissions.' ) );
+                    }
+
                     update_option( 'tp_dynamic_tag_seen', true );
                     wp_send_json_success();
                 });
@@ -252,7 +257,7 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
                 check_ajax_referer( 'tpae_dismiss_dynamic_notice', 'nonce' );
 
                 if ( ! current_user_can( 'manage_options' ) ) {
-                    wp_send_json_error( array( 'message' => 'Insufficient permissions.' ) );
+                    wp_send_json_error( array( 'message' => 'Invalid permissions.' ) );
                 }
 
                 update_option( 'tpae_dynamictag_notice_dismissed', true );
@@ -410,7 +415,7 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
 
             wp_add_inline_script(
                 'elementor-editor',
-                <<<JS
+                <<<'JS'
                 (function () {
 
                     let dismissed = false;
@@ -428,14 +433,14 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
 
                         const notice = document.createElement('div');
                         notice.className = 'tp-plus-dynamic-notice elementor-panel-alert elementor-panel-alert-info';
-                        notice.innerHTML = 
+                        notice.innerHTML =
                             `<button class="tp-plus-dynamic-notice-close"><i class="theplus-i-cross"></i></button>
-                            <div class="tp-plus-dynamic-notice-title">\${TPDynamicNotice.title}</div>
+                            <div class="tp-plus-dynamic-notice-title">${TPDynamicNotice.title}</div>
                             <div class="tp-plus-dynamic-notice-desc">
-                                \${TPDynamicNotice.desc}
+                                ${TPDynamicNotice.desc}
                                 <a href="https://theplusaddons.com/docs/add-dynamic-content-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=dynamiccontent"
                                 target="_blank" rel="noopener noreferrer">
-                                    \${TPDynamicNotice.learn}
+                                    ${TPDynamicNotice.learn}
                                 </a>
                             </div>`;
 

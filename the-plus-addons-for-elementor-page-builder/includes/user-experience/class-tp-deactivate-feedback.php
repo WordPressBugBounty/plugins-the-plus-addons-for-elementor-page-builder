@@ -283,6 +283,10 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 				wp_send_json( $response );
 			}
 
+			if ( ! current_user_can( 'deactivate_plugins' ) ) {
+				wp_send_json_error( __( 'You are not allowed to do this action', 'tpebl' ) );
+			}
+
 			$this->deavtive_url = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_deactivate_user_data';
 
 			$issue_type  = ! empty( $_POST['issue_type'] ) ? sanitize_text_field( wp_unslash( $_POST['issue_type'] ) ) : '';
@@ -307,11 +311,11 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 				$api_params['email'] = $user_email;
 			}
 
-			$data = wp_remote_post( $this->deavtive_url,
+			$data = wp_remote_post(
+				$this->deavtive_url,
 				array(
-					'timeout'   => 60,
-					'sslverify' => false,
-					'body'      => $api_params,
+					'timeout' => 15,
+					'body'    => $api_params,
 				)
 			);
 

@@ -112,23 +112,37 @@ class ThePlus_Dynamic_Tag_Post_Term_URL extends Tag {
      */
 	public function render(): void {
 
-		$post_id  = get_the_ID();
-		if ( ! $post_id ) {
-			return;
-		}
-
 		$taxonomy = $this->get_settings( 'select_taxonomy' );
 		if ( ! $taxonomy ) {
 			return;
 		}
 
-		$terms = get_the_terms( $post_id, $taxonomy );
+		$term = null;
 
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
-			return;
+		// On a term archive of the selected taxonomy, use the queried term directly.
+		if ( is_tax( $taxonomy ) || ( 'category' === $taxonomy && is_category() ) || ( 'post_tag' === $taxonomy && is_tag() ) ) {
+			$queried = get_queried_object();
+			if ( $queried instanceof \WP_Term ) {
+				$term = $queried;
+			}
+		} else {
+			$post_id = get_the_ID();
+			if ( ! $post_id ) {
+				return;
+			}
+
+			$terms = get_the_terms( $post_id, $taxonomy );
+
+			if ( empty( $terms ) || is_wp_error( $terms ) ) {
+				return;
+			}
+
+			$term = $terms[0]; // first term
 		}
 
-		$term = $terms[0]; // first term
+		if ( empty( $term ) ) {
+			return;
+		}
 
 		$term_url = get_term_link( $term );
 

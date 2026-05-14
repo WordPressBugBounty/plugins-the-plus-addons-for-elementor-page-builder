@@ -4158,7 +4158,7 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				}
 			}
 
-			$output .= '<div id="pt-plus-blog-post-list" class="blog-list ' . esc_attr( $uid ) . ' ' . $data_class . ' ' . esc_attr( $animated_class ) . '" ' . $layout_attr . ' ' . $data_attr . ' ' . $animation_attr . ' data-enable-isotope="1">';
+			$output .= '<div id="pt-plus-blog-post-list" class="blog-list ' . esc_attr( $uid ) . ' ' . esc_attr( $data_class ) . ' ' . esc_attr( $animated_class ) . '" ' . $layout_attr . ' ' . $data_attr . ' ' . $animation_attr . ' data-enable-isotope="1">';
 
 			$output .= '<div id="' . esc_attr( $uid ) . '" class="tp-row post-inner-loop ' . esc_attr( $uid ) . ' ">';
 
@@ -4206,12 +4206,12 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 					$button_style   = $settings['button_style'];
 					$btn_uid        = uniqid( 'btn' );
 					$data_class     = $btn_uid;
-					$data_class    .= ' button-' . $button_style . ' ';
+					$data_class    .= ' button-' . esc_attr( $button_style ) . ' ';
 
 					$the_button                      = '<div class="pt-plus-button-wrapper' . $overflow_class . '">';
 						$the_button                 .= '<div class="button_parallax">';
 							$the_button             .= '<div class="ts-button">';
-								$the_button         .= '<div class="pt_plus_button ' . $data_class . '">';
+								$the_button         .= '<div class="pt_plus_button ' . esc_attr( $data_class ) . '">';
 									$the_button     .= '<div class="animted-content-inner">';
 										$the_button .= '<a ' . $this->get_render_attribute_string( $button_attr ) . '>';
 										$the_button .= include L_THEPLUS_WSTYLES . 'blog/post-button.php';

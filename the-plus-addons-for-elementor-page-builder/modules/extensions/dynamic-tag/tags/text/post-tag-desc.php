@@ -86,26 +86,35 @@ class ThePlus_Dynamic_Tag_Post_Tag_Description extends Tag {
      */
 	public function render(): void {
 
-		$post_id = get_the_ID();
+		$tag = null;
 
-		// Elementor editor fallback (important)
-		if ( ! $post_id && ! empty( $_REQUEST['post_id'] ) ) {
-			$post_id = absint( $_REQUEST['post_id'] );
+		if ( is_tag() ) {
+			$queried = get_queried_object();
+			if ( $queried instanceof \WP_Term ) {
+				$tag = $queried;
+			}
+		} else {
+			$post_id = get_the_ID();
+
+			// Elementor editor fallback (important).
+			if ( ! $post_id && ! empty( $_REQUEST['post_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview only, value is cast via absint().
+				$post_id = absint( wp_unslash( $_REQUEST['post_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- editor preview only.
+			}
+
+			if ( ! $post_id ) {
+				return;
+			}
+
+			$terms = get_the_terms( $post_id, 'post_tag' );
+
+			if ( empty( $terms ) || is_wp_error( $terms ) ) {
+				return;
+			}
+
+			$tag = $terms[0];
 		}
 
-		if ( ! $post_id ) {
-			return;
-		}
-
-		$terms = get_the_terms( $post_id, 'post_tag' );
-
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
-			return;
-		}
-
-		$tag = $terms[0];
-
-		if ( empty( $tag->description ) ) {
+		if ( empty( $tag ) || empty( $tag->description ) ) {
 			return;
 		}
 

@@ -170,34 +170,32 @@ if ( ! class_exists( 'Tpae_Create_Template' ) ) {
 		 */
 		public function change_current_template_title() {
 
-			/** Security checked wp nonce*/
-			$nonce = ! empty( $_POST['security'] ) ? sanitize_text_field( wp_unslash( $_POST['security'] ) ) : '';
-			if ( ! isset( $nonce ) || empty( $nonce ) || ! wp_verify_nonce( $nonce, 'live_editor' ) ) {
-				die( 'Security checked!' );
-			}
+			check_ajax_referer( 'live_editor', 'security' );
 
-			/** Security checked user login*/
 			if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'tpebl' ) ) );
 			}
 
-			$id = ! empty( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
-
+			$id            = ! empty( $_POST['id'] ) ? absint( wp_unslash( $_POST['id'] ) ) : 0;
 			$updated_title = ! empty( $_POST['updated_title'] ) ? sanitize_text_field( wp_unslash( $_POST['updated_title'] ) ) : '';
 
-			$res = wp_update_post(
+			if ( $id <= 0 || ! current_user_can( 'edit_post', $id ) ) {
+				wp_send_json_error( array( 'content' => __( 'Invalid template.', 'tpebl' ) ) );
+			}
+
+			wp_update_post(
 				array(
 					'ID'         => $id,
 					'post_title' => $updated_title,
 				)
 			);
 
-			$dev = array(
-				'ID'         => $id,
-				'post_title' => $updated_title,
+			wp_send_json_success(
+				array(
+					'ID'         => $id,
+					'post_title' => $updated_title,
+				)
 			);
-
-			wp_send_json_success( $dev );
 		}
 	}
 

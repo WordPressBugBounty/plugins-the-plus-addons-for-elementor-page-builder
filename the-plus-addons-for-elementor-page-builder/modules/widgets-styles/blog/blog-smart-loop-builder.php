@@ -8,6 +8,10 @@
  * @package Theplus
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $template = str_replace( '{{tpae_excerpt}}', get_the_excerpt(), $content_html );
 $template = str_replace( '{{tpae_image}}', get_the_post_thumbnail(), $template );
 

@@ -3088,10 +3088,11 @@ class L_ThePlus_Plus_Form extends Plus_Widget_Base {
 
 		$form_markup = '<div class="tpae-form-container" ' . $error_message . ' ' . $email_data . ' >';
 
+		$safe_widget_id = preg_replace( '/[^a-zA-Z0-9_-]/', '', (string) $widget_id );
 		if ( 'yes' === $inline_button ) {
-			$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
+			$form_markup .= "<style> .elementor-element-{$safe_widget_id} .tpae-form-submit-container .tpae-form-button{ width:100%!important } </style>";
 		} elseif ( 'no' === $inline_button ) {
-			$form_markup .= "<style> .elementor-element-$widget_id .tpae-form-submit-container{ width:100%!important } </style>";
+			$form_markup .= "<style> .elementor-element-{$safe_widget_id} .tpae-form-submit-container{ width:100%!important } </style>";
 		}
 
 		if ( ! empty( $global_form_button_css ) ) {

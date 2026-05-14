@@ -2900,7 +2900,10 @@ class ThePlus_Hovercard extends Plus_Widget_Base {
 					$loopitem .= wp_kses_post( $item['html_content'] );
 				}
 				if ( $item['content_tag'] === 'style' && ! empty( $item['style_content'] ) ) {
-					$loopitem .= '<style>' . esc_attr( $item['style_content'] ) . '</style>';
+					if ( current_user_can( 'manage_options' ) ) {
+						$sanitized_style = preg_replace( '#</\s*(style|script)#i', '<\\/\\1', (string) $item['style_content'] );
+						$loopitem       .= '<style>' . $sanitized_style . '</style>';
+					}
 				}
 				if ( $item['content_tag'] === 'script' && ! empty( $item['script_content'] ) ) {
 					$sanitized_script = current_user_can( 'manage_options' ) ? wp_kses_post( $item['script_content'] ) : '';

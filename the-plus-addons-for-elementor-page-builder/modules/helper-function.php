@@ -79,7 +79,7 @@ function tp_senitize_js_input( $input ) {
     $input = preg_replace( '/\s*on\w+\s*=\s*(".*?"|\'.*?\'|[^>\s]+)/is', '', $input );
 
     // Ensure input is not overly stripped by handling invalid tags carefully
-    $input = strip_tags( $input );
+    $input = wp_strip_all_tags( $input );
 
     return trim( $input ); // Return the sanitized input, trimmed of whitespace
 }
@@ -217,7 +217,7 @@ class L_Theplus_Navigation_NavWalker extends \Walker_Nav_Menu {
 				if ( ! empty( $page_data ) && isset( $page_data->post_status ) && strcmp( $page_data->post_status, 'publish' ) === 0 ) {
 
 					$elementor_instance = \Elementor\Plugin::instance();
-					$content            = $elementor_instance->frontend->get_builder_content_for_display( $item->object_id );
+					$content            = $elementor_instance->frontend->get_builder_content_for_display( $item->object_id, true );
 					$item_output       .= '<div class="plus-megamenu-content">' . $content . '</div>';
 
 				}

@@ -91,26 +91,32 @@ if ( ! class_exists( 'Tp_Nxt_Download' ) ) {
 				wp_die();
 			}
 
-			$plugin_type = isset( $_POST['plugin_type'] ) ? sanitize_text_field( $_POST['plugin_type'] ) : 'elementor_library';
+			$plugin_type = isset( $_POST['plugin_type'] ) ? sanitize_key( wp_unslash( $_POST['plugin_type'] ) ) : '';
 
-			if('nexter_ext' === $plugin_type){
-				$type = array(
-					'tp_slug' => 'nexter-extension',
-					'tp_plugin_basename' => 'nexter-extension/nexter-extension.php'
-				);
-			}elseif ('tp_woo' === $plugin_type){
-				$type = array(
-					'tp_slug' => 'woocommerce',
-					'tp_plugin_basename' => 'woocommerce/woocommerce.php'
-				);
+			$allowed = array(
+				'nexter_ext' => array(
+					'tp_slug'            => 'nexter-extension',
+					'tp_plugin_basename' => 'nexter-extension/nexter-extension.php',
+				),
+				'tp_woo'     => array(
+					'tp_slug'            => 'woocommerce',
+					'tp_plugin_basename' => 'woocommerce/woocommerce.php',
+				),
+			);
+
+			if ( ! isset( $allowed[ $plugin_type ] ) ) {
+				wp_send_json( $this->tpae_response( 'Invalid Plugin Type', 'The requested plugin is not allowed.', false ) );
+				wp_die();
 			}
+
+			$type = $allowed[ $plugin_type ];
 
 			$tp_response = apply_filters( 'tpae_plugin_install', $type );
 
 			$response = $this->tpae_response( 'Success', '', true, $tp_response );
 
 			wp_send_json( $response );
-			
+			wp_die();
 		}
 
 
@@ -124,12 +130,23 @@ if ( ! class_exists( 'Tp_Nxt_Download' ) ) {
 			check_ajax_referer( 'tp_nxt_install', 'security' );
 
 			$post_type = isset( $_POST['post_type'] ) ? sanitize_key( $_POST['post_type'] ) : 'elementor_library';
-			$page_type = isset( $_POST['page_type'] ) ? sanitize_text_field( $_POST['page_type'] ) : 'tp_header';
-			$page_name = isset( $_POST['page_name'] ) ? sanitize_text_field( $_POST['page_name'] ) : 'theplus-addon';
+			$page_type = isset( $_POST['page_type'] ) ? sanitize_key( wp_unslash( $_POST['page_type'] ) ) : 'tp_header';
+			$page_name = isset( $_POST['page_name'] ) ? sanitize_text_field( wp_unslash( $_POST['page_name'] ) ) : 'theplus-addon';
 
 			$allowed_post_types = array( 'elementor_library', 'nxt_builder' );
 			if ( ! in_array( $post_type, $allowed_post_types, true ) ) {
 				$response = $this->tpae_response( 'Invalid Post Type', 'The selected post type is not allowed.', false );
+
+				wp_send_json( $response );
+				wp_die();
+			}
+
+			$allowed_page_types = apply_filters(
+				'tpae_create_page_allowed_page_types',
+				array( 'header', 'singular', 'archives', 'archive', 'single-page', 'product' )
+			);
+			if ( ! in_array( $page_type, $allowed_page_types, true ) ) {
+				$response = $this->tpae_response( 'Invalid Page Type', 'The selected page type is not allowed.', false );
 
 				wp_send_json( $response );
 				wp_die();

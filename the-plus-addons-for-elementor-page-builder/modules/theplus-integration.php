@@ -62,13 +62,19 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 		 */
 		public function include_plus_control( $control_id, $grouped = false ) {
 
-			$filename = sprintf( 'modules/controls/' . $control_id . '.php' );
-
-			if ( ! file_exists( L_THEPLUS_PATH . $filename ) ) {
+			$control_id = preg_replace( '/[^a-zA-Z0-9_-]/', '', (string) $control_id );
+			if ( '' === $control_id ) {
 				return false;
 			}
 
-			include L_THEPLUS_PATH . $filename;
+			$base = wp_normalize_path( L_THEPLUS_PATH . 'modules/controls/' );
+			$path = wp_normalize_path( $base . $control_id . '.php' );
+
+			if ( 0 !== strpos( $path, $base ) || ! file_exists( $path ) ) {
+				return false;
+			}
+
+			include $path;
 
 			return true;
 		}

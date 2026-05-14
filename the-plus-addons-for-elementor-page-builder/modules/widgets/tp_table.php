@@ -3248,8 +3248,10 @@ class L_ThePlus_Data_Table extends Plus_Widget_Base {
 											$toolbox = 'id="' . esc_attr( $uniqid ) . '"' . $this->get_render_attribute_string( 'plus_table_col' . $row['_id'] ) . $this->get_render_attribute_string( $_tooltip );
 										}
 
+										$tp_cell_tag = ( isset( $row['table_th_td'] ) && 'th' === $row['table_th_td'] ) ? 'th' : 'td';
+
 										?>
-										<<?php echo esc_attr( $row['table_th_td'] ); ?> <?php echo $toolbox; ?>>
+										<<?php echo tag_escape( $tp_cell_tag ); ?> <?php echo $toolbox; ?>>
 											<?php if ( ! empty( $row['link']['url'] ) ) { ?>
 											<a <?php echo $this->get_render_attribute_string( 'col-link-' . $row['_id'] ); ?>>
 											<?php } ?>
@@ -3343,7 +3345,7 @@ class L_ThePlus_Data_Table extends Plus_Widget_Base {
 											<?php if ( ! empty( $row['link']['url'] ) ) { ?>
 											</a>
 											<?php } ?>
-										</<?php echo $row['table_th_td']; ?>>
+										</<?php echo tag_escape( $tp_cell_tag ); ?>>
 											<?php
 											// Increment to next cell.
 											++$cell_counter_c;

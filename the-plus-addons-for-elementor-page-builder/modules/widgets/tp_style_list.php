@@ -544,6 +544,62 @@ class L_ThePlus_Style_List extends Plus_Widget_Base {
 			)
 		);
 		$this->add_responsive_control(
+			'space_between_h_gap',
+			array(
+				'label'      => esc_html__( 'Gap', 'tpebl' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%', 'em' ),
+				'range'      => array(
+					'px' => array(
+						'min'  => 0,
+						'max'  => 200,
+						'step' => 1,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 20,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .plus-stylist-list-wrapper.tp-sl-l-horizontal .plus-icon-list-items' => 'gap: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'layout' => 'tp_sl_l_horizontal',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'space_between_h_align',
+			array(
+				'label'     => esc_html__( 'Alignment', 'tpebl' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'flex-start' => array(
+						'title' => esc_html__( 'Left', 'tpebl' ),
+						'icon'  => 'eicon-h-align-left',
+					),
+					'center'     => array(
+						'title' => esc_html__( 'Center', 'tpebl' ),
+						'icon'  => 'eicon-h-align-center',
+					),
+					'flex-end'   => array(
+						'title' => esc_html__( 'Right', 'tpebl' ),
+						'icon'  => 'eicon-h-align-right',
+					),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .plus-stylist-list-wrapper.tp-sl-l-horizontal .plus-icon-list-items' => 'justify-content: {{VALUE}};',
+				),
+				'condition' => array(
+					'layout' => 'tp_sl_l_horizontal',
+				),
+			)
+		);
+		$this->add_responsive_control(
 			'space_between_h_bottom',
 			array(
 				'label'     => esc_html__( 'Bottom Space', 'tpebl' ),
@@ -1903,7 +1959,7 @@ class L_ThePlus_Style_List extends Plus_Widget_Base {
 
 		?>
 
-		<div class="plus-stylist-list-wrapper <?php echo esc_attr( $animated_class ); ?> <?php echo esc_attr( $hover_inverse_effect ); ?> <?php echo esc_attr( $hover_inverse_id ); ?> <?php // echo esc_attr($layout_class); ?>" <?php echo wp_kses_post( $animation_attr ); ?> <?php echo wp_kses_post( $hover_inverse_attr_id ); ?> data-layout="<?php echo esc_attr( $layout_attr ); ?>" >
+		<div class="plus-stylist-list-wrapper <?php echo esc_attr( $animated_class ); ?> <?php echo esc_attr( $hover_inverse_effect ); ?> <?php echo esc_attr( $hover_inverse_id ); ?> <?php // echo esc_attr($layout_class); ?>" <?php echo $animation_attr; ?> <?php echo $hover_inverse_attr_id; ?> data-layout="<?php echo esc_attr( $layout_attr ); ?>" >
 			
 		<ul class="plus-icon-list-items <?php echo esc_attr( $vertical_center ); ?>">
 			<?php

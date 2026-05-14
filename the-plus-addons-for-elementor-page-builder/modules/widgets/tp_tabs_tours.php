@@ -2193,7 +2193,7 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 					if ( ! empty( $item['backend_preview_template'] ) && 'yes' === $item['backend_preview_template'] ) {
 						$template_status = get_post_status( $content_template );
 						if ( 'publish' === $template_status ) {
-							$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+							$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ), true ) . '</div>';
 						} else {
 							$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 						}
@@ -2204,7 +2204,7 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 					$template_status = $this->get_elementor_template_status( $item['content_template_id'] );
 
 					if ( 'publish' === $template_status ) {
-						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ), true ) . '</div>';
 					} else {
 						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}
@@ -2213,7 +2213,7 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 				if ( ! empty( $item['backend_preview_template'] ) && 'yes' === $item['backend_preview_template'] ) {
 					$template_status = get_post_status( $content_template );
 					if ( 'publish' === $template_status ) {
-						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+						$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template, true ) . '</div>';
 					} else {
 						$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 					}
@@ -2238,7 +2238,7 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 
 				$template_status = get_post_status( $content_template );
 				if ( 'publish' === $template_status ) {
-					$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+					$tab_content .= '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template, true ) . '</div>';
 				} else {
 					$tab_content .= '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 				}

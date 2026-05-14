@@ -1184,7 +1184,7 @@ class L_ThePlus_Carousel_Anything extends Plus_Widget_Base {
 		}
 		?>
  
-		<div id="<?php echo esc_attr( $uid ); ?>" class="theplus-carousel-anything-wrapper <?php echo esc_attr( $isotope ); ?> <?php echo esc_attr( $arrow_class ); ?> <?php echo esc_attr( $data_carousel ); ?> <?php echo esc_attr( $uid ); ?> "data-id="<?php echo esc_attr( $uid ); ?>" data-connection="<?php echo esc_attr( $tab_id ); ?>" <?php echo wp_kses_post( $carousel_slider ); ?> dir=<?php echo esc_attr( $carousel_direction ); ?> <?php echo wp_kses_post( $data_slider ); ?> <?php echo wp_kses_post( $carousel_bg_conn ); ?>>
+		<div id="<?php echo esc_attr( $uid ); ?>" class="theplus-carousel-anything-wrapper <?php echo esc_attr( $isotope ); ?> <?php echo esc_attr( $arrow_class ); ?> <?php echo esc_attr( $data_carousel ); ?> <?php echo esc_attr( $uid ); ?> "data-id="<?php echo esc_attr( $uid ); ?>" data-connection="<?php echo esc_attr( $tab_id ); ?>" <?php echo $carousel_slider; ?> dir=<?php echo esc_attr( $carousel_direction ); ?> <?php echo $data_slider; ?> <?php echo $carousel_bg_conn; ?>>
 			<div class="plus-carousel-inner post-inner-loop">
 			<?php
 			if ( ! empty( $settings['carousel_content'] ) ) {
@@ -1211,7 +1211,7 @@ class L_ThePlus_Carousel_Anything extends Plus_Widget_Base {
 
 								$template_status = $this->get_elementor_template_status( $content_template_id );
 								if ( 'publish' === $template_status ) {
-									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ) ) . '</div>';
+									echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( substr( $item['content_template_id'], 24, -2 ), true ) . '</div>';
 								} else {
 									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 								}
@@ -1231,7 +1231,7 @@ class L_ThePlus_Carousel_Anything extends Plus_Widget_Base {
 									$template_status = get_post_status( $content_template );
 
 									if ( 'publish' === $template_status ) {
-										echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template ) . '</div>';
+										echo '<div class="plus-content-editor">' . L_Theplus_Element_Load::elementor()->frontend->get_builder_content_for_display( $content_template, true ) . '</div>';
 									} else {
 										echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Unauthorized Access', 'tpebl' ) . '</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'You need to upgrade your permissions to Editor or Administrator level to update this option.', 'tpebl' ) . '</div></div>';
 									}
