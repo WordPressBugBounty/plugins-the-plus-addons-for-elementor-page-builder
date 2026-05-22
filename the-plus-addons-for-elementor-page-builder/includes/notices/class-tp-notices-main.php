@@ -253,6 +253,11 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					}
 				}
 
+				/** Deprecated Widgets Removal Notice*/
+				if ( ! get_option( 'tpae_deprecated_widgets_notice' ) ) {
+					include L_THEPLUS_PATH . 'includes/notices/class-tp-deprecated-widgets-notice.php';
+				}
+
 				/** Ask for Review*/
 				if ( ! get_option( 'tpae_ask_review_notice' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-ask-review-notice.php';

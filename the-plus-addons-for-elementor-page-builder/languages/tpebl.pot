@@ -2,20 +2,21 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.4.15\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.4.16\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-13T05:37:13+00:00\n"
+"POT-Creation-Date: 2026-05-22T06:32:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
 
 #. Plugin Name of the plugin
 #: theplus_elementor_addon.php
+#: includes/notices/class-tp-deprecated-widgets-notice.php:104
 #: includes/preset/class-wdkit-preset.php:253
 msgid "The Plus Addons for Elementor"
 msgstr ""
@@ -53,7 +54,7 @@ msgstr ""
 #: includes/admin/tpae_hooks/class-tpae-hooks.php:648
 #: includes/notices/class-tp-wdkit-preview-popup.php:185
 #: includes/preset/class-wdkit-preset.php:152
-#: widgets_loader.php:235
+#: widgets_loader.php:234
 msgid "Failed to retrieve plugin information."
 msgstr ""
 
@@ -417,18 +418,18 @@ msgstr ""
 msgid "Upload Logo"
 msgstr ""
 
-#: includes/admin/tpae_hooks/class-tpae-widgets-scan.php:148
+#: includes/admin/tpae_hooks/class-tpae-widgets-scan.php:162
 msgid "All Unused Widgets Found!"
 msgstr ""
 
 #. translators: %d: Number of unused widgets
-#: includes/admin/tpae_hooks/class-tpae-widgets-scan.php:181
+#: includes/admin/tpae_hooks/class-tpae-widgets-scan.php:195
 #, php-format
 msgid "* %d Unused Widgets Found!"
 msgstr ""
 
 #. translators: %d: Number of unused extensions
-#: includes/admin/tpae_hooks/class-tpae-widgets-scan.php:241
+#: includes/admin/tpae_hooks/class-tpae-widgets-scan.php:255
 #, php-format
 msgid "* %d Unused Extension Found!"
 msgstr ""
@@ -455,6 +456,7 @@ msgstr ""
 
 #: includes/notices/class-tp-activate-license-notice.php:151
 #: includes/notices/class-tp-ask-review-notice.php:190
+#: includes/notices/class-tp-deprecated-widgets-notice.php:164
 #: includes/user-experience/class-tp-deactivate-feedback.php:279
 #: includes/user-experience/class-tp-deactivate-feedback.php:280
 msgid "Security checked!"
@@ -462,6 +464,7 @@ msgstr ""
 
 #: includes/notices/class-tp-activate-license-notice.php:155
 #: includes/notices/class-tp-ask-review-notice.php:194
+#: includes/notices/class-tp-deprecated-widgets-notice.php:168
 #: includes/notices/class-tp-expired-license-notice.php:305
 #: includes/notices/class-tp-join-community-notice.php:159
 #: includes/notices/class-tp-nexter-extension-promo.php:171
@@ -491,6 +494,56 @@ msgstr ""
 
 #: includes/notices/class-tp-ask-review-notice.php:127
 msgid "Already Done"
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:97
+#: modules/widget-promotion/tp-widget-promotion/class-tp-widget-promotion.php:154
+#: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:551
+#: build/index.js:1
+msgid "Design Tool"
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:97
+msgid "Use Elementor's native styling controls."
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:107
+msgid "Heads up: Deprecated Widgets will be Removed in the Next Release"
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:109
+msgid "The following widgets are marked as DEPRECATED and will be permanently removed in the next release of The Plus Addons for Elementor:"
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:112
+#: modules/ability/widgets-ability/tp-post-search.php:10
+#: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:289
+#: build/index.js:1
+msgid "Post Search"
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:112
+msgid "Use the new Search Bar widget instead."
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:113
+#: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:464
+#: modules/widgets/tp_caldera_forms.php:44
+#: modules/widgets/tp_caldera_forms.php:95
+#: build/index.js:1
+msgid "Caldera Forms"
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:113
+msgid "The Caldera Forms plugin is no longer maintained."
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:117
+msgid "If you are still using these widgets on any page, please switch to the suggested replacement before updating to avoid layout or functionality issues."
+msgstr ""
+
+#: includes/notices/class-tp-deprecated-widgets-notice.php:120
+msgid "Got it, dismiss"
 msgstr ""
 
 #: includes/notices/class-tp-expired-license-notice.php:140
@@ -578,25 +631,25 @@ msgstr ""
 msgid "Note : Safe to install - no effect on Elementor setup"
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:94
+#: includes/notices/class-tp-plugin-features-banner.php:95
 msgid "The Plus Addons for Elementor now gives Dynamic Fields for Elementor (without Elementor Pro). In the Free version, you can use Post Dynamic Fields to build dynamic blog layouts. To unlock all Dynamic Fields and create advanced dynamic designs, upgrade to Pro."
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:96
+#: includes/notices/class-tp-plugin-features-banner.php:97
 #: modules/controls/tpae-pro-features.php:49
 #: modules/widget-promotion/tp-widget-promotion/tp-widgets-load.js:138
 msgid "Get Pro"
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:100
+#: includes/notices/class-tp-plugin-features-banner.php:101
 msgid "You can now use Dynamic Fields (without Elementor Pro) in The Plus Addons for Elementor to build fully dynamic layouts."
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:109
+#: includes/notices/class-tp-plugin-features-banner.php:110
 msgid "Big Update: Dynamic Fields Are Now Available in The Plus Addons for Elementor"
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:112
+#: includes/notices/class-tp-plugin-features-banner.php:113
 #: modules/widgets/tp_blog_listout.php:1357
 #: modules/widgets/tp_blog_listout.php:1358
 #: modules/widgets/tp_button.php:241
@@ -610,11 +663,11 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:114
+#: includes/notices/class-tp-plugin-features-banner.php:115
 msgid "See in Action"
 msgstr ""
 
-#: includes/notices/class-tp-plugin-features-banner.php:158
+#: includes/notices/class-tp-plugin-features-banner.php:170
 msgid "You are not allowed to perform this action"
 msgstr ""
 
@@ -3034,12 +3087,6 @@ msgstr ""
 msgid "The Plus Post Navigation widget is not registered on this site."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-post-search.php:10
-#: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:289
-#: build/index.js:1
-msgid "Post Search"
-msgstr ""
-
 #: modules/ability/widgets-ability/tp-post-search.php:11
 msgid "Adds the The Plus \"Post Search\" widget (tp-post-search) to an Elementor container."
 msgstr ""
@@ -3503,8 +3550,8 @@ msgstr ""
 #: modules/widgets/tp_accordion.php:1803
 #: modules/widgets/tp_accordion.php:1816
 #: modules/widgets/tp_accordion.php:1834
-#: modules/widgets/tp_carousel_anything.php:1216
-#: modules/widgets/tp_carousel_anything.php:1236
+#: modules/widgets/tp_carousel_anything.php:1217
+#: modules/widgets/tp_carousel_anything.php:1237
 #: modules/widgets/tp_navigation_menu_lite.php:2533
 #: modules/widgets/tp_navigation_menu_lite.php:2713
 #: modules/widgets/tp_page_scroll.php:1132
@@ -5336,19 +5383,19 @@ msgstr ""
 msgid "Grayscale"
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:109
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:111
 msgid "Not a Valid"
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:115
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:117
 msgid "Empty Content."
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:120
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:122
 msgid "Invalid payload."
 msgstr ""
 
-#: modules/extensions/copy-paste/class-tpae-copy-paste.php:272
+#: modules/extensions/copy-paste/class-tpae-copy-paste.php:274
 msgid "Warning: TPAE Pro Plugin Widgets Used"
 msgstr ""
 
@@ -8199,7 +8246,7 @@ msgstr ""
 #: modules/helper-function.php:18
 #: modules/widgets/tp_accordion.php:1795
 #: modules/widgets/tp_accordion.php:1821
-#: modules/widgets/tp_carousel_anything.php:1223
+#: modules/widgets/tp_carousel_anything.php:1224
 #: modules/widgets/tp_navigation_menu_lite.php:2717
 #: modules/widgets/tp_page_scroll.php:1140
 #: modules/widgets/tp_tabs_tours.php:2247
@@ -8641,12 +8688,6 @@ msgstr ""
 msgid "Coupon Code"
 msgstr ""
 
-#: modules/widget-promotion/tp-widget-promotion/class-tp-widget-promotion.php:154
-#: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:551
-#: build/index.js:1
-msgid "Design Tool"
-msgstr ""
-
 #: modules/widget-promotion/tp-widget-promotion/class-tp-widget-promotion.php:160
 #: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:557
 #: build/index.js:1
@@ -8966,13 +9007,6 @@ msgstr ""
 msgid "WP Forms"
 msgstr ""
 
-#: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:464
-#: modules/widgets/tp_caldera_forms.php:44
-#: modules/widgets/tp_caldera_forms.php:95
-#: build/index.js:1
-msgid "Caldera Forms"
-msgstr ""
-
 #: modules/widgets-feature/template-editor/class-tp-create-template.php:150
 msgid "Permission denied."
 msgstr ""
@@ -8989,15 +9023,15 @@ msgstr ""
 msgid "zoom"
 msgstr ""
 
-#: modules/widgets/base/class-plus-widget-base.php:128
+#: modules/widgets/base/class-plus-widget-base.php:129
 msgid "Upgrade"
 msgstr ""
 
-#: modules/widgets/base/class-plus-widget-base.php:129
+#: modules/widgets/base/class-plus-widget-base.php:130
 msgid "Unlock all Features"
 msgstr ""
 
-#: modules/widgets/base/class-plus-widget-base.php:131
+#: modules/widgets/base/class-plus-widget-base.php:132
 msgid "Upgrade to Pro!"
 msgstr ""
 
@@ -11200,7 +11234,7 @@ msgstr ""
 
 #: modules/widgets/tp_accordion.php:1796
 #: modules/widgets/tp_accordion.php:1822
-#: modules/widgets/tp_carousel_anything.php:1224
+#: modules/widgets/tp_carousel_anything.php:1225
 #: modules/widgets/tp_navigation_menu_lite.php:2718
 #: modules/widgets/tp_page_scroll.php:1141
 #: modules/widgets/tp_switcher.php:1805
@@ -11211,8 +11245,8 @@ msgstr ""
 
 #: modules/widgets/tp_accordion.php:1803
 #: modules/widgets/tp_accordion.php:1834
-#: modules/widgets/tp_carousel_anything.php:1216
-#: modules/widgets/tp_carousel_anything.php:1236
+#: modules/widgets/tp_carousel_anything.php:1217
+#: modules/widgets/tp_carousel_anything.php:1237
 #: modules/widgets/tp_navigation_menu_lite.php:2533
 #: modules/widgets/tp_navigation_menu_lite.php:2713
 #: modules/widgets/tp_page_scroll.php:1132
@@ -11229,8 +11263,8 @@ msgstr ""
 
 #: modules/widgets/tp_accordion.php:1803
 #: modules/widgets/tp_accordion.php:1834
-#: modules/widgets/tp_carousel_anything.php:1216
-#: modules/widgets/tp_carousel_anything.php:1236
+#: modules/widgets/tp_carousel_anything.php:1217
+#: modules/widgets/tp_carousel_anything.php:1237
 #: modules/widgets/tp_navigation_menu_lite.php:2533
 #: modules/widgets/tp_navigation_menu_lite.php:2713
 #: modules/widgets/tp_page_scroll.php:1132
@@ -13497,7 +13531,7 @@ msgstr ""
 msgid "Please enter values in both HTML & CSS to enable the Smart Loop Builder feature."
 msgstr ""
 
-#: modules/widgets/tp_blog_listout.php:4352
+#: modules/widgets/tp_blog_listout.php:4351
 #: modules/widgets/tp_dynamic_categories.php:2499
 #: modules/widgets/tp_gallery_listout.php:1426
 #: modules/widgets/tp_switcher.php:1781
@@ -13970,8 +14004,8 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:106
 #: modules/widgets/tp_gravity_form.php:106
 #: modules/widgets/tp_gravity_form.php:118
-#: modules/widgets/tp_gravity_form.php:2692
-#: modules/widgets/tp_gravity_form.php:2714
+#: modules/widgets/tp_gravity_form.php:2713
+#: modules/widgets/tp_gravity_form.php:2735
 #: modules/widgets/tp_ninja_form.php:101
 #: modules/widgets/tp_wp_forms.php:106
 msgid "Select Form"
@@ -16065,19 +16099,19 @@ msgstr ""
 msgid "Captcha Margin"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2651
+#: modules/widgets/tp_gravity_form.php:2672
 msgid "Please select Gravity Form"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2655
+#: modules/widgets/tp_gravity_form.php:2676
 msgid "Please select Download Monitor Form"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2700
+#: modules/widgets/tp_gravity_form.php:2721
 msgid "No Gravity Forms Found!"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2723
+#: modules/widgets/tp_gravity_form.php:2744
 msgid "No forms found"
 msgstr ""
 
@@ -23617,13 +23651,12 @@ msgstr ""
 msgid "Select a WPForm"
 msgstr ""
 
-#: widgets_loader.php:129
-#: widgets_loader.php:134
+#: widgets_loader.php:130
 #: assets/js/admin/tp-elementor-install.js:12
 msgid "Install Now"
 msgstr ""
 
-#: widgets_loader.php:132
+#: widgets_loader.php:133
 #: assets/js/admin/tp-elementor-install.js:14
 #: build/index.js:1
 #: includes/nxt-ext/build/index.js:1
@@ -23631,111 +23664,111 @@ msgstr ""
 msgid "Activate Now"
 msgstr ""
 
-#: widgets_loader.php:141
+#: widgets_loader.php:140
 msgid "Elementor Plugin Required"
 msgstr ""
 
-#: widgets_loader.php:142
+#: widgets_loader.php:141
 msgid "The Plus Addons for Elementor works as an extension of Elementor. Please install and activate Elementor to unlock all 120+ widgets and extensions. Without Elementor, the addon cannot function."
 msgstr ""
 
-#: widgets_loader.php:207
+#: widgets_loader.php:206
 msgid "Invalid permission. Only administrators can perform this action."
 msgstr ""
 
-#: widgets_loader.php:249
+#: widgets_loader.php:248
 msgid "Failed to install Elementor plugin."
 msgstr ""
 
-#: widgets_loader.php:257
+#: widgets_loader.php:256
 msgid "Plugin installed but activation failed."
 msgstr ""
 
-#: widgets_loader.php:262
+#: widgets_loader.php:261
 msgid "Elementor installed & activated successfully!"
 msgstr ""
 
-#: widgets_loader.php:272
+#: widgets_loader.php:271
 msgid "Elementor activation failed."
 msgstr ""
 
-#: widgets_loader.php:277
+#: widgets_loader.php:276
 msgid "Elementor activated successfully!"
 msgstr ""
 
-#: widgets_loader.php:535
+#: widgets_loader.php:534
 msgid "You are not allowed to upload SVG files."
 msgstr ""
 
-#: widgets_loader.php:542
+#: widgets_loader.php:541
 msgid "SVG file could not be read."
 msgstr ""
 
-#: widgets_loader.php:548
+#: widgets_loader.php:547
 msgid "SVGZ uploads are not supported on this server (zlib unavailable)."
 msgstr ""
 
-#: widgets_loader.php:555
+#: widgets_loader.php:554
 msgid "Malformed SVGZ file rejected."
 msgstr ""
 
-#: widgets_loader.php:565
+#: widgets_loader.php:564
 msgid "File does not appear to be a valid SVG."
 msgstr ""
 
-#: widgets_loader.php:589
+#: widgets_loader.php:588
 msgid "SVG contains unsafe content"
 msgstr ""
 
-#: widgets_loader.php:639
+#: widgets_loader.php:641
 msgid "Plus Essential"
 msgstr ""
 
-#: widgets_loader.php:640
+#: widgets_loader.php:642
 msgid "Plus Advanced"
 msgstr ""
 
-#: widgets_loader.php:641
+#: widgets_loader.php:643
 msgid "Plus Creative"
 msgstr ""
 
-#: widgets_loader.php:642
+#: widgets_loader.php:644
 msgid "Plus Listing"
 msgstr ""
 
-#: widgets_loader.php:643
+#: widgets_loader.php:645
 msgid "Plus Social"
 msgstr ""
 
-#: widgets_loader.php:644
+#: widgets_loader.php:646
 msgid "Plus Forms"
 msgstr ""
 
-#: widgets_loader.php:645
+#: widgets_loader.php:647
 msgid "Plus WooCommerce"
 msgstr ""
 
-#: widgets_loader.php:646
+#: widgets_loader.php:648
 msgid "Plus Depreciated"
 msgstr ""
 
-#: widgets_loader.php:671
+#: widgets_loader.php:673
 msgid "Plus Header"
 msgstr ""
 
-#: widgets_loader.php:691
+#: widgets_loader.php:693
 msgid "Plus Archive"
 msgstr ""
 
-#: widgets_loader.php:712
+#: widgets_loader.php:714
 msgid "Plus Product Archive"
 msgstr ""
 
-#: widgets_loader.php:733
+#: widgets_loader.php:735
 msgid "Plus Product"
 msgstr ""
 
-#: widgets_loader.php:754
+#: widgets_loader.php:756
 msgid "Plus Single"
 msgstr ""
 

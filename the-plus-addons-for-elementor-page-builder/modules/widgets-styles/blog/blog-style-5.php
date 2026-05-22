@@ -82,7 +82,7 @@ if ( 'metro' !== $layout ) {
 	}
 
 	if ( 'yes' === $show_read_time && 'yes' === $tp_post_tima_overflow ) {
-		$time_diff = human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) );
+		$time_diff = human_time_diff( get_the_time( 'U' ), time() );
 		echo '<span class="tpae-blog-read-time">' . esc_html( $time_diff ) . ' ago</span>';
 	}
 
@@ -108,7 +108,7 @@ if ( 'yes' === $show_author_name && 'yes' !== $tp_meta_overflow ) {
 }
 
 if ( 'yes' === $show_read_time && 'yes' !== $tp_post_tima_overflow ) {
-	$time_diff = human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) );
+	$time_diff = human_time_diff( get_the_time( 'U' ), time() );
 	echo '<span class="tpae-blog-read-time">' . esc_html( $time_diff ) . ' ago</span>';
 }
 

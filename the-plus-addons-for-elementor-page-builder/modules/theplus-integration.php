@@ -23,7 +23,11 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 		 * @since 1.0.0
 		 */
 		public function init() {
-			add_action( 'elementor/controls/controls_registered', array( $this, 'add_controls' ), 10 );
+			// 'elementor/controls/controls_registered' is deprecated
+			// since Elementor 3.1. Both old and new hooks pass the
+			// Controls_Manager instance to the callback, so the existing
+			// add_controls() method continues to work unchanged.
+			add_action( 'elementor/controls/register', array( $this, 'add_controls' ), 10 );
 		}
 
 		/**

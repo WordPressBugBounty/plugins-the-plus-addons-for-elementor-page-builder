@@ -1141,6 +1141,7 @@ class L_ThePlus_Carousel_Anything extends Plus_Widget_Base {
 		$data_slider .= ' data-slider_animation="' . esc_attr( $slider_animation ) . '"';
 
 		$carousel_direction = ! empty( $settings['carousel_direction'] ) ? $settings['carousel_direction'] : 'ltr';
+		$carousel_direction = in_array( $carousel_direction, array( 'ltr', 'rtl' ), true ) ? $carousel_direction : 'ltr';
 
 		$carousel_slider = '';
 
@@ -1184,7 +1185,7 @@ class L_ThePlus_Carousel_Anything extends Plus_Widget_Base {
 		}
 		?>
  
-		<div id="<?php echo esc_attr( $uid ); ?>" class="theplus-carousel-anything-wrapper <?php echo esc_attr( $isotope ); ?> <?php echo esc_attr( $arrow_class ); ?> <?php echo esc_attr( $data_carousel ); ?> <?php echo esc_attr( $uid ); ?> "data-id="<?php echo esc_attr( $uid ); ?>" data-connection="<?php echo esc_attr( $tab_id ); ?>" <?php echo $carousel_slider; ?> dir=<?php echo esc_attr( $carousel_direction ); ?> <?php echo $data_slider; ?> <?php echo $carousel_bg_conn; ?>>
+		<div id="<?php echo esc_attr( $uid ); ?>" class="theplus-carousel-anything-wrapper <?php echo esc_attr( $isotope ); ?> <?php echo esc_attr( $arrow_class ); ?> <?php echo esc_attr( $data_carousel ); ?> <?php echo esc_attr( $uid ); ?> "data-id="<?php echo esc_attr( $uid ); ?>" data-connection="<?php echo esc_attr( $tab_id ); ?>" <?php echo $carousel_slider; ?> dir="<?php echo esc_attr( $carousel_direction ); ?>"<?php echo $data_slider; ?> <?php echo $carousel_bg_conn; ?>>
 			<div class="plus-carousel-inner post-inner-loop">
 			<?php
 			if ( ! empty( $settings['carousel_content'] ) ) {

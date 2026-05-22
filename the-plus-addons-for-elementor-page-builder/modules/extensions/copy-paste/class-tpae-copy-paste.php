@@ -87,6 +87,8 @@ if ( ! class_exists( 'Tpae_Copy_Paste' ) ) {
 			wp_enqueue_style( 'tpae-copy-paste', L_THEPLUS_URL . 'modules/extensions/copy-paste/tpae-copy-paste.css', array(),  L_THEPLUS_VERSION );
 			wp_enqueue_script( 'tpae-cross-cp', L_THEPLUS_URL . 'modules/extensions/copy-paste/tpae-copy-paste.js', array( 'jquery', 'elementor-editor'), L_THEPLUS_VERSION, true );
 
+			wp_set_script_translations( 'tpae-cross-cp', 'tpebl', L_THEPLUS_PATH . 'languages' );
+
 			wp_localize_script( 'tpae-cross-cp', 'theplus_cross_cp',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),

@@ -233,7 +233,7 @@ if ( ! class_exists( 'Tpae_Hooks' ) ) {
 			$default_load = get_option( 'theplus_options' );
 			if ( empty( $default_load ) ) {
 				$theplus_options['check_elements']  = array( 'tp_accordion', 'tp_adv_text_block','tp_blog_listout', 'tp_button','tp_clients_listout', 'tp_heading_title', 'tp_info_box', 'tp_navigation_menu_lite','tp_progress_bar', 'tp_number_counter', 'tp_pricing_table','tp_social_icon', 'tp_tabs_tours', 'tp_team_member_listout', 'tp_testimonial_listout', 'tp_video_player', 'tp_plus_form' );
-				$theplus_options['extras_elements'] = array( 'plus_cross_cp', 'plus_global_box_shadow', 'plus_global_gradient_color', 'plus_global_dimensions', 'plus_global_button' );
+				$theplus_options['extras_elements'] = array( 'plus_cross_cp', 'plus_global_box_shadow', 'plus_global_gradient_color', 'plus_global_dimensions', 'plus_global_button','plus_dynamic_tag' );
 
 				add_option( 'theplus_options', $theplus_options, '', 'on' );
 			} elseif ( ! is_array( $default_load['check_elements'] ) || ! is_array( $default_load['extras_elements'] ) ) {

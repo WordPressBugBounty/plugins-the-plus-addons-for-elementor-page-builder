@@ -117,7 +117,7 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 					'install-plugin_nexter-extension'
 				);
 
-				echo '<div class="notice notice-error tpae-nexter-extension-promo is-dismissible" style="border-left-color: #8072fc;">
+				echo '<div class="notice notice-info tpae-nexter-extension-promo is-dismissible" style="border-left-color: #8072fc;">
 					<div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: center; position: relative; margin-left: 0; flex-direction: row-reverse; justify-content: flex-end; padding: 20px 5px 20px 5px;">
 						<div style="margin: 0; color: #000;">
 							<h3 style="margin: 0; font-weight: 600; font-size: 1.030rem; line-height: 1.2; font-family: Roboto, Arial, Helvetica, sans-serif;">' . esc_html__( 'Create Elementor Header, Footer, Single, Archive, 404 etc for FREE!', 'tpebl' ) . '</h3>

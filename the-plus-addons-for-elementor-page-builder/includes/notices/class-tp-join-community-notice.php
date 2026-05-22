@@ -66,7 +66,7 @@ if ( ! class_exists( 'Tp_Join_Community_Notice' ) ) {
 			$saved_time = get_option( 'tpae_install_time' );
 
 			$saved_timestamp   = strtotime( $saved_time );
-			$current_timestamp = current_time( 'timestamp' );
+			$current_timestamp = time();
 
 			$days_passed = floor( ( $current_timestamp - $saved_timestamp ) / DAY_IN_SECONDS );
 
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Tp_Join_Community_Notice' ) ) {
 				return;
 			}
 
-			echo '<div class="notice notice-error is-dismissible tpae-notice-show tpae-join-community" style="border-left-color: #6660EF;">
+			echo '<div class="notice notice-info is-dismissible tpae-notice-show tpae-join-community" style="border-left-color: #6660EF;">
 				<div class="tp-nexter-werp" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
 
 					<div class="tp-notice-wrap" style="display: flex; padding-top: 14px;">

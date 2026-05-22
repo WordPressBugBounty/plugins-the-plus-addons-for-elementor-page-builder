@@ -2,9 +2,9 @@
 Contributors: posimyththemes, nirmalkavaiya, devangvachheta, sagarpatel124
 Tags: elementor, elementor widgets, elementor addons, elementor templates, widgets for elementor
 Requires at least: 6.0
-Tested up to: 6.9
-Requires PHP: 7.0
-Stable tag: 6.4.15
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 6.4.16
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -188,7 +188,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[Animated Service Boxes, Sliding Boxes & Horizontal & Vertical Image Accordion](https://theplusaddons.com/widgets/animated-service-boxes/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
-* <strong>[Before and After Image Slider Comparison for Elementor ](hhttps://theplusaddons.com/elementor-widget/before-after-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Before and After Image Slider Comparison for Elementor ](https://theplusaddons.com/elementor-widget/before-after-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[ Advanced Carousel Anything Slider for Elementor ](https://theplusaddons.com/widgets/elementor-carousel-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
@@ -392,6 +392,21 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.16 =
+Compatibility : Added compatibility with WordPress v7.0
+Improved : Dynamic Tags : Dynamic Tags enabled by default
+Improved : Core : Deprecated Elementor controls_registered hook migrated to current API
+Improved : Widgets Loader : Inline styles replaced with WordPress standard wp_add_inline_styles
+Improved : Blog Listing : Style-5 deprecated PHP timestamp function replaced with current WordPress API
+Improved : Gravity Form : Input handling improved with caching-plugin compatibility
+Improved : Unused code removed from widgets loader
+Fix : Carousel Anything : Stored Cross-Site Scripting (XSS) Security Patch (Medium Security)
+Fix : Gallery Listing : Style-2 extra text removed
+Fix : Navigation Menu : Broken layout when Blocksy theme is active fixed
+Fix : Post Listing : Isotope layout re-initialised on window load for consistent display
+Fix : Plus Copy Paste : Hardcoded strings made translatable
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.15 =
 Add : Stylish List : Added Gap & Alignment options
@@ -1136,3 +1151,6 @@ Fix: Minor bug fixes and performance improvements
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/the-plus-addons-for-elementor-page-builder/assets/changelog.txt) included with the plugin.
 
 == Upgrade Notice ==
+
+= 6.4.16 =
+Recommended update. Includes bug fixes, performance improvements, and security hardening. Always backup before updating.

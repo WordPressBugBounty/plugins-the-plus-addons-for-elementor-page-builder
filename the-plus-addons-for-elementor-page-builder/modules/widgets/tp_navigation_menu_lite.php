@@ -2482,7 +2482,7 @@ class ThePlus_Navigation_Menu_Lite extends Plus_Widget_Base {
 					<div class="plus-navigation-menu <?php echo esc_attr( $navbar_menu_type ); ?>">
 						
 						<?php
-						if ( defined( 'JUPITERX_VERSION' ) ) {
+						if ( defined( 'JUPITERX_VERSION' ) || 'blocksy' === get_template() ) {
 
 							wp_nav_menu( $nav_menu_args );
 						} elseif ( ! empty( $TypeMenu ) && $TypeMenu === 'custom' ) {
@@ -2511,7 +2511,7 @@ class ThePlus_Navigation_Menu_Lite extends Plus_Widget_Base {
 
 						if ( 'normal-menu' === $menu_content && ! empty( $settings['mobile_navbar'] ) ) {
 
-							if ( defined( 'JUPITERX_VERSION' ) ) {
+							if ( defined( 'JUPITERX_VERSION' ) || 'blocksy' === get_template() ) {
 								wp_nav_menu( $mobile_nav_menu_args );
 							} else {
 								wp_nav_menu( apply_filters( 'widget_nav_menu_args', $mobile_nav_menu_args, $nav_menu, $settings, '' ) );

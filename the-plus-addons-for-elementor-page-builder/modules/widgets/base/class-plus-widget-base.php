@@ -32,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 6.4.13
  */
+#[\AllowDynamicProperties]
 abstract class Plus_Widget_Base extends Widget_Base {
 
 	/**

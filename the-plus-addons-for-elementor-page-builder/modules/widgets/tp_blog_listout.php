@@ -4310,7 +4310,6 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 					'theplus_nonce'       => wp_create_nonce( 'theplus-addons' ),
 				);
 
-				$postattr     = array_merge( $postattr );
 				$data_loadkey = L_tp_plus_simple_decrypt( wp_json_encode( $postattr ), 'ey' );
 			}
 

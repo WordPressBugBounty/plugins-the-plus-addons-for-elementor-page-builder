@@ -2622,7 +2622,28 @@ class ThePlus_Gravity_Form extends Plus_Widget_Base {
 			include THEPLUS_PATH . 'modules/widgets/theplus-widgets-extra.php';
 		}
 
+		$gra_form_id = ! empty( $settings['gravity_form'] ) ? absint( $settings['gravity_form'] ) : 0;
+		$gra_ajax    = ! empty( $settings['ajax'] );
+		$gra_compat  = ! empty( $settings['select'] ) ? $settings['select'] : 'gf_default';
+
+		$gf_global_inline = '';
+		if ( 'gf_default' === $gra_compat && $gra_form_id > 0 && function_exists( 'gravity_form_enqueue_scripts' ) ) {
+			gravity_form_enqueue_scripts( $gra_form_id, $gra_ajax );
+
+			/*
+			 * Defensive: some caching/optimization plugins strip or reorder the
+			 * inline localization for `gform_gravityforms`, which causes
+			 * "gf_global is not defined" inside gravityforms.min.js.
+			 * Re-emit gf_global inline as a safety net.
+			 */
+			if ( class_exists( '\GFCommon' ) && method_exists( '\GFCommon', 'gf_global' ) ) {
+				$gf_global_js     = \GFCommon::gf_global( false, false );
+				$gf_global_inline = '<script type="text/javascript">if (typeof gf_global === "undefined") { ' . $gf_global_js . ' }</script>';
+			}
+		}
+
 		$output  = '<div class="pt_plus_gravity_form ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
+		$output .= $gf_global_inline;
 		$output .= do_shortcode( $this->get_shortcode() );
 		$output .= '</div>';
 

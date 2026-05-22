@@ -189,7 +189,7 @@ if ( ! class_exists( 'Tp_Expired_License_Notice' ) ) {
 				return;
 			}
 
-			echo '<div class="notice notice-error is-dismissible tpae-notice-show tpae-expired-license-week" style="border-left-color: #6660EF;">
+			echo '<div class="notice notice-warning is-dismissible tpae-notice-show tpae-expired-license-week" style="border-left-color: #6660EF;">
 				<div class="tp-notice-wrap" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
 
 					<div class="tp-tpae-logo" style="display: flex; padding-top: 14px;">
@@ -248,7 +248,7 @@ if ( ! class_exists( 'Tp_Expired_License_Notice' ) ) {
 				return;
 			}
 
-			echo '<div class="notice notice-error is-dismissible tpae-notice-show tpae-expired-license-month" style="border-left-color: #6660EF;">
+			echo '<div class="notice notice-info is-dismissible tpae-notice-show tpae-expired-license-month" style="border-left-color: #6660EF;">
 				<div class="tp-notice-wrap" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
 
 					<div class="tp-tpae-logo" style="display: flex; padding-top: 14px;">

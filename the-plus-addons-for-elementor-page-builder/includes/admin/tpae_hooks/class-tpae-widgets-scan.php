@@ -41,9 +41,20 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 		}
 
 		/**
-		 * Member Variable
+		 * Per-widget usage counts populated by tpae_get_elements_status_scan().
 		 *
-		 * @var countwidgets
+		 * Declared explicitly so PHP 8.2+ does not raise
+		 * "Creation of dynamic property" when the scan runs.
+		 *
+		 * @since 6.4.16
+		 * @var array
+		 */
+		public $countwidgets = array();
+
+		/**
+		 * Extension IDs queued for removal by the scanner.
+		 *
+		 * @var array
 		 */
 		public $remove_data = array();
 
@@ -129,7 +140,10 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 
 			global $wpdb;
 
-			$post_ids = $wpdb->get_col( 'SELECT `post_id` FROM `' . $wpdb->postmeta . '`WHERE `meta_key` = \'_elementor_version\';' );
+			$post_ids = $wpdb->get_col( $wpdb->prepare(
+				"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = %s",
+				'_elementor_version'
+			) );
 
 			// New & Optimize Query.
 			// $query = " SELECT MIN(id) AS post_id FROM {$wpdb->posts} WHERE post_type = 'revision' GROUP BY post_title HAVING COUNT(*) > 1 ";

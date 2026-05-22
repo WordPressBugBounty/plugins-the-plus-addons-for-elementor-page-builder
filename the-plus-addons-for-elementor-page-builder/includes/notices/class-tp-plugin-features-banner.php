@@ -69,6 +69,7 @@ if ( ! class_exists( 'Tpae_PluginFeatures_Banner' ) ) {
 
 			/** TPAE Plugin Features Banner Close*/
 			add_action( 'wp_ajax_tpae_pluginfeatures_notice_dismiss', array( $this, 'tpae_pluginfeatures_notice_dismiss' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'tpae_plugin_features_banner_styles' ) );
 		}
 
 		/**
@@ -120,7 +121,6 @@ if ( ! class_exists( 'Tpae_PluginFeatures_Banner' ) ) {
 				</div>
 			</div>';
 
-			echo '<style> .notice.tpae-notice-show.tpae-plugin-features-banner a.button.tpae-deal-btn:hover{background:#005FCC!important;}.notice.tpae-notice-show.tpae-plugin-features-banner a.button.tpae-offer-btn:hover,.notice.tpae-notice-show.tpae-plugin-features-banner a.button.tpae-video-btn:hover{background:#f3f3f3 !important;}</style>';
 			?>
 			<script>
 				jQuery(document).on('click', '.tpae-plugin-features-banner.tpae-notice-show .notice-dismiss', function(e) {
@@ -140,6 +140,18 @@ if ( ! class_exists( 'Tpae_PluginFeatures_Banner' ) ) {
 				});
 			</script>
 			<?php
+		}
+
+		/**
+		 * Enqueue hover styles for the plugin features banner notice buttons.
+		 *
+		 * @since 6.4.16
+		 */
+		public function tpae_plugin_features_banner_styles() {
+			if ( get_option( 'tpae_pluginfeatures_notice_dismissed' ) ) {
+				return;
+			}
+			wp_add_inline_style( 'common', '.notice.tpae-notice-show.tpae-plugin-features-banner a.button.tpae-deal-btn:hover{background:#005FCC!important;}.notice.tpae-notice-show.tpae-plugin-features-banner a.button.tpae-offer-btn:hover,.notice.tpae-notice-show.tpae-plugin-features-banner a.button.tpae-video-btn:hover{background:#f3f3f3 !important;}' );
 		}
 
 		/**

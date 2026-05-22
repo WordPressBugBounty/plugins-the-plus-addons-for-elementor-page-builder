@@ -39,10 +39,11 @@ spl_autoload_register(
 );
 
 /**
- * It Is load all widget and dashbord
+ * It Is load all widget and dashboard
  *
  * @since 1.0.0
  */
+#[\AllowDynamicProperties]
 final class L_Theplus_Element_Load {
 
 	/**
@@ -55,7 +56,7 @@ final class L_Theplus_Element_Load {
 	/**
 	 * Get Elementor Plugin Instance
 	 *
-	 * @return \Elementor\Theplus_Element_Loader
+	 * @return \Elementor\Plugin
 	 */
 	public static function elementor() {
 		return \Elementor\Plugin::$instance;
@@ -69,7 +70,7 @@ final class L_Theplus_Element_Load {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return Theplus_Element_Loader The single instance of the class.
+	 * @return L_Theplus_Element_Load The single instance of the class.
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -130,8 +131,6 @@ final class L_Theplus_Element_Load {
 
 		if ( isset( $installed_plugins[ $plugin ] ) ) {
 			$tp_ele_btn_txt = esc_html__( 'Activate Now', 'tpebl' );
-		}else{
-			$tp_ele_btn_txt = esc_html__( 'Install Now', 'tpebl' );
 		}
 
 		echo '<div class="notice notice-error tpae-notice-show tpae-install-elementor" style="border-left-color: #6660EF;">
@@ -347,7 +346,7 @@ final class L_Theplus_Element_Load {
 		$elements    = l_theplus_get_option( 'general', 'check_elements' );
 
 		if ( ( isset( $plus_extras ) && empty( $plus_extras ) && empty( $theplus_options ) ) || ( ! empty( $plus_extras ) && in_array( 'plus_display_rules', $plus_extras ) ) ) {
-			add_action( 'wp_head', array( $this, 'print_style' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'print_style' ) );
 		}
 
 		// add_action( 'elementor/init', array( $this, 'add_elementor_category' ) );
@@ -597,17 +596,20 @@ final class L_Theplus_Element_Load {
 	/**
 	 * Print style.
 	 *
-	 * Adds custom CSS to the HEAD html tag. The CSS that emphasise the maintenance
-	 * mode with red colors.
+	 * Registers and attaches the small piece of CSS that hides elements
+	 * marked with the .plus-conditions--hidden class on the frontend.
 	 *
-	 * Fired by `admin_head` and `wp_head` filters.
+	 * Fired by the `wp_enqueue_scripts` action.
 	 *
 	 * @since 2.1.0
 	 */
 	public function print_style() {
-		?>
-		<style>*:not(.elementor-editor-active) .plus-conditions--hidden {display: none;}</style> 
-		<?php
+		wp_register_style( 'tpae-display-conditions', false );
+		wp_enqueue_style( 'tpae-display-conditions' );
+		wp_add_inline_style(
+			'tpae-display-conditions',
+			'*:not(.elementor-editor-active) .plus-conditions--hidden { display: none; }'
+		);
 	}
 
 	/**
@@ -776,7 +778,7 @@ final class L_Theplus_Element_Load {
 	}
 
 	/**
-	 * The Plus Addon Menu Notificetions icon
+	 * The Plus Addon Menu Notifications icon
 	 *
 	 * @since 6.4.1
 	 */

@@ -5,7 +5,7 @@
     const INSTALLING_TEXT = __("Installing WDesignKit", "tpebl");
     const WAITING_TEXT = __("Waiting...", "tpebl");
 
-    $("document").ready(function () {
+    $(document).ready(function () {
         let templateAddSection = $("#tmpl-elementor-add-section");
 
         if (0 < templateAddSection.length) {
