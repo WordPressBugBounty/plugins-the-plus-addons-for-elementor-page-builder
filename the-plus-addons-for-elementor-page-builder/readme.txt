@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.4.16
+Stable tag: 6.4.17
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -392,6 +392,16 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.17 =
+Add : Blog Listing : Style-1 (Metro layout) - Added Read More button
+Add : Video Player : Added full-height option
+Update : Dashboard : Menu icon updated
+Improvement : MCP Abilities : Free widget ability list synced and reliability improved
+Fix : Infobox : Width issue 
+Fix : Blog Listing : Style-5 - Width issue 
+Fix : Form Widget : Dropdown field values now captured in email Output
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.16 =
 Compatibility : Added compatibility with WordPress v7.0
@@ -1149,8 +1159,3 @@ Improvement: Unnecessary files removed, and file structure improved
 Fix: Minor bug fixes and performance improvements
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/the-plus-addons-for-elementor-page-builder/assets/changelog.txt) included with the plugin.
-
-== Upgrade Notice ==
-
-= 6.4.16 =
-Recommended update. Includes bug fixes, performance improvements, and security hardening. Always backup before updating.

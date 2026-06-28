@@ -298,11 +298,11 @@ if ( ! class_exists( 'Tp_Deactivate_Feedback' ) ) {
 				'reason_tp_other'    => $issue_text,
 			);
 
-			// $tp_data_allow = get_option( 'tpae_data_allow' );
+			$tp_data_allow = get_option( 'tpae_data_allow' );
 
-			// if ( $tp_data_allow ) {
-			// 	$api_params['site_url'] = get_option( 'siteurl' );
-			// }
+			if ( $tp_data_allow ) {
+				$api_params['site_url'] = get_option( 'siteurl' );
+			}
 
 			if( 'on' === $collect_email ) {
 				$current_user = wp_get_current_user();

@@ -1283,8 +1283,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				'label_off' => esc_html__( 'Hide', 'tpebl' ),
 				'default'   => 'no',
 				'separator' => 'before',
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style' => array( 'style-2', 'style-3', 'style-5' ),
+					'style' => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 				),
 			)
 		);
@@ -1306,8 +1321,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 						'icon'  => 'eicon-globe',
 					),
 				),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition'   => array(
-					'style'          => array( 'style-2', 'style-3', 'style-5' ),
+					'style'          => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button' => 'yes',
 				),
 			)
@@ -1320,8 +1350,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				'label_block' => true,
 				'default'     => '',
 				'options'     => $this->get_global_button_style_options(),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition'   => array(
-					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'style'              => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button'     => 'yes',
 					'button_type_switch' => 'global',
 				),
@@ -1338,8 +1383,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 					'style-8' => esc_html__( 'Style 2', 'tpebl' ),
 					'style-9' => esc_html__( 'Style 3', 'tpebl' ),
 				),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'style'              => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button'     => 'yes',
 					'button_type_switch' => 'basic',
 				),
@@ -1356,8 +1416,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				),
 				'default'     => esc_html__( 'Read More', 'tpebl' ),
 				'placeholder' => esc_html__( 'Read More', 'tpebl' ),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition'   => array(
-					'style'          => array( 'style-2', 'style-3', 'style-5' ),
+					'style'          => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button' => 'yes',
 				),
 			)
@@ -1372,8 +1447,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 					''             => esc_html__( 'None', 'tpebl' ),
 					'font_awesome' => esc_html__( 'Font Awesome', 'tpebl' ),
 				),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'style'              => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'display_button'     => 'yes',
 					'button_type_switch' => 'basic',
@@ -1386,8 +1476,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				'label'     => esc_html__( 'Icon', 'tpebl' ),
 				'type'      => Controls_Manager::ICON,
 				'default'   => 'fa fa-chevron-right',
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'style'              => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style'  => 'font_awesome',
@@ -1405,8 +1510,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 					'after'  => esc_html__( 'After', 'tpebl' ),
 					'before' => esc_html__( 'Before', 'tpebl' ),
 				),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'style'              => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style!' => '',
@@ -1424,8 +1544,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 						'max' => 100,
 					),
 				),
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'              => array( 'style-2', 'style-3', 'style-5' ),
+					'style'              => array( 'style-1', 'style-2', 'style-3', 'style-5' ),
 					'display_button'     => 'yes',
 					'button_style!'      => array( 'style-7', 'style-9' ),
 					'button_icon_style!' => '',
@@ -1728,6 +1863,7 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				'selectors'   => array(
 					'{{WRAPPER}} .tpae-compect-blog-wrap' => 'flex-direction: {{VALUE}};',
 				),
+				'prefix_class' => 'tpae-blog-dir-%s',
 			)
 		);
 		$this->add_responsive_control(
@@ -2555,8 +2691,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				'label_off' => esc_html__( 'Default', 'tpebl' ),
 				'label_on'  => esc_html__( 'Custom', 'tpebl' ),
 				'default'   => 'no',
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'          => array( 'style-5' ),
+					'style'          => array( 'style-1', 'style-5' ),
 					'display_button' => 'yes',
 				),
 
@@ -3451,8 +3602,23 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button Style', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
+				'conditions' => array(
+					'relation' => 'or',
+					'terms'    => array(
+						array(
+							'name'     => 'style',
+							'operator' => '!==',
+							'value'    => 'style-1',
+						),
+						array(
+							'name'     => 'layout',
+							'operator' => '==',
+							'value'    => 'metro',
+						),
+					),
+				),
 				'condition' => array(
-					'style'              => array( 'style-5' ),
+					'style'              => array( 'style-1', 'style-5' ),
 					'display_button'     => 'yes',
 					'button_type_switch' => 'basic',
 				),

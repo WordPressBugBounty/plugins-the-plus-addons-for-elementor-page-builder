@@ -34,9 +34,9 @@
         tpPanelSettings.tp_pro_widgets.forEach(function (widget) {
 
             widgetCollection.add({
-                name: widget.key,
+                name: widget.name,
                 title: widget.title,
-                icon: widget.icon,
+                icon: widget.icon + ' tpae-editor-logo',
                 categories: ["tp-pro-widgets"],
                 editable: false
             });
@@ -98,10 +98,19 @@
             }
         });
     });
-    $(parent.document).on('mousedown', '#elementor-panel-category-tp-pro-widgets .elementor-element--promotion , .elementor-element-wrapper.elementor-element--promotion.tp-widgets-promotion', function (e) {
-        const dialogSelector = '#elementor-element--promotion__dialog';
-        $(dialogSelector, parent.document).remove();
-    });
+    // Elementor 3.7+ binds its own `mousedown` on any panel widget with `editable: false`
+    // and opens its native promotion popup (#elementor-element--promotion__dialog), calling
+    // stopPropagation() — so a bubble-phase handler can never suppress it. Intercept in the
+    // capture phase for TPAE promo widgets so Elementor's handler never runs and only our
+    // own dialog shows.
+    const tpProPromoSelector = '#elementor-panel-category-tp-pro-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-widgets-promotion';
+    parent.document.addEventListener('mousedown', function (e) {
+        const promo = e.target.closest && e.target.closest(tpProPromoSelector);
+        if (promo) {
+            e.stopPropagation();
+            $('#elementor-element--promotion__dialog', parent.document).remove();
+        }
+    }, true);
     $(parent.document).on('click', '#elementor-panel-category-tp-pro-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-widgets-promotion', function (e) {
         e.preventDefault();
         e.stopPropagation();

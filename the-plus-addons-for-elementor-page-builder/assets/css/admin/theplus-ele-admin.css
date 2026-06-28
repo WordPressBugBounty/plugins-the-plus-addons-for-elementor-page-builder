@@ -1,15 +1,10 @@
 .wp-customizer #customize-controls .control-section-ast_section .wrapper {
     height: auto; /*customizer compatibility */
 }
+.dashicons-plus-settings,
 .wp-menu-open.toplevel_page_theplus_welcome_page .dashicons-plus-settings,
 .current.toplevel_page_theplus_welcome_page .dashicons-plus-settings{
     background: url(../../images/tpae-favicon-white.png);
-    background-size: 22px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.dashicons-plus-settings {
-    background: url(../../images/tpae-favicon.png); 
     background-size: 22px;
     background-repeat: no-repeat;   
     background-position: center;

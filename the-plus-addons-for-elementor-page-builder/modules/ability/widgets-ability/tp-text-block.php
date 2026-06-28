@@ -180,6 +180,16 @@ function tpae_mcp_add_theplus_text_block_ability(array $input)
 }
 
 /**
+ * Whether Elementor is active and loaded.
+ */
+if (!function_exists('tpae_mcp_has_elementor')) {
+    function tpae_mcp_has_elementor(): bool
+    {
+        return class_exists('\Elementor\Plugin') && isset(\Elementor\Plugin::$instance);
+    }
+}
+
+/**
  * Check whether a widget type exists in Elementor.
  */
 if (!function_exists('tpae_mcp_has_registered_widget')) {

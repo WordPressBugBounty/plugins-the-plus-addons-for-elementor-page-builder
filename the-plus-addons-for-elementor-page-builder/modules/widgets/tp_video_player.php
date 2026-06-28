@@ -845,6 +845,28 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'full_height',
+			array(
+				'label'        => esc_html__( 'Full Height', 'tpebl' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_off'    => esc_html__( 'Off', 'tpebl' ),
+				'label_on'     => esc_html__( 'On', 'tpebl' ),
+				'default'      => '',
+				'return_value' => 'yes',
+				'separator'    => 'before',
+				'prefix_class' => 'tpae-video-full-height-',
+				'description'  => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text"><i>%s</i></p>',
+						esc_html__( 'Stretch the video to fill the full height of its parent container. The parent container must have a defined height (e.g. set Min Height on the container).', 'tpebl' )
+					)
+				),
+				'condition'    => array(
+					'popup_video!' => 'yes',
+				),
+			)
+		);
 		$this->start_controls_tabs( 'tabs_effect_video' );
 
 		$this->start_controls_tab(
