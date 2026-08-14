@@ -48,16 +48,6 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		}
 
 		/**
-		 * Onbording APi
-		 *
-		 * @since 6.3.17
-		 * @access public
-		 * @static
-		 * @var onbording_api of the class.
-		 */
-		public $onbording_api = 'https://api.posimyth.com/wp-json/tpae/v2/tpae_store_user_data';
-
-		/**
 		 * Define the core functionality of the plugin.
 		 *
 		 * @since    6.0.0
@@ -164,6 +154,9 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					break;
 				case 'tpae_user_meta_data':
 					$response = $this->tpae_user_meta_data();
+					break;
+				case 'tpae_analytics_consent':
+					$response = $this->tpae_analytics_consent();
 					break;
 				case 'tpae_whats_new_close':
 					$response = $this->tpae_whats_new_close();
@@ -527,7 +520,15 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					return array();
 				}
 
-				krsort( $plugin_info->versions );
+				/*
+				 * Sort by version, not by string. krsort() compares the keys as strings, so "6.3.9"
+				 * ranked above "6.3.16" and the 25-item cap below then kept the wrong releases:
+				 * 6.3.10-6.3.16 were dropped from the list entirely while 6.3.3-6.3.9 took their
+				 * place, so those versions could not be rolled back to at all. The dashboard sorts
+				 * the list again for display, but it can only order what this method chose to send.
+				 */
+				uksort( $plugin_info->versions, 'version_compare' );
+				$plugin_info->versions = array_reverse( $plugin_info->versions, true );
 
 				$versions_list = array();
 
@@ -620,10 +621,84 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				'title'  => '<img src="' . esc_url( $logo_url ) . '" alt="theplus-logo"><div class="theplus-rb-subtitle">' . esc_html__( 'Rollback to Previous Version', 'tpebl' ) . '</div>',
 			);
 
-			$upgrader_plugin = new \Plugin_Upgrader( new \Plugin_Upgrader_Skin( $args ) );
-			$upgrader_plugin->upgrade( $this_pluginname );
+			/*
+			 * A silent skin, because this is an AJAX endpoint and not update.php.
+			 *
+			 * Plugin_Upgrader_Skin prints a full admin page - heading, progress lines, a "Go to
+			 * Plugins page" link. That HTML was emitted straight into this response and
+			 * wp_send_json() then appended the JSON after it, so the body was markup followed by an
+			 * object and no JSON parser could read it. The dashboard's `data.success` came back
+			 * undefined on every rollback, which sent a SUCCESSFUL rollback down the error branch
+			 * and told a user whose rollback had actually worked that it had failed.
+			 *
+			 * Output buffering does NOT fix this. That skin reports progress through show_message(),
+			 * which calls wp_ob_end_flush_all() - a loop over ob_get_level() that flushes and closes
+			 * every buffer on the stack, including any this method opened. The output has to not be
+			 * produced in the first place.
+			 *
+			 * Automatic_Upgrader_Skin is core's own answer for non-interactive runs: it collects
+			 * feedback into an array instead of echoing it, and its credentials prompt is
+			 * self-buffered. class-wp-upgrader.php requires it, so it is already loaded above.
+			 */
+			$upgrader_skin   = new \Automatic_Upgrader_Skin( $args );
+			$upgrader_plugin = new \Plugin_Upgrader( $upgrader_skin );
 
+			// Second line of defence: the skin above stays quiet, but a third-party hook on any of
+			// the upgrader_* actions can still echo. Unwound back to the level we came in at.
+			$ob_level_before = ob_get_level();
+
+			ob_start();
+			$upgrade_result = $upgrader_plugin->upgrade( $this_pluginname );
+			while ( ob_get_level() > $ob_level_before ) {
+				ob_end_clean();
+			}
+
+			/*
+			 * Report a failed rollback as a failure.
+			 *
+			 * The result of upgrade() was discarded and this method returned success unconditionally,
+			 * so a rollback that never happened still answered "Roll Back Successfully" and the
+			 * dashboard reloaded onto the same version it started on. The dashboard's error handling
+			 * only ever saw success, so it could not surface any of this.
+			 *
+			 * upgrade() returns false or a WP_Error when it fails, and null when the skin bailed out
+			 * before running, so anything other than true is treated as a failure here.
+			 */
+			if ( true !== $upgrade_result ) {
+				$upgrade_error = '';
+
+				if ( is_wp_error( $upgrade_result ) ) {
+					$upgrade_error = $upgrade_result->get_error_message();
+				} else {
+					// upgrade() answers a bare false when the skin captured the reason instead of
+					// returning it, so the last thing the skin recorded is the actual explanation.
+					$skin_messages = $upgrader_skin->get_upgrade_messages();
+
+					if ( ! empty( $skin_messages ) ) {
+						$upgrade_error = (string) end( $skin_messages );
+					}
+				}
+
+				if ( '' === $upgrade_error ) {
+					$upgrade_error = __( 'The rollback could not be completed. Please try again.', 'tpebl' );
+				}
+
+				return $this->tpae_set_response( false, 'rollback_failed', $upgrade_error );
+			}
+
+			// Buffered for the same reason: activation fires the rolled-back plugin's activation
+			// hooks, and any notice one of those echoes would corrupt the JSON just as badly.
+			ob_start();
 			$activation_result = activate_plugin( $this_pluginname );
+			while ( ob_get_level() > $ob_level_before ) {
+				ob_end_clean();
+			}
+
+			// The files were replaced but the plugin did not come back up; say so rather than
+			// reporting success and leaving the user on a dashboard served by a deactivated plugin.
+			if ( is_wp_error( $activation_result ) ) {
+				return $this->tpae_set_response( false, 'rollback_activation_failed', $activation_result->get_error_message() );
+			}
 
 			return $this->tpae_set_response( true, 'Roll Back Successfully', 'Roll Back Successfully Done.' );
 			// wp_redirect( esc_url( admin_url( 'admin.php?page=theplus_welcome_page' ) ) );
@@ -829,6 +904,38 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				return $final;
 			}
 
+			/**
+			 * Optional response cache, opt-in per request via `cache_ttl` (seconds), so existing
+			 * callers of this proxy keep their live behaviour. The key covers url + method + body, so
+			 * every filter combination caches separately. `cache_bust=1` forces a refetch.
+			 *
+			 * Deliberately placed AFTER the SSRF and method guards above: keying a transient on an
+			 * unvalidated $api_url would let a rejected URL be served from cache on a later request,
+			 * which is the guard being bypassed by a slower route.
+			 *
+			 * @since 6.4.18
+			 */
+			$cache_ttl = isset( $_POST['cache_ttl'] ) ? absint( wp_unslash( $_POST['cache_ttl'] ) ) : 0;
+			$cache_ttl = min( $cache_ttl, DAY_IN_SECONDS );
+			$cache_key = '';
+
+			if ( $cache_ttl > 0 ) {
+				$cache_key  = 'tpae_api_' . md5( $api_url . '|' . $method . '|' . wp_json_encode( $body ) );
+				$cache_bust = isset( $_POST['cache_bust'] ) && '1' === sanitize_text_field( wp_unslash( $_POST['cache_bust'] ) );
+
+				if ( $cache_bust ) {
+					delete_transient( $cache_key );
+				} else {
+					$cached = get_transient( $cache_key );
+
+					if ( false !== $cached && is_array( $cached ) ) {
+						$cached['TPAE_CACHED'] = true;
+
+						return $cached;
+					}
+				}
+			}
+
 			$args = array(
 				'method'  => $method,
 				'timeout' => 15,
@@ -850,9 +957,9 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				return $final;
 			}
 
-			$statuscode = wp_remote_retrieve_response_code( $response );
-			$getdataone = wp_remote_retrieve_body( $response );
-			$statuscode = array( 'HTTP_CODE' => $statuscode );
+			$status_code = wp_remote_retrieve_response_code( $response );
+			$getdataone  = wp_remote_retrieve_body( $response );
+			$statuscode  = array( 'HTTP_CODE' => $status_code );
 
 			$response = json_decode( $getdataone, true );
 
@@ -860,7 +967,43 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				$final = array_merge( $statuscode, $response );
 			}
 
+			// Only cache successful responses, so a transient can't pin an error.
+			if ( $cache_ttl > 0 && ! empty( $cache_key ) && 200 === (int) $status_code && ! empty( $response ) ) {
+				$this->tpae_purge_expired_api_transients();
+				set_transient( $cache_key, $final, $cache_ttl );
+			}
+
 			return $final;
+		}
+
+		/**
+		 * Delete expired `tpae_api_*` response transients.
+		 *
+		 * WordPress only clears an expired transient when it is next requested, so keys never asked
+		 * for again would linger in wp_options. Runs only on a cache miss, just before a new entry is
+		 * written.
+		 *
+		 * @since 6.4.18
+		 */
+		public function tpae_purge_expired_api_transients() {
+			global $wpdb;
+
+			$expired = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT option_name FROM {$wpdb->options}
+					WHERE option_name LIKE %s AND option_value < %d LIMIT 100",
+					$wpdb->esc_like( '_transient_timeout_tpae_api_' ) . '%',
+					time()
+				)
+			);
+
+			if ( empty( $expired ) ) {
+				return;
+			}
+
+			foreach ( $expired as $timeout_name ) {
+				delete_transient( substr( $timeout_name, strlen( '_transient_timeout_' ) ) );
+			}
 		}
 
 		/**
@@ -1047,71 +1190,185 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		 */
 		public function tpae_user_meta_data() {
 
-			$tp_data_allow_onboarding = get_option( 'tpae_onbording_end' );
+			/*
+			 * The `tpae_data_allow` write that stood here was removed with the legacy telemetry.
+			 *
+			 * Its only reader was includes/user-experience/class-tp-deactivate-feedback.php, which is
+			 * gone, so the option was pure write-only state: set on every call, consulted by nothing.
+			 * It was never consent either — it was set unconditionally, so a user who had answered no
+			 * question at all still got a `true`. Sharing consent now lives in
+			 * posimyth_tpae_share_analytics, written only by the SDK's consent notice.
+			 *
+			 * The legacy onboarding telemetry was removed.
+			 *
+			 * This assembled server software, memory limit, max execution time, PHP and WP versions, the
+			 * active theme, the full active-plugin list via get_plugins(), the widget list, the site URL,
+			 * the site language and the raw admin_email, and POSTed the lot to
+			 * api.posimyth.com/wp-json/tpae/v2/tpae_store_user_data — with no opt-in surface, no
+			 * white-label suppression, and the administrator's email address, which the consent copy
+			 * explicitly promises is never sent. Reporting is the shared SDK's job now
+			 * (Posimyth_Tracker_TPAE, booted from theplus_elementor_addon.php) and is gated on the
+			 * suite-wide opt-in.
+			 *
+			 * Consent is deliberately NOT written here. Nothing in this handler represents the user
+			 * agreeing to anything — tpae_data_allow above is set unconditionally — so treating it as
+			 * consent would switch sharing on for people who were never asked, which is the pattern being
+			 * removed. The SDK's consent notice asks properly.
+			 *
+			 * The success path previously returned no JSON at all (only the error path answered), leaving
+			 * the caller with nothing to resolve on. It answers unconditionally now.
+			 */
+			wp_send_json( array( 'onBoarding' => true ) );
+		}
 
-			if ( ! $tp_data_allow_onboarding ) {
-				update_option( 'tpae_data_allow', true );
+		/**
+		 * Capability required to answer the analytics sharing question.
+		 *
+		 * On multisite the consent is ONE answer for the whole network — the SDK stores it as a site
+		 * option and Posimyth_Consent_Notice gates its own notice on manage_network_options. This
+		 * screen has to require the same thing, or a subsite administrator could decide for every
+		 * other blog on the network through the dashboard even though the notice refuses to let them.
+		 *
+		 * @since 6.5.8
+		 * @return string
+		 */
+		private function tpae_analytics_capability() {
+			return is_multisite() ? 'manage_network_options' : 'manage_options';
+		}
+
+		/**
+		 * Whether the analytics feature exists on this install at all.
+		 *
+		 * A white-labelled install never boots the tracker (see tpae_posimyth_is_white_labelled() in
+		 * the main plugin file), so the dashboard must not offer a switch that cannot do anything.
+		 *
+		 * @since 6.5.8
+		 * @return bool
+		 */
+		private function tpae_analytics_available() {
+			if ( ! function_exists( 'tpae_posimyth_is_white_labelled' ) ) {
+				return false;
 			}
 
-			$user_data = array();
+			return ! tpae_posimyth_is_white_labelled();
+		}
 
-			$s_e_r_v_e_r_s_o_f_t_w_a_r_e     = ! empty( $_SERVER['SERVER_SOFTWARE'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_SOFTWARE'] ) ) : '';
-			$user_data['web_server']         = $s_e_r_v_e_r_s_o_f_t_w_a_r_e;
-			$user_data['memory_limit']       = ini_get( 'memory_limit' );
-			$user_data['max_execution_time'] = ini_get( 'max_execution_time' );
-			$user_data['php_version']        = phpversion();
-			$user_data['wp_version']         = get_bloginfo( 'version' );
-
-			// Active Theme.
-			$acthemeobj = wp_get_theme();
-			if ( $acthemeobj->get( 'Name' ) !== null && ! empty( $acthemeobj->get( 'Name' ) ) ) {
-				$user_data['theme'] = $acthemeobj->get( 'Name' );
-			}
-
-			// Active Plugin Name.
-			$act_plugin = array();
-			$actplu     = get_option( 'active_plugins' );
-			if ( ! function_exists( 'get_plugins' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/plugin.php';
-			}
-			$plugins = get_plugins();
-			foreach ( $actplu as $p ) {
-				if ( isset( $plugins[ $p ] ) ) {
-					$act_plugin[] = $plugins[ $p ]['Name'];
-				}
-			}
-			$user_data['plugin'] = wp_json_encode( $act_plugin );
-
-			// No Of TPAE Block Used.
-			$get_widgets_list = get_option( 'theplus_options' );
-			$check_elements   = ! empty( $get_widgets_list['check_elements'] ) ? $get_widgets_list['check_elements'] : array();
-			if ( ! empty( $get_widgets_list ) && ! empty( $check_elements ) ) {
-				$user_data['no_block']    = count( $check_elements );
-				$user_data['used_blocks'] = wp_json_encode( $check_elements );
-			} else {
-				$user_data['no_block']    = 0;
-				$user_data['used_blocks'] = array();
-			}
-
-			$user_data['email'] = get_option( 'admin_email' );
-
-			$user_data['site_url'] = get_option( 'siteurl' );
-
-			$user_data['site_language'] = get_bloginfo( 'language' );
-
-			$response = wp_remote_post(
-				$this->onbording_api,
-				array(
-					'method' => 'POST',
-					'body'   => wp_json_encode( $user_data ),
-				)
+		/**
+		 * Current analytics state, for the dashboard and the onboarding step to render from.
+		 *
+		 * @since 6.5.8
+		 * @return array
+		 */
+		private function tpae_analytics_state() {
+			return array(
+				// False on a rebranded install: hide the control entirely rather than showing a dead one.
+				'available'  => $this->tpae_analytics_available(),
+				'enabled'    => (bool) get_site_option( 'posimyth_tpae_share_analytics', false ),
+				// False for a subsite admin on multisite — show the state, but read-only.
+				'can_manage' => current_user_can( $this->tpae_analytics_capability() ),
 			);
+		}
 
-			if ( is_wp_error( $response ) ) {
-				wp_send_json( array( 'onBoarding' => false ) );
-			} else {
-				$status_one = wp_remote_retrieve_response_code( $response );
+		/**
+		 * Records an explicit yes/no to analytics sharing.
+		 *
+		 * Kept separate from tpae_analytics_consent() so the onboarding step can call the same code
+		 * when that step is built — the two answers must be stored identically or they will drift.
+		 *
+		 * Three things have to happen together, and each fails silently on its own:
+		 *
+		 * 1. SITE options, not per-blog options. Posimyth_Tracker_Base::has_consent() reads with
+		 *    get_site_option(), so update_option() would write somewhere the SDK never looks — on
+		 *    multisite the switch would appear to work while nothing was ever sent. On single site
+		 *    get_site_option() falls back to the plain option, so this is equivalent there.
+		 *
+		 * 2. The suite-wide "answered" flag is set for BOTH answers. Posimyth_Consent_Notice::
+		 *    should_show() treats "opt-in empty and never dismissed" as unanswered, so switching
+		 *    sharing OFF here without this would bring the admin notice straight back to ask again —
+		 *    immediately after the user deliberately said no.
+		 *
+		 * 3. Turning it on sends something now. Without a ping the hub does not learn about this
+		 *    install until the weekly cron happens to fire.
+		 *
+		 * @since 6.5.8
+		 * @param bool $enable Whether sharing is being switched on.
+		 * @return void
+		 */
+		private function tpae_store_analytics_consent( $enable ) {
+
+			$enable = (bool) $enable;
+
+			update_site_option( 'posimyth_tpae_share_analytics', $enable ? 1 : 0 );
+			update_site_option( 'posi_consent_dismissed_tpae_suite', 1 );
+
+			if ( ! $enable || ! class_exists( 'Posimyth_Tracker_TPAE' ) ) {
+				return;
 			}
+
+			/*
+			 * report_activation() sends `activate` at most once per active period, so a user who
+			 * switches sharing off and later back on would otherwise send nothing at all and stay
+			 * invisible until the weekly heartbeat. Send the activation on the first opt-in, and a
+			 * heartbeat on a re-opt-in — that reports current state now without inflating the hub's
+			 * activation count, which is exactly what the once-per-period guard exists to protect.
+			 */
+			$already_reported = get_option( 'posimyth_tpae_activate_reported' );
+
+			Posimyth_Tracker_TPAE::send_first_ping();
+
+			if ( $already_reported ) {
+				Posimyth_Tracker_TPAE::do_request( 'heartbeat' );
+			}
+		}
+
+		/**
+		 * Read or set the analytics sharing consent from the dashboard.
+		 *
+		 * Nonce and the logged-in manage_options check are already done by tpae_dashboard_ajax_call();
+		 * this adds the network-scope capability on top — see tpae_analytics_capability().
+		 *
+		 * Deliberately its own endpoint rather than a key in tpae_wp_option_manage()'s allowlist.
+		 * Consent has to be written as a site option, has to set the suite-wide answered flag and has
+		 * to ping, none of which a generic option writer does — and a consent flag should not be
+		 * reachable through a general-purpose read/write API in the first place.
+		 *
+		 * @since 6.5.8
+		 * @return array
+		 */
+		public function tpae_analytics_consent() {
+
+			if ( ! $this->tpae_analytics_available() ) {
+				return $this->tpae_set_response( false, 'Unavailable.', 'Data sharing is not available on this installation.' );
+			}
+
+			if ( ! current_user_can( $this->tpae_analytics_capability() ) ) {
+				return $this->tpae_set_response( false, 'Invalid Permission.', 'You do not have permission to change this setting.' );
+			}
+
+			$operation = isset( $_POST['operation'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['operation'] ) ) ) : 'get';
+
+			if ( 'set' === $operation ) {
+
+				if ( ! isset( $_POST['share_analytics'] ) ) {
+					return $this->tpae_set_response( false, 'No data found.', 'Please send valid data.' );
+				}
+
+				// Accept the truthy spellings a JS client may send; anything else — including the
+				// strings "false" and "0", which are both truthy in PHP — counts as off.
+				$raw = strtolower( sanitize_text_field( wp_unslash( $_POST['share_analytics'] ) ) );
+
+				$this->tpae_store_analytics_consent( in_array( $raw, array( '1', 'true', 'on', 'yes' ), true ) );
+			}
+
+			/*
+			 * Returned directly rather than through tpae_set_response(), which accepts a $data
+			 * argument and then drops it — the state has to reach the client so the control can
+			 * render in the right position.
+			 */
+			$response         = $this->tpae_set_response( true, 'Data Found.', 'Data Found Successfully.' );
+			$response['data'] = $this->tpae_analytics_state();
+
+			return $response;
 		}
 
 		/**

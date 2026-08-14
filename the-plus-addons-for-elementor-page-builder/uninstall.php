@@ -71,6 +71,55 @@ if( 'enable' === $remove_db ) {
 	// }
 }
 
+/*
+ * Analytics / consent state — cleared UNCONDITIONALLY, outside the plus_remove_db gate above.
+ *
+ * That gate exists so a delete does not throw away someone's configuration unless they asked for it,
+ * and that is right for settings. This is not settings: it is the record of an answer to a question we
+ * asked. Deleting the plugin withdraws it, so a reinstall has to start from an unanswered state — if
+ * the consent survived, a reinstalled TPAE would silently resume reporting on an old yes and would
+ * never ask again. Leaving it behind the gate would mean that happens for every site that never turned
+ * the flag on, which is nearly all of them.
+ *
+ * No sibling check here, unlike Nexter Extension's and Nexter Blocks' uninstall scripts. Those three
+ * share one consent under `nexter_suite`, so they must not clear it while another member is still
+ * installed. TPAE deliberately has its OWN key and its own suite (see the notice config in
+ * theplus_elementor_addon.php) and is the only member, so there is nothing to preserve for anyone else.
+ */
+$tpae_sdk_base = __DIR__ . '/includes/posimyth-sdk/class-posimyth-tracker-base.php';
+$tpae_tracker  = __DIR__ . '/includes/posimyth-sdk/class-posimyth-tracker-tpae.php';
+
+if ( file_exists( $tpae_sdk_base ) && file_exists( $tpae_tracker ) ) {
+	require_once $tpae_sdk_base;
+	require_once $tpae_tracker;
+}
+
+// method_exists too, not only class_exists: an active POSIMYTH sibling loads before uninstall.php runs,
+// so an OLDER copy of Posimyth_Tracker_Base may already be defined without purge_state() — our subclass
+// then extends that copy, and calling the missing method would fatal mid-uninstall.
+if ( class_exists( 'Posimyth_Tracker_TPAE' ) && method_exists( 'Posimyth_Tracker_TPAE', 'purge_state' ) ) {
+	Posimyth_Tracker_TPAE::purge_state( true, 'tpae_suite' );
+} else {
+	// Fall back to clearing by name, so a broken or partial install still cleans up after itself.
+	wp_clear_scheduled_hook( 'posimyth_heartbeat_tpae' );
+
+	delete_option( 'posimyth_tpae_install_time' );
+	delete_option( 'posimyth_tpae_usage' );
+	delete_option( 'posimyth_tpae_first_use_at' );
+	delete_option( 'posimyth_tpae_activate_reported' );
+	delete_transient( 'posimyth_tpae_deact_reported' );
+
+	// Site options first (that is how they are written), then the legacy per-blog shape.
+	delete_site_option( 'posimyth_tpae_share_analytics' );
+	delete_site_option( 'posi_consent_dismissed_tpae_suite' );
+	delete_site_option( 'posi_consent_snoozed_until_tpae_suite' );
+	delete_site_option( 'posi_consent_grace_start_tpae_suite' );
+	delete_option( 'posimyth_tpae_share_analytics' );
+	delete_option( 'posi_consent_dismissed_tpae_suite' );
+	delete_option( 'posi_consent_snoozed_until_tpae_suite' );
+	delete_option( 'posi_consent_grace_start_tpae_suite' );
+}
+
 // delete_option('default_plus_options');
 
 // delete_option('post_type_options');

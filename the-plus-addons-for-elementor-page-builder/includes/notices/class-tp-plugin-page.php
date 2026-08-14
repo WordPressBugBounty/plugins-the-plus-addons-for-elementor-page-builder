@@ -140,7 +140,7 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 					'join-community'   => '<a href="' . esc_url( 'https://www.facebook.com/groups/1331664136965680' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Join Community', 'tpebl' ) . '</a>',
 					'whats-new'        => '<a href="' . esc_url( 'https://roadmap.theplusaddons.com/updates?filter=Free' ) . '" target="_blank" rel="noopener noreferrer" style="color: orange;">' . esc_html__( 'What\'s New?', 'tpebl' ) . '</a>',
 					'req-feature'      => '<a href="' . esc_url( 'https://roadmap.theplusaddons.com/boards/feature-request' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Request Feature', 'tpebl' ) . '</a>',
-					'rate-plugin-star' => '<a href="' . esc_url( 'https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/reviews/?filter=5' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Share Review', 'tpebl' ) . '</a>',
+					'rate-plugin-star' => '<a href="' . esc_url( 'https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/reviews/' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Share Review', 'tpebl' ) . '</a>',
 				);
 
 				$plugin_meta = array_merge( $plugin_meta, $new_links );

@@ -1,10 +1,10 @@
 === The Plus Addons for Elementor - Addons for Elementor, Page Templates, Widgets, Mega Menu, WooCommerce ===
-Contributors: posimyththemes, nirmalkavaiya, devangvachheta, sagarpatel124
+Contributors: posimyththemes, parthh2510, sandip111, sagarpatel124
 Tags: elementor, elementor widgets, elementor addons, elementor templates, widgets for elementor
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.4.17
+Stable tag: 6.4.18
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -343,6 +343,14 @@ https://nexterwp.com/nexter-extension?utm_source=wordpress&utm_medium=readmepage
 
 <em> For Gutenberg Block Editor, check <a href="https://wordpress.org/plugins/the-plus-addons-for-block-editor/">Nexter Blocks</a></em>
 
+== External Services ==
+
+The Plus Addons for Elementor may connect to the external services below only when the related feature is used:
+
+* <strong>api.posimyth.com</strong> — usage analytics. Off by default; submitting the deactivation feedback form also sends it, plus your admin email if you tick the contact box. <a href="https://store.posimyth.com/terms-conditions/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Terms</a> · <a href="https://store.posimyth.com/privacy-policy/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Privacy</a> · <a href="https://theplusaddons.com/docs/data-sharing/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">what's shared</a>
+* <strong>api.wdesignkit.com</strong> — WDesignKit template and widget library previews. <a href="https://wdesignkit.com/terms/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Terms</a> · <a href="https://wdesignkit.com/privacy-policy/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Privacy</a>
+* <strong>api.wordpress.org, downloads.wordpress.org</strong> — Rollback Manager version lookups and downloads. <a href="https://wordpress.org/about/privacy/">Privacy</a>
+
 == Frequently Asked Questions ==
 
 **Does Elementor is required to use this plugin?**
@@ -392,6 +400,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.4.18 =
+Add : Privacy : Data sharing is off by default. When enabled, shared non-sensitive details help us improve the plugin and build a better experience for users
+Improvement : Privacy : Nothing is shared until you turn it on, and never any personal data
+Add : Elementor Templates : Search, Free/Pro and category filters, AI Compatible filter and pagination
+Update : Deactivation Feedback : Refreshed the feedback form shown when deactivating the plugin
+Fix : Roll Back Plugin : Version list sorted correctly and failures now reported instead of reloading
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.17 =
 Add : Blog Listing : Style-1 (Metro layout) - Added Read More button

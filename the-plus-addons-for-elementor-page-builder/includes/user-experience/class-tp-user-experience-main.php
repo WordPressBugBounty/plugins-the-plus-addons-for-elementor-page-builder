@@ -102,7 +102,20 @@ if ( ! class_exists( 'Tp_User_Experience_Main' ) ) {
 		 */
 		public function tp_user_experience() {
 
-			include L_THEPLUS_PATH . 'includes/user-experience/class-tp-deactivate-feedback.php';
+			/*
+			 * The legacy deactivation-feedback dialog (class-tp-deactivate-feedback.php) was removed.
+			 *
+			 * It bound the Deactivate link itself and posted to api.posimyth.com/wp-json/tpae/v2/
+			 * tpae_deactivate_user_data, outside the shared consent model — so it collected feedback with
+			 * no opt-in surface, no white-label suppression and no single place to answer for the whole
+			 * suite. Keeping it alongside the SDK survey would also have bound that one link twice and
+			 * stacked two dialogs, which is the bug Nexter Extension shipped until its own legacy popup
+			 * was deleted.
+			 *
+			 * Deactivation feedback now comes from Posimyth_Deactivation_Survey, booted from
+			 * theplus_elementor_addon.php. Its handler was named tp_deactivate_rateus_notice but was the
+			 * feedback submit, not a rate-us prompt, so nothing else depended on it.
+			 */
 
 			if ( ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) || ( empty( $this->whitelabel['help_link'] ) || 'on' !== $this->whitelabel['help_link'] ) || ( empty( $this->whitelabel['plugin_ads'] ) || 'on' !== $this->whitelabel['plugin_ads'] ) ) {
 				include L_THEPLUS_PATH . 'includes/user-experience/update-popup/class-tp-update-popup.php';

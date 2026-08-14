@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.4.17\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.4.18\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-27T06:10:06+00:00\n"
+"POT-Creation-Date: 2026-08-14T04:41:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
@@ -41,16 +41,20 @@ msgstr ""
 msgid "https://posimyth.com/"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:273
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:274
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:266
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:267
 msgid "success"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:620
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:621
 msgid "Rollback to Previous Version"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:690
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:683
+msgid "The rollback could not be completed. Please try again."
+msgstr ""
+
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:765
 #: includes/admin/tpae_hooks/class-tpae-hooks.php:648
 #: includes/notices/class-tp-wdkit-preview-popup.php:185
 #: includes/preset/class-wdkit-preset.php:152
@@ -202,7 +206,7 @@ msgstr ""
 #: includes/admin/dashboard/class-tpae-dashboard-listing.php:168
 #: modules/ability/widgets-ability/tp-clients-listout.php:10
 #: modules/widgets/tp_clients_listout.php:61
-#: build/index.js:1
+#: build/index.js:3
 msgid "Clients"
 msgstr ""
 
@@ -248,16 +252,17 @@ msgstr ""
 #: modules/extensions/class-tpae-equal-height.php:193
 #: modules/extensions/global-control/class-tp-basic-global-controller.php:203
 #: build/index.js:1
+#: build/index.js:3
 msgid "Widgets"
 msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:243
-#: build/index.js:1
+#: build/index.js:3
 msgid "Extensions"
 msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:246
-#: build/index.js:1
+#: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
 msgid "Theme Builder"
 msgstr ""
@@ -277,24 +282,26 @@ msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:354
 #: includes/notices/class-tp-plugin-page.php:94
-#: build/index.js:1
+#: build/index.js:3
 msgid "Settings"
 msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:357
 #: includes/notices/class-tp-tpaepro-notice.php:117
 #: build/index.js:1
+#: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
 msgid "Upgrade Now"
 msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:365
-#: build/index.js:1
+#: build/index.js:3
 msgid "Activate"
 msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:433
 #: build/index.js:1
+#: build/index.js:3
 msgid "Dashboard"
 msgstr ""
 
@@ -457,8 +464,6 @@ msgstr ""
 #: includes/notices/class-tp-activate-license-notice.php:151
 #: includes/notices/class-tp-ask-review-notice.php:190
 #: includes/notices/class-tp-deprecated-widgets-notice.php:164
-#: includes/user-experience/class-tp-deactivate-feedback.php:279
-#: includes/user-experience/class-tp-deactivate-feedback.php:280
 msgid "Security checked!"
 msgstr ""
 
@@ -471,7 +476,6 @@ msgstr ""
 #: includes/notices/class-tp-nexter-extension-promo.php:316
 #: includes/notices/class-tp-nexter-notice.php:206
 #: includes/notices/class-tp-tpaepro-notice.php:161
-#: includes/user-experience/class-tp-deactivate-feedback.php:287
 #: includes/user-experience/update-popup/class-tp-update-popup.php:133
 msgid "You are not allowed to do this action"
 msgstr ""
@@ -726,6 +730,7 @@ msgstr ""
 #: modules/widgets/tp_video_player.php:715
 #: modules/widgets/tp_wp_forms.php:158
 #: build/index.js:1
+#: build/index.js:3
 msgid "Need Help?"
 msgstr ""
 
@@ -757,6 +762,7 @@ msgstr ""
 
 #: includes/notices/class-tp-plugin-page.php:141
 #: build/index.js:1
+#: build/index.js:3
 msgid "What's New?"
 msgstr ""
 
@@ -809,7 +815,7 @@ msgstr ""
 
 #: includes/notices/class-tp-wdkit-preview-popup.php:318
 #: assets/js/wdesignkit/tp-wdkit-preview-popup.js:4
-#: build/index.js:1
+#: build/index.js:3
 #: includes/preset/tp-preset-popup.js:4
 msgid "Enable Templates"
 msgstr ""
@@ -890,6 +896,7 @@ msgstr ""
 #: modules/widgets/tp_tabs_tours.php:586
 #: modules/widgets/tp_tabs_tours.php:657
 #: build/index.js:1
+#: build/index.js:3
 msgid "Learn More"
 msgstr ""
 
@@ -903,6 +910,117 @@ msgstr ""
 
 #: includes/notices/class-tp-widget-notice.php:105
 msgid "This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 6.1.0 Install Latest version Now."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/posimyth-sdk/class-posimyth-consent-notice.php:262
+#, php-format
+msgid "Help make %s faster and more stable. Share basic, non-sensitive info so we can catch conflicts and ship fixes quicker. No personal data, ever."
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-consent-notice.php:266
+#: build/index.js:3
+msgid "See what's shared"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-consent-notice.php:269
+msgid "Allow"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-consent-notice.php:270
+#: build/index.js:3
+msgid "Dismiss"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:183
+msgid "I no longer need the plugin"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:184
+msgid "I found a better plugin"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:185
+msgid "It's not working"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:186
+msgid "It's a temporary deactivation"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:187
+msgid "Plugin conflict"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:188
+msgid "It slowed down my site"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:189
+#: modules/widgets/tp_smooth_scroll.php:727
+msgid "Other"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:370
+msgid "Quick Feedback"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:375
+#, php-format
+msgid "Help us improve %s. Why are you deactivating?"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:409
+msgid "Please share more details…"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:439
+msgid "I agree to be contacted via email for support with this plugin."
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:445
+#: assets/js/admin/tp-deactivate-feedback.js:7
+msgid "Skip & Deactivate"
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:446
+#: assets/js/admin/tp-deactivate-feedback.js:6
+msgid "Submit & Deactivate"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:451
+#, php-format
+msgid "Submitting shares non-sensitive info so we can improve %s. No personal data."
+msgstr ""
+
+#. translators: %s: product name
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:453
+#, php-format
+msgid "Submitting shares non-sensitive info so we can improve %s, plus your admin email so we can reply."
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-deactivation-survey.php:602
+msgid "Submitting…"
+msgstr ""
+
+#. translators: %s: product name
+#: includes/posimyth-sdk/class-posimyth-tracker-base.php:183
+#, php-format
+msgid "%s can send non-sensitive information about this website to POSIMYTH Innovation (api.posimyth.com) to help diagnose conflicts and prioritise fixes. This is off by default, and while it is off nothing is collected or sent automatically."
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-tracker-base.php:187
+msgid "When enabled, the information sent is: the site URL, the plugin version, PHP / MySQL / WordPress versions, server software, timezone, locale, memory limit, maximum upload size, permalink structure, whether HTTPS / multisite / debug mode are on, the environment type, the number of registered users, the active theme and its version, the detected page builder, the list of active plugin folders and their count, which of the plugin's features are enabled and how often they are used, Pro/Free and licence status, and the install date. It is sent when the plugin is activated, when it is deactivated, and once a week in the background."
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-tracker-base.php:189
+msgid "There is one case where information is sent even while the setting is off: the feedback form shown when the plugin is deactivated. If an administrator fills it in and presses Submit, that submission is sent - the reason chosen, any comment typed, and the same non-sensitive setup information listed above - because pressing Submit is the consent for it. Choosing Skip, pressing Esc or clicking outside the form sends nothing at all."
+msgstr ""
+
+#: includes/posimyth-sdk/class-posimyth-tracker-base.php:191
+msgid "No post or page content, visitor data, user names or email addresses are included. The one exception is that same feedback form: if an administrator ticks \"I agree to be contacted via email\" there, the site administration email address is sent with the feedback so POSIMYTH can reply. That box is off by default."
 msgstr ""
 
 #: includes/preset/class-wdkit-preset.php:253
@@ -933,77 +1051,36 @@ msgstr ""
 msgid "Enable Presets"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:172
+#: includes/user-experience/class-tp-deactivate-survey.php:79
 msgid "Just Debugging"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:176
+#: includes/user-experience/class-tp-deactivate-survey.php:83
 msgid "Plugin Issues"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:180
+#: includes/user-experience/class-tp-deactivate-survey.php:87
 msgid "Slow Performance"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:184
+#: includes/user-experience/class-tp-deactivate-survey.php:91
 msgid "Switched to Alternative"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:188
+#: includes/user-experience/class-tp-deactivate-survey.php:95
 msgid "No Longer Needed"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:192
+#: includes/user-experience/class-tp-deactivate-survey.php:99
 msgid "Compatibility Issues"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:196
+#: includes/user-experience/class-tp-deactivate-survey.php:103
 msgid "Missing Feature"
 msgstr ""
 
-#: includes/user-experience/class-tp-deactivate-feedback.php:200
+#: includes/user-experience/class-tp-deactivate-survey.php:107
 msgid "Other Reason"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:210
-msgid "Deactivation Reason"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:236
-msgid "Please share the reason"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:242
-msgid "After submitting, we’ll get in touch with you via email to provide the support you need. If you require any help, please "
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:243
-msgid "Create A Ticket"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:244
-msgid ", we reply within 24 working hours. Looking for instant solutions? - "
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:245
-msgid "Read our Documentation"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:245
-msgid "or"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:245
-#: modules/controls/tpae-need-help.php:51
-msgid "Ask AI"
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:253
-msgid "I agree to be contacted via email for support with this plugin."
-msgstr ""
-
-#: includes/user-experience/class-tp-deactivate-feedback.php:324
-msgid "sucess"
 msgstr ""
 
 #: modules/ability/core-elementor/elementor-mcp-bridge.php:130
@@ -2663,6 +2740,7 @@ msgstr ""
 #: modules/widgets/tp_dark_mode.php:46
 #: modules/widgets/tp_social_embed.php:1378
 #: build/index.js:1
+#: build/index.js:3
 msgid "Dark Mode"
 msgstr ""
 
@@ -3097,6 +3175,7 @@ msgstr ""
 #: modules/widgets/tp_post_navigation.php:566
 #: modules/widgets/tp_post_title.php:46
 #: build/index.js:1
+#: build/index.js:3
 msgid "Post Title"
 msgstr ""
 
@@ -3289,7 +3368,7 @@ msgid "The Plus Tabs Tours widget is not registered."
 msgstr ""
 
 #: modules/ability/widgets-ability/tp-team-member-listout.php:10
-#: build/index.js:1
+#: build/index.js:3
 msgid "Team Member"
 msgstr ""
 
@@ -3305,6 +3384,7 @@ msgstr ""
 #: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:394
 #: modules/widgets/tp_testimonial_listout.php:75
 #: build/index.js:1
+#: build/index.js:3
 msgid "Testimonial"
 msgstr ""
 
@@ -3429,6 +3509,7 @@ msgstr ""
 #: modules/widgets/tp_video_player.php:726
 #: modules/widgets/tp_wp_forms.php:169
 #: build/index.js:1
+#: build/index.js:3
 msgid "Read Docs"
 msgstr ""
 
@@ -3484,6 +3565,10 @@ msgstr ""
 
 #: modules/controls/tpae-need-help.php:20
 msgid "Plugin Roadmap"
+msgstr ""
+
+#: modules/controls/tpae-need-help.php:51
+msgid "Ask AI"
 msgstr ""
 
 #: modules/controls/tpae-need-help.php:57
@@ -3553,7 +3638,7 @@ msgid "This will install Nexter Extension for FREE Elementor Theme Builder"
 msgstr ""
 
 #: modules/controls/tpae-theme-builder.php:47
-#: build/index.js:1
+#: build/index.js:3
 #: modules/controls/theme-builder/theplus-editor-theme-builder.js:39
 #: modules/controls/theme-builder/theplus-editor-theme-builder.js:58
 msgid "Enable Theme Builder"
@@ -3666,7 +3751,7 @@ msgstr ""
 #: modules/widgets/tp_post_comment.php:137
 #: modules/widgets/tp_pricing_table.php:746
 #: modules/widgets/tp_style_list.php:1812
-#: build/index.js:1
+#: build/index.js:3
 msgid "Global"
 msgstr ""
 
@@ -3851,7 +3936,7 @@ msgstr ""
 #: modules/widgets/tp_post_meta.php:1059
 #: modules/widgets/tp_post_meta.php:1262
 #: modules/widgets/tp_pricing_table.php:730
-#: build/index.js:1
+#: build/index.js:3
 msgid "Disable"
 msgstr ""
 
@@ -4122,6 +4207,7 @@ msgstr ""
 
 #: modules/extensions/class-tpae-advanced-shadow.php:103
 #: build/index.js:1
+#: build/index.js:3
 msgid "Advanced Shadows"
 msgstr ""
 
@@ -4278,7 +4364,7 @@ msgstr ""
 #: modules/widgets/tp_testimonial_listout.php:618
 #: modules/widgets/tp_testimonial_listout.php:795
 #: modules/widgets/tp_testimonial_listout.php:891
-#: build/index.js:1
+#: build/index.js:3
 msgid "Default"
 msgstr ""
 
@@ -4668,6 +4754,7 @@ msgstr ""
 #: modules/widgets/tp_social_embed.php:152
 #: modules/widgets/tp_social_embed.php:884
 #: modules/widgets/tp_tabs_tours.php:263
+#: build/index.js:1
 msgid "Type"
 msgstr ""
 
@@ -5216,6 +5303,7 @@ msgstr ""
 #: modules/extensions/class-tpae-equal-height.php:111
 #: modules/extensions/class-tpae-equal-height.php:118
 #: build/index.js:1
+#: build/index.js:3
 msgid "Equal Height"
 msgstr ""
 
@@ -5350,6 +5438,7 @@ msgstr ""
 #: modules/extensions/class-tpae-glass-morphism.php:96
 #: modules/extensions/class-tpae-glass-morphism.php:103
 #: build/index.js:1
+#: build/index.js:3
 msgid "Glass Morphism"
 msgstr ""
 
@@ -7171,6 +7260,7 @@ msgstr ""
 #: modules/widgets/tp_team_member_listout.php:1137
 #: modules/widgets/tp_video_player.php:901
 #: build/index.js:1
+#: build/index.js:3
 msgid "Box Shadow"
 msgstr ""
 
@@ -8201,6 +8291,7 @@ msgstr ""
 #: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:115
 #: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:134
 #: build/index.js:1
+#: build/index.js:3
 msgid "Wrapper Link"
 msgstr ""
 
@@ -8232,7 +8323,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:2717
 #: modules/widgets/tp_page_scroll.php:1140
 #: modules/widgets/tp_tabs_tours.php:2247
-#: build/index.js:1
+#: build/index.js:3
 msgid "Select Template"
 msgstr ""
 
@@ -8752,6 +8843,7 @@ msgstr ""
 #: modules/widget-promotion/tp-widget-promotion/class-tp-widget-promotion.php:244
 #: modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php:641
 #: build/index.js:1
+#: build/index.js:3
 msgid "Pre Loader"
 msgstr ""
 
@@ -9018,7 +9110,7 @@ msgid "Upgrade to Pro!"
 msgstr ""
 
 #: modules/widgets/theplus-gsap-animation.php:30
-#: build/index.js:1
+#: build/index.js:3
 msgid "Image Animation"
 msgstr ""
 
@@ -9342,7 +9434,7 @@ msgstr ""
 #: modules/widgets/theplus-gsap-animation.php:463
 #: modules/widgets/tp_flip_box.php:2049
 #: modules/widgets/tp_flip_box.php:2181
-#: build/index.js:1
+#: build/index.js:3
 msgid "Back"
 msgstr ""
 
@@ -10551,6 +10643,7 @@ msgstr ""
 #: modules/widgets/tp_tabs_tours.php:516
 #: modules/widgets/tp_tabs_tours.php:568
 #: modules/widgets/tp_testimonial_listout.php:581
+#: build/index.js:2
 #: modules/widget-promotion/tp-widget-promotion/tp-widgets-load.js:138
 msgid "PRO"
 msgstr ""
@@ -10748,7 +10841,7 @@ msgstr ""
 #: modules/widgets/tp_tabs_tours.php:1433
 #: modules/widgets/tp_tabs_tours.php:1489
 #: modules/widgets/tp_tabs_tours.php:2004
-#: build/index.js:1
+#: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
 msgid "Active"
 msgstr ""
@@ -11530,7 +11623,7 @@ msgstr ""
 
 #: modules/widgets/tp_adv_text_block.php:229
 #: modules/widgets/tp_heading_animation.php:96
-#: build/index.js:1
+#: build/index.js:3
 msgid "Text Animation"
 msgstr ""
 
@@ -11638,6 +11731,7 @@ msgstr ""
 #: modules/widgets/tp_video_player.php:1272
 #: modules/widgets/tp_wp_forms.php:2228
 #: build/index.js:1
+#: build/index.js:3
 msgid "Plus Extras"
 msgstr ""
 
@@ -12445,7 +12539,7 @@ msgstr ""
 #: modules/widgets/tp_team_member_listout.php:655
 #: modules/widgets/tp_team_member_listout.php:1497
 #: modules/widgets/tp_testimonial_listout.php:2187
-#: build/index.js:1
+#: build/index.js:3
 msgid "Extra Options"
 msgstr ""
 
@@ -13092,7 +13186,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:499
 #: modules/widgets/tp_plus_form.php:531
 #: modules/widgets/tp_table.php:654
-#: build/index.js:1
+#: build/index.js:3
 msgid "Button Style"
 msgstr ""
 
@@ -13681,6 +13775,7 @@ msgstr ""
 #: modules/widgets/tp_meeting_scheduler.php:240
 #: modules/widgets/tp_post_meta.php:226
 #: build/index.js:1
+#: build/index.js:3
 msgid "All"
 msgstr ""
 
@@ -13715,7 +13810,6 @@ msgstr ""
 #: modules/widgets/tp_breadcrumbs_bar.php:1949
 #: modules/widgets/tp_post_content.php:590
 #: modules/widgets/tp_social_embed.php:159
-#: build/index.js:1
 msgid "Page"
 msgstr ""
 
@@ -13924,13 +14018,14 @@ msgid "Button Tag Color"
 msgstr ""
 
 #: modules/widgets/tp_button.php:1237
-#: build/index.js:1
+#: build/index.js:3
 msgid "Special"
 msgstr ""
 
 #: modules/widgets/tp_button.php:1247
 #: modules/widgets/tp_social_icon.php:406
 #: build/index.js:1
+#: build/index.js:3
 msgid "Magic Scroll"
 msgstr ""
 
@@ -13941,6 +14036,7 @@ msgstr ""
 #: modules/widgets/tp_style_list.php:375
 #: modules/widgets/tp_switcher.php:504
 #: build/index.js:1
+#: build/index.js:3
 msgid "Tooltip"
 msgstr ""
 
@@ -13954,6 +14050,7 @@ msgstr ""
 #: modules/widgets/tp_gallery_listout.php:1241
 #: modules/widgets/tp_social_icon.php:474
 #: build/index.js:1
+#: build/index.js:3
 msgid "Mouse Move Parallax"
 msgstr ""
 
@@ -13961,6 +14058,7 @@ msgstr ""
 #: modules/widgets/tp_social_icon.php:504
 #: modules/widgets/tp_video_player.php:991
 #: build/index.js:1
+#: build/index.js:3
 msgid "Continuous Animation"
 msgstr ""
 
@@ -14820,11 +14918,12 @@ msgid "Select Options"
 msgstr ""
 
 #: modules/widgets/tp_clients_listout.php:586
+#: build/index.js:3
 msgid "Pagination"
 msgstr ""
 
 #: modules/widgets/tp_clients_listout.php:588
-#: build/index.js:1
+#: build/index.js:3
 msgid "Lazy Load"
 msgstr ""
 
@@ -15639,6 +15738,7 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:159
 #: modules/widgets/tp_info_box.php:126
 #: build/index.js:1
+#: build/index.js:3
 msgid "Listing"
 msgstr ""
 
@@ -15915,6 +16015,7 @@ msgstr ""
 #: modules/widgets/tp_gallery_listout.php:1212
 #: modules/widgets/tp_info_box.php:2844
 #: build/index.js:1
+#: build/index.js:3
 msgid "Tilt 3D Parallax"
 msgstr ""
 
@@ -16966,6 +17067,7 @@ msgid "Add a custom CSS class to style or target this hover card."
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:189
+#: build/index.js:3
 msgid "Close"
 msgstr ""
 
@@ -17165,7 +17267,7 @@ msgid "Define how content behaves when it overflows the container."
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:954
-#: build/index.js:1
+#: build/index.js:3
 msgid "Visibility"
 msgstr ""
 
@@ -17875,7 +17977,7 @@ msgstr ""
 #: modules/widgets/tp_page_scroll.php:236
 #: modules/widgets/tp_switcher.php:178
 #: modules/widgets/tp_switcher.php:337
-#: build/index.js:1
+#: build/index.js:3
 msgid "Elementor Templates"
 msgstr ""
 
@@ -19120,7 +19222,6 @@ msgid "Location"
 msgstr ""
 
 #: modules/widgets/tp_post_featured_image.php:122
-#: build/index.js:1
 #: includes/nxt-ext/build/index.js:1
 msgid "Section"
 msgstr ""
@@ -19500,6 +19601,7 @@ msgstr ""
 #: modules/widgets/tp_post_search.php:185
 #: modules/widgets/tp_table.php:1120
 #: build/index.js:1
+#: build/index.js:3
 msgid "Search"
 msgstr ""
 
@@ -19881,17 +19983,17 @@ msgid "Default Active"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:256
-#: build/index.js:1
+#: build/index.js:3
 msgid "1"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:257
-#: build/index.js:1
+#: build/index.js:3
 msgid "2"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:258
-#: build/index.js:1
+#: build/index.js:3
 msgid "3"
 msgstr ""
 
@@ -19900,7 +20002,7 @@ msgid "4"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:260
-#: build/index.js:1
+#: build/index.js:3
 msgid "5"
 msgstr ""
 
@@ -19913,7 +20015,7 @@ msgid "7"
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:263
-#: build/index.js:1
+#: build/index.js:3
 msgid "8"
 msgstr ""
 
@@ -20578,10 +20680,6 @@ msgstr ""
 msgid "Firefox"
 msgstr ""
 
-#: modules/widgets/tp_smooth_scroll.php:727
-msgid "Other"
-msgstr ""
-
 #: modules/widgets/tp_smooth_scroll.php:742
 msgid "Select which browsers should have smooth scrolling enabled."
 msgstr ""
@@ -20660,7 +20758,7 @@ msgstr ""
 
 #: modules/widgets/tp_social_embed.php:190
 #: modules/widgets/tp_syntax_highlighter.php:221
-#: build/index.js:1
+#: build/index.js:3
 msgid "Options"
 msgstr ""
 
@@ -20700,7 +20798,7 @@ msgid "Paste URL Here"
 msgstr ""
 
 #: modules/widgets/tp_social_embed.php:246
-#: build/index.js:1
+#: build/index.js:3
 msgid "App ID"
 msgstr ""
 
@@ -23648,7 +23746,7 @@ msgstr ""
 
 #: widgets_loader.php:133
 #: assets/js/admin/tp-elementor-install.js:14
-#: build/index.js:1
+#: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
 #: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:151
 msgid "Activate Now"
@@ -23762,16 +23860,8 @@ msgstr ""
 msgid "Plus Single"
 msgstr ""
 
-#: assets/js/admin/tp-deactivate-feedback.js:6
-msgid "Submit & Deactivate"
-msgstr ""
-
-#: assets/js/admin/tp-deactivate-feedback.js:7
-msgid "Skip & Deactivate"
-msgstr ""
-
 #: assets/js/admin/tp-elementor-install.js:13
-#: build/index.js:1
+#: build/index.js:3
 msgid "Installing..."
 msgstr ""
 
@@ -23784,7 +23874,7 @@ msgid "Failed!"
 msgstr ""
 
 #: assets/js/wdesignkit/tp-wdkit-preview-popup.js:5
-#: build/index.js:1
+#: build/index.js:3
 msgid "Installing WDesignKit"
 msgstr ""
 
@@ -23894,10 +23984,16 @@ msgid "Search Filters"
 msgstr ""
 
 #: build/index.js:1
+msgid "Forms"
+msgstr ""
+
+#: build/index.js:1
+#: build/index.js:3
 msgid "Mailchimp"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce"
 msgstr ""
 
@@ -23910,42 +24006,52 @@ msgid "Woo Product Images"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Cross Domain Copy Paste"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Custom/Media Width Column"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Column Mouse Cursor"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Display Condition"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Event Tracker"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Order & Width Column"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Section Scroll Animation"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Custom CSS"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Sticky Column"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Overlay Special Effect"
 msgstr ""
 
@@ -23966,14 +24072,17 @@ msgid "Dynamic Tag"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Gradient Color"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Dimensions"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Scroll Animation"
 msgstr ""
 
@@ -24058,6 +24167,7 @@ msgid "Good Evening"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Total Widgets"
 msgstr ""
 
@@ -24126,6 +24236,7 @@ msgid "We're Active on"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Live Demo"
 msgstr ""
 
@@ -24135,6 +24246,10 @@ msgstr ""
 
 #: build/index.js:1
 msgid "Oops, No Widgets Found!"
+msgstr ""
+
+#: build/index.js:1
+msgid "Please try searching with an alternative"
 msgstr ""
 
 #: build/index.js:1
@@ -24186,6 +24301,10 @@ msgid "Request for Widget"
 msgstr ""
 
 #: build/index.js:1
+msgid "We're always looking to improve our Widget Library. Share your ideas, and we’ll consider adding them based on user demand."
+msgstr ""
+
+#: build/index.js:1
 msgid "Request Widget"
 msgstr ""
 
@@ -24218,6 +24337,16 @@ msgid "The Generate Site Key and Secret key"
 msgstr ""
 
 #: build/index.js:1
+msgid "Google reCAPTCHA"
+msgstr ""
+
+#: build/index.js:1
+#: build/index.js:3
+msgid "Save"
+msgstr ""
+
+#: build/index.js:1
+#: build/index.js:3
 msgid "Performance Optimized"
 msgstr ""
 
@@ -24266,22 +24395,27 @@ msgid "Not at all. Performance is our priority. WDesignKit will load assets of o
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Disable All"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Enable All"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Free"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Freemium"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Pro"
 msgstr ""
 
@@ -24294,18 +24428,16 @@ msgid "Scan Unused Widgets"
 msgstr ""
 
 #: build/index.js:1
-msgid "Forms"
-msgstr ""
-
-#: build/index.js:1
 msgid " Active"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Used"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:3
 msgid "Unused"
 msgstr ""
 
@@ -24338,7 +24470,16 @@ msgid "100% Customizable Widgets"
 msgstr ""
 
 #: build/index.js:1
+msgid "Browse All Widgets"
+msgstr ""
+
+#: build/index.js:1
+#: build/index.js:3
 msgid "Upgrade to The Plus Addons for Elementor Pro to Unlock All Widgets & All Pre-Made Templates"
+msgstr ""
+
+#: build/index.js:1
+msgid "Free with The Plus Addons PRO"
 msgstr ""
 
 #: build/index.js:1
@@ -24346,11 +24487,8 @@ msgid "Name Of the Template"
 msgstr ""
 
 #: build/index.js:1
+#: build/index.js:2
 msgid "Live Preview"
-msgstr ""
-
-#: build/index.js:1
-msgid "Open Templates"
 msgstr ""
 
 #: build/index.js:1
@@ -24358,1355 +24496,1413 @@ msgid "Import Pre-Designed Website Templates Made With Plus Widgets."
 msgstr ""
 
 #: build/index.js:1
+msgid "Clear search"
+msgstr ""
+
+#: build/index.js:1
+msgid "Page Kits"
+msgstr ""
+
+#: build/index.js:1
+msgid "selected"
+msgstr ""
+
+#: build/index.js:1
+msgid "All Categories"
+msgstr ""
+
+#: build/index.js:1
+msgid "Loading…"
+msgstr ""
+
+#: build/index.js:1
+msgid "Clear all"
+msgstr ""
+
+#: build/index.js:1
+#: build/index.js:2
+msgid "AI Compatible"
+msgstr ""
+
+#: build/index.js:1
+msgid "No templates found"
+msgstr ""
+
+#. translators: %s: the search term the user typed
+#: build/index.js:2
+#, js-format
+msgid "Nothing matches “%s” with the filters you have applied."
+msgstr ""
+
+#: build/index.js:2
+msgid "No templates match the filters you have applied."
+msgstr ""
+
+#: build/index.js:2
+msgid "Clear all filters"
+msgstr ""
+
+#: build/index.js:2
+msgid "This is a Pro template. Upgrade to The Plus Addons Pro to import it."
+msgstr ""
+
+#: build/index.js:2
+#: build/index.js:3
+msgid "Installing WDesignKit…"
+msgstr ""
+
+#: build/index.js:2
 msgid "Download Now"
 msgstr ""
 
-#: build/index.js:1
-msgid "View More Website Templates"
+#. translators: 1: number shown on this page, 2: total number of templates
+#: build/index.js:3
+#, js-format
+msgid "Showing %1$s of %2$s Templates"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Previous page"
+msgstr ""
+
+#: build/index.js:3
+msgid "Next page"
+msgstr ""
+
+#: build/index.js:3
+msgid "Get Ready-to-Use Elementor Templates"
+msgstr ""
+
+#: build/index.js:3
+msgid "Choose from professionally designed Elementor templates. Install the WDesignKit plugin to download and import your selected designs into WordPress."
+msgstr ""
+
+#: build/index.js:3
+msgid "WDesignKit could not be installed. Please install it manually."
+msgstr ""
+
+#: build/index.js:3
+msgid "Install WDesignKit"
+msgstr ""
+
+#: build/index.js:3
+msgid "Explore More"
+msgstr ""
+
+#: build/index.js:3
 msgid "Feature"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "35+"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "120+"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Total Extensions"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "1000+ Elementor Templates & Sections "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Blog Builder"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Form Styler"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Horizontal & Vertical Mega Menu"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Ajax Search & Filters"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Builder"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Row Background (Parallax, Canvas)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Carousel Anything & Remote (Sliders)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Advanced Display Conditions"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Blog (Grid, Carousel, Masonary etc)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Product Listing (Grid, Carousel, Masonary)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Dynamic CPT Listing + Custom Loop Skins"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Full-Page Scroll Animations"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Popup Builder"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Facebook & Google Review Feed"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Social Embed (Instagram, Facebook, Twitter, YouTube and more...)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "White Label Plugin"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Custom CSS & JS"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Support"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WordPress.org"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Premium Helpdesk"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Response time under 24 working hours"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "View Detailed Comparison"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "60 days Money-Back Guarantee"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Abilities Access"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enable Abilities to allow your MCP connection and AI agents to use The Plus Addons widgets, generate widget data, and manage core settings."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Ability"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Turn on Ability to allow AI tools like Claude or other clients to control and generate widget data within this plugin."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Performance"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "If you do not plan to use Global CSS from Nexter Blocks and prefer to load it from your theme, you can disable it. It reduces extra CSS & JS loading on your site, ensuring faster performance and complete control over design."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "We are adding Lazy Load Functionality in each of our widgets. It's in beta version at this moment but completely implemented very soon. It will help you drastically in Google Web Vitals."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Lazy Load Type"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Choose Type of animation you want in Lazy Load using above options."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Wipe Settings before Uninstall"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note: Select the data you wish to delete from your database while uninstalling plugin. You’ll need to reconfigure settings manually if you reinstall the plugin later. Once deleted, this data cannot be recovered."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : This button will delete all of The Plus Addons for Elementor's settings from Database. You will then need to enter all your settings again. You can also do this before deactivating/deinstalling The Plus Addons for Elementor if you wish."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Remove Promotional Data"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Remove Plugin Configuration Data"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "API"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "To integrate Google Maps with your Maps Block, please enable the API, paste your Google Maps API key by clicking on the settings gear, and then save the changes."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Paste your your <a href = \"https://developers.google.com/maps/documentation/embed/get-api-key\" target=\"_blank\" rel=\"noopener noreferrer\"> Google Maps API Key </a>"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enter API Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Login with Facebook"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Login with Facebook option by adding App ID & App Secret ID. "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Login with Facebook "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : Generate <a href=\"https://developers.facebook.com/docs/apps\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook App Id</a> using link. This id will be used for your \"Login with Facebook\" feature in Login/Signup Widget."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Facebook App ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "App Secret ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : Generate Google Client Id using <a href=\"https://console.cloud.google.com/apis/dashboard?pli=1\" target=\"_blank\" rel=\"noopener noreferrer\">this link</a>. This id will be used for your \"Login with Google\" feature in Login/Signup Widget."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Facebook App Secret ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Login with Google"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Login with Google option by adding Google Client ID."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note: Generate Google Client Id using <a href=\"https://console.cloud.google.com/apis/dashboard?pli=1\" target=\"_blank\" rel=\"noopener noreferrer\">this link</a>. This id will be used for your \"Login with Google\" feature in Login/Signup Widget."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Client ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Google Client ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Google Map API"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Turn Off this key If your theme already have google key option. So, It will not generate error in console for multiple google map keys."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enable Google Map option using this. Note : Keep disabled, If your theme or any 3rd party plugin already load Google Map Js. "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Map API Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enter Google Map API Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "This field is required if you want to use Advance Google Map element. You can obtain your own Google Maps Key here: <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\" target=\"_blank\" rel=\"noopener noreferrer\">Click Here</a>"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Go to your Mailchimp > Account > Extras > API Keys then create a key and paste here"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Mailchimp API"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Mailchimp API Key and List ID using this option."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "API Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Mailchimp API Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "List ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Mailchimp List ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Go to your Mailchimp > List > Settings > List name and default > Copy the list ID and paste here."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Design"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "To disable Google Fonts, toggle this off. It will prevent any Google Fonts from loading and instead use the system font. If you want to avoid any Google Font requests, simply disable this option."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Preloader options for performance. "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : You can add Page/Post id with separated by comma to load Pre Loader on those specific posts or pages."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : If you disable this, It will stop loading frontend and in the backend throughout the website."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Pre Loader in Specific Page/Post"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : You can add Page/Post id with separated by comma to load this on those specific posts or pages."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Load Lottie JS in Pre Loader"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : If you enable this, It will load Lottie JS."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "LottieFiles Backend JS"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "You can enable/disable backend JS of lottiefiles using above option. This is master option, So You have to enable this to make it work in elementor backend. You should keep it disable if your backend have any performance issue, Size of this JS is 246KB."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "On Scroll View Animation Offset"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enter the value which will be used for offset of on scroll view animation. If you select 90, Then It will start taking effect from bottom's 10%. Default : 85 E.g. 90,85..etc."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Animation Offset"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Value must be Greater than or equal to 30 & Less than or equal to 120"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Thumbnail (Dynamic Categories)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "If you enable this option, Thumbnail image option will be available under each custom post type, Which you can use for Dynamic Categories widget."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Iconsmind Fonts"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Iconsmind options and manage options for better performance. "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : You can add Page/Post id with separated by comma to load this fonts on those specific posts or pages."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Iconsmind Font Functionality"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Iconsmind in Specific Page/Post"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Analytics"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "GA4 Measurement ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Events Tracker (Google Analytics 4) with this option by adding GA4 Measurement ID."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "<a href=\"https://theplusaddons.com/docs/track-google-analytics-events-with-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget\" target=\"_blank\" rel=\"noopener noreferrer\">GA4 Measurement ID</a> Note : If you have already added your GA4 Code then skip this, or else you can add the measurement ID here to start tracking your traffic."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Measurement ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Facebook Pixel ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Configure your Events Tracker (Facebook Pixel) with this option by adding Facebook Pixel ID."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Generate <a href=\"https://theplusaddons.com/docs/track-facebook-pixel-events-with-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Pixel Id</a>. Note : Keep this field empty, If you have already added Tracking Script on Website."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Pixel ID"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "e.g 38736373773"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Security"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Google ReCaptcha v3"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Mange your Site Key and Secret key of ReCaptcha v3 using these options. "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note : Here is a free service by Google that protects your website from spam and abuse."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Site Key reCAPTCHA v3"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Note :  <a href='https://www.google.com/recaptcha/about/' target='_blank' rel='noopener noreferrer'>reCAPTCHA v3</a> is a free service by Google that protects your website from spam and abuse."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Secret Key reCAPTCHA v3"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Swatches"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Swatches option will be available under Product -> Attributes. <a href=\"https://theplusaddons.com/docs/create-woocommerce-color-swatches-filter-in-elementor/\" target=\"_blank\" rel=\"noopener noreferrer\">How it works.</a>"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Product Video URL"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Video URL option will be available under each product, Which you can use for Woo Single Image widget for Product Gallery."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Recently Viewed"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "It will stored single product in list."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Countdown"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "It will Enable Field in WooCommerce Product Page. <a href=\"https://theplusaddons.com/docs/sales-countdown-timer-to-a-woocommerce-product-page-in-elementor/\" target=\"_blank\" rel=\"noopener noreferrer\">How it works.</a>"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WooCommerce Thank You Page"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Select WooCommerce Thank You Page using above option. Make sure to add Thank You page widget on selected page to make it work properly. <a href=\"https://theplusaddons.com/docs/edit-woocommerce-thank-you-page-in-elementor/\" target=\"_blank\" rel=\"noopener noreferrer\">How it works.</a>"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Thank You Page"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid " Features"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Privacy"
+msgstr ""
+
+#: build/index.js:3
+msgid "01 Features"
+msgstr ""
+
+#: build/index.js:3
+msgid "Share Non-Sensitive Details"
+msgstr ""
+
+#: build/index.js:3
+msgid "Help make the plugin faster and more stable. Share basic, non-sensitive info so we can catch conflicts and ship fixes quicker. No personal data, ever."
+msgstr ""
+
+#: build/index.js:3
 msgid "client"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Save Settings"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Saving..."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid " Post Type Settings"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Use below settings to configure your \""
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "\" custom post type."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "ThePlus Post Type"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Prebuilt Theme Based"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Post Name"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "*Keep Blank if you want to keep default Name"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #, js-format
 msgid "Enter value for clients custom post type name. Default: \"theplus_%s\""
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #, js-format
 msgid "Enter value for clients custom post title name. Default: \"Tp %s\""
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Category Taxonomy Value"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #, js-format
 msgid "Enter value for Category Taxonomy Value. Default: \"theplus_%s_cat\""
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Prebuilt Post Name : (You can find that from here)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #, js-format
 msgid "Enter the value of your current post type name which is prebuilt with your theme. E.g.: \"theplus_%s\"."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Prebuilt Category Taxonomy Value : (You can find that from here)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #, js-format
 msgid "Enter the value of your current Category Taxonomy Value which is prebuilt with your theme. E.g.: \"theplus_%s\"."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Install & Activate"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:216
 msgid "Activated"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "More Products"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Visit Official Website"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Asset Manager"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Are you sure you want to remove all cached files? It will remove all cached JS and CSS files from your server. It will generate automatically on your next visit of page."
+msgstr ""
+
+#: build/index.js:3
 msgid "In \"Smart Optimised\" method of caching, We use detect widgets used in each page, combine and minify all JS and CSS of page in two separate files for the best possible performance with least possible requests. All Cache stored at \"SiteURL/wp-content/uploads/theplus-addons/\"."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "In \"On Demand Assets\" method, We detect widgets used in page and based on that all assets of those widgets loaded in each page. It will have more requests compare to our recommended method but If you are having any complex cache plugin or server caching, You may choose this method."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Select Version"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Roll Back Plugin"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Are you sure you want to reinstall the previous version?"
+msgstr ""
+
+#: build/index.js:3
+msgid "Rollback failed. Please try again."
+msgstr ""
+
+#: build/index.js:3
+msgid "Rollback request failed. Check your connection and try again."
+msgstr ""
+
+#: build/index.js:3
 msgid "Rollback"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Rollback to Previous Free Version"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Warning: Please backup your database before making the rollback."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Hide all Help Links?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Hide all Plugin Updates related News?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Hide Our Recommended plugin Ads?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Hide Starter Templates Tab?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Hide Licence Key Tab?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Hide Plugin RollBack Tab?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Upgrade to The Plus Addons for Elementor Pro and Brand the Widgets under your Agency's Name"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "White Label"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Are you sure you want to Reset this Form Data?"
+msgstr ""
+
+#: build/index.js:3
 msgid "Reset"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Save Setting"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plugin Name (PRO Version)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enter Plugin Name"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plugin Description (PRO Version)"
 msgstr ""
 
-#: build/index.js:1
-msgid "Enter Plugin Descriptinon"
-msgstr ""
-
-#: build/index.js:1
-msgid "Developer/Agency (PRO Version)"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enter Developer Name"
-msgstr ""
-
-#: build/index.js:1
-msgid "Website URL (PRO Version)"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enter Web URL"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enter value for clients custom post type name. Default: \"theplus_clients\""
-msgstr ""
-
-#: build/index.js:1
-msgid "Plugin Name (Free Version)"
-msgstr ""
-
-#: build/index.js:1
-msgid "Plugin Description (Free Version)"
-msgstr ""
-
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enter Plugin Description"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Developer/Agency (PRO Version)"
+msgstr ""
+
+#: build/index.js:3
+msgid "Enter Developer Name"
+msgstr ""
+
+#: build/index.js:3
+msgid "Website URL (PRO Version)"
+msgstr ""
+
+#: build/index.js:3
+msgid "Enter Web URL"
+msgstr ""
+
+#: build/index.js:3
+msgid "Enter value for clients custom post type name. Default: \"theplus_clients\""
+msgstr ""
+
+#: build/index.js:3
+msgid "Plugin Name (Free Version)"
+msgstr ""
+
+#: build/index.js:3
+msgid "Plugin Description (Free Version)"
+msgstr ""
+
+#: build/index.js:3
 msgid "Developer/Agency (Free Version)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Website URL (Free Version)"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plus Icon/Logo"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Select or Upload Media"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Use this media"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Upload your Icon File Only .png, .jpg, .svg, .gif supported"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enable Force Disable Options : "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "If you enable this option, It will be completely hidden. If you want it back, You have to deactivate and activate plugin to make it work again."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enable Code Snippets"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Custom JS"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Are you sure you want to deactivate The Plus Addons for Elementor Pro License Key?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Invalid Key Entered !"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Activate PRO"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Licence Activation"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enter Your License Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
 msgid "Deactivate"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Congratulation! License Successfully Activated."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "How to Find the Activation Key?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Visit POSIMYTH Store Dashboard"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Copy the License Key"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Paste the Key here & Hit Activate"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Facing Issues?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Check our troubleshooting guide"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plus Special"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "GSAP Scroll Interactions"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Dynamic Tags"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plus Global"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plus Columns"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plus Effects"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plus Visibility"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Nexter Extension"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Admin Role Switcher"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Advanced Performance"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Branded WP Admin"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Code Snippets"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Custom Font Upload"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Custom Login URL"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Duplicate Post"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Elementor AdFree"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Image Upload Optimize"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Limit Login Attempts"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "CAPTCHA"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Replace Text & URL"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "SMTP Email"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WP Debug Mode"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "What is Nexter Extension? Why Do I Need an Extra Plugin for These Features?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Nexter Extension is a unique set of features provided through a separate plugin. We’ve made it independent from The Plus Addons for Elementor widgets. While The Plus Addons focuses on extra Elementor widgets, Nexter Extension helps you prepare your WordPress site for production with better security and higher performance."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Do I Need to Pay Anything to Use These Features?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Most of the Nexter Extensions are free, while only some are paid. These paid features are included for Pro users of The Plus Addons for Elementor. All Pro users also unlock Nexter Extension Pro."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Will This Affect My Site’s Performance?"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Not at all! These are great features designed to make your WordPress website more secure, faster, and smarter, saving you a lot of time. It’s a single plugin that eliminates multiple hassles, making it easy to create a powerful WordPress website."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Get 22+ More Extensions for your WordPress Website"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "with Nexter Extension"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Free Theme Builder for Elementor"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Extra Features"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Security Hardener"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Performance Booster"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Disable Unused Extension"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Scan Unused Extension"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Columns"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Effects"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Features"
 msgstr ""
 
-#: build/index.js:1
-msgid "Elementor Template"
-msgstr ""
-
-#: build/index.js:1
-msgid "Nexter Template"
-msgstr ""
-
-#: build/index.js:1
-msgid "Download Without Image"
-msgstr ""
-
-#: build/index.js:1
-msgid "Auto SVG Detact"
-msgstr ""
-
-#: build/index.js:1
-msgid "Width In Percentage"
-msgstr ""
-
-#: build/index.js:1
-msgid "Exported Image"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enter Your Figma Link !!"
-msgstr ""
-
-#: build/index.js:1
-msgid "Read How it Works"
-msgstr ""
-
-#: build/index.js:1
-msgid "Save"
-msgstr ""
-
-#: build/index.js:1
-msgid "Figma to Elementor"
-msgstr ""
-
-#: build/index.js:1
-msgid " Conversion Left"
-msgstr ""
-
-#: build/index.js:1
-msgid "Get More"
-msgstr ""
-
-#: build/index.js:1
-msgid "Powered by"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enter Your Figma URL"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enter your figma URL"
-msgstr ""
-
-#: build/index.js:1
-msgid "How to Get Figma URL?"
-msgstr ""
-
-#: build/index.js:1
-msgid "Get Convertible Frames"
-msgstr ""
-
-#: build/index.js:1
-msgid "Select Your Frames"
-msgstr ""
-
-#: build/index.js:1
-msgid "You can choose multiple design files for further optimisation process."
-msgstr ""
-
-#: build/index.js:1
-msgid "Global Styles"
-msgstr ""
-
-#: build/index.js:1
-msgid "Coming Soon"
-msgstr ""
-
-#: build/index.js:1
-msgid "View Page"
-msgstr ""
-
-#: build/index.js:1
-msgid "Retry"
-msgstr ""
-
-#: build/index.js:1
-msgid "Start Importing"
-msgstr ""
-
-#: build/index.js:1
+#: build/index.js:3
 msgid "More Products "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Version"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
 msgid "System Info"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Get Access to all"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "120+ Elementor Widgets."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "View all Widgets"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Recommended by Elementor"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Works with Most Themes"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Powered by POSIMYTH Innovations"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Quick Support"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "FREE VERSION"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "PRO VERSION"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Get Free Support"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Get Premium Support"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Join Facebook Community"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Suggest New Features"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Report Bug"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "AI Chat"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WordPress Version: "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Plugin Version: "
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Continue"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Select the Widgets You Want to Use"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Setting Up for Website Templates"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Enabling Website Templates"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "WDesignKit Activated"
 msgstr ""
 
-#: build/index.js:1
-msgid "Skip Setup"
-msgstr ""
-
-#: build/index.js:1
-msgid "Select Mode"
-msgstr ""
-
-#: build/index.js:1
-msgid "Select Widgets"
-msgstr ""
-
-#: build/index.js:1
-msgid "Enable Template"
-msgstr ""
-
-#: build/index.js:1
-msgid "Special Offer"
-msgstr ""
-
-#: build/index.js:1
-msgid "Stay Updated"
-msgstr ""
-
-#: build/index.js:1
-msgid "Confirmation"
-msgstr ""
-
-#: build/index.js:1
-msgid "How would you like to start?"
-msgstr ""
-
-#: build/index.js:1
-msgid "Import Ready Made Website"
-msgstr ""
-
-#: build/index.js:1
-msgid "Get a Full Website Ready "
-msgstr ""
-
-#: build/index.js:1
-msgid "Under 60 seconds"
-msgstr ""
-
-#: build/index.js:1
-msgid "This will install the WDesignKit Plugin, which enables you to import Elementor Templates & Sections."
-msgstr ""
-
-#: build/index.js:1
-msgid "Use Elementor Widgets"
-msgstr ""
-
-#: build/index.js:1
-msgid "Create your design with our highly customisable widgets"
-msgstr ""
-
-#: build/index.js:1
-msgid "Get 1000+ Pre-Designed Elementor Websites & Templates"
-msgstr ""
-
-#: build/index.js:1
-msgid "Skip"
-msgstr ""
-
-#: build/index.js:1
-msgid "Why Do I Need a Theme Builder?"
-msgstr ""
-
-#: build/index.js:1
-msgid "Our Theme Builder gives you the capability to customize the Header, Footer, Single, and Archive Pages using The Plus Addons for Elementor dynamic Widgets."
-msgstr ""
-
-#: build/index.js:1
-msgid "You don’t need to rely on the limited controls of the customizer like Other themes. This makes the The Plus Addons for Elementor ecosystem truly limitless, allowing you to create every element with Widgets."
-msgstr ""
-
-#: build/index.js:1
-msgid "Will this work with any WordPress theme?"
-msgstr ""
-
-#: build/index.js:1
-msgid "Yes, the Nexter Extension works with any WordPress theme. That said, we highly recommend using it with the Nexter theme — it’s the lightest theme available, under 10KB, built with pure vanilla JavaScript and no jQuery. This ensures your website stays lightning fast and optimized. But don’t worry, you’re free to use any theme you like!"
-msgstr ""
-
-#: build/index.js:1
-msgid "Will it break my current website?"
-msgstr ""
-
-#: build/index.js:1
-msgid "Not at all! The Theme Builder is designed to integrate smoothly with your existing site. It won’t interfere with your current layout or content. You can activate and use it gradually, applying changes only when you’re ready."
-msgstr ""
-
-#: build/index.js:1
-msgid "Get Free Theme Builder for"
-msgstr ""
-
-#: build/index.js:1
-msgid "Elementor with Nexter Extension"
-msgstr ""
-
-#: build/index.js:1
-msgid "Free Elementor Header & Footer Builder"
-msgstr ""
-
-#: build/index.js:1
-msgid "Pre-Made Theme Builder Section Templates"
-msgstr ""
-
-#: build/index.js:1
-msgid "100% Customisable with Widgets"
-msgstr ""
-
-#: build/index.js:1
-msgid "Free Single, Archive & 404 Page Builder"
-msgstr ""
-
-#: build/index.js:1
-msgid "Next"
-msgstr ""
-
-#: build/index.js:1
-msgid "Get access to all 120+ Widgets With FLAT 20% OFF"
-msgstr ""
-
-#: build/index.js:1
-msgid "USE CODE: "
-msgstr ""
-
-#: build/index.js:1
-msgid "Copied"
-msgstr ""
-
-#: build/index.js:1
-msgid " FIRST20"
-msgstr ""
-
-#: build/index.js:1
-msgid "Elementor Theme Builder with Nexter"
-msgstr ""
-
-#: build/index.js:1
-msgid "Get Exclusive Elementor Tips, Tricks and Resources Delivered Straight  "
-msgstr ""
-
-#: build/index.js:1
-msgid "to Your Inbox! "
-msgstr ""
-
-#: build/index.js:1
-msgid "Join our 200K+ Business Owners, Marketers, WordPress users."
-msgstr ""
-
-#: build/index.js:1
-msgid "NO SPAM GUARANTEE"
-msgstr ""
-
-#: build/index.js:1
-msgid " Agree to contribute to make The Plus Addons for Elementor better by sharing non-sensitive details."
-msgstr ""
-
-#: build/index.js:1
+#: build/index.js:3
 msgid "Subscribe"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
+msgid "Skip Setup"
+msgstr ""
+
+#: build/index.js:3
+msgid "Select Mode"
+msgstr ""
+
+#: build/index.js:3
+msgid "Select Widgets"
+msgstr ""
+
+#: build/index.js:3
+msgid "Enable Template"
+msgstr ""
+
+#: build/index.js:3
+msgid "Special Offer"
+msgstr ""
+
+#: build/index.js:3
+msgid "Stay Updated"
+msgstr ""
+
+#: build/index.js:3
+msgid "Confirmation"
+msgstr ""
+
+#: build/index.js:3
+msgid "How would you like to start?"
+msgstr ""
+
+#: build/index.js:3
+msgid "Import Ready Made Website"
+msgstr ""
+
+#: build/index.js:3
+msgid "Get a Full Website Ready "
+msgstr ""
+
+#: build/index.js:3
+msgid "Under 60 seconds"
+msgstr ""
+
+#: build/index.js:3
+msgid "This will install the WDesignKit Plugin, which enables you to import Elementor Templates & Sections."
+msgstr ""
+
+#: build/index.js:3
+msgid "Use Elementor Widgets"
+msgstr ""
+
+#: build/index.js:3
+msgid "Create your design with our highly customisable widgets"
+msgstr ""
+
+#: build/index.js:3
+msgid "Get 1000+ Pre-Designed Elementor Websites & Templates"
+msgstr ""
+
+#: build/index.js:3
+msgid "Skip"
+msgstr ""
+
+#: build/index.js:3
+msgid "Why Do I Need a Theme Builder?"
+msgstr ""
+
+#: build/index.js:3
+msgid "Our Theme Builder gives you the capability to customize the Header, Footer, Single, and Archive Pages using The Plus Addons for Elementor dynamic Widgets."
+msgstr ""
+
+#: build/index.js:3
+msgid "You don’t need to rely on the limited controls of the customizer like Other themes. This makes the The Plus Addons for Elementor ecosystem truly limitless, allowing you to create every element with Widgets."
+msgstr ""
+
+#: build/index.js:3
+msgid "Will this work with any WordPress theme?"
+msgstr ""
+
+#: build/index.js:3
+msgid "Yes, the Nexter Extension works with any WordPress theme. That said, we highly recommend using it with the Nexter theme — it’s the lightest theme available, under 10KB, built with pure vanilla JavaScript and no jQuery. This ensures your website stays lightning fast and optimized. But don’t worry, you’re free to use any theme you like!"
+msgstr ""
+
+#: build/index.js:3
+msgid "Will it break my current website?"
+msgstr ""
+
+#: build/index.js:3
+msgid "Not at all! The Theme Builder is designed to integrate smoothly with your existing site. It won’t interfere with your current layout or content. You can activate and use it gradually, applying changes only when you’re ready."
+msgstr ""
+
+#: build/index.js:3
+msgid "Get Free Theme Builder for"
+msgstr ""
+
+#: build/index.js:3
+msgid "Elementor with Nexter Extension"
+msgstr ""
+
+#: build/index.js:3
+msgid "Free Elementor Header & Footer Builder"
+msgstr ""
+
+#: build/index.js:3
+msgid "Pre-Made Theme Builder Section Templates"
+msgstr ""
+
+#: build/index.js:3
+msgid "100% Customisable with Widgets"
+msgstr ""
+
+#: build/index.js:3
+msgid "Free Single, Archive & 404 Page Builder"
+msgstr ""
+
+#: build/index.js:3
+msgid "Next"
+msgstr ""
+
+#: build/index.js:3
+msgid "Horizontal & Vertical Mega Menu and Mobile Menus"
+msgstr ""
+
+#: build/index.js:3
+msgid "Complete WooCommerce Store Builder"
+msgstr ""
+
+#: build/index.js:3
+msgid "Ultimate Popup Builder,Off Canvas & Slide-ins"
+msgstr ""
+
+#: build/index.js:3
+msgid "Advanced Display Conditions for WooCommerce & more"
+msgstr ""
+
+#: build/index.js:3
+msgid "Listings with Ajax Search Bar & 15+ Filters"
+msgstr ""
+
+#: build/index.js:3
+msgid "Social Media Live Feed & Review Widgets"
+msgstr ""
+
+#: build/index.js:3
+msgid "Login/Register & Password Reset Form"
+msgstr ""
+
+#: build/index.js:3
+msgid "Custom Loop Skin for Posts,CPT & Woo Products"
+msgstr ""
+
+#: build/index.js:3
+msgid "Get access to all 120+ Widgets With FLAT 20% OFF"
+msgstr ""
+
+#: build/index.js:3
+msgid "USE CODE: "
+msgstr ""
+
+#: build/index.js:3
+msgid "Copied"
+msgstr ""
+
+#: build/index.js:3
+msgid " FIRST20"
+msgstr ""
+
+#: build/index.js:3
+msgid "Elementor Theme Builder with Nexter"
+msgstr ""
+
+#: build/index.js:3
+msgid "Get Exclusive Elementor Tips, Tricks and Resources Delivered Straight  "
+msgstr ""
+
+#: build/index.js:3
+msgid "to Your Inbox! "
+msgstr ""
+
+#: build/index.js:3
+msgid "Join our 200K+ Business Owners, Marketers, WordPress users."
+msgstr ""
+
+#: build/index.js:3
+msgid "NO SPAM GUARANTEE"
+msgstr ""
+
+#: build/index.js:3
+msgid "Submitted !"
+msgstr ""
+
+#: build/index.js:3
 msgid "Setup Up Done Successfully."
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "I just Installed The Plus Addons for Elementor! It comes with 120+ Elementor Widgets which replace multiple plugins for me, without compromising on my website performance. Excited to use it"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Post on"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Start Using"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "No Internet Connection"
 msgstr ""
 
-#: build/index.js:1
+#: build/index.js:3
 msgid "Please check your internet connection and try again."
+msgstr ""
+
+#: build/index.js:3
+msgid "Retry"
 msgstr ""
 
 #: includes/nxt-ext/build/index.js:1
