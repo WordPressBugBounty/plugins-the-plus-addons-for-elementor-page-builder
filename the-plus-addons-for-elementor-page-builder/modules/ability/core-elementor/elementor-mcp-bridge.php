@@ -171,6 +171,10 @@ function tpae_elementor_mcp_is_safe_remote_url($url)
         }
     }
 
+    if (empty($ips)) {
+        return new \WP_Error('unresolvable_host', __('The host could not be resolved.', 'tpebl'));
+    }
+
     foreach ($ips as $ip) {
         if (!filter_var(
             $ip,
@@ -182,6 +186,55 @@ function tpae_elementor_mcp_is_safe_remote_url($url)
     }
 
     return true;
+}
+
+/**
+ * Authorize creating a post of the given type and status.
+ *
+ * wp_insert_post() performs no capability checking of its own — that is entirely the caller's
+ * responsibility. The abilities declare `post_type` and `post_status` enums in their input_schema,
+ * and current WP Abilities API builds do validate against those before dispatch, but that is a
+ * validation layer outside this plugin: a direct call to a public execute_* method, or a future
+ * Abilities API that relaxes schema validation, would bypass it silently. So re-check here, where
+ * the check sits next to the code it protects.
+ *
+ * Capabilities are resolved from the target post type rather than hardcoded to the page family,
+ * because `edit_pages` says nothing about whether a user may create a `post`.
+ *
+ * @since 6.5.0
+ *
+ * @param string $post_type Requested post type.
+ * @param string $status    Requested post status.
+ * @return string|\WP_Error Effective status — downgraded to `draft` when the user may create but
+ *                          not publish — or WP_Error when creation is not permitted at all.
+ */
+function tpae_elementor_mcp_authorize_post_creation($post_type, $status)
+{
+    if (!in_array($post_type, array('page', 'post'), true)) {
+        return new \WP_Error('invalid_post_type', __('Unsupported post type.', 'tpebl'));
+    }
+
+    if (!in_array($status, array('draft', 'publish'), true)) {
+        return new \WP_Error('invalid_status', __('Unsupported post status.', 'tpebl'));
+    }
+
+    $post_type_object = get_post_type_object($post_type);
+
+    if (!$post_type_object) {
+        return new \WP_Error('invalid_post_type', __('The requested post type does not exist.', 'tpebl'));
+    }
+
+    if (!current_user_can($post_type_object->cap->create_posts)) {
+        return new \WP_Error('forbidden', __('You do not have permission to create this content.', 'tpebl'));
+    }
+
+    // A role granted edit_pages but deliberately denied publish_pages must not be able to
+    // publish by passing status=publish. Downgrade rather than fail, so the content is kept.
+    if ('publish' === $status && !current_user_can($post_type_object->cap->publish_posts)) {
+        $status = 'draft';
+    }
+
+    return $status;
 }
 
 require_once L_THEPLUS_PATH . 'modules/ability/core-elementor/mcp-tools/class-id-generator.php';

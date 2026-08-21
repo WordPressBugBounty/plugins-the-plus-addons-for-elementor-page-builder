@@ -105,6 +105,16 @@ class ThePlus_Syntax_Highlighter extends Plus_Widget_Base {
 			)
 		);
 		$this->add_control(
+			'deprecated_notice_syntax_highlighter',
+			array(
+				'type'    => \Elementor\Controls_Manager::DEPRECATED_NOTICE,
+				'widget'  => 'Syntax Highlighter',
+				'since'   => '6.5.0',
+				'last'    => '6.6.0',
+				'plugin'  => 'The Plus Addons for Elementor',
+			)
+		);
+		$this->add_control(
 			'tpae_preset_controller',
 			array(
 				'type'        => 'tpae_preset_button',

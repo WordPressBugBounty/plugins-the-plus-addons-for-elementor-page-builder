@@ -85,10 +85,6 @@ class L_ThePlus_Button extends Plus_Widget_Base {
 		return false;
 	}
 
-	protected function get_is_simple_button( $settings ) {
-		return ! empty( $settings['button_type_switch'] ) && in_array( $settings['button_type_switch'], array( 'basic' ), true );
-	}
-
 	/**
 	 * Register controls.
 	 *

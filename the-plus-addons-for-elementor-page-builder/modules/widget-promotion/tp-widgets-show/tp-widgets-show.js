@@ -98,10 +98,14 @@
             }
         });
     });
-    $(parent.document).on('mousedown', '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion , .elementor-element-wrapper.elementor-element--promotion.tp-inactive-widgets-list', function (e) {
-        const dialogSelector = '#elementor-element--promotion__dialog';
-        $(dialogSelector, parent.document).remove();
-    });
+    const tpInactivePromoSelector = '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-inactive-widgets-list';
+    parent.document.addEventListener('mousedown', function (e) {
+        const promo = e.target.closest && e.target.closest(tpInactivePromoSelector);
+        if (promo) {
+            e.stopPropagation();
+            $('#elementor-element--promotion__dialog', parent.document).remove();
+        }
+    }, true);
     // $(parent.document).on('click', '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion', function (e) {
     $(parent.document).on('click', '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-inactive-widgets-list', function (e) {
 

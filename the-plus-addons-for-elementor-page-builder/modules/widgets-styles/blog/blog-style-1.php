@@ -66,7 +66,7 @@ if ( 'metro' === $layout ) {
 				$lazybgclass = ' lazy-background';
 			}
 			?>
-		<a href="<?php echo esc_url( get_the_permalink() ); ?>"><div class="blog-bg-image-metro <?php echo ( esc_attr( $lazybgclass ) ); ?>" <?php echo ( wp_kses_post( $bg_attr ) ); ?>></div></a>
+		<a href="<?php echo esc_url( get_the_permalink() ); ?>"><div class="blog-bg-image-metro <?php echo ( esc_attr( $lazybgclass ) ); ?>" <?php echo wp_kses_post( $bg_attr ); ?>></div></a>
 		<?php } ?>
 	</div>
 </article>

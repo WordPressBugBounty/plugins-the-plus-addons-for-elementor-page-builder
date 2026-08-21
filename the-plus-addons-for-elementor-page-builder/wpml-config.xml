@@ -622,15 +622,6 @@
 				<field type="Post Prev/Next: Next Post" editor_type="LINE">nextText</field>
 			</fields>
 		</widget>
-		<widget name="tp-post-search">
-            <conditions>
-                <condition key="widgetType">tp-post-search</condition>
-            </conditions>
-			<fields>                
-                <field type="Post Search: Search Field Placeholder" editor_type="LINE">search_field_placeholder</field>
-				<field type="Post Search: Button Text" editor_type="LINE">button_text</field>
-            </fields>
-        </widget>
 		<widget name="tp-post-title">
             <conditions>
                 <condition key="widgetType">tp-post-title</condition>

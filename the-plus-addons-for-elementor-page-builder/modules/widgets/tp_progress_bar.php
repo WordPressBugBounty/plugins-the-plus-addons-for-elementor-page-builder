@@ -1275,12 +1275,12 @@ class ThePlus_Progress_Bar extends Plus_Widget_Base {
 					$lottie_loop_value = 'loop';
 				}
 
-				$$lottie_anim = 'autoplay';
+				$lottie_anim_value = 'autoplay';
 				if ( 'yes' === $lottiehover ) {
-					$$lottie_anim = 'hover';
+					$lottie_anim_value = 'hover';
 				}
 
-				$icons = '<lottie-player src="' . esc_url( $settings['lottieUrl']['url'] ) . '" style="display: ' . esc_attr( $lottiedisplay ) . '; width: ' . esc_attr( $lottie_width ) . 'px; height: ' . esc_attr( $lottie_height ) . 'px;" ' . esc_attr( $lottie_loop_value ) . '  speed="' . esc_attr( $lottie_speed ) . '" ' . esc_attr( $$lottie_anim ) . '></lottie-player>';
+				$icons = '<lottie-player src="' . esc_url( $settings['lottieUrl']['url'] ) . '" style="display: ' . esc_attr( $lottiedisplay ) . '; width: ' . esc_attr( $lottie_width ) . 'px; height: ' . esc_attr( $lottie_height ) . 'px;" ' . esc_attr( $lottie_loop_value ) . '  speed="' . esc_attr( $lottie_speed ) . '" ' . esc_attr( $lottie_anim_value ) . '></lottie-player>';
 			}
 
 			$progress_bar_img = '<span class="progres-ims"><span>' . $icons . '</span></span>';

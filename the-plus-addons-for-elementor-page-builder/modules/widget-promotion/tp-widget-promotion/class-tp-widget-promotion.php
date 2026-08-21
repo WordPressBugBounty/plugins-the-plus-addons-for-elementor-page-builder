@@ -150,12 +150,6 @@ if ( ! class_exists( 'Tp_Widget_Promotion' ) ) {
 					'demo_url'   => 'https://theplusaddons.com/elementor-widget/coupon-code/',
 				),
 				array(
-					'name'       => 'tp-design-tool-adv',
-					'title'      => __( 'Design Tool', 'tpebl' ),
-					'icon'       => 'theplus-i-design-tool',
-					'demo_url'   => 'https://theplusaddons.com/elementor-extras/grid-design-tool/',
-				),
-				array(
 					'name'       => 'tp-draw-svg-adv',
 					'title'      => __( 'Draw SVG', 'tpebl' ),
 					'icon'       => 'theplus-i-draw-svg',

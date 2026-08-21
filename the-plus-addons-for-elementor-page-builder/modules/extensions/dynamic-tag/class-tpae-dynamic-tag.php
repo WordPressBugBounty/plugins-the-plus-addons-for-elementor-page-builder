@@ -248,7 +248,7 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
                         wp_send_json_error( array( 'message' => 'Insufficient permissions.' ) );
                     }
 
-                    update_option( 'tp_dynamic_tag_seen', true );
+                    update_option( 'tp_dynamic_tag_seen', true, false );
                     wp_send_json_success();
                 });
             }
@@ -260,7 +260,7 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
                     wp_send_json_error( array( 'message' => 'Invalid permissions.' ) );
                 }
 
-                update_option( 'tpae_dynamictag_notice_dismissed', true );
+                update_option( 'tpae_dynamictag_notice_dismissed', true, false );
                 wp_send_json_success();
             });
         }

@@ -303,16 +303,17 @@ if ( ! class_exists( 'Tp_Expired_License_Notice' ) ) {
 
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( __( 'You are not allowed to do this action', 'tpebl' ) );
+				wp_die();
 			}
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
 			if ( 'tpae_expired_license_notice' === $get_type ) {
-				update_option( 'tpae_expired_license_notice', true );
+				update_option( 'tpae_expired_license_notice', true, false );
 			} elseif ( 'tpae_expired_license_week_notice' === $get_type ) {
-				update_option( 'tpae_expired_license_week_notice', true );
+				update_option( 'tpae_expired_license_week_notice', true, false );
 			} elseif ( 'tpae_expired_license_month_notice' === $get_type ) {
-				update_option( 'tpae_expired_license_month_notice', true );
+				update_option( 'tpae_expired_license_month_notice', true, false );
 			}
 
 			wp_send_json_success();

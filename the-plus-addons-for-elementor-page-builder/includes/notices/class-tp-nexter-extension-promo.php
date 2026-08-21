@@ -107,7 +107,8 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 				return;
 			}
 
-			if ( ! empty( $_GET['action'] ) && 'install-plugin' === $_GET['action'] ) {
+			$get_action = ! empty( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : '';
+			if ( 'install-plugin' === $get_action ) {
 				return;
 			}
 
@@ -169,11 +170,12 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( __( 'You are not allowed to do this action', 'tpebl' ) );
+				wp_die();
 			}
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
-			update_option( 'tpae_nexter_extension_notice', true );
+			update_option( 'tpae_nexter_extension_notice', true, false );
 
 			wp_send_json_success();
 		}
@@ -314,11 +316,12 @@ if ( ! class_exists( 'Tp_Nexter_Extension_Promo_Notice' ) ) {
 
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( __( 'You are not allowed to do this action', 'tpebl' ) );
+				wp_die();
 			}
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
-			update_option( 'tpae_nxt_ext_pnotice', true );
+			update_option( 'tpae_nxt_ext_pnotice', true, false );
 
 			wp_send_json_success();
 		}

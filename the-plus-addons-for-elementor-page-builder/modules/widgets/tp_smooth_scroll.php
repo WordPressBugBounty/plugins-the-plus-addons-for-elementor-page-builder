@@ -854,8 +854,9 @@ class ThePlus_Smooth_Scroll extends Plus_Widget_Base {
 		$touchpad_support = 'yes' === $settings['touchpadSupport'] ? '1' : '0';
 		$fixed_background = 'yes' === $settings['fixedBackground'] ? '1' : '0';
 
-		$browsers = ! empty( $settings['browsers'] ) ? $settings['browsers'] : array( 'ieWin7', 'chrome', 'firefox', 'safari' );
-		$browsers = wp_json_encode( $browsers );
+		$allowed_browsers = array( 'mobile', 'ieWin7', 'edge', 'chrome', 'safari', 'firefox', 'other' );
+		$browsers_raw     = ! empty( $settings['browsers'] ) ? (array) $settings['browsers'] : array( 'ieWin7', 'chrome', 'firefox', 'safari' );
+		$browsers         = wp_json_encode( array_values( array_filter( $browsers_raw, fn( $v ) => in_array( $v, $allowed_browsers, true ) ) ) );
 
 		$smooth_scroll_array = array(
 			'Browsers' => ! empty( $settings['browsers'] ) ? $settings['browsers'] : array( 'ieWin7', 'chrome', 'firefox', 'safari' ),

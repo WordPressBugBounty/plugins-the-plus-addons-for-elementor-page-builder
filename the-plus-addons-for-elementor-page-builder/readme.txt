@@ -2,9 +2,9 @@
 Contributors: posimyththemes, parthh2510, sandip111, sagarpatel124
 Tags: elementor, elementor widgets, elementor addons, elementor templates, widgets for elementor
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.4.18
+Stable tag: 6.5.0
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -65,7 +65,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 ###🏆 35+ Free Elementor Widgets
 
 * <strong>[ FREE Blog Website Builder for Elementor 🔥](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) </strong>
-[Post Title](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Content](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Featured Image](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Meta](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Author](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Comment](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Navigation (Next/Previous Button)](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Search Bar](https://theplusaddons.com/?s=perfect&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+[Post Title](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Content](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Featured Image](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Meta](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Author](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Comment](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Navigation (Next/Previous Button)](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
 
 * <strong> [FREE Block Quote Box for Elementor](https://theplusaddons.com/widgets/blockquote/?&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -150,7 +150,7 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[FREE Dark Mode for Elementor 🔥](https://theplusaddons.com/widgets/elementor-dark-mode/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-* <strong>[Blog Builder: Post Navigation & Post Search](https://theplusaddons.com/blog-builder/#blog-single?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
+* <strong>[Blog Builder: Post Navigation](https://theplusaddons.com/blog-builder/#blog-single?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[FREEMIUM Dynamic Tags for Elementor](https://theplusaddons.com/elementor-extras/dynamic-tags/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
@@ -306,7 +306,6 @@ https://www.youtube.com/watch?v=yG_oyhz-oAY
 
 * <strong>[White Label  for Elementor](https://theplusaddons.com/plus-extras/white-label-branding/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong> 
 
-* <strong>[Grid Design Tool  for Elementor](https://theplusaddons.com/plus-extras/design-tool/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks/)</strong>
 
 * <strong>[MagicScroll Integration for Elementor](https://theplusaddons.com/plus-extras/on-scroll-magic-elementor-parallax/)</strong> 
 
@@ -400,6 +399,56 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.5.0 =
+Add : Tabs & Tours : Accordion toggle icon option added
+Update : Compatibility : Tested up to WordPress 7.1
+Update : Blog Listing : Smart Loop Builder is now out of beta
+Update : Hover Card : Widget is deprecated and will be removed in an upcoming release
+Update : Syntax Highlighter : Widget is deprecated and will be removed in an upcoming release
+Improvement : MCP Abilities : Added support to build and edit whole pages, not just widget settings
+Improvement : MCP Abilities : Abilities stay discoverable to AI clients on WordPress 7.1
+Improvement : Dashboard : Input validation, remote request handling and theme installation hardened for better security
+Improvement : i18n : Corrected text domain so all strings are translatable
+Improvement : Elementor : Shows an admin notice instead of a fatal error when the installed Elementor version is unsupported
+Improvement : Performance : Admin and editor only files are no longer loaded on frontend requests
+Improvement : Performance : Widget asset dependencies moved to a single registry for faster lookups
+Improvement : Performance : Admin styles and scripts now load only on plugin screens
+Improvement : Multiple Widgets : Output rendering improved across widgets for better security and compatibility
+Improvement : Widget Registration : Free's widgets now register correctly if the Pro plugin does not load them
+Improvement : Accordion : Accessibility improved with proper keyboard support and open or closed state announcements
+Improvement : Forms : Form submission and request handling improved for better security
+Improvement : SVG : Validation improved for SVG and SVGZ files
+Improvement : Syntax Highlighter : Bundled highlighting library updated to the latest version
+Improvement : Uninstall : Generated cache, markers and plugin transients are now fully removed
+Improvement : Plugin code quality and structure improved
+Fix : Caching : Cache regenerates on plugin update and activation, and the purge action now completes reliably
+Fix : Caching : First page view after clearing cache is no longer unstyled
+Fix : Notices : Broken banner image and stale notice states
+Fix : Admin Menu : Plugin menu icon, submenu and notification badge now display on every admin screen
+Fix : Editor : Plus badge overlap and duplicate inactive widget promotion dialog
+Fix : Multisite : Uninstall now removes plugin data from all subsites
+Fix : Removed Widgets : Content saved with a removed widget is preserved instead of lost
+Fix : Blog Listing : Columns gap now applies between items only, not on the outer edges
+Fix : Blog Listing : Metro background and lightbox attributes restored
+Fix : Blog Listing : Author avatar image now includes proper alt text
+Fix : Gallery Listing : Metro background and lightbox attributes restored
+Fix : Gallery Listing : Multiple reported issues fixed
+Fix : Post Meta : Author link and taxonomy handling updated for the current WordPress API
+Fix : Post Listing : Layout no longer re-initializes twice on window resize
+Fix : Posts Not Found : Message background color improved for better text visibility
+Fix : Header Extras : Mini Cart count on pages without an active WooCommerce cart
+Fix : Header Extras : Icon option now defaults to a valid choice
+Fix : Tabs & Tours : Multiple reported issues fixed
+Fix : Process Steps : Multiple reported issues fixed
+Fix : Plus Copy Paste : Garbled popup text when switching browser tabs
+Fix : Progress Bar : Lottie animation not rendering
+Fix : Isotope : Console errors no longer appear before the layout has initialized
+Fix : Testimonial : Description not rendering when the limit is set to words
+Fix : Testimonial : Read More not working
+Removed : Caldera Forms : Deprecated widget removed
+Removed : Post Search : Deprecated widget removed
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.4.18 =
 Add : Privacy : Data sharing is off by default. When enabled, shared non-sensitive details help us improve the plugin and build a better experience for users
@@ -764,414 +813,5 @@ Improvement : Dashboard : Language Compatibility
 Fix : Blog Listing : Author Image tag in the Smart Loop builder option
 Fix : Buttton : Style 8 Alignment Issue
 Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.16 =
-Fix : SVG Upload : Security Patch (Low Security)
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.15 =
-Improvement : Client Listing : UI Improvements
-Improvement : Gallery Listing : UI Improvements
-Improvement : Pricing Table : UI Improvements
-Improvement : Team Member Listing : UI Improvements
-Improvement : Testimonial : UI Improvements
-Fix : Blog Listing : Author Image tag in the Smart Loop builder option
-Improvement : Dashboard : Design Improvements
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.14 =
-Add : Form Widget : Spinner in the Submit Button and Style Options
-Improvement : Countdown : UI Improvements
-Improvement : Flipbox : UI Improvements
-Improvement : Process Steps : UI Improvements
-Improvement : Scroll Navigation : UI Improvements
-Improvement : Social Icon : UI Improvements
-Improvement : Stylish List : UI Improvements
-Improvement : Switcher : UI Improvements
-Improvement : Need Help Section : Added widget-wise documentation & video links
-Fix : Form Widget : Placeholder Text Color Issue
-Fix : Info Box : Image not displaying
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.13 =
-Add : Info Box : Add Text Support
-Add : Number Counter : Add responsive option for the Icon size
-Add : Number Counter : Support Font Awesome 5 
-Add : Pricing Table : Support Font Awesome 5 
-Add : Breadcrumbs Bar : Add option for the spacing
-Improvement : Contact Form 7 : UI Improvements
-Improvement : Everest Form : UI Improvements
-Improvement : Gravity Form : UI Improvements
-Improvement : Heading Animation : UI Improvements
-Improvement : Meeting Schedular : UI Improvements
-Improvement : Ninja Form : UI Improvements
-Improvement : Smooth Scroll : UI Improvements
-Improvement : Social Embed : UI Improvements
-Improvement : Video Player : UI Improvements
-Improvement : WP Form : UI Improvements
-Fix : Info Box : Color not working on the Font Awesome 5 Icon
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.12 =
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.11 =
-Add : New widget : Icon Widget
-Add : Accordion : Add Fil/Stroke color option for the Font Awesome 5 Icons
-Add : Button : Add Fil/Stroke color option for the Font Awesome 5 Icons
-Add : Flip Box : Add Fil/Stroke color option for the Font Awesome 5 Icons
-Add : Info Box : Add Fil/Stroke color option for the Font Awesome 5 Icons
-Add : Form Widget : Add Fil/Stroke color option for the Font Awesome 5 Icons
-Add : Number Counter : Add gradient color option for the Symbol
-Add : Form Widget : Add gradient color option for the Submit Button
-Add : Testimonial : Tablet & Mobile Column options
-Improvement : Post Content : UI Improvements
-Improvement : Post Featured Image : UI Improvements
-Improvement : Post Prev/Next : UI Improvements
-Improvement : Syntax Highlighter : UI Improvements
-Improvement : Form widget : Email Field Validation
-Improvement : Form widget : WPML Compatibility
-Improvement : Dashboard : Design Improvements
-Improvement : Dashboard : language Compatibility 
-Fix : Form widget : Field width not changes on the resize
-Fix : Form widget : Dropdown BG color
-Fix : Form widget : Active text color
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.10 =
-Add : Switcher : Switcher Border option Added
-Improvement : Blockquote : UI Improvements
-Improvement : Dark Mode : UI Improvements
-Improvement : Dynamic Categories : UI Improvements
-Improvement : Heading Title : UI Improvements
-Improvement : Message Box : UI Improvements
-Improvement : Number Counter : UI Improvements
-Improvement : Post Title : UI Improvements
-Improvement : Progress Bar : UI Improvements
-Improvement : Flipbox : CSS Improvements
-Improvement : Progress Bar : Controller Improvements
-Improvement : Dashboard : Design Improvements
-Improvement : Need Help Controller
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.9 =
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.8 =
-Add : Form Widget : Form Name Show option Added
-Improvement : Accordion : Add notice when Template not selected
-Improvement : Carousel Anything : Add notice when Template not selected
-Improvement : Navigation Menu Lite : Add notice when Template not selected
-Improvement : Page Scroll : Add notice when Template not selected
-Improvement : Switcher : Add notice when Template not selected
-Improvement : Tabs/Tours : Add notice when Template not selected
-Improvement : Need Help Section : Controller Improvement
-Improvement : All widget : Widget Icon change on Elementor editor side
-Improvement : Dashboard : Dashboard design
-Improvement : Dashboard : Product Logo
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.7 =
-Add : Button : Hover Icon color option
-Add : Button : Button tag color option for Style 23
-Improvement : Blog Listing : UI Improvements
-Improvement : Carousel Anything : UI Improvements
-Improvement : Coupon Code : UI Improvements
-Improvement : Tabs/Tours : UI Improvements
-Improvement : Button : Controller Improvement
-Improvement : Table : Controller Improvement
-Improvement : Dashboard : Dashboard design
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.6 =
-Improvement : Button : UI Improvements
-Improvement : Breadcrumbs Bar : UI Improvements
-Improvement : Accordion : WPML Compatibility with template
-Improvement : Carousel Anything : WPML Compatibility with template
-Improvement : Navigation Menu Lite : WPML Compatibility with template
-Improvement : Page Scroll : WPML Compatibility with template
-Improvement : Tabs/Tours : WPML Compatibility with template
-Improvement : Dashboard : Dashboard design
-Fix : Dark Mode : Console Error
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.5 =
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.4 =
-Add : Scroll Navigation : Add Preset Option for the Ready design
-Add : Switcher : Add Preset Option for the Ready design
-Improvement : Age gate : UI Improvements
-Improvement : All Widgets : Disable Elementor's default inner wrapper for custom HTML control
-Improvement : Deactivated Form : Design
-Fix : Form Widget : Layout breaking Issue
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.3 =
-Add : Video Widget : Sticky option 
-Improvement : Unnecessary code removed for better Performance
-Improvement : Accordion : UI Improvements
-Improvement : Dashboard : Dashboard design
-Fix : Client Listing : URL Issue solved
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.2 =
-Improvement : Info Box : CSS Optimize
-Improvement : Extra Option -> Equal Height : File Structure Improvement
-Improvement : Plus Extra : UI Improvement
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.1 =
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.3.0 =
-Improvement : Advanced Shadow : UI Improvement
-Improvement : Equal Height : UI Improvement
-Improvement : Glass Morphism : UI Improvement
-Improvement : Wrapper Link : UI Improvement
-Fix : disable unused extensions issue
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.8 =
-Add : Product Listing : Wishlist listing Compatibility With Lazy Load
-Add : Continuous Animation : Added switch in Dashboard for the enable/disable
-Add : Magic Scroll : Added switch in Dashboard for the enable/disable
-Add : Mouse Move Parallax : Added switch in Dashboard for the enable/disable
-Add : Overlay Special Effect : Added switch in Dashboard for the enable/disable
-Add : Tilt 3D Parallax : Added switch in Dashboard for the enable/disable
-Add : Tooltip : Added switch in Dashboard for the enable/disable
-Add : Add option for the disable unused extensions
-Improvements : Elementor Widgets Manage Compatibility
-Fix : Blog Listing : Security Patch ( Low Security )
-Fix : Blockquote : Text translate Issue Solved
-Fix : Hovercard : Text translate Issue Solved
-Fix : Form Widget : Responsive width Issue solved
-Fix : Glass Morphism : Blur Issue solved
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.7 =
-Add : Accordion : Add Preset Option for the Ready Design
-Add : Carousel Anything : Add Preset Option for the Ready Design
-Add : Flip Box : Add Preset Option for the Ready Design
-Add : Heading Animation : Add Preset Option for the Ready Design
-Add : Hover Card : Add Preset Option for the Ready Design
-Add : Tabs Tours : Add Preset Option for the Ready Design
-Improvement : Extra Option -> Advanced Shadow : File Structure Improvement
-Improvement : Extra Option -> Equal Height : File Structure Improvement
-Improvement : Extra Option -> Glass Morphism : File Structure Improvement
-Improvement : Extra Option -> Wrapper Link : File Structure Improvement
-Fix : Extra Option -> Glass Morphism : Option not working 
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.6 =
-Fix : Minor Bug Fixes & Performance Improvement
-
-= 6.2.5 =
-Compatibility : Remove Deprecated class of the Elementor
-Fix : Advanced Shadow : Custom class option not working
-Fix : Testimonial : Carousel Issue
-Fix : Minor Bug Fixes & Performance Improvement
-
-= 6.2.4 =
-Add : Audio Player : Add Preset Option for the Ready Design
-Add : Breadcrumbs Bar : Add Preset Option for the Ready Design
-Add : Chart : Add Preset Option for the Ready Design
-Add : Countdown : Add Preset Option for the Ready Design
-Add : Coupon Code : Add Preset Option for the Ready Design
-Add : Google Map : Add Preset Option for the Ready Design
-Add : Horizontal Scroll : Add Preset Option for the Ready Design
-Add : Info Box : Add Preset Option for the Ready Design
-Add : Pre Loader : Add Preset Option for the Ready Design
-Add : Pricing List : Add Preset Option for the Ready Design
-Add : Pricing Table : Add Preset Option for the Ready Design
-Add : Protected Content : Add Preset Option for the Ready Design
-Add : Social Icon : Add Preset Option for the Ready Design
-Add : Social Sharing : Add Preset Option for the Ready Design
-Add : Stylish List : Add Preset Option for the Ready Design
-Add : Table : Add Preset Option for the Ready Design
-Add : WP Login & Register : Add Preset Option for the Ready Design
-Improvement : Plus Form : CSS Optimize
-Improvement : Search Filter : Compatibility with Row Background
-Fix : Navigation Menu : Relayout issue in Product listing while using the Mega Menu
-Fix : Navigation Menu : Sticky Outer Padding Issue
-FIx : Navigation Menu : Sub Menu Width Issue
-Fix : Navigation Menu : Container Padding option not working in the Sticky Menu
-Fix : Navigation Menu : Repeater > Mega Menu Template responsive width not working
-Fix : Table Widget : PHP Warning
-Fix : Table of Content : Fixed Option not working
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.3 =
-Fix : Countdown : Security Patch ( Low Security )
-Fix : Syntax Highlighter : Security Patch ( Low Security )
-Fix : Page Scroll : Security Patch ( Low Security )
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.2 =
-Add : Option to remove database values of the plugin : Check this in The Plus Settings -> Extras in the backend
-Add : Blog Listing : New Date formate support for the Smart Loop Builder
-Add : Blog Listing : Box hover Title color option Added for the Smart Loop Builder
-Add : Navigation Menu Lite : Width option for the Submenu
-Add : Form Widget : Inline Button Option Added
-Fix : Info Box : Style3 Alignment not working in responsive
-Fix : Navigation Menu Lite : Submenu default open in Mobile Menu
-Fix : Number Counter : Hover Digit color not working
-Fix : Testimonial : Column option not working
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.1 =
-Add : Blog Listing : Date Formate for the Smart Loop Builder
-Add : Blof Listing : Category for the Smart Loop Builder
-Add : Blof Listing : Tag for the Smart Loop Builder
-Add : Blof Listing : Author Link for the Smart Loop Builder
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.2.0 =
-Fix : Hover Card : Default Value Issue Solved
-Fix : Table : Security Patch ( Low Security )
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.1.8 =
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.1.7 =
-Fix : Age Gate : Compatibility With Html Tags
-Fix : Navigation Menu lite : Border color Issue Solved in Mobile Menu  
-Fix : Navigation Menu lite : Mobile Menu - Submenu not clickable in Editor side 
-Fix : Number Counter : Issue solved when Number value is null
-Fix : Minor Bug Fixes & Performance Improvements
-
-= 6.1.6 =
-Fix : Post Comment : Click Reload Issue
-Fix : White Label : Condiiton Issue
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.1.5 =
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.1.4 =
-Fix : Gravity Form : Form submit Issue solved
-Fix : Navigation Menu Lite : Active color Issue solved when using Repeater
-Fix : Number Counter : Issue solved when Number value is 0
-Fix : Table : Security Patch ( Low security )
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.1.3 =
-Compatibility : Elementor Free & Pro 3.26
-Compatibility : Nexter Extension 4.0.0
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.1.2 =
-Fix : Carousel Anything : Shortcode Issue
-Fix : Switcher : Shortcode Issue
-Fix : Tabs/Tours : Shortcode Issue
-Fix : Table : Security Patch ( Low security )
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.1.1 =
-Improvement : Accordion : File Structure
-Improvement : Blog Listout : File Structure
-Improvement : Client Listout : File Structure
-Improvement : Page Scroll : File Structure
-Improvement : Post Featured Image : File Structure
-Improvement : Post Navigation : File Structure
-Fix : Testimonial Listout : PHP Warning
-Fix : Post Title : Link default set off
-Fix : Language Compability in Advertisement popup
-Fix : Language Compability in Advertisement banner
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.1.0 =
-Add : New Widget : Breadcrumb Bar widget
-Improvement : Accordion : Compatibility for Widget Output Caching for TTFB
-Improvement : Carousel Anything : Compatibility for Widget Output Caching for TTFB
-Improvement : Countdown : Compatibility for Widget Output Caching for TTFB
-Improvement : Flip Box : Compatibility for Widget Output Caching for TTFB
-Improvement : Header Meta Content : Compatibility for Widget Output Caching for TTFB
-Improvement : Info Box : Compatibility for Widget Output Caching for TTFB
-Improvement : Number Counter : Compatibility for Widget Output Caching for TTFB
-Improvement : Page Scroll : Compatibility for Widget Output Caching for TTFB
-Improvement : Pricing Table : Compatibility for Widget Output Caching for TTFB
-Improvement : Process Steps : Compatibility for Widget Output Caching for TTFB
-Improvement : Scroll Navigation : Compatibility for Widget Output Caching for TTFB
-Improvement : Social Icon : Compatibility for Widget Output Caching for TTFB
-Improvement : Stylish List : Compatibility for Widget Output Caching for TTFB
-Improvement : Switcher : Compatibility for Widget Output Caching for TTFB
-Improvement : Table : Compatibility for Widget Output Caching for TTFB
-Improvement : Tabs/Tours : Compatibility for Widget Output Caching for TTFB
-Fix : Table : Security Patch ( Low security )
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.0.8 =
-Update : Hovercard : Compatibility for Widget Output Caching for TTFB
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.0.7 =
-Fix : Textdomain Compatibility with WordPress 6.7.0
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.0.6 =
-Add : Form Widget : Select field
-Add : Form Widget : Date field
-Add : Form Widget : Time field
-Update : TP Text Block  : Compatibility for Widget Output Caching for TTFB
-Update : Age gate  : Compatibility for Widget Output Caching for TTFB
-Update : Blockquote  : Compatibility for Widget Output Caching for TTFB
-Update : Contact form 7  : Compatibility for Widget Output Caching for TTFB
-Update : Dark Mode  : Compatibility for Widget Output Caching for TTFB
-Update : Everest Form  : Compatibility for Widget Output Caching for TTFB
-Update : Gravity Form  : Compatibility for Widget Output Caching for TTFB
-Update : Heading Animation  : Compatibility for Widget Output Caching for TTFB
-Update : Hovercard   : Compatibility for Widget Output Caching for TTFB
-Update : Meeting Scheduler  : Compatibility for Widget Output Caching for TTFB
-Update : Message Box  : Compatibility for Widget Output Caching for TTFB
-Update : Ninja Form : Compatibility for Widget Output Caching for TTFB
-Update : Form Widget : Compatibility for Widget Output Caching for TTFB
-Update : Progress Bar : Compatibility for Widget Output Caching for TTFB
-Update : Smooth Scroll : Compatibility for Widget Output Caching for TTFB
-Update : Syntax Highlighter : Compatibility for Widget Output Caching for TTFB
-Update : WP Form : Compatibility for Widget Output Caching for TTFB
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.0.5 =
-Improvement : Client Listing : File Structure
-Improvement : Testimonial  : File Structure
-Improvement : Team Member Listing : File Structure
-Fix : Minor Bug Fixes & performance Improvements
-
-= 6.0.4 =
-Add : New Widget : Form 
-Add : Navigation Menu Lite : Mobile menu toggle bottom space option added
-Add : Post Content : CSS Improvement
-Update : Carousel Anything : Security Patch ( Low security )
-Update : Navigation Menu : Security Patch ( Low security )
-Update : Page Scroll : Security Patch ( Low security )
-Update : Switcher : Security Patch ( Low security )
-Update : Tabs/tours : Security Patch ( Low security )
-Update : Video Player : Language Compability
-Fix : Minor Bug Fixes & performance Improvements 
-
-= 6.0.3 =
-Update: Dashboard : White Label Condition Improvement
-Fix: Minor bug fixes and performance improvements
-
-= 6.0.2 =
-Fix : Responsive Design Error in Main Menu.
-Fix: Minor bug fixes and performance improvements
-
-= 6.0.1 =
-Fix : Setting page error
-Improvement : Design for responsive screen
-Improvement : Add Mobile menu for small screen
-Improvement : Elementor Widget Banner Design Responsive error
-Fix: Minor bug fixes and performance improvements
-
-= 6.0.0 =
-New: Revamped Dashboard for new UI/UX
-New: Dashboard: Plugin Rollback Option
-Improvement: Unnecessary code removed for better performance
-Improvement: Code enhanced for better performance and security
-Improvement: Unnecessary files removed, and file structure improved
-Fix: Minor bug fixes and performance improvements
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/the-plus-addons-for-elementor-page-builder/assets/changelog.txt) included with the plugin.

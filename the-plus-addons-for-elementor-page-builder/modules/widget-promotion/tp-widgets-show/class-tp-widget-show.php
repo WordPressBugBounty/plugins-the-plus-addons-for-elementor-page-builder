@@ -285,13 +285,6 @@ if ( ! class_exists( 'Tp_Widget_Show' ) ) {
 					'tag'      => 'free',
 				),
 				array(
-					'name'     => 'tp_post_search',
-					'title'    => __( 'Post Search', 'tpebl' ),
-					'icon'    => 'tpae-editor-logo theplus-i-post-search',
-					'demo_url'  => 'https://theplusaddons.com/widgets/search-bar/',
-					'tag'      => 'DEPRECATED',
-				),
-				array(
 					'name'     => 'tp_header_extras',
 					'title'    => __( 'Header Meta Content', 'tpebl' ),
 					'icon'    => 'tpae-editor-logo theplus-i-header-meta-content',
@@ -459,13 +452,6 @@ if ( ! class_exists( 'Tp_Widget_Show' ) ) {
 					'demo_url'  => 'https://theplusaddons.com/elementor-widget/wpforms-styler/',
 					'tag'      => 'free',
 				),
-				array(
-					'name'     => 'tp_caldera_forms',
-					'title'    => __( 'Caldera Forms', 'tpebl' ),
-					'icon'    => 'tpae-editor-logo theplus-i-caldera-form',
-					'demo_url'  => 'https://theplusaddons.com/widgets/caldera-forms/',
-					'tag'      => 'DEPRECATED',
-				),
 			);
 			$tpae_pro_widgets = array(
 				array(
@@ -545,12 +531,6 @@ if ( ! class_exists( 'Tp_Widget_Show' ) ) {
 					'title'    => __( 'Coupon Code', 'tpebl' ),
 					'icon'     => 'tpae-editor-logo theplus-i-coupon-code',
 					'demo_url' => 'https://theplusaddons.com/elementor-widget/coupon-code/',
-				),
-				array(
-					'name'     => 'tp_design_tool',
-					'title'    => __( 'Design Tool', 'tpebl' ),
-					'icon'     => 'tpae-editor-logo theplus-i-design-tool',
-					'demo_url' => 'https://theplusaddons.com/elementor-extras/grid-design-tool/',
 				),
 				array(
 					'name'     => 'tp_draw_svg',
@@ -879,12 +859,14 @@ if ( ! class_exists( 'Tp_Widget_Show' ) ) {
 				wp_send_json(
 					$this->tpae_set_response(false, 'Invalid Permission.', 'Something went wrong.')
 				);
+				wp_die();
 			}
 			
 			if ( empty($_POST['widget_id']) ) {
 				wp_send_json(
 					$this->tpae_set_response(false, 'Invalid Widget ID', 'Something went wrong.')
 				);
+				wp_die();
 			}
 
 			$widget_id = sanitize_key($_POST['widget_id']);

@@ -37,6 +37,13 @@ if ( ! class_exists( 'L_Theplus_Elements_Integration' ) ) {
 		 */
 		public function add_controls( $controls_manager ) {
 
+			// Pro registers its own copy of these controls. Free stands down only
+			// once Pro has demonstrably loaded its widget layer, so that a Pro that
+			// bailed out early does not leave Free's widgets without controls.
+			if ( \TheplusAddons\tpae_pro_handles_widgets() ) {
+				return;
+			}
+
 			$plus_control = array(
 				'plus-query' => 'L_Theplus_Query',
 				'tpae-need-help' => 'Tpae_Need_Help_Control',

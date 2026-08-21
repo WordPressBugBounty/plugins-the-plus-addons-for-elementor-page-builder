@@ -75,14 +75,6 @@ class L_ThePlus_Page_Scroll extends Plus_Widget_Base {
 	public function get_keywords() {
 		return array( 'Tp Page Scroll','Full Page Scroll', 'Vertical Scroll Sections', 'Page Piling', 'Multi-Scroll', 'Horizontal Scrolling Page', 'Scroll-Based Navigation', 'Slide-by-Slide Scrolling', 'Full-Screen Slides', 'Scrolling Transitions', 'Interactive Page Scroll', 'Dot Navigation Scroll', 'Next/Prev Scrolling', 'Smooth Scrolling' );
 	}
-	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.1.2
-	 */
-	// public function is_dynamic_content(): bool {
-	// return false;
-	// }
 
 	/**
 	 * Register controls.

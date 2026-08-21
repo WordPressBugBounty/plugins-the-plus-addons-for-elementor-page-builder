@@ -107,7 +107,7 @@ class L_ThePlus_Header_Extras extends Plus_Widget_Base {
 			array(
 				'label'   => esc_html__( 'Select Options', 'tpebl' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => '',
+				'default' => 'search',
 				'options' => array(
 					'search'       => esc_html__( 'Search Bar', 'tpebl' ),
 					'cart'         => esc_html__( 'Mini Cart', 'tpebl' ),
@@ -2854,7 +2854,15 @@ class L_ThePlus_Header_Extras extends Plus_Widget_Base {
 							}
 
 							if ( ! $editor_mode ) {
-								$meta_content .= '<div class="cart-wrap"><span>' . WC()->cart->get_cart_contents_count() . '</span></div>';
+								/*
+								 * WC()->cart is null outside a customer session (REST,
+								 * cron, admin-ajax), which fataled here. Degrade to an
+								 * empty count instead of taking the page down.
+								 */
+								$tp_wc_cart   = function_exists( 'WC' ) ? WC()->cart : null;
+								$tp_cart_count = is_null( $tp_wc_cart ) ? 0 : (int) $tp_wc_cart->get_cart_contents_count();
+
+								$meta_content .= '<div class="cart-wrap"><span>' . esc_html( $tp_cart_count ) . '</span></div>';
 							} else {
 								$meta_content .= '<div class="cart-wrap"><span>0</span></div>';
 							}

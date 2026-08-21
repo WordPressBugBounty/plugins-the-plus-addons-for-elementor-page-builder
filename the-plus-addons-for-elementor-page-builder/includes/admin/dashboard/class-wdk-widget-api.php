@@ -153,7 +153,7 @@ class Wdk_Widget_Api {
 			$local_widgets = $this->wdk_local_widget();
 		}
 
-		$server_w_unique = array_column( $local_widgets, 'widget_id' );
+		$server_w_unique = ! empty( $local_widgets ) && is_array( $local_widgets ) ? array_column( $local_widgets, 'widget_id' ) : array();
 
 		foreach ( $server_widgets as $key => $value ) {
 

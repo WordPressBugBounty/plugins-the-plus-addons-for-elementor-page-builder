@@ -54,10 +54,25 @@ class L_Plus_Generator {
 		$output = '';
 
 		if ( ! empty( $paths ) ) {
+			$pieces = array();
 			foreach ( $paths as $path ) {
 				if ( file_exists( l_theplus_library()->secure_path_url( $path ) ) ) {
-					$output .= file_get_contents( l_theplus_library()->secure_path_url( $path ) );
+					$pieces[] = file_get_contents( l_theplus_library()->secure_path_url( $path ) );
 				}
+			}
+
+			if ( $type == 'js' ) {
+				// Each widget's minified JS is a self-contained module, but many
+				// end in `}` (IIFE) rather than `;`. Concatenating them raw glues
+				// a module that starts with `function ...` (e.g. tp_woo_listing)
+				// onto the previous one, producing `...}function ...` which the
+				// parser rejects with "Unexpected token 'function'". A newline +
+				// semicolon between modules terminates the previous statement and
+				// closes any trailing single-line comment, making the merge safe
+				// regardless of file order.
+				$output = implode( ";\n", $pieces );
+			} else {
+				$output = implode( '', $pieces );
 			}
 		}
 		if ( ! empty( $type ) && $type == 'css' ) {
@@ -200,12 +215,6 @@ class L_Plus_Generator {
 						$paths[] = $path;
 					}
 				}
-			} elseif ( isset( $this->registered_extensions[ $element ] ) ) {
-				if ( ! empty( $this->registered_extensions[ $element ]['dependency'][ $type ] ) ) {
-					foreach ( $this->registered_extensions[ $element ]['dependency'][ $type ] as $path ) {
-						$paths[] = $path;
-					}
-				}
 			}
 		}
 
@@ -284,6 +293,30 @@ class L_Plus_Generator {
 		return $value;
 	}
 
+	/**
+	 * Read the whole metadata container, without flattening it to a single key.
+	 *
+	 * @param int|string $post_id  Post or term id.
+	 * @param string     $meta_key Container meta key, e.g. 'tp_widgets'.
+	 * @return array|string Container as stored, or '' when nothing is stored.
+	 * @since 6.5.0
+	 */
+	public function get_metadata_container( $post_id = '', $meta_key = '' ) {
+		if ( '' === $post_id || '' === $meta_key ) {
+			return '';
+		}
+
+		if ( is_404() || is_search() || 0 === $post_id || ! is_numeric( $post_id ) ) {
+			return get_option( 'theplus-term-' . $post_id . '-widgets' );
+		} elseif ( self::$tpae_post_type === 'term' && is_numeric( $post_id ) ) {
+			return get_term_meta( $post_id, $meta_key, true );
+		} elseif ( is_numeric( $post_id ) ) {
+			return get_post_meta( $post_id, $meta_key, true );
+		}
+
+		return '';
+	}
+
 	public function get_post_version( $post_id = '' ) {
 		$version = L_THEPLUS_VERSION;
 
@@ -353,6 +386,10 @@ class L_Plus_Generator {
 
 		$elements = array_map(
 			function ( $val ) use ( $replace ) {
+				if ( ! is_string( $val ) ) {
+					return '';
+				}
+
 				$val = str_replace( array( 'theplus-' ), array( '' ), $val );
 				return ( array_key_exists( $val, $replace ) ? $replace[ $val ] : $val );
 			},
@@ -399,7 +436,7 @@ class L_Plus_Generator {
 	public function load_inline_script() {
 		$js_inline1 = 'var theplus_ajax_url = "' . admin_url( 'admin-ajax.php' ) . '";
 		var theplus_ajax_post_url = "' . admin_url( 'admin-post.php' ) . '";
-		var theplus_nonce = "' . wp_create_nonce( 'theplus-addons' ) . '";';
+		var theplus_nonce = "' . ( is_user_logged_in() ? wp_create_nonce( 'theplus-addons' ) : '' ) . '";';
 		wp_print_inline_script_tag( $js_inline1 );
 	}
 
@@ -472,27 +509,47 @@ class L_Plus_Generator {
 	// rules how css will be enqueued on front-end
 	protected function enqueue_frontend_load( $post_type, $queried_obj ) {
 
-		if ( ! l_theplus_library()->is_preview_mode() ) {
+		if ( l_theplus_library()->is_preview_mode() ) {
+			return;
+		}
 
-			if ( $this->get_post_type_post_id() ) {
+		if ( ! $this->get_post_type_post_id() ) {
+			return;
+		}
 
-				$elements = array();
-				if ( ! $this->requires_update ) {
-					$elements = $this->get_posts_metadata( $queried_obj, 'tp_widgets', 'widgets', $this->plus_uid . 'tp_widgets' );
-					if ( $this->get_caching_option() ) {
-						l_theplus_library()->remove_files_unlink( $post_type, $queried_obj );
-					} elseif ( ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'css' ) && ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'js' ) && ! empty( $elements ) ) {
-							$this->plus_generate_scripts( $elements, 'theplus-' . $post_type . '-' . $queried_obj );
-					}
-					// if no widget in page, return
-					if ( empty( $elements ) ) {
-						return;
-					} elseif ( ! empty( $elements ) ) {
-						$this->enqueue_css_js( $elements, false );
-					}
-				}
+		$elements = $this->get_posts_metadata( $queried_obj, 'tp_widgets', 'widgets', $this->plus_uid . 'tp_widgets' );
+
+		// No detected TPAE widgets yet (typically the first-ever view of a page):
+		// leave detection + first generation to generate_scripts_frontend() on
+		// wp_footer, which scans the rendered content.
+		if ( empty( $elements ) ) {
+			return;
+		}
+
+		if ( $this->get_caching_option() ) {
+			// Separate mode enqueues each widget's own source files, so a version
+			// bump needs no per-post regeneration here.
+			l_theplus_library()->remove_files_unlink( $post_type, $queried_obj );
+		} else {
+			// Merge mode: make sure this page's bundle EXISTS so the enqueue below
+			// is never skipped — skipping it while requires_update was true is what
+			// left pages unstyled on the first view after a version change. If the
+			// bundle is missing (never built, or purged) rebuild it from the known
+			// widget list so the page is styled immediately.
+			//
+			// If the bundle exists but is stale (version bump / content edit) we
+			// still enqueue it here and let generate_scripts_frontend() on wp_footer
+			// re-detect the page's CURRENT widgets and refresh the bundle before the
+			// browser fetches it. We deliberately do NOT sync the update marker or
+			// clear requires_update here — doing so would stop the footer detection
+			// and any newly added widget would never get its CSS built.
+			if ( ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'css' )
+				|| ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'js' ) ) {
+				$this->plus_generate_scripts( $elements, 'theplus-' . $post_type . '-' . $queried_obj );
 			}
 		}
+
+		$this->enqueue_css_js( $elements, false );
 	}
 
 	/**
@@ -580,6 +637,11 @@ class L_Plus_Generator {
 	public function theplus_smart_perf_clear_cache() {
 		check_ajax_referer( 'theplus-addons', 'security' );
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Insufficient permissions.' ) );
+			wp_die();
+		}
+
 		// clear cache files
 		l_theplus_library()->remove_dir_files( L_THEPLUS_ASSET_PATH );
 		update_option( 'tp_save_update_at', strtotime( 'now' ), false );
@@ -593,6 +655,11 @@ class L_Plus_Generator {
 	 */
 	public function theplus_backend_clear_cache() {
 		check_ajax_referer( 'theplus-addons', 'security' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Insufficient permissions.' ) );
+			wp_die();
+		}
 
 		// clear cache files
 		l_theplus_library()->remove_backend_dir_files();
@@ -608,9 +675,21 @@ class L_Plus_Generator {
 	public function theplus_current_page_clear_cache() {
 		check_ajax_referer( 'theplus-addons', 'security' );
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Insufficient permissions.' ) );
+			wp_die();
+		}
+
 		$plus_name = '';
 		if ( isset( $_POST['plus_name'] ) && ! empty( $_POST['plus_name'] ) ) {
-			$plus_name = sanitize_text_field( $_POST['plus_name'] );
+			/**
+			 * This value becomes part of a filename that is then deleted, so it has to stay a
+			 * single path segment. `sanitize_text_field()` preserves `/`, `\` and `..`;
+			 * `sanitize_file_name()` strips the separators a traversal needs.
+			 *
+			 * @since 6.5.0
+			 */
+			$plus_name = sanitize_file_name( wp_unslash( $_POST['plus_name'] ) );
 		}
 		if ( $plus_name == 'theplus-all' ) {
 			// All clear cache files
@@ -631,23 +710,64 @@ class L_Plus_Generator {
 	public function tp_version_clear_cache() {
 		$option_name = 'tpae_version_cache';
 		$get_version = get_option( $option_name );
-		$versions    = array( L_THEPLUS_VERSION );
 
-		if ( $get_version === false ) {
-			l_theplus_library()->remove_dir_files( L_THEPLUS_ASSET_PATH ); // only remove files
-			update_option( 'tp_save_update_at', strtotime( 'now' ), false ); // all cache regenerate
-			add_option( $option_name, $versions );
-
-			$this->tp_third_patry_cache();
-
-		} elseif ( ! in_array( '5.6.0', $get_version ) ) {
-				l_theplus_library()->remove_dir_files( L_THEPLUS_ASSET_PATH ); // only remove files
-				update_option( 'tp_save_update_at', strtotime( 'now' ), false ); // all cache regenerate
-				$versions = array_unique( array_merge( $get_version, array( '5.6.0' ) ) );
-				update_option( $option_name, $versions );
-
-				$this->tp_third_patry_cache();
+		// Historically this stored an array of versions — normalise anything
+		// unexpected so the version check below is always array-safe.
+		if ( ! is_array( $get_version ) ) {
+			$get_version = ( false === $get_version ) ? array() : array( $get_version );
 		}
+
+		// Combined Free (+ Pro) version key. The editor preview serves a single
+		// merged theplus.min.css that contains BOTH Free and Pro widget CSS, so
+		// a Pro-only upgrade must bust the cache too — keying on the Free
+		// version alone would leave the editor stale after a standalone Pro
+		// update.
+		$current_version = defined( 'THEPLUS_VERSION' )
+			? L_THEPLUS_VERSION . '-pro-' . THEPLUS_VERSION
+			: L_THEPLUS_VERSION;
+
+		// Bust the generated cache whenever this version combination has not
+		// been recorded before — i.e. on fresh install and on EVERY upgrade of
+		// either plugin.
+		//
+		// The previous logic hard-coded a one-time `in_array( '5.6.0', ... )`
+		// check, so once 5.6.0 was recorded no later upgrade ever purged the
+		// stale global editor cache (theplus.min.css / theplus.min.js). Because
+		// the Elementor editor preview always serves that global merged file
+		// (regenerated only when it is missing), the editor kept rendering
+		// widgets with outdated CSS after every update, while the frontend —
+		// which regenerates per-post caches on save — looked correct.
+		if ( in_array( $current_version, $get_version, true ) ) {
+			return;
+		}
+
+		// Record the new version FIRST, before any invalidation work. On large
+		// sites the cache directory can hold tens of thousands of files; if we
+		// invalidated first and the request timed out, the version would never
+		// be recorded and this clear would re-run on every admin load.
+		$get_version[] = $current_version;
+		$versions      = array_values( array_unique( $get_version ) );
+
+		if ( false === get_option( $option_name ) ) {
+			add_option( $option_name, $versions, '', 'no' );
+		} else {
+			update_option( $option_name, $versions, false );
+		}
+
+		// Invalidate cheaply (O(1)) instead of deleting the entire cache dir:
+		//  - bump tp_save_update_at so every per-post frontend bundle is treated
+		//    as stale and rebuilt lazily, one page at a time, on next view
+		//    (enqueue_frontend_load regenerates + enqueues on the SAME request,
+		//    so pages are never served unstyled).
+		//  - drop only the small global editor bundle + bump tpae_backend_cache
+		//    so the Elementor editor preview regenerates.
+		// This avoids a multi-thousand-file synchronous delete that can exceed
+		// the PHP time limit and never complete on large sites (which left the
+		// version record stuck and the cache perpetually half-cleared).
+		update_option( 'tp_save_update_at', strtotime( 'now' ), false );
+		l_theplus_library()->remove_backend_dir_files();
+
+		$this->tp_third_patry_cache();
 	}
 
 	/**
@@ -968,6 +1088,12 @@ class L_Plus_Generator {
 		$save_updated_at = get_option( 'tp_save_update_at' );
 		$post_updated_at = $this->get_posts_metadata( self::$tpae_post_id, 'tp_widgets', 'update_at', $this->plus_uid . '_update_at' );
 
+		/* Key absent means the payload was never stored, so rebuild. An explicitly stored empty payload is valid (page has no TPAE widgets) and must not rebuild every request. */
+		$tpae_widget_container = $this->get_metadata_container( self::$tpae_post_id, 'tp_widgets' );
+
+		if ( ! is_array( $tpae_widget_container ) || ! array_key_exists( 'widgets', $tpae_widget_container ) ) {
+			return true;
+		}
 		if ( $widgets === false ) {
 			return true;
 		}
@@ -1202,9 +1328,11 @@ class L_Plus_Generator {
 
 		if ( ! $this->get_caching_option() ) {
 			add_action( 'admin_bar_menu', array( $this, 'add_plus_clear_cache_admin_bar' ), 300 );
-			if ( current_user_can( 'manage_options' ) ) {
-				add_action( 'wp_ajax_plus_purge_current_clear', array( $this, 'theplus_current_page_clear_cache' ) );
-			}
+			// Register the AJAX handler unconditionally. current_user_can() is not
+			// reliable this early in the request, so gating registration on it left
+			// the handler unregistered and the purge AJAX returning HTTP 400. The
+			// capability check is enforced inside theplus_current_page_clear_cache().
+			add_action( 'wp_ajax_plus_purge_current_clear', array( $this, 'theplus_current_page_clear_cache' ) );
 
 			if ( is_user_logged_in() ) {
 				add_action( 'wp_head', array( $this, 'plus_purge_clear_print_style' ) );
@@ -1213,7 +1341,13 @@ class L_Plus_Generator {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'plus_enqueue_scripts' ) );
 
-		if ( is_admin() && current_user_can( 'manage_options' ) ) {
+		// Register admin maintenance + cache-clear AJAX in the admin context only.
+		// Do NOT add current_user_can() here: it is unreliable at plugin-init time,
+		// and gating on it previously left these unregistered — so the version-clear
+		// on admin_init never ran (cache never busted on upgrade) and the Purge AJAX
+		// (smart_perf_clear_cache) returned HTTP 400 with the button stuck on
+		// "PURGING…". Each cache-clear handler verifies manage_options internally.
+		if ( is_admin() ) {
 			add_action( 'admin_init', array( $this, 'tp_version_clear_cache' ) );
 			add_action( 'wp_ajax_smart_perf_clear_cache', array( $this, 'theplus_smart_perf_clear_cache' ) );
 			add_action( 'wp_ajax_backend_clear_cache', array( $this, 'theplus_backend_clear_cache' ) );

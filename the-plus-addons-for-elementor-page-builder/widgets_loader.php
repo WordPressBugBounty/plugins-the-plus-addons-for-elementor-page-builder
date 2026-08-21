@@ -18,6 +18,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Register the plugin classmap autoloader.
+ *
+ * Loaded here (rather than in the main plugin file) so the plugin bootstrap
+ * stays clean. Registers Tpae_Autoloader, which lazy-loads 120+ plugin classes
+ * via spl_autoload_register only when a class is actually referenced.
+ *
+ * @since 6.5.0
+ */
+require_once L_THEPLUS_PATH . 'includes/autoloader.php';
+\Tpae_Autoloader::register( L_THEPLUS_PATH );
+
+/**
  * Autoload the shared widget base class and reload-preview trait on demand.
  *
  * Registered here (rather than in the main plugin file) so the plugin bootstrap
@@ -37,6 +49,43 @@ spl_autoload_register(
 		}
 	}
 );
+
+/**
+ * Whether Pro has actually taken over widget and control registration.
+ *
+ * THEPLUS_VERSION is defined the moment Pro's main file is *parsed*, long before
+ * Pro decides whether it can run at all. When Pro bails out early -- an outdated
+ * Free, an outdated Elementor -- it returns before loading its widget layer, so
+ * reading that constant as "Pro is handling widgets" made BOTH plugins stand down
+ * and register nothing. Elementor then silently dropped every tp- widget from the
+ * document on save, with no fatal or notice anywhere.
+ *
+ * Only ever called from `elementor/controls/register` and
+ * `elementor/widgets/register`, which both fire long after every plugin's
+ * `plugins_loaded` callback, so Pro's real state is settled by then.
+ *
+ * @since 6.5.0
+ *
+ * @return bool True when Pro registers the widgets, false when Free must.
+ */
+function tpae_pro_handles_widgets() {
+
+	if ( ! defined( 'THEPLUS_VERSION' ) ) {
+		return false;
+	}
+
+	// Pro 6.5.0+ sets this immediately before it loads widgets_loader.php.
+	if ( defined( 'THEPLUS_PRO_WIDGETS_LOADED' ) ) {
+		return true;
+	}
+
+	/*
+	 * Older Pro predates the marker, so detect its widget loader directly. No
+	 * autoload pass -- the class is plain-required by Pro, and its absence here
+	 * is exactly the "Pro never got that far" case we are testing for.
+	 */
+	return class_exists( '\TheplusAddons\Theplus_Widgets_Include', false );
+}
 
 /**
  * It Is load all widget and dashboard
@@ -94,6 +143,10 @@ final class L_Theplus_Element_Load {
 		register_activation_hook( L_THEPLUS_FILE, array( __CLASS__, 'tp_f_activation' ) );
 		register_deactivation_hook( L_THEPLUS_FILE, array( __CLASS__, 'tp_f_deactivation' ) );
 
+		// Force a cache regeneration whenever the plugin is updated in place
+		// (zip replace / auto-update), even if the version string is unchanged.
+		add_action( 'upgrader_process_complete', array( __CLASS__, 'tp_f_on_upgrade' ), 10, 2 );
+
 		add_action( 'init', array( $this, 'tp_i18n' ) );
 		add_action( 'plugins_loaded', array( $this, 'tp_f_plugin_loaded' ) );
 	}
@@ -111,6 +164,33 @@ final class L_Theplus_Element_Load {
 		if ( isset( $data['upgrade_notice'] ) && ! empty( $data['upgrade_notice'] ) ) {
 			printf( '<div class="update-message">%s</div>', wpautop( $data['upgrade_notice'] ) );
 		}
+	}
+
+	/**
+	 * Elementor is active but older than L_THEPLUS_MINIMUM_ELEMENTOR_VERSION.
+	 *
+	 * @since 6.5.0
+	 */
+	public function tp_f_elementor_outdated_notice() {
+
+		if ( ! current_user_can( 'update_plugins' ) ) {
+			return;
+		}
+
+		echo '<div class="notice notice-error tpae-notice-show" style="border-left-color: #6660EF;">
+			<div class="tp-notice-wrap" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
+				<div style="margin: 0; color: #000;">
+					<h3 style="margin: 10px 0 7px;">' . esc_html__( 'Update Elementor to Continue', 'tpebl' ) . '</h3>
+					<p>'
+						/* translators: %s: minimum required Elementor version. */
+						. sprintf( esc_html__( 'The Plus Addons for Elementor requires Elementor %s or newer. Widgets and extensions are paused until Elementor is updated.', 'tpebl' ), esc_html( L_THEPLUS_MINIMUM_ELEMENTOR_VERSION ) )
+					. '</p>
+					<div class="tp-tpae-button" style="margin-top: 10px;">
+						<a href="' . esc_url( self_admin_url( 'plugins.php' ) ) . '" class="button button-primary">' . esc_html__( 'Go to Plugins', 'tpebl' ) . '</a>
+					</div>
+				</div>
+			</div>
+		</div>';
 	}
 
 	/**
@@ -154,7 +234,14 @@ final class L_Theplus_Element_Load {
 	 *
 	 * @return void
 	 */
-	public static function tp_f_activation() {}
+	public static function tp_f_activation() {
+		// Reset the version marker so tp_version_clear_cache() (admin_init)
+		// performs a full purge + regeneration of the generated CSS/JS on the
+		// next admin load. This makes a re-activated / re-installed build never
+		// serve the previous build's stale editor + frontend cache, even when
+		// the version string is unchanged (the common QA re-test case).
+		delete_option( 'tpae_version_cache' );
+	}
 
 	/**
 	 * Plugin deactivation.
@@ -162,6 +249,34 @@ final class L_Theplus_Element_Load {
 	 * @return void
 	 */
 	public static function tp_f_deactivation() {}
+
+	/**
+	 * Reset the cache marker after this plugin is updated in place.
+	 *
+	 * register_activation_hook does not fire on plugin UPDATE (zip replace /
+	 * auto-update), so on those paths we clear via upgrader_process_complete.
+	 * Clearing the version marker lets tp_version_clear_cache() regenerate the
+	 * cache on the next admin load through its normal, tested path.
+	 *
+	 * @since 6.5.0
+	 *
+	 * @param object $upgrader   WP_Upgrader instance (unused).
+	 * @param array  $hook_extra Context of the completed upgrade.
+	 */
+	public static function tp_f_on_upgrade( $upgrader, $hook_extra ) {
+		if ( empty( $hook_extra['type'] ) || 'plugin' !== $hook_extra['type'] ) {
+			return;
+		}
+		if ( empty( $hook_extra['action'] ) || 'update' !== $hook_extra['action'] ) {
+			return;
+		}
+
+		$plugins = ! empty( $hook_extra['plugins'] ) ? (array) $hook_extra['plugins'] : array();
+
+		if ( in_array( L_THEPLUS_PBNAME, $plugins, true ) ) {
+			delete_option( 'tpae_version_cache' );
+		}
+	}
 
 	/**
 	 * After Load Plugin All set than call this function
@@ -177,6 +292,11 @@ final class L_Theplus_Element_Load {
 			return;
 		}
 
+		if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, L_THEPLUS_MINIMUM_ELEMENTOR_VERSION, '<' ) ) {
+			add_action( 'admin_notices', array( $this, 'tp_f_elementor_outdated_notice' ) );
+			return;
+		}
+
 		// Register class automatically.
 		$this->tp_manage_files();
 
@@ -185,9 +305,12 @@ final class L_Theplus_Element_Load {
 		// Finally hooked up all things.
 		$this->hooks();
 
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			L_Theplus_Elements_Integration()->init();
-		}
+		/*
+		 * Always hook the control registration. Whether Pro supersedes it is
+		 * decided inside add_controls(), once Pro's state is actually known --
+		 * see tpae_pro_handles_widgets().
+		 */
+		L_Theplus_Elements_Integration()->init();
 
 		$this->include_widgets();
 		$tpae_s_options = get_option( 'theplus_api_connection_data' );
@@ -318,16 +441,30 @@ final class L_Theplus_Element_Load {
 	 */
 	public function tp_manage_files() {
 
-		require_once L_THEPLUS_PATH . 'includes/admin/tpae_hooks/class-tpae-main-hooks.php';
+		if ( is_admin() ) {
+			// Admin-only: DB setup, widget scan, notices, feedback, editor UI.
+			// These hooks (wp_ajax_*, elementor/editor/*, admin_menu, admin_notices)
+			// only fire in admin context where is_admin() returns true.
+			require_once L_THEPLUS_PATH . 'includes/admin/tpae-hooks/class-tpae-main-hooks.php';
 
-		include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-main.php';
-		include L_THEPLUS_PATH . 'includes/user-experience/class-tp-user-experience-main.php';
+			include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-main.php';
+			include L_THEPLUS_PATH . 'includes/user-experience/class-tp-user-experience-main.php';
+
+			// Editor-only: loop builder, preset, and theme builder controls.
+			// Their hooks (elementor/editor/before_enqueue_scripts, elementor/editor/footer,
+			// elementor/editor/after_enqueue_scripts, wp_ajax_*) all fire in admin context.
+			include L_THEPLUS_PATH . 'includes/preset/class-wdkit-preset.php';
+			include L_THEPLUS_PATH . 'modules/controls/theme-builder/tpae-class-nxt-download.php';
+		}
+
+		// MUST load on frontend:
+		// - Registers custom post types (clients, testimonials, team members) via init hook.
+		// - Outputs user-defined custom CSS/JS to wp_head and wp_footer.
 		include L_THEPLUS_PATH . 'includes/admin/dashboard/class-tpae-dashboard-main.php';
 
-		include L_THEPLUS_PATH . 'includes/preset/class-wdkit-preset.php';
-		include L_THEPLUS_PATH . 'modules/controls/theme-builder/tpae-class-nxt-download.php';
-
-		// Front or Elementor Editor
+		// MUST load on frontend:
+		// - Defines Tp_LazyLoad_Images class and helper functions used by widget render methods
+		//   (tp_get_image_rander, tp_has_lazyload, tp_bg_lazyLoad, tp_getAspectRatio).
 		require_once L_THEPLUS_PATH . 'includes/tp-lazy-function.php';
 	}
 
@@ -367,14 +504,19 @@ final class L_Theplus_Element_Load {
 		// Include some backend files.
 		add_action( 'admin_enqueue_scripts', array( $this, 'theplus_elementor_admin_css' ) );
 
-		$get_notification = get_option( 'tpae_menu_notification' );
+		// Notification UI hook + default seeding only matter in admin context.
+		// admin_footer never fires on frontend, and add_option idempotency
+		// checks still cost an alloptions lookup × 2 per request.
+		if ( is_admin() ) {
+			$get_notification = get_option( 'tpae_menu_notification' );
 
-		if ( $get_notification !== TPAE_MENU_NOTIFICETIONS ) {
-			add_action( 'admin_footer', array( $this, 'tpae_add_notificetion' ) );
+			if ( $get_notification !== TPAE_MENU_NOTIFICETIONS ) {
+				add_action( 'admin_footer', array( $this, 'tpae_add_notificetion' ) );
+			}
+
+			add_option( 'tpae_menu_notification', '3' );
+			add_option( 'tpae_whats_new_notification', '3' );
 		}
-
-		add_option( 'tpae_menu_notification', '3' );
-		add_option( 'tpae_whats_new_notification', '3' );
 	}
 
 	/**
@@ -388,16 +530,16 @@ final class L_Theplus_Element_Load {
 	private function includes() {
 
 		require_once L_THEPLUS_INCLUDES_URL . 'plus_addon.php';
-		require_once L_THEPLUS_PATH . 'modules/widgets-feature/class-tp-widgets-feature-main.php';
+		require_once L_THEPLUS_PATH . 'modules/widgets-features/class-tp-widgets-feature-main.php';
 
 		add_action( 'elementor/init', function() {
 			require L_THEPLUS_PATH . 'modules/extensions/class-tpae-extensions-main.php';
 		});
 		// require L_THEPLUS_PATH . 'modules/theplus-core-cp.php';
 
-		if ( ! defined( 'THEPLUS_VERSION' ) ) {
-			require L_THEPLUS_PATH . 'modules/theplus-integration.php';
-		}
+		// Defines L_Theplus_Elements_Integration; loaded unconditionally so Free can
+		// still register its controls if Pro turns out never to have loaded.
+		require L_THEPLUS_PATH . 'modules/theplus-integration.php';
 		include L_THEPLUS_PATH . 'modules/widget-promotion/tp-widget-promotion-main.php';
 
 		require L_THEPLUS_PATH . 'modules/query-control/module.php';
@@ -417,7 +559,7 @@ final class L_Theplus_Element_Load {
 		require_once L_THEPLUS_PATH . 'modules/theplus-include-widgets.php';
 
 		if ( defined( 'THEPLUS_VERSION' ) ) {
-			require L_THEPLUS_PATH . 'includes/admin/white_label/class-tpae-white-label.php';
+			require L_THEPLUS_PATH . 'includes/admin/white-label/class-tpae-white-label.php';
 		}
 	}
 
@@ -482,6 +624,44 @@ final class L_Theplus_Element_Load {
 	 * @since 6.1.0
 	 */
 	public function theplus_elementor_admin_css( $hook ) {
+
+		/*
+		 * The TPAE admin-menu styling (icon, submenu flyout, notification badge)
+		 * lives inside theplus-ele-admin.css, but the WordPress admin menu is
+		 * visible on EVERY admin screen -- so those menu rules must load
+		 * everywhere, even though the rest of the stylesheet is gated to the
+		 * plugin's own screens below. Emit just the admin-menu rules inline on all
+		 * admin pages so the menu logo / submenu / badge are never left unstyled.
+		 */
+		$tp_menu_img = esc_url( L_THEPLUS_ASSETS_URL . 'images/tpae-favicon-white.png' );
+
+		wp_register_style( 'tpae-admin-menu', false, array(), L_THEPLUS_VERSION );
+		wp_enqueue_style( 'tpae-admin-menu' );
+		wp_add_inline_style(
+			'tpae-admin-menu',
+			'.dashicons-plus-settings,.wp-menu-open.toplevel_page_theplus_welcome_page .dashicons-plus-settings,.current.toplevel_page_theplus_welcome_page .dashicons-plus-settings{background:url(' . $tp_menu_img . ') center/22px no-repeat;}'
+			. '#toplevel_page_theplus_welcome_page .wp-submenu li>a{display:flex;align-items:center;gap:6px;}'
+			. '#toplevel_page_theplus_welcome_page .wp-submenu li>a>i{font-size:16px;flex:0 0 auto;}'
+			. '#toplevel_page_theplus_welcome_page .wp-submenu li>a>i.activate{color:#FF0004;}'
+			. '#toplevel_page_theplus_welcome_page.tpae-admin-notice-active a[href="admin.php?page=theplus_welcome_page#/"].wp-has-submenu::after{content:"1";background:#ca2222;color:#fff;border-radius:50%;position:absolute;top:0;right:1px;width:18px;font-size:12px;height:18px;text-align:center;line-height:17px;border:unset!important}'
+		);
+
+		/*
+		 * This callback fires on admin_enqueue_scripts for EVERY admin screen, so
+		 * without a gate it injected ~21KB of CSS/JS plus a fresh nonce into
+		 * Dashboard, Posts, Media, Users and Settings. The assets are only needed
+		 * on TPAE's own admin pages and by the deactivation-feedback modal on the
+		 * Plugins screen. Match on the page slug rather than $hook, because the
+		 * submenu hook suffix derives from the (white-labelable) menu title. The
+		 * Elementor editor loads the same stylesheet separately via
+		 * theplus_editor_styles().
+		 */
+		$tp_admin_page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only screen check, no state change.
+		$tp_our_pages  = array( 'theplus_welcome_page', 'tpae-form-submissions' );
+
+		if ( 'plugins.php' !== $hook && ! in_array( $tp_admin_page, $tp_our_pages, true ) ) {
+			return;
+		}
 
 		wp_enqueue_style( 'theplus-ele-admin', L_THEPLUS_ASSETS_URL . 'css/admin/theplus-ele-admin.css', array(), L_THEPLUS_VERSION, false );
 		wp_enqueue_script( 'theplus-admin-js', L_THEPLUS_ASSETS_URL . 'js/admin/theplus-admin.js', array(), L_THEPLUS_VERSION, false );

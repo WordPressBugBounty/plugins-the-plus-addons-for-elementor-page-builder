@@ -217,14 +217,18 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			// $get_active_widgets = $this->tpae_get_elements_status_scan();
 
 			$user_info = array(
-				'user_image' => $user_image,
-				'roles'      => $user->roles,
-				'user_name'  => $user->display_name,
-				'tpae_pro'   => $tpae_pro,
-				'whatsnew'   => $get_whats_new,
-				'user_email' => $user->user_email,
+				'user_image'      => $user_image,
+				'roles'           => $user->roles,
+				'user_name'       => $user->display_name,
+				'tpae_pro'        => $tpae_pro,
+				'whatsnew'        => $get_whats_new,
+				'user_email'      => $user->user_email,
+				// Ships with the initial payload so the Settings Privacy card renders in the
+				// first paint alongside every other section, instead of waiting on its own
+				// tpae_analytics_consent (operation=get) round-trip after mount.
+				'analytics_state' => $this->tpae_analytics_state(),
 				// 'used_widgets' => $get_active_widgets,
-				'success'    => true,
+				'success'         => true,
 			);
 
 			$tp_form_settings = get_option( 'theplus_widgets_settings' );
@@ -362,7 +366,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				$final = array_diff( $converted, $check_elements );
 				$final = array_values( $final );
 
-				update_option( 'elementor_disabled_elements', $final, '', 'on' );
+				update_option( 'elementor_disabled_elements', $final, 'yes' );
 			}
 
 			$this->tpae_backend_catch_remove();
@@ -465,14 +469,36 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$css = isset( $new_code['css'] ) ? $new_code['css'] : '';
 			$js  = isset( $new_code['js'] ) ? $new_code['js'] : '';
 
-			$theplus_styling_data['theplus_custom_css_editor'] = $css;
-			$theplus_styling_data['theplus_custom_js_editor']  = $js;
-
-			if ( false === $theplus_styling_data ) {
-				add_option( 'theplus_styling_data', $theplus_styling_data, '', 'yes' );
-			} else {
-				update_option( 'theplus_styling_data', $theplus_styling_data );
+			// get_option() returns false when unset; assigning an offset on false is deprecated.
+			if ( ! is_array( $theplus_styling_data ) ) {
+				$theplus_styling_data = array();
 			}
+
+			$theplus_styling_data['theplus_custom_css_editor'] = $css;
+
+			/**
+			 * Site-wide JavaScript is precisely what `unfiltered_html` governs in core. On
+			 * single-site an administrator holds that capability, so this changes nothing. On
+			 * multisite a Site Administrator has `manage_options` but NOT `unfiltered_html`, and
+			 * this field would otherwise let them inject script into every page — a privilege
+			 * WordPress deliberately withholds from them.
+			 *
+			 * An unchanged value is allowed through so a user who cannot edit the JS can still
+			 * save the CSS field beside it; only an actual modification is refused.
+			 *
+			 * @since 6.5.0
+			 */
+			$stored_js = isset( $theplus_styling_data['theplus_custom_js_editor'] )
+				? (string) $theplus_styling_data['theplus_custom_js_editor']
+				: '';
+
+			if ( current_user_can( 'unfiltered_html' ) ) {
+				$theplus_styling_data['theplus_custom_js_editor'] = $js;
+			} elseif ( (string) $js !== $stored_js ) {
+				return $this->tpae_set_response( false, 'Insufficient permissions.', 'Saving custom JavaScript requires the unfiltered_html capability.' );
+			}
+
+			update_option( 'theplus_styling_data', $theplus_styling_data );
 
 			return $theplus_styling_data;
 		}
@@ -714,7 +740,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$plus_cache_option = json_decode( stripslashes( sanitize_text_field( wp_unslash( $plus_cache_option ) ) ), true );
 
 			if ( ! empty( $plus_cache_option ) ) {
-				update_option( 'theplus_performance', $plus_cache_option, '', 'on' );
+				update_option( 'theplus_performance', $plus_cache_option, 'yes' );
 			}
 
 			return $this->tpae_set_response( true, 'Successfully.', 'Change Successfully.' );
@@ -814,9 +840,18 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				return $response;
 			}
 
-			$name = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+			/**
+			 * `sanitize_text_field()` preserves `/`, `\` and `..`, so it is the wrong sanitiser for a
+			 * value that ends up in a filesystem path. `sanitize_key()` constrains the value to the
+			 * lowercase alphanumerics, dashes and underscores a wordpress.org theme slug can contain.
+			 *
+			 * @since 6.5.0
+			 */
+			$name = isset( $_POST['name'] ) ? sanitize_key( wp_unslash( $_POST['name'] ) ) : '';
 
-			$theme_slug = $name;
+			if ( '' === $name ) {
+				return $this->tpae_set_response( false, 'Invalid slug.', 'A valid theme slug is required.' );
+			}
 
 			if ( ! function_exists( 'themes_api' ) ) {
 				require_once ABSPATH . 'wp-admin/includes/theme.php';
@@ -827,58 +862,39 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				array(
 					'slug'   => $name,
 					'fields' => array(
-						'description'     => false,
-						'sections'        => false,
-						'rating'          => true,
-						'ratings'         => false,
-						'downloaded'      => true,
-						'download_link'   => true,
-						'last_updated'    => true,
-						'homepage'        => true,
-						'tags'            => true,
-						'template'        => true,
-						'active_installs' => false,
-						'parent'          => false,
-						'versions'        => false,
-						'screenshot_url'  => true,
+						'download_link' => true,
 					),
 				)
 			);
 
-			if ( is_wp_error( $theme_info ) ) {
-				$error_message = $theme_info->get_error_message();
-
-				$result = $this->tpae_set_response( false, 'oops', 'oops');
-			} else {
-				$theme_name    = $theme_info->name;
-				$theme_zip_url = $theme_info->download_link;
-
-				global $wp_filesystem;
-				// Install the theme
-				$theme = wp_remote_get( $theme_zip_url );
-
-				if ( ! function_exists( 'WP_Filesystem' ) ) {
-					require_once wp_normalize_path( ABSPATH . '/wp-admin/includes/file.php' );
-				}
-
-				WP_Filesystem();
-
-				$active_theme = wp_get_theme();
-				$theme_name   = $active_theme->get( 'Name' );
-
-				$wp_filesystem->put_contents( WP_CONTENT_DIR . '/themes/' . $theme_slug . '.zip', $theme['body'] );
-				$zip = new ZipArchive();
-				if ( $zip->open( WP_CONTENT_DIR . '/themes/' . $theme_slug . '.zip' ) === true ) {
-					$zip->extractTo( WP_CONTENT_DIR . '/themes/' );
-					$zip->close();
-				}
-
-				$wp_filesystem->delete( WP_CONTENT_DIR . '/themes/' . $theme_slug . '.zip' );
-
-				$result = $this->tpae_set_response( true, "Success $name", "Success $name");
+			if ( is_wp_error( $theme_info ) || empty( $theme_info->download_link ) ) {
+				return $this->tpae_set_response( false, 'oops', 'oops' );
 			}
 
-			return $result;
+			include_once ABSPATH . 'wp-admin/includes/file.php';
+			include_once ABSPATH . 'wp-admin/includes/misc.php';
+			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			include_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
+			include_once ABSPATH . 'wp-admin/includes/class-theme-upgrader.php';
+
+			/**
+			 * Core's Theme_Upgrader replaces the hand-rolled download plus ZipArchive::extractTo()
+			 * this handler used to perform. It downloads to a temp directory outside the web root
+			 * rather than staging the archive inside wp-content/themes/ where it was briefly
+			 * fetchable, checks the transfer for errors instead of dereferencing $theme['body']
+			 * blind, and extracts through unzip_file(), which runs validate_file() on every archive
+			 * entry and so rejects the `../` names that made the old extractTo() a Zip Slip.
+			 *
+			 * @since 6.5.0
+			 */
+			$upgrader  = new \Theme_Upgrader( new \Automatic_Upgrader_Skin() );
+			$installed = $upgrader->install( $theme_info->download_link );
+
+			if ( is_wp_error( $installed ) || ! $installed ) {
+				return $this->tpae_set_response( false, 'oops', 'The theme could not be installed.' );
+			}
+
+			return $this->tpae_set_response( true, "Success $name", "Success $name" );
 		}
 
 		/**
@@ -948,9 +964,22 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				$args['body'] = wp_json_encode( $body );
 			}
 
+			/**
+			 * `wp_remote_*` follows up to 5 redirects and never re-checks the destination, so the
+			 * guard above only ever sees the first hop — a 302 to a private or link-local address
+			 * would be fetched and its body handed straight back to the caller.
+			 *
+			 * `wp_safe_remote_*` sets `reject_unsafe_urls`, which re-runs `wp_http_validate_url()`
+			 * on every hop of the redirect chain. Redirects are still permitted so legitimate
+			 * http→https and trailing-slash hops keep working; each one is now validated.
+			 *
+			 * @since 6.5.0
+			 */
+			$args['reject_unsafe_urls'] = true;
+
 			$response = ( 'POST' === $method )
-				? wp_remote_post( $api_url, $args )
-				: wp_remote_get( $api_url, $args );
+				? wp_safe_remote_post( $api_url, $args )
+				: wp_safe_remote_get( $api_url, $args );
 
 			if ( is_wp_error( $response ) ) {
 				$final['error'] = 'request_failed';
@@ -1030,12 +1059,62 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				return false;
 			}
 
-			$host = $parts['host'];
-			$ip   = filter_var( $host, FILTER_VALIDATE_IP ) ? $host : gethostbyname( $host );
+			$host = strtolower( $parts['host'] );
 
-			if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
-				$flags = FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
-				if ( ! filter_var( $ip, FILTER_VALIDATE_IP, array( 'flags' => $flags ) ) ) {
+			/**
+			 * Reject local hostnames before any resolution, so a resolver that is misconfigured
+			 * or poisoned cannot answer for them.
+			 */
+			$blocked_hosts = array( 'localhost', 'localhost.localdomain', '127.0.0.1', '0.0.0.0', '::1' );
+
+			if ( in_array( $host, $blocked_hosts, true ) ) {
+				return false;
+			}
+
+			/**
+			 * Collect every A and AAAA record rather than the single IPv4 answer `gethostbyname()`
+			 * returns. A host whose AAAA record points at ::1 or fd00::/8 passed the old check
+			 * untouched, because the IPv6 address was never looked at.
+			 *
+			 * @since 6.5.0
+			 */
+			$ips = array();
+
+			if ( filter_var( $host, FILTER_VALIDATE_IP ) ) {
+				$ips[] = $host;
+			} else {
+				$records = @dns_get_record( $host, DNS_A + DNS_AAAA );
+
+				if ( is_array( $records ) ) {
+					foreach ( $records as $record ) {
+						if ( ! empty( $record['ip'] ) ) {
+							$ips[] = $record['ip'];
+						} elseif ( ! empty( $record['ipv6'] ) ) {
+							$ips[] = $record['ipv6'];
+						}
+					}
+				}
+
+				if ( empty( $ips ) ) {
+					$resolved = gethostbyname( $host );
+
+					if ( $resolved && $resolved !== $host ) {
+						$ips[] = $resolved;
+					}
+				}
+			}
+
+			/**
+			 * Fail closed. `gethostbyname()` hands back the hostname unchanged when resolution
+			 * fails, which made `filter_var()` return false and skipped the private-range test
+			 * entirely — an unresolvable host used to be treated as a safe one.
+			 */
+			if ( empty( $ips ) ) {
+				return false;
+			}
+
+			foreach ( $ips as $ip ) {
+				if ( ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
 					return false;
 				}
 			}
@@ -1111,10 +1190,20 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 				return $data;
 			} elseif ( 'delete' === $operation ) {
-				delete_option( $key );
+				/**
+				 * Transients live in the prefixed `_transient_{$key}` row. Calling `delete_option()`
+				 * here removed the unprefixed row instead — for keys such as `theplus_options` or
+				 * `theplus_white_label` that is the live settings row, so clearing a transient wiped
+				 * plugin configuration and left the transient in place.
+				 *
+				 * @since 6.5.0
+				 */
+				delete_transient( $key );
 
 				return $this->tpae_set_response( true, 'Successfully.', 'Successfully.' );
 			}
+
+			return $this->tpae_set_response( false, 'Invalid operation.', 'Unsupported operation.' );
 		}
 
 		/**
@@ -1131,9 +1220,19 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			}
 
 			if ( 'get' === $operation ) {
-				$data = get_transient( $key );
+				/**
+				 * This handler reads the options table. It previously called `get_transient()`,
+				 * a copy-paste from `tpae_transient_manage()`, so every read of a plain option
+				 * returned false and the dashboard reported the value as missing.
+				 *
+				 * `null` is the sentinel for "no such option" — `false` is a legitimate stored
+				 * value and must not be reported as absent.
+				 *
+				 * @since 6.5.0
+				 */
+				$data = get_option( $key, null );
 
-				if ( false === $data ) {
+				if ( null === $data ) {
 					return $this->tpae_set_response( false, 'oops.', 'oops.' );
 				}
 
@@ -1143,6 +1242,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 
 				return $this->tpae_set_response( true, 'Successfully.', 'Successfully.' );
 			}
+
+			return $this->tpae_set_response( false, 'Invalid operation.', 'Unsupported operation.' );
 		}
 
 		/**

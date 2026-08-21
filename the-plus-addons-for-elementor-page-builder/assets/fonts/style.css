@@ -59,16 +59,8 @@
   content: "\e9b3";
 }
 
-.theplus-i-caldera-form:before {
-  content: "\e9b4";
-}
-
 .theplus-i-chart:before {
   content: "\e9a9";
-}
-
-.theplus-i-design-tool:before {
-  content: "\e9aa";
 }
 
 .theplus-i-dynamic-listing:before {
@@ -556,10 +548,6 @@
 
 .theplus-i-post-prev-next:before {
   content: "\e96e";
-}
-
-.theplus-i-post-search:before {
-  content: "\e96f";
 }
 
 .theplus-i-pricing-list:before {

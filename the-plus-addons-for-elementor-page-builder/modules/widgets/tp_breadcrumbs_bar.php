@@ -1655,7 +1655,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Plus_Widget_Base {
 		}
 
 		if ( 'image' === $icontype && ! empty( $icons ) ) {
-			$icons_content = '<img class="bread-home-img" src="' . esc_attr( $icons ) . '" />';
+			$icons_content = '<img class="bread-home-img" src="' . esc_url( $icons ) . '" />';
 		}
 
 		$icons_sep_content = '';
@@ -1664,7 +1664,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Plus_Widget_Base {
 		}
 
 		if ( 'sep_image' === $sep_icontype && ! empty( $sep_icons ) ) {
-			$icons_sep_content = '<img class="bread-sep-icon" src="' . esc_attr( $sep_icons ) . '" />';
+			$icons_sep_content = '<img class="bread-sep-icon" src="' . esc_url( $sep_icons ) . '" />';
 		}
 
 		global $post;

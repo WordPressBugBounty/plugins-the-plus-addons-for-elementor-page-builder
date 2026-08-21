@@ -1,6 +1,8 @@
 <?php
 namespace ElementPack\Includes\DynamicContent;
 
+if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+
 use Elementor\Core\DynamicTags\Tag;
 use Elementor\Modules\DynamicTags\Module;
 

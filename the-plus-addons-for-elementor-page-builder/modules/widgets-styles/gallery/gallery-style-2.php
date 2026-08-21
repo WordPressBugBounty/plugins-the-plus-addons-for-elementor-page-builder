@@ -27,12 +27,12 @@ if ( 'metro' === $layout ) {
 
 		$full_image1 = wp_get_attachment_image_src( $image_id, $thumbnail );
 		if ( ! empty( $full_image1 ) ) {
-			$bg_attr = 'style="background:url(' . $full_image1[0] . ')"';
+			$bg_attr = 'style="background:url(' . esc_url( $full_image1[0] ) . ')"';
 		} else {
 			$bg_attr = theplus_loading_image_grid( $postid, 'background' );
 		}
 	} elseif ( ! empty( $full_image ) ) {
-		$bg_attr = 'style="background:url(' . $full_image . ')"';
+		$bg_attr = 'style="background:url(' . esc_url( $full_image ) . ')"';
 	} else {
 		$bg_attr = theplus_loading_image_grid( $postid, 'background' );
 	}
@@ -47,11 +47,11 @@ if ( 'metro' === $layout ) {
 if ( ! empty( $settings['display_box_link'] ) && 'yes' === $settings['display_box_link'] ) {
 	if ( ! empty( $settings['force_custom_url'] ) && 'yes' === $settings['force_custom_url'] ) {
 		?>
-		<a href="<?php echo esc_url( $custom_url ); ?>" <?php echo esc_attr( $target ); ?> <?php echo esc_attr( $nofollow ); ?> class="gallery-list-content" <?php echo esc_attr( $popup_attr ); ?>>
+		<a href="<?php echo esc_url( $custom_url ); ?>" <?php echo esc_attr( $target ); ?> <?php echo esc_attr( $nofollow ); ?> class="gallery-list-content" <?php echo wp_kses_post( $popup_attr ); ?>>
 		<?php
 	} else {
 		?>
-		<a href="<?php echo esc_url( $full_image ); ?>" class="gallery-list-content" <?php echo $popup_attr; ?>>
+		<a href="<?php echo esc_url( $full_image ); ?>" class="gallery-list-content" <?php echo wp_kses_post( $popup_attr ); ?>>
 		<?php
 	}
 } else {

@@ -105,7 +105,7 @@ if ( ! class_exists( 'Tpae_PluginFeatures_Banner' ) ) {
 
 			echo '<div class="notice tpae-notice-show tpae-plugin-features-banner is-dismissible" style="border-left: 4px solid #006ADF;">
 				<div class="inline" style="display: flex;column-gap: 12px;align-items: center;padding: 15px 10px;position: relative;    margin-left: 0px;">
-					<img style="max-width:136px;max-height:136px;" src="' . esc_url( L_THEPLUS_URL . 'assets/images/dynamictag-banner.png' ) . '" />
+					<!-- assets/images/dynamictag-banner.png was never shipped, so the img rendered as a broken image in the notice. Restore the tag once the asset exists. -->
 					<div style="margin: 0 10px; color:#000;display:flex;flex-direction:column;gap:10px;">  
 						<div style="font-size:16px;font-weight:600;letter-spacing:0.1px;">' . esc_html__( 'Big Update: Dynamic Fields Are Now Available in The Plus Addons for Elementor', 'tpebl' ) . '</div>
 						<div style="font-size:12px;color:#5D5D5D;width:96%;"> ' . esc_html( $desc_text ) . ' </div>
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Tpae_PluginFeatures_Banner' ) ) {
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
-			update_option( 'tpae_pluginfeatures_notice_dismissed', true );
+			update_option( 'tpae_pluginfeatures_notice_dismissed', true, false );
 
 			wp_send_json_success();
 		}

@@ -64,7 +64,9 @@ if ( ! class_exists( 'TP_Widgets_Promotion_Main' ) ) {
 		 * @return void
 		 */
 		public function init() {
-			add_action( 'elementor/widgets/register', array( $this, 'add_widgets' ) );
+			// Priority 100 ensures promo widgets register AFTER all real widgets,
+			// preventing duplicate registration races with the main widget loader.
+			add_action( 'elementor/widgets/register', array( $this, 'add_widgets' ), 100 );
 		}
 
 		/**
@@ -80,6 +82,12 @@ if ( ! class_exists( 'TP_Widgets_Promotion_Main' ) ) {
 		}
 
 		public function tp_load_ajax_files() {
+			// File hooks elementor/editor/* and wp_ajax_* only. Both fire in
+			// admin context (admin-ajax.php returns true for is_admin()).
+			// Skip the ~9k-line file on frontend requests.
+			if ( ! is_admin() ) {
+				return;
+			}
 			$file_path = L_THEPLUS_PATH . 'modules/widget-promotion/tp-widgets-show/class-tp-widget-show.php';
 			if ( file_exists( $file_path ) ) {
 				include_once $file_path;

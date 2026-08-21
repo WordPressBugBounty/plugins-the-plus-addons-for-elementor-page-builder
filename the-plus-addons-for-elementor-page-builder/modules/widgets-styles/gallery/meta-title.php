@@ -18,7 +18,7 @@ if ( ! isset( $post_title_tag ) && empty( $post_title_tag ) ) {
 	if ( 'no' !== $popup_style ) {
 		?>
 				
-		<a href="<?php echo esc_url( $full_image ); ?>" <?php echo esc_attr( $popup_attr ); ?>><?php echo esc_html( $title ); ?></a>				
+		<a href="<?php echo esc_url( $full_image ); ?>" <?php echo wp_kses_post( $popup_attr ); ?>><?php echo esc_html( $title ); ?></a>
 		<?php
 	} else {
 		echo esc_html( $title );

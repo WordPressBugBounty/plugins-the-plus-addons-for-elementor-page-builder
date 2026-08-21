@@ -55,8 +55,8 @@
 					c('[data-enable-isotope="1"]')
 				}),
 				
-				b.window.on("load resize", function() {
-					c('[data-enable-isotope="1"]')
+				b.window.on("load", function() {
+					$('.list-isotope .post-inner-loop', $scope).isotope('layout')
 				}),
 				$(document).ready(function() {
 					c('[data-enable-isotope="1"]')					

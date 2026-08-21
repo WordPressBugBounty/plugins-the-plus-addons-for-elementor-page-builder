@@ -68,17 +68,17 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 
 			$client_post = l_theplus_get_option( 'post_type', 'client_post_type' );
 			if ( isset( $client_post ) && ! empty( $client_post ) && ( $client_post == 'themes' || $client_post == 'plugin' || $client_post == 'themes_pro' ) ) {
-				require_once L_THEPLUS_INCLUDES_URL . 'admin/extra-option/clients_options.php';
+				require_once L_THEPLUS_INCLUDES_URL . 'admin/extra-options/clients_options.php';
 			}
 
 			$testimonial_post = l_theplus_get_option( 'post_type', 'testimonial_post_type' );
 			if ( isset( $testimonial_post ) && ! empty( $testimonial_post ) && ( $testimonial_post == 'themes' || $testimonial_post == 'plugin' || $client_post == 'themes_pro' ) ) {
-				require_once L_THEPLUS_INCLUDES_URL . 'admin/extra-option/testimonial_option.php';
+				require_once L_THEPLUS_INCLUDES_URL . 'admin/extra-options/testimonial_option.php';
 			}
 
 			$team_member_post = l_theplus_get_option( 'post_type', 'team_member_post_type' );
 			if ( isset( $team_member_post ) && ! empty( $team_member_post ) && ( $team_member_post == 'themes' || $team_member_post == 'plugin' || $client_post == 'themes_pro' ) ) {
-				require_once L_THEPLUS_INCLUDES_URL . 'admin/extra-option/teammember_options.php';
+				require_once L_THEPLUS_INCLUDES_URL . 'admin/extra-options/teammember_options.php';
 			}
 		}
 
@@ -94,7 +94,12 @@ if ( ! class_exists( 'Tpae_Dashboard_Listing' ) ) {
 		 */
 		public function tpae_post_type_get_option( $options_type, $field ) {
 
-			$post_type_options = get_option( 'post_type_options' );
+			// Memoize per-request: this helper is called ~36 times across the
+			// 6 init callbacks below for the same option.
+			static $post_type_options = null;
+			if ( null === $post_type_options ) {
+				$post_type_options = get_option( 'post_type_options' );
+			}
 
 			$values = '';
 			if ( 'post_type' === $options_type ) {

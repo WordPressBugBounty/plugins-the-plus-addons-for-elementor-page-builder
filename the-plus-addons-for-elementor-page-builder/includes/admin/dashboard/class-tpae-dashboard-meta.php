@@ -186,7 +186,13 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 
 			if ( 'toplevel_page_theplus_welcome_page' === $page ) {
 
-				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', array( 'wp-i18n', 'wp-element', 'wp-components' ), L_THEPLUS_VERSION . time(), true );
+				$tpae_db_asset_file = L_THEPLUS_PATH . 'build/index.asset.php';
+				$tpae_db_asset      = file_exists( $tpae_db_asset_file ) ? include $tpae_db_asset_file : array();
+				$tpae_db_deps       = ( is_array( $tpae_db_asset ) && ! empty( $tpae_db_asset['dependencies'] ) )
+					? $tpae_db_asset['dependencies']
+					: array( 'react', 'react-dom', 'react-jsx-runtime', 'wp-i18n', 'wp-element', 'wp-components' );
+
+				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', $tpae_db_deps, L_THEPLUS_VERSION . time(), true );
 				wp_localize_script(
 					'tpae-db-build',
 					'tpae_db_object',
@@ -262,7 +268,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 						$has_submissions = false;
 
 						if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) === $table_name ) {
-							$submission_count = (int) $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(id) FROM %i', $table_name ) );
+							$submission_count = (int) $wpdb->get_var( "SELECT COUNT(id) FROM {$table_name}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $table_name is built from $wpdb->prefix; avoids the %i placeholder (WP 6.2+).
 							if ( $submission_count > 0 ) {
 								$has_submissions = true;
 							}

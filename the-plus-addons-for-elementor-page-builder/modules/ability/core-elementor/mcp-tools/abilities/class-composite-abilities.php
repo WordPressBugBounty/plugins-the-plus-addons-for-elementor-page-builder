@@ -182,6 +182,19 @@ class Tpae_Elementor_MCP_Composite_Abilities {
 			return new \WP_Error( 'missing_structure', __( 'The structure parameter is required and must be an array.', 'tpebl' ) );
 		}
 
+		/**
+		 * Re-validate the post type and status against the current user's capabilities for that
+		 * type. Relying on the input_schema enum alone puts the security decision in a layer
+		 * outside this plugin.
+		 *
+		 * @since 6.5.0
+		 */
+		$status = tpae_elementor_mcp_authorize_post_creation( $post_type, $status );
+
+		if ( is_wp_error( $status ) ) {
+			return $status;
+		}
+
 		// 1. Create the WordPress post.
 		$post_id = wp_insert_post(
 			array(

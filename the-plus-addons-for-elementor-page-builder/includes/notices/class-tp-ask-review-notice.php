@@ -192,18 +192,17 @@ if ( ! class_exists( 'Tp_Ask_Review_Notice' ) ) {
 
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error( __( 'You are not allowed to do this action', 'tpebl' ) );
+				wp_die();
 			}
 
 			$get_type = ! empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
 			if ( 'tpae_review_notice_later' === $get_type ) {
 				$saved_time = current_time( 'mysql' );
-				update_option( 'tpae_review_show_later', $saved_time );
+				update_option( 'tpae_review_show_later', $saved_time, false );
 			} elseif ( 'tpae_ask_review_notice' === $get_type ) {
-				update_option( 'tpae_ask_review_notice', true );
+				update_option( 'tpae_ask_review_notice', true, false );
 			}
-
-			return;
 
 			wp_send_json_success();
 		}

@@ -275,7 +275,7 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 		$this->start_controls_section(
 			'smart_loop_builder_section',
 			array(
-				'label'     => esc_html__( 'Smart Loop Builder (Beta)', 'tpebl' ),
+				'label'     => esc_html__( 'Smart Loop Builder', 'tpebl' ),
 				'tab'       => Controls_Manager::TAB_CONTENT,
 				'condition' => array(
 					'style' => array( 'smart-loop-builder' ),
@@ -499,6 +499,7 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .blog-list .post-inner-loop .grid-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .blog-list .post-inner-loop.tp-row' => 'margin: -{{TOP}}{{UNIT}} -{{RIGHT}}{{UNIT}} -{{BOTTOM}}{{UNIT}} -{{LEFT}}{{UNIT}} !important;',
 				),
 			)
 		);
@@ -4315,7 +4316,7 @@ class L_ThePlus_Blog_ListOut extends Plus_Widget_Base {
 				$style_custom = ! empty( $settings['content_css'] ) ? $settings['content_css'] : '';
 				$html_custom  = ! empty( $settings['content_html'] ) ? $settings['content_html'] : '';
 
-				if ( ! empty( $style_custom ) ) {
+				if ( ! empty( $style_custom ) && current_user_can( 'unfiltered_html' ) ) {
 					echo '<style>' . wp_strip_all_tags( $style_custom ) . '</style>';
 				}
 

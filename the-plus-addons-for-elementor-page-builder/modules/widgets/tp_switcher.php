@@ -80,14 +80,6 @@ class L_ThePlus_Switcher extends Plus_Widget_Base {	// public $tp_doc = '';
 		return array( 'Tp Switcher', 'Content Toggle', 'Dual Content' );
 	}
 
-	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.1.2
-	 */
-	// public function is_dynamic_content(): bool {
-	// return false;
-	// }
 
 	/**
 	 * Register controls.

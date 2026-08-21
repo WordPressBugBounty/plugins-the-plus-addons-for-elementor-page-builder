@@ -78,14 +78,6 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 		return array( 'Tp Tabs/Tours', 'Content Tabs', 'Tab Navigation', 'Tab Layout', 'Vertical Tab', 'Horizontal Tab', 'Swipe Tab', 'Autoplay Tabs', 'Hover Tabs', 'Carousel Tab' );
 	}
 
-	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.1.2
-	 */
-	// public function is_dynamic_content(): bool {
-	// return false;
-	// }
 
 	/**
 	 * Register controls.
@@ -1667,7 +1659,7 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 			array(
 				'name'     => 'nav_bg_box_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .theplus-tabs-wrapper .theplus-tabs-nav-wrapper,{{WRAPPER}} .theplus-tabs-wrapper .theplus-tabs-nav-wrapper .plus-tabs-nav',
+				'selector' => '{{WRAPPER}} .theplus-tabs-wrapper .theplus-tabs-nav-wrapper .plus-tabs-nav',
 
 			)
 		);
@@ -1976,6 +1968,19 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 				),
 			)
 		);
+		$this->add_control(
+			'accordion_toggle_icon',
+			array(
+				'label'       => esc_html__( 'Accordion Toggle Icon', 'tpebl' ),
+				'type'        => Controls_Manager::ICONS,
+				'description' => esc_html__( 'Leave empty to use the default +/- icon. When an icon is selected, it is shown on the right of each accordion header and rotates when the section is open.', 'tpebl' ),
+				'skin'        => 'inline',
+				'label_block' => false,
+				'condition'   => array(
+					'tab_nav_responsive' => 'tab_accordion',
+				),
+			)
+		);
 		$this->start_controls_tabs( 'accordion_background_style' );
 		$this->start_controls_tab(
 			'accordion_background_normal',
@@ -2114,6 +2119,19 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 			$tab_nav     .= '</div>';
 			$tabccon_bg   = tp_bg_lazyLoad( $settings['content_box_background_image'] );
 			$tab_content  = '<div class="theplus-tabs-content-wrapper elementor-tabs-content-wrapper ' . $tabccon_bg . '">';
+
+			// Accordion toggle icon: custom icon (rotates on open) or default CSS +/- when empty.
+			$acc_toggle_icon  = ! empty( $settings['accordion_toggle_icon'] ) ? $settings['accordion_toggle_icon'] : array();
+			$acc_toggle_html  = '';
+			$acc_toggle_class = 'tp-accordion-toggle-icon';
+		if ( ! empty( $acc_toggle_icon['value'] ) ) {
+			ob_start();
+			\Elementor\Icons_Manager::render_icon( $acc_toggle_icon, array( 'aria-hidden' => 'true' ) );
+			$acc_toggle_html = ob_get_clean();
+			if ( ! empty( $acc_toggle_html ) ) {
+				$acc_toggle_class .= ' has-custom-icon';
+			}
+		}
 		foreach ( $tabs as $index => $item ) :
 			$tab_count = $index + 1;
 
@@ -2176,6 +2194,7 @@ class L_ThePlus_Tabs_Tours extends Plus_Widget_Base {
 						endif;
 				$tab_title    = ! empty( $item['tab_title'] ) ? $item['tab_title'] : '';
 				$tab_content .= '<span>' . wp_kses_post( $tab_title ) . '</span>';
+				$tab_content .= '<span class="' . esc_attr( $acc_toggle_class ) . '" aria-hidden="true">' . $acc_toggle_html . '</span>';
 			$tab_content     .= '</div>';
 			$tab_content     .= '<div ' . $this->get_render_attribute_string( $tab_content_setting_key ) . '>';
 

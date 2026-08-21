@@ -211,6 +211,19 @@ class Tpae_Elementor_MCP_Page_Abilities {
 			return new \WP_Error( 'missing_title', __( 'The title parameter is required.', 'tpebl' ) );
 		}
 
+		/**
+		 * Re-validate the post type and status against the current user's capabilities for that
+		 * type. Relying on the input_schema enum alone puts the security decision in a layer
+		 * outside this plugin.
+		 *
+		 * @since 6.5.0
+		 */
+		$status = tpae_elementor_mcp_authorize_post_creation( $post_type, $status );
+
+		if ( is_wp_error( $status ) ) {
+			return $status;
+		}
+
 		$post_id = wp_insert_post(
 			array(
 				'post_title'  => $title,

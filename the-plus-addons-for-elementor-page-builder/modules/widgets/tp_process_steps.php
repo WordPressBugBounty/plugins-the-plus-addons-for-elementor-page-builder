@@ -85,7 +85,9 @@ class L_ThePlus_Process_Steps extends Plus_Widget_Base {
 	 */
 	public function is_dynamic_content(): bool {
 		return false;
-	}	/**
+	}
+
+	/**
 	 * Register controls.
 	 *
 	 * @since 3.0.0
@@ -2067,11 +2069,11 @@ class L_ThePlus_Process_Steps extends Plus_Widget_Base {
 					$this->add_render_attribute( 'loop_box_link' . $index, 'href', esc_url( $item['loop_url_link']['url'] ) );
 
 					if ( $item['loop_url_link']['is_external'] ) {
-						$this->add_render_attribute( 'box_link' . $index, 'target', '_blank' );
+						$this->add_render_attribute( 'loop_box_link' . $index, 'target', '_blank' );
 					}
 
 					if ( $item['loop_url_link']['nofollow'] ) {
-						$this->add_render_attribute( 'box_link' . $index, 'rel', 'nofollow' );
+						$this->add_render_attribute( 'loop_box_link' . $index, 'rel', 'nofollow' );
 					}
 				}
 
@@ -2183,7 +2185,7 @@ class L_ThePlus_Process_Steps extends Plus_Widget_Base {
 
 						$icn_a_start = '<span class="tp-ps-icon-img ' . esc_attr( $display_special_bg ) . '">';
 						$icn_a_end   = '</span>';
-						if ( ! empty( $item['loop_icn_link'] && 'yes' === $item['loop_icn_link'] ) ) {
+						if ( ! empty( $item['loop_icn_link'] ) && 'yes' === $item['loop_icn_link'] ) {
 							if ( ! empty( $item['loop_url_link']['url'] ) ) {
 								$icn_a_start = '<a class="tp-ps-icon-img ' . esc_attr( $display_special_bg ) . '" ' . $this->get_render_attribute_string( 'loop_box_link' . $index ) . '>';
 								$icn_a_end   = '</a>';

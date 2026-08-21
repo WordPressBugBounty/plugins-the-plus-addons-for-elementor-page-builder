@@ -1735,8 +1735,8 @@ class ThePlus_Post_Meta extends Plus_Widget_Base {
 							}
 						} else {
 							$terms = get_terms(
-								$category_taxonomies,
 								array(
+									'taxonomy'   => $category_taxonomies,
 									'orderby'    => 'count',
 									'hide_empty' => 0,
 									'exclude'    => array( 1 ),
@@ -1779,8 +1779,9 @@ class ThePlus_Post_Meta extends Plus_Widget_Base {
 							$iconauthor = '<i class="' . esc_attr( $author_icon ) . '"></i>';
 						}
 
+						/* get_queried_object() is null outside a query context (widget preview, REST). */
 						$post            = get_queried_object();
-						$author_page_url = get_author_posts_url( $post->post_author );
+						$author_page_url = ( ! empty( $post ) && isset( $post->post_author ) ) ? get_author_posts_url( $post->post_author ) : get_author_posts_url( $author_id );
 						$output         .= '<span class="tp-meta-author" ><span class="tp-meta-author-label tp-meta-label" >' . esc_html( $author_prefix ) . '</span><a class="tp-meta-value" href="' . esc_url( $author_page_url ) . '" rel="' . esc_attr__( 'author', 'tpebl' ) . '">' . $iconauthor . esc_html( get_the_author_meta( 'display_name', $author_id ) ) . '</a></span>';
 					}
 				}

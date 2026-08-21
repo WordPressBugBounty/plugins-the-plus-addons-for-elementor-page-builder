@@ -30,7 +30,6 @@ class L_Plus_Library {
 			'tp_blog_listout'         => 'tp-blog-listout',
 			'tp_breadcrumbs_bar'      => 'tp-breadcrumbs-bar',
 			'tp_button'               => 'tp-button',
-			'tp_caldera_forms'        => 'tp-caldera-forms',
 			'tp_clients_listout'      => 'tp-clients-listout',
 			'tp_contact_form_7'       => 'tp-contact-form-7',
 			'tp_countdown'            => 'tp-countdown',
@@ -61,7 +60,6 @@ class L_Plus_Library {
 			'tp_post_navigation'      => 'tp-post-navigation',
 			'tp_page_scroll'          => 'tp-page-scroll',
 			'tp_pricing_table'        => 'tp-pricing-table',
-			'tp_post_search'          => 'tp-post-search',
 			'tp_progress_bar'         => 'tp-progress-bar',
 			'tp_process_steps'        => 'tp-process-steps',
 			'tp_scroll_navigation'    => 'tp-scroll-navigation',
@@ -376,12 +374,28 @@ class L_Plus_Library {
 			update_option( 'tpae_backend_cache', strtotime( 'now' ), false );
 		}
 
+		// Time-box the deletion. On large sites this directory can hold tens of
+		// thousands of generated files; deleting them all synchronously can
+		// exceed the PHP execution limit, which leaves the caller (e.g. the
+		// dashboard "Purge" AJAX) hung on "PURGING…" and never returning success.
+		// We delete as many as fit in a safe budget and stop; the remaining files
+		// are invalidated by the caller bumping tp_save_update_at and are
+		// regenerated per page on next view, and a subsequent purge continues the
+		// cleanup.
+		$limit  = (int) ini_get( 'max_execution_time' );
+		$budget = $limit > 0 ? max( 5, $limit - 15 ) : 20;
+		$start  = microtime( true );
+
 		foreach ( scandir( $path_url ) as $item ) {
-			if ( $item == '.' || $item == '..' ) {
+			if ( '.' === $item || '..' === $item ) {
 				continue;
 			}
 
 			wp_delete_file( $this->secure_path_url( $path_url . DIRECTORY_SEPARATOR . $item ) );
+
+			if ( ( microtime( true ) - $start ) > $budget ) {
+				break;
+			}
 		}
 	}
 
@@ -413,7 +427,18 @@ class L_Plus_Library {
 	 */
 	public function remove_current_page_dir_files( $path_url, $plus_name = '' ) {
 
-		if ( ( ! is_dir( $path_url ) || ! file_exists( $path_url ) ) && empty( $plus_name ) ) {
+		/**
+		 * Enforce containment at the sink as well as the caller. `$plus_name` is concatenated into
+		 * paths passed to `wp_delete_file()` and `unlink()`, and `secure_path_url()` only collapses
+		 * duplicate separators — it neither resolves nor constrains the path. `sanitize_file_name()`
+		 * removes `/` and `\`, and `basename()` drops anything that survives, so the value can only
+		 * ever name a file directly inside `$path_url`.
+		 *
+		 * @since 6.5.0
+		 */
+		$plus_name = basename( sanitize_file_name( (string) $plus_name ) );
+
+		if ( '' === $plus_name ) {
 			return;
 		}
 

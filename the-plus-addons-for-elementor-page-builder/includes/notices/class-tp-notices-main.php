@@ -112,7 +112,7 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 		public function tp_notices_manage() {
 
 			if ( ! get_option( 'tpae_install_time' ) ) {
-				add_option( 'tpae_install_time', current_time( 'mysql' ) );
+				add_option( 'tpae_install_time', current_time( 'mysql' ), '', 'no' );
 			}
 
 			// $envato_plugins = array(
@@ -187,18 +187,37 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 
 				$current_version = str_replace( '.', '', L_THEPLUS_VERSION );
 
-				$current_cleanup_key  = 'theplus_cleanup_sale_notices_' . $current_version;
-				$previous_cleanup_key = 'theplus_cleanup_sale_notices_' . ( (int) $current_version - 1 );
+				$current_cleanup_key = 'theplus_cleanup_sale_notices_' . $current_version;
 
 				/**Remove Key In Databash*/
 				if ( ! get_option( $current_cleanup_key ) ) {
-					if ( get_option( $previous_cleanup_key ) ) {
-						delete_option( $previous_cleanup_key );
+					/*
+					 * The previous key used to be guessed with
+					 * ( (int) $current_version - 1 ). On a version string such as
+					 * "650-beta5" the cast yields 650, so it looked for "..._649" --
+					 * a key that never existed, and one option leaked per release.
+					 * Clear every stale cleanup key instead of guessing one. This
+					 * runs once per version, guarded by the check above.
+					 */
+					global $wpdb;
+
+					$stale_cleanup_keys = $wpdb->get_col(
+						$wpdb->prepare(
+							"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s AND option_name != %s",
+							$wpdb->esc_like( 'theplus_cleanup_sale_notices_' ) . '%',
+							$current_cleanup_key
+						)
+					);
+
+					if ( ! empty( $stale_cleanup_keys ) ) {
+						foreach ( $stale_cleanup_keys as $stale_cleanup_key ) {
+							delete_option( $stale_cleanup_key );
+						}
 					}
 
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-notices-remove.php';
 
-					update_option( $current_cleanup_key, true );
+					update_option( $current_cleanup_key, true, false );
 				}
 			}
 
@@ -253,9 +272,15 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					}
 				}
 
-				/** Deprecated Widgets Removal Notice*/
-				if ( ! get_option( 'tpae_deprecated_widgets_notice' ) ) {
-					include L_THEPLUS_PATH . 'includes/notices/class-tp-deprecated-widgets-notice.php';
+				/** What's New in this release (loaded first so it sits above the widget notice)*/
+				$tpae_wn_release = defined( 'L_THEPLUS_VERSION' ) ? preg_replace( '/[-+].*$/', '', L_THEPLUS_VERSION ) : '';
+				if ( $tpae_wn_release && get_option( 'tpae_whats_new_dismissed' ) !== $tpae_wn_release ) {
+					include L_THEPLUS_PATH . 'includes/notices/class-tp-whats-new-notice.php';
+				}
+
+				/** Removed & Deprecated Widgets Notice (6.5.0)*/
+				if ( ! get_option( 'tpae_removed_widgets_notice' ) ) {
+					include L_THEPLUS_PATH . 'includes/notices/class-tp-removed-widgets-notice.php';
 				}
 
 				/** Ask for Review*/

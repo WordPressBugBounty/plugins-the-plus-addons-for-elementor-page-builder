@@ -246,9 +246,9 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 
 			$option_value = get_option( $this->db_preview_popup_key );
 			if ( ! empty( $option_value ) && 'yes' === $option_value ) {
-				update_option( $this->db_preview_popup_key, 'yes' );
+				update_option( $this->db_preview_popup_key, 'yes', false );
 			} else {
-				add_option( $this->db_preview_popup_key, 'yes' );
+				add_option( $this->db_preview_popup_key, 'yes', '', 'no' );
 			}
 
 			$result = $this->tp_response( 'Success Install WDesignKit', 'Success Install WDesignKit', true, '' );

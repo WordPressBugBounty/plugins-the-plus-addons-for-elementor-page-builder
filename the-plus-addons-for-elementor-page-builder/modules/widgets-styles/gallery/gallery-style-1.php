@@ -33,7 +33,7 @@ if ( 'metro' === $layout ) {
 	<?php include L_THEPLUS_WSTYLES . 'gallery/format-image.php'; ?>
 </div>
 <?php } ?>
-<div class="post-content-center">		
+<div class="post-content-center"<?php echo ( 'metro' === $layout && ( empty( $settings['display_box_link'] ) || 'yes' !== $settings['display_box_link'] ) ) ? ' style="pointer-events:none"' : ''; ?>>		
 	<div class="post-hover-content">
 		<?php
 		if ( 'yes' === $display_icon_zoom ) {
@@ -56,6 +56,10 @@ if ( 'metro' === $layout ) {
 	</div>
 </div>
 <?php if ( 'metro' === $layout ) { ?>
-	<div class="gallery-bg-image-metro" <?php echo wp_kses_post( $bg_attr ); ?>></div>
+	<?php if ( empty( $settings['display_box_link'] ) || 'yes' !== $settings['display_box_link'] ) { ?>
+		<a class="gallery-bg-image-metro" href="<?php echo esc_url( $full_image ); ?>" <?php echo wp_kses_post( $popup_attr_icon1 ); ?> <?php echo wp_kses_post( $bg_attr ); ?>></a>
+	<?php } else { ?>
+		<div class="gallery-bg-image-metro" <?php echo wp_kses_post( $bg_attr ); ?>></div>
+	<?php } ?>
 <?php } ?>
 </div>

@@ -476,7 +476,13 @@
         document.body.appendChild(popup);
     }
 
+    let typeMessageTimeout = null;
+
     const typeMessage = (element, text, speed = 50) => {
+        if (typeMessageTimeout !== null) {
+            clearTimeout(typeMessageTimeout);
+            typeMessageTimeout = null;
+        }
         element.innerHTML = "";
         let i = 0;
 
@@ -484,7 +490,7 @@
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
                 i++;
-                setTimeout(typeChar, speed);
+                typeMessageTimeout = setTimeout(typeChar, speed);
             }
         };
 

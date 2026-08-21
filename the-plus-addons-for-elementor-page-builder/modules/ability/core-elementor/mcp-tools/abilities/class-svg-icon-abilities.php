@@ -262,7 +262,7 @@ class Tpae_Elementor_MCP_Svg_Icon_Abilities {
 	 * @param string $title Optional title for filename fallback.
 	 * @return array|\WP_Error Array with attachment_id and url on success.
 	 */
-	private function upload_from_url( string $url, string $title ): array {
+	private function upload_from_url( string $url, string $title ) {
 		$safe = tpae_elementor_mcp_is_safe_remote_url( $url );
 		if ( is_wp_error( $safe ) ) {
 			return new \WP_Error( 'unsafe_url', $safe->get_error_message() );
@@ -308,7 +308,7 @@ class Tpae_Elementor_MCP_Svg_Icon_Abilities {
 	 * @param string $title   Optional title for filename.
 	 * @return array|\WP_Error Array with attachment_id and url on success.
 	 */
-	private function upload_from_content( string $content, string $title ): array {
+	private function upload_from_content( string $content, string $title ) {
 		// Basic validation: must contain <svg tag.
 		if ( stripos( $content, '<svg' ) === false ) {
 			return new \WP_Error(
@@ -349,7 +349,7 @@ class Tpae_Elementor_MCP_Svg_Icon_Abilities {
 	 * @param string $filename The desired filename.
 	 * @return array|\WP_Error Array with attachment_id and url on success.
 	 */
-	private function do_sideload( string $tmp_file, string $filename ): array {
+	private function do_sideload( string $tmp_file, string $filename ) {
 		$file_array = array(
 			'name'     => sanitize_file_name( $filename ),
 			'tmp_name' => $tmp_file,
@@ -414,24 +414,45 @@ class Tpae_Elementor_MCP_Svg_Icon_Abilities {
 			);
 		}
 
-		// Let Elementor's sanitizer handle the rest if available.
-		if ( class_exists( '\Elementor\Utils' ) && method_exists( '\Elementor\Utils', 'get_svg_sanitizer' ) ) {
-			$sanitizer = \Elementor\Utils::get_svg_sanitizer();
-			if ( $sanitizer && method_exists( $sanitizer, 'sanitize' ) ) {
-				$sanitized = $sanitizer->sanitize( $content );
-				if ( empty( $sanitized ) ) {
-					return new \WP_Error(
-						'svg_sanitization_failed',
-						__( 'SVG failed Elementor security sanitization.', 'tpebl' )
-					);
-				}
-				// Write back the sanitized content.
-				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-				file_put_contents( $file_path, $sanitized );
-			}
+		/**
+		 * Hand off to Elementor's DOM-based sanitizer, and refuse the upload if it is not
+		 * available. The checks above are a blocklist and cannot be the last word on whether
+		 * an SVG is safe, so there is no fallback path here by design.
+		 *
+		 * @since 6.5.0
+		 */
+		if ( ! $this->is_svg_sanitizer_available() ) {
+			return new \WP_Error(
+				'svg_sanitizer_unavailable',
+				__( 'SVG uploads require Elementor\'s SVG sanitizer, which is unavailable on this site.', 'tpebl' )
+			);
+		}
+
+		// sanitize_file() writes the sanitized markup back to disk itself.
+		if ( ! ( new \Elementor\Core\Utils\Svg\Svg_Sanitizer() )->sanitize_file( $file_path ) ) {
+			return new \WP_Error(
+				'svg_sanitization_failed',
+				__( 'SVG failed Elementor security sanitization.', 'tpebl' )
+			);
 		}
 
 		return true;
+	}
+
+	/**
+	 * Whether Elementor's SVG sanitizer can run on this site.
+	 *
+	 * The sanitizer ships with Elementor 3.16.0 and up and needs both DOM extensions, which
+	 * mirrors the gate Elementor itself applies in Svg::file_sanitizer_can_run().
+	 *
+	 * @since 6.5.0
+	 *
+	 * @return bool
+	 */
+	private function is_svg_sanitizer_available() {
+		return class_exists( '\Elementor\Core\Utils\Svg\Svg_Sanitizer' )
+			&& class_exists( 'DOMDocument' )
+			&& class_exists( 'SimpleXMLElement' );
 	}
 
 	/**
@@ -457,27 +478,43 @@ class Tpae_Elementor_MCP_Svg_Icon_Abilities {
 			);
 		}
 
-		// Remove event handlers (on*="...").
-		$content = preg_replace( '/\s+on\w+\s*=\s*(["\']).*?\1/i', '', $content );
+		/**
+		 * Remove event handlers (on*=...). The previous pattern required a quote character, so
+		 * unquoted handlers such as `<svg onload=alert(1)>` passed through untouched. This form
+		 * matches double-quoted, single-quoted and bare values.
+		 *
+		 * @since 6.5.0
+		 */
+		$content = preg_replace( '/\s+on\w+\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $content );
 
 		// Remove javascript: URLs.
 		$content = preg_replace( '/javascript\s*:/i', '', $content );
 
-		// Use Elementor's sanitizer if available.
-		if ( class_exists( '\Elementor\Utils' ) && method_exists( '\Elementor\Utils', 'get_svg_sanitizer' ) ) {
-			$sanitizer = \Elementor\Utils::get_svg_sanitizer();
-			if ( $sanitizer && method_exists( $sanitizer, 'sanitize' ) ) {
-				$sanitized = $sanitizer->sanitize( $content );
-				if ( empty( $sanitized ) ) {
-					return new \WP_Error(
-						'svg_sanitization_failed',
-						__( 'SVG failed Elementor security sanitization. Ensure it contains valid SVG markup.', 'tpebl' )
-					);
-				}
-				return $sanitized;
-			}
+		/**
+		 * Everything above is a blocklist and misses standard SVG XSS vectors — <foreignObject>,
+		 * <animate attributeName="href">, <use href="data:...">, entity expansion, and
+		 * entity-encoded schemes such as `javascript&#58;`. Elementor's DOM-based sanitizer is
+		 * the actual control, so refuse the content outright when it cannot run rather than
+		 * returning regex-scrubbed markup as if it were sanitized.
+		 *
+		 * @since 6.5.0
+		 */
+		if ( ! $this->is_svg_sanitizer_available() ) {
+			return new \WP_Error(
+				'svg_sanitizer_unavailable',
+				__( 'SVG uploads require Elementor\'s SVG sanitizer, which is unavailable on this site.', 'tpebl' )
+			);
 		}
 
-		return $content;
+		$sanitized = ( new \Elementor\Core\Utils\Svg\Svg_Sanitizer() )->sanitize( $content );
+
+		if ( false === $sanitized || '' === trim( (string) $sanitized ) ) {
+			return new \WP_Error(
+				'svg_sanitization_failed',
+				__( 'SVG failed Elementor security sanitization. Ensure it contains valid SVG markup.', 'tpebl' )
+			);
+		}
+
+		return $sanitized;
 	}
 }

@@ -77,14 +77,6 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 		return array( 'Tp Accordion', 'FAQ', 'Content Accordion', 'Collapsible Content', 'Expandable Content', 'Horizontal Accordion', 'Hover Accordion', 'Autoplay Accordion', 'Accordion Search', 'Accordion Pagination', 'Accordion Toggle', 'Animated Accordion', 'SEO Schema Accordion', 'Multi-section Accordion', 'Foldable Content' );
 	}
 
-	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.1.2
-	 */
-	// public function is_dynamic_content(): bool {
-	// return false;
-	// }
 
 	/**
 	 * Register controls.
@@ -1665,7 +1657,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 		$icon_allig   = ! empty( $settings['icon_align'] ) ? $settings['icon_align'] : '';
 
 		?>
-		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo $animation_attr; ?>  role="tablist">
+		<div class="theplus-accordion-wrapper elementor-accordion <?php echo esc_attr( $animated_class ); ?>" id="<?php echo esc_attr( $uid ); ?>" data-accordion-id="<?php echo esc_attr( $uid ); ?>" data-accordion-type="accordion" data-toogle-speed="300" <?php echo $animation_attr; ?>>
 			<?php
 
 			$acc_tabs = ! empty( $settings['tabs'] ) ? $settings['tabs'] : [];
@@ -1691,6 +1683,13 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 
 				$tab_content_setting_key = $this->get_repeater_setting_key( 'tab_content', 'tabs', $index );
 
+				/*
+				 * role="button" alongside aria-expanded, because the title tag is
+				 * author-chosen and h1-h6 are offered: aria-expanded is not allowed
+				 * on role="heading", so announcing the state without this role would
+				 * simply trade one ARIA violation for another. The JS keeps the value
+				 * in step and adds Enter/Space activation to match the role.
+				 */
 				$this->add_render_attribute(
 					$tab_title_setting_key,
 					array(
@@ -1698,8 +1697,9 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 						'class'         => array( 'elementor-tab-title', 'plus-accordion-header', $active_default ),
 						'tabindex'      => $id_int . $tab_count,
 						'data-tab'      => $tab_count,
-						'role'          => 'tab',
+						'role'          => 'button',
 						'aria-controls' => $tab_content_id,
+						'aria-expanded' => ( 'active-default' === $active_default ) ? 'true' : 'false',
 					)
 				);
 
@@ -1709,7 +1709,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 						'id'              => $tab_content_id,
 						'class'           => array( 'elementor-tab-content', 'elementor-clearfix', 'plus-accordion-content', $active_default ),
 						'data-tab'        => $tab_count,
-						'role'            => 'tabpanel',
+						'role'            => 'region',
 						'aria-labelledby' => $tab_title_id,
 					)
 				);

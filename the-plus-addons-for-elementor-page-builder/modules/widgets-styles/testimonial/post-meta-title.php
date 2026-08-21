@@ -31,7 +31,7 @@ if ( ! empty( $testimonial_title ) ) {
 				$tiremaining_words = implode( ' ', array_slice( $titotal, $title_limit - 1 ) );
 			if ( count( $tilimit_words ) >= $title_limit ) {
 				array_pop( $tilimit_words );
-				$title = implode( ' ', $tilimit_words ) . ' <span class="testi-more-text" style = "display: none" >' . wp_kses_post( $tiremaining_words ) . '</span><a ' . $attr . ' class="testi-readbtn"> ' . esc_attr( $redmor_txt ) . ' </a>';
+				$title = implode( ' ', $tilimit_words ) . ' <span class="testi-more-text" style = "display: none" >' . wp_kses_post( $tiremaining_words ) . '</span><a ' . $attr . ' class="testi-readbtn"> ' . esc_html( $redmor_txt ) . ' </a>';
 			} else {
 				$title = implode( ' ', $tilimit_words );
 			}
@@ -40,7 +40,7 @@ if ( ! empty( $testimonial_title ) ) {
 			$tilimit_words     = substr( $testimonial_title, 0, $title_limit );
 			$tiremaining_words = substr( $testimonial_title, $title_limit, $tiltn );
 			if ( strlen( $testimonial_title ) > $title_limit ) {
-				$title = $tilimit_words . '<span class="testi-more-text" style = "display:none" >' . wp_kses_post( $tiremaining_words ) . '</span><a ' . $attr . ' class="testi-readbtn"> ' . esc_attr( $redmor_txt ) . ' </a>';
+				$title = $tilimit_words . '<span class="testi-more-text" style = "display:none" >' . wp_kses_post( $tiremaining_words ) . '</span><a ' . $attr . ' class="testi-readbtn"> ' . esc_html( $redmor_txt ) . ' </a>';
 			} else {
 				$title = $tilimit_words;
 			}

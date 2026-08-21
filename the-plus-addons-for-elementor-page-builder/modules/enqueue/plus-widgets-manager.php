@@ -310,7 +310,7 @@ class Plus_Widgets_Manager {
 
 		if ( ! empty( $widget_name ) ) {
 
-			if ( 'tp-heading-title' === $widget_name || 'tp-button' === $widget_name || 'tp-contact-form-7' === $widget_name || 'tp-post-search' === $widget_name || 'tp-flip-box' === $widget_name || 'tp-info-box' === $widget_name || 'tp-navigation-menu-lite' === $widget_name || 'tp-tabs-tours' === $widget_name || 'tp-social-icon' === $widget_name ) {
+			if ( 'tp-heading-title' === $widget_name || 'tp-button' === $widget_name || 'tp-contact-form-7' === $widget_name || 'tp-flip-box' === $widget_name || 'tp-info-box' === $widget_name || 'tp-navigation-menu-lite' === $widget_name || 'tp-tabs-tours' === $widget_name || 'tp-social-icon' === $widget_name ) {
 				$this->transient_widgets[] = 'plus-alignmnet-effect';
 			}
 

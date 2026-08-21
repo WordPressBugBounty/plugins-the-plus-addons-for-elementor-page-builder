@@ -179,8 +179,14 @@ class L_Theplus_Navigation_NavWalker extends \Walker_Nav_Menu {
 			$attributes = '';
 			foreach ( $atts as $attr => $value ) {
 				if ( ! empty( $value ) ) {
-					$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
-					$attributes .= ' ' . $attr . '="' . $value . '"';
+					$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+
+					/*
+					 * Keys arrive from the nav_menu_link_attributes filter, so a third-party
+					 * plugin could supply one containing a quote and break out of the attribute.
+					 * The value was already escaped per context; the name was not.
+					 */
+					$attributes .= ' ' . esc_attr( $attr ) . '="' . $value . '"';
 				}
 			}
 
@@ -191,7 +197,7 @@ class L_Theplus_Navigation_NavWalker extends \Walker_Nav_Menu {
 			} elseif ( ! empty( $icon_class_type ) && $icon_class_type == 'icon_image' ) {
 				$attachment_id = get_post_meta( $item->ID, 'tp-menu-icon-img', true );
 				$icon_thumb    = wp_get_attachment_image_src( $attachment_id, 'full' );
-				$icon          = empty( $icon_thumb[0] ) ? '' : '<img class="plus-nav-icon-menu icon-img" src="' . esc_attr( $icon_thumb[0] ) . '" />';
+				$icon          = empty( $icon_thumb[0] ) ? '' : '<img class="plus-nav-icon-menu icon-img" src="' . esc_url( $icon_thumb[0] ) . '" />';
 			} else {
 				$icon = '';
 			}
@@ -261,46 +267,59 @@ class L_Theplus_Navigation_NavWalker extends \Walker_Nav_Menu {
 	}
 
 	public static function fallback( $args ) {
-		if ( current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
-			extract( $args );
+		/*
+		 * `extract( $args )` used to create these locals, which made this function's scope
+		 * depend on whatever wp_nav_menu() was called with, allowed it to shadow existing
+		 * locals, and made the code impossible to audit statically. Assign explicitly and
+		 * escape per context instead: $container is used as an HTML tag name, so it needs
+		 * tag_escape() rather than esc_attr().
+		 */
+		$args            = (array) $args;
+		$container       = ! empty( $args['container'] ) ? tag_escape( $args['container'] ) : '';
+		$container_id    = ! empty( $args['container_id'] ) ? esc_attr( $args['container_id'] ) : '';
+		$container_class = ! empty( $args['container_class'] ) ? esc_attr( $args['container_class'] ) : '';
+		$menu_id         = ! empty( $args['menu_id'] ) ? esc_attr( $args['menu_id'] ) : '';
+		$menu_class      = ! empty( $args['menu_class'] ) ? esc_attr( $args['menu_class'] ) : '';
 
-			$fb_output = null;
+		$fb_output = '';
 
-			if ( $container ) {
-				$fb_output = '<' . $container;
+		if ( $container ) {
+			$fb_output = '<' . $container;
 
-				if ( $container_id ) {
-					$fb_output .= ' id="' . $container_id . '"';
-				}
-
-				if ( $container_class ) {
-					$fb_output .= ' class="' . $container_class . '"';
-				}
-
-				$fb_output .= '>';
+			if ( $container_id ) {
+				$fb_output .= ' id="' . $container_id . '"';
 			}
 
-			$fb_output .= '<ul';
-
-			if ( $menu_id ) {
-				$fb_output .= ' id="' . $menu_id . '"';
-			}
-
-			if ( $menu_class ) {
-				$fb_output .= ' class="' . $menu_class . '"';
+			if ( $container_class ) {
+				$fb_output .= ' class="' . $container_class . '"';
 			}
 
 			$fb_output .= '>';
-			$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">' . esc_html__( 'Add a menu', 'tpebl' ) . '</a></li>';
-			$fb_output .= '</ul>';
-
-			if ( $container ) {
-				$fb_output .= '</' . $container . '>';
-			}
-
-			echo wp_kses_post( $fb_output );
 		}
+
+		$fb_output .= '<ul';
+
+		if ( $menu_id ) {
+			$fb_output .= ' id="' . $menu_id . '"';
+		}
+
+		if ( $menu_class ) {
+			$fb_output .= ' class="' . $menu_class . '"';
+		}
+
+		$fb_output .= '>';
+		$fb_output .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">' . esc_html__( 'Add a menu', 'tpebl' ) . '</a></li>';
+		$fb_output .= '</ul>';
+
+		if ( $container ) {
+			$fb_output .= '</' . $container . '>';
+		}
+
+		echo wp_kses_post( $fb_output );
 	}
 }
 

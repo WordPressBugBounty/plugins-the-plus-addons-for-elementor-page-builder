@@ -150,6 +150,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preset' ) ) {
 
 			if ( is_wp_error( $plugin_info ) || ! $plugin_info ) {
 				wp_send_json_error( array( 'content' => __( 'Failed to retrieve plugin information.', 'tpebl' ) ) );
+				wp_die();
 			}
 
 			$skin     = new \Automatic_Upgrader_Skin();

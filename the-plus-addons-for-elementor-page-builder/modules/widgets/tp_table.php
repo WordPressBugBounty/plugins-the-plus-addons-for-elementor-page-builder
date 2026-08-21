@@ -82,14 +82,6 @@ class L_ThePlus_Data_Table extends Plus_Widget_Base {
 		return array( 'Tp Table', 'Data Table', 'Table Widget', 'Table', 'Table Addon', 'Table Plugin', 'Elementor Table', 'Elementor Data Table', 'Table Design', 'Table Layout' );
 	}
 
-	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.1.0
-	 */
-	// public function is_dynamic_content(): bool {
-	// return false;
-	// }
 
 	/**
 	 * Register controls.

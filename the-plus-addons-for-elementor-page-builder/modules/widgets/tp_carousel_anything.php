@@ -81,14 +81,6 @@ class L_ThePlus_Carousel_Anything extends Plus_Widget_Base {
 		return array( 'Tp Carousel Anything', 'Template Carousel', 'Vertical Carousel', 'Infinite Loop Slider', 'Multi-Column Carousel', 'Autoplay Carousel', 'Draggable Slider', 'Horizontal Carousel', 'Slider', 'Autoplay Slideshow', 'Slideshow', 'Mousewheel Slider' );
 	}
 
-	/**
-	 * It is use for widget add in catch or not.
-	 *
-	 * @since 6.1.2
-	 */
-	// public function is_dynamic_content(): bool {
-	// return false;
-	// }
 
 	/**
 	 * Register controls.

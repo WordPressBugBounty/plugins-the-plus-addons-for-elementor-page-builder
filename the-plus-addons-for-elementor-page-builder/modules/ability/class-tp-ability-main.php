@@ -57,7 +57,6 @@ if ( ! class_exists( 'Tp_Ability_Main' ) ) {
 			'tp-scroll-navigation.php',
 			'tp-page-scroll.php',
 			'tp-plus-form.php',
-			'tp-post-search.php',
 			'tp-dynamic-categories.php',
 			'tp-header-extras.php',
 		);
@@ -117,9 +116,37 @@ if ( ! class_exists( 'Tp_Ability_Main' ) ) {
 			}
 
 			wp_register_ability_category( 'tpae', array(
-				'label'       => __( 'The Plus Addons for Elementor', 'tpae' ),
-				'description' => __( 'Abilities for The Plus Addons for Elementor widgets.', 'tpae' ),
+				'label'       => __( 'The Plus Addons for Elementor', 'tpebl' ),
+				'description' => __( 'Abilities for The Plus Addons for Elementor widgets.', 'tpebl' ),
 			) );
+		}
+
+		/**
+		 * Mark this plugin's abilities as public.
+		 *
+		 * WordPress 7.1 introduced a unified `meta.public` flag that defaults to false.
+		 * Clients that honour it would otherwise skip every tpae/ ability. An explicit
+		 * value set by an ability definition always wins.
+		 *
+		 * @param array  $args Ability registration arguments.
+		 * @param string $name Ability name.
+		 * @return array
+		 * @since 6.5.0
+		 */
+		public function tp_ability_public_flag( $args, $name ) {
+			if ( ! is_string( $name ) || 0 !== strpos( $name, 'tpae/' ) ) {
+				return $args;
+			}
+
+			if ( ! isset( $args['meta'] ) || ! is_array( $args['meta'] ) ) {
+				$args['meta'] = array();
+			}
+
+			if ( ! isset( $args['meta']['public'] ) ) {
+				$args['meta']['public'] = true;
+			}
+
+			return $args;
 		}
 
 		/**
@@ -135,6 +162,9 @@ if ( ! class_exists( 'Tp_Ability_Main' ) ) {
 			if ( ! wp_has_ability_category( 'tpae' ) ) {
 				return;
 			}
+
+			/* WP 7.1 added a unified meta.public flag that defaults to false; set it before the ability files register. */
+			add_filter( 'wp_register_ability_args', array( $this, 'tp_ability_public_flag' ), 10, 2 );
 
 			$ability_dir = L_THEPLUS_PATH . 'modules/ability/widgets-ability';
 			require_once L_THEPLUS_PATH . 'modules/ability/core-elementor/layout-abilities.php';

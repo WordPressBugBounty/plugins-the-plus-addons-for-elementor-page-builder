@@ -245,18 +245,6 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 				),
 			)
 		);
-		$this->add_control(
-			'popup_style',
-			array(
-				'label'     => esc_html__( 'Popup Layout', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'default',
-				'separator' => 'before',
-				'options'   => array(
-					'default' => esc_html__( 'Default Light-box', 'tpebl' ),
-				),
-			)
-		);
 		$this->end_controls_section();
 		$this->start_controls_section(
 			'content_section',
@@ -361,19 +349,6 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 				),
 				'condition' => array(
 					'layout' => array( 'metro' ),
-				),
-			)
-		);
-		$this->add_control(
-			'metro_style_3',
-			array(
-				'label'     => esc_html__( 'Metro Style', 'tpebl' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'style-1',
-				'options'   => l_theplus_get_style_list( 1 ),
-				'condition' => array(
-					'metro_column' => '3',
-					'layout'       => array( 'metro' ),
 				),
 			)
 		);
@@ -870,7 +845,7 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 			array(
 				'name'     => 'contnet_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .gallery-list.gallery-style-1 .gallery-list-content .post-content-center',
+				'selector' => '{{WRAPPER}} .gallery-list.gallery-style-1 .gallery-list-content .post-content-center,{{WRAPPER}} .gallery-list.gallery-style-2 .gallery-list-content .post-content-bottom',
 			)
 		);
 		$this->end_controls_tab();
@@ -885,7 +860,7 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 			array(
 				'name'     => 'content_hover_background',
 				'types'    => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .gallery-list.gallery-style-1 .gallery-list-content:hover .post-content-center',
+				'selector' => '{{WRAPPER}} .gallery-list.gallery-style-1 .gallery-list-content:hover .post-content-center,{{WRAPPER}} .gallery-list.gallery-style-2 .gallery-list-content:hover .post-content-bottom',
 			)
 		);
 		$this->end_controls_tab();
@@ -897,15 +872,6 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 			array(
 				'label' => esc_html__( 'Featured Image', 'tpebl' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-		$this->add_control(
-			'hover_image_style',
-			array(
-				'label'   => esc_html__( 'Image Hover Effect', 'tpebl' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'style-1',
-				'options' => l_theplus_get_style_list( 1 ),
 			)
 		);
 		$this->start_controls_tabs( 'tabs_image_style' );
@@ -1312,7 +1278,7 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 		$layout          = ! empty( $settings['layout'] ) ? $settings['layout'] : 'grid';
 		$display_title   = ! empty( $settings['display_title'] ) ? $settings['display_title'] : '';
 		$post_title_tag  = ! empty( $settings['post_title_tag'] ) ? $settings['post_title_tag'] : 'h3';
-		$popup_style     = ! empty( $settings['popup_style'] ) ? $settings['popup_style'] : '';
+		$popup_style     = 'default';
 		$metro_columns   = ! empty( $settings['metro_column'] ) ? $settings['metro_column'] : '';
 		$popup_attr      = '';
 		$popup_attr_icon = '';
@@ -1355,12 +1321,13 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 			$data_class .= ' list-isotope';
 		}
 		if ( 'metro' === $layout ) {
-			$layout_attr .= ' data-metro-columns="' . esc_attr( $metro_columns ) . '" ';
-			$layout_attr .= ' data-metro-style="' . esc_attr( $settings[ 'metro_style_' . $metro_columns ] ) . '" ';
+			$metro_style_val = ! empty( $settings[ 'metro_style_' . $metro_columns ] ) ? $settings[ 'metro_style_' . $metro_columns ] : 'style-1';
+			$layout_attr    .= ' data-metro-columns="' . esc_attr( $metro_columns ) . '" ';
+			$layout_attr    .= ' data-metro-style="' . esc_attr( $metro_style_val ) . '" ';
 		}
 
 		$data_class .= ' gallery-' . $style;
-		$data_class .= ' hover-image-' . $settings['hover_image_style'];
+		$data_class .= ' hover-image-style-1';
 
 		$output    = '';
 		$data_attr = '';
@@ -1402,10 +1369,7 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 					}
 
 					if ( 'metro' === $layout ) {
-
-						if ( ! empty( $settings[ 'metro_style_' . $metro_columns ] ) ) {
-							$ij = l_theplus_metro_style_layout( $ji, $settings['metro_column'], $settings[ 'metro_style_' . $metro_columns ] );
-						}
+						$ij = l_theplus_metro_style_layout( $ji, $settings['metro_column'], $metro_style_val );
 					}
 
 					$output .= '<div class="grid-item metro-item' . esc_attr( $ij ) . ' ' . $desktop_class . ' ' . $tablet_class . ' ' . $mobile_class . ' ' . esc_attr( $animated_columns ) . '" >';

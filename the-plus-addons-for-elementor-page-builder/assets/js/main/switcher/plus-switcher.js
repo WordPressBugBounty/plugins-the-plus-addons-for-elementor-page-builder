@@ -97,6 +97,7 @@
             }
 
             tp_hash_url (hash){
+                if ( !hash || !/^#[a-zA-Z0-9_-]+$/.test(hash) ) { return; }
                 let $FindID = this.container[0].querySelectorAll(`${hash}`);
                 if( $FindID.length > 0 ){
                     $FindID.forEach(function(self){
