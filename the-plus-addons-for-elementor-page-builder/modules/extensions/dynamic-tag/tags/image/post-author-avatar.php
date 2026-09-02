@@ -100,7 +100,7 @@ class ThePlus_Dynamic_Tag_Post_Author_Avatar extends Data_Tag {
 	 */
 	public function get_value( array $options = [] ) {
 
-		$post_id = get_the_ID();
+		$post_id = L_ThePlus_Dynamic_Tag_Context::get_post_id();
 		if ( ! $post_id ) {
 			return false;
 		}

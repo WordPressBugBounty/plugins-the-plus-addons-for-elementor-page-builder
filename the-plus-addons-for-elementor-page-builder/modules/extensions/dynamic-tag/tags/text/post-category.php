@@ -86,28 +86,11 @@ class ThePlus_Dynamic_Tag_Post_Category extends Tag {
      */
 	public function render(): void {
 
-		// On a category archive, output the queried category's name only.
-		if ( is_category() ) {
-			$queried = get_queried_object();
-			if ( $queried instanceof \WP_Term ) {
-				echo esc_html( $queried->name );
-			}
+		$category = L_ThePlus_Dynamic_Tag_Context::get_term( 'category' );
+
+		if ( empty( $category ) ) {
 			return;
 		}
-
-		$post_id = get_the_ID();
-
-		if ( ! $post_id ) {
-			return;
-		}
-
-		$terms = get_the_terms( $post_id, 'category' );
-
-		if ( empty( $terms ) || is_wp_error( $terms ) ) {
-			return;
-		}
-
-		$category = $terms[0];
 
 		echo esc_html( $category->name );
 	}

@@ -1204,7 +1204,7 @@ class L_ThePlus_Clients_ListOut extends Plus_Widget_Base {
 
 		if ( ! is_wp_error( $terms ) && ! empty( $terms ) && ! empty( $post_category ) ) {
 			foreach ( $terms as $term ) {
-				if ( in_array( $term->term_id, $post_category ) ) {
+				if ( in_array( $term->term_id, (array) $post_category ) ) {
 					$category[] = $term->slug;
 				}
 			}

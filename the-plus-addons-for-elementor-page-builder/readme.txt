@@ -4,7 +4,7 @@ Tags: elementor, elementor widgets, elementor addons, elementor templates, widge
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.5.0
+Stable tag: 6.5.1
 
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -399,6 +399,25 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.5.1 =
+Improvement : MCP Abilities : Widgets and controls are discoverable and controllable by WordPress AI agents, including Angie, through the Abilities API
+Improvement : Icon Library : Icon font now loads only on the widgets that use it
+Improvement : Gallery Listing : Added a description to the Category Wise Filter option
+Improvement : Process Steps : Removed stray separators splitting the control groups
+Improvement : Multiple Widgets : Output rendering improved across several widgets for better compatibility
+Improvement : Plugin code quality and structure improved
+Fix : Editor : Hardened handling of query values in widget option lookups Security Patch (Low Security)
+Fix : Editor : Clearing cached widget data no longer errors on an unrecognised widget
+Fix : Breadcrumbs : Hardened output escaping of home and author labels Security Patch (Low Security)
+Fix : Blog Listing : Hardened output escaping of author names and excerpts Security Patch (Low Security)
+Fix : Listing Widgets : Category filter no longer breaks the page when a category is unavailable
+Fix : Dynamic Tags : Post term tags now resolve against the current item instead of the archive
+Fix : Dynamic Tags : Tags now resolve correctly inside the editor
+Fix : Post Content & Post Meta : No longer error when used outside a Theme Builder template
+Fix : Social Embed : Twitter timeline height no longer triggers a notice
+Fix : Gravity Form : Password strength meter text restored
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.5.0 =
 Add : Tabs & Tours : Accordion toggle icon option added

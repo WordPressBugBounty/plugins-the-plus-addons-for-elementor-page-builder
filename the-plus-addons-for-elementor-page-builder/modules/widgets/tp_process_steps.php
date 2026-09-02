@@ -837,7 +837,6 @@ class L_ThePlus_Process_Steps extends Plus_Widget_Base {
 						'step' => 1,
 					),
 				),
-				'separator'   => 'after',
 				'render_type' => 'ui',
 				'selectors'   => array(
 					'{{WRAPPER}} .tp-process-steps-widget .tp-process-steps-wrapper .tp-ps-icon-img .tp-icon-img' => 'width: {{SIZE}}{{UNIT}};height: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}}',

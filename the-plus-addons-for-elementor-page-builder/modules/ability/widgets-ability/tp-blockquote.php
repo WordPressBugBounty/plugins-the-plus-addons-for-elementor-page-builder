@@ -10,24 +10,24 @@ wp_register_ability('tpae/tpae-blockquote', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'style' => ['type' => 'string', 'description' => 'Style', 'enum' => ['columns', 'style-1', 'style-2']],
-        'content_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'devices', 'icon', 'justify', 'left', 'prefix_class', 'right']],
+        'style' => ['type' => 'string', 'description' => 'Style', 'enum' => ['style-1', 'style-2']],
+        'content_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['left', 'center', 'right', 'justify']],
         'content_description' => ['type' => 'string', 'description' => 'Description'],
         'quote_author' => ['type' => 'string', 'description' => 'Author'],
         'quote_author_desc' => ['type' => 'string', 'description' => 'Author Description'],
         'quote_icon' => ['type' => 'string', 'description' => 'Icon', 'enum' => ['yes', 'no']],
-        'quote_icon_select' => ['type' => 'string', 'description' => 'Icon Library'],
-        'quote_icon_pos' => ['type' => 'string', 'description' => 'Position', 'enum' => ['qip_both', 'qip_bottm', 'qip_top', 'quote_icon', 'style!']],
-        'quote_icon_pos_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['qipa_left', 'qipa_right', 'quote_icon', 'quote_icon_pos', 'style!']],
-        'quote_icon_pos_align_both' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['qipa_center', 'qipa_left', 'qipa_opposite', 'qipa_right', 'quote_icon', 'quote_icon_pos', 'style!']],
-        'quote_tweet' => ['type' => 'string', 'description' => 'quote_tweet', 'enum' => ['yes', 'no']],
-        'quote_tweet_icon_select' => ['type' => 'string', 'description' => 'Tweet Icon'],
+        'quote_icon_select' => ['type' => 'object', 'description' => 'Icon Library'],
+        'quote_icon_pos' => ['type' => 'string', 'description' => 'Position', 'enum' => ['qip_top', 'qip_bottm', 'qip_both']],
+        'quote_icon_pos_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['qipa_left', 'qipa_right']],
+        'quote_icon_pos_align_both' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['qipa_opposite', 'qipa_left', 'qipa_right', 'qipa_center']],
+        'quote_tweet' => ['type' => 'string', 'description' => 'Tweet', 'enum' => ['yes', 'no']],
+        'quote_tweet_icon_select' => ['type' => 'object', 'description' => 'Tweet Icon'],
         'quote_tweet_text' => ['type' => 'string', 'description' => 'Text'],
         'quote_tweet_link' => ['type' => 'string', 'description' => 'Tweet Current Page', 'enum' => ['yes', 'no']],
         'quote_iamge_switch' => ['type' => 'string', 'description' => 'Image', 'enum' => ['yes', 'no']],
-        'quote_image' => ['type' => 'integer', 'description' => 'Select (Image ID)'],
+        'quote_image' => ['type' => 'object', 'description' => 'Select (Image ID)'],
         'quote_dropcap' => ['type' => 'string', 'description' => 'Drop Cap', 'enum' => ['yes', 'no']],
-        'border_layout' => ['type' => 'string', 'description' => 'Border Layout', 'enum' => ['bl_1', 'bl_2', 'bl_3', 'columns', 'none']],
+        'border_layout' => ['type' => 'string', 'description' => 'Border Layout', 'enum' => ['none', 'bl_1', 'bl_2', 'bl_3']],
         'quote_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
         'quote_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
         'content_color' => ['type' => 'string', 'description' => 'Text Color (Color Hex/RGBA)'],
@@ -40,7 +40,7 @@ wp_register_ability('tpae/tpae-blockquote', [
         'dropcap_color_h' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'desc_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
         'desc_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
-        'author_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'flex-end', 'flex-start', 'icon', '{{WRAPPER}} .plus_blockquote.quote-style-2 .quote-text .quote_author']],
+        'author_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['flex-start', 'center', 'flex-end']],
         'author_main_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
         'author_main_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
         'author_main_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
@@ -55,7 +55,7 @@ wp_register_ability('tpae/tpae-blockquote', [
         'ae_radius' => ['type' => 'object', 'description' => 'Border Radius (Dimensions Object)'],
         'image_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
         'image_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
-        'image_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'flex-end', 'flex-start', 'icon', '{{WRAPPER}} .tp-bq-imr-wrap']],
+        'image_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['flex-start', 'center', 'flex-end']],
         'image_size' => ['type' => 'object', 'description' => 'Size (Slider/Size Object)'],
         'image_radius' => ['type' => 'object', 'description' => 'Border Radius (Dimensions Object)'],
         'icon_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
@@ -73,7 +73,7 @@ wp_register_ability('tpae/tpae-blockquote', [
         'ipright_icon' => ['type' => 'object', 'description' => 'Right Icon Offset (Slider/Size Object)'],
         'icon_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'icon_radius' => ['type' => 'object', 'description' => 'Border Radius (Dimensions Object)'],
-        'tweet_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'flex-end', 'flex-start', 'icon', '{{WRAPPER}} .plus_blockquote .tp-bq-tweet-wrapper']],
+        'tweet_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['flex-start', 'center', 'flex-end']],
         'tweet_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
         'tweet_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
         'tweet_svg_size' => ['type' => 'object', 'description' => 'Icon Size (Slider/Size Object)'],
@@ -104,7 +104,7 @@ wp_register_ability('tpae/tpae-blockquote', [
         'box_padding_n' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
         'box_margin_n' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
         'box_border' => ['type' => 'string', 'description' => 'Box Border', 'enum' => ['yes', 'no']],
-        'border_style' => ['type' => 'string', 'description' => 'Border Style', 'enum' => ['box_border', '{{WRAPPER}} .plus_blockquote']],
+        'border_style' => ['type' => 'string', 'description' => 'Border Style', 'enum' => ['solid', 'dashed', 'dotted', 'groove', 'inset', 'outset', 'ridge']],
         'box_border_color' => ['type' => 'string', 'description' => 'Border Color (Color Hex/RGBA)'],
         'box_border_width' => ['type' => 'object', 'description' => 'Border Width (Dimensions Object)'],
         'border_radius' => ['type' => 'object', 'description' => 'Border Radius (Dimensions Object)'],
@@ -145,12 +145,12 @@ function tpae_mcp_add_theplus_blockquote_ability(array $input) {
     if (isset($input['quote_author'])) { $settings['quote_author'] = sanitize_text_field($input['quote_author']); }
     if (isset($input['quote_author_desc'])) { $settings['quote_author_desc'] = sanitize_text_field($input['quote_author_desc']); }
     if (isset($input['quote_icon'])) { $settings['quote_icon'] = sanitize_text_field($input['quote_icon']); }
-    if (isset($input['quote_icon_select'])) { $settings['quote_icon_select'] = sanitize_text_field($input['quote_icon_select']); }
+    if (isset($input['quote_icon_select'])) { $settings['quote_icon_select'] = tpae_mcp_sanitize_widget_setting_value($input['quote_icon_select']); }
     if (isset($input['quote_icon_pos'])) { $settings['quote_icon_pos'] = sanitize_text_field($input['quote_icon_pos']); }
     if (isset($input['quote_icon_pos_align'])) { $settings['quote_icon_pos_align'] = sanitize_text_field($input['quote_icon_pos_align']); }
     if (isset($input['quote_icon_pos_align_both'])) { $settings['quote_icon_pos_align_both'] = sanitize_text_field($input['quote_icon_pos_align_both']); }
     if (isset($input['quote_tweet'])) { $settings['quote_tweet'] = sanitize_text_field($input['quote_tweet']); }
-    if (isset($input['quote_tweet_icon_select'])) { $settings['quote_tweet_icon_select'] = sanitize_text_field($input['quote_tweet_icon_select']); }
+    if (isset($input['quote_tweet_icon_select'])) { $settings['quote_tweet_icon_select'] = tpae_mcp_sanitize_widget_setting_value($input['quote_tweet_icon_select']); }
     if (isset($input['quote_tweet_text'])) { $settings['quote_tweet_text'] = sanitize_text_field($input['quote_tweet_text']); }
     if (isset($input['quote_tweet_link'])) { $settings['quote_tweet_link'] = sanitize_text_field($input['quote_tweet_link']); }
     if (isset($input['quote_iamge_switch'])) { $settings['quote_iamge_switch'] = sanitize_text_field($input['quote_iamge_switch']); }

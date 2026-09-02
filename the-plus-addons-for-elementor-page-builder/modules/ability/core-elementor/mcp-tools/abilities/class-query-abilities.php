@@ -171,6 +171,22 @@ class Tpae_Elementor_MCP_Query_Abilities {
 		$result   = array();
 
 		foreach ( $widgets as $name => $widget ) {
+			/*
+			 * Skip removed-widget stubs (Tp_Removed_*). They stay registered only
+			 * to preserve stored data when an affected page is saved (no controls,
+			 * show_in_panel() false), so an AI agent must not be offered them:
+			 * building one yields an inert, editor-notice-only element. Matching
+			 * the base class also auto-covers any widget removed the same way
+			 * later. Deliberately NOT a blanket show_in_panel() filter -- that also
+			 * hides context-gated widgets an agent may legitimately build in a
+			 * theme-builder document (theme-*, loop-*, woocommerce-*, nav-menu).
+			 *
+			 * @since 6.5.1
+			 */
+			if ( $widget instanceof \TheplusAddons\Widgets\Base\Tp_Removed_Widget ) {
+				continue;
+			}
+
 			$widget_categories = $widget->get_categories();
 
 			if ( ! empty( $category ) && ! in_array( $category, $widget_categories, true ) ) {

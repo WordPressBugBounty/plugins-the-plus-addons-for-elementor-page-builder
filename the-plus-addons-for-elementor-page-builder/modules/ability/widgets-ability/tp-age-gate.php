@@ -12,13 +12,12 @@ wp_register_ability('tpae/tpae-age-gate', [
             'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
             'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
             'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'age_verify_method' => ['type' => 'string', 'description' => 'Method', 'enum' => ['columns', 'method-1', 'method-2', 'method-3']],
+        'age_verify_method' => ['type' => 'string', 'description' => 'Method', 'enum' => ['method-1', 'method-2', 'method-3']],
         'backend_preview' => ['type' => 'string', 'description' => 'Backend Visibility', 'enum' => ['yes', 'no']],
-        'age_gate_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'devices', 'flex-end', 'flex-start', 'icon', '{{WRAPPER}} .tp-agegate-wrapper .tp-agegate-inner-wrapper .tp-agegate-boxes,
-					{{WRAPPER}} .tp-agegate-wrapper .tp-agegate-inner-wrapper .tp-agegate-boxes *:not(.tp-age-btn-ex)']],
+        'age_gate_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['flex-start', 'center', 'flex-end']],
         'age_icon_popover_toggle' => ['type' => 'string', 'description' => 'Logo', 'enum' => ['yes', 'no']],
         'age_icon_img_type' => ['type' => 'string', 'description' => 'Logo', 'enum' => ['yes', 'no']],
-        'age_head_img' => ['type' => 'integer', 'description' => 'Icon library (Image ID)'],
+        'age_head_img' => ['type' => 'object', 'description' => 'Icon library (Image ID)'],
         'age_title_popover_toggle' => ['type' => 'string', 'description' => 'Title', 'enum' => ['yes', 'no']],
         'age_gate_title' => ['type' => 'string', 'description' => 'Title', 'enum' => ['yes', 'no']],
         'age_gate_title_input' => ['type' => 'string', 'description' => 'Label'],
@@ -28,28 +27,27 @@ wp_register_ability('tpae/tpae-age-gate', [
         'age_gate_description_inputhree' => ['type' => 'string', 'description' => 'Type'],
         'chkinput_text' => ['type' => 'string', 'description' => 'Confirm Box'],
         'age_extra_info_switch' => ['type' => 'string', 'description' => 'Extra Content', 'enum' => ['yes', 'no']],
-        'age_gate_align_txtera' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['center', 'icon', 'left', 'right', '{{WRAPPER}} .tp-agegate-wrapper .tp-agegate-inner-wrapper .tp-agegate-boxes,
-					{{WRAPPER}} .tp-agegate-wrapper .tp-agegate-inner-wrapper .tp-agegate-boxes *:not(.tp-age-btn-ex)']],
+        'age_gate_align_txtera' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['left', 'center', 'right']],
         'age_extra_info' => ['type' => 'string', 'description' => 'Type'],
         'button_text' => ['type' => 'string', 'description' => 'Text'],
         'icon_action' => ['type' => 'string', 'description' => 'Icon', 'enum' => ['yes', 'no']],
-        'icon_position' => ['type' => 'string', 'description' => 'Icon Position', 'enum' => ['age_icon_postfix', 'age_icon_prefix', 'icon_action']],
-        'button_icon' => ['type' => 'string', 'description' => 'Icon library'],
+        'icon_position' => ['type' => 'string', 'description' => 'Icon Position', 'enum' => ['age_icon_prefix', 'age_icon_postfix']],
+        'button_icon' => ['type' => 'object', 'description' => 'Icon library'],
         'second_button_text' => ['type' => 'string', 'description' => 'Text'],
         'second_icon_action' => ['type' => 'string', 'description' => 'Icon', 'enum' => ['yes', 'no']],
-        'second_icon_position' => ['type' => 'string', 'description' => 'Icon Position', 'enum' => ['age_scnd_icon_postfix', 'age_scnd_icon_prefix', 'age_verify_method', 'second_icon_action']],
-        'second_button_icon' => ['type' => 'string', 'description' => 'Icon'],
-        'birthyears' => ['type' => 'string', 'description' => 'Minimum Age Limit'],
+        'second_icon_position' => ['type' => 'string', 'description' => 'Icon Position', 'enum' => ['age_scnd_icon_prefix', 'age_scnd_icon_postfix']],
+        'second_button_icon' => ['type' => 'object', 'description' => 'Icon'],
+        'birthyears' => ['type' => 'number', 'description' => 'Minimum Age Limit'],
         'age_cookies' => ['type' => 'string', 'description' => 'Cookies', 'enum' => ['yes', 'no']],
-        'age_cookies_days' => ['type' => 'string', 'description' => 'Cookies Expiry Time'],
+        'age_cookies_days' => ['type' => 'number', 'description' => 'Cookies Expiry Time'],
         'db_max_width' => ['type' => 'object', 'description' => 'Form Content Max-width (Slider/Size Object)'],
         'age_sec_bg_image_switch' => ['type' => 'string', 'description' => 'Background Image', 'enum' => ['yes', 'no']],
-        'age_sec_bg_image' => ['type' => 'integer', 'description' => 'Background (Image ID)'],
-        'age_bgImg_pos' => ['type' => 'string', 'description' => 'Background Position', 'enum' => ['age_sec_bg_image_switch', '{{WRAPPER}} .tp-agegate-wrapper']],
+        'age_sec_bg_image' => ['type' => 'object', 'description' => 'Background (Image ID)'],
+        'age_bgImg_pos' => ['type' => 'string', 'description' => 'Background Position', 'enum' => ['', 'top left', 'top center', 'top right', 'center left', 'center center', 'center right', 'bottom left', 'bottom center', 'bottom right']],
         'age_sec_bg_overlay_color' => ['type' => 'string', 'description' => 'Overlay Color (Color Hex/RGBA)'],
         'age_side_image_show' => ['type' => 'string', 'description' => 'Right Side Image', 'enum' => ['yes', 'no']],
-        'age_side_img' => ['type' => 'integer', 'description' => 'Image (Image ID)'],
-        'age_rightImg_pos' => ['type' => 'string', 'description' => 'Right Image Position', 'enum' => ['age_side_image_show', '{{WRAPPER}} .tp-agegate-boxes.tp-equ-width-50']],
+        'age_side_img' => ['type' => 'object', 'description' => 'Image (Image ID)'],
+        'age_rightImg_pos' => ['type' => 'string', 'description' => 'Right Image Position', 'enum' => ['', 'top left', 'top center', 'top right', 'center left', 'center center', 'center right', 'bottom left', 'bottom center', 'bottom right']],
         'age_gate_wrong_message' => ['type' => 'string', 'description' => 'Error Message'],
         'logo_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
         'logo_size' => ['type' => 'object', 'description' => 'Logo Size (Slider/Size Object)'],
@@ -110,9 +108,9 @@ wp_register_ability('tpae/tpae-age-gate', [
         'msgHvrColor' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'msgHvrBRadius' => ['type' => 'object', 'description' => 'Border Radius (Dimensions Object)'],
         'box_position' => ['type' => 'string', 'description' => 'Box Position', 'enum' => ['yes', 'no']],
-        'box_left_auto' => ['type' => 'object', 'description' => 'Left (Auto)', 'enum' => ['yes', 'no']],
+        'box_left_auto' => ['type' => 'string', 'description' => 'Left (Auto)', 'enum' => ['yes', 'no']],
         'box_pos_xposition' => ['type' => 'object', 'description' => 'Left (Slider/Size Object)'],
-        'box_right_auto' => ['type' => 'object', 'description' => 'Right (Auto)', 'enum' => ['yes', 'no']],
+        'box_right_auto' => ['type' => 'string', 'description' => 'Right (Auto)', 'enum' => ['yes', 'no']],
         'box_pos_rightposition' => ['type' => 'object', 'description' => 'Right (Slider/Size Object)'],
         'box_width' => ['type' => 'object', 'description' => 'Box Width (Slider/Size Object)'],
         'box_height' => ['type' => 'object', 'description' => 'Box Height (Slider/Size Object)'],
@@ -169,11 +167,11 @@ function tpae_mcp_add_theplus_age_gate_ability(array $input) {
     if (isset($input['button_text'])) { $settings['button_text'] = sanitize_text_field($input['button_text']); }
     if (isset($input['icon_action'])) { $settings['icon_action'] = sanitize_text_field($input['icon_action']); }
     if (isset($input['icon_position'])) { $settings['icon_position'] = sanitize_text_field($input['icon_position']); }
-    if (isset($input['button_icon'])) { $settings['button_icon'] = sanitize_text_field($input['button_icon']); }
+    if (isset($input['button_icon'])) { $settings['button_icon'] = tpae_mcp_sanitize_widget_setting_value($input['button_icon']); }
     if (isset($input['second_button_text'])) { $settings['second_button_text'] = sanitize_text_field($input['second_button_text']); }
     if (isset($input['second_icon_action'])) { $settings['second_icon_action'] = sanitize_text_field($input['second_icon_action']); }
     if (isset($input['second_icon_position'])) { $settings['second_icon_position'] = sanitize_text_field($input['second_icon_position']); }
-    if (isset($input['second_button_icon'])) { $settings['second_button_icon'] = sanitize_text_field($input['second_button_icon']); }
+    if (isset($input['second_button_icon'])) { $settings['second_button_icon'] = tpae_mcp_sanitize_widget_setting_value($input['second_button_icon']); }
     if (isset($input['birthyears'])) { $settings['birthyears'] = sanitize_text_field($input['birthyears']); }
     if (isset($input['age_cookies'])) { $settings['age_cookies'] = sanitize_text_field($input['age_cookies']); }
     if (isset($input['age_cookies_days'])) { $settings['age_cookies_days'] = sanitize_text_field($input['age_cookies_days']); }

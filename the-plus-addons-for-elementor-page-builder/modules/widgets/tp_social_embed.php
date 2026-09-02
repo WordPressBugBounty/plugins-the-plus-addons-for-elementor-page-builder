@@ -3566,7 +3566,7 @@ class ThePlus_Social_Embed extends Plus_Widget_Base {
 				$Twlimit   = ! empty( $settings['Twlimit']['size'] ) ? $settings['Twlimit']['size'] : '';
 				$Twstyle   = ! empty( $settings['Twstyle'] ) ? $settings['Twstyle'] : 'linear';
 				$TwDesign  = ! empty( $settings['TwDesign'] ) ? $settings['TwDesign'] : array();
-				$Twheight  = ( $Twstyle === 'linear' ) ? $settings['Twheight']['size'] : '';
+				$Twheight  = ( $Twstyle === 'linear' && ! empty( $settings['Twheight']['size'] ) ) ? $settings['Twheight']['size'] : '';
 				$DesignBTN = array();
 				if ( is_array( $TwDesign ) ) {
 					foreach ( $TwDesign as $value ) {

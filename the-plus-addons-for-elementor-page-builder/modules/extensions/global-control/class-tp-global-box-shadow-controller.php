@@ -204,16 +204,28 @@ class TP_Box_Shadow_Global extends Tab_Base {
 	 * Usage: 'options' => TP_Box_Shadow_Global::get_preset_options()
 	 *
 	 * @since v6.5.0
-	 * @return array  [ '' => 'Select Box Shadow', '_id' => 'Name', ... ]
+	 * @return array  [ '' => 'None', '_id' => 'Name', ... ]
 	 */
 	public static function get_preset_options() {
-		$options = array( '' => esc_html__( 'Select Box Shadow', 'tpebl' ) );
+		$presets = array();
 
 		foreach ( self::get_global_box_shadow_list() as $preset ) {
-			$options[ $preset['_id'] ] = ! empty( $preset['name'] ) ? $preset['name'] : 'Unnamed';
+			$id = isset( $preset['_id'] ) ? (string) $preset['_id'] : '';
+
+			/**
+			 * A preset saved without an `_id` would key the array on '' and overwrite the
+			 * placeholder below, leaving the picker with no way back to "no shadow".
+			 *
+			 * @since 6.5.1
+			 */
+			if ( '' === $id ) {
+				continue;
+			}
+
+			$presets[ $id ] = ! empty( $preset['name'] ) ? $preset['name'] : esc_html__( 'Unnamed', 'tpebl' );
 		}
 
-		return $options;
+		return array( '' => esc_html__( 'None', 'tpebl' ) ) + $presets;
 	}
 
 	/**

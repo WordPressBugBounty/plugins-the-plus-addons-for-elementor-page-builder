@@ -323,7 +323,7 @@ if ( ! class_exists( 'Tp_Wdkit_Preview_Popup' ) ) {
 						<?php } else { ?>
 							<a class="tp-pre-wdesign-install" href="#"><span class="tp-visit-plugin"><?php echo esc_html__( 'Visit Plugin', 'tpebl' ); ?></span></a>
 						<?php } ?>
-							<a class="tp-pre-wdesign-about" target="_blank" href="https://wdesignkit.com/templates?temp_type_req=pagetemplate&builder_req=1001"><?php echo esc_html__( 'Learn More', 'tpebl' ); ?></a>
+							<a class="tp-pre-wdesign-about" target="_blank" rel="noopener noreferrer" href="https://wdesignkit.com/templates?temp_type_req=pagetemplate&builder_req=1001"><?php echo esc_html__( 'Learn More', 'tpebl' ); ?></a>
 					</div>
 				</div>
 				<div class="tp-pre-image-sections"></div>

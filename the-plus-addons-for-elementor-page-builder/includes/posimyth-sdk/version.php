@@ -83,4 +83,8 @@
  * @package POSIMYTH\Analytics\SDK
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 return '2.21.0';

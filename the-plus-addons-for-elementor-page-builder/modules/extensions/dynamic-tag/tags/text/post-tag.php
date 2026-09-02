@@ -87,21 +87,7 @@ class ThePlus_Dynamic_Tag_Post_Tags extends Tag {
      */
 	public function render(): void {
 
-		// On a tag archive, output the queried tag's name only.
-		if ( is_tag() ) {
-			$queried = get_queried_object();
-			if ( $queried instanceof \WP_Term ) {
-				echo esc_html( $queried->name );
-			}
-			return;
-		}
-
-		$post_id = get_the_ID();
-		if ( ! $post_id ) {
-			return;
-		}
-
-		$tags = get_the_tags( $post_id );
+		$tags = L_ThePlus_Dynamic_Tag_Context::get_terms( 'post_tag' );
 
 		if ( empty( $tags ) ) {
 			return;

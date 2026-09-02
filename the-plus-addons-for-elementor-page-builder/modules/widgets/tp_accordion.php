@@ -1813,7 +1813,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 										}
 									}
 
-									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Selected Template :', 'tpebl' ) . ' <b>"' . esc_attr( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
+									echo '<div class="tab-preview-template-notice"><div class="preview-temp-notice-heading">' . esc_html__( 'Selected Template :', 'tpebl' ) . ' <b>"' . esc_html( $get_template_name ) . '"</b></div><div class="preview-temp-notice-desc"><b>' . esc_html__( 'Note :', 'tpebl' ) . '</b> ' . esc_html__( 'We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend.', 'tpebl' ) . '</div></div>';
 								}
 							} elseif ( 'page_template' === $content_source ) {
 								if ( empty( $content_template ) || '0' === $content_template ) {

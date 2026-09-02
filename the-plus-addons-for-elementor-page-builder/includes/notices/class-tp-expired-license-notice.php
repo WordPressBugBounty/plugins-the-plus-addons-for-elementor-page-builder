@@ -142,7 +142,7 @@ if ( ! class_exists( 'Tp_Expired_License_Notice' ) ) {
 						<p style="color: #1e1e1e;">' . esc_html__( 'Please renew your license to continue using Pro features and receive updates, security patches, and access to new features.', 'tpebl' ) . '</p>
 						
 						<div class="tp-tpae-button" style="margin-top: 10px;">
-							<a href="https://store.posimyth.com/checkout/?edd_license_key=' . esc_html( $license_key ) . '&download_id=141297" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: #fff;">' . esc_html__( 'Renew Now', 'tpebl' ) . '</a>
+							<a href="https://store.posimyth.com/checkout/?edd_license_key=' . rawurlencode( $license_key ) . '&download_id=141297" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: #fff;">' . esc_html__( 'Renew Now', 'tpebl' ) . '</a>
 						</div>
 					</div>
 				</div>
@@ -201,7 +201,7 @@ if ( ! class_exists( 'Tp_Expired_License_Notice' ) ) {
 						<p style="color: #1e1e1e;">' . esc_html__( 'Your Pro license will expire in 7 days. Renewing ensures continued access to updates and Pro features without interruption.', 'tpebl' ) . '</p>
 						
 						<div class="tp-tpae-button" style="margin-top: 10px;">
-							<a href="https://store.posimyth.com/checkout/?edd_license_key=' . esc_html( $license_key ) . '&download_id=141297" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: #fff;">' . esc_html__( 'Renew Now', 'tpebl' ) . '</a>
+							<a href="https://store.posimyth.com/checkout/?edd_license_key=' . rawurlencode( $license_key ) . '&download_id=141297" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: #fff;">' . esc_html__( 'Renew Now', 'tpebl' ) . '</a>
 						</div>
 					</div>
 				</div>
@@ -260,7 +260,7 @@ if ( ! class_exists( 'Tp_Expired_License_Notice' ) ) {
 						<p style="color: #1e1e1e;">' . esc_html__( 'Your Pro license will expire in 30 days renew in advance to avoid any break in functionality or receiving active updates.', 'tpebl' ) . '</p>
 						
 						<div class="tp-tpae-button" style="margin-top: 10px;">
-							<a href="https://store.posimyth.com/checkout/?edd_license_key=' . esc_html( $license_key ) . '&download_id=141297" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: #fff;">' . esc_html__( 'Renew Early', 'tpebl' ) . '</a>
+							<a href="https://store.posimyth.com/checkout/?edd_license_key=' . rawurlencode( $license_key ) . '&download_id=141297" class="button" target="_blank" rel="noopener noreferrer" style="margin-right: 10px; background: #6660EF; color: #fff;">' . esc_html__( 'Renew Early', 'tpebl' ) . '</a>
 						</div>
 					</div>
 				</div>

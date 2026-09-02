@@ -1697,7 +1697,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Plus_Widget_Base {
 				$crumbs_output = '<nav id="breadcrumbs"><a href="' . esc_url( home_url() ) . '">' . $icons_content . esc_html( $text['home'] ) . '</a></nav>';
 			}
 		} else {
-			$crumbs_output = '<nav id="breadcrumbs">' . sprintf( $home_link, $homeLink, $text['home'] ) . $home_delimiter;
+			$crumbs_output = '<nav id="breadcrumbs">' . sprintf( $home_link, $homeLink, esc_html( $text['home'] ) ) . $home_delimiter;
 
 			if ( is_category() ) {
 				$thisCat = get_category( get_query_var( 'cat' ), false );
@@ -1936,7 +1936,7 @@ class L_ThePlus_Breadcrumbs_Bar extends Plus_Widget_Base {
 
 				$userdata = get_userdata( $author );
 
-				$crumbs_output .= $before . sprintf( $text['author'], $userdata->display_name ) . $after;
+				$crumbs_output .= $before . sprintf( $text['author'], esc_html( $userdata->display_name ) ) . $after;
 			} elseif ( is_404() ) {
 				$crumbs_output .= $before . $text['404'] . $after;
 			}

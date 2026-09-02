@@ -247,7 +247,22 @@ if (!function_exists('tpae_mcp_save_elementor_page_data')) {
             return new WP_Error('document_not_found', __('Elementor document not found for save.', 'tpebl'));
         }
 
-        $result = $document->save(['elements' => $data]);
+        /*
+         * Elementor save hooks re-render widgets (TPAE regenerates its per-post CSS/JS
+         * bundles here). A notice or warning raised during that render would be written
+         * straight into this ability response, prefixing the JSON with HTML and breaking
+         * every later MCP call against the page. Swallow stray output.
+         */
+        $tpae_ob_level = ob_get_level();
+        ob_start();
+
+        try {
+            $result = $document->save(['elements' => $data]);
+        } finally {
+            while (ob_get_level() > $tpae_ob_level) {
+                ob_end_clean();
+            }
+        }
         if ($result === false) {
             $json = wp_json_encode($data);
             if ($json === false) {

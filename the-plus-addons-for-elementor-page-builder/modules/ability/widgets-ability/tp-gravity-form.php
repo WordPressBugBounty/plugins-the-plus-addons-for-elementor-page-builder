@@ -12,7 +12,7 @@ wp_register_ability('tpae/tpae-gravity-form', [
             'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
             'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
             'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-            'gravity_form' => ['type' => 'integer', 'description' => 'Gravity Forms form ID to embed'],
+            'gravity_form' => ['type' => 'string', 'description' => 'Gravity Forms form ID to embed (values are site-specific; read the live list with the tpae/tpae-widget-schema ability)'],
             'title_hide' => ['type' => 'string', 'enum' => ['yes', 'no'], 'description' => 'Hide the form title'],
             'ajax' => ['type' => 'string', 'enum' => ['yes', 'no'], 'description' => 'Submit form via AJAX'],
                     'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],

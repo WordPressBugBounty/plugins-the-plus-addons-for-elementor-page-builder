@@ -161,8 +161,20 @@ final class L_Theplus_Element_Load {
 	 */
 	public function tp_f_in_plugin_update_message( $data, $response ) {
 
-		if ( isset( $data['upgrade_notice'] ) && ! empty( $data['upgrade_notice'] ) ) {
-			printf( '<div class="update-message">%s</div>', wpautop( $data['upgrade_notice'] ) );
+		/*
+		 * The notice arrives on $response, not $data (header fields only); read it
+		 * from there, fall back to $data, and wp_kses_post() before wpautop().
+		 * @since 6.5.1
+		 */
+		$upgrade_notice = '';
+		if ( ! empty( $response->upgrade_notice ) ) {
+			$upgrade_notice = $response->upgrade_notice;
+		} elseif ( ! empty( $data['upgrade_notice'] ) ) {
+			$upgrade_notice = $data['upgrade_notice'];
+		}
+
+		if ( '' !== $upgrade_notice ) {
+			printf( '<div class="update-message">%s</div>', wpautop( wp_kses_post( $upgrade_notice ) ) );
 		}
 	}
 
@@ -490,13 +502,14 @@ final class L_Theplus_Element_Load {
 		add_action( 'elementor/elements/categories_registered', array( $this, 'add_elementor_category' ) );
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'theplus_editor_styles' ) );
 		
-		if ( defined( 'THEPLUS_VERSION' ) && ! empty( $elements ) && is_array( $elements ) && in_array( 'tp_social_feed', $elements ) ) {
-			add_action( 'wp_enqueue_scripts', array( $this, 'theplus_frontend_styles' ) );
-		}
-
-		if(defined('THEPLUS_VERSION') && !empty($plus_extras) && is_array($plus_extras) && in_array('plus_adv_scroll_interactions', $plus_extras)) {
-			add_action( 'wp_enqueue_scripts', array( $this, 'theplus_frontend_styles' ) );
-		}
+		/*
+		 * Register the icon-font handle only; consumers enqueue it on demand
+		 * (Social Feed get_style_depends(), admin timeline), so pages without TPAE
+		 * icons never load it. Replaces the 6.4.2 blanket enqueue.
+		 * @since 6.5.1
+		 */
+		add_action( 'wp_enqueue_scripts', array( $this, 'theplus_register_icons_library' ) );
+		add_action( 'elementor/frontend/after_register_styles', array( $this, 'theplus_register_icons_library' ) );
 
 		add_filter( 'upload_mimes', array( $this, 'theplus_mime_types' ) );
 		add_filter( 'wp_handle_upload_prefilter', array( $this, 'theplus_sanitize_svg_upload' ) );
@@ -606,12 +619,15 @@ final class L_Theplus_Element_Load {
 	}
 
 	/**
-	 * Load Icon library on the frontend side
-	 *
-	 * @since 6.4.2
+	 * Register the icon-font stylesheet (register only; consumers enqueue on
+	 * demand). Kept at its real plugin path so its bare-relative font URLs
+	 * resolve -- never merge it into the uploads cache.
+	 * @since 6.5.1
 	 */
-	public function theplus_frontend_styles() {
-		wp_enqueue_style( 'theplus-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
+	public function theplus_register_icons_library() {
+		if ( ! wp_style_is( 'theplus-icons-library', 'registered' ) ) {
+			wp_register_style( 'theplus-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION );
+		}
 	}
 
 	/**

@@ -10,10 +10,10 @@ wp_register_ability('tpae/tpae-icon', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'selected_icon' => ['type' => 'string', 'description' => 'Choose Icon'],
+        'selected_icon' => ['type' => 'object', 'description' => 'Choose Icon'],
         'tp_icon_link' => ['type' => 'object', 'description' => 'Link'],
         'tp_icon_padding' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
-        'tp_icon_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'icon', 'left', 'right', '{{WRAPPER}} .tp-icon-wrapper']],
+        'tp_icon_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['left', 'center', 'right']],
         'tp_icon_size' => ['type' => 'object', 'description' => 'Size (Slider/Size Object)'],
         'tp_rotate_icon' => ['type' => 'object', 'description' => 'Rotate (Slider/Size Object)'],
         'tp_icon_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
@@ -57,7 +57,7 @@ function tpae_mcp_add_theplus_icon_ability(array $input) {
     $page_data = tpae_mcp_get_elementor_page_data($post_id);
     if (is_wp_error($page_data)) { return $page_data; }
     $settings = [];
-    if (isset($input['selected_icon'])) { $settings['selected_icon'] = sanitize_text_field($input['selected_icon']); }
+    if (isset($input['selected_icon'])) { $settings['selected_icon'] = tpae_mcp_sanitize_widget_setting_value($input['selected_icon']); }
     if (isset($input['tp_icon_link'])) { $settings['tp_icon_link'] = $input['tp_icon_link']; }
     if (isset($input['tp_icon_padding'])) { $settings['tp_icon_padding'] = $input['tp_icon_padding']; }
     if (isset($input['tp_icon_align'])) { $settings['tp_icon_align'] = $input['tp_icon_align']; }

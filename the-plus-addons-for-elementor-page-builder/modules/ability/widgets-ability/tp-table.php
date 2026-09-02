@@ -10,7 +10,7 @@ wp_register_ability('tpae/tpae-table', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'table_selection' => ['type' => 'string', 'enum' => ['custom'], 'description' => 'Table data source (custom = manually built table)'],
+        'table_selection' => ['type' => 'string', 'description' => 'Table data source (custom = manually built table) (values are site-specific; read the live list with the tpae/tpae-widget-schema ability)'],
                 'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],
         ],
         'required' => ['post_id', 'parent_id'], 'additionalProperties' => false],

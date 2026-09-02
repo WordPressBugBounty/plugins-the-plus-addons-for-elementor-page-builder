@@ -25,6 +25,8 @@ if ( 'after' === $before_after && ! empty( $icons ) ) {
 		$icons_after = '<i class="btn-icon button-after ' . esc_attr( $icons ) . '"></i>';
 }
 
+$button_text = wp_kses_post( $button_text );
+
 if ( 'style-8' === $button_style ) {
 	$button_content = $icons_before . $button_text . $icons_after;
 }

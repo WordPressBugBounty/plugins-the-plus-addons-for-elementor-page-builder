@@ -244,10 +244,11 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 			 * The roadmap link is deliberately left clean, matching the existing roadmap
 			 * links in class-tp-plugin-page.php, which carry no UTM.
 			 */
-			$utm      = 'utm_source=wpbackend&utm_medium=adminpanel&utm_campaign=abilities';
-			$log_url  = 'https://roadmap.theplusaddons.com/updates/';
-			$blog_url = 'https://theplusaddons.com/blog/the-plus-addons-for-elementor-6-5-0-update/?' . $utm;
-			$logo_url = defined( 'L_THEPLUS_ASSETS_URL' ) ? L_THEPLUS_ASSETS_URL . 'images/tpae-favicon-white.png' : '';
+			$utm         = 'utm_source=wpbackend&utm_medium=adminpanel&utm_campaign=abilities';
+			$log_url     = 'https://roadmap.theplusaddons.com/updates/';
+			$learn_url   = 'https://theplusaddons.com/mcp-abilities/?' . $utm;
+			$recipes_url = 'https://theplusaddons.com/widget-recipes/?utm_source=wpbackend&utm_medium=adminpanel&utm_campaign=widgetrecipes';
+			$logo_url    = defined( 'L_THEPLUS_ASSETS_URL' ) ? L_THEPLUS_ASSETS_URL . 'images/tpae-favicon-white.png' : '';
 
 			/**
 			 * The Abilities switch lives on the dashboard Settings route, in the group
@@ -304,11 +305,11 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 								<a class="tpae-wn__btn tpae-wn__btn--on" href="<?php echo esc_url( $on_url ); ?>">
 									<?php echo esc_html__( 'Turn on Abilities', 'tpebl' ); ?>
 								</a>
-								<a class="tpae-wn__btn tpae-wn__btn--gh" href="<?php echo esc_url( $blog_url ); ?>" target="_blank" rel="noopener noreferrer">
+								<a class="tpae-wn__btn tpae-wn__btn--gh" href="<?php echo esc_url( $learn_url ); ?>" target="_blank" rel="noopener noreferrer">
 									<?php echo esc_html__( 'Learn More', 'tpebl' ); ?>
 								</a>
 							<?php } else { ?>
-								<a class="tpae-wn__btn tpae-wn__btn--on" href="<?php echo esc_url( $blog_url ); ?>" target="_blank" rel="noopener noreferrer">
+								<a class="tpae-wn__btn tpae-wn__btn--on" href="<?php echo esc_url( $learn_url ); ?>" target="_blank" rel="noopener noreferrer">
 									<?php echo esc_html__( 'Learn More', 'tpebl' ); ?>
 								</a>
 							<?php } ?>
@@ -329,6 +330,10 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 						}
 						?>
 						<li class="tpae-wn__logli">
+							<a class="tpae-wn__log" href="<?php echo esc_url( $recipes_url ); ?>" target="_blank" rel="noopener noreferrer">
+								<?php echo esc_html__( 'Browse Widget Recipes', 'tpebl' ); ?>
+							</a>
+							<span class="tpae-wn__logsep" aria-hidden="true">&middot;</span>
 							<a class="tpae-wn__log" href="<?php echo esc_url( $log_url ); ?>" target="_blank" rel="noopener noreferrer">
 								<?php echo esc_html__( 'See the full changelog', 'tpebl' ); ?>
 							</a>
@@ -425,6 +430,7 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 			.tpae-wn a.tpae-wn__btn--gh:focus,.tpae-wn a.tpae-wn__btn--gh:focus-visible{color:#413c5e;border-radius:8px;box-shadow:0 0 0 3px rgba(124,58,237,.35)}
 			.tpae-wn a.tpae-wn__log{font-size:11.5px;color:#524bcf;text-decoration:underline}
 			.tpae-wn a.tpae-wn__log:hover,.tpae-wn a.tpae-wn__log:focus{color:#3b35a6}
+			.tpae-wn__logsep{font-size:11.5px;color:#b8b3e0;margin:0 8px}
 
 			@keyframes tpaeWnIn{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
 			@keyframes tpaeWnUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}

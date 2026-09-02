@@ -64,8 +64,19 @@ class L_Theplus_Module {
 		if ( empty( $data['query_type'] ) || empty( $data['q'] ) ) {
 			throw new \Exception( 'Bad Request' );
 		}
-		
-		$results = call_user_func( [ $this, 'get_autocomplete_for_' . $data['query_type'] ], $data );
+
+		/*
+		 * query_type comes from the request, so the method name is partly
+		 * attacker-controlled: unknown types were fatal, and any same-named
+		 * method on this class was reachable. Resolve it explicitly.
+		 */
+		$callback = is_string( $data['query_type'] ) ? 'get_autocomplete_for_' . $data['query_type'] : '';
+
+		if ( '' === $callback || ! method_exists( $this, $callback ) ) {
+			throw new \Exception( 'Bad Request' );
+		}
+
+		$results = call_user_func( [ $this, $callback ], $data );
 
 		return [
 			'results' => $results,
@@ -288,7 +299,15 @@ class L_Theplus_Module {
 	 * @return array
 	 */
 	public function plus_get_control_value_titles( $request ) {
-		$results = call_user_func( [ $this, 'get_value_titles_for_' . $request['query_type'] ], $request );
+		/* Same dynamic-dispatch guard as plus_get_filter_autocomplete(). */
+		$query_type = isset( $request['query_type'] ) ? $request['query_type'] : '';
+		$callback   = ( is_string( $query_type ) && '' !== $query_type ) ? 'get_value_titles_for_' . $query_type : '';
+
+		if ( '' === $callback || ! method_exists( $this, $callback ) ) {
+			return [];
+		}
+
+		$results = call_user_func( [ $this, $callback ], $request );
 
 		return $results;
 	}

@@ -543,6 +543,11 @@ class ThePlus_Post_Content extends Plus_Widget_Base {
 					static $posts = array();
 					$post         = get_post();
 
+					/* No post in context (generic page, not a Theme Builder single/archive template). */
+					if ( ! $post instanceof \WP_Post ) {
+						return;
+					}
+
 					if ( post_password_required( $post->ID ) ) {
 						echo get_the_password_form( $post->ID );
 						return;

@@ -1714,9 +1714,9 @@ class L_ThePlus_Team_Member_ListOut extends Plus_Widget_Base {
 		$category      = array();
 		$post_category = ! empty( $settings['post_category'] ) ? $settings['post_category'] : '';
 
-		if ( null !== $terms && ! empty( $post_category ) ) {
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) && ! empty( $post_category ) ) {
 			foreach ( $terms as $term ) {
-				if ( in_array( $term->term_id, $post_category ) ) {
+				if ( in_array( $term->term_id, (array) $post_category ) ) {
 					$category[] = $term->slug;
 				}
 			}
@@ -1731,7 +1731,7 @@ class L_ThePlus_Team_Member_ListOut extends Plus_Widget_Base {
 			'order'               => $settings['post_order'],
 		);
 
-		if ( null !== $terms && ! empty( $post_category ) ) {
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) && ! empty( $post_category ) ) {
 			$query_args['tax_query'] = array(
 				array(
 					'taxonomy' => $team_taxonomy,

@@ -36,7 +36,7 @@ if ( ! class_exists( 'ThePlusAddons\Elementor\ScrollAnimation\TP_Global_Scroll_A
 				return TP_Global_Scroll_Animation_Controller::get_preset_options();
 			}
 
-			return array( '' => esc_html__( 'Select Global Animation', 'tpebl' ) );
+			return array( '' => esc_html__( 'None', 'tpebl' ) );
 		}
 
 		public static function resolve_widget_settings( $settings ) {

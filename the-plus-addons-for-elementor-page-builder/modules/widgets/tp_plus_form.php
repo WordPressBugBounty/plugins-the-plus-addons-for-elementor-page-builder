@@ -3100,7 +3100,7 @@ class L_ThePlus_Plus_Form extends Plus_Widget_Base {
 		}
 
 		if ( 'yes' === $form_title_display ) {
-			$form_markup .= '<div class="tpae-form-name">' . esc_attr( $unique_form_name ) . '</div>';
+			$form_markup .= '<div class="tpae-form-name">' . esc_html( $unique_form_name ) . '</div>';
 		}
 
 			$form_markup .= '<form id="' . esc_attr( $form_id ) . '" class="tpae-form" method="post">';

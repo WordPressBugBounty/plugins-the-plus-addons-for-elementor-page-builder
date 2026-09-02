@@ -278,6 +278,11 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-whats-new-notice.php';
 				}
 
+				/** Widget Recipes feature announcement (6.5.1) */
+				if ( ! get_option( 'tpae_widget_recipes_notice' ) ) {
+					include L_THEPLUS_PATH . 'includes/notices/class-tp-widget-recipes-notice.php';
+				}
+
 				/** Removed & Deprecated Widgets Notice (6.5.0)*/
 				if ( ! get_option( 'tpae_removed_widgets_notice' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-removed-widgets-notice.php';

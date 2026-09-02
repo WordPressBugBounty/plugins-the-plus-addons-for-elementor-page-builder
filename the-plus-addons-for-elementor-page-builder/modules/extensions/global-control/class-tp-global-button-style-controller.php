@@ -48,7 +48,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			return TP_Box_Shadow_Global::get_preset_options();
 		}
 
-		return array( '' => esc_html__( 'Select Global Shadow', 'tpebl' ) );
+		return array( '' => esc_html__( 'None', 'tpebl' ) );
 	}
 
 	public function get_id() {
@@ -614,7 +614,7 @@ class TP_Button_Style_Global extends Tab_Base {
 			$presets[ $id ] = ! empty( $preset['name'] ) ? $preset['name'] : esc_html__( 'Unnamed', 'tpebl' );
 		}
 
-		return array( '' => esc_html__( 'Select Global Button', 'tpebl' ) ) + $presets;
+		return array( '' => esc_html__( 'None', 'tpebl' ) ) + $presets;
 	}
 
 	/**

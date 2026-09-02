@@ -8,6 +8,10 @@
  * @package the-plus-addons-for-elementor-page-builder
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
 use Elementor\Plugin;

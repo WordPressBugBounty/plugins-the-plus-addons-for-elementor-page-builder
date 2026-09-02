@@ -10,7 +10,7 @@ wp_register_ability('tpae/tpae-scroll-navigation', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'scroll_navigation_style' => ['type' => 'string', 'enum' => ['style-1'], 'description' => 'Navigation dots style'],
+        'scroll_navigation_style' => ['type' => 'string', 'description' => 'Navigation dots style', 'enum' => ['style-1', 'style-2', 'style-3', 'style-4', 'style-5']],
         'scroll_navigation_direction' => ['type' => 'string', 'enum' => ['left', 'right', 'top', 'bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right'], 'description' => 'Position of navigation dots on screen'],
         'scroll_navigation_display_counter' => ['type' => 'string', 'enum' => ['yes', 'no'], 'description' => 'Show section number counter'],
                 'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],

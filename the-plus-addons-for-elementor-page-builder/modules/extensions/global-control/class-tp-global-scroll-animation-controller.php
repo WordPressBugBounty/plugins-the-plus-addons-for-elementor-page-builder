@@ -341,7 +341,7 @@ class TP_Global_Scroll_Animation_Controller extends Tab_Base {
 	}
 
 	public static function get_preset_options() {
-		$options = array( '' => esc_html__( 'Select Global Animation', 'tpebl' ) );
+		$options = array( '' => esc_html__( 'None', 'tpebl' ) );
 
 		foreach ( self::get_global_scroll_animation_list() as $preset ) {
 			if ( empty( $preset['_id'] ) ) {

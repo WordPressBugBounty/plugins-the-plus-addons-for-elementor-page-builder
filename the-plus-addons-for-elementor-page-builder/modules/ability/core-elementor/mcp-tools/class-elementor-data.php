@@ -201,7 +201,22 @@ class Tpae_Elementor_MCP_Data {
 		}
 
 		// Attempt native Elementor save (handles CSS regen, cache busting).
-		$result = $document->save( array( 'elements' => $data ) );
+		/*
+		 * Elementor save hooks re-render widgets (TPAE regenerates its per-post CSS/JS
+		 * bundles here). A notice or warning raised during that render would be written
+		 * straight into this ability response, prefixing the JSON with HTML and breaking
+		 * every later MCP call against the page. Swallow stray output.
+		 */
+		$tpae_ob_level = ob_get_level();
+		ob_start();
+
+		try {
+			$result = $document->save( array( 'elements' => $data ) );
+		} finally {
+			while ( ob_get_level() > $tpae_ob_level ) {
+				ob_end_clean();
+			}
+		}
 
 		if ( false === $result ) {
 			// Fallback: direct meta write for non-browser contexts (CLI, REST proxy).
@@ -255,7 +270,22 @@ class Tpae_Elementor_MCP_Data {
 			return $document;
 		}
 
-		$result = $document->save( array( 'settings' => $settings ) );
+		/*
+		 * Elementor save hooks re-render widgets (TPAE regenerates its per-post CSS/JS
+		 * bundles here). A notice or warning raised during that render would be written
+		 * straight into this ability response, prefixing the JSON with HTML and breaking
+		 * every later MCP call against the page. Swallow stray output.
+		 */
+		$tpae_ob_level = ob_get_level();
+		ob_start();
+
+		try {
+			$result = $document->save( array( 'settings' => $settings ) );
+		} finally {
+			while ( ob_get_level() > $tpae_ob_level ) {
+				ob_end_clean();
+			}
+		}
 
 		if ( false === $result ) {
 			// Fallback: merge settings into existing page settings meta.

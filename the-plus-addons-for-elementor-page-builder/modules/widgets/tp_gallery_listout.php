@@ -192,8 +192,9 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 			array(
 				'type'        => 'tpae_pro_feature',
 				'label_block' => true,
+				'default'     => '',
 				'condition'   => array(
-					'layout' => 'carousel',
+					'layout' => array( 'carousel' ),
 				),
 			)
 		);
@@ -470,19 +471,25 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 		$this->add_control(
 			'filter_category',
 			array(
-				'label'     => wp_kses_post(
+				'label'       => wp_kses_post(
 					sprintf(
 						'%s <a class="tp-docs-link" href="%s" target="_blank" rel="noopener noreferrer"><i class="eicon-help-o"></i></a>',
 						esc_html__( 'Category Wise Filter', 'tpebl' ),
 						esc_url( $this->tp_doc . 'create-filterable-image-gallery-in-elementor/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=widget' )
 					)
 				),
-				'type'      => Controls_Manager::SWITCHER,
-				'label_on'  => esc_html__( 'Show', 'tpebl' ),
-				'label_off' => esc_html__( 'Hide', 'tpebl' ),
-				'default'   => 'no',
-				'separator' => 'before',
-				'condition' => array(
+				'type'        => Controls_Manager::SWITCHER,
+				'label_on'    => esc_html__( 'Show', 'tpebl' ),
+				'label_off'   => esc_html__( 'Hide', 'tpebl' ),
+				'default'     => 'no',
+				'separator'   => 'before',
+				'description' => wp_kses_post(
+					sprintf(
+						'<p class="tp-controller-label-text">%s</p>',
+						esc_html__( 'Enable this to add category-based filtering buttons above the gallery, letting visitors sort items by category.', 'tpebl' )
+					)
+				),
+				'condition'   => array(
 					'gallery_options' => 'repeater',
 				),
 			)
@@ -1350,8 +1357,11 @@ class L_ThePlus_Gallery_ListOut extends Plus_Widget_Base {
 
 				$output .= '<div id="' . esc_attr( $uid ) . '" class="tp-row post-inner-loop ' . esc_attr( $uid ) . '">';
 
-			if ( ! empty( $gallery_img ) && 'normal' === $gal_options ) {
+			if ( ! empty( $gallery_img ) && is_array( $gallery_img ) && 'normal' === $gal_options ) {
 				foreach ( $gallery_img as $image ) {
+					if ( ! is_array( $image ) || empty( $image['id'] ) ) {
+						continue;
+					}
 					$image_id    = $image['id'];
 					$attachment  = get_post( $image_id );
 					$title       = '';

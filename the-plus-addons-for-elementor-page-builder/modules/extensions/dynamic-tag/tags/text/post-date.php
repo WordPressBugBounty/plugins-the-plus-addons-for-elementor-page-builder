@@ -137,7 +137,7 @@ class ThePlus_Dynamic_Tag_Post_Date extends Tag {
      */
 	public function render(): void {
 
-		$post_id = get_the_ID();
+		$post_id = L_ThePlus_Dynamic_Tag_Context::get_post_id();
 		if ( ! $post_id ) {
 			return;
 		}

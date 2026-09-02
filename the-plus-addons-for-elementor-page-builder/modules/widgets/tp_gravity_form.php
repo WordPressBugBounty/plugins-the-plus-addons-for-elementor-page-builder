@@ -2627,6 +2627,7 @@ class ThePlus_Gravity_Form extends Plus_Widget_Base {
 		$gra_compat  = ! empty( $settings['select'] ) ? $settings['select'] : 'gf_default';
 
 		$gf_global_inline = '';
+		$gf_text_inline   = '';
 		if ( 'gf_default' === $gra_compat && $gra_form_id > 0 && function_exists( 'gravity_form_enqueue_scripts' ) ) {
 			gravity_form_enqueue_scripts( $gra_form_id, $gra_ajax );
 
@@ -2640,10 +2641,54 @@ class ThePlus_Gravity_Form extends Plus_Widget_Base {
 				$gf_global_js     = \GFCommon::gf_global( false, false );
 				$gf_global_inline = '<script type="text/javascript">if (typeof gf_global === "undefined") { ' . $gf_global_js . ' }</script>';
 			}
+
+			/*
+			 * Same defence one level down. Gravity Forms defines `window.gf_text` (the password
+			 * strength labels) inside its inline form-init script. When that inline script is
+			 * deferred or stripped, the password field's `onkeyup="gformShowPasswordStrength(...)"`
+			 * runs first and throws "Cannot read properties of undefined (reading 'password_short')",
+			 * which kills every later handler on the page.
+			 *
+			 * Re-emit `gf_text` inline, but only for a form that actually has a password field with
+			 * the strength meter switched on. The strings are read from Gravity Forms' own text
+			 * domain so they stay in whatever language GF is running in.
+			 *
+			 * @since 6.5.1
+			 */
+			if ( class_exists( 'GFAPI' ) ) {
+				$gf_form_obj = \GFAPI::get_form( $gra_form_id );
+
+				if ( ! empty( $gf_form_obj['fields'] ) && is_array( $gf_form_obj['fields'] ) ) {
+					$has_pwd_strength = false;
+
+					foreach ( $gf_form_obj['fields'] as $gf_field ) {
+						if ( isset( $gf_field->type ) && 'password' === $gf_field->type && ! empty( $gf_field->passwordStrengthEnabled ) ) {
+							$has_pwd_strength = true;
+							break;
+						}
+					}
+
+					if ( $has_pwd_strength ) {
+						$gf_text_js  = "if(!window['gf_text']){window['gf_text'] = {};}";
+						$gf_text_js .= "if(typeof window['gf_text']['password_short'] === 'undefined'){";
+						$gf_text_js .= "window['gf_text']['password_blank'] = '" . esc_js( __( 'Strength indicator', 'gravityforms' ) ) . "';";
+						$gf_text_js .= "window['gf_text']['password_mismatch'] = '" . esc_js( __( 'Mismatch', 'gravityforms' ) ) . "';";
+						$gf_text_js .= "window['gf_text']['password_unknown'] = '" . esc_js( __( 'Password strength unknown', 'gravityforms' ) ) . "';";
+						$gf_text_js .= "window['gf_text']['password_bad'] = '" . esc_js( __( 'Weak', 'gravityforms' ) ) . "';";
+						$gf_text_js .= "window['gf_text']['password_short'] = '" . esc_js( __( 'Very weak', 'gravityforms' ) ) . "';";
+						$gf_text_js .= "window['gf_text']['password_good'] = '" . esc_js( __( 'Medium', 'gravityforms' ) ) . "';";
+						$gf_text_js .= "window['gf_text']['password_strong'] = '" . esc_js( __( 'Strong', 'gravityforms' ) ) . "';";
+						$gf_text_js .= '}';
+
+						$gf_text_inline = '<script type="text/javascript">' . $gf_text_js . '</script>';
+					}
+				}
+			}
 		}
 
 		$output  = '<div class="pt_plus_gravity_form ' . esc_attr( $animated_class ) . '" ' . $animation_attr . '>';
 		$output .= $gf_global_inline;
+		$output .= $gf_text_inline;
 		$output .= do_shortcode( $this->get_shortcode() );
 		$output .= '</div>';
 

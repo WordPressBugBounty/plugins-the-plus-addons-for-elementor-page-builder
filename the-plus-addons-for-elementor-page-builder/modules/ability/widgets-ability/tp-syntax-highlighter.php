@@ -10,7 +10,7 @@ wp_register_ability('tpae/tpae-syntax-highlighter', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'languageType' => ['type' => 'string', 'enum' => ['markup', 'css', 'javascript', 'php', 'python', 'ruby', 'sql', 'java', 'c', 'cpp', 'json', 'git', 'http', 'perl'], 'description' => 'Programming language for syntax highlighting'],
+        'languageType' => ['type' => 'string', 'description' => 'Programming language for syntax highlighting', 'enum' => ['markup', 'basic', 'c', 'c#', 'cpp', 'css', 'css-extras', 'gcode', 'git', 'http', 'java', 'javadoc', 'javadoclike', 'javascript', 'jsdoc', 'js-extras', 'js-templates', 'json', 'jsonp', 'json5', 'perl', 'php', 'phpdoc', 'php-extras', 'plsql', 'python', 'react', 'ruby', 'sas', 'sass', 'scss', 'scheme', 'sql', 'vbnet', 'visual-basic', 'wiki', 'xquery']],
         'themeType' => ['type' => 'string', 'enum' => ['prism-default', 'prism-coy', 'prism-dark', 'prism-funky', 'prism-okaidia', 'prism-solarizedlight', 'prism-tomorrownight', 'prism-twilight'], 'description' => 'Color theme for the code block'],
         'sourceCode' => ['type' => 'string', 'description' => 'Source code content to display', 'minLength' => 1],
         'lanugaetext' => ['type' => 'string', 'description' => 'Language label shown in header'],

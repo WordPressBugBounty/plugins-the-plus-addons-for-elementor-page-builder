@@ -128,6 +128,9 @@ if ( ! function_exists( 'theplus_free_uninstall_site' ) ) {
 			delete_option( 'tpae_removed_widgets_notice' );
 			delete_option( 'tpae_whats_new_dismissed' );
 			delete_option( 'tpae_whats_new_seen' );
+			delete_option( 'tpae_widget_recipes_notice' );
+			delete_option( 'tpae_widget_recipes_since' );
+			delete_option( 'tpae_install_time' );
 
 			// if ( file_exists( L_THEPLUS_ASSET_PATH . '/theplus.min.css' ) ) {
 			// 	wp_delete_file( L_THEPLUS_ASSET_PATH . DIRECTORY_SEPARATOR . '/theplus.min.css' );

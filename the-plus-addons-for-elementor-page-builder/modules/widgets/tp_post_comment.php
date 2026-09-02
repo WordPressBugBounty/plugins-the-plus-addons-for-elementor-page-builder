@@ -1474,7 +1474,7 @@ class ThePlus_Post_Comment extends Plus_Widget_Base {
 			sprintf(
 				// Translators: %1$s is replaced with the user's display name, %2$s is replaced with the opening <a> tag for the user profile link, %3$s is replaced with the closing </a> tag for the user profile link, %4$s is replaced with the opening <a> tag for the logout link, and %5$s is replaced with the closing </a> tag for the logout link.
 				esc_html__( 'Logged in as %1$s%2$s. %3$sLog out?%4$s', 'tpebl' ),
-				$user_identity,
+				esc_html( $user_identity ),
 				'<a href="' . esc_url( admin_url( 'profile.php' ) ) . '">' .
 				'</a>',
 				'<a href="' . esc_url( wp_logout_url( apply_filters( 'the_permalink', get_permalink() ) ) ) . '" title="' . esc_attr__( 'Log out of this account', 'tpebl' ) . '">',

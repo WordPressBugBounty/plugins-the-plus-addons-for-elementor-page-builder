@@ -10,7 +10,7 @@ wp_register_ability('tpae/tpae-pricing-table', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'pricing_table_style' => ['type' => 'string', 'enum' => ['style-1'], 'description' => 'Pricing table visual style'],
+        'pricing_table_style' => ['type' => 'string', 'description' => 'Pricing table visual style', 'enum' => ['style-1', 'style-2', 'style-3']],
         'pricing_title' => ['type' => 'string', 'description' => 'Plan name (e.g. Starter, Pro, Enterprise)', 'minLength' => 1],
         'pricing_subtitle' => ['type' => 'string', 'description' => 'Short tagline under the plan name'],
         'pricing_price' => ['type' => 'string', 'description' => 'Price value to display (e.g. 29)'],

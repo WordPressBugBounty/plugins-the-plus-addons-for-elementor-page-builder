@@ -66,7 +66,7 @@ if ( ! trait_exists( 'ThePlusAddons\Elementor\ButtonStyle\TP_Global_Button_Style
 				return TP_Button_Style_Global::get_preset_options();
 			}
 
-			return array( '' => esc_html__( 'Select Button Styles', 'tpebl' ) );
+			return array( '' => esc_html__( 'None', 'tpebl' ) );
 		}
 
 		protected function format_dimensions_css( $value ) {

@@ -10,69 +10,69 @@ wp_register_ability('tpae/tpae-heading-title', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'heading_style' => ['type' => 'string', 'description' => 'Style', 'enum' => ['style_1', 'style_2', 'style_4', 'style_5', 'style_6', 'style_7', 'style_8', 'style_9']],
-        'select_heading' => ['type' => 'string', 'description' => 'Select Heading', 'enum' => ['page_title']],
-        'sub_title_align' => ['type' => 'object', 'description' => 'Alignment', 'enum' => ['center', 'devices', 'icon', 'justify', 'left', 'prefix_class', 'right']],
+        'heading_style' => ['type' => 'string', 'description' => 'Style', 'enum' => ['style_1', 'style_2', 'style_4', 'style_5', 'style_6', 'style_7', 'style_8', 'style_9', 'style_10']],
+        'select_heading' => ['type' => 'string', 'description' => 'Select Heading', 'enum' => ['default', 'page_title']],
+        'sub_title_align' => ['type' => 'string', 'description' => 'Alignment', 'enum' => ['left', 'center', 'right', 'justify']],
         'title' => ['type' => 'string', 'description' => 'Heading Title'],
         'sub_title' => ['type' => 'string', 'description' => 'Sub Title'],
         'title_s' => ['type' => 'string', 'description' => 'Extra Title'],
-        'heading_s_style' => ['type' => 'string', 'description' => 'Extra Title Position', 'enum' => ['heading_style', 'text_after', 'text_before']],
-        'heading_title_subtitle_limit' => ['type' => 'string', 'description' => 'heading_title_subtitle_limit', 'enum' => ['yes', 'no']],
+        'heading_s_style' => ['type' => 'string', 'description' => 'Extra Title Position', 'enum' => ['text_after', 'text_before']],
+        'heading_title_subtitle_limit' => ['type' => 'string', 'description' => 'Heading & Sub Title Limit', 'enum' => ['yes', 'no']],
         'display_heading_title_limit' => ['type' => 'string', 'description' => 'Heading Title Limit', 'enum' => ['yes', 'no']],
-        'display_heading_title_by' => ['type' => 'string', 'description' => 'Limit on', 'enum' => ['char', 'display_heading_title_limit', 'heading_title_subtitle_limit', 'word']],
-        'display_heading_title_input' => ['type' => 'string', 'description' => 'Heading Title Count'],
+        'display_heading_title_by' => ['type' => 'string', 'description' => 'Limit on', 'enum' => ['char', 'word']],
+        'display_heading_title_input' => ['type' => 'number', 'description' => 'Heading Title Count'],
         'display_title_3_dots' => ['type' => 'string', 'description' => 'Display Dots', 'enum' => ['yes', 'no']],
         'display_sub_title_limit' => ['type' => 'string', 'description' => 'Sub Title Limit', 'enum' => ['yes', 'no']],
-        'display_sub_title_by' => ['type' => 'string', 'description' => 'Limit on', 'enum' => ['char', 'display_sub_title_limit', 'heading_title_subtitle_limit', 'word']],
-        'display_sub_title_input' => ['type' => 'string', 'description' => 'Sub Title Count'],
+        'display_sub_title_by' => ['type' => 'string', 'description' => 'Limit on', 'enum' => ['char', 'word']],
+        'display_sub_title_input' => ['type' => 'number', 'description' => 'Sub Title Count'],
         'display_sub_title_3_dots' => ['type' => 'string', 'description' => 'Display Dots', 'enum' => ['yes', 'no']],
-        'enable_text_animation' => ['type' => 'string', 'description' => 'Enable Animation'],
-        'text_animations' => ['type' => 'string', 'description' => 'Animation'],
-        'tp_select_text_global_animation' => ['type' => 'string', 'description' => 'Global Animation'],
-        'text_animation_type' => ['type' => 'string', 'description' => 'Animation Type'],
-        'tp_tansformtion_toggel' => ['type' => 'string', 'description' => 'Transform Effects '],
-        'transform_x' => ['type' => 'string', 'description' => 'X Position'],
-        'transform_y' => ['type' => 'string', 'description' => 'Y Position'],
-        'transform_skewx' => ['type' => 'string', 'description' => 'Skew X'],
-        'transform_skewy' => ['type' => 'string', 'description' => 'Skew Y'],
-        'transform_scale' => ['type' => 'string', 'description' => 'Scale'],
-        'transform_rotation' => ['type' => 'string', 'description' => 'Rotation'],
-        'transform_origin' => ['type' => 'string', 'description' => 'Transform Origin'],
-        'split_type' => ['type' => 'string', 'description' => 'Split Type'],
-        'text_trigger' => ['type' => 'string', 'description' => 'Animation Trigger'],
-        'tp_scrub' => ['type' => 'string', 'description' => 'tp_scrub'],
-        'heading_animation_controls' => ['type' => 'string', 'description' => 'heading_animation_controls', 'enum' => ['yes', 'no']],
-        'text_duration' => ['type' => 'string', 'description' => 'Duration'],
-        'text_delay' => ['type' => 'string', 'description' => 'Delay'],
-        'text_stagger' => ['type' => 'string', 'description' => 'Stagger'],
-        'text_ease' => ['type' => 'string', 'description' => 'Animation Effects'],
-        'text_repeat' => ['type' => 'string', 'description' => 'Repeat'],
-        'enable_text_animation_sub_txt' => ['type' => 'string', 'description' => 'Enable Animation'],
-        'sub_text_animations' => ['type' => 'string', 'description' => 'Animation'],
-        'tp_select_sub_text_global_animation' => ['type' => 'string', 'description' => 'Global Animation'],
-        'text_animation_type_sub_txt' => ['type' => 'string', 'description' => 'Animation Type'],
-        'tp_tansformtion_toggel_sub_txt' => ['type' => 'string', 'description' => 'Transform Effects '],
-        'transform_x_sub_txt' => ['type' => 'string', 'description' => 'X Position'],
-        'transform_y_sub_txt' => ['type' => 'string', 'description' => 'Y Position'],
-        'transform_skewx_sub_txt' => ['type' => 'string', 'description' => 'Skew X'],
-        'transform_skewy_sub_txt' => ['type' => 'string', 'description' => 'Skew Y'],
-        'transform_scale_sub_txt' => ['type' => 'string', 'description' => 'Scale'],
-        'transform_rotation_sub_txt' => ['type' => 'string', 'description' => 'Rotation'],
-        'transform_origin_sub_txt' => ['type' => 'string', 'description' => 'Transform Origin'],
-        'split_type_sub_txt' => ['type' => 'string', 'description' => 'Split Type'],
-        'text_trigger_sub_txt' => ['type' => 'string', 'description' => 'Animation Trigger'],
-        'tp_scrub_sub_txt' => ['type' => 'string', 'description' => 'tp_scrub_sub_txt'],
-        'sub_animation_controls' => ['type' => 'string', 'description' => 'sub_animation_controls', 'enum' => ['yes', 'no']],
-        'text_duration_sub_txt' => ['type' => 'string', 'description' => 'Duration'],
-        'text_delay_sub_txt' => ['type' => 'string', 'description' => 'Delay'],
-        'text_stagger_sub_txt' => ['type' => 'string', 'description' => 'Stagger'],
-        'text_ease_sub_txt' => ['type' => 'string', 'description' => 'Animation Effects'],
-        'text_repeat_sub_txt' => ['type' => 'string', 'description' => 'Repeat'],
-        'sep_img' => ['type' => 'integer', 'description' => 'Separator With Image (Image ID)'],
+        'enable_text_animation' => ['type' => 'string', 'description' => 'Enable Animation', 'enum' => ['yes', 'no']],
+        'text_animations' => ['type' => 'string', 'description' => 'Animation', 'enum' => ['tp_basic', 'tp_global']],
+        'tp_select_text_global_animation' => ['type' => 'string', 'description' => 'Global Animation (values are site-specific; read the live list with the tpae/tpae-widget-schema ability)'],
+        'text_animation_type' => ['type' => 'string', 'description' => 'Animation Type', 'enum' => ['normal', 'explode', 'scramble', 'typing']],
+        'tp_tansformtion_toggel' => ['type' => 'string', 'description' => 'Transform Effects ', 'enum' => ['yes', 'no']],
+        'transform_x' => ['type' => 'object', 'description' => 'X Position'],
+        'transform_y' => ['type' => 'object', 'description' => 'Y Position'],
+        'transform_skewx' => ['type' => 'object', 'description' => 'Skew X'],
+        'transform_skewy' => ['type' => 'object', 'description' => 'Skew Y'],
+        'transform_scale' => ['type' => 'object', 'description' => 'Scale'],
+        'transform_rotation' => ['type' => 'object', 'description' => 'Rotation'],
+        'transform_origin' => ['type' => 'string', 'description' => 'Transform Origin', 'enum' => ['0% 0%', '50% 0%', '100% 0%', '0% 50%', '50% 50%', '100% 50%', '0% 100%', '50% 100%', '100% 100%']],
+        'split_type' => ['type' => 'string', 'description' => 'Split Type', 'enum' => ['chars', 'words']],
+        'text_trigger' => ['type' => 'string', 'description' => 'Animation Trigger', 'enum' => ['onload', 'onscroll', 'onhover']],
+        'tp_scrub' => ['type' => 'string', 'description' => 'Enable Scroll Scrub', 'enum' => ['yes', 'no']],
+        'heading_animation_controls' => ['type' => 'string', 'description' => 'Animation Controls', 'enum' => ['yes', 'no']],
+        'text_duration' => ['type' => 'number', 'description' => 'Duration'],
+        'text_delay' => ['type' => 'number', 'description' => 'Delay'],
+        'text_stagger' => ['type' => 'number', 'description' => 'Stagger'],
+        'text_ease' => ['type' => 'string', 'description' => 'Animation Effects', 'enum' => ['power1.out', 'power2.out', 'power3.out', 'power4.out', 'sine.out', 'expo.out', 'circ.out', 'back.out', 'elastic.out', 'bounce.out']],
+        'text_repeat' => ['type' => 'string', 'description' => 'Repeat', 'enum' => ['yes', 'no']],
+        'enable_text_animation_sub_txt' => ['type' => 'string', 'description' => 'Enable Animation', 'enum' => ['yes', 'no']],
+        'sub_text_animations' => ['type' => 'string', 'description' => 'Animation', 'enum' => ['tp_basic', 'tp_global']],
+        'tp_select_sub_text_global_animation' => ['type' => 'string', 'description' => 'Global Animation (values are site-specific; read the live list with the tpae/tpae-widget-schema ability)'],
+        'text_animation_type_sub_txt' => ['type' => 'string', 'description' => 'Animation Type', 'enum' => ['normal', 'explode', 'scramble', 'typing']],
+        'tp_tansformtion_toggel_sub_txt' => ['type' => 'string', 'description' => 'Transform Effects ', 'enum' => ['yes', 'no']],
+        'transform_x_sub_txt' => ['type' => 'object', 'description' => 'X Position'],
+        'transform_y_sub_txt' => ['type' => 'object', 'description' => 'Y Position'],
+        'transform_skewx_sub_txt' => ['type' => 'object', 'description' => 'Skew X'],
+        'transform_skewy_sub_txt' => ['type' => 'object', 'description' => 'Skew Y'],
+        'transform_scale_sub_txt' => ['type' => 'object', 'description' => 'Scale'],
+        'transform_rotation_sub_txt' => ['type' => 'object', 'description' => 'Rotation'],
+        'transform_origin_sub_txt' => ['type' => 'string', 'description' => 'Transform Origin', 'enum' => ['0% 0%', '50% 0%', '100% 0%', '0% 50%', '50% 50%', '100% 50%', '0% 100%', '50% 100%', '100% 100%']],
+        'split_type_sub_txt' => ['type' => 'string', 'description' => 'Split Type', 'enum' => ['chars', 'words']],
+        'text_trigger_sub_txt' => ['type' => 'string', 'description' => 'Animation Trigger', 'enum' => ['onload', 'onscroll', 'onhover']],
+        'tp_scrub_sub_txt' => ['type' => 'string', 'description' => 'Enable Scroll Scrub', 'enum' => ['yes', 'no']],
+        'sub_animation_controls' => ['type' => 'string', 'description' => 'Animation Controls', 'enum' => ['yes', 'no']],
+        'text_duration_sub_txt' => ['type' => 'number', 'description' => 'Duration'],
+        'text_delay_sub_txt' => ['type' => 'number', 'description' => 'Delay'],
+        'text_stagger_sub_txt' => ['type' => 'number', 'description' => 'Stagger'],
+        'text_ease_sub_txt' => ['type' => 'string', 'description' => 'Animation Effects', 'enum' => ['power1.out', 'power2.out', 'power3.out', 'power4.out', 'sine.out', 'expo.out', 'circ.out', 'back.out', 'elastic.out', 'bounce.out']],
+        'text_repeat_sub_txt' => ['type' => 'string', 'description' => 'Repeat', 'enum' => ['yes', 'no']],
+        'sep_img' => ['type' => 'object', 'description' => 'Separator With Image (Image ID)'],
         'input_margin' => ['type' => 'object', 'description' => 'Margin (Dimensions Object)'],
         'double_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
-        'double_top' => ['type' => 'string', 'description' => 'Top Separator Height'],
-        'double_bottom' => ['type' => 'string', 'description' => 'Bottom Separator Height'],
+        'double_top' => ['type' => 'number', 'description' => 'Top Separator Height'],
+        'double_bottom' => ['type' => 'number', 'description' => 'Bottom Separator Height'],
         'sep_clr' => ['type' => 'string', 'description' => 'Separator Color (Color Hex/RGBA)'],
         'sep_width' => ['type' => 'object', 'description' => 'Separator Width (Slider/Size Object)'],
         'dot_color' => ['type' => 'string', 'description' => 'Separator Dot Color (Color Hex/RGBA)'],
@@ -81,51 +81,51 @@ wp_register_ability('tpae/tpae-heading-title', [
         'top_clr_height' => ['type' => 'object', 'description' => 'Height (Slider/Size Object)'],
         'top_clr' => ['type' => 'string', 'description' => 'Separator Vertical Color (Color Hex/RGBA)'],
         'title_sep_spacing' => ['type' => 'object', 'description' => 'Separator Spacing (Slider/Size Object)'],
-        'title_h' => ['type' => 'string', 'description' => 'Title Tag'],
+        'title_h' => ['type' => 'string', 'description' => 'Title Tag', 'enum' => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p', 'span', 'a']],
         'title_link' => ['type' => 'object', 'description' => 'Heading Title Link'],
         's_maintitle_pg' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
-        'title_color' => ['type' => 'string', 'description' => 'Title Color', 'enum' => ['gradient', 'icon', 'solid', 'toggle']],
+        'title_color' => ['type' => 'string', 'description' => 'Title Color', 'enum' => ['solid', 'gradient']],
         'title_solid_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'title_gradient_color1' => ['type' => 'string', 'description' => 'Color 1 (Color Hex/RGBA)'],
         'title_gradient_color1_control' => ['type' => 'object', 'description' => 'Color 1 Location (Slider/Size Object)'],
         'title_gradient_color2' => ['type' => 'string', 'description' => 'Color 2 (Color Hex/RGBA)'],
         'title_gradient_color2_control' => ['type' => 'object', 'description' => 'Color 2 Location (Slider/Size Object)'],
-        'title_gradient_style' => ['type' => 'string', 'description' => 'Gradient Style', 'enum' => ['of_type', 'title_color']],
+        'title_gradient_style' => ['type' => 'string', 'description' => 'Gradient Style', 'enum' => ['linear', 'radial']],
         'title_gradient_angle' => ['type' => 'object', 'description' => 'Gradient Angle (Slider/Size Object)'],
-        'title_gradient_position' => ['type' => 'string', 'description' => 'Position', 'enum' => ['of_type', 'title_color', 'title_gradient_style', '{{WRAPPER}} .heading .heading-title']],
+        'title_gradient_position' => ['type' => 'string', 'description' => 'Position', 'enum' => ['center center', 'center left', 'center right', 'top center', 'top left', 'top right', 'bottom center', 'bottom left', 'bottom right']],
         'title_hover_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'special_effect' => ['type' => 'string', 'description' => 'Special Effect', 'enum' => ['yes', 'no']],
         'special_effect_options' => ['type' => 'string', 'description' => 'special_effect_options'],
         'subtitle_sep_spacing' => ['type' => 'object', 'description' => 'Separator Spacing (Slider/Size Object)'],
-        'sub_title_tag' => ['type' => 'string', 'description' => 'Subtitle Tag'],
+        'sub_title_tag' => ['type' => 'string', 'description' => 'Subtitle Tag', 'enum' => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p', 'span']],
         's_subtitle_pg' => ['type' => 'object', 'description' => 'Padding (Dimensions Object)'],
-        'sub_title_color' => ['type' => 'string', 'description' => 'Subtitle Title Color', 'enum' => ['gradient', 'icon', 'solid', 'toggle']],
+        'sub_title_color' => ['type' => 'string', 'description' => 'Subtitle Title Color', 'enum' => ['solid', 'gradient']],
         'sub_title_solid_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'sub_title_gradient_color1' => ['type' => 'string', 'description' => 'Color 1 (Color Hex/RGBA)'],
         'sub_title_gradient_color1_control' => ['type' => 'object', 'description' => 'Color 1 Location (Slider/Size Object)'],
         'sub_title_gradient_color2' => ['type' => 'string', 'description' => 'Color 2 (Color Hex/RGBA)'],
         'sub_title_gradient_color2_control' => ['type' => 'object', 'description' => 'Color 2 Location (Slider/Size Object)'],
-        'sub_title_gradient_style' => ['type' => 'string', 'description' => 'Gradient Style', 'enum' => ['of_type', 'sub_title_color']],
+        'sub_title_gradient_style' => ['type' => 'string', 'description' => 'Gradient Style', 'enum' => ['linear', 'radial']],
         'sub_title_gradient_angle' => ['type' => 'object', 'description' => 'Gradient Angle (Slider/Size Object)'],
-        'sub_title_gradient_position' => ['type' => 'string', 'description' => 'Position', 'enum' => ['of_type', 'sub_title_color', 'sub_title_gradient_style', '{{WRAPPER}} .heading .heading-sub-title']],
+        'sub_title_gradient_position' => ['type' => 'string', 'description' => 'Position', 'enum' => ['center center', 'center left', 'center right', 'top center', 'top left', 'top right', 'bottom center', 'bottom left', 'bottom right']],
         'sub_title_hover_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
-        'ex_title_color' => ['type' => 'string', 'description' => 'Extra Title Color', 'enum' => ['gradient', 'icon', 'solid', 'toggle']],
+        'ex_title_color' => ['type' => 'string', 'description' => 'Extra Title Color', 'enum' => ['solid', 'gradient']],
         'ex_title_solid_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
         'ex_title_gradient_color1' => ['type' => 'string', 'description' => 'Color 1 (Color Hex/RGBA)'],
         'ex_title_gradient_color1_control' => ['type' => 'object', 'description' => 'Color 1 Location (Slider/Size Object)'],
         'ex_title_gradient_color2' => ['type' => 'string', 'description' => 'Color 2 (Color Hex/RGBA)'],
         'ex_title_gradient_color2_control' => ['type' => 'object', 'description' => 'Color 2 Location (Slider/Size Object)'],
-        'ex_title_gradient_style' => ['type' => 'string', 'description' => 'Gradient Style', 'enum' => ['ex_title_color', 'of_type']],
+        'ex_title_gradient_style' => ['type' => 'string', 'description' => 'Gradient Style', 'enum' => ['linear', 'radial']],
         'ex_title_gradient_angle' => ['type' => 'object', 'description' => 'Gradient Angle (Slider/Size Object)'],
-        'ex_title_gradient_position' => ['type' => 'string', 'description' => 'Position', 'enum' => ['ex_title_color', 'ex_title_gradient_style', 'of_type', '{{WRAPPER}} .heading .title-s']],
+        'ex_title_gradient_position' => ['type' => 'string', 'description' => 'Position', 'enum' => ['center center', 'center left', 'center right', 'top center', 'top left', 'top right', 'bottom center', 'bottom left', 'bottom right']],
         'ex_title_hover_color' => ['type' => 'string', 'description' => 'Color (Color Hex/RGBA)'],
-        'position' => ['type' => 'string', 'description' => 'Title Position', 'enum' => ['after', 'before']],
+        'title_position' => ['type' => 'string', 'description' => 'Title Position relative to Sub Title (maps to the widget control "position")', 'enum' => ['after', 'before']],
         'mobile_center_align' => ['type' => 'string', 'description' => 'Center Alignment In Mobile', 'enum' => ['yes', 'no']],
-        'animation_effects' => ['type' => 'string', 'description' => 'Choose Animation Effect'],
+        'animation_effects' => ['type' => 'string', 'description' => 'Choose Animation Effect', 'enum' => ['no-animation', 'transition.fadeIn', 'transition.flipXIn', 'transition.flipYIn', 'transition.flipBounceXIn', 'transition.flipBounceYIn', 'transition.swoopIn', 'transition.whirlIn', 'transition.shrinkIn', 'transition.expandIn', 'transition.bounceIn', 'transition.bounceUpIn', 'transition.bounceDownIn', 'transition.bounceLeftIn', 'transition.bounceRightIn', 'transition.slideUpIn', 'transition.slideDownIn', 'transition.slideLeftIn', 'transition.slideRightIn', 'transition.slideUpBigIn', 'transition.slideDownBigIn', 'transition.slideLeftBigIn', 'transition.slideRightBigIn', 'transition.perspectiveUpIn', 'transition.perspectiveDownIn', 'transition.perspectiveLeftIn', 'transition.perspectiveRightIn']],
         'animation_delay' => ['type' => 'object', 'description' => 'Animation Delay (Slider/Size Object)'],
         'animation_duration_default' => ['type' => 'string', 'description' => 'Animation Duration', 'enum' => ['yes', 'no']],
         'animate_duration' => ['type' => 'object', 'description' => 'Duration Speed (Slider/Size Object)'],
-        'animation_out_effects' => ['type' => 'string', 'description' => 'Out Animation Effect', 'enum' => ['animation_effects!']],
+        'animation_out_effects' => ['type' => 'string', 'description' => 'Out Animation Effect', 'enum' => ['no-animation', 'transition.fadeOut', 'transition.flipXOut', 'transition.flipYOut', 'transition.flipBounceXOut', 'transition.flipBounceYOut', 'transition.swoopOut', 'transition.whirlOut', 'transition.shrinkOut', 'transition.expandOut', 'transition.bounceOut', 'transition.bounceUpOut', 'transition.bounceDownOut', 'transition.bounceLeftOut', 'transition.bounceRightOut', 'transition.slideUpOut', 'transition.slideDownOut', 'transition.slideLeftOut', 'transition.slideRightOut', 'transition.slideUpBigOut', 'transition.slideDownBigOut', 'transition.slideLeftBigOut', 'transition.slideRightBigOut', 'transition.perspectiveUpOut', 'transition.perspectiveDownOut', 'transition.perspectiveLeftOut', 'transition.perspectiveRightOut']],
         'animation_out_delay' => ['type' => 'object', 'description' => 'Out Animation Delay (Slider/Size Object)'],
         'animation_out_duration_default' => ['type' => 'string', 'description' => 'Out Animation Duration', 'enum' => ['yes', 'no']],
         'animation_out_duration' => ['type' => 'object', 'description' => 'Duration Speed (Slider/Size Object)'],
@@ -179,12 +179,12 @@ function tpae_mcp_add_theplus_heading_title_ability(array $input) {
     if (isset($input['tp_select_text_global_animation'])) { $settings['tp_select_text_global_animation'] = sanitize_text_field($input['tp_select_text_global_animation']); }
     if (isset($input['text_animation_type'])) { $settings['text_animation_type'] = sanitize_text_field($input['text_animation_type']); }
     if (isset($input['tp_tansformtion_toggel'])) { $settings['tp_tansformtion_toggel'] = sanitize_text_field($input['tp_tansformtion_toggel']); }
-    if (isset($input['transform_x'])) { $settings['transform_x'] = sanitize_text_field($input['transform_x']); }
-    if (isset($input['transform_y'])) { $settings['transform_y'] = sanitize_text_field($input['transform_y']); }
-    if (isset($input['transform_skewx'])) { $settings['transform_skewx'] = sanitize_text_field($input['transform_skewx']); }
-    if (isset($input['transform_skewy'])) { $settings['transform_skewy'] = sanitize_text_field($input['transform_skewy']); }
-    if (isset($input['transform_scale'])) { $settings['transform_scale'] = sanitize_text_field($input['transform_scale']); }
-    if (isset($input['transform_rotation'])) { $settings['transform_rotation'] = sanitize_text_field($input['transform_rotation']); }
+    if (isset($input['transform_x'])) { $settings['transform_x'] = tpae_mcp_sanitize_widget_setting_value($input['transform_x']); }
+    if (isset($input['transform_y'])) { $settings['transform_y'] = tpae_mcp_sanitize_widget_setting_value($input['transform_y']); }
+    if (isset($input['transform_skewx'])) { $settings['transform_skewx'] = tpae_mcp_sanitize_widget_setting_value($input['transform_skewx']); }
+    if (isset($input['transform_skewy'])) { $settings['transform_skewy'] = tpae_mcp_sanitize_widget_setting_value($input['transform_skewy']); }
+    if (isset($input['transform_scale'])) { $settings['transform_scale'] = tpae_mcp_sanitize_widget_setting_value($input['transform_scale']); }
+    if (isset($input['transform_rotation'])) { $settings['transform_rotation'] = tpae_mcp_sanitize_widget_setting_value($input['transform_rotation']); }
     if (isset($input['transform_origin'])) { $settings['transform_origin'] = sanitize_text_field($input['transform_origin']); }
     if (isset($input['split_type'])) { $settings['split_type'] = sanitize_text_field($input['split_type']); }
     if (isset($input['text_trigger'])) { $settings['text_trigger'] = sanitize_text_field($input['text_trigger']); }
@@ -200,12 +200,12 @@ function tpae_mcp_add_theplus_heading_title_ability(array $input) {
     if (isset($input['tp_select_sub_text_global_animation'])) { $settings['tp_select_sub_text_global_animation'] = sanitize_text_field($input['tp_select_sub_text_global_animation']); }
     if (isset($input['text_animation_type_sub_txt'])) { $settings['text_animation_type_sub_txt'] = sanitize_text_field($input['text_animation_type_sub_txt']); }
     if (isset($input['tp_tansformtion_toggel_sub_txt'])) { $settings['tp_tansformtion_toggel_sub_txt'] = sanitize_text_field($input['tp_tansformtion_toggel_sub_txt']); }
-    if (isset($input['transform_x_sub_txt'])) { $settings['transform_x_sub_txt'] = sanitize_text_field($input['transform_x_sub_txt']); }
-    if (isset($input['transform_y_sub_txt'])) { $settings['transform_y_sub_txt'] = sanitize_text_field($input['transform_y_sub_txt']); }
-    if (isset($input['transform_skewx_sub_txt'])) { $settings['transform_skewx_sub_txt'] = sanitize_text_field($input['transform_skewx_sub_txt']); }
-    if (isset($input['transform_skewy_sub_txt'])) { $settings['transform_skewy_sub_txt'] = sanitize_text_field($input['transform_skewy_sub_txt']); }
-    if (isset($input['transform_scale_sub_txt'])) { $settings['transform_scale_sub_txt'] = sanitize_text_field($input['transform_scale_sub_txt']); }
-    if (isset($input['transform_rotation_sub_txt'])) { $settings['transform_rotation_sub_txt'] = sanitize_text_field($input['transform_rotation_sub_txt']); }
+    if (isset($input['transform_x_sub_txt'])) { $settings['transform_x_sub_txt'] = tpae_mcp_sanitize_widget_setting_value($input['transform_x_sub_txt']); }
+    if (isset($input['transform_y_sub_txt'])) { $settings['transform_y_sub_txt'] = tpae_mcp_sanitize_widget_setting_value($input['transform_y_sub_txt']); }
+    if (isset($input['transform_skewx_sub_txt'])) { $settings['transform_skewx_sub_txt'] = tpae_mcp_sanitize_widget_setting_value($input['transform_skewx_sub_txt']); }
+    if (isset($input['transform_skewy_sub_txt'])) { $settings['transform_skewy_sub_txt'] = tpae_mcp_sanitize_widget_setting_value($input['transform_skewy_sub_txt']); }
+    if (isset($input['transform_scale_sub_txt'])) { $settings['transform_scale_sub_txt'] = tpae_mcp_sanitize_widget_setting_value($input['transform_scale_sub_txt']); }
+    if (isset($input['transform_rotation_sub_txt'])) { $settings['transform_rotation_sub_txt'] = tpae_mcp_sanitize_widget_setting_value($input['transform_rotation_sub_txt']); }
     if (isset($input['transform_origin_sub_txt'])) { $settings['transform_origin_sub_txt'] = sanitize_text_field($input['transform_origin_sub_txt']); }
     if (isset($input['split_type_sub_txt'])) { $settings['split_type_sub_txt'] = sanitize_text_field($input['split_type_sub_txt']); }
     if (isset($input['text_trigger_sub_txt'])) { $settings['text_trigger_sub_txt'] = sanitize_text_field($input['text_trigger_sub_txt']); }
@@ -267,7 +267,7 @@ function tpae_mcp_add_theplus_heading_title_ability(array $input) {
     if (isset($input['ex_title_gradient_angle'])) { $settings['ex_title_gradient_angle'] = $input['ex_title_gradient_angle']; }
     if (isset($input['ex_title_gradient_position'])) { $settings['ex_title_gradient_position'] = sanitize_text_field($input['ex_title_gradient_position']); }
     if (isset($input['ex_title_hover_color'])) { $settings['ex_title_hover_color'] = sanitize_text_field($input['ex_title_hover_color']); }
-    if (isset($input['position'])) { $settings['position'] = sanitize_text_field($input['position']); }
+    if (isset($input['title_position'])) { $settings['position'] = sanitize_text_field($input['title_position']); }
     if (isset($input['mobile_center_align'])) { $settings['mobile_center_align'] = sanitize_text_field($input['mobile_center_align']); }
     if (isset($input['animation_effects'])) { $settings['animation_effects'] = sanitize_text_field($input['animation_effects']); }
     if (isset($input['animation_delay'])) { $settings['animation_delay'] = $input['animation_delay']; }

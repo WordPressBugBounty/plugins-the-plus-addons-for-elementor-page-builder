@@ -1765,9 +1765,12 @@ class ThePlus_Post_Meta extends Plus_Widget_Base {
 				}
 				if ( 'author' === $sortfield ) {
 
-					if ( 'yes' === $show_author ) {
-						global $post;
-						$author_id = $post->post_author;
+					global $post;
+
+					/* $post is null on a generic page (no Theme Builder query context). */
+					$author_id = ( $post instanceof \WP_Post ) ? (int) $post->post_author : 0;
+
+					if ( 'yes' === $show_author && $author_id > 0 ) {
 
 						$author_icon   = ! empty( $settings['authorIcon'] ) ? $settings['authorIcon'] : 'none';
 						$author_prefix = ! empty( $settings['authorPrefix'] ) ? $settings['authorPrefix'] : 'By';

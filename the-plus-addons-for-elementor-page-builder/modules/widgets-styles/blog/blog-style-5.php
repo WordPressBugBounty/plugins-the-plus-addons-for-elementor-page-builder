@@ -28,7 +28,7 @@ if ( 'metro' === $layout ) {
 	if ( ( ! empty( $display_thumbnail ) && 'yes' === $display_thumbnail ) && ! empty( $thumbnail ) ) {
 		$featured_image = get_the_post_thumbnail_url( $postid, $thumbnail );
 		if ( ! empty( $featured_image ) ) {
-			$bg_attr = 'style="background:url(' . $featured_image . ') #f7f7f7;"';
+			$bg_attr = 'style="background:url(' . esc_url( $featured_image ) . ') #f7f7f7;"';
 		} else {
 			$bg_attr = l_theplus_loading_image_grid( $postid, 'background' );
 		}

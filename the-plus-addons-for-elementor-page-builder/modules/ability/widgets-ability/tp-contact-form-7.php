@@ -12,7 +12,7 @@ wp_register_ability('tpae/tpae-contact-form-7', [
             'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
             'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
             'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-            'contact_form' => ['type' => 'integer', 'description' => 'Contact Form 7 form ID to embed'],
+            'contact_form' => ['type' => 'string', 'description' => 'Contact Form 7 form ID to embed (values are site-specific; read the live list with the tpae/tpae-widget-schema ability)'],
                     'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],
         ],
         'required' => ['post_id', 'parent_id', 'contact_form'],

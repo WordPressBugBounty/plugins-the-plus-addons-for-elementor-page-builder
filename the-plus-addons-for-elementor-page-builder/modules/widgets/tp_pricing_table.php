@@ -4048,6 +4048,8 @@ class L_ThePlus_Pricing_Table extends Plus_Widget_Base {
 
 		if ( 'style-8' === $button_style ) {
 			$button_text = $icons_before . wp_kses_post( $button_text ) . $icons_after;
+		} else {
+			$button_text = wp_kses_post( $button_text );
 		}
 
 		return $button_text;

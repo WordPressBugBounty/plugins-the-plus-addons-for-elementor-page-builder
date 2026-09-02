@@ -10,6 +10,10 @@
 
 namespace ElementPack\Includes\DynamicContent;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! defined( 'WPINC' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -541,6 +545,11 @@ if ( ! class_exists( 'Tpae_Dynamic_Tag' ) ) {
 		 * @param object $dynamic_ele Elementor dynamic tag manager.
 		 */
         public function tpae_reg_dynamic_tag( $dynamic_ele ) {
+            $tag_context = L_THEPLUS_PATH . 'modules/extensions/dynamic-tag/tags/tag-context.php';
+            if ( file_exists( $tag_context ) ) {
+                require_once $tag_context;
+            }
+
             $this->tpae_register_text_tags( $dynamic_ele );
 
             $this->tpae_register_image_tags( $dynamic_ele );

@@ -10,7 +10,7 @@ wp_register_ability('tpae/tpae-page-scroll', [
         'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-        'page_scroll_opt' => ['type' => 'string', 'enum' => ['tp_full_page'], 'description' => 'Full page scrolling mode'],
+        'page_scroll_opt' => ['type' => 'string', 'description' => 'Full page scrolling mode', 'enum' => ['tp_full_page', 'tp_page_pilling', 'tp_multi_scroll', 'tp_horizontal_scroll']],
         'fp-slideid' => ['type' => 'string', 'description' => 'Unique slide section ID for full-page scroll targeting'],
                 'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],
         ],

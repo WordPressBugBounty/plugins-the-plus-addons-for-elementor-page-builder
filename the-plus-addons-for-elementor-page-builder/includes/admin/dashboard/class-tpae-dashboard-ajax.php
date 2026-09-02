@@ -382,8 +382,29 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		public function tpae_set_extra_options() {
 			$get_options_data = get_option( 'theplus_api_connection_data' );
 
-			$extra_options_data = isset( $_POST['extra_options_data'] ) ? sanitize_text_field( wp_unslash( $_POST['extra_options_data'] ) ) : '';
-			$extra_options_data = json_decode( $extra_options_data, true );
+			/**
+			 * `sanitize_text_field()` must not run on the JSON envelope. It strips tags,
+			 * percent-octets and line breaks from the serialised string, so one such character
+			 * anywhere in the payload breaks the JSON, `json_decode()` returns null and the
+			 * update below stores that null over every saved setting. The endpoint is already
+			 * nonce-checked and gated on `manage_options`, so the raw body is decoded here and
+			 * the individual values are escaped by their consumers.
+			 *
+			 * @since 6.5.1
+			 */
+			$extra_options_raw  = isset( $_POST['extra_options_data'] ) ? wp_unslash( $_POST['extra_options_data'] ) : '';
+			$extra_options_data = json_decode( $extra_options_raw, true );
+
+			/**
+			 * A truncated or malformed body decodes to null, and writing that over the option
+			 * would drop every stored setting. Refuse the write instead so the saved values
+			 * survive a bad request.
+			 *
+			 * @since 6.5.1
+			 */
+			if ( ! is_array( $extra_options_data ) ) {
+				return $this->tpae_set_response( false, 'Invalid data.', 'Could not read the submitted settings.' );
+			}
 
 			if ( empty( $get_options_data ) ) {
 				add_option( 'theplus_api_connection_data', $extra_options_data, '', 'on' );

@@ -11,7 +11,7 @@ wp_register_ability('tpae/tpae-social-embed', [
         'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
         'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
         'EmbedType' => ['type' => 'string', 'enum' => ['facebook', 'twitter', 'vimeo', 'instagram', 'youtube', 'googlemap'], 'description' => 'Social platform to embed'],
-        'CommentURL' => ['type' => 'string', 'description' => 'URL of the post/content to embed'],
+        'CommentURL' => ['type' => 'object', 'description' => 'URL of the post/content to embed'],
         'AppID' => ['type' => 'string', 'description' => 'Facebook App ID (required for Facebook embeds)'],
                 'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],
         ],

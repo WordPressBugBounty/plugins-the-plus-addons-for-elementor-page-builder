@@ -203,7 +203,20 @@ class L_Plus_Generator {
 	 *
 	 * @since 2.0
 	 */
-	public function plus_dependency_widgets( array $elements, $type ) {
+	public function plus_dependency_widgets( $elements, $type ) {
+		/*
+		 * Callers read the widget list out of post meta, which on migrated or
+		 * restored databases can come back as a serialized string rather than an
+		 * array. A strict `array` type here turned that into an uncaught
+		 * TypeError and took the whole front end down, so accept anything and
+		 * bail on what we cannot walk.
+		 *
+		 * @since 6.5.1
+		 */
+		if ( ! is_array( $elements ) ) {
+			return array();
+		}
+
 		$paths = array();
 		if ( has_filter( 'theplus_pro_registered_widgets' ) ) {
 			$this->l_registered_widgets = apply_filters( 'theplus_pro_registered_widgets', $this->l_registered_widgets );
@@ -277,7 +290,24 @@ class L_Plus_Generator {
 			if ( ! empty( $old_value ) && is_array( $old_value ) && isset( $old_value[ $get_key_val ] ) ) {
 				$value = $old_value[ $get_key_val ];
 			} elseif ( ! empty( $old_value ) && ! is_array( $old_value ) ) {
-				$value = $old_value;
+				/*
+				 * A migration, import or backup restore can leave this meta
+				 * double-serialized, so WordPress's own unserialize pass returns a
+				 * string. Unserialize once more to recover the real list, and fall
+				 * back to '' when it still is not an array — the caller treats an
+				 * empty value as "not detected yet" and generate_scripts_frontend()
+				 * rebuilds from the rendered page on wp_footer.
+				 *
+				 * allowed_classes => false so a crafted value can never instantiate
+				 * a PHP object here (object-injection guard); we only ever expect a
+				 * plain array of widget names.
+				 *
+				 * @since 6.5.1
+				 */
+				$tp_maybe = ( is_string( $old_value ) && is_serialized( $old_value ) )
+					? @unserialize( $old_value, array( 'allowed_classes' => false ) ) // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize -- allowed_classes=false, recovering a plain array only.
+					: $old_value;
+				$value    = is_array( $tp_maybe ) && isset( $tp_maybe[ $get_key_val ] ) ? $tp_maybe[ $get_key_val ] : '';
 			}
 		}
 

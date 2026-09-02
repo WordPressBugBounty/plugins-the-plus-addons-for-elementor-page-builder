@@ -41,6 +41,15 @@ wp_register_ability('tpae/tpae-tabs-tours', [
                 'enum' => ['left', 'right'],
                 'description' => 'Tab position for vertical layout',
             ],
+            'tab_nav_responsive' => [
+                'type' => 'string',
+                'enum' => ['', 'nav_full', 'nav_one', 'tab_accordion'],
+                'description' => 'Tab behaviour on small devices. Use tab_accordion to force accordion mode. nav_full and nav_one require the Pro plugin.',
+            ],
+            'accordion_toggle_icon' => [
+                'type' => 'object',
+                'description' => 'Accordion Toggle Icon as an Elementor icon object {value, library}. Leave empty for the default +/- icon. Applies only when tab_nav_responsive is tab_accordion.',
+            ],
             'tabs' => [
                 'type' => 'array',
                 'description' => 'Array of tab items',
@@ -127,6 +136,8 @@ function tpae_mcp_add_theplus_tabs_tours_ability(array $input)
     if (!empty($input['tabs_type'])) { $settings['tabs_type'] = sanitize_key((string) $input['tabs_type']); }
     if (!empty($input['tabs_align_horizontal'])) { $settings['tabs_align_horizontal'] = sanitize_key((string) $input['tabs_align_horizontal']); }
     if (!empty($input['tabs_align_vertical'])) { $settings['tabs_align_vertical'] = sanitize_key((string) $input['tabs_align_vertical']); }
+    if (isset($input['tab_nav_responsive'])) { $settings['tab_nav_responsive'] = sanitize_key((string) $input['tab_nav_responsive']); }
+    if (isset($input['accordion_toggle_icon'])) { $settings['accordion_toggle_icon'] = tpae_mcp_sanitize_widget_setting_value($input['accordion_toggle_icon']); }
     if (!empty($input['tabs']) && is_array($input['tabs'])) {
         $settings['tabs'] = array_map(function ($tab) {
             return [

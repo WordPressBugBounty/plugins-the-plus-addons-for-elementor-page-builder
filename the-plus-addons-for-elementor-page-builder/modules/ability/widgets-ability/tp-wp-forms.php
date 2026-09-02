@@ -12,7 +12,7 @@ wp_register_ability('tpae/tpae-wp-forms', [
             'post_id' => ['type' => 'integer', 'description' => 'Elementor page/post ID'],
             'parent_id' => ['type' => 'string', 'description' => 'Target Elementor container ID'],
             'position' => ['type' => 'integer', 'description' => 'Insert position. Use -1 to append.', 'default' => -1],
-            'wp_forms' => ['type' => 'integer', 'description' => 'WPForms form ID to embed'],
+            'wp_forms' => ['type' => 'string', 'description' => 'WPForms form ID to embed (values are site-specific; read the live list with the tpae/tpae-widget-schema ability)'],
             'form_title' => ['type' => 'string', 'enum' => ['yes', 'no'], 'description' => 'Show form title'],
             'form_description' => ['type' => 'string', 'enum' => ['yes', 'no'], 'description' => 'Show form description'],
                     'settings' => ['type' => 'object', 'description' => 'Raw Elementor/The Plus control settings to merge into the widget at creation time. Use control keys from sprout/get-theplus-widget-schema.'],

@@ -8,6 +8,10 @@
  * @package the-plus-addons-for-elementor-page-builder
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
 use Elementor\Plugin;
@@ -1026,7 +1030,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 			if ( ! empty( $adv_shadow_boxshadow ) && 'yes' === $adv_shadow_boxshadow ) {
 				$bs_class = '';
 				if ( ! empty( $settings['adv_shadow_boxshadow_class'] ) && ! empty( $adv_shadow_boxshadow_apply ) && 'customclass' === $adv_shadow_boxshadow_apply ) {
-					$bs_class = ' .' . $settings['adv_shadow_boxshadow_class'];
+					$bs_class = ' .' . preg_replace( '/[^A-Za-z0-9_\- .,#]/', '', $settings['adv_shadow_boxshadow_class'] );
 				}
 
 				$bstrans = '';
@@ -1110,7 +1114,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 			if ( ! empty( $adv_shadow_textshadow ) && 'yes' === $adv_shadow_textshadow ) {
 				$ts_class = '';
 				if ( ! empty( $settings['adv_shadow_textshadow_class'] ) && ! empty( $adv_shadow_textshadow_apply ) && 'customclass' === $adv_shadow_textshadow_apply ) {
-					$ts_class = ' .' . $settings['adv_shadow_textshadow_class'];
+					$ts_class = ' .' . preg_replace( '/[^A-Za-z0-9_\- .,#]/', '', $settings['adv_shadow_textshadow_class'] );
 				}
 
 				$tstrans = '';
@@ -1184,7 +1188,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 			if ( ! empty( $adv_shadow_dropshadow ) && 'yes' === $adv_shadow_dropshadow ) {
 				$ds_class = '';
 				if ( ! empty( $settings['adv_shadow_dropshadow_class'] ) && ! empty( $adv_shadow_dropshadow_apply ) && 'customclass' === $adv_shadow_dropshadow_apply ) {
-					$ds_class = ' .' . $settings['adv_shadow_dropshadow_class'];
+					$ds_class = ' .' . preg_replace( '/[^A-Za-z0-9_\- .,#]/', '', $settings['adv_shadow_dropshadow_class'] );
 				}
 
 				$dstrans = '';

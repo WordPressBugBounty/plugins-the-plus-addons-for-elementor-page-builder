@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.5.0\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.5.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-21T04:24:41+00:00\n"
+"POT-Creation-Date: 2026-09-02T04:40:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
@@ -47,19 +47,19 @@ msgstr ""
 msgid "success"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:647
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:668
 msgid "Rollback to Previous Version"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:709
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:730
 msgid "The rollback could not be completed. Please try again."
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:791
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:812
 #: includes/admin/tpae-hooks/class-tpae-hooks.php:645
 #: includes/notices/class-tp-wdkit-preview-popup.php:185
 #: includes/preset/class-wdkit-preset.php:152
-#: widgets_loader.php:357
+#: widgets_loader.php:369
 msgid "Failed to retrieve plugin information."
 msgstr ""
 
@@ -153,7 +153,7 @@ msgstr ""
 #: includes/admin/dashboard/class-tpae-dashboard-listing.php:161
 #: includes/admin/dashboard/class-tpae-dashboard-listing.php:452
 #: modules/widgets/tp_blog_listout.php:3454
-#: modules/widgets/tp_gallery_listout.php:873
+#: modules/widgets/tp_gallery_listout.php:880
 #: modules/widgets/tp_team_member_listout.php:1152
 #: modules/widgets/tp_testimonial_listout.php:1649
 msgid "Featured Image"
@@ -245,12 +245,13 @@ msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:230
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:237
+#: includes/notices/class-tp-widget-recipes-notice.php:189
 msgid "The Plus Addons"
 msgstr ""
 
 #: includes/admin/dashboard/class-tpae-dashboard-meta.php:248
 #: modules/extensions/animation/class-tpae-gsap-controller.php:415
-#: modules/extensions/class-tpae-equal-height.php:193
+#: modules/extensions/class-tpae-equal-height.php:197
 #: modules/extensions/global-control/class-tp-basic-global-controller.php:203
 #: build/index.js:1
 #: build/index.js:3
@@ -476,7 +477,8 @@ msgstr ""
 #: includes/notices/class-tp-nexter-notice.php:206
 #: includes/notices/class-tp-removed-widgets-notice.php:185
 #: includes/notices/class-tp-tpaepro-notice.php:161
-#: includes/notices/class-tp-whats-new-notice.php:464
+#: includes/notices/class-tp-whats-new-notice.php:470
+#: includes/notices/class-tp-widget-recipes-notice.php:312
 #: includes/user-experience/update-popup/class-tp-update-popup.php:133
 msgid "You are not allowed to do this action"
 msgstr ""
@@ -642,7 +644,7 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:611
 #: modules/widgets/tp_everest_form.php:123
 #: modules/widgets/tp_flip_box.php:1281
-#: modules/widgets/tp_gallery_listout.php:506
+#: modules/widgets/tp_gallery_listout.php:513
 #: modules/widgets/tp_gravity_form.php:182
 #: modules/widgets/tp_header_extras.php:2696
 #: modules/widgets/tp_heading_animation.php:243
@@ -843,18 +845,18 @@ msgid "Visit Plugin"
 msgstr ""
 
 #: includes/notices/class-tp-wdkit-preview-popup.php:326
-#: includes/notices/class-tp-whats-new-notice.php:308
-#: includes/notices/class-tp-whats-new-notice.php:312
+#: includes/notices/class-tp-whats-new-notice.php:309
+#: includes/notices/class-tp-whats-new-notice.php:313
 #: modules/extensions/animation/class-tpae-gsap-controller.php:93
-#: modules/extensions/class-tpae-advanced-shadow.php:123
-#: modules/extensions/class-tpae-advanced-shadow.php:453
-#: modules/extensions/class-tpae-advanced-shadow.php:724
-#: modules/extensions/class-tpae-equal-height.php:129
-#: modules/extensions/class-tpae-equal-height.php:158
-#: modules/extensions/class-tpae-equal-height.php:177
-#: modules/extensions/class-tpae-glass-morphism.php:113
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:411
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:126
+#: modules/extensions/class-tpae-advanced-shadow.php:127
+#: modules/extensions/class-tpae-advanced-shadow.php:457
+#: modules/extensions/class-tpae-advanced-shadow.php:728
+#: modules/extensions/class-tpae-equal-height.php:133
+#: modules/extensions/class-tpae-equal-height.php:162
+#: modules/extensions/class-tpae-equal-height.php:181
+#: modules/extensions/class-tpae-glass-morphism.php:117
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:415
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:130
 #: modules/widgets/tp_accordion.php:142
 #: modules/widgets/tp_accordion.php:527
 #: modules/widgets/tp_accordion.php:557
@@ -940,39 +942,45 @@ msgstr ""
 msgid "Many fixes"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:270
+#: includes/notices/class-tp-whats-new-notice.php:271
 msgid "What is new in The Plus Addons for Elementor"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:277
+#: includes/notices/class-tp-whats-new-notice.php:278
 msgid "What is new in The Plus Addons"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:278
+#: includes/notices/class-tp-whats-new-notice.php:279
 msgid "Update installed"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:289
+#: includes/notices/class-tp-whats-new-notice.php:290
 msgid "Abilities: Now Builds Whole Pages, Not Just Widgets"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:295
+#: includes/notices/class-tp-whats-new-notice.php:296
 msgid "Claude, or any MCP client, can build and edit your pages. Abilities is on."
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:297
+#: includes/notices/class-tp-whats-new-notice.php:298
 msgid "Claude, or any MCP client, can build and edit your pages. Off until you switch it on."
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:305
+#: includes/notices/class-tp-whats-new-notice.php:306
 msgid "Turn on Abilities"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:333
+#: includes/notices/class-tp-whats-new-notice.php:334
+#: includes/notices/class-tp-widget-recipes-notice.php:202
+msgid "Browse Widget Recipes"
+msgstr ""
+
+#: includes/notices/class-tp-whats-new-notice.php:338
 msgid "See the full changelog"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:460
+#: includes/notices/class-tp-whats-new-notice.php:466
+#: includes/notices/class-tp-widget-recipes-notice.php:308
 msgid "Security check failed"
 msgstr ""
 
@@ -986,6 +994,26 @@ msgstr ""
 
 #: includes/notices/class-tp-widget-notice.php:105
 msgid "This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 6.1.0 Install Latest version Now."
+msgstr ""
+
+#: includes/notices/class-tp-widget-recipes-notice.php:183
+msgid "Widget Recipes for The Plus Addons"
+msgstr ""
+
+#: includes/notices/class-tp-widget-recipes-notice.php:190
+msgid "Widget Recipes"
+msgstr ""
+
+#: includes/notices/class-tp-widget-recipes-notice.php:194
+msgid "Widget Recipes: build any widget from a ready-made prompt"
+msgstr ""
+
+#: includes/notices/class-tp-widget-recipes-notice.php:197
+msgid "Copy a ready-made prompt and your AI assistant builds the widget directly in Elementor. 1,100 recipes across 110 widgets."
+msgstr ""
+
+#: includes/notices/class-tp-widget-recipes-notice.php:205
+msgid "Set up the MCP connection"
 msgstr ""
 
 #. translators: %s: product name
@@ -1265,7 +1293,7 @@ msgid "Duplicates an Elementor element with fresh IDs and inserts it after the o
 msgstr ""
 
 #: modules/ability/core-elementor/layout-abilities.php:190
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:408
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:424
 msgid "Get Page Structure"
 msgstr ""
 
@@ -1275,10 +1303,10 @@ msgstr ""
 
 #: modules/ability/core-elementor/layout-abilities.php:231
 #: modules/ability/widgets-ability/get-theplus-widget-schema.php:54
-#: modules/ability/widgets-ability/tp-accordion.php:120
-#: modules/ability/widgets-ability/tp-age-gate.php:140
+#: modules/ability/widgets-ability/tp-accordion.php:119
+#: modules/ability/widgets-ability/tp-age-gate.php:138
 #: modules/ability/widgets-ability/tp-blockquote.php:130
-#: modules/ability/widgets-ability/tp-blog-listout.php:239
+#: modules/ability/widgets-ability/tp-blog-listout.php:237
 #: modules/ability/widgets-ability/tp-breadcrumbs-bar.php:100
 #: modules/ability/widgets-ability/tp-button.php:96
 #: modules/ability/widgets-ability/tp-carousel-anything.php:122
@@ -1288,7 +1316,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-dark-mode.php:69
 #: modules/ability/widgets-ability/tp-dynamic-categories.php:177
 #: modules/ability/widgets-ability/tp-everest-form.php:35
-#: modules/ability/widgets-ability/tp-flip-box.php:146
+#: modules/ability/widgets-ability/tp-flip-box.php:144
 #: modules/ability/widgets-ability/tp-gallery-listout.php:128
 #: modules/ability/widgets-ability/tp-gravity-form.php:37
 #: modules/ability/widgets-ability/tp-header-extras.php:96
@@ -1296,7 +1324,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-heading-title.php:149
 #: modules/ability/widgets-ability/tp-hovercard.php:34
 #: modules/ability/widgets-ability/tp-icon.php:48
-#: modules/ability/widgets-ability/tp-info-box.php:183
+#: modules/ability/widgets-ability/tp-info-box.php:182
 #: modules/ability/widgets-ability/tp-meeting-scheduler.php:94
 #: modules/ability/widgets-ability/tp-messagebox.php:33
 #: modules/ability/widgets-ability/tp-navigation-menu-lite.php:95
@@ -1322,7 +1350,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-switcher.php:36
 #: modules/ability/widgets-ability/tp-syntax-highlighter.php:35
 #: modules/ability/widgets-ability/tp-table.php:31
-#: modules/ability/widgets-ability/tp-tabs-tours.php:99
+#: modules/ability/widgets-ability/tp-tabs-tours.php:108
 #: modules/ability/widgets-ability/tp-team-member-listout.php:96
 #: modules/ability/widgets-ability/tp-testimonial-listout.php:77
 #: modules/ability/widgets-ability/tp-text-block.php:107
@@ -1338,18 +1366,18 @@ msgstr ""
 #: modules/ability/core-elementor/mcp-tools/abilities/class-page-abilities.php:383
 #: modules/ability/core-elementor/mcp-tools/abilities/class-page-abilities.php:454
 #: modules/ability/core-elementor/mcp-tools/abilities/class-page-abilities.php:535
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:456
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:621
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:738
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:472
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:637
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:754
 msgid "The post_id parameter is required."
 msgstr ""
 
 #: modules/ability/core-elementor/layout-abilities.php:263
 #: modules/ability/core-elementor/mcp-tools/abilities/class-stock-image-abilities.php:668
-#: modules/ability/widgets-ability/tp-accordion.php:225
-#: modules/ability/widgets-ability/tp-age-gate.php:259
+#: modules/ability/widgets-ability/tp-accordion.php:224
+#: modules/ability/widgets-ability/tp-age-gate.php:257
 #: modules/ability/widgets-ability/tp-blockquote.php:245
-#: modules/ability/widgets-ability/tp-blog-listout.php:451
+#: modules/ability/widgets-ability/tp-blog-listout.php:449
 #: modules/ability/widgets-ability/tp-breadcrumbs-bar.php:185
 #: modules/ability/widgets-ability/tp-button.php:177
 #: modules/ability/widgets-ability/tp-carousel-anything.php:219
@@ -1359,7 +1387,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-dark-mode.php:119
 #: modules/ability/widgets-ability/tp-dynamic-categories.php:320
 #: modules/ability/widgets-ability/tp-everest-form.php:51
-#: modules/ability/widgets-ability/tp-flip-box.php:275
+#: modules/ability/widgets-ability/tp-flip-box.php:273
 #: modules/ability/widgets-ability/tp-gallery-listout.php:231
 #: modules/ability/widgets-ability/tp-gravity-form.php:55
 #: modules/ability/widgets-ability/tp-header-extras.php:152
@@ -1367,7 +1395,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-heading-title.php:283
 #: modules/ability/widgets-ability/tp-hovercard.php:53
 #: modules/ability/widgets-ability/tp-icon.php:81
-#: modules/ability/widgets-ability/tp-info-box.php:350
+#: modules/ability/widgets-ability/tp-info-box.php:349
 #: modules/ability/widgets-ability/tp-meeting-scheduler.php:150
 #: modules/ability/widgets-ability/tp-messagebox.php:51
 #: modules/ability/widgets-ability/tp-navigation-menu-lite.php:152
@@ -1393,7 +1421,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-switcher.php:57
 #: modules/ability/widgets-ability/tp-syntax-highlighter.php:55
 #: modules/ability/widgets-ability/tp-table.php:47
-#: modules/ability/widgets-ability/tp-tabs-tours.php:153
+#: modules/ability/widgets-ability/tp-tabs-tours.php:164
 #: modules/ability/widgets-ability/tp-team-member-listout.php:145
 #: modules/ability/widgets-ability/tp-testimonial-listout.php:121
 #: modules/ability/widgets-ability/tp-text-block.php:167
@@ -1692,7 +1720,7 @@ msgstr ""
 
 #: modules/ability/core-elementor/mcp-tools/abilities/class-global-abilities.php:151
 #: modules/ability/core-elementor/mcp-tools/abilities/class-global-abilities.php:284
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:1079
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:1095
 msgid "Active Elementor kit not found."
 msgstr ""
 
@@ -1931,143 +1959,143 @@ msgstr ""
 msgid "Filter widgets by category slug."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:201
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:217
 msgid "Get Widget Schema"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:202
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:218
 msgid "Returns the full JSON Schema for a widget type's settings, describing all available controls and their types. Use this to discover what settings a widget accepts before creating or updating it."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:211
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:227
 msgid "The widget type name, e.g. \"heading\", \"button\", \"image\"."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:248
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:264
 #: modules/ability/widgets-ability/get-theplus-widget-schema.php:59
 msgid "The widget_type parameter is required."
 msgstr ""
 
 #. translators: %s: widget type name
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:257
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:273
 #: modules/ability/core-elementor/mcp-tools/class-elementor-data.php:148
 #: modules/ability/core-elementor/mcp-tools/schemas/class-schema-generator.php:37
 #, php-format
 msgid "Widget type \"%s\" not found."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:284
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:300
 msgid "Get Container Schema"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:285
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:301
 msgid "Returns JSON Schema for all container controls (flex + grid), including flex_direction, justify_content, align_items, flex_wrap, gap, content_width, min_height, container_type, grid controls, background, border, padding, and more."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:319
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:335
 msgid "Container element type not available."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:409
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:425
 msgid "Returns the element tree for an Elementor page, showing all containers, widgets, and their nesting structure. Each element includes its ID, type, widget type (for widgets), and child elements."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:418
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:578
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:434
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:594
 msgid "The WordPress post/page ID."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:461
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:477
 msgid "Post not found."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:568
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:584
 msgid "Get Element Settings"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:569
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:585
 msgid "Returns the current settings for a specific element on a page. Provide the post ID and element ID to retrieve all control values for that element."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:582
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:598
 msgid "The Elementor element ID."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:625
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:641
 msgid "The element_id parameter is required."
 msgstr ""
 
 #. translators: %s: element ID
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:641
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:657
 #, php-format
 msgid "Element \"%s\" not found on this page."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:663
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:679
 msgid "Find Element"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:664
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:680
 msgid "Searches elements on a page by type, widget type, or settings content. Returns matching element IDs, types, and a settings preview."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:673
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:689
 msgid "The post/page ID to search."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:677
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:693
 msgid "Filter by widget type (e.g. \"heading\", \"button\"). Leave empty for all."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:682
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:698
 msgid "Filter by element type."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:686
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:702
 msgid "Search for text content in settings values (case-insensitive)."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:690
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:706
 msgid "Filter by setting key existence (e.g. \"title_color\")."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:694
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:710
 msgid "Filter by setting value (requires setting_key)."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:843
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:859
 msgid "List Elementor Pages"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:844
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:860
 msgid "Returns all WordPress pages and posts that are built with Elementor. Optionally filter by post type and status."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:853
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:869
 msgid "Filter by post type (e.g. \"page\", \"post\"). Default: any."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:857
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:873
 msgid "Filter by post status (e.g. \"publish\", \"draft\"). Default: any."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:942
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:958
 msgid "List Elementor Templates"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:943
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:959
 msgid "Returns all saved Elementor templates from the template library. Optionally filter by template type (page, section, container)."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:952
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:968
 msgid "Filter by template type (e.g. \"page\", \"section\", \"container\")."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:1037
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:1053
 msgid "Get Global Settings"
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:1038
+#: modules/ability/core-elementor/mcp-tools/abilities/class-query-abilities.php:1054
 msgid "Returns the active Elementor kit/global settings including colors, typography, spacing, and breakpoints. These are the site-wide design tokens used across all pages."
 msgstr ""
 
@@ -2484,7 +2512,7 @@ msgstr ""
 msgid "Elementor document not found for post ID %d."
 msgstr ""
 
-#: modules/ability/core-elementor/mcp-tools/class-elementor-data.php:213
+#: modules/ability/core-elementor/mcp-tools/class-elementor-data.php:228
 msgid "Failed to encode element data as JSON."
 msgstr ""
 
@@ -2581,14 +2609,14 @@ msgstr ""
 msgid "Adds the The Plus \"Accordion\" widget (tp-accordion) to an Elementor container."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-accordion.php:122
+#: modules/ability/widgets-ability/tp-accordion.php:121
 msgid "The Plus Accordion widget is not registered."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-accordion.php:126
-#: modules/ability/widgets-ability/tp-age-gate.php:146
+#: modules/ability/widgets-ability/tp-accordion.php:125
+#: modules/ability/widgets-ability/tp-age-gate.php:144
 #: modules/ability/widgets-ability/tp-blockquote.php:136
-#: modules/ability/widgets-ability/tp-blog-listout.php:252
+#: modules/ability/widgets-ability/tp-blog-listout.php:250
 #: modules/ability/widgets-ability/tp-breadcrumbs-bar.php:106
 #: modules/ability/widgets-ability/tp-button.php:102
 #: modules/ability/widgets-ability/tp-carousel-anything.php:135
@@ -2598,14 +2626,14 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-dark-mode.php:75
 #: modules/ability/widgets-ability/tp-dynamic-categories.php:190
 #: modules/ability/widgets-ability/tp-everest-form.php:41
-#: modules/ability/widgets-ability/tp-flip-box.php:152
+#: modules/ability/widgets-ability/tp-flip-box.php:150
 #: modules/ability/widgets-ability/tp-gallery-listout.php:141
 #: modules/ability/widgets-ability/tp-gravity-form.php:43
 #: modules/ability/widgets-ability/tp-heading-animation.php:45
 #: modules/ability/widgets-ability/tp-heading-title.php:155
 #: modules/ability/widgets-ability/tp-hovercard.php:40
 #: modules/ability/widgets-ability/tp-icon.php:54
-#: modules/ability/widgets-ability/tp-info-box.php:189
+#: modules/ability/widgets-ability/tp-info-box.php:188
 #: modules/ability/widgets-ability/tp-messagebox.php:39
 #: modules/ability/widgets-ability/tp-navigation-menu-lite.php:108
 #: modules/ability/widgets-ability/tp-ninja-form.php:41
@@ -2630,7 +2658,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-switcher.php:42
 #: modules/ability/widgets-ability/tp-syntax-highlighter.php:41
 #: modules/ability/widgets-ability/tp-table.php:37
-#: modules/ability/widgets-ability/tp-tabs-tours.php:112
+#: modules/ability/widgets-ability/tp-tabs-tours.php:121
 #: modules/ability/widgets-ability/tp-team-member-listout.php:109
 #: modules/ability/widgets-ability/tp-testimonial-listout.php:90
 #: modules/ability/widgets-ability/tp-video-player.php:113
@@ -2638,10 +2666,10 @@ msgstr ""
 msgid "post_id and parent_id are required."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-accordion.php:128
-#: modules/ability/widgets-ability/tp-age-gate.php:148
+#: modules/ability/widgets-ability/tp-accordion.php:127
+#: modules/ability/widgets-ability/tp-age-gate.php:146
 #: modules/ability/widgets-ability/tp-blockquote.php:138
-#: modules/ability/widgets-ability/tp-blog-listout.php:257
+#: modules/ability/widgets-ability/tp-blog-listout.php:255
 #: modules/ability/widgets-ability/tp-breadcrumbs-bar.php:108
 #: modules/ability/widgets-ability/tp-button.php:104
 #: modules/ability/widgets-ability/tp-carousel-anything.php:140
@@ -2651,7 +2679,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-dark-mode.php:77
 #: modules/ability/widgets-ability/tp-dynamic-categories.php:195
 #: modules/ability/widgets-ability/tp-everest-form.php:43
-#: modules/ability/widgets-ability/tp-flip-box.php:154
+#: modules/ability/widgets-ability/tp-flip-box.php:152
 #: modules/ability/widgets-ability/tp-gallery-listout.php:146
 #: modules/ability/widgets-ability/tp-gravity-form.php:45
 #: modules/ability/widgets-ability/tp-header-extras.php:115
@@ -2659,7 +2687,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-heading-title.php:157
 #: modules/ability/widgets-ability/tp-hovercard.php:42
 #: modules/ability/widgets-ability/tp-icon.php:56
-#: modules/ability/widgets-ability/tp-info-box.php:191
+#: modules/ability/widgets-ability/tp-info-box.php:190
 #: modules/ability/widgets-ability/tp-meeting-scheduler.php:113
 #: modules/ability/widgets-ability/tp-messagebox.php:41
 #: modules/ability/widgets-ability/tp-navigation-menu-lite.php:113
@@ -2685,7 +2713,7 @@ msgstr ""
 #: modules/ability/widgets-ability/tp-switcher.php:44
 #: modules/ability/widgets-ability/tp-syntax-highlighter.php:43
 #: modules/ability/widgets-ability/tp-table.php:39
-#: modules/ability/widgets-ability/tp-tabs-tours.php:117
+#: modules/ability/widgets-ability/tp-tabs-tours.php:126
 #: modules/ability/widgets-ability/tp-team-member-listout.php:114
 #: modules/ability/widgets-ability/tp-testimonial-listout.php:95
 #: modules/ability/widgets-ability/tp-text-block.php:126
@@ -2705,7 +2733,7 @@ msgstr ""
 msgid "Adds the The Plus \"Age Gate\" widget (tp-age-gate) to an Elementor container."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-age-gate.php:142
+#: modules/ability/widgets-ability/tp-age-gate.php:140
 msgid "The Plus Age Gate widget is not registered on this site."
 msgstr ""
 
@@ -2734,7 +2762,7 @@ msgstr ""
 msgid "Adds the The Plus \"Blog Listing\" widget (tp-blog-listout) to an Elementor container."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-blog-listout.php:244
+#: modules/ability/widgets-ability/tp-blog-listout.php:242
 msgid "The Plus Blog Listing widget is not registered."
 msgstr ""
 
@@ -2893,7 +2921,7 @@ msgstr ""
 msgid "Adds the The Plus \"Flip Box\" widget (tp-flip-box) to an Elementor container."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-flip-box.php:148
+#: modules/ability/widgets-ability/tp-flip-box.php:146
 msgid "The Plus Flip Box widget is not registered."
 msgstr ""
 
@@ -3044,7 +3072,7 @@ msgstr ""
 msgid "Adds the The Plus \"Info Box\" widget (tp-info-box) to an Elementor container."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-info-box.php:185
+#: modules/ability/widgets-ability/tp-info-box.php:184
 msgid "The Plus Info Box widget is not registered."
 msgstr ""
 
@@ -3439,7 +3467,7 @@ msgstr ""
 msgid "Adds the The Plus \"Tabs Tours\" widget (tp-tabs-tours) to an Elementor container."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-tabs-tours.php:104
+#: modules/ability/widgets-ability/tp-tabs-tours.php:113
 msgid "The Plus Tabs Tours widget is not registered."
 msgstr ""
 
@@ -3499,7 +3527,7 @@ msgstr ""
 msgid "Elementor document not found for save."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-text-block.php:254
+#: modules/ability/widgets-ability/tp-text-block.php:269
 msgid "Failed to encode Elementor data."
 msgstr ""
 
@@ -3548,7 +3576,7 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:622
 #: modules/widgets/tp_everest_form.php:134
 #: modules/widgets/tp_flip_box.php:1292
-#: modules/widgets/tp_gallery_listout.php:517
+#: modules/widgets/tp_gallery_listout.php:524
 #: modules/widgets/tp_gravity_form.php:193
 #: modules/widgets/tp_header_extras.php:2707
 #: modules/widgets/tp_heading_animation.php:254
@@ -3604,7 +3632,7 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:626
 #: modules/widgets/tp_everest_form.php:138
 #: modules/widgets/tp_flip_box.php:1296
-#: modules/widgets/tp_gallery_listout.php:521
+#: modules/widgets/tp_gallery_listout.php:528
 #: modules/widgets/tp_gravity_form.php:197
 #: modules/widgets/tp_heading_animation.php:258
 #: modules/widgets/tp_heading_title.php:1366
@@ -3720,15 +3748,15 @@ msgstr ""
 msgid "Enable Theme Builder"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:860
+#: modules/enqueue/plus-generator.php:890
 msgid "The Plus Performance"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:871
+#: modules/enqueue/plus-generator.php:901
 msgid "Purge All Pages"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:882
+#: modules/enqueue/plus-generator.php:912
 msgid "Purge Current Page"
 msgstr ""
 
@@ -3749,8 +3777,16 @@ msgstr ""
 
 #: modules/extensions/animation/class-tpae-gsap-controller.php:29
 #: modules/extensions/global-control/class-tp-control-dimensions.php:331
+#: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:228
+#: modules/extensions/global-control/class-tp-global-button-style-controller.php:51
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:178
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:394
+#: modules/extensions/global-control/class-tp-global-button-style-controller.php:617
+#: modules/extensions/global-control/class-tp-global-button-style-helper.php:69
+#: modules/extensions/global-control/class-tp-global-dimensions-controller.php:162
+#: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:253
+#: modules/extensions/global-control/class-tp-global-scroll-animation-controller.php:344
+#: modules/extensions/global-control/class-tp-global-scroll-animation-helper.php:39
 #: modules/extensions/global-control/class-tp-group-background.php:50
 #: modules/extensions/global-control/class-tp-group-box-shadow.php:51
 #: modules/helper-function.php:377
@@ -4268,25 +4304,25 @@ msgstr ""
 msgid "Turn this on if you want the animation to play again instead of running just once. This is useful for looping effects or animations that should keep repeating."
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:103
+#: modules/extensions/class-tpae-advanced-shadow.php:107
 #: build/index.js:1
 #: build/index.js:3
 msgid "Advanced Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:112
+#: modules/extensions/class-tpae-advanced-shadow.php:116
 msgid "Box Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:114
-#: modules/extensions/class-tpae-advanced-shadow.php:306
-#: modules/extensions/class-tpae-advanced-shadow.php:444
-#: modules/extensions/class-tpae-advanced-shadow.php:608
-#: modules/extensions/class-tpae-advanced-shadow.php:715
-#: modules/extensions/class-tpae-advanced-shadow.php:879
-#: modules/extensions/class-tpae-equal-height.php:120
-#: modules/extensions/class-tpae-glass-morphism.php:105
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:117
+#: modules/extensions/class-tpae-advanced-shadow.php:118
+#: modules/extensions/class-tpae-advanced-shadow.php:310
+#: modules/extensions/class-tpae-advanced-shadow.php:448
+#: modules/extensions/class-tpae-advanced-shadow.php:612
+#: modules/extensions/class-tpae-advanced-shadow.php:719
+#: modules/extensions/class-tpae-advanced-shadow.php:883
+#: modules/extensions/class-tpae-equal-height.php:124
+#: modules/extensions/class-tpae-glass-morphism.php:109
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:121
 #: modules/widgets/tp_blog_listout.php:4179
 #: modules/widgets/tp_carousel_anything.php:267
 #: modules/widgets/tp_countdown.php:207
@@ -4300,15 +4336,15 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:115
-#: modules/extensions/class-tpae-advanced-shadow.php:307
-#: modules/extensions/class-tpae-advanced-shadow.php:445
-#: modules/extensions/class-tpae-advanced-shadow.php:609
-#: modules/extensions/class-tpae-advanced-shadow.php:716
-#: modules/extensions/class-tpae-advanced-shadow.php:880
-#: modules/extensions/class-tpae-equal-height.php:121
-#: modules/extensions/class-tpae-glass-morphism.php:106
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:118
+#: modules/extensions/class-tpae-advanced-shadow.php:119
+#: modules/extensions/class-tpae-advanced-shadow.php:311
+#: modules/extensions/class-tpae-advanced-shadow.php:449
+#: modules/extensions/class-tpae-advanced-shadow.php:613
+#: modules/extensions/class-tpae-advanced-shadow.php:720
+#: modules/extensions/class-tpae-advanced-shadow.php:884
+#: modules/extensions/class-tpae-equal-height.php:125
+#: modules/extensions/class-tpae-glass-morphism.php:110
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:122
 #: modules/widgets/tp_blog_listout.php:4180
 #: modules/widgets/tp_carousel_anything.php:268
 #: modules/widgets/tp_countdown.php:208
@@ -4322,19 +4358,19 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:121
+#: modules/extensions/class-tpae-advanced-shadow.php:125
 msgid "Turn this on to add a shadow around the widget or container. You can set different shadows for normal view and when someone hovers over it."
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:131
-#: modules/extensions/class-tpae-advanced-shadow.php:461
-#: modules/extensions/class-tpae-advanced-shadow.php:732
+#: modules/extensions/class-tpae-advanced-shadow.php:135
+#: modules/extensions/class-tpae-advanced-shadow.php:465
+#: modules/extensions/class-tpae-advanced-shadow.php:736
 msgid "Apply to"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:134
-#: modules/extensions/class-tpae-advanced-shadow.php:464
-#: modules/extensions/class-tpae-advanced-shadow.php:735
+#: modules/extensions/class-tpae-advanced-shadow.php:138
+#: modules/extensions/class-tpae-advanced-shadow.php:468
+#: modules/extensions/class-tpae-advanced-shadow.php:739
 #: modules/extensions/dynamic-tag/tags/text/site-current-date-time.php:85
 #: modules/helper-function.php:545
 #: modules/helper-function.php:559
@@ -4403,8 +4439,8 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:601
 #: modules/widgets/tp_pricing_table.php:864
 #: modules/widgets/tp_process_steps.php:441
-#: modules/widgets/tp_process_steps.php:1159
-#: modules/widgets/tp_process_steps.php:1879
+#: modules/widgets/tp_process_steps.php:1158
+#: modules/widgets/tp_process_steps.php:1878
 #: modules/widgets/tp_progress_bar.php:423
 #: modules/widgets/tp_progress_bar.php:452
 #: modules/widgets/tp_scroll_navigation.php:351
@@ -4429,33 +4465,33 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:135
-#: modules/extensions/class-tpae-advanced-shadow.php:465
-#: modules/extensions/class-tpae-advanced-shadow.php:736
+#: modules/extensions/class-tpae-advanced-shadow.php:139
+#: modules/extensions/class-tpae-advanced-shadow.php:469
+#: modules/extensions/class-tpae-advanced-shadow.php:740
 msgid "Add Custom Class"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:146
-#: modules/extensions/class-tpae-advanced-shadow.php:476
-#: modules/extensions/class-tpae-advanced-shadow.php:747
+#: modules/extensions/class-tpae-advanced-shadow.php:150
+#: modules/extensions/class-tpae-advanced-shadow.php:480
+#: modules/extensions/class-tpae-advanced-shadow.php:751
 msgid "Enter Custom Class Name"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:149
-#: modules/extensions/class-tpae-advanced-shadow.php:479
-#: modules/extensions/class-tpae-advanced-shadow.php:750
+#: modules/extensions/class-tpae-advanced-shadow.php:153
+#: modules/extensions/class-tpae-advanced-shadow.php:483
+#: modules/extensions/class-tpae-advanced-shadow.php:754
 msgid "e.g. .class-name"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:154
-#: modules/extensions/class-tpae-advanced-shadow.php:484
-#: modules/extensions/class-tpae-advanced-shadow.php:755
+#: modules/extensions/class-tpae-advanced-shadow.php:158
+#: modules/extensions/class-tpae-advanced-shadow.php:488
+#: modules/extensions/class-tpae-advanced-shadow.php:759
 msgid "Read Documentation"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:168
-#: modules/extensions/class-tpae-advanced-shadow.php:498
-#: modules/extensions/class-tpae-advanced-shadow.php:769
+#: modules/extensions/class-tpae-advanced-shadow.php:172
+#: modules/extensions/class-tpae-advanced-shadow.php:502
+#: modules/extensions/class-tpae-advanced-shadow.php:773
 #: modules/extensions/global-control/class-tp-text-global-controller.php:66
 #: modules/widgets/tp_accordion.php:900
 #: modules/widgets/tp_accordion.php:1032
@@ -4539,14 +4575,14 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:857
 #: modules/widgets/tp_flip_box.php:1383
 #: modules/widgets/tp_flip_box.php:1790
-#: modules/widgets/tp_gallery_listout.php:263
-#: modules/widgets/tp_gallery_listout.php:618
-#: modules/widgets/tp_gallery_listout.php:708
-#: modules/widgets/tp_gallery_listout.php:792
-#: modules/widgets/tp_gallery_listout.php:840
-#: modules/widgets/tp_gallery_listout.php:881
-#: modules/widgets/tp_gallery_listout.php:1030
-#: modules/widgets/tp_gallery_listout.php:1117
+#: modules/widgets/tp_gallery_listout.php:264
+#: modules/widgets/tp_gallery_listout.php:625
+#: modules/widgets/tp_gallery_listout.php:715
+#: modules/widgets/tp_gallery_listout.php:799
+#: modules/widgets/tp_gallery_listout.php:847
+#: modules/widgets/tp_gallery_listout.php:888
+#: modules/widgets/tp_gallery_listout.php:1037
+#: modules/widgets/tp_gallery_listout.php:1124
 #: modules/widgets/tp_gravity_form.php:584
 #: modules/widgets/tp_gravity_form.php:696
 #: modules/widgets/tp_gravity_form.php:787
@@ -4675,12 +4711,12 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:3622
 #: modules/widgets/tp_process_steps.php:150
 #: modules/widgets/tp_process_steps.php:782
-#: modules/widgets/tp_process_steps.php:882
-#: modules/widgets/tp_process_steps.php:984
-#: modules/widgets/tp_process_steps.php:1087
-#: modules/widgets/tp_process_steps.php:1312
-#: modules/widgets/tp_process_steps.php:1603
-#: modules/widgets/tp_process_steps.php:1788
+#: modules/widgets/tp_process_steps.php:881
+#: modules/widgets/tp_process_steps.php:983
+#: modules/widgets/tp_process_steps.php:1086
+#: modules/widgets/tp_process_steps.php:1311
+#: modules/widgets/tp_process_steps.php:1602
+#: modules/widgets/tp_process_steps.php:1787
 #: modules/widgets/tp_scroll_navigation.php:649
 #: modules/widgets/tp_scroll_navigation.php:764
 #: modules/widgets/tp_scroll_navigation.php:827
@@ -4741,12 +4777,12 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:178
-#: modules/extensions/class-tpae-advanced-shadow.php:319
-#: modules/extensions/class-tpae-advanced-shadow.php:508
-#: modules/extensions/class-tpae-advanced-shadow.php:618
-#: modules/extensions/class-tpae-advanced-shadow.php:779
-#: modules/extensions/class-tpae-advanced-shadow.php:889
+#: modules/extensions/class-tpae-advanced-shadow.php:182
+#: modules/extensions/class-tpae-advanced-shadow.php:323
+#: modules/extensions/class-tpae-advanced-shadow.php:512
+#: modules/extensions/class-tpae-advanced-shadow.php:622
+#: modules/extensions/class-tpae-advanced-shadow.php:783
+#: modules/extensions/class-tpae-advanced-shadow.php:893
 #: modules/widgets/tp_age_gate.php:300
 #: modules/widgets/tp_countdown.php:1174
 #: modules/widgets/tp_dark_mode.php:327
@@ -4761,22 +4797,22 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:180
-#: modules/extensions/class-tpae-advanced-shadow.php:321
+#: modules/extensions/class-tpae-advanced-shadow.php:184
+#: modules/extensions/class-tpae-advanced-shadow.php:325
 msgid "Box Shadow 1"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:181
-#: modules/extensions/class-tpae-advanced-shadow.php:322
-#: modules/extensions/class-tpae-advanced-shadow.php:511
-#: modules/extensions/class-tpae-advanced-shadow.php:621
-#: modules/extensions/class-tpae-advanced-shadow.php:782
-#: modules/extensions/class-tpae-advanced-shadow.php:892
+#: modules/extensions/class-tpae-advanced-shadow.php:185
+#: modules/extensions/class-tpae-advanced-shadow.php:326
+#: modules/extensions/class-tpae-advanced-shadow.php:515
+#: modules/extensions/class-tpae-advanced-shadow.php:625
+#: modules/extensions/class-tpae-advanced-shadow.php:786
+#: modules/extensions/class-tpae-advanced-shadow.php:896
 msgid "Enter label"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:188
-#: modules/extensions/class-tpae-advanced-shadow.php:329
+#: modules/extensions/class-tpae-advanced-shadow.php:192
+#: modules/extensions/class-tpae-advanced-shadow.php:333
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:71
 #: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:70
 #: modules/widgets/tp_accordion.php:180
@@ -4798,75 +4834,75 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:191
-#: modules/extensions/class-tpae-advanced-shadow.php:332
+#: modules/extensions/class-tpae-advanced-shadow.php:195
+#: modules/extensions/class-tpae-advanced-shadow.php:336
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:75
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:253
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:469
 #: modules/helper-function.php:349
 #: modules/widgets/tp_hovercard.php:1586
 #: modules/widgets/tp_hovercard.php:2439
-#: modules/widgets/tp_process_steps.php:1339
+#: modules/widgets/tp_process_steps.php:1338
 #: modules/widgets/tp_social_embed.php:3234
 msgid "Inset"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:192
-#: modules/extensions/class-tpae-advanced-shadow.php:333
+#: modules/extensions/class-tpae-advanced-shadow.php:196
+#: modules/extensions/class-tpae-advanced-shadow.php:337
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:74
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:252
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:468
 #: modules/helper-function.php:350
 #: modules/widgets/tp_hovercard.php:1587
 #: modules/widgets/tp_hovercard.php:2440
-#: modules/widgets/tp_process_steps.php:1340
+#: modules/widgets/tp_process_steps.php:1339
 #: modules/widgets/tp_social_embed.php:3235
 msgid "Outset"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:201
-#: modules/extensions/class-tpae-advanced-shadow.php:342
-#: modules/extensions/class-tpae-advanced-shadow.php:519
-#: modules/extensions/class-tpae-advanced-shadow.php:629
-#: modules/extensions/class-tpae-advanced-shadow.php:790
-#: modules/extensions/class-tpae-advanced-shadow.php:900
+#: modules/extensions/class-tpae-advanced-shadow.php:205
+#: modules/extensions/class-tpae-advanced-shadow.php:346
+#: modules/extensions/class-tpae-advanced-shadow.php:523
+#: modules/extensions/class-tpae-advanced-shadow.php:633
+#: modules/extensions/class-tpae-advanced-shadow.php:794
+#: modules/extensions/class-tpae-advanced-shadow.php:904
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:85
 msgid "X"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:217
-#: modules/extensions/class-tpae-advanced-shadow.php:358
-#: modules/extensions/class-tpae-advanced-shadow.php:535
-#: modules/extensions/class-tpae-advanced-shadow.php:645
-#: modules/extensions/class-tpae-advanced-shadow.php:806
-#: modules/extensions/class-tpae-advanced-shadow.php:916
+#: modules/extensions/class-tpae-advanced-shadow.php:221
+#: modules/extensions/class-tpae-advanced-shadow.php:362
+#: modules/extensions/class-tpae-advanced-shadow.php:539
+#: modules/extensions/class-tpae-advanced-shadow.php:649
+#: modules/extensions/class-tpae-advanced-shadow.php:810
+#: modules/extensions/class-tpae-advanced-shadow.php:920
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:105
 msgid "Y"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:233
-#: modules/extensions/class-tpae-advanced-shadow.php:374
-#: modules/extensions/class-tpae-advanced-shadow.php:551
-#: modules/extensions/class-tpae-advanced-shadow.php:661
-#: modules/extensions/class-tpae-advanced-shadow.php:822
-#: modules/extensions/class-tpae-advanced-shadow.php:932
-#: modules/extensions/class-tpae-glass-morphism.php:121
+#: modules/extensions/class-tpae-advanced-shadow.php:237
+#: modules/extensions/class-tpae-advanced-shadow.php:378
+#: modules/extensions/class-tpae-advanced-shadow.php:555
+#: modules/extensions/class-tpae-advanced-shadow.php:665
+#: modules/extensions/class-tpae-advanced-shadow.php:826
+#: modules/extensions/class-tpae-advanced-shadow.php:936
+#: modules/extensions/class-tpae-glass-morphism.php:125
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:125
 #: modules/widgets/tp_hovercard.php:1720
 #: modules/widgets/tp_hovercard.php:1816
 #: modules/widgets/tp_hovercard.php:2165
 #: modules/widgets/tp_hovercard.php:2565
 #: modules/widgets/tp_hovercard.php:2647
-#: modules/widgets/tp_process_steps.php:1167
-#: modules/widgets/tp_process_steps.php:1887
+#: modules/widgets/tp_process_steps.php:1166
+#: modules/widgets/tp_process_steps.php:1886
 #: modules/widgets/tp_social_embed.php:3350
 #: modules/widgets/tp_style_list.php:1697
 #: modules/widgets/tp_tabs_tours.php:1727
 msgid "Blur"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:249
-#: modules/extensions/class-tpae-advanced-shadow.php:390
+#: modules/extensions/class-tpae-advanced-shadow.php:253
+#: modules/extensions/class-tpae-advanced-shadow.php:394
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:145
 #: modules/widgets/tp_hovercard.php:1745
 #: modules/widgets/tp_hovercard.php:2589
@@ -4874,12 +4910,12 @@ msgstr ""
 msgid "Spread"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:264
-#: modules/extensions/class-tpae-advanced-shadow.php:405
-#: modules/extensions/class-tpae-advanced-shadow.php:566
-#: modules/extensions/class-tpae-advanced-shadow.php:676
-#: modules/extensions/class-tpae-advanced-shadow.php:837
-#: modules/extensions/class-tpae-advanced-shadow.php:947
+#: modules/extensions/class-tpae-advanced-shadow.php:268
+#: modules/extensions/class-tpae-advanced-shadow.php:409
+#: modules/extensions/class-tpae-advanced-shadow.php:570
+#: modules/extensions/class-tpae-advanced-shadow.php:680
+#: modules/extensions/class-tpae-advanced-shadow.php:841
+#: modules/extensions/class-tpae-advanced-shadow.php:951
 #: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:164
 #: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:132
 #: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:171
@@ -5007,8 +5043,8 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:1193
 #: modules/widgets/tp_pricing_table.php:1752
 #: modules/widgets/tp_pricing_table.php:2078
-#: modules/widgets/tp_process_steps.php:1318
-#: modules/widgets/tp_process_steps.php:1510
+#: modules/widgets/tp_process_steps.php:1317
+#: modules/widgets/tp_process_steps.php:1509
 #: modules/widgets/tp_progress_bar.php:661
 #: modules/widgets/tp_scroll_navigation.php:658
 #: modules/widgets/tp_scroll_navigation.php:692
@@ -5037,12 +5073,12 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:282
-#: modules/extensions/class-tpae-advanced-shadow.php:424
-#: modules/extensions/class-tpae-advanced-shadow.php:584
-#: modules/extensions/class-tpae-advanced-shadow.php:695
-#: modules/extensions/class-tpae-advanced-shadow.php:855
-#: modules/extensions/class-tpae-advanced-shadow.php:966
+#: modules/extensions/class-tpae-advanced-shadow.php:286
+#: modules/extensions/class-tpae-advanced-shadow.php:428
+#: modules/extensions/class-tpae-advanced-shadow.php:588
+#: modules/extensions/class-tpae-advanced-shadow.php:699
+#: modules/extensions/class-tpae-advanced-shadow.php:859
+#: modules/extensions/class-tpae-advanced-shadow.php:970
 #: modules/widgets/tp_hovercard.php:1074
 #: modules/widgets/tp_hovercard.php:1237
 #: modules/widgets/tp_hovercard.php:1772
@@ -5051,18 +5087,18 @@ msgstr ""
 msgid "Transition css"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:284
-#: modules/extensions/class-tpae-advanced-shadow.php:426
-#: modules/extensions/class-tpae-advanced-shadow.php:586
-#: modules/extensions/class-tpae-advanced-shadow.php:697
-#: modules/extensions/class-tpae-advanced-shadow.php:857
-#: modules/extensions/class-tpae-advanced-shadow.php:968
+#: modules/extensions/class-tpae-advanced-shadow.php:288
+#: modules/extensions/class-tpae-advanced-shadow.php:430
+#: modules/extensions/class-tpae-advanced-shadow.php:590
+#: modules/extensions/class-tpae-advanced-shadow.php:701
+#: modules/extensions/class-tpae-advanced-shadow.php:861
+#: modules/extensions/class-tpae-advanced-shadow.php:972
 msgid "e.g. all .3s linear"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:295
-#: modules/extensions/class-tpae-advanced-shadow.php:597
-#: modules/extensions/class-tpae-advanced-shadow.php:868
+#: modules/extensions/class-tpae-advanced-shadow.php:299
+#: modules/extensions/class-tpae-advanced-shadow.php:601
+#: modules/extensions/class-tpae-advanced-shadow.php:872
 #: modules/widgets/tp_age_gate.php:915
 #: modules/widgets/tp_age_gate.php:1025
 #: modules/widgets/tp_age_gate.php:1137
@@ -5128,13 +5164,13 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:1067
 #: modules/widgets/tp_flip_box.php:1536
 #: modules/widgets/tp_flip_box.php:1927
-#: modules/widgets/tp_gallery_listout.php:642
-#: modules/widgets/tp_gallery_listout.php:726
-#: modules/widgets/tp_gallery_listout.php:810
-#: modules/widgets/tp_gallery_listout.php:855
-#: modules/widgets/tp_gallery_listout.php:917
-#: modules/widgets/tp_gallery_listout.php:1069
-#: modules/widgets/tp_gallery_listout.php:1131
+#: modules/widgets/tp_gallery_listout.php:649
+#: modules/widgets/tp_gallery_listout.php:733
+#: modules/widgets/tp_gallery_listout.php:817
+#: modules/widgets/tp_gallery_listout.php:862
+#: modules/widgets/tp_gallery_listout.php:924
+#: modules/widgets/tp_gallery_listout.php:1076
+#: modules/widgets/tp_gallery_listout.php:1138
 #: modules/widgets/tp_gravity_form.php:1561
 #: modules/widgets/tp_gravity_form.php:1696
 #: modules/widgets/tp_gravity_form.php:1895
@@ -5242,12 +5278,12 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:3597
 #: modules/widgets/tp_pricing_table.php:3636
 #: modules/widgets/tp_process_steps.php:800
-#: modules/widgets/tp_process_steps.php:900
-#: modules/widgets/tp_process_steps.php:1030
-#: modules/widgets/tp_process_steps.php:1120
-#: modules/widgets/tp_process_steps.php:1504
-#: modules/widgets/tp_process_steps.php:1660
-#: modules/widgets/tp_process_steps.php:1830
+#: modules/widgets/tp_process_steps.php:899
+#: modules/widgets/tp_process_steps.php:1029
+#: modules/widgets/tp_process_steps.php:1119
+#: modules/widgets/tp_process_steps.php:1503
+#: modules/widgets/tp_process_steps.php:1659
+#: modules/widgets/tp_process_steps.php:1829
 #: modules/widgets/tp_scroll_navigation.php:683
 #: modules/widgets/tp_scroll_navigation.php:788
 #: modules/widgets/tp_scroll_navigation.php:865
@@ -5291,193 +5327,193 @@ msgstr ""
 msgid "Hover"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:304
+#: modules/extensions/class-tpae-advanced-shadow.php:308
 msgid "Hover Box Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:441
+#: modules/extensions/class-tpae-advanced-shadow.php:445
 msgid "Text Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:451
+#: modules/extensions/class-tpae-advanced-shadow.php:455
 msgid "Turn this on to add a shadow to text content of a widget or container. You can set different text shadows for normal view and when someone hovers over it."
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:510
-#: modules/extensions/class-tpae-advanced-shadow.php:620
+#: modules/extensions/class-tpae-advanced-shadow.php:514
+#: modules/extensions/class-tpae-advanced-shadow.php:624
 msgid "Text Shadow 1"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:606
+#: modules/extensions/class-tpae-advanced-shadow.php:610
 msgid "Hover Text Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:712
+#: modules/extensions/class-tpae-advanced-shadow.php:716
 msgid "Drop Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:722
+#: modules/extensions/class-tpae-advanced-shadow.php:726
 msgid "Turn this on to add a drop shadow to the widget or container. It helps elements stand out visually, and you can set different shadows for the normal and hover states."
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:781
-#: modules/extensions/class-tpae-advanced-shadow.php:891
+#: modules/extensions/class-tpae-advanced-shadow.php:785
+#: modules/extensions/class-tpae-advanced-shadow.php:895
 msgid "Drop Shadow 1"
 msgstr ""
 
-#: modules/extensions/class-tpae-advanced-shadow.php:877
+#: modules/extensions/class-tpae-advanced-shadow.php:881
 msgid "Hover Drop Shadows"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:111
-#: modules/extensions/class-tpae-equal-height.php:118
+#: modules/extensions/class-tpae-equal-height.php:115
+#: modules/extensions/class-tpae-equal-height.php:122
 #: build/index.js:1
 #: build/index.js:3
 msgid "Equal Height"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:127
+#: modules/extensions/class-tpae-equal-height.php:131
 msgid "If your content boxes have different heights, Turn this on to make elements the same height. You can use a CSS class or the container level to keep your layout even."
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:137
+#: modules/extensions/class-tpae-equal-height.php:141
 msgid "Mode Based on"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:140
+#: modules/extensions/class-tpae-equal-height.php:144
 msgid "Div Level"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:141
+#: modules/extensions/class-tpae-equal-height.php:145
 msgid "Unique Class"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:156
+#: modules/extensions/class-tpae-equal-height.php:160
 msgid "Use this option to match the height of elements based on their nesting level. It helps keep layouts consistent when elements are inside different containers."
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:175
+#: modules/extensions/class-tpae-equal-height.php:179
 msgid "Use this option to match height of elements by the CSS class name of the target element or its parent container."
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:190
+#: modules/extensions/class-tpae-equal-height.php:194
 msgid "Select Nested Level"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:194
+#: modules/extensions/class-tpae-equal-height.php:198
 msgid "Nested Level 1"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:195
+#: modules/extensions/class-tpae-equal-height.php:199
 msgid "Nested Level 2"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:196
+#: modules/extensions/class-tpae-equal-height.php:200
 msgid "Nested Level 3"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:197
+#: modules/extensions/class-tpae-equal-height.php:201
 msgid "Nested Level 4"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:198
+#: modules/extensions/class-tpae-equal-height.php:202
 msgid "Nested Level 5"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:199
+#: modules/extensions/class-tpae-equal-height.php:203
 msgid "Nested Level 6"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:200
+#: modules/extensions/class-tpae-equal-height.php:204
 msgid "Nested Level 7"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:201
+#: modules/extensions/class-tpae-equal-height.php:205
 msgid "Nested Level 8"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:202
+#: modules/extensions/class-tpae-equal-height.php:206
 msgid "Nested Level 9"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:203
+#: modules/extensions/class-tpae-equal-height.php:207
 msgid "Nested Level 10"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:209
+#: modules/extensions/class-tpae-equal-height.php:213
 msgid "Count the number of parent containers between the target element and the container with the \"elementor-widget-container\" class is the nested level."
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:221
+#: modules/extensions/class-tpae-equal-height.php:225
 msgid "Select Sub Nested Level"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:224
+#: modules/extensions/class-tpae-equal-height.php:228
 msgid "Level 1"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:225
+#: modules/extensions/class-tpae-equal-height.php:229
 msgid "Level 2"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:226
+#: modules/extensions/class-tpae-equal-height.php:230
 msgid "Level 3"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:227
+#: modules/extensions/class-tpae-equal-height.php:231
 msgid "Level 4"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:228
+#: modules/extensions/class-tpae-equal-height.php:232
 msgid "Level 5"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:229
+#: modules/extensions/class-tpae-equal-height.php:233
 msgid "Level 6"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:230
+#: modules/extensions/class-tpae-equal-height.php:234
 msgid "Level 7"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:231
+#: modules/extensions/class-tpae-equal-height.php:235
 msgid "Level 8"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:232
+#: modules/extensions/class-tpae-equal-height.php:236
 msgid "Level 9"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:233
+#: modules/extensions/class-tpae-equal-height.php:237
 msgid "Level 10"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:239
+#: modules/extensions/class-tpae-equal-height.php:243
 msgid "The number of div`s between the target element and its immediate parent level is the sub nested level."
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:251
+#: modules/extensions/class-tpae-equal-height.php:255
 msgid "Enter Unique Class"
 msgstr ""
 
-#: modules/extensions/class-tpae-equal-height.php:254
+#: modules/extensions/class-tpae-equal-height.php:258
 msgid ".class-name"
 msgstr ""
 
-#: modules/extensions/class-tpae-glass-morphism.php:96
-#: modules/extensions/class-tpae-glass-morphism.php:103
+#: modules/extensions/class-tpae-glass-morphism.php:100
+#: modules/extensions/class-tpae-glass-morphism.php:107
 #: build/index.js:1
 #: build/index.js:3
 msgid "Glass Morphism"
 msgstr ""
 
-#: modules/extensions/class-tpae-glass-morphism.php:111
+#: modules/extensions/class-tpae-glass-morphism.php:115
 msgid "Turn this on to add a frosted glass look to the element. It creates a soft, blurred background effect that helps the content stand out."
 msgstr ""
 
-#: modules/extensions/class-tpae-glass-morphism.php:143
-#: modules/widgets/tp_process_steps.php:1189
-#: modules/widgets/tp_process_steps.php:1909
+#: modules/extensions/class-tpae-glass-morphism.php:147
+#: modules/widgets/tp_process_steps.php:1188
+#: modules/widgets/tp_process_steps.php:1908
 #: modules/widgets/tp_style_list.php:1719
 #: modules/widgets/tp_tabs_tours.php:1749
 msgid "Grayscale"
@@ -5499,39 +5535,39 @@ msgstr ""
 msgid "Warning: TPAE Pro Plugin Widgets Used"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:409
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:413
 msgid "Dynamic Content from The Plus Addons for Elementor"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:410
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:414
 msgid "Dynamic Content is now included with The Plus Addons for Elementor, letting you use dynamic features in Elementor even without Elementor Pro."
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:483
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:487
 msgid "Plus - Post"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:490
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:494
 msgid "Plus - Site"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:498
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:502
 msgid "Plus - User"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:505
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:509
 msgid "Plus - Archive"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:512
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:516
 msgid "Plus - Dynamic Categories"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:520
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:524
 msgid "Plus - WooCommerce"
 msgstr ""
 
-#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:529
+#: modules/extensions/dynamic-tag/class-tpae-dynamic-tag.php:533
 msgid "Plus - ACF"
 msgstr ""
 
@@ -5685,9 +5721,9 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:269
 #: modules/widgets/tp_process_steps.php:282
 #: modules/widgets/tp_process_steps.php:442
-#: modules/widgets/tp_process_steps.php:1160
-#: modules/widgets/tp_process_steps.php:1342
-#: modules/widgets/tp_process_steps.php:1880
+#: modules/widgets/tp_process_steps.php:1159
+#: modules/widgets/tp_process_steps.php:1341
+#: modules/widgets/tp_process_steps.php:1879
 #: modules/widgets/tp_progress_bar.php:424
 #: modules/widgets/tp_progress_bar.php:453
 #: modules/widgets/tp_scroll_navigation.php:448
@@ -5761,7 +5797,7 @@ msgstr ""
 #: modules/widgets/tp_clients_listout.php:638
 #: modules/widgets/tp_dynamic_categories.php:657
 #: modules/widgets/tp_flip_box.php:247
-#: modules/widgets/tp_gallery_listout.php:689
+#: modules/widgets/tp_gallery_listout.php:696
 #: modules/widgets/tp_gravity_form.php:135
 #: modules/widgets/tp_heading_title.php:348
 #: modules/widgets/tp_info_box.php:323
@@ -6032,12 +6068,13 @@ msgstr ""
 msgid "Add Shadow"
 msgstr ""
 
-#: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:210
-msgid "Select Box Shadow"
-msgstr ""
-
-#: modules/extensions/global-control/class-tp-global-button-style-controller.php:51
-msgid "Select Global Shadow"
+#: modules/extensions/global-control/class-tp-global-box-shadow-controller.php:225
+#: modules/extensions/global-control/class-tp-global-button-style-controller.php:614
+#: modules/extensions/global-control/class-tp-global-dimensions-controller.php:159
+#: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:250
+#: modules/extensions/global-control/class-tp-global-scroll-animation-controller.php:351
+#: modules/widgets/tp_adv_text_block.php:279
+msgid "Unnamed"
 msgstr ""
 
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:59
@@ -6127,8 +6164,8 @@ msgstr ""
 #: modules/widgets/tp_post_title.php:345
 #: modules/widgets/tp_post_title.php:508
 #: modules/widgets/tp_process_steps.php:710
-#: modules/widgets/tp_process_steps.php:1750
-#: modules/widgets/tp_process_steps.php:1962
+#: modules/widgets/tp_process_steps.php:1749
+#: modules/widgets/tp_process_steps.php:1961
 #: modules/widgets/tp_style_list.php:1247
 #: modules/widgets/tp_syntax_highlighter.php:425
 #: modules/widgets/tp_syntax_highlighter.php:551
@@ -6262,9 +6299,9 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2324
 #: modules/widgets/tp_pricing_table.php:2917
 #: modules/widgets/tp_pricing_table.php:3333
-#: modules/widgets/tp_process_steps.php:1540
-#: modules/widgets/tp_process_steps.php:1738
-#: modules/widgets/tp_process_steps.php:1948
+#: modules/widgets/tp_process_steps.php:1539
+#: modules/widgets/tp_process_steps.php:1737
+#: modules/widgets/tp_process_steps.php:1947
 #: modules/widgets/tp_style_list.php:500
 #: modules/widgets/tp_style_list.php:1236
 #: modules/widgets/tp_style_list.php:1549
@@ -6395,10 +6432,10 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2559
 #: modules/widgets/tp_pricing_table.php:3026
 #: modules/widgets/tp_pricing_table.php:3384
-#: modules/widgets/tp_process_steps.php:888
-#: modules/widgets/tp_process_steps.php:906
-#: modules/widgets/tp_process_steps.php:1609
-#: modules/widgets/tp_process_steps.php:1666
+#: modules/widgets/tp_process_steps.php:887
+#: modules/widgets/tp_process_steps.php:905
+#: modules/widgets/tp_process_steps.php:1608
+#: modules/widgets/tp_process_steps.php:1665
 #: modules/widgets/tp_social_embed.php:1891
 #: modules/widgets/tp_style_list.php:268
 #: modules/widgets/tp_style_list.php:1470
@@ -6433,8 +6470,8 @@ msgstr ""
 #: modules/widgets/tp_button.php:963
 #: modules/widgets/tp_contact_form_7.php:1144
 #: modules/widgets/tp_flip_box.php:863
-#: modules/widgets/tp_gallery_listout.php:627
-#: modules/widgets/tp_gallery_listout.php:651
+#: modules/widgets/tp_gallery_listout.php:634
+#: modules/widgets/tp_gallery_listout.php:658
 #: modules/widgets/tp_header_extras.php:728
 #: modules/widgets/tp_header_extras.php:1614
 #: modules/widgets/tp_info_box.php:2009
@@ -6529,7 +6566,7 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:1304
 #: modules/widgets/tp_flip_box.php:1826
 #: modules/widgets/tp_flip_box.php:2097
-#: modules/widgets/tp_gallery_listout.php:994
+#: modules/widgets/tp_gallery_listout.php:1001
 #: modules/widgets/tp_gravity_form.php:658
 #: modules/widgets/tp_gravity_form.php:939
 #: modules/widgets/tp_gravity_form.php:1236
@@ -6584,7 +6621,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:1351
 #: modules/widgets/tp_navigation_menu_lite.php:1645
 #: modules/widgets/tp_pricing_table.php:3058
-#: modules/widgets/tp_process_steps.php:1335
+#: modules/widgets/tp_process_steps.php:1334
 #: modules/widgets/tp_social_embed.php:3230
 #: modules/widgets/tp_social_icon.php:895
 #: modules/widgets/tp_table.php:2123
@@ -6607,7 +6644,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:1352
 #: modules/widgets/tp_navigation_menu_lite.php:1646
 #: modules/widgets/tp_pricing_table.php:3059
-#: modules/widgets/tp_process_steps.php:1337
+#: modules/widgets/tp_process_steps.php:1336
 #: modules/widgets/tp_social_embed.php:3232
 #: modules/widgets/tp_social_icon.php:896
 #: modules/widgets/tp_table.php:2124
@@ -6630,7 +6667,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:1353
 #: modules/widgets/tp_navigation_menu_lite.php:1647
 #: modules/widgets/tp_pricing_table.php:3060
-#: modules/widgets/tp_process_steps.php:1336
+#: modules/widgets/tp_process_steps.php:1335
 #: modules/widgets/tp_social_embed.php:3231
 #: modules/widgets/tp_social_icon.php:897
 #: modules/widgets/tp_table.php:2125
@@ -6658,7 +6695,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:1354
 #: modules/widgets/tp_navigation_menu_lite.php:1648
 #: modules/widgets/tp_pricing_table.php:3061
-#: modules/widgets/tp_process_steps.php:1338
+#: modules/widgets/tp_process_steps.php:1337
 #: modules/widgets/tp_social_embed.php:3233
 #: modules/widgets/tp_social_icon.php:898
 #: modules/widgets/tp_table.php:2126
@@ -6693,7 +6730,7 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:1319
 #: modules/widgets/tp_flip_box.php:1858
 #: modules/widgets/tp_flip_box.php:2126
-#: modules/widgets/tp_gallery_listout.php:1009
+#: modules/widgets/tp_gallery_listout.php:1016
 #: modules/widgets/tp_gravity_form.php:674
 #: modules/widgets/tp_gravity_form.php:954
 #: modules/widgets/tp_gravity_form.php:1251
@@ -6785,8 +6822,8 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:1055
 #: modules/widgets/tp_flip_box.php:1889
 #: modules/widgets/tp_flip_box.php:2112
-#: modules/widgets/tp_gallery_listout.php:1039
-#: modules/widgets/tp_gallery_listout.php:1078
+#: modules/widgets/tp_gallery_listout.php:1046
+#: modules/widgets/tp_gallery_listout.php:1085
 #: modules/widgets/tp_gravity_form.php:705
 #: modules/widgets/tp_gravity_form.php:746
 #: modules/widgets/tp_gravity_form.php:984
@@ -6959,10 +6996,10 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:1761
 #: modules/widgets/tp_everest_form.php:1841
 #: modules/widgets/tp_flip_box.php:2146
-#: modules/widgets/tp_gallery_listout.php:903
-#: modules/widgets/tp_gallery_listout.php:939
-#: modules/widgets/tp_gallery_listout.php:1054
-#: modules/widgets/tp_gallery_listout.php:1092
+#: modules/widgets/tp_gallery_listout.php:910
+#: modules/widgets/tp_gallery_listout.php:946
+#: modules/widgets/tp_gallery_listout.php:1061
+#: modules/widgets/tp_gallery_listout.php:1099
 #: modules/widgets/tp_gravity_form.php:721
 #: modules/widgets/tp_gravity_form.php:761
 #: modules/widgets/tp_gravity_form.php:997
@@ -7090,14 +7127,14 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:3407
 #: modules/widgets/tp_pricing_table.php:3492
 #: modules/widgets/tp_pricing_table.php:3530
-#: modules/widgets/tp_process_steps.php:850
-#: modules/widgets/tp_process_steps.php:1007
-#: modules/widgets/tp_process_steps.php:1055
-#: modules/widgets/tp_process_steps.php:1489
-#: modules/widgets/tp_process_steps.php:1639
-#: modules/widgets/tp_process_steps.php:1702
-#: modules/widgets/tp_process_steps.php:1811
-#: modules/widgets/tp_process_steps.php:1855
+#: modules/widgets/tp_process_steps.php:849
+#: modules/widgets/tp_process_steps.php:1006
+#: modules/widgets/tp_process_steps.php:1054
+#: modules/widgets/tp_process_steps.php:1488
+#: modules/widgets/tp_process_steps.php:1638
+#: modules/widgets/tp_process_steps.php:1701
+#: modules/widgets/tp_process_steps.php:1810
+#: modules/widgets/tp_process_steps.php:1854
 #: modules/widgets/tp_scroll_navigation.php:849
 #: modules/widgets/tp_scroll_navigation.php:890
 #: modules/widgets/tp_scroll_navigation.php:1112
@@ -7259,20 +7296,6 @@ msgstr ""
 msgid "Global Hover Shadow"
 msgstr ""
 
-#: modules/extensions/global-control/class-tp-global-button-style-controller.php:614
-#: modules/extensions/global-control/class-tp-global-scroll-animation-controller.php:351
-#: modules/widgets/tp_adv_text_block.php:279
-msgid "Unnamed"
-msgstr ""
-
-#: modules/extensions/global-control/class-tp-global-button-style-controller.php:617
-msgid "Select Global Button"
-msgstr ""
-
-#: modules/extensions/global-control/class-tp-global-button-style-helper.php:69
-msgid "Select Button Styles"
-msgstr ""
-
 #: modules/extensions/global-control/class-tp-global-controller-main.php:210
 msgid "Global Border Radius"
 msgstr ""
@@ -7292,11 +7315,6 @@ msgstr ""
 
 #: modules/extensions/global-control/class-tp-global-dimensions-controller.php:75
 msgid "Values"
-msgstr ""
-
-#: modules/extensions/global-control/class-tp-global-dimensions-controller.php:144
-#: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:235
-msgid "Select Global"
 msgstr ""
 
 #: modules/extensions/global-control/class-tp-global-gradient-color-controller.php:34
@@ -7732,11 +7750,6 @@ msgstr ""
 #: modules/extensions/global-control/class-tp-global-scroll-animation-controller.php:276
 #: modules/widgets/theplus-widget-animation.php:258
 msgid "Out Animation Duration"
-msgstr ""
-
-#: modules/extensions/global-control/class-tp-global-scroll-animation-controller.php:344
-#: modules/extensions/global-control/class-tp-global-scroll-animation-helper.php:39
-msgid "Select Global Animation"
 msgstr ""
 
 #: modules/extensions/global-control/class-tp-group-background.php:57
@@ -8211,19 +8224,19 @@ msgstr ""
 msgid "Toggle this to allow the text animation to re-trigger upon subsequent visits."
 msgstr ""
 
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:108
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:115
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:134
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:112
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:119
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:138
 #: build/index.js:1
 #: build/index.js:3
 msgid "Wrapper Link"
 msgstr ""
 
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:124
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:128
 msgid "Use this option to make the entire container or column clickable. This is useful when you want users to navigate by clicking anywhere inside the element instead of only on a button or text. After enabling, add the destination link you want the wrapper to point to."
 msgstr ""
 
-#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:139
+#: modules/extensions/wrapper-link/class-tpae-wrapper-link.php:143
 #: modules/widgets/tp_button.php:289
 #: modules/widgets/tp_flip_box.php:584
 #: modules/widgets/tp_heading_title.php:1662
@@ -8264,7 +8277,7 @@ msgstr ""
 #: modules/helper-function.php:351
 #: modules/widgets/tp_hovercard.php:1588
 #: modules/widgets/tp_hovercard.php:2441
-#: modules/widgets/tp_process_steps.php:1341
+#: modules/widgets/tp_process_steps.php:1340
 #: modules/widgets/tp_social_embed.php:3236
 msgid "Ridge"
 msgstr ""
@@ -8286,7 +8299,7 @@ msgstr ""
 #: modules/helper-function.php:358
 #: modules/widgets/tp_blog_listout.php:449
 #: modules/widgets/tp_dynamic_categories.php:434
-#: modules/widgets/tp_gallery_listout.php:345
+#: modules/widgets/tp_gallery_listout.php:346
 #: modules/widgets/tp_testimonial_listout.php:1790
 #: modules/widgets/tp_testimonial_listout.php:2147
 #: modules/widgets/tp_testimonial_listout.php:2172
@@ -9098,7 +9111,7 @@ msgid "View All Features"
 msgstr ""
 
 #: modules/widgets/theplus-widget-animation.php:34
-#: modules/widgets/tp_process_steps.php:1978
+#: modules/widgets/tp_process_steps.php:1977
 #: modules/widgets/tp_switcher.php:1653
 msgid "On Scroll View Animation"
 msgstr ""
@@ -9116,7 +9129,7 @@ msgstr ""
 #: modules/widgets/tp_contact_form_7.php:101
 #: modules/widgets/tp_dynamic_categories.php:282
 #: modules/widgets/tp_flip_box.php:143
-#: modules/widgets/tp_gallery_listout.php:252
+#: modules/widgets/tp_gallery_listout.php:253
 #: modules/widgets/tp_heading_title.php:311
 #: modules/widgets/tp_hovercard.php:238
 #: modules/widgets/tp_info_box.php:107
@@ -9334,15 +9347,15 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:2346
 #: modules/widgets/tp_flip_box.php:2359
 #: modules/widgets/tp_flip_box.php:2372
-#: modules/widgets/tp_gallery_listout.php:390
-#: modules/widgets/tp_gallery_listout.php:424
-#: modules/widgets/tp_gallery_listout.php:447
-#: modules/widgets/tp_gallery_listout.php:481
-#: modules/widgets/tp_gallery_listout.php:540
-#: modules/widgets/tp_gallery_listout.php:985
-#: modules/widgets/tp_gallery_listout.php:1184
-#: modules/widgets/tp_gallery_listout.php:1213
-#: modules/widgets/tp_gallery_listout.php:1241
+#: modules/widgets/tp_gallery_listout.php:391
+#: modules/widgets/tp_gallery_listout.php:425
+#: modules/widgets/tp_gallery_listout.php:448
+#: modules/widgets/tp_gallery_listout.php:482
+#: modules/widgets/tp_gallery_listout.php:547
+#: modules/widgets/tp_gallery_listout.php:992
+#: modules/widgets/tp_gallery_listout.php:1191
+#: modules/widgets/tp_gallery_listout.php:1220
+#: modules/widgets/tp_gallery_listout.php:1248
 #: modules/widgets/tp_gravity_form.php:649
 #: modules/widgets/tp_gravity_form.php:931
 #: modules/widgets/tp_gravity_form.php:1101
@@ -9413,8 +9426,8 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:180
 #: modules/widgets/tp_process_steps.php:496
 #: modules/widgets/tp_process_steps.php:593
-#: modules/widgets/tp_process_steps.php:1281
-#: modules/widgets/tp_process_steps.php:1292
+#: modules/widgets/tp_process_steps.php:1280
+#: modules/widgets/tp_process_steps.php:1291
 #: modules/widgets/tp_progress_bar.php:1061
 #: modules/widgets/tp_progress_bar.php:1072
 #: modules/widgets/tp_scroll_navigation.php:216
@@ -9654,15 +9667,15 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:2347
 #: modules/widgets/tp_flip_box.php:2360
 #: modules/widgets/tp_flip_box.php:2373
-#: modules/widgets/tp_gallery_listout.php:391
-#: modules/widgets/tp_gallery_listout.php:425
-#: modules/widgets/tp_gallery_listout.php:448
-#: modules/widgets/tp_gallery_listout.php:482
-#: modules/widgets/tp_gallery_listout.php:541
-#: modules/widgets/tp_gallery_listout.php:986
-#: modules/widgets/tp_gallery_listout.php:1185
-#: modules/widgets/tp_gallery_listout.php:1214
-#: modules/widgets/tp_gallery_listout.php:1242
+#: modules/widgets/tp_gallery_listout.php:392
+#: modules/widgets/tp_gallery_listout.php:426
+#: modules/widgets/tp_gallery_listout.php:449
+#: modules/widgets/tp_gallery_listout.php:483
+#: modules/widgets/tp_gallery_listout.php:548
+#: modules/widgets/tp_gallery_listout.php:993
+#: modules/widgets/tp_gallery_listout.php:1192
+#: modules/widgets/tp_gallery_listout.php:1221
+#: modules/widgets/tp_gallery_listout.php:1249
 #: modules/widgets/tp_gravity_form.php:650
 #: modules/widgets/tp_gravity_form.php:932
 #: modules/widgets/tp_gravity_form.php:1102
@@ -9732,8 +9745,8 @@ msgstr ""
 #: modules/widgets/tp_process_steps.php:181
 #: modules/widgets/tp_process_steps.php:497
 #: modules/widgets/tp_process_steps.php:594
-#: modules/widgets/tp_process_steps.php:1282
-#: modules/widgets/tp_process_steps.php:1293
+#: modules/widgets/tp_process_steps.php:1281
+#: modules/widgets/tp_process_steps.php:1292
 #: modules/widgets/tp_progress_bar.php:1062
 #: modules/widgets/tp_progress_bar.php:1073
 #: modules/widgets/tp_scroll_navigation.php:217
@@ -10101,7 +10114,7 @@ msgstr ""
 #: modules/widgets/tp_accordion.php:483
 #: modules/widgets/tp_blog_listout.php:1053
 #: modules/widgets/tp_clients_listout.php:462
-#: modules/widgets/tp_gallery_listout.php:404
+#: modules/widgets/tp_gallery_listout.php:405
 #: modules/widgets/tp_heading_title.php:1649
 #: modules/widgets/tp_info_box.php:723
 #: modules/widgets/tp_switcher.php:543
@@ -10254,7 +10267,7 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:618
 #: modules/widgets/tp_everest_form.php:130
 #: modules/widgets/tp_flip_box.php:1288
-#: modules/widgets/tp_gallery_listout.php:513
+#: modules/widgets/tp_gallery_listout.php:520
 #: modules/widgets/tp_gravity_form.php:189
 #: modules/widgets/tp_header_extras.php:2703
 #: modules/widgets/tp_heading_animation.php:250
@@ -10311,7 +10324,7 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:862
 #: modules/widgets/tp_everest_form.php:1027
 #: modules/widgets/tp_flip_box.php:803
-#: modules/widgets/tp_gallery_listout.php:564
+#: modules/widgets/tp_gallery_listout.php:571
 #: modules/widgets/tp_gravity_form.php:1159
 #: modules/widgets/tp_gravity_form.php:1324
 #: modules/widgets/tp_header_extras.php:1578
@@ -10450,8 +10463,8 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:1412
 #: modules/widgets/tp_flip_box.php:1374
 #: modules/widgets/tp_flip_box.php:1700
-#: modules/widgets/tp_gallery_listout.php:697
-#: modules/widgets/tp_gallery_listout.php:781
+#: modules/widgets/tp_gallery_listout.php:704
+#: modules/widgets/tp_gallery_listout.php:788
 #: modules/widgets/tp_header_extras.php:524
 #: modules/widgets/tp_heading_title.php:1975
 #: modules/widgets/tp_heading_title.php:2137
@@ -10494,7 +10507,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2271
 #: modules/widgets/tp_pricing_table.php:2501
 #: modules/widgets/tp_pricing_table.php:2512
-#: modules/widgets/tp_process_steps.php:871
+#: modules/widgets/tp_process_steps.php:870
 #: modules/widgets/tp_progress_bar.php:735
 #: modules/widgets/tp_progress_bar.php:766
 #: modules/widgets/tp_progress_bar.php:793
@@ -10825,7 +10838,7 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:1094
 #: modules/widgets/tp_everest_form.php:1293
 #: modules/widgets/tp_flip_box.php:2086
-#: modules/widgets/tp_gallery_listout.php:983
+#: modules/widgets/tp_gallery_listout.php:990
 #: modules/widgets/tp_gravity_form.php:647
 #: modules/widgets/tp_gravity_form.php:929
 #: modules/widgets/tp_gravity_form.php:1225
@@ -11700,8 +11713,8 @@ msgstr ""
 #: modules/widgets/tp_post_navigation.php:393
 #: modules/widgets/tp_post_navigation.php:454
 #: modules/widgets/tp_post_navigation.php:1170
-#: modules/widgets/tp_process_steps.php:991
-#: modules/widgets/tp_process_steps.php:1037
+#: modules/widgets/tp_process_steps.php:990
+#: modules/widgets/tp_process_steps.php:1036
 #: modules/widgets/tp_scroll_navigation.php:1186
 #: modules/widgets/tp_scroll_navigation.php:1197
 #: modules/widgets/tp_style_list.php:687
@@ -11728,8 +11741,8 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:3568
 #: modules/widgets/tp_post_featured_image.php:353
 #: modules/widgets/tp_post_featured_image.php:394
-#: modules/widgets/tp_process_steps.php:1109
-#: modules/widgets/tp_process_steps.php:1144
+#: modules/widgets/tp_process_steps.php:1108
+#: modules/widgets/tp_process_steps.php:1143
 msgid "Overlay Color"
 msgstr ""
 
@@ -11922,12 +11935,12 @@ msgstr ""
 #: modules/widgets/tp_post_title.php:395
 #: modules/widgets/tp_post_title.php:447
 #: modules/widgets/tp_post_title.php:590
-#: modules/widgets/tp_process_steps.php:1000
-#: modules/widgets/tp_process_steps.php:1047
-#: modules/widgets/tp_process_steps.php:1630
-#: modules/widgets/tp_process_steps.php:1691
-#: modules/widgets/tp_process_steps.php:1803
-#: modules/widgets/tp_process_steps.php:1846
+#: modules/widgets/tp_process_steps.php:999
+#: modules/widgets/tp_process_steps.php:1046
+#: modules/widgets/tp_process_steps.php:1629
+#: modules/widgets/tp_process_steps.php:1690
+#: modules/widgets/tp_process_steps.php:1802
+#: modules/widgets/tp_process_steps.php:1845
 #: modules/widgets/tp_scroll_navigation.php:672
 #: modules/widgets/tp_scroll_navigation.php:707
 #: modules/widgets/tp_scroll_navigation.php:838
@@ -12188,8 +12201,8 @@ msgstr ""
 #: modules/widgets/tp_clients_listout.php:990
 #: modules/widgets/tp_contact_form_7.php:157
 #: modules/widgets/tp_flip_box.php:2221
-#: modules/widgets/tp_gallery_listout.php:381
-#: modules/widgets/tp_gallery_listout.php:1168
+#: modules/widgets/tp_gallery_listout.php:382
+#: modules/widgets/tp_gallery_listout.php:1175
 #: modules/widgets/tp_gravity_form.php:161
 #: modules/widgets/tp_header_extras.php:2649
 #: modules/widgets/tp_info_box.php:2803
@@ -12322,7 +12335,7 @@ msgstr ""
 #: modules/widgets/tp_meeting_scheduler.php:342
 #: modules/widgets/tp_meeting_scheduler.php:474
 #: modules/widgets/tp_pricing_table.php:1650
-#: modules/widgets/tp_process_steps.php:1243
+#: modules/widgets/tp_process_steps.php:1242
 #: modules/widgets/tp_progress_bar.php:236
 #: modules/widgets/tp_progress_bar.php:1023
 #: modules/widgets/tp_social_embed.php:541
@@ -12347,7 +12360,7 @@ msgid "Outer Part"
 msgstr ""
 
 #: modules/widgets/tp_blockquote.php:1802
-#: modules/widgets/tp_process_steps.php:1355
+#: modules/widgets/tp_process_steps.php:1354
 msgid "Border Size"
 msgstr ""
 
@@ -12356,7 +12369,7 @@ msgstr ""
 #: modules/widgets/tp_hovercard.php:1557
 #: modules/widgets/tp_post_featured_image.php:338
 #: modules/widgets/tp_post_navigation.php:1082
-#: modules/widgets/tp_process_steps.php:930
+#: modules/widgets/tp_process_steps.php:929
 msgid "Background Size"
 msgstr ""
 
@@ -12402,7 +12415,7 @@ msgstr ""
 #: modules/widgets/tp_pricing_table.php:2825
 #: modules/widgets/tp_pricing_table.php:3420
 #: modules/widgets/tp_pricing_table.php:3546
-#: modules/widgets/tp_process_steps.php:921
+#: modules/widgets/tp_process_steps.php:920
 msgid "Background Options"
 msgstr ""
 
@@ -12417,7 +12430,7 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:788
 #: modules/widgets/tp_everest_form.php:1417
 #: modules/widgets/tp_flip_box.php:2158
-#: modules/widgets/tp_gallery_listout.php:1108
+#: modules/widgets/tp_gallery_listout.php:1115
 #: modules/widgets/tp_gravity_form.php:778
 #: modules/widgets/tp_gravity_form.php:1052
 #: modules/widgets/tp_gravity_form.php:2103
@@ -12523,9 +12536,9 @@ msgstr ""
 #: modules/widgets/tp_clients_listout.php:170
 #: modules/widgets/tp_clients_listout.php:186
 #: modules/widgets/tp_clients_listout.php:251
-#: modules/widgets/tp_gallery_listout.php:207
-#: modules/widgets/tp_gallery_listout.php:223
-#: modules/widgets/tp_gallery_listout.php:239
+#: modules/widgets/tp_gallery_listout.php:208
+#: modules/widgets/tp_gallery_listout.php:224
+#: modules/widgets/tp_gallery_listout.php:240
 #: modules/widgets/tp_hovercard.php:2770
 #: modules/widgets/tp_team_member_listout.php:145
 #: modules/widgets/tp_team_member_listout.php:421
@@ -12592,7 +12605,7 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:399
 #: modules/widgets/tp_clients_listout.php:384
 #: modules/widgets/tp_dynamic_categories.php:384
-#: modules/widgets/tp_gallery_listout.php:295
+#: modules/widgets/tp_gallery_listout.php:296
 #: modules/widgets/tp_team_member_listout.php:586
 #: modules/widgets/tp_testimonial_listout.php:419
 msgid "Columns Manage"
@@ -12601,7 +12614,7 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:409
 #: modules/widgets/tp_clients_listout.php:394
 #: modules/widgets/tp_dynamic_categories.php:394
-#: modules/widgets/tp_gallery_listout.php:305
+#: modules/widgets/tp_gallery_listout.php:306
 #: modules/widgets/tp_team_member_listout.php:596
 #: modules/widgets/tp_testimonial_listout.php:429
 msgid "Desktop Column"
@@ -12610,7 +12623,7 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:421
 #: modules/widgets/tp_clients_listout.php:406
 #: modules/widgets/tp_dynamic_categories.php:406
-#: modules/widgets/tp_gallery_listout.php:317
+#: modules/widgets/tp_gallery_listout.php:318
 #: modules/widgets/tp_team_member_listout.php:608
 #: modules/widgets/tp_testimonial_listout.php:441
 msgid "Tablet Column"
@@ -12619,7 +12632,7 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:433
 #: modules/widgets/tp_clients_listout.php:418
 #: modules/widgets/tp_dynamic_categories.php:418
-#: modules/widgets/tp_gallery_listout.php:329
+#: modules/widgets/tp_gallery_listout.php:330
 #: modules/widgets/tp_team_member_listout.php:620
 #: modules/widgets/tp_testimonial_listout.php:453
 msgid "Mobile Column"
@@ -12627,25 +12640,25 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:445
 #: modules/widgets/tp_dynamic_categories.php:430
-#: modules/widgets/tp_gallery_listout.php:341
+#: modules/widgets/tp_gallery_listout.php:342
 msgid "Metro Column"
 msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:450
 #: modules/widgets/tp_dynamic_categories.php:435
-#: modules/widgets/tp_gallery_listout.php:346
+#: modules/widgets/tp_gallery_listout.php:347
 msgid "Column 4 (PRO)"
 msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:451
 #: modules/widgets/tp_dynamic_categories.php:436
-#: modules/widgets/tp_gallery_listout.php:347
+#: modules/widgets/tp_gallery_listout.php:348
 msgid "Column 5 (PRO)"
 msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:452
 #: modules/widgets/tp_dynamic_categories.php:437
-#: modules/widgets/tp_gallery_listout.php:348
+#: modules/widgets/tp_gallery_listout.php:349
 msgid "Column 6 (PRO)"
 msgstr ""
 
@@ -12657,7 +12670,7 @@ msgstr ""
 #: modules/widgets/tp_blog_listout.php:487
 #: modules/widgets/tp_clients_listout.php:430
 #: modules/widgets/tp_dynamic_categories.php:460
-#: modules/widgets/tp_gallery_listout.php:358
+#: modules/widgets/tp_gallery_listout.php:359
 #: modules/widgets/tp_team_member_listout.php:632
 #: modules/widgets/tp_testimonial_listout.php:465
 msgid "Columns Gap/Space Between"
@@ -12800,7 +12813,7 @@ msgid "Display All Category"
 msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:1181
-#: modules/widgets/tp_gallery_listout.php:422
+#: modules/widgets/tp_gallery_listout.php:423
 msgid "Display Excerpt/Content"
 msgstr ""
 
@@ -12907,7 +12920,7 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:1668
 #: modules/widgets/tp_clients_listout.php:547
-#: modules/widgets/tp_gallery_listout.php:476
+#: modules/widgets/tp_gallery_listout.php:477
 #: modules/widgets/tp_team_member_listout.php:731
 msgid "Category Wise Filter"
 msgstr ""
@@ -13023,7 +13036,7 @@ msgstr ""
 #: modules/widgets/tp_meeting_scheduler.php:319
 #: modules/widgets/tp_meeting_scheduler.php:451
 #: modules/widgets/tp_pricing_table.php:1627
-#: modules/widgets/tp_process_steps.php:1225
+#: modules/widgets/tp_process_steps.php:1224
 #: modules/widgets/tp_progress_bar.php:1005
 #: modules/widgets/tp_social_embed.php:516
 #: modules/widgets/tp_social_embed.php:613
@@ -13152,8 +13165,8 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:682
 #: modules/widgets/tp_dynamic_categories.php:708
 #: modules/widgets/tp_flip_box.php:1389
-#: modules/widgets/tp_gallery_listout.php:714
-#: modules/widgets/tp_gallery_listout.php:732
+#: modules/widgets/tp_gallery_listout.php:721
+#: modules/widgets/tp_gallery_listout.php:739
 #: modules/widgets/tp_header_extras.php:1660
 #: modules/widgets/tp_heading_title.php:1700
 #: modules/widgets/tp_info_box.php:879
@@ -13171,8 +13184,8 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:3375
 #: modules/widgets/tp_blog_listout.php:3395
-#: modules/widgets/tp_gallery_listout.php:798
-#: modules/widgets/tp_gallery_listout.php:816
+#: modules/widgets/tp_gallery_listout.php:805
+#: modules/widgets/tp_gallery_listout.php:823
 #: modules/widgets/tp_pricing_table.php:2522
 #: modules/widgets/tp_testimonial_listout.php:1231
 #: modules/widgets/tp_testimonial_listout.php:1249
@@ -13181,7 +13194,7 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:3410
 #: modules/widgets/tp_breadcrumbs_bar.php:1282
-#: modules/widgets/tp_gallery_listout.php:831
+#: modules/widgets/tp_gallery_listout.php:838
 #: modules/widgets/tp_header_extras.php:467
 #: modules/widgets/tp_post_author.php:709
 #: modules/widgets/tp_post_navigation.php:896
@@ -13209,7 +13222,7 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:3585
 #: modules/widgets/tp_clients_listout.php:699
-#: modules/widgets/tp_gallery_listout.php:955
+#: modules/widgets/tp_gallery_listout.php:962
 #: modules/widgets/tp_team_member_listout.php:1244
 msgid "Filter Category"
 msgstr ""
@@ -13222,7 +13235,7 @@ msgid "Hover Border Radius"
 msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:3905
-#: modules/widgets/tp_gallery_listout.php:976
+#: modules/widgets/tp_gallery_listout.php:983
 #: modules/widgets/tp_team_member_listout.php:1264
 msgid "Box Loop Background Style"
 msgstr ""
@@ -13231,7 +13244,7 @@ msgstr ""
 #: modules/widgets/tp_carousel_anything.php:326
 #: modules/widgets/tp_clients_listout.php:966
 #: modules/widgets/tp_flip_box.php:2198
-#: modules/widgets/tp_gallery_listout.php:1148
+#: modules/widgets/tp_gallery_listout.php:1155
 #: modules/widgets/tp_info_box.php:2625
 #: modules/widgets/tp_team_member_listout.php:1477
 #: modules/widgets/tp_testimonial_listout.php:1723
@@ -13242,7 +13255,7 @@ msgstr ""
 #: modules/widgets/tp_clients_listout.php:1000
 #: modules/widgets/tp_dynamic_categories.php:2376
 #: modules/widgets/tp_flip_box.php:2245
-#: modules/widgets/tp_gallery_listout.php:1236
+#: modules/widgets/tp_gallery_listout.php:1243
 #: modules/widgets/tp_info_box.php:2868
 #: modules/widgets/tp_team_member_listout.php:1507
 #: modules/widgets/tp_testimonial_listout.php:2194
@@ -13262,7 +13275,7 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:4518
 #: modules/widgets/tp_dynamic_categories.php:2499
-#: modules/widgets/tp_gallery_listout.php:1390
+#: modules/widgets/tp_gallery_listout.php:1400
 #: modules/widgets/tp_switcher.php:1773
 #: modules/widgets/tp_team_member_listout.php:1688
 #: modules/widgets/tp_testimonial_listout.php:2357
@@ -13461,7 +13474,7 @@ msgid "Error 404"
 msgstr ""
 
 #: modules/widgets/tp_breadcrumbs_bar.php:1949
-#: modules/widgets/tp_post_content.php:590
+#: modules/widgets/tp_post_content.php:595
 #: modules/widgets/tp_social_embed.php:159
 msgid "Page"
 msgstr ""
@@ -13700,7 +13713,7 @@ msgstr ""
 
 #: modules/widgets/tp_button.php:1309
 #: modules/widgets/tp_dynamic_categories.php:2350
-#: modules/widgets/tp_gallery_listout.php:1207
+#: modules/widgets/tp_gallery_listout.php:1214
 #: modules/widgets/tp_social_icon.php:474
 #: build/index.js:1
 #: build/index.js:3
@@ -14230,8 +14243,8 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:106
 #: modules/widgets/tp_gravity_form.php:106
 #: modules/widgets/tp_gravity_form.php:118
-#: modules/widgets/tp_gravity_form.php:2713
-#: modules/widgets/tp_gravity_form.php:2735
+#: modules/widgets/tp_gravity_form.php:2758
+#: modules/widgets/tp_gravity_form.php:2780
 #: modules/widgets/tp_ninja_form.php:101
 #: modules/widgets/tp_wp_forms.php:106
 msgid "Select Form"
@@ -15053,7 +15066,7 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:891
 #: modules/widgets/tp_hovercard.php:620
 #: modules/widgets/tp_post_meta.php:429
-#: modules/widgets/tp_process_steps.php:1575
+#: modules/widgets/tp_process_steps.php:1574
 msgid "Top Offset"
 msgstr ""
 
@@ -15112,8 +15125,8 @@ msgstr ""
 #: modules/widgets/tp_hovercard.php:1092
 #: modules/widgets/tp_hovercard.php:1256
 #: modules/widgets/tp_hovercard.php:1788
-#: modules/widgets/tp_process_steps.php:1097
-#: modules/widgets/tp_process_steps.php:1130
+#: modules/widgets/tp_process_steps.php:1096
+#: modules/widgets/tp_process_steps.php:1129
 msgid "rotate(10deg) scale(1.1)"
 msgstr ""
 
@@ -15485,86 +15498,90 @@ msgstr ""
 msgid "Responsive Visibility"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:259
+#: modules/widgets/tp_gallery_listout.php:260
 msgid "Select Option"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:264
+#: modules/widgets/tp_gallery_listout.php:265
 msgid "Repeater (PRO)"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:265
+#: modules/widgets/tp_gallery_listout.php:266
 msgid "ACF Gallery (PRO)"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:272
+#: modules/widgets/tp_gallery_listout.php:273
 msgid "Add Images"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:388
+#: modules/widgets/tp_gallery_listout.php:389
 msgid "Display Title"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:396
+#: modules/widgets/tp_gallery_listout.php:397
 msgid "Turn this on to show image titles directly inside your gallery items."
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:411
+#: modules/widgets/tp_gallery_listout.php:412
 msgid "Select the proper heading tag for your image titles to keep your design and SEO consistent."
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:431
+#: modules/widgets/tp_gallery_listout.php:432
 msgid "Show short captions or descriptions below your gallery images for added context."
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:442
+#: modules/widgets/tp_gallery_listout.php:443
 msgid "Box Link"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:454
+#: modules/widgets/tp_gallery_listout.php:455
 msgid " Activate this to make each gallery item clickable and lead users to the desired link."
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:531
-msgid "Popup Icon"
+#: modules/widgets/tp_gallery_listout.php:489
+msgid "Enable this to add category-based filtering buttons above the gallery, letting visitors sort items by category."
 msgstr ""
 
 #: modules/widgets/tp_gallery_listout.php:538
+msgid "Popup Icon"
+msgstr ""
+
+#: modules/widgets/tp_gallery_listout.php:545
 msgid "Display Icon"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:548
+#: modules/widgets/tp_gallery_listout.php:555
 msgid "Custom Icon"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:590
+#: modules/widgets/tp_gallery_listout.php:597
 #: modules/widgets/tp_post_comment.php:546
 #: modules/widgets/tp_style_list.php:605
 #: modules/widgets/tp_table.php:2621
 msgid "Bottom Space"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:669
+#: modules/widgets/tp_gallery_listout.php:676
 msgid "Extra Icon"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:747
+#: modules/widgets/tp_gallery_listout.php:754
 #: modules/widgets/tp_testimonial_listout.php:1203
 msgid "Excerpt/Content"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:758
+#: modules/widgets/tp_gallery_listout.php:765
 msgid "Top Space"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:1178
+#: modules/widgets/tp_gallery_listout.php:1185
 #: modules/widgets/tp_info_box.php:2844
 #: build/index.js:1
 #: build/index.js:3
 msgid "Tilt 3D Parallax"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:1347
+#: modules/widgets/tp_gallery_listout.php:1354
 msgid "Please select a multiple images gallery"
 msgstr ""
 
@@ -15727,19 +15744,19 @@ msgstr ""
 msgid "Captcha Margin"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2672
+#: modules/widgets/tp_gravity_form.php:2717
 msgid "Please select Gravity Form"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2676
+#: modules/widgets/tp_gravity_form.php:2721
 msgid "Please select Download Monitor Form"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2721
+#: modules/widgets/tp_gravity_form.php:2766
 msgid "No Gravity Forms Found!"
 msgstr ""
 
-#: modules/widgets/tp_gravity_form.php:2744
+#: modules/widgets/tp_gravity_form.php:2789
 msgid "No forms found"
 msgstr ""
 
@@ -16118,7 +16135,7 @@ msgstr ""
 #: modules/widgets/tp_header_extras.php:1956
 #: modules/widgets/tp_messagebox.php:1001
 #: modules/widgets/tp_messagebox.php:1044
-#: modules/widgets/tp_process_steps.php:1331
+#: modules/widgets/tp_process_steps.php:1330
 msgid "Border Type"
 msgstr ""
 
@@ -16773,7 +16790,7 @@ msgid "Left (Auto / PX)"
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:698
-#: modules/widgets/tp_process_steps.php:1556
+#: modules/widgets/tp_process_steps.php:1555
 msgid "Left Offset"
 msgstr ""
 
@@ -16927,7 +16944,7 @@ msgstr ""
 
 #: modules/widgets/tp_icon.php:445
 #: modules/widgets/tp_pricing_table.php:3554
-#: modules/widgets/tp_process_steps.php:1290
+#: modules/widgets/tp_process_steps.php:1289
 #: modules/widgets/tp_progress_bar.php:1070
 #: modules/widgets/tp_social_icon.php:537
 #: modules/widgets/tp_video_player.php:1020
@@ -18529,7 +18546,7 @@ msgstr ""
 
 #: modules/widgets/tp_post_author.php:856
 #: modules/widgets/tp_post_author.php:865
-#: modules/widgets/tp_post_meta.php:1785
+#: modules/widgets/tp_post_meta.php:1788
 msgid "author"
 msgstr ""
 
@@ -18745,7 +18762,7 @@ msgstr ""
 msgid "Block Re-rendering halted"
 msgstr ""
 
-#: modules/widgets/tp_post_content.php:586
+#: modules/widgets/tp_post_content.php:591
 msgid "Pages:"
 msgstr ""
 
@@ -19011,7 +19028,7 @@ msgstr ""
 msgid "%s"
 msgstr ""
 
-#: modules/widgets/tp_post_meta.php:1812
+#: modules/widgets/tp_post_meta.php:1815
 msgid "comment"
 msgstr ""
 
@@ -19534,7 +19551,7 @@ msgid "I am text block. Click edit button to change this text. Lorem ipsum dolor
 msgstr ""
 
 #: modules/widgets/tp_process_steps.php:335
-#: modules/widgets/tp_process_steps.php:1218
+#: modules/widgets/tp_process_steps.php:1217
 #: modules/widgets/tp_progress_bar.php:373
 #: modules/widgets/tp_progress_bar.php:981
 msgid "Lottie"
@@ -19606,74 +19623,74 @@ msgstr ""
 msgid "Image Options"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:862
+#: modules/widgets/tp_process_steps.php:861
 msgid "Text Options"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:959
+#: modules/widgets/tp_process_steps.php:958
 msgid "Minimum Height of Content"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1093
-#: modules/widgets/tp_process_steps.php:1126
+#: modules/widgets/tp_process_steps.php:1092
+#: modules/widgets/tp_process_steps.php:1125
 msgid "Transform CSS"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1157
-#: modules/widgets/tp_process_steps.php:1877
+#: modules/widgets/tp_process_steps.php:1156
+#: modules/widgets/tp_process_steps.php:1876
 #: modules/widgets/tp_style_list.php:1687
 #: modules/widgets/tp_tabs_tours.php:1717
 msgid "Backdrop Filter"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1261
+#: modules/widgets/tp_process_steps.php:1260
 #: modules/widgets/tp_progress_bar.php:1041
 msgid "Speed"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1279
+#: modules/widgets/tp_process_steps.php:1278
 #: modules/widgets/tp_progress_bar.php:1059
 msgid "Loop Animation"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1304
+#: modules/widgets/tp_process_steps.php:1303
 msgid "Separator/Line Style"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1386
+#: modules/widgets/tp_process_steps.php:1385
 msgid "Separator/Line Image"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1401
+#: modules/widgets/tp_process_steps.php:1400
 msgid "Separator/Line Offset"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1430
+#: modules/widgets/tp_process_steps.php:1429
 msgid "Separator/Line Size"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1460
+#: modules/widgets/tp_process_steps.php:1459
 msgid "Image Maximum Size"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1530
+#: modules/widgets/tp_process_steps.php:1529
 #: modules/widgets/tp_style_list.php:1226
 msgid "Display Counter Style"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1731
+#: modules/widgets/tp_process_steps.php:1730
 msgid "Content Background Style"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1766
+#: modules/widgets/tp_process_steps.php:1765
 msgid "Left Content Right Margin"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:1938
+#: modules/widgets/tp_process_steps.php:1937
 msgid "Horizontal Background"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:2117
+#: modules/widgets/tp_process_steps.php:2116
 #: modules/widgets/tp_progress_bar.php:1263
 msgid "Opps!! Please Enter Only JSON File Extension."
 msgstr ""
@@ -23254,26 +23271,26 @@ msgstr ""
 msgid "Select a WPForm"
 msgstr ""
 
-#: widgets_loader.php:183
+#: widgets_loader.php:195
 msgid "Update Elementor to Continue"
 msgstr ""
 
 #. translators: %s: minimum required Elementor version.
-#: widgets_loader.php:186
+#: widgets_loader.php:198
 #, php-format
 msgid "The Plus Addons for Elementor requires Elementor %s or newer. Widgets and extensions are paused until Elementor is updated."
 msgstr ""
 
-#: widgets_loader.php:189
+#: widgets_loader.php:201
 msgid "Go to Plugins"
 msgstr ""
 
-#: widgets_loader.php:210
+#: widgets_loader.php:222
 #: assets/js/admin/tp-elementor-install.js:12
 msgid "Install Now"
 msgstr ""
 
-#: widgets_loader.php:213
+#: widgets_loader.php:225
 #: assets/js/admin/tp-elementor-install.js:14
 #: build/index.js:3
 #: includes/nxt-ext/build/index.js:1
@@ -23281,111 +23298,111 @@ msgstr ""
 msgid "Activate Now"
 msgstr ""
 
-#: widgets_loader.php:220
+#: widgets_loader.php:232
 msgid "Elementor Plugin Required"
 msgstr ""
 
-#: widgets_loader.php:221
+#: widgets_loader.php:233
 msgid "The Plus Addons for Elementor works as an extension of Elementor. Please install and activate Elementor to unlock all 120+ widgets and extensions. Without Elementor, the addon cannot function."
 msgstr ""
 
-#: widgets_loader.php:329
+#: widgets_loader.php:341
 msgid "Invalid permission. Only administrators can perform this action."
 msgstr ""
 
-#: widgets_loader.php:371
+#: widgets_loader.php:383
 msgid "Failed to install Elementor plugin."
 msgstr ""
 
-#: widgets_loader.php:379
+#: widgets_loader.php:391
 msgid "Plugin installed but activation failed."
 msgstr ""
 
-#: widgets_loader.php:384
+#: widgets_loader.php:396
 msgid "Elementor installed & activated successfully!"
 msgstr ""
 
-#: widgets_loader.php:394
+#: widgets_loader.php:406
 msgid "Elementor activation failed."
 msgstr ""
 
-#: widgets_loader.php:399
+#: widgets_loader.php:411
 msgid "Elementor activated successfully!"
 msgstr ""
 
-#: widgets_loader.php:714
+#: widgets_loader.php:730
 msgid "You are not allowed to upload SVG files."
 msgstr ""
 
-#: widgets_loader.php:721
+#: widgets_loader.php:737
 msgid "SVG file could not be read."
 msgstr ""
 
-#: widgets_loader.php:727
+#: widgets_loader.php:743
 msgid "SVGZ uploads are not supported on this server (zlib unavailable)."
 msgstr ""
 
-#: widgets_loader.php:734
+#: widgets_loader.php:750
 msgid "Malformed SVGZ file rejected."
 msgstr ""
 
-#: widgets_loader.php:744
+#: widgets_loader.php:760
 msgid "File does not appear to be a valid SVG."
 msgstr ""
 
-#: widgets_loader.php:768
+#: widgets_loader.php:784
 msgid "SVG contains unsafe content"
 msgstr ""
 
-#: widgets_loader.php:821
+#: widgets_loader.php:837
 msgid "Plus Essential"
 msgstr ""
 
-#: widgets_loader.php:822
+#: widgets_loader.php:838
 msgid "Plus Advanced"
 msgstr ""
 
-#: widgets_loader.php:823
+#: widgets_loader.php:839
 msgid "Plus Creative"
 msgstr ""
 
-#: widgets_loader.php:824
+#: widgets_loader.php:840
 msgid "Plus Listing"
 msgstr ""
 
-#: widgets_loader.php:825
+#: widgets_loader.php:841
 msgid "Plus Social"
 msgstr ""
 
-#: widgets_loader.php:826
+#: widgets_loader.php:842
 msgid "Plus Forms"
 msgstr ""
 
-#: widgets_loader.php:827
+#: widgets_loader.php:843
 msgid "Plus WooCommerce"
 msgstr ""
 
-#: widgets_loader.php:828
+#: widgets_loader.php:844
 msgid "Plus Depreciated"
 msgstr ""
 
-#: widgets_loader.php:853
+#: widgets_loader.php:869
 msgid "Plus Header"
 msgstr ""
 
-#: widgets_loader.php:873
+#: widgets_loader.php:889
 msgid "Plus Archive"
 msgstr ""
 
-#: widgets_loader.php:894
+#: widgets_loader.php:910
 msgid "Plus Product Archive"
 msgstr ""
 
-#: widgets_loader.php:915
+#: widgets_loader.php:931
 msgid "Plus Product"
 msgstr ""
 
-#: widgets_loader.php:936
+#: widgets_loader.php:952
 msgid "Plus Single"
 msgstr ""
 
