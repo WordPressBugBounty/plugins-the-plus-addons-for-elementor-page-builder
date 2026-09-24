@@ -3024,9 +3024,11 @@ class L_ThePlus_Data_Table extends Plus_Widget_Base {
 									$toolbox = 'id="' . esc_attr( $uniqid ) . '"' . $this->get_render_attribute_string( 'current_' . $head['_id'] ) . ' data-local="true" ' . $this->get_render_attribute_string( $_tooltip ) . '';
 								}
 
+								$aria_sort = ( 'yes' === $settings['sortable'] && true === $first_row_th ) ? ' aria-sort="none"' : '';
+
 								if ( 'cell' === $head['header_content_type'] ) {
 									?>
-										<th <?php echo $toolbox; ?> scope="col">
+										<th <?php echo $toolbox; ?> scope="col"<?php echo $aria_sort; ?>>
 											<span class="sort-style">
 											<span <?php echo $this->get_render_attribute_string( 'plus_table__text' ); ?>>
 											<?php

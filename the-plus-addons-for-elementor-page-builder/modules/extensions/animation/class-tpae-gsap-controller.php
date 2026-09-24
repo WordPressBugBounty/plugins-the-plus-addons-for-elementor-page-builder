@@ -104,7 +104,6 @@ $widget->add_control(
 	array(
 		'label' => esc_html__('Trigger', 'tpebl'),
 		'type' => Controls_Manager::SELECT,
-		'default' => 'on_scroll',
 		'render_type' => 'ui',
 		'default' => 'tp_on_load',
 		'options' => array(
@@ -114,7 +113,6 @@ $widget->add_control(
 		'condition' => array(
 			'plus_gsap_animation_type' => array('tp_basic'),
 		),
-		'render_type' => 'ui',
 		'frontend_available' => true,
 	)
 );

@@ -1695,7 +1695,7 @@ class L_ThePlus_Accordion extends Plus_Widget_Base {
 					array(
 						'id'            => $tab_title_id,
 						'class'         => array( 'elementor-tab-title', 'plus-accordion-header', $active_default ),
-						'tabindex'      => $id_int . $tab_count,
+						'tabindex'      => '0',
 						'data-tab'      => $tab_count,
 						'role'          => 'button',
 						'aria-controls' => $tab_content_id,

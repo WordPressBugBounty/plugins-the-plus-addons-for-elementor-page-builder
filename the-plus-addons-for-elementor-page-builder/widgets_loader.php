@@ -252,7 +252,12 @@ final class L_Theplus_Element_Load {
 		// next admin load. This makes a re-activated / re-installed build never
 		// serve the previous build's stale editor + frontend cache, even when
 		// the version string is unchanged (the common QA re-test case).
+		//
+		// tpae_version_active is the marker tp_version_clear_cache() now gates
+		// on, so it has to be cleared too or the same-version re-install would
+		// no longer force a purge.
 		delete_option( 'tpae_version_cache' );
+		delete_option( 'tpae_version_active' );
 	}
 
 	/**
@@ -287,6 +292,7 @@ final class L_Theplus_Element_Load {
 
 		if ( in_array( L_THEPLUS_PBNAME, $plugins, true ) ) {
 			delete_option( 'tpae_version_cache' );
+			delete_option( 'tpae_version_active' );
 		}
 	}
 
@@ -841,7 +847,7 @@ final class L_Theplus_Element_Load {
 			'plus-social'      => array( 'title' => esc_html__( 'Plus Social', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
 			'plus-forms'       => array( 'title' => esc_html__( 'Plus Forms', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
 			'plus-woo-builder' => array( 'title' => esc_html__( 'Plus WooCommerce', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
-			'plus-depreciated' => array( 'title' => esc_html__( 'Plus Depreciated', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
+			'plus-depreciated' => array( 'title' => esc_html__( 'Plus Deprecated', 'tpebl' ), 'icon'  => 'fa fa-plug' ),
 		);
 
 		if ( $post_id ) {
