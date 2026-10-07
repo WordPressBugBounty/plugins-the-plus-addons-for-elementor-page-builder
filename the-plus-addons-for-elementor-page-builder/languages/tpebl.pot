@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.5.2\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/potsrc\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.5.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-21T10:48:54+00:00\n"
+"POT-Creation-Date: 2026-10-06T09:55:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
@@ -59,7 +59,7 @@ msgstr ""
 #: includes/admin/tpae-hooks/class-tpae-hooks.php:654
 #: includes/notices/class-tp-wdkit-preview-popup.php:185
 #: includes/preset/class-wdkit-preset.php:152
-#: widgets_loader.php:369
+#: widgets_loader.php:375
 msgid "Failed to retrieve plugin information."
 msgstr ""
 
@@ -658,7 +658,7 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:133
 #: modules/widgets/tp_number_counter.php:469
 #: modules/widgets/tp_page_scroll.php:847
-#: modules/widgets/tp_plus_form.php:1171
+#: modules/widgets/tp_plus_form.php:1173
 #: modules/widgets/tp_post_author.php:206
 #: modules/widgets/tp_post_comment.php:210
 #: modules/widgets/tp_post_content.php:195
@@ -893,8 +893,8 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:251
 #: modules/widgets/tp_navigation_menu_lite.php:1004
 #: modules/widgets/tp_number_counter.php:213
-#: modules/widgets/tp_plus_form.php:127
-#: modules/widgets/tp_plus_form.php:770
+#: modules/widgets/tp_plus_form.php:129
+#: modules/widgets/tp_plus_form.php:772
 #: modules/widgets/tp_pricing_table.php:1003
 #: modules/widgets/tp_progress_bar.php:148
 #: modules/widgets/tp_social_embed.php:178
@@ -2862,7 +2862,7 @@ msgstr ""
 #: modules/widgets/tp_flip_box.php:472
 #: modules/widgets/tp_info_box.php:497
 #: modules/widgets/tp_info_box.php:1721
-#: modules/widgets/tp_plus_form.php:523
+#: modules/widgets/tp_plus_form.php:525
 #: modules/widgets/tp_pricing_table.php:730
 #: modules/widgets/tp_pricing_table.php:740
 #: modules/widgets/tp_pricing_table.php:2920
@@ -3666,7 +3666,7 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:144
 #: modules/widgets/tp_number_counter.php:480
 #: modules/widgets/tp_page_scroll.php:858
-#: modules/widgets/tp_plus_form.php:1182
+#: modules/widgets/tp_plus_form.php:1184
 #: modules/widgets/tp_post_author.php:217
 #: modules/widgets/tp_post_comment.php:221
 #: modules/widgets/tp_post_content.php:206
@@ -3721,7 +3721,7 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:148
 #: modules/widgets/tp_number_counter.php:484
 #: modules/widgets/tp_page_scroll.php:861
-#: modules/widgets/tp_plus_form.php:1186
+#: modules/widgets/tp_plus_form.php:1188
 #: modules/widgets/tp_post_author.php:221
 #: modules/widgets/tp_post_comment.php:225
 #: modules/widgets/tp_post_content.php:210
@@ -3793,11 +3793,11 @@ msgid "Whitelabel & More"
 msgstr ""
 
 #: modules/controls/tpae-theme-builder.php:27
-#: modules/widgets/tp_accordion.php:1803
-#: modules/widgets/tp_accordion.php:1816
-#: modules/widgets/tp_accordion.php:1834
-#: modules/widgets/tp_carousel_anything.php:1209
-#: modules/widgets/tp_carousel_anything.php:1229
+#: modules/widgets/tp_accordion.php:1808
+#: modules/widgets/tp_accordion.php:1821
+#: modules/widgets/tp_accordion.php:1839
+#: modules/widgets/tp_carousel_anything.php:1214
+#: modules/widgets/tp_carousel_anything.php:1234
 #: modules/widgets/tp_navigation_menu_lite.php:2558
 #: modules/widgets/tp_navigation_menu_lite.php:2738
 #: modules/widgets/tp_page_scroll.php:1124
@@ -3805,10 +3805,10 @@ msgstr ""
 #: modules/widgets/tp_switcher.php:1820
 #: modules/widgets/tp_switcher.php:1840
 #: modules/widgets/tp_switcher.php:1861
-#: modules/widgets/tp_tabs_tours.php:2228
-#: modules/widgets/tp_tabs_tours.php:2239
-#: modules/widgets/tp_tabs_tours.php:2248
-#: modules/widgets/tp_tabs_tours.php:2273
+#: modules/widgets/tp_tabs_tours.php:2233
+#: modules/widgets/tp_tabs_tours.php:2244
+#: modules/widgets/tp_tabs_tours.php:2253
+#: modules/widgets/tp_tabs_tours.php:2278
 #: modules/extensions/copy-paste/tpae-copy-paste.js:560
 msgid "Note :"
 msgstr ""
@@ -3824,23 +3824,23 @@ msgstr ""
 msgid "Enable Theme Builder"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:470
+#: modules/enqueue/plus-generator.php:521
 msgid "Pause automatic slideshow"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:471
+#: modules/enqueue/plus-generator.php:522
 msgid "Play automatic slideshow"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:892
+#: modules/enqueue/plus-generator.php:979
 msgid "The Plus Performance"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:903
+#: modules/enqueue/plus-generator.php:990
 msgid "Purge All Pages"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:914
+#: modules/enqueue/plus-generator.php:1001
 msgid "Purge Current Page"
 msgstr ""
 
@@ -3909,7 +3909,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:2280
 #: modules/widgets/tp_number_counter.php:338
 #: modules/widgets/tp_number_counter.php:526
-#: modules/widgets/tp_plus_form.php:593
+#: modules/widgets/tp_plus_form.php:595
 #: modules/widgets/tp_post_meta.php:576
 #: modules/widgets/tp_post_meta.php:1082
 #: modules/widgets/tp_post_meta.php:1285
@@ -3941,7 +3941,7 @@ msgstr ""
 #: modules/widgets/tp_heading_title.php:546
 #: modules/widgets/tp_heading_title.php:961
 #: modules/widgets/tp_info_box.php:521
-#: modules/widgets/tp_plus_form.php:540
+#: modules/widgets/tp_plus_form.php:542
 #: modules/widgets/tp_post_comment.php:137
 #: modules/widgets/tp_pricing_table.php:759
 #: modules/widgets/tp_style_list.php:1812
@@ -3960,7 +3960,7 @@ msgstr ""
 #: modules/widgets/tp_heading_title.php:545
 #: modules/widgets/tp_heading_title.php:960
 #: modules/widgets/tp_info_box.php:517
-#: modules/widgets/tp_plus_form.php:536
+#: modules/widgets/tp_plus_form.php:538
 #: modules/widgets/tp_post_comment.php:133
 #: modules/widgets/tp_pricing_table.php:755
 #: modules/widgets/tp_smooth_scroll.php:114
@@ -4749,11 +4749,11 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:2265
 #: modules/widgets/tp_number_counter.php:2306
 #: modules/widgets/tp_page_scroll.php:903
-#: modules/widgets/tp_plus_form.php:1345
-#: modules/widgets/tp_plus_form.php:1544
-#: modules/widgets/tp_plus_form.php:1681
-#: modules/widgets/tp_plus_form.php:2056
-#: modules/widgets/tp_plus_form.php:2726
+#: modules/widgets/tp_plus_form.php:1347
+#: modules/widgets/tp_plus_form.php:1546
+#: modules/widgets/tp_plus_form.php:1683
+#: modules/widgets/tp_plus_form.php:2058
+#: modules/widgets/tp_plus_form.php:2728
 #: modules/widgets/tp_post_author.php:284
 #: modules/widgets/tp_post_author.php:381
 #: modules/widgets/tp_post_author.php:478
@@ -4879,8 +4879,8 @@ msgstr ""
 #: modules/widgets/tp_everest_form.php:155
 #: modules/widgets/tp_everest_form.php:192
 #: modules/widgets/tp_navigation_menu_lite.php:585
-#: modules/widgets/tp_plus_form.php:245
-#: modules/widgets/tp_plus_form.php:1453
+#: modules/widgets/tp_plus_form.php:247
+#: modules/widgets/tp_plus_form.php:1455
 #: modules/widgets/tp_post_author.php:352
 #: modules/widgets/tp_wp_forms.php:190
 msgid "Label"
@@ -4911,7 +4911,7 @@ msgstr ""
 #: modules/widgets/tp_age_gate.php:427
 #: modules/widgets/tp_dark_mode.php:104
 #: modules/widgets/tp_flip_box.php:119
-#: modules/widgets/tp_plus_form.php:145
+#: modules/widgets/tp_plus_form.php:147
 #: modules/widgets/tp_post_featured_image.php:100
 #: modules/widgets/tp_post_meta.php:195
 #: modules/widgets/tp_post_meta.php:237
@@ -5094,8 +5094,8 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1342
 #: modules/widgets/tp_number_counter.php:1650
 #: modules/widgets/tp_number_counter.php:1812
-#: modules/widgets/tp_plus_form.php:2124
-#: modules/widgets/tp_plus_form.php:2374
+#: modules/widgets/tp_plus_form.php:2126
+#: modules/widgets/tp_plus_form.php:2376
 #: modules/widgets/tp_post_author.php:293
 #: modules/widgets/tp_post_author.php:317
 #: modules/widgets/tp_post_author.php:390
@@ -5318,11 +5318,11 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:2222
 #: modules/widgets/tp_number_counter.php:2281
 #: modules/widgets/tp_number_counter.php:2320
-#: modules/widgets/tp_plus_form.php:1398
-#: modules/widgets/tp_plus_form.php:1565
-#: modules/widgets/tp_plus_form.php:1735
-#: modules/widgets/tp_plus_form.php:2305
-#: modules/widgets/tp_plus_form.php:2793
+#: modules/widgets/tp_plus_form.php:1400
+#: modules/widgets/tp_plus_form.php:1567
+#: modules/widgets/tp_plus_form.php:1737
+#: modules/widgets/tp_plus_form.php:2307
+#: modules/widgets/tp_plus_form.php:2795
 #: modules/widgets/tp_post_author.php:308
 #: modules/widgets/tp_post_author.php:405
 #: modules/widgets/tp_post_author.php:502
@@ -5865,7 +5865,7 @@ msgstr ""
 
 #: modules/extensions/dynamic-tag/tags/text/post-featured-image.php:84
 #: modules/helper-function.php:438
-#: modules/widgets/tp_plus_form.php:412
+#: modules/widgets/tp_plus_form.php:414
 #: modules/widgets/tp_table.php:496
 msgid "ID"
 msgstr ""
@@ -6177,7 +6177,7 @@ msgstr ""
 
 #: modules/extensions/global-control/class-tp-global-button-style-controller.php:98
 #: modules/widgets/tp_breadcrumbs_bar.php:1193
-#: modules/widgets/tp_plus_form.php:1478
+#: modules/widgets/tp_plus_form.php:1480
 #: modules/widgets/tp_tabs_tours.php:725
 msgid "Spacing"
 msgstr ""
@@ -6242,10 +6242,10 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:1379
 #: modules/widgets/tp_ninja_form.php:1508
 #: modules/widgets/tp_ninja_form.php:1741
-#: modules/widgets/tp_plus_form.php:1279
-#: modules/widgets/tp_plus_form.php:1625
-#: modules/widgets/tp_plus_form.php:1912
-#: modules/widgets/tp_plus_form.php:2632
+#: modules/widgets/tp_plus_form.php:1281
+#: modules/widgets/tp_plus_form.php:1627
+#: modules/widgets/tp_plus_form.php:1914
+#: modules/widgets/tp_plus_form.php:2634
 #: modules/widgets/tp_post_author.php:449
 #: modules/widgets/tp_post_comment.php:1136
 #: modules/widgets/tp_post_meta.php:894
@@ -6366,10 +6366,10 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:1729
 #: modules/widgets/tp_ninja_form.php:1936
 #: modules/widgets/tp_page_scroll.php:952
-#: modules/widgets/tp_plus_form.php:1264
-#: modules/widgets/tp_plus_form.php:1613
-#: modules/widgets/tp_plus_form.php:1897
-#: modules/widgets/tp_plus_form.php:2620
+#: modules/widgets/tp_plus_form.php:1266
+#: modules/widgets/tp_plus_form.php:1615
+#: modules/widgets/tp_plus_form.php:1899
+#: modules/widgets/tp_plus_form.php:2622
 #: modules/widgets/tp_post_author.php:716
 #: modules/widgets/tp_post_comment.php:522
 #: modules/widgets/tp_post_comment.php:598
@@ -6508,15 +6508,15 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:1180
 #: modules/widgets/tp_ninja_form.php:1767
 #: modules/widgets/tp_ninja_form.php:1792
-#: modules/widgets/tp_plus_form.php:1352
-#: modules/widgets/tp_plus_form.php:1405
-#: modules/widgets/tp_plus_form.php:1551
-#: modules/widgets/tp_plus_form.php:1572
-#: modules/widgets/tp_plus_form.php:1688
-#: modules/widgets/tp_plus_form.php:1742
-#: modules/widgets/tp_plus_form.php:2063
-#: modules/widgets/tp_plus_form.php:2312
-#: modules/widgets/tp_plus_form.php:2653
+#: modules/widgets/tp_plus_form.php:1354
+#: modules/widgets/tp_plus_form.php:1407
+#: modules/widgets/tp_plus_form.php:1553
+#: modules/widgets/tp_plus_form.php:1574
+#: modules/widgets/tp_plus_form.php:1690
+#: modules/widgets/tp_plus_form.php:1744
+#: modules/widgets/tp_plus_form.php:2065
+#: modules/widgets/tp_plus_form.php:2314
+#: modules/widgets/tp_plus_form.php:2655
 #: modules/widgets/tp_post_comment.php:832
 #: modules/widgets/tp_pricing_table.php:2572
 #: modules/widgets/tp_pricing_table.php:3039
@@ -6578,8 +6578,8 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:2207
 #: modules/widgets/tp_navigation_menu_lite.php:2245
 #: modules/widgets/tp_number_counter.php:592
-#: modules/widgets/tp_plus_form.php:2075
-#: modules/widgets/tp_plus_form.php:2324
+#: modules/widgets/tp_plus_form.php:2077
+#: modules/widgets/tp_plus_form.php:2326
 #: modules/widgets/tp_post_meta.php:639
 #: modules/widgets/tp_post_meta.php:678
 #: modules/widgets/tp_post_meta.php:1195
@@ -6613,11 +6613,11 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:861
 #: modules/widgets/tp_messagebox.php:923
 #: modules/widgets/tp_navigation_menu_lite.php:630
-#: modules/widgets/tp_plus_form.php:1700
-#: modules/widgets/tp_plus_form.php:1754
-#: modules/widgets/tp_plus_form.php:1809
-#: modules/widgets/tp_plus_form.php:2139
-#: modules/widgets/tp_plus_form.php:2665
+#: modules/widgets/tp_plus_form.php:1702
+#: modules/widgets/tp_plus_form.php:1756
+#: modules/widgets/tp_plus_form.php:1811
+#: modules/widgets/tp_plus_form.php:2141
+#: modules/widgets/tp_plus_form.php:2667
 #: modules/widgets/tp_post_navigation.php:1126
 #: modules/widgets/tp_scroll_navigation.php:1084
 #: modules/widgets/tp_social_icon.php:354
@@ -7165,13 +7165,13 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:2210
 #: modules/widgets/tp_number_counter.php:2242
 #: modules/widgets/tp_page_scroll.php:998
-#: modules/widgets/tp_plus_form.php:1384
-#: modules/widgets/tp_plus_form.php:1437
-#: modules/widgets/tp_plus_form.php:1721
-#: modules/widgets/tp_plus_form.php:1775
-#: modules/widgets/tp_plus_form.php:1830
-#: modules/widgets/tp_plus_form.php:2282
-#: modules/widgets/tp_plus_form.php:2533
+#: modules/widgets/tp_plus_form.php:1386
+#: modules/widgets/tp_plus_form.php:1439
+#: modules/widgets/tp_plus_form.php:1723
+#: modules/widgets/tp_plus_form.php:1777
+#: modules/widgets/tp_plus_form.php:1832
+#: modules/widgets/tp_plus_form.php:2284
+#: modules/widgets/tp_plus_form.php:2535
 #: modules/widgets/tp_post_author.php:569
 #: modules/widgets/tp_post_author.php:758
 #: modules/widgets/tp_post_author.php:799
@@ -7320,7 +7320,7 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:951
 #: modules/widgets/tp_messagebox.php:1020
 #: modules/widgets/tp_messagebox.php:1063
-#: modules/widgets/tp_plus_form.php:1847
+#: modules/widgets/tp_plus_form.php:1849
 #: modules/widgets/tp_post_comment.php:317
 #: modules/widgets/tp_post_comment.php:351
 #: modules/widgets/tp_social_embed.php:3277
@@ -7474,9 +7474,9 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1795
 #: modules/widgets/tp_number_counter.php:1949
 #: modules/widgets/tp_number_counter.php:2104
-#: modules/widgets/tp_plus_form.php:1936
-#: modules/widgets/tp_plus_form.php:2256
-#: modules/widgets/tp_plus_form.php:2506
+#: modules/widgets/tp_plus_form.php:1938
+#: modules/widgets/tp_plus_form.php:2258
+#: modules/widgets/tp_plus_form.php:2508
 #: modules/widgets/tp_pricing_table.php:1318
 #: modules/widgets/tp_pricing_table.php:1542
 #: modules/widgets/tp_pricing_table.php:1876
@@ -7899,11 +7899,11 @@ msgstr ""
 #: modules/widgets/tp_heading_title.php:946
 #: modules/widgets/tp_heading_title.php:1232
 #: modules/widgets/tp_heading_title.php:1334
-#: modules/widgets/tp_plus_form.php:294
-#: modules/widgets/tp_plus_form.php:636
-#: modules/widgets/tp_plus_form.php:1136
-#: modules/widgets/tp_plus_form.php:1148
-#: modules/widgets/tp_plus_form.php:1159
+#: modules/widgets/tp_plus_form.php:296
+#: modules/widgets/tp_plus_form.php:638
+#: modules/widgets/tp_plus_form.php:1138
+#: modules/widgets/tp_plus_form.php:1150
+#: modules/widgets/tp_plus_form.php:1161
 #: modules/widgets/tp_pricing_table.php:428
 #: modules/widgets/tp_pricing_table.php:658
 #: modules/widgets/tp_pricing_table.php:995
@@ -7934,11 +7934,11 @@ msgstr ""
 #: modules/widgets/tp_heading_title.php:947
 #: modules/widgets/tp_heading_title.php:1233
 #: modules/widgets/tp_heading_title.php:1335
-#: modules/widgets/tp_plus_form.php:295
-#: modules/widgets/tp_plus_form.php:637
-#: modules/widgets/tp_plus_form.php:1137
-#: modules/widgets/tp_plus_form.php:1149
-#: modules/widgets/tp_plus_form.php:1160
+#: modules/widgets/tp_plus_form.php:297
+#: modules/widgets/tp_plus_form.php:639
+#: modules/widgets/tp_plus_form.php:1139
+#: modules/widgets/tp_plus_form.php:1151
+#: modules/widgets/tp_plus_form.php:1162
 #: modules/widgets/tp_pricing_table.php:429
 #: modules/widgets/tp_pricing_table.php:659
 #: modules/widgets/tp_pricing_table.php:996
@@ -8338,12 +8338,12 @@ msgid "You Haven’t Saved Templates Yet."
 msgstr ""
 
 #: modules/helper-function.php:18
-#: modules/widgets/tp_accordion.php:1795
-#: modules/widgets/tp_accordion.php:1821
-#: modules/widgets/tp_carousel_anything.php:1216
+#: modules/widgets/tp_accordion.php:1800
+#: modules/widgets/tp_accordion.php:1826
+#: modules/widgets/tp_carousel_anything.php:1221
 #: modules/widgets/tp_navigation_menu_lite.php:2742
 #: modules/widgets/tp_page_scroll.php:1132
-#: modules/widgets/tp_tabs_tours.php:2277
+#: modules/widgets/tp_tabs_tours.php:2282
 #: build/index.js:3
 msgid "Select Template"
 msgstr ""
@@ -8425,7 +8425,7 @@ msgid "Name (slug)"
 msgstr ""
 
 #: modules/helper-function.php:442
-#: modules/widgets/tp_plus_form.php:156
+#: modules/widgets/tp_plus_form.php:158
 #: modules/widgets/tp_post_meta.php:121
 msgid "Date"
 msgstr ""
@@ -8696,6 +8696,179 @@ msgstr ""
 #: modules/helper-function.php:630
 #: modules/widgets/tp_hovercard.php:1561
 msgid "Contain"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:240
+msgid "Can't find a style that fits? Describe the design you want and UiChemy writes it in real HTML, CSS and JavaScript."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:243
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:279
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:655
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:811
+msgid "See how it works"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:274
+msgid "Powered by UiChemy"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:275
+msgid "Describe It. UiChemy Builds It."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:276
+msgid "Describe this section, or your whole website, and UiChemy writes it as real, editable HTML, CSS and JavaScript, right in your builder."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:292
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:309
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:802
+msgid "Build with UiChemy"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:296
+msgid "Activate UiChemy & Build"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:297
+msgid "Install UiChemy & Build"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:313
+msgid "Activate UiChemy"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:314
+#: build/index.js:1
+msgid "Install UiChemy"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:421
+msgid "Build Your Own Design"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:554
+msgid "Figma to WordPress"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:555
+msgid "Turn a Figma design into real, editable WordPress in your builder, pixel accurate and responsive."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:556
+msgid "Convert Figma"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:560
+msgid "AI Website Creator"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:561
+msgid "Turn a prompt or client brief into a full WordPress site you own, from brief to sitemap to export."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:562
+msgid "Create with AI"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:566
+msgid "AI to WordPress"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:567
+msgid "Bring a Lovable, Claude or v0 build straight into WordPress, editable and yours."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:568
+msgid "Connect an AI"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:572
+msgid "UiChemy Composer"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:573
+msgid "Describe it in the builder and get real, editable HTML, CSS and JavaScript."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:574
+msgid "Explore Composer"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:596
+#: build/index.js:1
+msgid "UiChemy"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:602
+msgid "Opens the UiChemy AI Website Creator."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:604
+msgid "Activates UiChemy, then opens its AI Website Creator."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:606
+msgid "Installs UiChemy, then opens its AI Website Creator."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:650
+msgid "Create A Website With One Prompt"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:651
+msgid "Describe your business. UiChemy turns it into a real WordPress site, pages, sections and copy, all editable in your own builder. Nothing locked, nothing rendered from someone else's server."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:656
+msgid "Other ways in"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:659
+msgid "Opening UiChemy..."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:660
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:805
+msgid "Setting up UiChemy..."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:661
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:806
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:803
+msgid "UiChemy is ready, open it"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:804
+msgid "UiChemy is installed. Click the button to open the AI Website Creator."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:809
+msgid "No Widget For That? Describe It To UiChemy"
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:810
+msgid "From one section to a full website, describe what you need and UiChemy builds it as real, editable code you keep."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:1066
+msgid "This site cannot install plugins automatically. Install UiChemy from Plugins > Add New, then try again."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:1080
+msgid "Could not install UiChemy. Install it from Plugins > Add New, then try again."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:1117
+msgid "Security check failed. Reload and try again."
+msgstr ""
+
+#: modules/uichemy-notice/class-tpae-uichemy-notice.php:1124
+msgid "You do not have permission to do this."
 msgstr ""
 
 #: modules/widget-promotion/tp-widget-promotion/class-tp-widget-promotion.php:76
@@ -9217,8 +9390,8 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:101
 #: modules/widgets/tp_page_scroll.php:201
 #: modules/widgets/tp_page_scroll.php:283
-#: modules/widgets/tp_plus_form.php:139
-#: modules/widgets/tp_plus_form.php:566
+#: modules/widgets/tp_plus_form.php:141
+#: modules/widgets/tp_plus_form.php:568
 #: modules/widgets/tp_post_comment.php:105
 #: modules/widgets/tp_post_content.php:100
 #: modules/widgets/tp_post_content.php:147
@@ -10023,7 +10196,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:209
 #: modules/widgets/tp_number_counter.php:143
 #: modules/widgets/tp_number_counter.php:172
-#: modules/widgets/tp_plus_form.php:1964
+#: modules/widgets/tp_plus_form.php:1966
 #: modules/widgets/tp_post_comment.php:1151
 #: modules/widgets/tp_post_content.php:167
 #: modules/widgets/tp_post_featured_image.php:181
@@ -10067,7 +10240,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:421
 #: modules/widgets/tp_info_box.php:647
 #: modules/widgets/tp_number_counter.php:348
-#: modules/widgets/tp_plus_form.php:588
+#: modules/widgets/tp_plus_form.php:590
 #: modules/widgets/tp_pricing_table.php:244
 #: modules/widgets/tp_pricing_table.php:585
 #: modules/widgets/tp_pricing_table.php:858
@@ -10129,7 +10302,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:439
 #: modules/widgets/tp_info_box.php:653
 #: modules/widgets/tp_number_counter.php:353
-#: modules/widgets/tp_plus_form.php:592
+#: modules/widgets/tp_plus_form.php:594
 #: modules/widgets/tp_pricing_table.php:249
 #: modules/widgets/tp_pricing_table.php:289
 #: modules/widgets/tp_pricing_table.php:590
@@ -10172,7 +10345,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:467
 #: modules/widgets/tp_info_box.php:683
 #: modules/widgets/tp_number_counter.php:380
-#: modules/widgets/tp_plus_form.php:600
+#: modules/widgets/tp_plus_form.php:602
 #: modules/widgets/tp_pricing_table.php:276
 #: modules/widgets/tp_pricing_table.php:305
 #: modules/widgets/tp_pricing_table.php:598
@@ -10364,7 +10537,7 @@ msgstr ""
 #: modules/widgets/tp_ninja_form.php:140
 #: modules/widgets/tp_number_counter.php:476
 #: modules/widgets/tp_page_scroll.php:854
-#: modules/widgets/tp_plus_form.php:1178
+#: modules/widgets/tp_plus_form.php:1180
 #: modules/widgets/tp_post_author.php:213
 #: modules/widgets/tp_post_comment.php:217
 #: modules/widgets/tp_post_content.php:202
@@ -10417,7 +10590,7 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:784
 #: modules/widgets/tp_ninja_form.php:887
 #: modules/widgets/tp_number_counter.php:539
-#: modules/widgets/tp_plus_form.php:2023
+#: modules/widgets/tp_plus_form.php:2025
 #: modules/widgets/tp_post_meta.php:782
 #: modules/widgets/tp_post_meta.php:1122
 #: modules/widgets/tp_post_meta.php:1325
@@ -10447,7 +10620,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:2517
 #: modules/widgets/tp_number_counter.php:741
 #: modules/widgets/tp_number_counter.php:973
-#: modules/widgets/tp_plus_form.php:2090
+#: modules/widgets/tp_plus_form.php:2092
 #: modules/widgets/tp_pricing_table.php:1336
 #: modules/widgets/tp_pricing_table.php:1559
 #: modules/widgets/tp_progress_bar.php:886
@@ -10470,7 +10643,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:2532
 #: modules/widgets/tp_number_counter.php:755
 #: modules/widgets/tp_number_counter.php:987
-#: modules/widgets/tp_plus_form.php:2105
+#: modules/widgets/tp_plus_form.php:2107
 #: modules/widgets/tp_pricing_table.php:1350
 #: modules/widgets/tp_pricing_table.php:1573
 #: modules/widgets/tp_progress_bar.php:901
@@ -10493,7 +10666,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:2093
 #: modules/widgets/tp_navigation_menu_lite.php:2228
 #: modules/widgets/tp_page_scroll.php:922
-#: modules/widgets/tp_plus_form.php:1789
+#: modules/widgets/tp_plus_form.php:1791
 #: modules/widgets/tp_switcher.php:779
 #: modules/widgets/tp_switcher.php:1034
 #: modules/widgets/tp_switcher.php:1312
@@ -10565,12 +10738,12 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1156
 #: modules/widgets/tp_number_counter.php:1511
 #: modules/widgets/tp_page_scroll.php:965
-#: modules/widgets/tp_plus_form.php:1295
-#: modules/widgets/tp_plus_form.php:1466
-#: modules/widgets/tp_plus_form.php:1638
-#: modules/widgets/tp_plus_form.php:1928
-#: modules/widgets/tp_plus_form.php:2645
-#: modules/widgets/tp_plus_form.php:2688
+#: modules/widgets/tp_plus_form.php:1297
+#: modules/widgets/tp_plus_form.php:1468
+#: modules/widgets/tp_plus_form.php:1640
+#: modules/widgets/tp_plus_form.php:1930
+#: modules/widgets/tp_plus_form.php:2647
+#: modules/widgets/tp_plus_form.php:2690
 #: modules/widgets/tp_post_author.php:270
 #: modules/widgets/tp_post_author.php:367
 #: modules/widgets/tp_post_author.php:464
@@ -10672,8 +10845,8 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1671
 #: modules/widgets/tp_number_counter.php:1841
 #: modules/widgets/tp_number_counter.php:1986
-#: modules/widgets/tp_plus_form.php:2128
-#: modules/widgets/tp_plus_form.php:2378
+#: modules/widgets/tp_plus_form.php:2130
+#: modules/widgets/tp_plus_form.php:2380
 #: modules/widgets/tp_pricing_table.php:1195
 #: modules/widgets/tp_pricing_table.php:1418
 #: modules/widgets/tp_pricing_table.php:1754
@@ -10742,8 +10915,8 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1703
 #: modules/widgets/tp_number_counter.php:1865
 #: modules/widgets/tp_number_counter.php:2015
-#: modules/widgets/tp_plus_form.php:2166
-#: modules/widgets/tp_plus_form.php:2416
+#: modules/widgets/tp_plus_form.php:2168
+#: modules/widgets/tp_plus_form.php:2418
 #: modules/widgets/tp_pricing_table.php:1233
 #: modules/widgets/tp_pricing_table.php:1457
 #: modules/widgets/tp_pricing_table.php:1792
@@ -10811,8 +10984,8 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1737
 #: modules/widgets/tp_number_counter.php:1894
 #: modules/widgets/tp_number_counter.php:2046
-#: modules/widgets/tp_plus_form.php:2198
-#: modules/widgets/tp_plus_form.php:2448
+#: modules/widgets/tp_plus_form.php:2200
+#: modules/widgets/tp_plus_form.php:2450
 #: modules/widgets/tp_pricing_table.php:1262
 #: modules/widgets/tp_pricing_table.php:1486
 #: modules/widgets/tp_pricing_table.php:1821
@@ -10846,8 +11019,8 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1755
 #: modules/widgets/tp_number_counter.php:1911
 #: modules/widgets/tp_number_counter.php:2064
-#: modules/widgets/tp_plus_form.php:2218
-#: modules/widgets/tp_plus_form.php:2468
+#: modules/widgets/tp_plus_form.php:2220
+#: modules/widgets/tp_plus_form.php:2470
 #: modules/widgets/tp_pricing_table.php:1279
 #: modules/widgets/tp_pricing_table.php:1503
 #: modules/widgets/tp_pricing_table.php:1838
@@ -10881,8 +11054,8 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:1769
 #: modules/widgets/tp_number_counter.php:1924
 #: modules/widgets/tp_number_counter.php:2078
-#: modules/widgets/tp_plus_form.php:2230
-#: modules/widgets/tp_plus_form.php:2480
+#: modules/widgets/tp_plus_form.php:2232
+#: modules/widgets/tp_plus_form.php:2482
 #: modules/widgets/tp_pricing_table.php:1292
 #: modules/widgets/tp_pricing_table.php:1516
 #: modules/widgets/tp_pricing_table.php:1851
@@ -10962,21 +11135,21 @@ msgstr ""
 msgid "Hover Style"
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1796
-#: modules/widgets/tp_accordion.php:1822
-#: modules/widgets/tp_carousel_anything.php:1217
+#: modules/widgets/tp_accordion.php:1801
+#: modules/widgets/tp_accordion.php:1827
+#: modules/widgets/tp_carousel_anything.php:1222
 #: modules/widgets/tp_navigation_menu_lite.php:2743
 #: modules/widgets/tp_page_scroll.php:1133
 #: modules/widgets/tp_switcher.php:1807
 #: modules/widgets/tp_switcher.php:1848
-#: modules/widgets/tp_tabs_tours.php:2278
+#: modules/widgets/tp_tabs_tours.php:2283
 msgid "Please select a template to display its content."
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1803
-#: modules/widgets/tp_accordion.php:1834
-#: modules/widgets/tp_carousel_anything.php:1209
-#: modules/widgets/tp_carousel_anything.php:1229
+#: modules/widgets/tp_accordion.php:1808
+#: modules/widgets/tp_accordion.php:1839
+#: modules/widgets/tp_carousel_anything.php:1214
+#: modules/widgets/tp_carousel_anything.php:1234
 #: modules/widgets/tp_navigation_menu_lite.php:2558
 #: modules/widgets/tp_navigation_menu_lite.php:2738
 #: modules/widgets/tp_page_scroll.php:1124
@@ -10984,17 +11157,17 @@ msgstr ""
 #: modules/widgets/tp_switcher.php:1820
 #: modules/widgets/tp_switcher.php:1840
 #: modules/widgets/tp_switcher.php:1861
-#: modules/widgets/tp_tabs_tours.php:2228
-#: modules/widgets/tp_tabs_tours.php:2239
-#: modules/widgets/tp_tabs_tours.php:2248
-#: modules/widgets/tp_tabs_tours.php:2273
+#: modules/widgets/tp_tabs_tours.php:2233
+#: modules/widgets/tp_tabs_tours.php:2244
+#: modules/widgets/tp_tabs_tours.php:2253
+#: modules/widgets/tp_tabs_tours.php:2278
 msgid "Unauthorized Access"
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1803
-#: modules/widgets/tp_accordion.php:1834
-#: modules/widgets/tp_carousel_anything.php:1209
-#: modules/widgets/tp_carousel_anything.php:1229
+#: modules/widgets/tp_accordion.php:1808
+#: modules/widgets/tp_accordion.php:1839
+#: modules/widgets/tp_carousel_anything.php:1214
+#: modules/widgets/tp_carousel_anything.php:1234
 #: modules/widgets/tp_navigation_menu_lite.php:2558
 #: modules/widgets/tp_navigation_menu_lite.php:2738
 #: modules/widgets/tp_page_scroll.php:1124
@@ -11002,22 +11175,22 @@ msgstr ""
 #: modules/widgets/tp_switcher.php:1820
 #: modules/widgets/tp_switcher.php:1840
 #: modules/widgets/tp_switcher.php:1861
-#: modules/widgets/tp_tabs_tours.php:2228
-#: modules/widgets/tp_tabs_tours.php:2239
-#: modules/widgets/tp_tabs_tours.php:2248
-#: modules/widgets/tp_tabs_tours.php:2273
+#: modules/widgets/tp_tabs_tours.php:2233
+#: modules/widgets/tp_tabs_tours.php:2244
+#: modules/widgets/tp_tabs_tours.php:2253
+#: modules/widgets/tp_tabs_tours.php:2278
 msgid "You need to upgrade your permissions to Editor or Administrator level to update this option."
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1816
+#: modules/widgets/tp_accordion.php:1821
 msgid "Selected Template :"
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1816
+#: modules/widgets/tp_accordion.php:1821
 msgid "We have turn off visibility of template in the backend due to performance improvements. This will be visible perfectly on the frontend."
 msgstr ""
 
-#: modules/widgets/tp_accordion.php:1859
+#: modules/widgets/tp_accordion.php:1864
 msgid "All Open"
 msgstr ""
 
@@ -11076,12 +11249,12 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:147
 #: modules/widgets/tp_number_counter.php:176
 #: modules/widgets/tp_page_scroll.php:382
-#: modules/widgets/tp_plus_form.php:1310
-#: modules/widgets/tp_plus_form.php:1508
-#: modules/widgets/tp_plus_form.php:1654
-#: modules/widgets/tp_plus_form.php:1940
-#: modules/widgets/tp_plus_form.php:1968
-#: modules/widgets/tp_plus_form.php:2700
+#: modules/widgets/tp_plus_form.php:1312
+#: modules/widgets/tp_plus_form.php:1510
+#: modules/widgets/tp_plus_form.php:1656
+#: modules/widgets/tp_plus_form.php:1942
+#: modules/widgets/tp_plus_form.php:1970
+#: modules/widgets/tp_plus_form.php:2702
 #: modules/widgets/tp_post_author.php:151
 #: modules/widgets/tp_post_author.php:180
 #: modules/widgets/tp_post_comment.php:1156
@@ -11163,12 +11336,12 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:1048
 #: modules/widgets/tp_navigation_menu_lite.php:1079
 #: modules/widgets/tp_number_counter.php:151
-#: modules/widgets/tp_plus_form.php:1314
-#: modules/widgets/tp_plus_form.php:1512
-#: modules/widgets/tp_plus_form.php:1658
-#: modules/widgets/tp_plus_form.php:1944
-#: modules/widgets/tp_plus_form.php:1972
-#: modules/widgets/tp_plus_form.php:2704
+#: modules/widgets/tp_plus_form.php:1316
+#: modules/widgets/tp_plus_form.php:1514
+#: modules/widgets/tp_plus_form.php:1660
+#: modules/widgets/tp_plus_form.php:1946
+#: modules/widgets/tp_plus_form.php:1974
+#: modules/widgets/tp_plus_form.php:2706
 #: modules/widgets/tp_post_author.php:155
 #: modules/widgets/tp_post_author.php:184
 #: modules/widgets/tp_post_comment.php:1160
@@ -11244,12 +11417,12 @@ msgstr ""
 #: modules/widgets/tp_number_counter.php:155
 #: modules/widgets/tp_number_counter.php:180
 #: modules/widgets/tp_page_scroll.php:381
-#: modules/widgets/tp_plus_form.php:1318
-#: modules/widgets/tp_plus_form.php:1516
-#: modules/widgets/tp_plus_form.php:1662
-#: modules/widgets/tp_plus_form.php:1948
-#: modules/widgets/tp_plus_form.php:1976
-#: modules/widgets/tp_plus_form.php:2708
+#: modules/widgets/tp_plus_form.php:1320
+#: modules/widgets/tp_plus_form.php:1518
+#: modules/widgets/tp_plus_form.php:1664
+#: modules/widgets/tp_plus_form.php:1950
+#: modules/widgets/tp_plus_form.php:1978
+#: modules/widgets/tp_plus_form.php:2710
 #: modules/widgets/tp_post_author.php:159
 #: modules/widgets/tp_post_author.php:188
 #: modules/widgets/tp_post_comment.php:1164
@@ -11661,7 +11834,7 @@ msgstr ""
 #: modules/widgets/tp_info_box.php:332
 #: modules/widgets/tp_info_box.php:2776
 #: modules/widgets/tp_meeting_scheduler.php:568
-#: modules/widgets/tp_plus_form.php:149
+#: modules/widgets/tp_plus_form.php:151
 #: modules/widgets/tp_post_comment.php:244
 #: modules/widgets/tp_post_meta.php:718
 #: modules/widgets/tp_post_meta.php:729
@@ -11683,7 +11856,7 @@ msgstr ""
 #: modules/widgets/tp_button.php:492
 #: modules/widgets/tp_flip_box.php:700
 #: modules/widgets/tp_info_box.php:715
-#: modules/widgets/tp_plus_form.php:616
+#: modules/widgets/tp_plus_form.php:618
 #: modules/widgets/tp_pricing_table.php:919
 #: modules/widgets/tp_progress_bar.php:482
 #: modules/widgets/tp_table.php:2336
@@ -11698,7 +11871,7 @@ msgstr ""
 #: modules/widgets/tp_dark_mode.php:886
 #: modules/widgets/tp_flip_box.php:705
 #: modules/widgets/tp_info_box.php:720
-#: modules/widgets/tp_plus_form.php:621
+#: modules/widgets/tp_plus_form.php:623
 #: modules/widgets/tp_pricing_table.php:924
 #: modules/widgets/tp_progress_bar.php:486
 #: modules/widgets/tp_style_list.php:919
@@ -11715,7 +11888,7 @@ msgstr ""
 #: modules/widgets/tp_dark_mode.php:930
 #: modules/widgets/tp_flip_box.php:704
 #: modules/widgets/tp_info_box.php:719
-#: modules/widgets/tp_plus_form.php:620
+#: modules/widgets/tp_plus_form.php:622
 #: modules/widgets/tp_pricing_table.php:923
 #: modules/widgets/tp_progress_bar.php:487
 #: modules/widgets/tp_style_list.php:920
@@ -11789,8 +11962,8 @@ msgstr ""
 #: modules/widgets/tp_hovercard.php:1302
 #: modules/widgets/tp_meeting_scheduler.php:582
 #: modules/widgets/tp_messagebox.php:965
-#: modules/widgets/tp_plus_form.php:1365
-#: modules/widgets/tp_plus_form.php:1418
+#: modules/widgets/tp_plus_form.php:1367
+#: modules/widgets/tp_plus_form.php:1420
 #: modules/widgets/tp_post_navigation.php:341
 #: modules/widgets/tp_post_navigation.php:393
 #: modules/widgets/tp_post_navigation.php:454
@@ -11892,8 +12065,8 @@ msgstr ""
 #: modules/widgets/tp_messagebox.php:500
 #: modules/widgets/tp_messagebox.php:992
 #: modules/widgets/tp_messagebox.php:1035
-#: modules/widgets/tp_plus_form.php:2120
-#: modules/widgets/tp_plus_form.php:2370
+#: modules/widgets/tp_plus_form.php:2122
+#: modules/widgets/tp_plus_form.php:2372
 msgid "Background Type"
 msgstr ""
 
@@ -11978,11 +12151,11 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:846
 #: modules/widgets/tp_ninja_form.php:1418
 #: modules/widgets/tp_ninja_form.php:1460
-#: modules/widgets/tp_plus_form.php:1376
-#: modules/widgets/tp_plus_form.php:1429
-#: modules/widgets/tp_plus_form.php:1713
-#: modules/widgets/tp_plus_form.php:1767
-#: modules/widgets/tp_plus_form.php:1822
+#: modules/widgets/tp_plus_form.php:1378
+#: modules/widgets/tp_plus_form.php:1431
+#: modules/widgets/tp_plus_form.php:1715
+#: modules/widgets/tp_plus_form.php:1769
+#: modules/widgets/tp_plus_form.php:1824
 #: modules/widgets/tp_post_author.php:751
 #: modules/widgets/tp_post_author.php:792
 #: modules/widgets/tp_post_comment.php:298
@@ -12293,7 +12466,7 @@ msgstr ""
 #: modules/widgets/tp_navigation_menu_lite.php:2269
 #: modules/widgets/tp_number_counter.php:2336
 #: modules/widgets/tp_page_scroll.php:302
-#: modules/widgets/tp_plus_form.php:1105
+#: modules/widgets/tp_plus_form.php:1107
 #: modules/widgets/tp_scroll_navigation.php:1253
 #: modules/widgets/tp_social_embed.php:2681
 #: modules/widgets/tp_style_list.php:767
@@ -12798,7 +12971,7 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:627
 #: modules/widgets/tp_info_box.php:593
-#: modules/widgets/tp_plus_form.php:573
+#: modules/widgets/tp_plus_form.php:575
 #: modules/widgets/tp_post_comment.php:121
 #: modules/widgets/tp_pricing_table.php:826
 #: modules/widgets/tp_social_embed.php:1690
@@ -12824,7 +12997,7 @@ msgstr ""
 #: modules/widgets/tp_button.php:132
 #: modules/widgets/tp_flip_box.php:515
 #: modules/widgets/tp_info_box.php:536
-#: modules/widgets/tp_plus_form.php:550
+#: modules/widgets/tp_plus_form.php:552
 #: modules/widgets/tp_post_comment.php:147
 #: modules/widgets/tp_pricing_table.php:772
 msgid "Global Style"
@@ -12935,7 +13108,7 @@ msgstr ""
 #: modules/widgets/tp_button.php:214
 #: modules/widgets/tp_flip_box.php:530
 #: modules/widgets/tp_info_box.php:552
-#: modules/widgets/tp_plus_form.php:531
+#: modules/widgets/tp_plus_form.php:533
 #: modules/widgets/tp_table.php:646
 #: build/index.js:3
 msgid "Button Style"
@@ -12959,7 +13132,7 @@ msgstr ""
 #: modules/widgets/tp_button.php:509
 #: modules/widgets/tp_flip_box.php:718
 #: modules/widgets/tp_info_box.php:734
-#: modules/widgets/tp_plus_form.php:1996
+#: modules/widgets/tp_plus_form.php:1998
 #: modules/widgets/tp_pricing_table.php:936
 #: modules/widgets/tp_pricing_table.php:2430
 #: modules/widgets/tp_scroll_navigation.php:620
@@ -13344,24 +13517,24 @@ msgstr ""
 msgid "Messy Columns"
 msgstr ""
 
-#: modules/widgets/tp_blog_listout.php:4312
+#: modules/widgets/tp_blog_listout.php:4317
 #: modules/widgets/tp_clients_listout.php:1146
-#: modules/widgets/tp_team_member_listout.php:1660
-#: modules/widgets/tp_testimonial_listout.php:2372
+#: modules/widgets/tp_team_member_listout.php:1665
+#: modules/widgets/tp_testimonial_listout.php:2377
 msgid "Posts not found"
 msgstr ""
 
-#: modules/widgets/tp_blog_listout.php:4324
+#: modules/widgets/tp_blog_listout.php:4329
 msgid "Please enter values in both HTML & CSS to enable the Smart Loop Builder feature."
 msgstr ""
 
-#: modules/widgets/tp_blog_listout.php:4518
+#: modules/widgets/tp_blog_listout.php:4523
 #: modules/widgets/tp_dynamic_categories.php:2508
-#: modules/widgets/tp_gallery_listout.php:1409
+#: modules/widgets/tp_gallery_listout.php:1414
 #: modules/widgets/tp_switcher.php:1782
-#: modules/widgets/tp_team_member_listout.php:1710
-#: modules/widgets/tp_testimonial_listout.php:2367
-#: modules/widgets/tp_testimonial_listout.php:2410
+#: modules/widgets/tp_team_member_listout.php:1715
+#: modules/widgets/tp_testimonial_listout.php:2372
+#: modules/widgets/tp_testimonial_listout.php:2415
 msgid "This Style Premium Version"
 msgstr ""
 
@@ -13735,7 +13908,7 @@ msgid "Circle Size"
 msgstr ""
 
 #: modules/widgets/tp_button.php:563
-#: modules/widgets/tp_plus_form.php:707
+#: modules/widgets/tp_plus_form.php:709
 msgid "Button ID"
 msgstr ""
 
@@ -13852,7 +14025,7 @@ msgid "Template"
 msgstr ""
 
 #: modules/widgets/tp_carousel_anything.php:139
-#: modules/widgets/tp_plus_form.php:432
+#: modules/widgets/tp_plus_form.php:434
 #: modules/widgets/tp_switcher.php:157
 #: modules/widgets/tp_switcher.php:319
 #: modules/widgets/tp_tabs_tours.php:298
@@ -15271,7 +15444,7 @@ msgid "Inner Padding"
 msgstr ""
 
 #: modules/widgets/tp_dynamic_categories.php:2261
-#: modules/widgets/tp_plus_form.php:2389
+#: modules/widgets/tp_plus_form.php:2391
 #: modules/widgets/tp_post_navigation.php:1136
 msgid "Hover Background Color"
 msgstr ""
@@ -15285,7 +15458,7 @@ msgstr ""
 #: modules/widgets/tp_dynamic_categories.php:2326
 #: modules/widgets/tp_hovercard.php:942
 #: modules/widgets/tp_hovercard.php:967
-#: modules/widgets/tp_plus_form.php:153
+#: modules/widgets/tp_plus_form.php:155
 msgid "Hidden"
 msgstr ""
 
@@ -15499,7 +15672,7 @@ msgid "Hover Fill "
 msgstr ""
 
 #: modules/widgets/tp_flip_box.php:1124
-#: modules/widgets/tp_plus_form.php:2354
+#: modules/widgets/tp_plus_form.php:2356
 msgid "Hover Stroke"
 msgstr ""
 
@@ -15664,7 +15837,7 @@ msgstr ""
 msgid "Tilt 3D Parallax"
 msgstr ""
 
-#: modules/widgets/tp_gallery_listout.php:1354
+#: modules/widgets/tp_gallery_listout.php:1359
 msgid "Please select a multiple images gallery"
 msgstr ""
 
@@ -16011,7 +16184,7 @@ msgid "Search Field Border Width"
 msgstr ""
 
 #: modules/widgets/tp_header_extras.php:713
-#: modules/widgets/tp_plus_form.php:1889
+#: modules/widgets/tp_plus_form.php:1891
 #: modules/widgets/tp_post_comment.php:1115
 msgid "Submit Button"
 msgstr ""
@@ -16825,8 +16998,8 @@ msgid "Enable alignment controls using CSS."
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:488
-#: modules/widgets/tp_plus_form.php:1306
-#: modules/widgets/tp_plus_form.php:1504
+#: modules/widgets/tp_plus_form.php:1308
+#: modules/widgets/tp_plus_form.php:1506
 msgid "Text Align"
 msgstr ""
 
@@ -17215,7 +17388,7 @@ msgstr ""
 msgid "Enable Minimum Height"
 msgstr ""
 
-#: modules/widgets/tp_info_box.php:3211
+#: modules/widgets/tp_info_box.php:3216
 msgid "This Info Box Style/Layout is available in the Pro version."
 msgstr ""
 
@@ -17288,7 +17461,7 @@ msgid "Get Steps!"
 msgstr ""
 
 #: modules/widgets/tp_meeting_scheduler.php:233
-#: modules/widgets/tp_plus_form.php:157
+#: modules/widgets/tp_plus_form.php:159
 #: modules/widgets/tp_social_embed.php:586
 msgid "Time"
 msgstr ""
@@ -18064,495 +18237,495 @@ msgstr ""
 msgid "Please Select Template To Get The Desired Result"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:97
-#: modules/widgets/tp_plus_form.php:1196
+#: modules/widgets/tp_plus_form.php:99
+#: modules/widgets/tp_plus_form.php:1198
 msgid "General"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:112
+#: modules/widgets/tp_plus_form.php:114
 msgid "Unique Form Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:114
+#: modules/widgets/tp_plus_form.php:116
 msgid "New Plus Form"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:115
+#: modules/widgets/tp_plus_form.php:117
 msgid "Enter Form Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:125
+#: modules/widgets/tp_plus_form.php:127
 msgid "Add new form fields below and choose the ones you want to include in your form."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:147
+#: modules/widgets/tp_plus_form.php:149
 msgid "text"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:150
+#: modules/widgets/tp_plus_form.php:152
 msgid "Long Text"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:151
-#: modules/widgets/tp_plus_form.php:474
-#: modules/widgets/tp_plus_form.php:739
+#: modules/widgets/tp_plus_form.php:153
+#: modules/widgets/tp_plus_form.php:476
+#: modules/widgets/tp_plus_form.php:741
 #: modules/widgets/tp_post_comment.php:1053
-#: modules/widgets/tp_team_member_listout.php:1888
+#: modules/widgets/tp_team_member_listout.php:1893
 msgid "Email"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:152
+#: modules/widgets/tp_plus_form.php:154
 #: modules/widgets/tp_progress_bar.php:312
 #: modules/widgets/tp_progress_bar.php:785
 msgid "Number"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:154
+#: modules/widgets/tp_plus_form.php:156
 msgid "HoneyPot"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:155
-#: modules/widgets/tp_plus_form.php:1855
+#: modules/widgets/tp_plus_form.php:157
+#: modules/widgets/tp_plus_form.php:1857
 msgid "Dropdown"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:169
+#: modules/widgets/tp_plus_form.php:171
 msgid "Use this option for short, single-line responses like names or titles. If you need to collect multi-line responses such as feedback or messages, select the Long Text option instead."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:185
+#: modules/widgets/tp_plus_form.php:187
 msgid "You can use this option when you need numeric input such as age, quantity, or any other number-based field. If your goal is to collect phone numbers, choose the Phone Number option instead for a better experience."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:201
+#: modules/widgets/tp_plus_form.php:203
 msgid "This option is for longer, multi-line responses such as messages, feedback, or addresses"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:217
+#: modules/widgets/tp_plus_form.php:219
 msgid "Use this to add a field that stays invisible on the form but still stores data in the backend, such as form IDs, tracking values, or default information."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:233
+#: modules/widgets/tp_plus_form.php:235
 msgid "Adds a hidden field that real users won’t see but bots will try to fill, helping you block spam submissions automatically."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:250
+#: modules/widgets/tp_plus_form.php:252
 msgid "Field Label"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:262
+#: modules/widgets/tp_plus_form.php:264
 msgid "Dropdown Options"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:264
+#: modules/widgets/tp_plus_form.php:266
 msgid "Enter each option on a new line."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:273
+#: modules/widgets/tp_plus_form.php:275
 msgid "Placeholder"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:278
+#: modules/widgets/tp_plus_form.php:280
 #: modules/widgets/tp_post_comment.php:160
 msgid "Placeholder Text"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:291
+#: modules/widgets/tp_plus_form.php:293
 msgid "Required"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:307
+#: modules/widgets/tp_plus_form.php:309
 #: modules/widgets/tp_table.php:405
 msgid "Column Width"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:327
+#: modules/widgets/tp_plus_form.php:329
 msgid "Rows"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:346
-#: modules/widgets/tp_plus_form.php:700
+#: modules/widgets/tp_plus_form.php:348
+#: modules/widgets/tp_plus_form.php:702
 #: modules/widgets/tp_table.php:833
 msgid "Advance"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:353
-#: modules/widgets/tp_plus_form.php:358
+#: modules/widgets/tp_plus_form.php:355
+#: modules/widgets/tp_plus_form.php:360
 msgid "Default Value"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:371
-#: modules/widgets/tp_plus_form.php:376
-#: modules/widgets/tp_plus_form.php:2612
+#: modules/widgets/tp_plus_form.php:373
+#: modules/widgets/tp_plus_form.php:378
+#: modules/widgets/tp_plus_form.php:2614
 msgid "Help Text"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:389
-#: modules/widgets/tp_plus_form.php:394
+#: modules/widgets/tp_plus_form.php:391
+#: modules/widgets/tp_plus_form.php:396
 msgid "Aria Description"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:407
+#: modules/widgets/tp_plus_form.php:409
 #: modules/widgets/tp_switcher.php:240
 #: modules/widgets/tp_switcher.php:396
 msgid "Unique ID"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:419
+#: modules/widgets/tp_plus_form.php:421
 msgid "Ensure the ID is unique and not duplicated anywhere else on the page displaying this form. Valid entries include uppercase and lowercase letters (A-Z, a-z), numbers (0-9), and underscores, but spaces are not allowed."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:427
+#: modules/widgets/tp_plus_form.php:429
 msgid "Data Shortcode"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:454
+#: modules/widgets/tp_plus_form.php:456
 msgid "First Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:455
+#: modules/widgets/tp_plus_form.php:457
 msgid "Enter First Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:464
+#: modules/widgets/tp_plus_form.php:466
 msgid "Last Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:465
+#: modules/widgets/tp_plus_form.php:467
 msgid "Enter Last Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:475
+#: modules/widgets/tp_plus_form.php:477
 msgid "Enter your official email address"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:484
+#: modules/widgets/tp_plus_form.php:486
 msgid "Mobile Number"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:485
+#: modules/widgets/tp_plus_form.php:487
 msgid "Enter your mobile number"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:494
-#: modules/widgets/tp_plus_form.php:869
+#: modules/widgets/tp_plus_form.php:496
+#: modules/widgets/tp_plus_form.php:871
 msgid "Subject"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:495
+#: modules/widgets/tp_plus_form.php:497
 msgid "Enter your Subject"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:504
-#: modules/widgets/tp_plus_form.php:900
+#: modules/widgets/tp_plus_form.php:506
+#: modules/widgets/tp_plus_form.php:902
 msgid "Message"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:505
+#: modules/widgets/tp_plus_form.php:507
 msgid "Share why you are contacting"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:578
+#: modules/widgets/tp_plus_form.php:580
 msgid "Send"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:618
+#: modules/widgets/tp_plus_form.php:620
 msgid "after"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:633
+#: modules/widgets/tp_plus_form.php:635
 msgid "Inline Button"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:644
-#: modules/widgets/tp_plus_form.php:671
+#: modules/widgets/tp_plus_form.php:646
+#: modules/widgets/tp_plus_form.php:673
 #: modules/widgets/tp_table.php:2045
 msgid "Button Width"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:715
+#: modules/widgets/tp_plus_form.php:717
 msgid "button-id"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:727
+#: modules/widgets/tp_plus_form.php:729
 msgid "Submit Actions"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:734
+#: modules/widgets/tp_plus_form.php:736
 msgid "Add Action"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:736
+#: modules/widgets/tp_plus_form.php:738
 #: modules/widgets/tp_post_author.php:893
 msgid "email"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:740
+#: modules/widgets/tp_plus_form.php:742
 msgid "Redirect"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:746
+#: modules/widgets/tp_plus_form.php:748
 msgid "You can select one or more actions here to decide what happens after someone submits the form."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:757
+#: modules/widgets/tp_plus_form.php:759
 msgid "Email Settings"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:768
+#: modules/widgets/tp_plus_form.php:770
 msgid "To make sure you receive every form submission in your email, please set up SMTP on your site. SMTP ensures your emails are delivered reliably instead of going to spam. You can also do this using the Nexter Extension."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:783
+#: modules/widgets/tp_plus_form.php:785
 msgid "To"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:789
-#: modules/widgets/tp_plus_form.php:817
-#: modules/widgets/tp_plus_form.php:845
+#: modules/widgets/tp_plus_form.php:791
+#: modules/widgets/tp_plus_form.php:819
+#: modules/widgets/tp_plus_form.php:847
 msgid "Email Address"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:800
+#: modules/widgets/tp_plus_form.php:802
 msgid "You can add the email address here where you want to receive all form submissions, so every new entry instantly notifies you."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:811
+#: modules/widgets/tp_plus_form.php:813
 msgid "CC"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:828
+#: modules/widgets/tp_plus_form.php:830
 msgid "You can add additional email here, so others also stay notified whenever a form is submitted. Use [value_id=\"email\"] to also send it to the address the visitor typed."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:839
+#: modules/widgets/tp_plus_form.php:841
 msgid "BCC"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:856
+#: modules/widgets/tp_plus_form.php:858
 msgid "You can add hidden email here, so they receive the form submissions without being visible to receivers."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:878
-#: modules/widgets/tp_plus_form.php:893
+#: modules/widgets/tp_plus_form.php:880
+#: modules/widgets/tp_plus_form.php:895
 msgid "New Form Submission"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:885
+#: modules/widgets/tp_plus_form.php:887
 msgid "Email Heading"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:912
+#: modules/widgets/tp_plus_form.php:914
 msgid "The email message you write here will be sent to the email address added in the ‘To’ field, and you can also include form data inside it. To display all submitted fields together, simply use the <code>[all-values]</code> shortcode. If you want to show only specific fields, you can use their individual shortcodes, which you can find under each field inside the <b>Data Shortcode</b> option in the Advanced tab"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:921
+#: modules/widgets/tp_plus_form.php:923
 msgid "From Email"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:932
+#: modules/widgets/tp_plus_form.php:934
 msgid "You can set the sender email here. If you leave this empty, the emails will be sent from your admin email."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:940
+#: modules/widgets/tp_plus_form.php:942
 msgid "From Name"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:951
+#: modules/widgets/tp_plus_form.php:953
 msgid "You can add the name here, so the email is received from this name."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:959
+#: modules/widgets/tp_plus_form.php:961
 msgid "Reply-To"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:970
+#: modules/widgets/tp_plus_form.php:972
 msgid "You can add the reply-to email address here, so when the person who receives the form submission replies, their response will go directly to this address instead of the default admin email. This makes it easier to manage replies. Use [value_id=\"email\"] to send replies to the address the visitor typed."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:980
+#: modules/widgets/tp_plus_form.php:982
 msgid "Redirect Settings"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:991
+#: modules/widgets/tp_plus_form.php:993
 msgid "Redirect To"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1006
+#: modules/widgets/tp_plus_form.php:1008
 msgid "You can add a URL here, so after submitting the form, the person will be redirected to this page"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1016
-#: modules/widgets/tp_plus_form.php:2679
+#: modules/widgets/tp_plus_form.php:1018
+#: modules/widgets/tp_plus_form.php:2681
 msgid "Message Content"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1023
+#: modules/widgets/tp_plus_form.php:1025
 msgid "Success Message"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1029
+#: modules/widgets/tp_plus_form.php:1031
 msgid "Form Submitted Successfully"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1039
+#: modules/widgets/tp_plus_form.php:1041
 msgid "Mandatory Fields"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1045
+#: modules/widgets/tp_plus_form.php:1047
 msgid "This field is required."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1055
+#: modules/widgets/tp_plus_form.php:1057
 msgid "Form Validation Error"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1061
+#: modules/widgets/tp_plus_form.php:1063
 msgid "Invalid form! Please check it again."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1071
+#: modules/widgets/tp_plus_form.php:1073
 msgid "Submission Issue"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1077
+#: modules/widgets/tp_plus_form.php:1079
 msgid "There was an error in submitting the form."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1087
+#: modules/widgets/tp_plus_form.php:1089
 msgid "Server Issue"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1093
+#: modules/widgets/tp_plus_form.php:1095
 msgid "A server error occurred."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1113
+#: modules/widgets/tp_plus_form.php:1115
 msgid "Form ID"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1124
+#: modules/widgets/tp_plus_form.php:1126
 msgid "Enter a unique ID for this form using letters, numbers, or underscores (no spaces). Make sure it’s not duplicated anywhere else on the page. The ID you set here will also appear as the form name inside the Table widget when you want to display the data collected from this form."
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1133
+#: modules/widgets/tp_plus_form.php:1135
 msgid "Show Form Title"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1145
+#: modules/widgets/tp_plus_form.php:1147
 msgid "Show Label"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1156
+#: modules/widgets/tp_plus_form.php:1158
 msgid "Required Mark"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1205
+#: modules/widgets/tp_plus_form.php:1207
 msgid "Columns Gap"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1229
+#: modules/widgets/tp_plus_form.php:1231
 msgid "Rows Gap"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1252
+#: modules/widgets/tp_plus_form.php:1254
 msgid "Form Title"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1588
+#: modules/widgets/tp_plus_form.php:1590
 msgid "Required Mark Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1605
+#: modules/widgets/tp_plus_form.php:1607
 msgid "Fields"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1650
+#: modules/widgets/tp_plus_form.php:1652
 msgid "Input Text Align"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1796
+#: modules/widgets/tp_plus_form.php:1798
 msgid "Active Text Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1864
+#: modules/widgets/tp_plus_form.php:1866
 msgid "Option Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1877
+#: modules/widgets/tp_plus_form.php:1879
 msgid "Option Background"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:1980
+#: modules/widgets/tp_plus_form.php:1982
 msgid "Stretch"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2153
-#: modules/widgets/tp_plus_form.php:2403
+#: modules/widgets/tp_plus_form.php:2155
+#: modules/widgets/tp_plus_form.php:2405
 msgid "Gradient Color 1"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2185
-#: modules/widgets/tp_plus_form.php:2435
+#: modules/widgets/tp_plus_form.php:2187
+#: modules/widgets/tp_plus_form.php:2437
 msgid "Gradient Color 2"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2274
-#: modules/widgets/tp_plus_form.php:2524
+#: modules/widgets/tp_plus_form.php:2276
+#: modules/widgets/tp_plus_form.php:2526
 msgid "Button Border"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2295
-#: modules/widgets/tp_plus_form.php:2546
+#: modules/widgets/tp_plus_form.php:2297
+#: modules/widgets/tp_plus_form.php:2548
 msgid "Button Box Shadow"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2339
+#: modules/widgets/tp_plus_form.php:2341
 msgid "Hover Fill"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2558
+#: modules/widgets/tp_plus_form.php:2560
 msgid "Spinner"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2566
+#: modules/widgets/tp_plus_form.php:2568
 msgid "Spinner Size"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2588
+#: modules/widgets/tp_plus_form.php:2590
 msgid "Spinner Inner Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2599
+#: modules/widgets/tp_plus_form.php:2601
 msgid "Spinner Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2696
+#: modules/widgets/tp_plus_form.php:2698
 msgid "Message Text Align"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2733
-#: modules/widgets/tp_plus_form.php:2800
+#: modules/widgets/tp_plus_form.php:2735
+#: modules/widgets/tp_plus_form.php:2802
 msgid "Success Message Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2745
-#: modules/widgets/tp_plus_form.php:2812
+#: modules/widgets/tp_plus_form.php:2747
+#: modules/widgets/tp_plus_form.php:2814
 msgid "Error Message Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2757
-#: modules/widgets/tp_plus_form.php:2824
+#: modules/widgets/tp_plus_form.php:2759
+#: modules/widgets/tp_plus_form.php:2826
 msgid "Success Message Background Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2768
-#: modules/widgets/tp_plus_form.php:2835
+#: modules/widgets/tp_plus_form.php:2770
+#: modules/widgets/tp_plus_form.php:2837
 msgid "Error Message Background Color"
 msgstr ""
 
-#: modules/widgets/tp_plus_form.php:2779
-#: modules/widgets/tp_plus_form.php:2846
+#: modules/widgets/tp_plus_form.php:2781
+#: modules/widgets/tp_plus_form.php:2848
 msgid "Inline Message Color"
 msgstr ""
 
@@ -18761,7 +18934,7 @@ msgid "Custom Width"
 msgstr ""
 
 #: modules/widgets/tp_post_comment.php:1073
-#: modules/widgets/tp_team_member_listout.php:1870
+#: modules/widgets/tp_team_member_listout.php:1875
 msgid "Website"
 msgstr ""
 
@@ -19800,7 +19973,7 @@ msgstr ""
 msgid "Horizontal Background"
 msgstr ""
 
-#: modules/widgets/tp_process_steps.php:2124
+#: modules/widgets/tp_process_steps.php:2129
 #: modules/widgets/tp_progress_bar.php:1276
 msgid "Opps!! Please Enter Only JSON File Extension."
 msgstr ""
@@ -20327,7 +20500,7 @@ msgstr ""
 
 #: modules/widgets/tp_social_embed.php:110
 #: modules/widgets/tp_social_embed.php:142
-#: modules/widgets/tp_team_member_listout.php:1873
+#: modules/widgets/tp_team_member_listout.php:1878
 msgid "Facebook"
 msgstr ""
 
@@ -20335,7 +20508,7 @@ msgstr ""
 #: modules/widgets/tp_social_embed.php:1075
 #: modules/widgets/tp_social_embed.php:1594
 #: modules/widgets/tp_social_embed.php:1612
-#: modules/widgets/tp_team_member_listout.php:1876
+#: modules/widgets/tp_team_member_listout.php:1881
 msgid "Twitter"
 msgstr ""
 
@@ -20347,7 +20520,7 @@ msgstr ""
 
 #: modules/widgets/tp_social_embed.php:122
 #: modules/widgets/tp_social_embed.php:1902
-#: modules/widgets/tp_team_member_listout.php:1879
+#: modules/widgets/tp_team_member_listout.php:1884
 msgid "Instagram"
 msgstr ""
 
@@ -22739,15 +22912,15 @@ msgstr ""
 msgid "Content Padding"
 msgstr ""
 
-#: modules/widgets/tp_team_member_listout.php:1882
+#: modules/widgets/tp_team_member_listout.php:1887
 msgid "Google Plus"
 msgstr ""
 
-#: modules/widgets/tp_team_member_listout.php:1885
+#: modules/widgets/tp_team_member_listout.php:1890
 msgid "LinkedIn"
 msgstr ""
 
-#: modules/widgets/tp_team_member_listout.php:1891
+#: modules/widgets/tp_team_member_listout.php:1896
 msgid "Phone"
 msgstr ""
 
@@ -23453,103 +23626,103 @@ msgstr ""
 msgid "The Plus Addons for Elementor works as an extension of Elementor. Please install and activate Elementor to unlock all 120+ widgets and extensions. Without Elementor, the addon cannot function."
 msgstr ""
 
-#: widgets_loader.php:341
+#: widgets_loader.php:347
 msgid "Invalid permission. Only administrators can perform this action."
 msgstr ""
 
-#: widgets_loader.php:383
+#: widgets_loader.php:389
 msgid "Failed to install Elementor plugin."
 msgstr ""
 
-#: widgets_loader.php:391
+#: widgets_loader.php:397
 msgid "Plugin installed but activation failed."
 msgstr ""
 
-#: widgets_loader.php:396
+#: widgets_loader.php:402
 msgid "Elementor installed & activated successfully!"
 msgstr ""
 
-#: widgets_loader.php:406
+#: widgets_loader.php:412
 msgid "Elementor activation failed."
 msgstr ""
 
-#: widgets_loader.php:411
+#: widgets_loader.php:417
 msgid "Elementor activated successfully!"
 msgstr ""
 
-#: widgets_loader.php:730
+#: widgets_loader.php:739
 msgid "You are not allowed to upload SVG files."
 msgstr ""
 
-#: widgets_loader.php:737
+#: widgets_loader.php:746
 msgid "SVG file could not be read."
 msgstr ""
 
-#: widgets_loader.php:743
+#: widgets_loader.php:752
 msgid "SVGZ uploads are not supported on this server (zlib unavailable)."
 msgstr ""
 
-#: widgets_loader.php:750
+#: widgets_loader.php:759
 msgid "Malformed SVGZ file rejected."
 msgstr ""
 
-#: widgets_loader.php:760
+#: widgets_loader.php:769
 msgid "File does not appear to be a valid SVG."
 msgstr ""
 
-#: widgets_loader.php:784
+#: widgets_loader.php:793
 msgid "SVG contains unsafe content"
 msgstr ""
 
-#: widgets_loader.php:837
+#: widgets_loader.php:846
 msgid "Plus Essential"
 msgstr ""
 
-#: widgets_loader.php:838
+#: widgets_loader.php:847
 msgid "Plus Advanced"
 msgstr ""
 
-#: widgets_loader.php:839
+#: widgets_loader.php:848
 msgid "Plus Creative"
 msgstr ""
 
-#: widgets_loader.php:840
+#: widgets_loader.php:849
 msgid "Plus Listing"
 msgstr ""
 
-#: widgets_loader.php:841
+#: widgets_loader.php:850
 msgid "Plus Social"
 msgstr ""
 
-#: widgets_loader.php:842
+#: widgets_loader.php:851
 msgid "Plus Forms"
 msgstr ""
 
-#: widgets_loader.php:843
+#: widgets_loader.php:852
 msgid "Plus WooCommerce"
 msgstr ""
 
-#: widgets_loader.php:844
+#: widgets_loader.php:853
 msgid "Plus Deprecated"
 msgstr ""
 
-#: widgets_loader.php:869
+#: widgets_loader.php:878
 msgid "Plus Header"
 msgstr ""
 
-#: widgets_loader.php:889
+#: widgets_loader.php:898
 msgid "Plus Archive"
 msgstr ""
 
-#: widgets_loader.php:910
+#: widgets_loader.php:919
 msgid "Plus Product Archive"
 msgstr ""
 
-#: widgets_loader.php:931
+#: widgets_loader.php:940
 msgid "Plus Product"
 msgstr ""
 
-#: widgets_loader.php:952
+#: widgets_loader.php:961
 msgid "Plus Single"
 msgstr ""
 
@@ -23820,15 +23993,7 @@ msgid "Convert Figma to WordPress in Minutes"
 msgstr ""
 
 #: build/index.js:1
-msgid "Install UiChemy"
-msgstr ""
-
-#: build/index.js:1
 msgid "UiChemy Setting"
-msgstr ""
-
-#: build/index.js:1
-msgid "UiChemy"
 msgstr ""
 
 #: build/index.js:1

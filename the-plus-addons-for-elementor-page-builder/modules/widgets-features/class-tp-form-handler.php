@@ -44,6 +44,24 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 		public function __construct() {
 			add_action( 'wp_ajax_tpae_form_submission', array( $this, 'tpae_form_submission' ) );
 			add_action( 'wp_ajax_nopriv_tpae_form_submission', array( $this, 'tpae_form_submission' ) );
+			add_action( 'wp_ajax_tpae_form_nonce', array( $this, 'tpae_form_nonce' ) );
+			add_action( 'wp_ajax_nopriv_tpae_form_nonce', array( $this, 'tpae_form_nonce' ) );
+		}
+
+		/**
+		 * Hand out a fresh submit nonce (FORM-15).
+		 *
+		 * The nonce rendered into the page is frozen by any full-page cache (WP Super Cache, a CDN,
+		 * a host-level cache) and expires after 12-24h, after which every submit from the cached
+		 * page fails. The form script asks this uncached admin-ajax endpoint for a current nonce
+		 * just before it submits. It is per-user (uid 0 for visitors), exactly like the nonce that
+		 * was rendered into the page, so it grants nothing the page did not already.
+		 *
+		 * @since 6.5.3
+		 */
+		public function tpae_form_nonce() {
+			nocache_headers();
+			wp_send_json_success( array( 'nonce' => wp_create_nonce( 'tp-form-nonce' ) ) );
 		}
 
 		/**
@@ -69,7 +87,12 @@ if ( ! class_exists( 'Tp_Form_Handler' ) ) {
 				wp_die();
 			}
 
-			$nonce = isset( $email_data['nonce'] ) ? sanitize_text_field( $email_data['nonce'] ) : '';
+			// FORM-15: prefer the nonce the script fetched just before submitting; fall back to the
+			// one sealed into the page at render for clients that did not send one.
+			$nonce = isset( $_POST['security'] ) ? sanitize_text_field( wp_unslash( $_POST['security'] ) ) : '';
+			if ( '' === $nonce ) {
+				$nonce = isset( $email_data['nonce'] ) ? sanitize_text_field( $email_data['nonce'] ) : '';
+			}
 			if ( ! wp_verify_nonce( $nonce, 'tp-form-nonce' ) ) {
 				$result['message'] = 'Nonce verification failed.';
 				wp_send_json( $result );

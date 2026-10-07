@@ -530,3 +530,8 @@ $widget->add_control(
 // 		'label_block' => true,
 // 	)
 // );
+
+// UiChemy promotion hint, shown once an animation type is picked.
+if ( class_exists( 'Tpae_UiChemy_Notice' ) ) {
+	\Tpae_UiChemy_Notice::add_gsap_notice( $widget );
+}

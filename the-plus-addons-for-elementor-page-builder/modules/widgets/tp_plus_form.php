@@ -83,7 +83,9 @@ class L_ThePlus_Plus_Form extends Plus_Widget_Base {
 	 * @since 6.0.6
 	 */
 	public function is_dynamic_content(): bool {
-		return false;
+		// The submit nonce is minted at render and sealed into the form's data attribute; Elementor's
+		// element cache would freeze it for up to 24h and every submit after that fails (QA FORM-15 / NEW-2).
+		return true;
 	}	/**
 	 * Register controls.
 	 *

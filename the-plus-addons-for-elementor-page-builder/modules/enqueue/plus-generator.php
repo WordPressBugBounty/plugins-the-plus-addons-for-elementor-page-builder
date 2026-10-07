@@ -463,7 +463,58 @@ class L_Plus_Generator {
 		}
 	}
 
+	/**
+	 * Whether the front-end globals block has been printed on this request.
+	 *
+	 * @since 6.5.3
+	 *
+	 * @var bool
+	 */
+	protected $tp_inline_printed = false;
+
+	/**
+	 * Whether the globals block is waiting for wp_head to print.
+	 *
+	 * @since 6.5.3
+	 *
+	 * @var bool
+	 */
+	protected $tp_inline_deferred = false;
+
+	/**
+	 * Print the front-end globals (ajax urls, nonce, carousel labels).
+	 *
+	 * This prints straight to the output, so it must not run before the document
+	 * has started. Since 6.5.2 enqueue_assets() runs on every request, and for an
+	 * Elementor Pro Theme Builder template it is reached from
+	 * elementor/theme/register_locations on template_redirect, before the theme
+	 * has sent anything. The block then landed ahead of the doctype and put the
+	 * page in quirks mode. A call made before wp_head is now held back and printed
+	 * at the very start of wp_head, ahead of every enqueued script that reads the
+	 * globals.
+	 *
+	 * It also printed once per caller, so a page got two or three copies. It is
+	 * now printed once per request.
+	 *
+	 * A request that never reaches wp_head (AJAX, REST, feeds) prints nothing.
+	 *
+	 * @since 6.5.3 Deferred to wp_head when called early, and printed only once.
+	 */
 	public function load_inline_script() {
+		if ( $this->tp_inline_printed ) {
+			return;
+		}
+
+		if ( ! did_action( 'wp_head' ) && ! doing_action( 'wp_head' ) ) {
+			if ( ! $this->tp_inline_deferred ) {
+				$this->tp_inline_deferred = true;
+				add_action( 'wp_head', array( $this, 'load_inline_script' ), 0 );
+			}
+			return;
+		}
+
+		$this->tp_inline_printed = true;
+
 		$js_inline1 = 'var theplus_ajax_url = "' . admin_url( 'admin-ajax.php' ) . '";
 		var theplus_ajax_post_url = "' . admin_url( 'admin-post.php' ) . '";
 		var theplus_nonce = "' . wp_create_nonce( 'theplus-addons' ) . '";
@@ -624,6 +675,24 @@ class L_Plus_Generator {
 			}
 			if ( isset( $separate_path['js'] ) && ! empty( $separate_path['js'] ) ) {
 				$iji = 0;
+
+				/*
+				 * These per-widget scripts are STATIC plugin files that only change on a
+				 * plugin release, so they are versioned with the active plugin versions,
+				 * not the per-post timestamp in $plus_version. get_post_version() returns
+				 * Elementor's own CSS time first, so a plugin update did not change the
+				 * ?ver= string and browsers kept serving a fixed script from their
+				 * one-year cache (reported with the 6.5.2 carousel dots fix). Free and Pro
+				 * are both part of the key, as in the cache version gate, so updating
+				 * either one changes the URL. The generated per-post bundles keep
+				 * $plus_version because their contents genuinely change.
+				 *
+				 * @since 6.5.3
+				 */
+				$tp_release_version = defined( 'THEPLUS_VERSION' )
+					? L_THEPLUS_VERSION . '-pro-' . THEPLUS_VERSION
+					: L_THEPLUS_VERSION;
+
 				foreach ( $separate_path['js'] as $key => $path ) {
 					if ( is_readable( l_theplus_library()->secure_path_url( $path ) ) ) {
 						$js_sep_url = str_replace( $tp_path, $tp_url, $path );
@@ -635,7 +704,7 @@ class L_Plus_Generator {
 						if ( $iji === 0 ) {
 							$load_localize = 'theplus-' . $js_file_key;
 						}
-						wp_enqueue_script( 'theplus-' . $js_file_key, $this->pathurl_security( $js_sep_url ), $load_depend, $plus_version, true );
+						wp_enqueue_script( 'theplus-' . $js_file_key, $this->pathurl_security( $js_sep_url ), $load_depend, $tp_release_version, true );
 						++$iji;
 					}
 				}

@@ -140,7 +140,7 @@ function tpaeFixCarouselDotAria( $track ) {
 	var $dots = $track.closest(".list-carousel-slick").find(".slick-dots > li > button");
 	$dots.each( function( i ) {
 		var $dot = $( this );
-		if ( "true" !== $dot.attr( "aria-selected" ) ) {
+		if ( "true" !== $dot.attr( "aria-selected" ) && "false" !== $dot.attr( "aria-selected" ) ) {
 			$dot.attr( "aria-selected", "false" );
 		}
 		if ( ! $dot.attr( "id" ) ) {

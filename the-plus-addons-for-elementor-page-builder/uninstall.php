@@ -43,6 +43,7 @@ if ( ! function_exists( 'theplus_free_uninstall_site' ) ) {
 				delete_option('tp-rateus-notice');
 				delete_option('tp_wdkit_preview_popup');
 				delete_option('tp_editor_onbording_popup');
+				delete_option('tpae_uichemy_notice_dismissed');
 			}
 
 			if( 'enable' === $remove_db_alldata ) {

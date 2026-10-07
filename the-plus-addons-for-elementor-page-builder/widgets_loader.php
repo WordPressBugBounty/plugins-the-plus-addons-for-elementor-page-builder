@@ -561,6 +561,9 @@ final class L_Theplus_Element_Load {
 		require L_THEPLUS_PATH . 'modules/theplus-integration.php';
 		include L_THEPLUS_PATH . 'modules/widget-promotion/tp-widget-promotion-main.php';
 
+		// UiChemy promotion (admin notice + editor placements).
+		require_once L_THEPLUS_PATH . 'modules/uichemy-notice/class-tpae-uichemy-notice.php';
+
 		require L_THEPLUS_PATH . 'modules/query-control/module.php';
 
 		require_once L_THEPLUS_PATH . 'modules/helper-function.php';

@@ -1988,6 +1988,11 @@ class L_ThePlus_Process_Steps extends Plus_Widget_Base {
 		);
 		$this->end_controls_section();
 
+		// UiChemy promotion: Style picker line + Build Your Own Design panel.
+		if ( class_exists( 'Tpae_UiChemy_Notice' ) ) {
+			\Tpae_UiChemy_Notice::add_widget_notices( $this );
+		}
+
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-profeatures.php';
 	}
 

@@ -4,7 +4,7 @@ Tags: elementor addons, elementor templates, mega menu, woocommerce, elementor w
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.5.2
+Stable tag: 6.5.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -13,7 +13,7 @@ License URI: https://opensource.org/licenses/GPL-3.0
 == Description ==
 Most Elementor sites end up stacking a separate plugin for each job - a blog, a store, a mega menu, popups, a custom header. Every extra plugin is more page weight, more conflicts and another thing to keep updated.
 
-The Plus Addons for Elementor is one addon that replaces six separate plugins for the [Elementor Website Builder](https://wordpress.org/plugins/elementor/) - <strong>120+ widgets & extensions, 1000+ templates</strong>, and a built-in AI layer that lets AI agents like ChatGPT and Claude edit your live Elementor site.
+The Plus Addons for Elementor is one addon that replaces six separate plugins for the [Elementor Website Builder](https://wordpress.org/plugins/elementor/) - <strong>120+ widgets & extensions, 1000+ templates</strong>, and a built-in AI layer that lets AI agents like ChatGPT and Claude edit your live Elementor site. Trusted by <strong>100,000+ active websites</strong>, rated <strong>4.6 out of 5</strong> by users on WordPress.org, and tested with Elementor 4.3.
 
 Build a complete website without piling on plugins - <strong>[Blog Builder](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [WooCommerce Store Builder](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Mega Menu](https://theplusaddons.com/widgets/mega-menu/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Header & Footer Builder](https://theplusaddons.com/elementor-builder/header-builder/#header-builder-wgts?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), [Popup Builder](https://theplusaddons.com/elementor-builder/popup-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) and [Grid Builder](https://theplusaddons.com/grid-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - all in one lightweight plugin.
 
@@ -26,12 +26,13 @@ Build a complete website without piling on plugins - <strong>[Blog Builder](http
 
 ### 🤖 Control Elementor with AI (New)
 
-Connect ChatGPT, Claude, Cursor or any MCP-compatible AI agent - including WordPress <strong>Angie</strong> - directly to your real Elementor site. <strong>[80+ AI abilities](https://theplusaddons.com/mcp-abilities/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> let you build and edit pages, widgets and settings by prompt, guided by built-in design skills so the AI builds on-brand, not just functional. No API key, no copy-paste. [Copy a ready-made prompt](https://theplusaddons.com/widget-recipes/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) for any of 110 widgets and the agent builds it for you.
+Connect ChatGPT, Claude, Cursor or any MCP-compatible AI agent - including WordPress <strong>Angie</strong> - directly to your real Elementor site. <strong>[80+ AI abilities](https://theplusaddons.com/mcp-abilities/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> let you build and edit pages, widgets and settings by prompt, guided by four built-in design skills (design, motion, WooCommerce and theme builder) so the AI builds on-brand, not just functional. No API key, no copy-paste. [Copy a ready-made prompt](https://theplusaddons.com/widget-recipes/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) for any widget and the agent builds it for you.
 
 ### ⚡ Lightweight by Design - No Bloat
 
 * <strong>One-Click Auto Widget Scanner</strong> turns off every unused widget automatically, so only what your page actually uses ever loads 🚀
 * <strong>Modular asset delivery</strong> - per-widget CSS/JS, and icon fonts load only on the widgets that use them
+* <strong>Nothing extra on your visitors' pages</strong> - admin and editor-only files are not loaded on the frontend
 * Security issues can be reported through the public <strong>[Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/the-plus-addons-for-elementor-page-builder)</strong>, which validates and triages every report 🔐
 
 ### ⚖️ Free vs Pro - What You Get
@@ -90,11 +91,10 @@ Build popups directly in Elementor with multiple popup types and display conditi
 * <strong>Preloader Animation and Page Transition</strong> for Elementor
 * <strong>Custom Cursor Icons</strong> for Elementor
 * Integrated with <strong>ACF, Toolset, Pods, WooCommerce, Mailchimp</strong> and more
+* <strong>Elementor 3.28 or newer</strong>, tested with <strong>Elementor 4.3</strong>
 * <strong>Supports RTL | WPML</strong> or any Translation | <strong>Multisite Networks</strong>
 * <strong>SEO Friendly, A/B Tested Designs</strong> and <strong>Mobile Friendly</strong>
 * Compatible with most <strong>WordPress themes</strong> like <strong>[Nexter](https://nexterwp.com/nexter-theme/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks), Blocksy, Kadence, Astra, OceanWP, GeneratePress, Neve</strong> and more
-
-<strong>Join 100,000+ active websites</strong> building with The Plus Addons on WordPress.org.
 
 ### 💬 What People Are Saying
 
@@ -120,12 +120,12 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 ## Complete List of Our Elementor Widgets & Extensions ⤵️
 
 
-###🏆 35+ Free Elementor Widgets
+### 🏆 35+ Free Elementor Widgets
 
 <strong>Content & Blog</strong>
 
 * <strong>[FREE Blog Website Builder for Elementor 🔥](https://theplusaddons.com/blog-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) </strong>
-[Post Title](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Content](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Featured Image](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Meta](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Author](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Comment](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Navigation (Next/Previous Button)](https://theplusaddons.com/blog-builder/#blog-single/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+Post Title | Post Content | Post Featured Image | Post Meta | Post Author | Post Comment | Post Navigation (Next/Previous Button)
 
 * <strong> [FREE Block Quote Box for Elementor](https://theplusaddons.com/widgets/blockquote/?&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -134,7 +134,7 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 * <strong>[FREE Heading Animation for Elementor](https://theplusaddons.com/widgets/heading-animation/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[FREE Blog Posts Listing for Elementor](https://theplusaddons.com/elementor-listing/blog-post/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
-[Grid Post Layout](https://theplusaddons.com/plus-blogs/grid-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Masonry Post Layout](https://theplusaddons.com/plus-blogs/masonry-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Metro Post Layout](https://theplusaddons.com/plus-blogs/metro-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Carousel Slider](https://theplusaddons.com/plus-blogs/carousel-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) |[Stagger Load Layout](https://theplusaddons.com/plus-blogs/blog-stagger-load/) 
+Grid Post Layout | Masonry Post Layout | Metro Post Layout | Post Carousel Slider | Stagger Load Layout
 
 * <strong>[FREE Message Box for Elementor & Toast Notification](https://theplusaddons.com/widgets/message-box/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -149,7 +149,7 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 * <strong>[FREE Video Player for Elementor](https://theplusaddons.com/widgets/videos/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[FREE Image Gallery for Elementor](https://theplusaddons.com/elementor-listing/image-gallery/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
-[Image Grid Gallery](https://theplusaddons.com/plus-image-gallery/image-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Masonry Gallery](https://theplusaddons.com/plus-image-gallery/image-masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Metro Gallery](https://theplusaddons.com/plus-image-gallery/image-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Carousel Slider](https://theplusaddons.com/plus-image-gallery/image-carousel/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+Image Grid Gallery | Image Masonry Gallery | Image Metro Gallery | Image Carousel Slider
 
 <strong>Interactive Elements</strong>
 
@@ -188,12 +188,12 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 * <strong>[FREE Social Icons for Elementor](https://theplusaddons.com/widgets/social-icon/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[FREE Team Members Listing for Elementor](https://theplusaddons.com/elementor-listing/team-members/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[Grid Team Member Listing](https://theplusaddons.com/pluslisting/elementor-team-members/grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Masonry Team Member Listing](https://theplusaddons.com/pluslisting/elementor-team-members/masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Carousel Slider for Team Member Listing](https://theplusaddons.com/pluslisting/elementor-team-members/carousel/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+Grid Team Member Listing | Masonry Team Member Listing | Carousel Slider for Team Member Listing
 
 * <strong>[FREE Testimonials Listing for Elementor](https://theplusaddons.com/elementor-listing/testimonials/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[FREE Client Logos Listing for Elementor](https://theplusaddons.com/elementor-listing/client-logos/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[Grid Logo Layout](https://theplusaddons.com/team-member/#grid-section?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Client Logo Masonry Layout](https://theplusaddons.com/elementor-listing/client-logos/masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+Grid Logo Layout | Client Logo Masonry Layout
 
 <strong>Navigation & Header</strong>
 
@@ -234,10 +234,10 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 <strong>WooCommerce</strong>
 
 * <strong>[WooCommerce Store Builder for Elementor](https://theplusaddons.com/woo-builder/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[My Account Page](https://theplusaddons.com/plus-builder/woocommerce-builder/my-account-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Order Track Page](https://theplusaddons.com/plus-builder/woocommerce-builder/order-tracking-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Cart Page](https://theplusaddons.com/plus-builder/woocommerce-builder/cart-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Checkout Page](https://theplusaddons.com/plus-builder/woocommerce-builder/checkout-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)  | [Single Product Page](https://theplusaddons.com/plus-builder/woocommerce-builder/product-single-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Thank You Page](https://theplusaddons.com/plus-builder/woocommerce-builder/thank-you-page/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Search Filters](https://theplusaddons.com/plus-builder/woocommerce-builder/ajax-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+My Account Page | Order Track Page | Cart Page | Checkout Page | Single Product Page | Thank You Page | Search Filters
 
 * <strong>[Woo Products for Elementor](https://theplusaddons.com/elementor-listing/woocommerce-product/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
-[Woo Products Carousel](https://theplusaddons.com/pluslisting/product-carousal/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Products Filter](https://theplusaddons.com/elementor-listing/woocommerce-product/filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Products Grid Layout](https://theplusaddons.com/pluslisting/product-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Products Infinite Load](https://theplusaddons.com/pluslisting/product-lazy-load/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Products Load More](https://theplusaddons.com/pluslisting/product-load-more/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Products Metro](https://theplusaddons.com/pluslisting/product-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Products Pagination](https://theplusaddons.com/pluslisting/product-pagination/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+Woo Products Carousel | Products Filter | Products Grid Layout | Products Infinite Load | Products Load More | Products Metro | Products Pagination
 
 * <strong>[WooCommerce Quick View for Elementor](https://theplusaddons.com/docs/add-product-post-quick-view-in-elementor/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -276,7 +276,7 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 * <strong>[Switcher for Elementor](https://theplusaddons.com/widgets/switcher/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[Blog Posts Listing for Elementor](https://theplusaddons.com/elementor-listing/blog-post/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[Post Carousel](https://theplusaddons.com/plus-blogs/carousel-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Grid](https://theplusaddons.com/plus-blogs/blog-styles/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Filter](https://theplusaddons.com/plus-blogs/blog-filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Infinite Load](https://theplusaddons.com/plus-blogs/lazy-load-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Load More](https://theplusaddons.com/plus-blogs/load-more-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Post Pagination](https://theplusaddons.com/plus-blogs/pagination-blogs/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+Post Carousel | Post Grid | Post Filter | Post Infinite Load | Post Load More | Post Pagination
 
 * <strong>[Table of Contents for Elementor](https://theplusaddons.com/widgets/table-of-contents/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
@@ -295,7 +295,7 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 * <strong>[Carousel Slider Remote for Elementor *(Custom Dots, Arrows, Next Previous Button)* ](https://theplusaddons.com/widgets/elementor-carousel-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Image Gallery for Elementor](https://theplusaddons.com/elementor-listing/image-gallery/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
-[Image Carousel](https://theplusaddons.com/plus-image-gallery/image-carousel/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Filter](https://theplusaddons.com/plus-image-gallery/image-filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [ACF Gallery Field](https://theplusaddons.com/pluslisting/elementor-acf-gallery-support/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Grid Layout](https://theplusaddons.com/plus-image-gallery/image-grid/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Metro](https://theplusaddons.com/plus-image-gallery/image-metro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Image Masonry Layout](https://theplusaddons.com/plus-image-gallery/image-masonry/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+Image Carousel | Image Filter | ACF Gallery Field | Image Grid Layout | Image Metro | Image Masonry Layout
 
 <strong>Creative & Visual</strong>
 
@@ -347,14 +347,14 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 * <strong>[Dynamic Category Grid for Elementor](https://theplusaddons.com/pluslisting/dynamic-category/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
 * <strong>[Dynamic Smart Showcase for Elementor](https://theplusaddons.com/pluslisting/#plus-magazine-post-styles?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
-[Magazine Slider](https://theplusaddons.com/pluslisting/dynamic-magazine-slider/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Magazine Filter](https://theplusaddons.com/pluslisting/dynamic-magazine-filter/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Dynamic Ticker](https://theplusaddons.com/pluslisting/dynamic-ticker/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+Magazine Slider | Magazine Filter | Dynamic Ticker
 
 <strong>Search & Filters</strong>
 
 * <strong>[Plus Search Filters for Elementor](https://theplusaddons.com/plus-search-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 
 * <strong>[Search Bar for Elementor](https://theplusaddons.com/plus-search-filters/advanced-wp-ajax-searchbar/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
-[Vertical Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Horizontal Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters-horizontal-columns/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Filters with Popups](https://theplusaddons.com/plus-search-filters/advanced-wp-filters-modal-popup/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)| [Inline Filters](https://theplusaddons.com/plus-search-filters/advanced-wp-filters-inline?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) 
+Vertical Filters | Horizontal Filters | Filters with Popups | Inline Filters
 
 <strong>Scroll & Motion Effects</strong>
 
@@ -434,20 +434,20 @@ If The Plus Addons has helped you build a better website, please consider [leavi
 
 * <strong>[Advanced Buttons for Elementor](https://theplusaddons.com/widgets/advanced-buttons/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> 
 
-###🔍 OUR PRODUCTS
+### 🔍 OUR PRODUCTS
 <strong>[🥇 Nexter Blocks](https://theplusblocks.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> -  90+ WordPress Blocks for Default Gutenberg Block Editor. The Same Plus Power for Core Gutenberg Block Editor.
 
 <strong>[🥇 NexterWP Theme](https://nexterwp.com/nexter-theme/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Best Starter and lightweight Theme for Elementor.
 
  <strong>[🥇 Nexter Extension](https://nexterwp.com/nexter-extension?utm_source=wordpress&utm_medium=readmepage&utm_campaign=nexterblocks)</strong> - Power up your WordPress website with 20+ extensions that work with all themes, boost performance, and harden security.
 
-<strong>[🥇 UiChemy - Figma to Elementor Convertor](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Convert your Figma Templates In Live Elementor Website using our [FREE Figma Plugin.](https://www.figma.com/community/plugin/1265873702834050352/)
+<strong>[🥇 UiChemy - Convert Figma, Prompts and AI Builds to Elementor, Gutenberg and Bricks](https://uichemy.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - Start from a prompt, a client brief, a Figma design or an AI build. UiChemy turns it into real, editable WordPress you own.
 
 <strong>[🥇WDesignKit](https://wdesignkit.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> - 1000+ Elementor Template, Elementor Widget Builder, Widget Convertor to Block, Bricks, Cloud Template & Widget Storage & more.
 
 
 == Installation ==
-####⚠️ NOTE: This plugin is an extension for Elementor Page Builder
+#### ⚠️ NOTE: This plugin is an extension for Elementor Page Builder
 <a href="https://elementor.com/">Elementor Page Builder</a> plugin must be installed and activated to use our plugin.
 
 <h3>☑️ 5 Steps for Installation </h3>
@@ -465,80 +465,84 @@ The Plus Addons for Elementor may connect to the external services below only wh
 
 * <strong>api.posimyth.com</strong> - usage analytics. Off by default; submitting the deactivation feedback form also sends it, plus your admin email if you tick the contact box. <a href="https://store.posimyth.com/terms-conditions/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Terms</a> · <a href="https://store.posimyth.com/privacy-policy/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Privacy</a> · <a href="https://theplusaddons.com/docs/data-sharing/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">what's shared</a>
 * <strong>api.wdesignkit.com</strong> - WDesignKit template and widget library previews. <a href="https://wdesignkit.com/terms/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Terms</a> · <a href="https://wdesignkit.com/privacy-policy/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=externalservices">Privacy</a>
-* <strong>api.wordpress.org, downloads.wordpress.org</strong> - Rollback Manager version lookups and downloads. <a href="https://wordpress.org/about/privacy/">Privacy</a>
+* <strong>api.wordpress.org, downloads.wordpress.org</strong> - Rollback Manager version lookups and downloads, and installing the free UiChemy plugin when an administrator clicks "Install UiChemy & Build". <a href="https://wordpress.org/about/privacy/">Privacy</a>
 * <strong>api.openverse.org</strong> - Openverse stock image search, run by WordPress.org. Called only when a connected AI agent requests images through the MCP abilities. Sends the search terms and your WordPress version; no personal data. <a href="https://wordpress.org/about/privacy/">Privacy</a>
 
 == Frequently Asked Questions ==
 
-**Is The Plus Addons for Elementor free?**
+= Is The Plus Addons for Elementor free? =
 
 Yes. The free version includes 35+ widgets and extensions, a free Blog and CPT single-page builder, Cross-Domain Copy and Paste, Dark Mode, form stylers and 80+ AI abilities. The Pro version unlocks 120+ widgets in total, including the WooCommerce Store Builder, Mega Menu, Header and Footer Builder and Popup Builder.
 
-**Do I need Elementor Pro to use The Plus Addons?**
+= Do I need Elementor Pro to use The Plus Addons? =
 
 No. The Plus Addons works with the free Elementor plugin. Many features people buy Elementor Pro for, such as a header and footer builder, popup builder and dynamic content, are available through The Plus Addons instead.
 
-**Will The Plus Addons slow down my website?**
+= Will The Plus Addons slow down my website? =
 
-No. Only the CSS and JavaScript for the widgets you actually use is loaded, and icon fonts load only on the widgets that need them. The built-in One-Click Auto Widget Scanner turns off every unused widget automatically, so nothing extra runs on your pages.
+It is built not to. Only the CSS and JavaScript for the widgets you actually use is loaded, icon fonts load only on the widgets that need them, and admin and editor files are not loaded on the frontend. The built-in One-Click Auto Widget Scanner turns off every unused widget automatically, so nothing extra runs on your pages.
 
-**Does it work with my theme?**
+= Does it work with my theme? =
 
 Yes. The Plus Addons works with any well-coded WordPress theme, including Nexter, Astra, Kadence, Blocksy, GeneratePress, OceanWP and Neve.
 
-**Does it work with WooCommerce?**
+= Does it work with WooCommerce? =
 
 Yes. The Pro version includes a full WooCommerce Store Builder for the Cart, Checkout, My Account, Single Product and Thank You pages, plus product listings, Ajax product filters and WooCommerce-specific display conditions.
 
-**Do I need to know how to code?**
+= Do I need to know how to code? =
 
 No. Every widget and feature is built visually inside the Elementor editor. No coding or design experience is required.
 
-**Can I turn off the widgets I do not use?**
+= Can I turn off the widgets I do not use? =
 
 Yes. Open The Plus Settings and disable any widget you do not need, or run the One-Click Auto Widget Scanner to switch off all unused widgets automatically and keep your site lean.
 
-**Can I build with AI like ChatGPT, Claude or Angie?**
+= Can I build with AI like ChatGPT, Claude or Angie? =
 
 Yes. The Plus Addons exposes 80+ WordPress AI abilities through the MCP and Abilities API, plus built-in design skills that guide the agent to build on-brand, so ChatGPT, Claude, Cursor and WordPress Angie can build and edit pages, widgets and settings on your real Elementor site.
 
-**Is it translation ready and RTL compatible?**
+= Is it translation ready and RTL compatible? =
 
 Yes. The Plus Addons is fully translation ready, works with WPML and other translation plugins, supports RTL languages and is compatible with WordPress Multisite networks.
 
-**What data does The Plus Addons collect?**
+= What data does The Plus Addons collect? =
 
-Nothing is collected unless you turn it on. Usage sharing is off by default and never includes any personal data. See the External Services section below for full details.
+Nothing is collected unless you turn it on. Usage sharing is off by default and never includes any personal data. See the External Services section above for full details.
 
-**Is Elementor required to use this plugin?**
+= Is Elementor required to use this plugin? =
 
-Yes. You need to install and activate the Elementor plugin first to get access to The Plus Addons widgets and features.
+Yes. You need to install and activate the Elementor plugin first to get access to The Plus Addons widgets and features. Elementor 3.28 or newer is required.
 
-**Why does the Elementor panel freeze or show a spinning loader?**
+= Does it work with Elementor 4? =
+
+Yes. The Plus Addons is tested with Elementor 4.3. It requires Elementor 3.28 or newer, and on an older Elementor the widgets pause and an admin notice explains why instead of erroring.
+
+= Why does the Elementor panel freeze or show a spinning loader? =
 
 Make sure your memory limit is set to 768M or higher, especially if you have multiple Elementor addons installed and the editor's loading icon is freezing.
 
-This isn't a bug on our end — the more widgets and addons you use, the more memory your server needs to load everything in the editor.
+This isn't a bug on our end, the more widgets and addons you use, the more memory your server needs to load everything in the editor.
 
 If your hosting provider doesn't allow a higher memory limit, disable any unused widgets from The Plus Addons and your other addons. Fewer active widgets means a lower memory requirement.
 
-**Everything looks broken in the editor, or looks fine in the editor but has issues on the frontend — what do I do?**
+= Everything looks broken in the editor, or looks fine in the editor but has issues on the frontend - what do I do? =
 
 Make sure you have removed cache from The Plus Settings → Performance → Purge all cache. Also clear the cache from any third-party cache plugins you're using, then clear your browser cache with a hard reload and/or test your site in incognito mode.
 
-**Why are my Font Awesome icons not visible?**
+= Why are my Font Awesome icons not visible? =
 
 You need to turn on compatibility for Font Awesome 4 from Elementor → Extra Settings.
 
-**Why is my editor slower after installing The Plus Addons?**
+= Why is my editor slower after installing The Plus Addons? =
 
 We don't load any extra files that would slow down the editor. If the Elementor panel is loading with a noticeable delay, increase your memory limit. If you can't increase it, disable any unused widgets from The Plus Settings → Plus Widgets, and from any other addon plugins you have installed.
 
-**Why is my frontend loading slower after installing The Plus Addons?**
+= Why is my frontend loading slower after installing The Plus Addons? =
 
 We use an advanced caching architecture designed to avoid bloating your site, plus a few extra tricks and suggestions to improve frontend performance. 
 
-**How can I report security bugs?**
+= How can I report security bugs? =
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/the-plus-addons-for-elementor-page-builder)
 
@@ -557,6 +561,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.5.3 =
+Add : UiChemy : Dismissible admin notice and editor hints that install UiChemy and open its AI Website Creator, only when an administrator clicks
+Improvement : Assets : In separate-file mode, widget script URLs change with the plugin version, so browsers fetch updated files
+Fix : Carousel : Dot navigation no longer freezes the page on carousels with pagination dots
+Fix : Assets : The global script is printed once, after the doctype, when a theme builder loads it early
+Fix : Plus Form : The submit token could be frozen by page caching, which made submissions fail
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.5.2 =
 Important : Elementor 3.28 or newer is now required. On an older Elementor the widgets pause and an admin notice explains why, instead of erroring
