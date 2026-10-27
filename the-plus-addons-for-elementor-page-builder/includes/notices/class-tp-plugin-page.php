@@ -138,8 +138,8 @@ if ( ! class_exists( 'Tp_Plugin_Page' ) ) {
 					'docs'             => '<a href="' . esc_url( 'https://theplusaddons.com/docs?utm_source=wpbackend&utm_medium=pluginpage&utm_campaign=links' ) . '" target="_blank" rel="noopener noreferrer" style="color:green;">' . esc_html__( 'Docs', 'tpebl' ) . '</a>',
 					'video-tutorials'  => '<a href="' . esc_url( 'https://www.youtube.com/c/POSIMYTHInnovations/?sub_confirmation=1' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Video Tutorials', 'tpebl' ) . '</a>',
 					'join-community'   => '<a href="' . esc_url( 'https://www.facebook.com/groups/1331664136965680' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Join Community', 'tpebl' ) . '</a>',
-					'whats-new'        => '<a href="' . esc_url( 'https://roadmap.theplusaddons.com/updates?filter=Free' ) . '" target="_blank" rel="noopener noreferrer" style="color: orange;">' . esc_html__( 'What\'s New?', 'tpebl' ) . '</a>',
-					'req-feature'      => '<a href="' . esc_url( 'https://roadmap.theplusaddons.com/boards/feature-request' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Request Feature', 'tpebl' ) . '</a>',
+					'whats-new'        => '<a href="' . esc_url( 'https://roadmap.theplusaddons.com/en/changelogs' ) . '" target="_blank" rel="noopener noreferrer" style="color: orange;">' . esc_html__( 'What\'s New?', 'tpebl' ) . '</a>',
+					'req-feature'      => '<a href="' . esc_url( 'https://roadmap.theplusaddons.com/' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Request Feature', 'tpebl' ) . '</a>',
 					'rate-plugin-star' => '<a href="' . esc_url( 'https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/reviews/' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Share Review', 'tpebl' ) . '</a>',
 				);
 

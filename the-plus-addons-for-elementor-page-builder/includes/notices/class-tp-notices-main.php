@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* One promotion per screen, none on the WordPress Dashboard. Loaded before any notice file. */
+require_once L_THEPLUS_PATH . 'includes/notices/tpae-promo-notice-gate.php';
+
 if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 
 	/**
@@ -126,35 +129,10 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 				'status'      => '',
 				'plugin_slug' => 'theplus_elementor_addon/theplus_elementor_addon.php',
 			);
-			$nxt_plugin         = array(
-				'name'        => 'the-plus-addons-for-block-editor',
-				'status'      => '',
-				'plugin_slug' => 'the-plus-addons-for-block-editor/the-plus-addons-for-block-editor.php',
-			);
-			$nxt_pro_plugin     = array(
-				'name'        => 'the-plus-addons-for-block-editor-pro',
-				'status'      => '',
-				'plugin_slug' => 'the-plus-addons-for-block-editor-pro/the-plus-addons-for-block-editor-pro.php',
-			);
-			$nxt_ext_plugin     = array(
-				'name'        => 'nexter-extension',
-				'status'      => '',
-				'plugin_slug' => 'nexter-extension/nexter-extension.php',
-			);
-			$nxt_ext_pro_plugin = array(
-				'name'        => 'nexter-pro-extensions',
-				'status'      => '',
-				'plugin_slug' => 'nexter-pro-extensions/nexter-pro-extensions.php',
-			);
 			$ele_plugin         = array(
 				'name'        => 'elementor',
 				'status'      => '',
 				'plugin_slug' => 'elementor/elementor.php',
-			);
-			$ele_pro_plugin     = array(
-				'name'        => 'elementor-pro',
-				'status'      => '',
-				'plugin_slug' => 'elementor-pro/elementor-pro.php',
 			);
 			$temp_kit_plugin    = array(
 				'name'        => 'template-kit-import',
@@ -162,16 +140,9 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 				'plugin_slug' => 'template-kit-import/template-kit-import.php',
 			);
 
-			$ele_details     = $this->tpae_check_plugins_depends( $ele_plugin );
-			$ele_pro_details = $this->tpae_check_plugins_depends( $ele_pro_plugin );
+			$ele_details = $this->tpae_check_plugins_depends( $ele_plugin );
 
 			$tpae_pro_details = $this->tpae_check_plugins_depends( $tpae_pro_plugin );
-
-			$nxt_details     = $this->tpae_check_plugins_depends( $nxt_plugin );
-			$nxt_pro_details = $this->tpae_check_plugins_depends( $nxt_pro_plugin );
-
-			$nxt_ext_details     = $this->tpae_check_plugins_depends( $nxt_ext_plugin );
-			$nxt_ext_pro_details = $this->tpae_check_plugins_depends( $nxt_ext_pro_plugin );
 
 			$temp_kit_details = $this->tpae_check_plugins_depends( $temp_kit_plugin );
 
@@ -223,30 +194,14 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 
 			$license_data = get_option( 'tpaep_licence_data' );
 
-			if ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) {
+			/**
+			 * The Pro, licence, What's New, Widget Recipes and review notices are for the people who
+			 * manage the site. Without this check an editor or a shop manager on a client site saw
+			 * them, and could not dismiss them (the dismiss handlers need manage_options).
+			 */
+			if ( current_user_can( 'manage_options' ) && ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) ) {
 
 				$check_license = $license_data ? $license_data['expires'] : '';
-
-				/** Plugin Features Banner*/
-				// if ( ! get_option( 'tpae_pluginfeatures_notice_dismissed' ) ) {
-				// 	include L_THEPLUS_PATH . 'includes/notices/class-tp-plugin-features-banner.php';
-				// }
-
-				if ( ! empty( $ele_pro_details[0]['status'] ) && 'unavailable' == $ele_pro_details[0]['status'] ) {
-					if ( ! empty( $nxt_ext_details[0]['status'] ) && 'unavailable' == $nxt_ext_details[0]['status'] ) {
-						if ( ! empty( $nxt_ext_pro_details[0]['status'] ) && 'unavailable' == $nxt_ext_pro_details[0]['status'] ) {
-							include L_THEPLUS_PATH . 'includes/notices/class-tp-nexter-extension-promo.php';
-						}
-					}
-				}
-
-				if ( ! get_option( 'tpae_nexter_block_notice' ) ) {
-					if ( ! empty( $nxt_details[0]['status'] ) && 'unavailable' == $nxt_details[0]['status'] ) {
-						if ( ! empty( $nxt_pro_details[0]['status'] ) && 'unavailable' == $nxt_pro_details[0]['status'] ) {
-							include L_THEPLUS_PATH . 'includes/notices/class-tp-nexter-notice.php';
-						}
-					}
-				}
 
 				/** Install TPAE Pro notice*/
 				if ( ! get_option( 'tpae_pro_promo_notice' ) ) {
@@ -272,7 +227,7 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					}
 				}
 
-				/** What's New in this release (loaded first so it sits above the widget notice)*/
+				/** What's New in this release*/
 				$tpae_wn_release = defined( 'L_THEPLUS_VERSION' ) ? preg_replace( '/[-+].*$/', '', L_THEPLUS_VERSION ) : '';
 				if ( $tpae_wn_release && get_option( 'tpae_whats_new_dismissed' ) !== $tpae_wn_release ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-whats-new-notice.php';
@@ -283,21 +238,10 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-widget-recipes-notice.php';
 				}
 
-				/** Removed & Deprecated Widgets Notice (6.5.0)*/
-				if ( ! get_option( 'tpae_removed_widgets_notice' ) ) {
-					include L_THEPLUS_PATH . 'includes/notices/class-tp-removed-widgets-notice.php';
-				}
-
 				/** Ask for Review*/
 				if ( ! get_option( 'tpae_ask_review_notice' ) ) {
 					include L_THEPLUS_PATH . 'includes/notices/class-tp-ask-review-notice.php';
 				}
-
-				/** Join Community Discord*/
-				if ( ! get_option( 'tpae_join_community_notice' ) ) {
-					include L_THEPLUS_PATH . 'includes/notices/class-tp-join-community-notice.php';
-				}
-
 			}
 
 			// $envato_details = $this->tpae_check_plugins_depends( $envato_plugins );

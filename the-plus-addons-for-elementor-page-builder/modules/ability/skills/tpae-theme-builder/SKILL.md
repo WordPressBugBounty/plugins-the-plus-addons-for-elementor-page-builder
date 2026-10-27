@@ -12,7 +12,7 @@ Build the reusable, dynamic parts of a site: headers, footers, single/archive te
 Theme templates are not pages - they are Elementor library templates with a **type** and **display conditions**.
 
 1. **Create** with `create-theme-template` - choose the type: header · footer · single (post/page/CPT) · archive · 404 · search-results. (WooCommerce single/archive/cart/checkout templates -> **tpae-woocommerce**.)
-2. **Condition** with `set-template-conditions` - where it renders: entire site, specific post types, a taxonomy/term, front page, etc. A header/footer usually applies site-wide; a single template targets a post type. Conflicting conditions between templates cause the wrong one to show - state the intended scope in the Plan and confirm.
+2. **Condition** with `set-template-conditions` - where it renders: entire site, specific post types, a taxonomy/term, front page, etc. A header/footer usually applies site-wide; a single template targets a post type. Conflicting conditions between templates cause the wrong one to show - state the intended scope in the Plan and confirm. `set-template-conditions` refuses and lists the templates it would clash with; tell the user which one would be replaced and repeat with `confirm_conflicts: true` only after they say yes.
 3. **Compose** with the widgets below (+ dynamic binding for single/archive).
 4. **Verify** against a real preview target (a real post for a single template) and confirm the condition actually resolves.
 
@@ -53,6 +53,9 @@ Full per-widget notes: `nav-and-chrome`. Template recipes (header/footer/single/
 - Header: logo, menu, and mobile trigger all present; menu opens on mobile; sticky (if set) behaves.
 - Single/archive: every dynamic element is bound (no placeholder/literal leaking) and resolves for the previewed post.
 - Confirm no conflicting template already claims the same condition.
+- **Before publishing a header or footer**, fetch a real page and note its `<body>` classes and stylesheet links. After it is on, fetch the same page again: the theme's own header file is replaced, and anything the theme wrote there (a font or background class) can be lost. If a class or stylesheet went missing, switch the template back off and tell the user.
+- **Mega menus only work inside the TPAE Navigation Menu widget.** The theme's own menu ignores them. Before adding a mega menu, check the header actually uses `tpaep-navigation-menu`; if it does not, say so instead of editing menu items.
+- Clear any page cache after the change, and flush the object cache (Redis/Memcached) if the host keeps one - template conditions are cached.
 
 ## Shared gotchas (full detail: tpae-design -> troubleshooting)
 

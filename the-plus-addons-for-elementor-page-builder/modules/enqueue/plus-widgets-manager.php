@@ -229,13 +229,18 @@ class Plus_Widgets_Manager {
 				$data,
 				function ( $element ) use ( &$widget_list, $replace ) {
 
-					if ( empty( $element['widgetType'] ) ) {
-						$type = $element['elType'];
-					} else {
-						$type = $element['widgetType'];
-					}
+					/*
+					 * Elementor picks the element class from elType and ignores
+					 * widgetType on anything that is not a widget. Only trust
+					 * widgetType when elType is 'widget', so a Container carrying an
+					 * extraneous widgetType cannot pull in a widget's assets.
+					 */
+					$el_type     = ( isset( $element['elType'] ) && is_string( $element['elType'] ) ) ? $element['elType'] : '';
+					$widget_type = ( 'widget' === $el_type && ! empty( $element['widgetType'] ) && is_string( $element['widgetType'] ) ) ? $element['widgetType'] : '';
 
-					if ( ! empty( $element['widgetType'] ) && $element['widgetType'] === 'global' ) {
+					$type = ! empty( $widget_type ) ? $widget_type : $el_type;
+
+					if ( 'global' === $widget_type ) {
 						$document = Elementor\Plugin::$instance->documents->get( $element['templateID'] );
 						$type     = is_object( $document ) ? current( $this->get_widget_list( $document->get_elements_data() ) ) : $type;
 
@@ -247,7 +252,7 @@ class Plus_Widgets_Manager {
 					// Load assets for Elementor Pro Loop Item templates used in Loop Grid/Carousel.
 					// These templates are not theme builder locations, so the asset system
 					// must detect them here by reading the widget settings.
-					if ( ! empty( $element['widgetType'] ) && in_array( $element['widgetType'], array( 'loop-grid', 'loop-carousel' ), true ) ) {
+					if ( ! empty( $widget_type ) && in_array( $widget_type, array( 'loop-grid', 'loop-carousel' ), true ) ) {
 						$loop_template_ids = array();
 
 						if ( ! empty( $element['settings']['template_id'] ) ) {
@@ -288,10 +293,10 @@ class Plus_Widgets_Manager {
 						 */
 						$tpae_element_settings = isset( $element['settings'] ) ? $element['settings'] : array();
 
-						if ( isset( $element['widgetType'] ) ) {
-							$this->plus_widgets_options( $tpae_element_settings, $element['widgetType'] );
-						} elseif ( isset( $element['elType'] ) ) {
-							$this->plus_widgets_options( $tpae_element_settings, $element['elType'] );
+						if ( ! empty( $widget_type ) ) {
+							$this->plus_widgets_options( $tpae_element_settings, $widget_type );
+						} elseif ( ! empty( $el_type ) ) {
+							$this->plus_widgets_options( $tpae_element_settings, $el_type );
 						}
 					}
 				}

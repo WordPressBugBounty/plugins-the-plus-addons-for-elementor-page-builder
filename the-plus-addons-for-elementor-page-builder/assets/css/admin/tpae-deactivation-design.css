@@ -1,0 +1,86 @@
+.posi-deact-modal.posi-deact-p-the-plus-addons-for-elementor-page-builder {
+    padding: 24px;
+    box-sizing: border-box;
+    background: color-mix(in srgb, var(--nx-surface) 70%, transparent);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-dialog {
+    position: relative;
+    width: 600px;
+    max-width: 100%;
+    max-height: calc(100dvh - 48px);
+    padding: 24px;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-2xl);
+    box-shadow: var(--nx-shadow-xl);
+    background: var(--nx-surface);
+    text-align: left;
+    overflow-y: auto;
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .tpae-deact-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: var(--nx-text-tertiary);
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-dialog h3 {
+    margin: 0 32px 8px 0;
+    gap: 10px;
+    font-size: var(--nx-title-3-size);
+    line-height: var(--nx-title-3-lh);
+    font-weight: var(--nx-weight-semibold);
+    color: var(--nx-text);
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-icon img { display: block; width: 30px; height: 30px; }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-sub {
+    margin: 0 0 20px;
+    font-size: var(--nx-body-2-size);
+    line-height: var(--nx-body-2-lh);
+    color: var(--nx-text-secondary);
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-cards { gap: 12px; }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-cards label {
+    min-height: 52px;
+    padding: 12px 14px;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-xl);
+    box-shadow: var(--nx-shadow-xs);
+    background: var(--nx-surface);
+    color: var(--nx-text);
+    font-size: var(--nx-body-2-size);
+    line-height: var(--nx-body-2-lh);
+    font-weight: var(--nx-weight-medium);
+    text-align: left;
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-cards label:hover { border-color: var(--nx-border-hover); }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-cards label:has(input:checked) { border-color: var(--nx-primary); background: var(--nx-primary-subtle); }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-cards label:has(input:focus-visible) { outline: none; box-shadow: var(--nx-focus-ring); }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-dialog textarea {
+    margin-top: 16px;
+    padding: 10px 12px;
+    font-size: var(--nx-body-2-size);
+    border-radius: var(--nx-radius-lg);
+    min-height: 88px;
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-opts { margin-top: 20px; padding-top: 20px; border-color: var(--nx-border-subtle); }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-opt {
+    padding: 14px;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: var(--nx-body-2-size);
+    line-height: var(--nx-body-2-lh);
+    border-color: var(--nx-border);
+    border-radius: var(--nx-radius-xl);
+    background: var(--nx-bg-subtle);
+}
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-opt .nx-check__box { margin-top: 2px; }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-footer { margin-top: 20px; gap: 12px; }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-submit,
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-skip { font-family: inherit; text-decoration: none; }
+.posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-consent { margin-top: 16px; font-size: var(--nx-caption-1-size); line-height: var(--nx-caption-1-lh); color: var(--nx-text-secondary); }
+@media (max-width: 600px) {
+    .posi-deact-modal.posi-deact-p-the-plus-addons-for-elementor-page-builder { padding: 12px; }
+    .posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-dialog { max-height: calc(100dvh - 24px); padding: 20px; }
+    .posi-deact-p-the-plus-addons-for-elementor-page-builder .posi-deact-footer { align-items: stretch; flex-direction: column-reverse; }
+}

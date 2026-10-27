@@ -70,9 +70,9 @@ if ( ! class_exists( 'Tp_Tpaepro_Notice' ) ) {
 
 			$days_passed = floor( ( $current_timestamp - $saved_timestamp ) / DAY_IN_SECONDS );
 
-			if ( $days_passed >= 2 ) {
+			if ( $days_passed >= 3 ) {
 				if ( ! get_option( 'tpae_pro_promo_notice' ) ) {
-					add_action( 'admin_notices', array( $this, 'theplus_pro_promo_install_plugin' ) );
+					add_action( 'admin_notices', tpae_promo_notice( 'tpae-pro', array( $this, 'theplus_pro_promo_install_plugin' ) ) );
 				}
 			}
 		}

@@ -484,7 +484,7 @@ class Tpae_Elementor_MCP_Custom_Code_Abilities {
 						'status'        => array(
 							'type'        => 'string',
 							'enum'        => array( 'publish', 'draft' ),
-							'description' => __( 'Post status. "publish" = active immediately. "draft" = saved but not active. Default: publish.', 'tpebl' ),
+							'description' => __( 'Post status. "publish" = active immediately. "draft" = saved but not active. Default: draft; use "publish" only after the user approved it, because it runs on every page.', 'tpebl' ),
 						),
 						'ensure_jquery' => array(
 							'type'        => 'boolean',
@@ -529,7 +529,7 @@ class Tpae_Elementor_MCP_Custom_Code_Abilities {
 		$code          = $input['code'] ?? '';
 		$location_key  = sanitize_key( $input['location'] ?? 'head' );
 		$priority      = absint( $input['priority'] ?? 1 );
-		$status        = sanitize_key( $input['status'] ?? 'publish' );
+		$status        = sanitize_key( $input['status'] ?? 'draft' );
 		$ensure_jquery = ! empty( $input['ensure_jquery'] );
 
 		if ( empty( $title ) || empty( $code ) ) {
@@ -550,7 +550,7 @@ class Tpae_Elementor_MCP_Custom_Code_Abilities {
 
 		// Validate status.
 		if ( ! in_array( $status, array( 'publish', 'draft' ), true ) ) {
-			$status = 'publish';
+			$status = 'draft';
 		}
 
 		// Create the elementor_snippet CPT post.

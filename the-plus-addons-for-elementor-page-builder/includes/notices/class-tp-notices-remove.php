@@ -77,6 +77,15 @@ if ( ! class_exists( 'Tp_Notices_Remove' ) ) {
 			delete_option( 'tpae_cmsale_notice_dismissed' );
 			delete_option( 'tpae_wintersale_notice_dismissed' );
 			delete_option( 'tpae_pluginfeatures_notice_dismissed' );
+
+			/* 6.6.0: the Nexter Blocks, Nexter Extension and Join Community notices were removed. */
+			delete_option( 'tpae_nexter_block_notice' );
+			delete_option( 'tpae_nexter_extension_notice' );
+			delete_option( 'tpae_nxt_ext_pnotice' );
+			delete_option( 'tpae_join_community_notice' );
+
+			/* 6.6.0: the 6.5.0 Widget Changes (removed/deprecated widgets) notice was removed. */
+			delete_option( 'tpae_removed_widgets_notice' );
 		}
 	}
 

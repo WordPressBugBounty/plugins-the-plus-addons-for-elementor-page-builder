@@ -11,18 +11,27 @@
 		data_dowtext = tpdowicon.data("download-text"),
 		data_dowicon = tpdowicon.data("download-iconsh");
 		
+		/* Label as text, icon as the server-rendered markup: the label is
+		   author text and must never be parsed as HTML. */
+		var setLabel = function($el, text, icon) {
+			$el.text(text || '');
+			if (icon) {
+				$el.append(icon);
+			}
+		};
+
 		if(container.length){
-			container.find('.copy-to-clipboard-button').html(data_copy + data_copyicon);
+			setLabel(container.find('.copy-to-clipboard-button'), data_copy, data_copyicon);
 			$( ".copy-to-clipboard-button" ).on( "click", function() {
-				container.find('.copy-to-clipboard-button').html(data_copyed + data_copiedbtnicon);
+				setLabel(container.find('.copy-to-clipboard-button'), data_copyed, data_copiedbtnicon);
 				setTimeout(function(){ 
-					container.find('.copy-to-clipboard-button').html(data_copy + data_copyicon);
+					setLabel(container.find('.copy-to-clipboard-button'), data_copy, data_copyicon);
 				}, 1500);
 			});
 		}
 		
 		if(tpdowicon.length){			
-			tpdowicon.find('.toolbar-item a').html(data_dowtext + data_dowicon);			
+			setLabel(tpdowicon.find('.toolbar-item a'), data_dowtext, data_dowicon);			
 		}
 		
 	};	

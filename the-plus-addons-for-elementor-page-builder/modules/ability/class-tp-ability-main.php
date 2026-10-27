@@ -155,6 +155,8 @@ if ( ! class_exists( 'Tp_Ability_Main' ) ) {
 				$args['meta']['public'] = true;
 			}
 
+			$args = $this->tp_fill_annotations( $args, $name );
+
 			/**
 			 * When the Angie bundle is present AND Angie is actually active,
 			 * reclassify free tpae/ abilities off mcp.type='tool' so the bridge
@@ -178,6 +180,53 @@ if ( ! class_exists( 'Tp_Ability_Main' ) ) {
 				}
 				$args['meta']['mcp']['type'] = 'bridge';
 			}
+
+			return $args;
+		}
+
+		/**
+		 * Fill in read-only / destructive hints for tpae/ abilities that do not declare them.
+		 *
+		 * MCP clients such as WPVibe ask for approval only for abilities marked destructive,
+		 * and treat unmarked ones as safe to run. Reads are marked read-only, abilities that
+		 * remove content or change a post's status are marked destructive, and every other
+		 * ability is a plain write. An explicit value in an ability definition always wins.
+		 *
+		 * @param array  $args Ability registration arguments.
+		 * @param string $name Ability name.
+		 * @return array
+		 * @since 6.6.0
+		 */
+		private function tp_fill_annotations( $args, $name ) {
+			$annotations = ( isset( $args['meta']['annotations'] ) && is_array( $args['meta']['annotations'] ) ) ? $args['meta']['annotations'] : array();
+
+			if ( preg_match( '#^tpae/(elementor-)?(get|list|find|search|export)-#', $name ) || 'tpae/tpae-widget-schema' === $name ) {
+				$defaults = array(
+					'readonly'    => true,
+					'destructive' => false,
+					'idempotent'  => true,
+				);
+			} elseif ( in_array( $name, array( 'tpae/remove-element', 'tpae/elementor-remove-element', 'tpae/set-post-status', 'tpae/delete-page-content', 'tpae/set-template-conditions' ), true ) ) {
+				$defaults = array(
+					'readonly'    => false,
+					'destructive' => true,
+					'idempotent'  => false,
+				);
+			} else {
+				$defaults = array(
+					'readonly'    => false,
+					'destructive' => false,
+					'idempotent'  => false,
+				);
+			}
+
+			foreach ( $defaults as $key => $value ) {
+				if ( ! isset( $annotations[ $key ] ) ) {
+					$annotations[ $key ] = $value;
+				}
+			}
+
+			$args['meta']['annotations'] = $annotations;
 
 			return $args;
 		}

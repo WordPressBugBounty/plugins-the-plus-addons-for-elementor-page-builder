@@ -357,8 +357,10 @@ if ( ! class_exists( 'Tpae_UiChemy_Notice' ) ) {
 		 */
 		public static function init() {
 
-			// Admin notice: renders on top (priority 0) of the main wp-admin screens.
-			add_action( 'in_admin_header', array( __CLASS__, 'admin_notice' ), 0 );
+			// Admin notice: renders on top (priority 0) of the main wp-admin screens, taking
+			// its turn with TPAE's other promotions (one per screen, none on the Dashboard).
+			require_once L_THEPLUS_PATH . 'includes/notices/tpae-promo-notice-gate.php';
+			add_action( 'in_admin_header', tpae_promo_notice( 'uichemy', array( __CLASS__, 'admin_notice' ) ), 0 );
 			add_action( 'wp_ajax_tpae_uichemy_notice_dismiss', array( __CLASS__, 'ajax_notice_dismiss' ) );
 			add_action( 'wp_ajax_tpae_uichemy_build', array( __CLASS__, 'ajax_build' ) );
 
@@ -722,7 +724,9 @@ if ( ! class_exists( 'Tpae_UiChemy_Notice' ) ) {
 							var d = new FormData();
 							d.append( 'action', 'tpae_uichemy_notice_dismiss' );
 							d.append( 'nonce', nonce );
-							fetch( ajaxurl, { method: 'POST', credentials: 'same-origin', body: d } );
+							// keepalive: an admin who dismisses and moves straight on must not
+							// cancel the request, or the notice is back on the next screen.
+							fetch( ajaxurl, { method: 'POST', credentials: 'same-origin', body: d, keepalive: true } );
 							return;
 						}
 

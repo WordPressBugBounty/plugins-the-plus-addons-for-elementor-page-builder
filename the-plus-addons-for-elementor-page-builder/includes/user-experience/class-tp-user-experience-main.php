@@ -117,9 +117,14 @@ if ( ! class_exists( 'Tp_User_Experience_Main' ) ) {
 			 * feedback submit, not a rate-us prompt, so nothing else depended on it.
 			 */
 
-			if ( ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) || ( empty( $this->whitelabel['help_link'] ) || 'on' !== $this->whitelabel['help_link'] ) || ( empty( $this->whitelabel['plugin_ads'] ) || 'on' !== $this->whitelabel['plugin_ads'] ) ) {
-				include L_THEPLUS_PATH . 'includes/user-experience/update-popup/class-tp-update-popup.php';
-			}
+			/*
+			 * Update video popup, off for now: it still shows the 6.4.9 video and the What's New
+			 * notice covers release news. Kept for a release that has its own video - update the
+			 * video in tp-update-plugin-popup.js and bump TPAE_MENU_NOTIFICETIONS when turning it on.
+			 */
+			// if ( ( empty( $this->whitelabel['plugin_news'] ) || 'on' !== $this->whitelabel['plugin_news'] ) || ( empty( $this->whitelabel['help_link'] ) || 'on' !== $this->whitelabel['help_link'] ) || ( empty( $this->whitelabel['plugin_ads'] ) || 'on' !== $this->whitelabel['plugin_ads'] ) ) {
+			// 	include L_THEPLUS_PATH . 'includes/user-experience/update-popup/class-tp-update-popup.php';
+			// }
 		}
 	}
 

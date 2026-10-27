@@ -78,10 +78,10 @@ if ( ! class_exists( 'Tp_Ask_Review_Notice' ) ) {
 					$days_passed         = floor( ( $current_timestamp - $showlater_timestamp ) / DAY_IN_SECONDS );
 
 					if ( $days_passed >= 30 ) {
-						add_action( 'admin_notices', array( $this, 'theplus_ask_review_notice' ) );
+						add_action( 'admin_notices', tpae_promo_notice( 'ask-review', array( $this, 'theplus_ask_review_notice' ) ) );
 					}
 				} elseif ( $days_passed >= 14 ) {
-					add_action( 'admin_notices', array( $this, 'theplus_ask_review_notice' ) );
+					add_action( 'admin_notices', tpae_promo_notice( 'ask-review', array( $this, 'theplus_ask_review_notice' ) ) );
 				}
 			}
 		}

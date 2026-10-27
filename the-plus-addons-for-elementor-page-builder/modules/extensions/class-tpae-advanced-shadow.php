@@ -1101,7 +1101,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 
 				}
 				if ( ! empty( $bs_normal ) || ! empty( $bs_hover ) ) {
-					echo '<style>' . $bs_normal . $bs_hover . '</style>';
+					echo '<style>' . str_replace( '<', '', $bs_normal . $bs_hover ) . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- no '<' can survive, so a saved value cannot close the style tag.
 				}
 			}
 
@@ -1175,7 +1175,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 
 				}
 				if ( ! empty( $ts_normal ) || ! empty( $ts_hover ) ) {
-					echo '<style>' . $ts_normal . $ts_hover . '</style>';
+					echo '<style>' . str_replace( '<', '', $ts_normal . $ts_hover ) . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- no '<' can survive, so a saved value cannot close the style tag.
 				}
 			}
 
@@ -1239,7 +1239,7 @@ if ( ! class_exists( 'Tpae_Advanced_Shadow' ) ) {
 
 				}
 				if ( ! empty( $ds_normal ) || ! empty( $ds_hover ) ) {
-					echo '<style>' . $ds_normal . $ds_hover . '</style>';
+					echo '<style>' . str_replace( '<', '', $ds_normal . $ds_hover ) . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- no '<' can survive, so a saved value cannot close the style tag.
 				}
 			}
 		}

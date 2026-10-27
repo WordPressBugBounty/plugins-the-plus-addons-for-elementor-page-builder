@@ -197,6 +197,11 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 					'status'      => '',
 					'plugin_slug' => 'nexter-extension/nexter-extension.php',
 				),
+				array(
+					'name'        => 'sticky-header-effects-for-elementor',
+					'status'      => '',
+					'plugin_slug' => 'sticky-header-effects-for-elementor/sticky-header-effects-for-elementor.php',
+				),
 				// array(
 				// 'name'        => 'envato-elements',
 				// 'status'      => '',

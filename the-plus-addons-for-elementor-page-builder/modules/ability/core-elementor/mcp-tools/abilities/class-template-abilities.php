@@ -321,8 +321,12 @@ class Tpae_Elementor_MCP_Template_Abilities {
 				'output_schema'       => array(
 					'type'       => 'object',
 					'properties' => array(
-						'success'        => array( 'type' => 'boolean' ),
-						'elements_added' => array( 'type' => 'integer' ),
+						'success'            => array( 'type' => 'boolean' ),
+						'elements_added'     => array( 'type' => 'integer' ),
+						'had_prior_revision' => array(
+							'type'        => 'boolean',
+							'description' => __( 'Whether the page had a revision to restore from before this change.', 'tpebl' ),
+						),
 					),
 				),
 				'meta'                => array(
@@ -404,6 +408,9 @@ class Tpae_Elementor_MCP_Template_Abilities {
 			}
 		}
 
+		// Read before the save: Elementor writes its own revision as part of it.
+		$had_revision = $this->data->has_revision( $post_id );
+
 		$result = $this->data->save_page_data( $post_id, $page_data );
 
 		if ( is_wp_error( $result ) ) {
@@ -411,8 +418,9 @@ class Tpae_Elementor_MCP_Template_Abilities {
 		}
 
 		return array(
-			'success'        => true,
-			'elements_added' => $count,
+			'success'            => true,
+			'elements_added'     => $count,
+			'had_prior_revision' => $had_revision,
 		);
 	}
 
@@ -501,7 +509,7 @@ class Tpae_Elementor_MCP_Template_Abilities {
 			'elementor-mcp/set-template-conditions',
 			array(
 				'label'               => __( 'Set Template Conditions', 'tpebl' ),
-				'description'         => __( 'Sets display conditions for a theme builder template (e.g., Entire Site, specific pages, post types).', 'tpebl' ),
+				'description'         => __( 'Sets display conditions for a theme builder template (e.g., Entire Site, specific pages, post types). A published template goes live on every page its conditions match. If another published template of the same type already claims an overlapping condition, the call is refused and lists it: get the user\'s approval, then repeat with confirm_conflicts true.', 'tpebl' ),
 				'category'            => 'tpae',
 				'execute_callback'    => array( $this, 'execute_set_template_conditions' ),
 				'permission_callback' => array( $this, 'check_site_template_permission' ),
@@ -520,13 +528,21 @@ class Tpae_Elementor_MCP_Template_Abilities {
 								'items' => array( 'type' => 'string' ),
 							),
 						),
+						'confirm_conflicts' => array(
+							'type'        => 'boolean',
+							'description' => __( 'Set true only after the user approved replacing the conflicting templates listed by an earlier refused call. Default false.', 'tpebl' ),
+						),
 					),
 					'required'   => array( 'post_id', 'conditions' ),
 				),
 				'output_schema'       => array(
 					'type'       => 'object',
 					'properties' => array(
-						'success' => array( 'type' => 'boolean' ),
+						'success'   => array( 'type' => 'boolean' ),
+						'conflicts' => array(
+							'type'        => 'array',
+							'description' => __( 'Published templates of the same type with overlapping conditions.', 'tpebl' ),
+						),
 					),
 				),
 				'meta'                => array(
@@ -555,6 +571,19 @@ class Tpae_Elementor_MCP_Template_Abilities {
 			}
 		}
 
+		$conflicts = $this->find_condition_conflicts( $post_id, $formatted );
+
+		if ( ! empty( $conflicts ) && empty( $input['confirm_conflicts'] ) ) {
+			return new \WP_Error(
+				'template_conditions_conflict',
+				__( 'Another published template of the same type already claims an overlapping condition, so only one of them would show. Nothing was changed. Ask the user whether to replace it, then repeat with confirm_conflicts true.', 'tpebl' ),
+				array(
+					'status'    => 409,
+					'conflicts' => $conflicts,
+				)
+			);
+		}
+
 		update_post_meta( $post_id, '_elementor_conditions', $formatted );
 
 		// Clear Elementor Pro's conditions cache if available.
@@ -562,7 +591,86 @@ class Tpae_Elementor_MCP_Template_Abilities {
 			delete_option( 'elementor_pro_theme_builder_conditions' );
 		}
 
-		return array( 'success' => true );
+		return array(
+			'success'   => true,
+			'conflicts' => $conflicts,
+		);
+	}
+
+	/**
+	 * Finds other published templates of the same type whose conditions overlap.
+	 *
+	 * Only one theme-builder template of a type renders where conditions overlap,
+	 * so a new header or footer can silently fail to show. "Entire site" overlaps
+	 * with every other include rule; anything else overlaps on an identical rule.
+	 *
+	 * @since 6.6.0
+	 *
+	 * @param int      $post_id   The template being scoped.
+	 * @param string[] $formatted Its conditions as "include/general" style strings.
+	 * @return array<int,array<string,mixed>>
+	 */
+	private function find_condition_conflicts( int $post_id, array $formatted ): array {
+		$type = (string) get_post_meta( $post_id, '_elementor_template_type', true );
+
+		if ( ! in_array( $type, array( 'header', 'footer', 'single', 'single-post', 'single-page', 'archive', 'search-results', 'error-404' ), true ) ) {
+			return array();
+		}
+
+		$mine = array_filter(
+			$formatted,
+			static function ( $rule ) {
+				return 0 === strpos( (string) $rule, 'include/' );
+			}
+		);
+
+		if ( empty( $mine ) ) {
+			return array();
+		}
+
+		$others = get_posts(
+			array(
+				'post_type'      => 'elementor_library',
+				'post_status'    => 'publish',
+				'posts_per_page' => 50,
+				'post__not_in'   => array( $post_id ),
+				'fields'         => 'ids',
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					array(
+						'key'   => '_elementor_template_type',
+						'value' => $type,
+					),
+				),
+			)
+		);
+
+		$conflicts = array();
+
+		foreach ( $others as $other_id ) {
+			$theirs = array_filter(
+				(array) get_post_meta( $other_id, '_elementor_conditions', true ),
+				static function ( $rule ) {
+					return 0 === strpos( (string) $rule, 'include/' );
+				}
+			);
+
+			$overlap = array_intersect( $mine, $theirs );
+
+			if ( empty( $overlap ) && ! empty( $theirs ) && ( in_array( 'include/general', $mine, true ) || in_array( 'include/general', $theirs, true ) ) ) {
+				$overlap = $theirs;
+			}
+
+			if ( ! empty( $overlap ) ) {
+				$conflicts[] = array(
+					'template_id' => (int) $other_id,
+					'title'       => get_the_title( $other_id ),
+					'type'        => $type,
+					'conditions'  => array_values( $theirs ),
+				);
+			}
+		}
+
+		return $conflicts;
 	}
 
 	// ── Phase 6: Dynamic Tags ─────────────────────────────────────────

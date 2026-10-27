@@ -2410,10 +2410,15 @@ class L_ThePlus_Number_Counter extends Plus_Widget_Base {
 		include L_THEPLUS_PATH . 'modules/widgets/theplus-widget-animation-attr.php';
 
 		$symbol       = ! empty( $settings['symbol'] ) ? $settings['symbol'] : '';
-		$max_number   = isset( $settings['max_number'] ) ? $settings['max_number'] : '';
-		$delay_number = ! empty( $settings['delay_number']['size'] ) ? $settings['delay_number']['size'] : '';
+		/*
+		 * NUMBER/SLIDER values are not type-checked when Elementor saves them,
+		 * so a hand-crafted _elementor_data can store any string here. Keep only
+		 * real numbers; numscroller.js reads these attributes back on the frontend.
+		 */
+		$max_number   = ( isset( $settings['max_number'] ) && is_numeric( $settings['max_number'] ) ) ? $settings['max_number'] + 0 : '';
+		$delay_number = ( ! empty( $settings['delay_number']['size'] ) && is_numeric( $settings['delay_number']['size'] ) ) ? $settings['delay_number']['size'] + 0 : '';
 
-		$increment_number = ! empty( $settings['increment_number']['size'] ) ? $settings['increment_number']['size'] : '';
+		$increment_number = ( ! empty( $settings['increment_number']['size'] ) && is_numeric( $settings['increment_number']['size'] ) ) ? $settings['increment_number']['size'] + 0 : '';
 		$symbol_position  = ! empty( $settings['symbol_position'] ) ? $settings['symbol_position'] : '';
 
 		$icon_type  = ! empty( $settings['icon_type'] ) ? $settings['icon_type'] : '';
@@ -2456,7 +2461,7 @@ class L_ThePlus_Number_Counter extends Plus_Widget_Base {
 			$icon_link_a_close = '</a>';
 		}
 
-		$min_number = $settings['min_number'];
+		$min_number = ( isset( $settings['min_number'] ) && is_numeric( $settings['min_number'] ) ) ? $settings['min_number'] + 0 : '';
 
 		/*
 		 * NC1 (widget-test/number-counter, Medium): the text node here used to

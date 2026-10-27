@@ -233,6 +233,44 @@ if (!function_exists('tpae_mcp_get_elementor_page_data')) {
     }
 }
 
+if (!function_exists('tpae_mcp_get_overwrite_error')) {
+    /**
+     * Refuses an Elementor write that would replace content Elementor did not build.
+     *
+     * Saving Elementor data to a block-editor or classic post that already has content
+     * turns it into an Elementor page and drops that content. Blank posts, Elementor
+     * pages and library templates are safe. This is the only copy of the rule; the
+     * Elementor MCP data class calls it too.
+     *
+     * @since 6.6.0
+     *
+     * @param int $post_id The post ID.
+     * @return WP_Error|null WP_Error when the write would overwrite, null when safe.
+     */
+    function tpae_mcp_get_overwrite_error(int $post_id)
+    {
+        $tpae_post = get_post($post_id);
+        if (
+            $tpae_post instanceof WP_Post
+            && 'elementor_library' !== $tpae_post->post_type
+            && 'builder' !== get_post_meta($post_id, '_elementor_edit_mode', true)
+            && '' !== trim($tpae_post->post_content)
+        ) {
+            return new WP_Error(
+                'not_an_elementor_page',
+                sprintf(
+                    /* translators: %d: post ID */
+                    __('Post %d was not built with Elementor and already has content; adding Elementor data would replace it. Duplicate it with tpae/duplicate-page or build on a new page instead.', 'tpebl'),
+                    $post_id
+                ),
+                ['status' => 409]
+            );
+        }
+
+        return null;
+    }
+}
+
 /**
  * Save Elementor data with native save first, then meta fallback.
  *
@@ -242,6 +280,11 @@ if (!function_exists('tpae_mcp_get_elementor_page_data')) {
 if (!function_exists('tpae_mcp_save_elementor_page_data')) {
     function tpae_mcp_save_elementor_page_data(int $post_id, array $data)
     {
+        $overwrite_error = tpae_mcp_get_overwrite_error($post_id);
+        if ($overwrite_error) {
+            return $overwrite_error;
+        }
+
         $document = \Elementor\Plugin::$instance->documents->get($post_id);
         if (!$document) {
             return new WP_Error('document_not_found', __('Elementor document not found for save.', 'tpebl'));

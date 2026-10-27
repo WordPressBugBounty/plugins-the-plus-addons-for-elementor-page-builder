@@ -240,12 +240,8 @@ class Tpae_Autoloader {
 			'Tp\\Notices\\Remove\\Tp_Notices_Remove'                              => 'includes/notices/class-tp-notices-remove.php',
 			'Tp\\Notices\\TPAEActivateLicense\\Tp_Activate_License_Notice'        => 'includes/notices/class-tp-activate-license-notice.php',
 			'Tp\\Notices\\TPAEAskReview\\Tp_Ask_Review_Notice'                    => 'includes/notices/class-tp-ask-review-notice.php',
-			'Tp\\Notices\\TPAEAskReview\\Tp_Join_Community_Notice'                => 'includes/notices/class-tp-join-community-notice.php',
 			'Tp\\Notices\\TPAEExpiredLicense\\Tp_Expired_License_Notice'           => 'includes/notices/class-tp-expired-license-notice.php',
 			'Tp\\Notices\\TPAEPInstallNotice\\Tp_Tpaepro_Notice'                  => 'includes/notices/class-tp-tpaepro-notice.php',
-			'Tp\\Notices\\TPAEWinterSaleBanner\\Tpae_PluginFeatures_Banner'       => 'includes/notices/class-tp-plugin-features-banner.php',
-			'Tp\\Notices\\TPAGInstallNotice\\Tp_Nexter_Extension_Promo_Notice'    => 'includes/notices/class-tp-nexter-extension-promo.php',
-			'Tp\\Notices\\TPAGInstallNotice\\Tp_Nexter_Notice'                    => 'includes/notices/class-tp-nexter-notice.php',
 			'Tp\\Notices\\WidgetNotice\\Tp_Widget_Notice'                         => 'includes/notices/class-tp-widget-notice.php',
 
 			// === Preset ===.

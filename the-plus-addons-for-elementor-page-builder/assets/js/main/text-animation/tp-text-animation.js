@@ -102,10 +102,12 @@ function TP_common_txt_gsap($wrapper, tp_gsap_dataset, tp_text_finder, tp_widget
         }
 
 
-        /* Save original text */
+        /* Save original text, HTML-escaped: GSAP's TextPlugin and ScrambleText
+           write it with innerHTML, and .text() has already decoded any
+           entities the author typed (e.g. &lt;img onerror&gt;). */
         $textEls.each(function () {
             if (!$(this).data("tp-original-text")) {
-                $(this).data("tp-original-text", $(this).text());
+                $(this).data("tp-original-text", $("<div>").text($(this).text()).html());
             }
         });
 

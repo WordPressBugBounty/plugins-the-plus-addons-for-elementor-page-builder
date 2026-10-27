@@ -6,6 +6,10 @@
 				var $this=$(this);
 				var hover_uniqid = $this.data('hover_uniqid');
 				var hover_shadow = $this.data('hover_shadow');
+				/* The colour is pasted into a <style> tag, so anything that is not a plain CSS colour could close the tag and inject markup. */
+				if ( typeof hover_shadow !== 'string' || /[<>{};]/.test(hover_shadow) || ( window.CSS && CSS.supports && ! CSS.supports( 'color', hover_shadow ) ) ) {
+					return;
+				}
 				var content_hover_effects= $this.data('content_hover_effects');
 				if(content_hover_effects=='float_shadow'){
 					$('head').append('<style >.'+hover_uniqid+'.content_hover_float_shadow:before{background: -webkit-radial-gradient(center, ellipse, '+hover_shadow+' 0%, rgba(60, 60, 60, 0) 70%);background: radial-gradient(ellipse at center, '+hover_shadow+' 0%, rgba(60, 60, 60, 0) 70%);}</style>');

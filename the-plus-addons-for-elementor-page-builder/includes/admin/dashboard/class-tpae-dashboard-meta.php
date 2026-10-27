@@ -56,6 +56,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 			if ( current_user_can( 'manage_options' ) ) {
 				add_action( 'admin_menu', array( $this, 'tpae_add_dashboard_menu' ) );
 				add_action( 'admin_enqueue_scripts', array( $this, 'tpae_enqueue_scripts' ) );
+				add_action( 'admin_menu', array( $this, 'tpae_theme_builder_redirect' ), 1 );
 			}
 
 			if ( defined( 'THEPLUS_VERSION' ) ) {
@@ -103,6 +104,12 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		 */
 		public function tpae_enqueue_scripts( $page ) {
 
+			if ( 'plugins.php' === $page ) {
+				wp_enqueue_style( 'tpae-deactivation-design-system', L_THEPLUS_URL . 'assets/css/admin/design-system.generated.css', array(), L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/css/admin/design-system.generated.css' ) );
+				wp_enqueue_style( 'tpae-deactivation-design', L_THEPLUS_URL . 'assets/css/admin/tpae-deactivation-design.css', array( 'tpae-deactivation-design-system' ), L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/css/admin/tpae-deactivation-design.css' ) );
+				wp_enqueue_script( 'tpae-deactivation-design', L_THEPLUS_URL . 'assets/js/admin/tpae-deactivation-design.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/js/admin/tpae-deactivation-design.js' ), true );
+			}
+
 			wp_enqueue_style( 'tpae-db-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
 
 			$et_plugin_status    = apply_filters( 'tpae_get_plugin_status', 'template-kit-import/template-kit-import.php' );
@@ -116,36 +123,8 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 				$onbording_set = 'hide';
 			}
 
+			/* active / inactive / not_installed: the Theme Builder tab offers to install or activate it. */
 			$nexter_et_plugin_status = apply_filters( 'tpae_get_plugin_status', 'nexter-extension/nexter-extension.php' );
-
-			$next_et_status    = '';
-			$extensionactivate = '';
-
-			if ( 'active' === $nexter_et_plugin_status ) {
-				$next_et_status    = true;
-				$extensionactivate = 'active';
-			} elseif ( 'inactive' === $nexter_et_plugin_status ) {
-				$next_et_status    = false;
-				$extensionactivate = 'inactive';
-			} else {
-				$next_et_status    = false;
-				$extensionactivate = '';
-			}
-
-			$wdesign_plugin_status = apply_filters( 'tpae_get_plugin_status', 'wdesignkit/wdesignkit.php' );
-
-			$wdkit_status = '';
-			$wdkactive    = '';
-			if ( 'active' === $wdesign_plugin_status ) {
-				$wdkit_status = true;
-				$wdkactive    = 'active';
-			} elseif ( 'inactive' === $wdesign_plugin_status ) {
-				$wdkit_status = false;
-				$wdkactive    = 'inactive';
-			} else {
-				$wdkit_status = false;
-				$wdkactive    = '';
-			}
 
 			$get_whats_new_notification = get_option( 'tpae_whats_new_notification' );
 
@@ -157,30 +136,27 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 				$show_whats_new = false;
 			}
 
-			if ( isset( $_GET['page'] ) && $_GET['page'] === 'nxt_builder' && ! defined( 'NEXTER_EXT' ) ) {
-					wp_enqueue_style( 'nexter-theme-builder', L_THEPLUS_URL . 'includes/nxt-ext/build/index.css', array(), L_THEPLUS_VERSION, 'all' );
+			/*
+			 * With Nexter Extension active, the Theme Builder screen is Nexter's, and its back
+			 * link and close button always lead to the Nexter dashboard - even for someone who
+			 * opened it from The Plus Addons. Nexter enqueues it at priority 1, so by now its
+			 * config exists and can be pointed back here for visits that started in TPAE.
+			 *
+			 * The origin is remembered per tab (sessionStorage), so moving between templates
+			 * and back to the list keeps it; arriving from the Nexter dashboard clears it.
+			 */
+			if ( isset( $_GET['page'] ) && 'nxt_builder' === $_GET['page'] && defined( 'NEXTER_EXT' ) && wp_script_is( 'nexter-theme-builder', 'enqueued' ) ) {
+				$tpae_dashboard = wp_json_encode( admin_url( 'admin.php?page=theplus_welcome_page' ) );
 
-					wp_enqueue_script( 'nexter-theme-builder', L_THEPLUS_URL . 'includes/nxt-ext/build/index.js', array( 'react', 'react-dom', 'wp-dom-ready', 'wp-i18n' ), L_THEPLUS_VERSION, true );
-
-					$nexter_theme_builder_config = array(
-						'adminUrl'          => admin_url(),
-						'ajaxurl'           => admin_url( 'admin-ajax.php' ),
-						'ajax_nonce'        => wp_create_nonce( 'nexter_admin_nonce' ),
-						'assets'            => L_THEPLUS_URL . 'includes/nxt-ext/assets/',
-						'is_pro'            => ( defined( 'NXT_PRO_EXT' ) ) ? true : false,
-						'dashboard_url'     => admin_url( 'admin.php?page=theplus_welcome_page' ),
-						'version'           => L_THEPLUS_VERSION,
-						'import_temp_nonce' => wp_create_nonce( 'nxt_ajax' ),
-						'wdkPlugin'         => $wdkit_status,
-						'wdkactive'         => $wdkactive,
-						'extensioninstall'  => $next_et_status,
-						'extensionactivate' => $extensionactivate,
-						'tpae'              => true,
-						'tpae_nonce'        => wp_create_nonce( 'tpae-db-nonce' ),
-					);
-
-					wp_set_script_translations( 'nexter-theme-builder', 'tpebl', L_THEPLUS_PATH . 'languages' );
-					wp_localize_script( 'nexter-theme-builder', 'nexter_theme_builder_config', $nexter_theme_builder_config );
+				wp_add_inline_script(
+					'nexter-theme-builder',
+					"(function(){try{var k='tpae_tb_return',p=new URLSearchParams(window.location.search),r=document.referrer||'';" .
+					"if(p.get('tpae_from')||r.indexOf('page=theplus_welcome_page')>-1){sessionStorage.setItem(k,'1');}" .
+					"else if(r.indexOf('page=nexter_welcome')>-1){sessionStorage.removeItem(k);}" .
+					"if('1'===sessionStorage.getItem(k)&&window.nexter_theme_builder_config){window.nexter_theme_builder_config.dashboard_url={$tpae_dashboard};}" .
+					'}catch(e){}})();',
+					'before'
+				);
 			}
 
 			if ( 'toplevel_page_theplus_welcome_page' === $page ) {
@@ -209,6 +185,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 						'envato_plugin_status' => $et_plugin_status,
 						'wdkit_plugin_status'  => $wdkit_plugin_status,
 						'show_whats_new'       => $show_whats_new,
+						'nexter_ext_status'    => $nexter_et_plugin_status,
 					)
 				);
 
@@ -248,7 +225,12 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 			add_submenu_page( 'theplus_welcome_page', esc_html__( 'Extensions', 'tpebl' ), esc_html__( 'Extensions', 'tpebl' ), 'manage_options', 'theplus_welcome_page#/extension', array( $this, 'tpae_admin_page_display' ) );
 
 			if ( empty( $options ) || 'on' !== $plugin_ads ) {
-				add_submenu_page( 'theplus_welcome_page', esc_html__( 'Theme Builder', 'tpebl' ), esc_html__( 'Theme Builder', 'tpebl' ), 'manage_options', 'nxt_builder', array( $this, 'nexter_theme_builder_display' ) );
+				/* Nexter Extension's own builder when it is active, otherwise the dashboard tab that offers it. */
+				if ( defined( 'NEXTER_EXT' ) ) {
+					add_submenu_page( 'theplus_welcome_page', esc_html__( 'Theme Builder', 'tpebl' ), esc_html__( 'Theme Builder', 'tpebl' ), 'manage_options', 'nxt_builder', array( $this, 'nexter_theme_builder_display' ) );
+				} else {
+					add_submenu_page( 'theplus_welcome_page', esc_html__( 'Theme Builder', 'tpebl' ), esc_html__( 'Theme Builder', 'tpebl' ), 'manage_options', 'theplus_welcome_page#/theme_builder', array( $this, 'tpae_admin_page_display' ) );
+				}
 			}
 
 			if ( ( 'not_installed' === $et_plugin_status || 'active' === $wdkit_plugin_status ) && ( empty( $options ) || 'on' !== $template_tab ) ) {
@@ -457,6 +439,23 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 				});
 			</script>
 			<?php
+		}
+
+		/**
+		 * Without Nexter Extension there is no nxt_builder screen: the Theme Builder is a
+		 * dashboard tab. Old links and bookmarks to the screen land on that tab. Runs on
+		 * admin_menu: WordPress refuses an unregistered page right after that hook, before
+		 * admin_init.
+		 *
+		 * @since 6.6.0
+		 */
+		public function tpae_theme_builder_redirect() {
+			if ( defined( 'NEXTER_EXT' ) || wp_doing_ajax() || ! isset( $_GET['page'] ) || 'nxt_builder' !== $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				return;
+			}
+
+			wp_safe_redirect( admin_url( 'admin.php?page=theplus_welcome_page#/theme_builder' ) );
+			exit;
 		}
 
 		/**

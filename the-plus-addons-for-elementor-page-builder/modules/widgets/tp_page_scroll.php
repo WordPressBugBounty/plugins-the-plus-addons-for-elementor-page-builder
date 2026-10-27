@@ -1109,7 +1109,16 @@ class L_ThePlus_Page_Scroll extends Plus_Widget_Base {
 					if ( ! empty( $elem_templates ) ) {
 						$slideid = ! empty( $item['fp-slideid'] ) ? $item['fp-slideid'] : 'fp_' . $id . '_' . $i;
 
-						$full_page_anchors[] = tp_senitize_js_input( $slideid );
+						/*
+						 * fullPage.js concatenates anchors into its nav markup (href="#...")
+						 * and the URL hash, so keep them to safe id characters only.
+						 */
+						$slideid = preg_replace( '/[^A-Za-z0-9_-]/', '', tp_senitize_js_input( $slideid ) );
+						if ( '' === $slideid ) {
+							$slideid = 'fp_' . $id . '_' . $i;
+						}
+
+						$full_page_anchors[] = $slideid;
 
 						$full_page_content .= '<div class="section">';
 
@@ -1157,7 +1166,8 @@ class L_ThePlus_Page_Scroll extends Plus_Widget_Base {
 			$fullpage_opt['responsiveWidth']    = ! empty( $settings['res_width_value'] ) ? sanitize_text_field( $settings['res_width_value'] ) : 0;
 
 			$dots_text     = ! empty( $settings['nav_dots_tooltips'] ) ? tp_senitize_js_input( $settings['nav_dots_tooltips'] ) : '';
-			$nav_dots_text = explode( ',', $dots_text );
+			// fullPage.js writes each tooltip into innerHTML, so hand it escaped text.
+			$nav_dots_text = array_map( 'esc_html', explode( ',', $dots_text ) );
 
 			$dots_show = ! empty( $settings['show_dots'] ) ? $settings['show_dots'] : '';
 
@@ -1171,7 +1181,8 @@ class L_ThePlus_Page_Scroll extends Plus_Widget_Base {
 
 			$data_fullpage = wp_json_encode( $fullpage_opt );
 
-			$data_attr .= ' data-full-page-opt=\'' . esc_attr( $data_fullpage ) . '\'';
+			// Always encode (esc_attr() skips existing entities) so the escaped tooltips survive the browser's attribute decode.
+			$data_attr .= ' data-full-page-opt=\'' . htmlspecialchars( $data_fullpage, ENT_QUOTES, 'UTF-8', true ) . '\'';
 
 			$scroll_conn   = ! empty( $settings['scroll_nav_connection'] ) ? $settings['scroll_nav_connection'] : '';
 			$scroll_con_id = ! empty( $settings['scrollnav_connect_id'] ) ? sanitize_text_field( $settings['scrollnav_connect_id'] ) : '';

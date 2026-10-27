@@ -54,7 +54,7 @@ if ( ! class_exists( 'Tp_Widget_Recipes_Notice' ) ) {
 		const OPTION = 'tpae_widget_recipes_notice';
 
 		/**
-		 * Option storing when both release notices were first seen cleared, as a Unix
+		 * Option storing when the What's New notice was first seen cleared, as a Unix
 		 * timestamp. The notice is held back for DELAY_HOURS after this moment.
 		 *
 		 * @since 6.5.1
@@ -63,8 +63,8 @@ if ( ! class_exists( 'Tp_Widget_Recipes_Notice' ) ) {
 		const OPTION_SINCE = 'tpae_widget_recipes_since';
 
 		/**
-		 * Hours to hold the notice back after both release notices are dismissed, so
-		 * it does not appear the instant the user closes the second one.
+		 * Hours to hold the notice back after the What's New notice is dismissed, so
+		 * it does not appear the instant the user closes it.
 		 *
 		 * @since 6.5.1
 		 * @var int
@@ -97,18 +97,18 @@ if ( ! class_exists( 'Tp_Widget_Recipes_Notice' ) ) {
 			add_action( 'wp_ajax_theplus_widget_recipes_notice_dismiss', array( $this, 'theplus_widget_recipes_notice_dismiss' ) );
 
 			if ( ! get_option( self::OPTION ) && $this->tp_release_notices_cleared() && $this->tp_delay_passed() ) {
-				add_action( 'admin_notices', array( $this, 'theplus_widget_recipes_notice' ) );
+				add_action( 'admin_notices', tpae_promo_notice( 'widget-recipes', array( $this, 'theplus_widget_recipes_notice' ) ) );
 			}
 		}
 
 		/**
-		 * Whether the hold-back window has elapsed since both release notices cleared.
+		 * Whether the hold-back window has elapsed since the What's New notice cleared.
 		 *
-		 * Stamps the moment both were first seen cleared (Unix time, like the What's
-		 * New notice) and holds the notice back until DELAY_HOURS have passed, so it
-		 * does not appear the instant the user closes the second release notice. Only
-		 * reached once tp_release_notices_cleared() is true, so the timer starts when
-		 * both are already gone.
+		 * Stamps the moment it was first seen cleared (Unix time, like the What's New
+		 * notice) and holds the notice back until DELAY_HOURS have passed, so it does
+		 * not appear the instant the user closes What's New. Only reached once
+		 * tp_release_notices_cleared() is true, so the timer starts when it is already
+		 * gone.
 		 *
 		 * @since 6.5.1
 		 *
@@ -127,26 +127,27 @@ if ( ! class_exists( 'Tp_Widget_Recipes_Notice' ) ) {
 		}
 
 		/**
-		 * Whether the two higher-priority release notices have been cleared.
+		 * Whether the higher-priority release notice has been cleared.
 		 *
-		 * This promo is the lowest-priority notice, so it waits until the release
-		 * notices are gone -- the Widget Changes (removed/deprecated widgets) notice
-		 * and the What's New notice for the current release -- so the three never
-		 * stack. In practice the What's New notice carries a Widget Recipes link and
-		 * marks this notice seen when it is dismissed, so this standalone is the
-		 * fallback for sites where What's New was already gone.
+		 * This promo is the lowest-priority notice, so it waits until the What's New
+		 * notice for the current release is gone, so the two never stack. In practice
+		 * the What's New notice carries a Widget Recipes link and marks this notice
+		 * seen when it is dismissed, so this standalone is the fallback for sites where
+		 * What's New was already gone.
+		 *
+		 * It used to wait for the 6.5.0 Widget Changes notice as well; that notice was
+		 * removed in 6.6.0 (and its option cleared), so waiting for it would hide this
+		 * one for good.
 		 *
 		 * @since 6.5.1
+		 * @version 6.6.0
 		 *
 		 * @return bool
 		 */
 		private function tp_release_notices_cleared() {
 			$release = defined( 'L_THEPLUS_VERSION' ) ? preg_replace( '/[-+].*$/', '', L_THEPLUS_VERSION ) : '';
 
-			$whats_new_cleared      = '' !== $release && get_option( 'tpae_whats_new_dismissed' ) === $release;
-			$widget_changes_cleared = (bool) get_option( 'tpae_removed_widgets_notice' );
-
-			return $whats_new_cleared && $widget_changes_cleared;
+			return '' !== $release && get_option( 'tpae_whats_new_dismissed' ) === $release;
 		}
 
 		/**

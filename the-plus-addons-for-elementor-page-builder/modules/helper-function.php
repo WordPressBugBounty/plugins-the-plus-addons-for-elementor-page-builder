@@ -58,6 +58,24 @@ function tp_senitize_role( $capability ) {
 }
 
 /**
+ * Decode HTML entities until nothing changes, so nested encoding
+ * (&amp;lt; ...) cannot hide markup or quotes from a later check. Every
+ * decode that changes the string shortens it, so the loop always ends.
+ *
+ * @since 6.6.0
+ * */
+function tp_decode_all_entities( $input ) {
+	$input = (string) $input;
+
+	do {
+		$previous = $input;
+		$input    = html_entity_decode( $input, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+	} while ( $input !== $previous );
+
+	return $input;
+}
+
+/**
  * Prevent JS senitizer
  *
  * @since 5.5.0
@@ -77,7 +95,14 @@ function tp_sanitize_js_input( $input ) {
 
 	$input = (string) $input;
 
-	$input = preg_replace( '/&#x[0-9a-fA-F]+;/i', '', $input );
+	/*
+	 * Decode entities before stripping. Callers print the result into data-*
+	 * attributes that JS reads back (entity-decoded) and inserts as HTML, so an
+	 * entity-encoded "&lt;img onerror&#61;...&gt;" used to slip past every check
+	 * below and come back to life in the browser. Loop until stable to undo
+	 * nested encoding; every decode that changes the string shortens it.
+	 */
+	$input = tp_decode_all_entities( $input );
 
     // Remove complete iframe tags with or without content
     $input = preg_replace( '/<iframe[^>]*>.*?<\/iframe>/is', '', $input );

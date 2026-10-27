@@ -4,7 +4,7 @@ Tags: elementor addons, elementor templates, mega menu, woocommerce, elementor w
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.5.3
+Stable tag: 6.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -22,7 +22,7 @@ Build a complete website without piling on plugins - <strong>[Blog Builder](http
 --
 
 
-[Visit Website](https://theplusaddons.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Video Tutorials](https://www.youtube.com/c/POSIMYTHInnovations/?sub_confirmation=1)| [Documentations](https://theplusaddons.com/docs) | [Roadmap](https://roadmap.theplusaddons.com/) | [Join Facebook Community](https://www.facebook.com/groups/theplus4elementor) | [Join Discord Community](https://go.posimyth.com/plus-elementor-discord) | [Free Support](https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/) | [Premium Support](https://store.posimyth.com/helpdesk/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Compare FREE vs PRO](https://theplusaddons.com/free-vs-pro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [MCP Abilities](https://theplusaddons.com/mcp-abilities/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Widget Recipes](https://theplusaddons.com/widget-recipes/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [AI Chat (Instant Answers)](https://theplusaddons.com/chat/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
+[Visit Website](https://theplusaddons.com/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Video Tutorials](https://www.youtube.com/c/POSIMYTHInnovations/?sub_confirmation=1)| [Documentations](https://theplusaddons.com/docs) | [Roadmap](https://roadmap.theplusaddons.com/) | [Join Facebook Community](https://www.facebook.com/groups/theplus4elementor) | [Free Support](https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/) | [Premium Support](https://store.posimyth.com/helpdesk/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Compare FREE vs PRO](https://theplusaddons.com/free-vs-pro/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [MCP Abilities](https://theplusaddons.com/mcp-abilities/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks) | [Widget Recipes](https://theplusaddons.com/widget-recipes/?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)
 
 ### 🤖 Control Elementor with AI (New)
 
@@ -115,7 +115,7 @@ Read more real reviews from our users on [WordPress.org](https://wordpress.org/s
 
 ### ⭐ Enjoying The Plus Addons?
 
-If The Plus Addons has helped you build a better website, please consider [leaving a quick review on WordPress.org](https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/reviews/#new-post). Your feedback helps other creators find the plugin and helps us keep making it better. Need a hand or have a question? [Ask in our free support forum](https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/), [join our Facebook community](https://www.facebook.com/groups/theplus4elementor) or [chat with us on Discord](https://go.posimyth.com/plus-elementor-discord).
+If The Plus Addons has helped you build a better website, please consider [leaving a quick review on WordPress.org](https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/reviews/#new-post). Your feedback helps other creators find the plugin and helps us keep making it better. Need a hand or have a question? [Ask in our free support forum](https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder/) or [join our Facebook community](https://www.facebook.com/groups/theplus4elementor).
 
 ## Complete List of Our Elementor Widgets & Extensions ⤵️
 
@@ -561,6 +561,20 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.6.0 =
+Update : Dashboard : New design for the plugin dashboard
+Update : Theme Builder : New design for the Theme Builder page
+Improvement : Assets : Widget scripts load only for real widgets on the page, not for other elements carrying a widget name
+Improved : Security hardening for output escaping across Number Counter, Heading Title, Advanced Text Block, Button, Flip Box, Info Box, Syntax Highlighter, Page Scroll, Video Player & Advanced Shadow
+Improved : Security enhancements for input sanitization and URL validation across Widget Asset Loader, Wrapper Link & Plugin Input Handling
+Improvement : AI Abilities : Setting where a header, footer or other template shows now stops and lists any published template of the same type that overlaps, so a new one is not hidden by an older one
+Improvement : AI Abilities : Applying a template to a page now reports whether the page has a revision to restore
+Improvement : AI Abilities : Code snippets added by AI are now saved as drafts until published on purpose
+Improvement : AI Abilities : The design guide now covers checking the theme header, mega menus and clearing caches
+Fix : Number Counter : Stored Cross-Site Scripting (XSS) Security Patch (Medium Security)
+Fix : AI Abilities : Editing a page that was not built with Elementor no longer replaces its content
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.5.3 =
 Add : UiChemy : Dismissible admin notice and editor hints that install UiChemy and open its AI Website Creator, only when an administrator clicks

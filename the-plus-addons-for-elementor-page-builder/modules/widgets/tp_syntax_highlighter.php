@@ -1070,7 +1070,7 @@ class ThePlus_Syntax_Highlighter extends Plus_Widget_Base {
 
 		$line_highlight = ! empty( $settings['lineHighlight'] ) ? $settings['lineHighlight'] : '';
 		$dnload_btn     = ! empty( 'yes' === $settings['dnloadBtn'] ) ? true : false;
-		$dwnld_btn_text = ! empty( $settings['dwnldBtnText'] ) ? $settings['dwnldBtnText'] : '';
+		$dwnld_btn_text = ! empty( $settings['dwnldBtnText'] ) ? tp_senitize_js_input( $settings['dwnldBtnText'] ) : '';
 		$file_link      = ! empty( $settings['fileLink']['url'] ) ? $settings['fileLink']['url'] : '';
 
 		$cpybtnicon    = '';
@@ -1110,7 +1110,7 @@ class ThePlus_Syntax_Highlighter extends Plus_Widget_Base {
 		$dwnld_btn_class = '';
 		$dwnld_btn_icon  = '';
 		if ( 'yes' === $dnload_btn ) {
-			$dwnld_btn_class = 'data-src=' . esc_url( $file_link ) . ' data-download-link data-download-link-label=' . esc_attr( $dwnld_btn_text ) . '';
+			$dwnld_btn_class = 'data-src="' . esc_url( $file_link ) . '" data-download-link data-download-link-label="' . esc_attr( $dwnld_btn_text ) . '"';
 
 			if ( ! empty( $settings['dwnldBtnIcon']['value'] ) ) {
 				$dowbtniconclass = ' tpdowicon';
@@ -1129,9 +1129,20 @@ class ThePlus_Syntax_Highlighter extends Plus_Widget_Base {
 			$langtext = 'data-label="' . esc_html( $settings['lanugaetext'] ) . '"';
 		}
 
-		$output = '<div class="tp-code-highlighter code-' . esc_attr( $theme_type ) . ' tp-widget-' . esc_attr( $uid_synhg ) . ' ' . esc_attr( $cpybtniconclass ) . ' ' . esc_attr( $dowbtniconclass ) . '" data-prismjs-copy="' . esc_html( $cpybtntext ) . '"  data-copyicon="' . esc_html( $cpybtnicon ) . '" data-prismjs-copy-success="' . esc_html( $copiedbtntext ) . '" data-copiedbtnicon="' . esc_html( $copiedbtnicon ) . '" data-download-text="' . esc_html( $dwnld_btn_text ) . '" data-download-iconsh="' . esc_html( $dwnld_btn_icon ) . '">';
+		/*
+		 * tp-copy-dow-icons.js reads these back and inserts the icon markup as
+		 * HTML. esc_html()/esc_attr() never double-encode, so an entity already in
+		 * the value (or the &quot; Elementor puts in an icon's class attribute)
+		 * would be decoded by the browser into live markup. Always encode, so one
+		 * decode returns exactly the server-rendered string.
+		 */
+		$tp_sh_attr = function ( $value ) {
+			return htmlspecialchars( (string) $value, ENT_QUOTES, 'UTF-8', true );
+		};
 
-			$output .= '<pre class="language-' . esc_attr( $language_type ) . ' ' . esc_attr( $line_num_class ) . '" data-line="' . esc_attr( $line_highlight ) . '" ' . esc_attr( $dwnld_btn_class ) . ' ' . $langtext . ' data-previewers="angle color gradient easing time">';
+		$output = '<div class="tp-code-highlighter code-' . esc_attr( $theme_type ) . ' tp-widget-' . esc_attr( $uid_synhg ) . ' ' . esc_attr( $cpybtniconclass ) . ' ' . esc_attr( $dowbtniconclass ) . '" data-prismjs-copy="' . $tp_sh_attr( $cpybtntext ) . '"  data-copyicon="' . $tp_sh_attr( $cpybtnicon ) . '" data-prismjs-copy-success="' . $tp_sh_attr( $copiedbtntext ) . '" data-copiedbtnicon="' . $tp_sh_attr( $copiedbtnicon ) . '" data-download-text="' . $tp_sh_attr( $dwnld_btn_text ) . '" data-download-iconsh="' . $tp_sh_attr( $dwnld_btn_icon ) . '">';
+
+			$output .= '<pre class="language-' . esc_attr( $language_type ) . ' ' . esc_attr( $line_num_class ) . '" data-line="' . esc_attr( $line_highlight ) . '" ' . $dwnld_btn_class . ' ' . $langtext . ' data-previewers="angle color gradient easing time">';
 
 				$output .= '<code class="language-' . esc_attr( $language_type ) . '" data-prismjs-copy="' . esc_attr( $cpybtntext ) . '" data-prismjs-copy-error="' . esc_attr( $cpyerrbtntext ) . '" data-prismjs-copy-success="' . esc_attr( $copiedbtntext ) . '">';
 

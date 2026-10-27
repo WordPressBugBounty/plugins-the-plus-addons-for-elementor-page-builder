@@ -61,49 +61,42 @@ if ( ! class_exists( 'Tp_Widget_Notice' ) ) {
 		 * Perform some compatibility checks to make sure basic requirements are meet.
 		 *
 		 * @since 5.2.3
-		 * @version 5.3.3
+		 * @version 6.6.0
 		 */
 		public function __construct() {
-			if ( defined( 'THEPLUS_VERSION' ) ) {
-				add_action( 'admin_notices', array( $this, 'l_theplus_elementor_cache_notice' ) );
-				add_action( 'admin_notices', array( $this, 'tpae_dashboard_notice' ) );
-				add_action( 'admin_notices', array( $this, 'tpae_widget_dashboard_notice' ) );
+			if ( defined( 'THEPLUS_VERSION' ) && defined( 'L_THEPLUS_MINIMUM_PRO_VERSION' ) && version_compare( THEPLUS_VERSION, L_THEPLUS_MINIMUM_PRO_VERSION, '<' ) ) {
+				add_action( 'admin_notices', array( $this, 'tpae_pro_outdated_notice' ) );
 			}
 		}
 
 		/**
-		 * Version Update Notice
+		 * Pro is older than L_THEPLUS_MINIMUM_PRO_VERSION: one "Update Pro" notice.
 		 *
-		 * @since 5.4.0
-		 * @version 5.4.0
-		 * @access public
+		 * Replaces the three notices for Pro below 5.5.3, 6.0.0 and 6.1.0, which all showed
+		 * at once on an old enough Pro.
+		 *
+		 * @since 6.6.0
 		 */
-		public function l_theplus_elementor_cache_notice() {
-			if ( is_admin() && version_compare( THEPLUS_VERSION, '5.5.3', '<' ) ) {
-				echo '<div class="notice notice-error tp-update-notice is-dismissible"><p>' . esc_html__( 'This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 5.5.3 Install Latest version Now.', 'tpebl' ) . '</p></div>';
-			}
-		}
+		public function tpae_pro_outdated_notice() {
 
-		/**
-		 * Version Update Notice
-		 *
-		 * @since 6.0.0
-		 */
-		public function tpae_dashboard_notice() {
-			if ( version_compare( THEPLUS_VERSION, '6.0.0', '<' ) ) {
-				echo '<div class="notice notice-error tp-update-notice is-dismissible"><p>' . esc_html__( 'This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 6.0.0 Install Latest version Now.', 'tpebl' ) . '</p></div>';
+			if ( ! current_user_can( 'update_plugins' ) ) {
+				return;
 			}
-		}
 
-		/**
-		 * Version Update Notice
-		 *
-		 * @since 6.1.0
-		 */
-		public function tpae_widget_dashboard_notice() {
-			if ( version_compare( THEPLUS_VERSION, '6.1.0', '<' ) ) {
-				echo '<div class="notice notice-error tp-update-notice is-dismissible"><p>' . esc_html__( 'This is major Version Release. That is required to have latest version of The Plus Addons for Elementor Pro 6.1.0 Install Latest version Now.', 'tpebl' ) . '</p></div>';
-			}
+			echo '<div class="notice notice-error tpae-notice-show" style="border-left-color: #6660EF;">
+				<div class="tp-notice-wrap" style="display: flex; column-gap: 12px; align-items: flex-start; padding: 15px 10px; position: relative; margin-left: 0;">
+					<div style="margin: 0; color: #000;">
+						<h3 style="margin: 10px 0 7px;">' . esc_html__( 'Update The Plus Addons for Elementor Pro', 'tpebl' ) . '</h3>
+						<p>'
+							/* translators: 1: installed Pro version, 2: minimum Pro version. */
+							. sprintf( esc_html__( 'You have Pro %1$s. This version of The Plus Addons for Elementor needs Pro %2$s or newer to work correctly.', 'tpebl' ), esc_html( THEPLUS_VERSION ), esc_html( L_THEPLUS_MINIMUM_PRO_VERSION ) )
+						. '</p>
+						<div class="tp-tpae-button" style="margin-top: 10px;">
+							<a href="' . esc_url( self_admin_url( 'plugins.php' ) ) . '" class="button button-primary">' . esc_html__( 'Update Pro', 'tpebl' ) . '</a>
+						</div>
+					</div>
+				</div>
+			</div>';
 		}
 	}
 

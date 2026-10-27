@@ -3,7 +3,7 @@
  * Plugin Name: The Plus Addons for Elementor
  * Plugin URI: https://theplusaddons.com/
  * Description: Highly Customisable 120+ Advanced Elementor Widgets & Extensions for Performance Driven Website.
- * Version: 6.5.3
+ * Version: 6.6.0
  * Author: POSIMYTH
  * Author URI: https://posimyth.com/
  * Requires at least: 6.0
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'L_THEPLUS_VERSION', '6.5.3' );
+define( 'L_THEPLUS_VERSION', '6.6.0' );
 
 /**
  * Minimum Elementor version.
@@ -44,6 +44,16 @@ define( 'L_THEPLUS_VERSION', '6.5.3' );
  * @since 6.5.0
  */
 define( 'L_THEPLUS_MINIMUM_ELEMENTOR_VERSION', '3.28.0' );
+
+/*
+ * Oldest Pro this Free works with; an older Pro gets one "Update Pro" notice.
+ * Raise it only when Free makes a change that older Pro cannot handle, and never to
+ * the newest Pro: Free ships before Pro, so that would warn every Pro customer on
+ * Free's release day.
+ *
+ * @since 6.6.0
+ */
+define( 'L_THEPLUS_MINIMUM_PRO_VERSION', '6.1.0' );
 define( 'L_THEPLUS_FILE', __FILE__ );
 define( 'L_THEPLUS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'L_THEPLUS_PBNAME', plugin_basename( __FILE__ ) );

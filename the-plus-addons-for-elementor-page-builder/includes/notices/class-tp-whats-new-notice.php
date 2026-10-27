@@ -6,10 +6,6 @@
  * than a boolean, so the next release shows its own notice without needing a new
  * option key -- bump nothing, just ship.
  *
- * Deliberately does NOT repeat the removed/deprecated widget list: that is owned
- * by class-tp-removed-widgets-notice.php, and two notices saying the same thing
- * on the same screen reads as noise.
- *
  * @link       https://posimyth.com/
  * @since      6.5.0
  *
@@ -53,7 +49,9 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 		const OPTION = 'tpae_whats_new_dismissed';
 
 		/**
-		 * Option holding the release we first saw, and when, as "release|timestamp".
+		 * Option holding the release we first saw, when, and whether the site was
+		 * updated to it, as "release|timestamp|updated" (updated is 1 or 0). Stamps
+		 * written before 6.6.0 have only the first two parts.
 		 *
 		 * @since 6.5.0
 		 * @var string
@@ -63,10 +61,8 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 		/**
 		 * Hours to hold the notice back after a release first appears.
 		 *
-		 * 6.5.0 also ships the removed/deprecated widgets notice, which is time
-		 * critical because it asks people to migrate away from widgets that are
-		 * already gone. Stacking both on the same screen buries it, so this one
-		 * waits and gets the Dashboard to itself afterwards.
+		 * The notice waits two days after a release first appears. That keeps it off
+		 * the screen right after the update and gives the admin a quiet first look.
 		 *
 		 * @since 6.5.0
 		 * @var int
@@ -98,7 +94,7 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 		public function __construct() {
 			add_action( 'wp_ajax_theplus_whats_new_notice_dismiss', array( $this, 'theplus_whats_new_notice_dismiss' ) );
 
-			if ( $this->tp_release() !== get_option( self::OPTION ) && $this->tp_delay_passed() ) {
+			if ( $this->tp_release() !== get_option( self::OPTION ) && $this->tp_delay_passed() && $this->tp_is_update() ) {
 				add_action( 'admin_notices', array( $this, 'theplus_whats_new_notice' ) );
 			}
 		}
@@ -129,16 +125,69 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 			}
 
 			$seen  = get_option( self::OPTION_SEEN );
-			$parts = is_string( $seen ) ? explode( '|', $seen, 2 ) : array();
+			$parts = is_string( $seen ) ? explode( '|', $seen, 3 ) : array();
 
 			/** First admin load on this release: stamp it and hold the notice back. */
-			if ( 2 !== count( $parts ) || $parts[0] !== $release || ! is_numeric( $parts[1] ) ) {
-				update_option( self::OPTION_SEEN, $release . '|' . time(), false );
+			if ( count( $parts ) < 2 || $parts[0] !== $release || ! is_numeric( $parts[1] ) ) {
+				// A stamp for an earlier release means the site ran that release, so this is an update.
+				$updated = ( count( $parts ) >= 2 && '' !== $parts[0] ) || $this->tp_installed_before( time() );
+
+				update_option( self::OPTION_SEEN, $release . '|' . time() . '|' . ( $updated ? '1' : '0' ), false );
 
 				return false;
 			}
 
 			return ( time() - (int) $parts[1] ) >= ( self::DELAY_HOURS * HOUR_IN_SECONDS );
+		}
+
+		/**
+		 * Whether the site was updated to this release rather than installed on it.
+		 *
+		 * The notice describes what changed, which means nothing on a fresh install.
+		 * Decided once, when the release is first stamped; stamps written before this
+		 * check existed fall back to the install time alone.
+		 *
+		 * @since 6.6.0
+		 *
+		 * @return bool
+		 */
+		public function tp_is_update() {
+			$seen  = get_option( self::OPTION_SEEN );
+			$parts = is_string( $seen ) ? explode( '|', $seen, 3 ) : array();
+
+			if ( count( $parts ) < 2 || ! is_numeric( $parts[1] ) ) {
+				return false;
+			}
+
+			if ( isset( $parts[2] ) ) {
+				return '1' === $parts[2];
+			}
+
+			return $this->tp_installed_before( (int) $parts[1] );
+		}
+
+		/**
+		 * Whether TPAE was installed more than a day before $timestamp.
+		 *
+		 * tpae_install_time is site-local mysql time (see class-tp-notices-main.php),
+		 * so it is converted to UTC before comparing with a Unix timestamp. A site
+		 * without it, which includes every fresh install, counts as new.
+		 *
+		 * @since 6.6.0
+		 *
+		 * @param int $timestamp Unix timestamp.
+		 * @return bool
+		 */
+		public function tp_installed_before( $timestamp ) {
+			$installed = get_option( 'tpae_install_time' );
+
+			if ( empty( $installed ) ) {
+				return false;
+			}
+
+			$installed = (int) get_gmt_from_date( $installed, 'U' );
+
+			return $installed > 0 && $installed < ( $timestamp - DAY_IN_SECONDS );
 		}
 
 		/**
@@ -158,66 +207,6 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 		}
 
 		/**
-		 * The secondary release points, in the order they are shown.
-		 *
-		 * Titles only. Abilities is the headline and carries the one explanatory
-		 * line; these five are short enough to read as pills without prose.
-		 *
-		 * @since 6.5.0
-		 *
-		 * @return array
-		 */
-		public function tp_highlights() {
-			return array(
-				array(
-					'icon'  => 'bolt',
-					'title' => esc_html__( 'Lighter, faster pages', 'tpebl' ),
-				),
-				array(
-					'icon'  => 'refresh',
-					'title' => esc_html__( 'Reliable caching', 'tpebl' ),
-				),
-				array(
-					'icon'  => 'shield',
-					'title' => esc_html__( 'Sturdier output', 'tpebl' ),
-				),
-				array(
-					'icon'  => 'layers',
-					'title' => esc_html__( 'Widget changes', 'tpebl' ),
-				),
-				array(
-					'icon'  => 'bug',
-					'title' => esc_html__( 'Many fixes', 'tpebl' ),
-				),
-			);
-		}
-
-		/**
-		 * Inline SVG for a highlight icon.
-		 *
-		 * Inline rather than an icon font so the notice never depends on a
-		 * stylesheet that might be gated off the current screen.
-		 *
-		 * @since 6.5.0
-		 *
-		 * @param  string $name Icon key.
-		 * @return string
-		 */
-		public function tp_icon( $name ) {
-			$paths = array(
-				'bolt'    => '<path d="M13 2 4.5 12.5h5L9 22l8.5-10.5h-5L13 2z"/>',
-				'refresh' => '<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3v4h-4"/>',
-				'shield'  => '<path d="M12 3l7 3v6c0 4.2-2.9 7.9-7 9-4.1-1.1-7-4.8-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
-				'layers'  => '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/>',
-				'bug'     => '<path d="M9 4l1.5 2.5h3L15 4"/><rect x="7" y="7" width="10" height="12" rx="5"/><path d="M3 12h4M17 12h4M4 17l3-2M20 17l-3-2M4 8l3 2M20 8l-3 2"/>',
-			);
-
-			$path = isset( $paths[ $name ] ) ? $paths[ $name ] : $paths['bolt'];
-
-			return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . $path . '</svg>';
-		}
-
-		/**
 		 * Render the notice.
 		 *
 		 * @since 6.5.0
@@ -226,7 +215,7 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 
 			$screen = get_current_screen();
 
-			$allowed_parents = array( 'index', 'elementor', 'themes', 'edit', 'plugins', 'theplus_welcome_page' );
+			$allowed_parents = array( 'elementor', 'themes', 'edit', 'plugins', 'theplus_welcome_page' );
 
 			$parent_base = ! empty( $screen->parent_base ) && in_array( $screen->parent_base, $allowed_parents, true );
 
@@ -234,134 +223,67 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 				return;
 			}
 
-			$nonce    = wp_create_nonce( 'tpae-whats-new' );
-			$release  = $this->tp_release();
+			$nonce = wp_create_nonce( 'tpae-whats-new' );
 			/**
 			 * UTM follows the convention the other notices already use: source is always
-			 * wpbackend, medium names the surface and campaign names the subject. See
-			 * class-tp-nexter-notice.php, which tags an admin notice as adminpanel.
-			 *
-			 * The roadmap link is deliberately left clean, matching the existing roadmap
-			 * links in class-tp-plugin-page.php, which carry no UTM.
+			 * wpbackend, medium names the surface (adminpanel for an admin notice) and
+			 * campaign names the subject. utm_content carries the release, so visits from
+			 * each release's notice can be told apart. Unlike the other roadmap links, the
+			 * changelog carries it too, because this notice is the one place we know why
+			 * they came.
 			 */
-			$utm         = 'utm_source=wpbackend&utm_medium=adminpanel&utm_campaign=abilities';
-			$log_url     = 'https://roadmap.theplusaddons.com/updates/';
-			$learn_url   = 'https://theplusaddons.com/mcp-abilities/?' . $utm;
-			$recipes_url = 'https://theplusaddons.com/widget-recipes/?utm_source=wpbackend&utm_medium=adminpanel&utm_campaign=widgetrecipes';
-			$logo_url    = defined( 'L_THEPLUS_ASSETS_URL' ) ? L_THEPLUS_ASSETS_URL . 'images/tpae-favicon-white.png' : '';
+			$log_url  = add_query_arg(
+				array(
+					'utm_source'   => 'wpbackend',
+					'utm_medium'   => 'adminpanel',
+					'utm_campaign' => 'whatsnew',
+					'utm_content'  => 'v' . $this->tp_release(),
+				),
+				'https://roadmap.theplusaddons.com/en/changelogs'
+			);
+			$logo_url = defined( 'L_THEPLUS_ASSETS_URL' ) ? L_THEPLUS_ASSETS_URL . 'svg/navbox/tpae-logomark.svg' : '';
 
-			/**
-			 * The Abilities switch lives on the dashboard Settings route, in the group
-			 * labelled "Abilities Access" (theplus_ability_switch, inside the
-			 * theplus_api_connection_data option). It is off on every upgrading site,
-			 * so this button is the activation path rather than a nicety.
-			 */
-			$on_url = admin_url( 'admin.php?page=theplus_welcome_page#/settings' );
-
-			/**
-			 * Read the switch the same way widgets_loader.php does, so the button only
-			 * shows when it is actually actionable. On a site that already has Abilities
-			 * on, a 'Turn on Abilities' button would be a dead end.
-			 */
-			$tpae_conn   = get_option( 'theplus_api_connection_data' );
-			$ability_on  = ! empty( $tpae_conn['theplus_ability_switch'] ) && 'on' === $tpae_conn['theplus_ability_switch'];
+			// The headline is the redesigned dashboard, so the one button opens it.
+			$dashboard_url = admin_url( 'admin.php?page=theplus_welcome_page' );
 
 			$this->tp_styles();
 			?>
 			<div class="notice tpae-wn is-dismissible" role="region" aria-label="<?php echo esc_attr__( 'What is new in The Plus Addons for Elementor', 'tpebl' ); ?>">
 
-				<div class="tpae-wn__hero">
-					<?php if ( $logo_url ) { ?>
-						<img class="tpae-wn__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="" width="22" height="22">
-					<?php } ?>
-					<span class="tpae-wn__v"><?php echo esc_html( $release ); ?></span>
-					<span class="tpae-wn__ht"><?php echo esc_html__( 'What is new in The Plus Addons', 'tpebl' ); ?></span>
-					<span class="tpae-wn__hs"><?php echo esc_html__( 'Update installed', 'tpebl' ); ?></span>
-				</div>
+				<?php if ( $logo_url ) { ?>
+					<span class="tpae-wn__mark">
+						<img class="tpae-wn__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="" width="40" height="40">
+					</span>
+				<?php } ?>
 
-				<div class="tpae-wn__body">
-
-					<div class="tpae-wn__call">
-						<span class="tpae-wn__callic">
-							<?php echo $this->tp_icon( 'bolt' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static inline SVG markup. ?>
-						</span>
-						<span class="tpae-wn__calltx">
-							<span class="tpae-wn__callt">
-								<?php echo esc_html__( 'Abilities: Now Builds Whole Pages, Not Just Widgets', 'tpebl' ); ?>
-								<em><?php echo esc_html( $release ); ?></em>
-							</span>
-							<span class="tpae-wn__calls">
-								<?php
-								if ( $ability_on ) {
-									echo esc_html__( 'Claude, or any MCP client, can build and edit your pages. Abilities is on.', 'tpebl' );
-								} else {
-									echo esc_html__( 'Claude, or any MCP client, can build and edit your pages. Off until you switch it on.', 'tpebl' );
-								}
-								?>
-							</span>
-						</span>
-						<span class="tpae-wn__callacts">
-							<?php if ( ! $ability_on ) { ?>
-								<a class="tpae-wn__btn tpae-wn__btn--on" href="<?php echo esc_url( $on_url ); ?>">
-									<?php echo esc_html__( 'Turn on Abilities', 'tpebl' ); ?>
-								</a>
-								<a class="tpae-wn__btn tpae-wn__btn--gh" href="<?php echo esc_url( $learn_url ); ?>" target="_blank" rel="noopener noreferrer">
-									<?php echo esc_html__( 'Learn More', 'tpebl' ); ?>
-								</a>
-							<?php } else { ?>
-								<a class="tpae-wn__btn tpae-wn__btn--on" href="<?php echo esc_url( $learn_url ); ?>" target="_blank" rel="noopener noreferrer">
-									<?php echo esc_html__( 'Learn More', 'tpebl' ); ?>
-								</a>
-							<?php } ?>
-						</span>
-					</div>
-
-					<ul class="tpae-wn__grid">
-						<?php
-						$i = 0;
-						foreach ( $this->tp_highlights() as $item ) {
-							++$i;
-							?>
-							<li class="tpae-wn__item" style="--tpae-i: <?php echo (int) $i; ?>">
-								<?php echo $this->tp_icon( $item['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static inline SVG markup. ?>
-								<strong><?php echo esc_html( $item['title'] ); ?></strong>
-							</li>
-							<?php
-						}
-						?>
-						<li class="tpae-wn__logli">
-							<a class="tpae-wn__log" href="<?php echo esc_url( $recipes_url ); ?>" target="_blank" rel="noopener noreferrer">
-								<?php echo esc_html__( 'Browse Widget Recipes', 'tpebl' ); ?>
-							</a>
-							<span class="tpae-wn__logsep" aria-hidden="true">&middot;</span>
-							<a class="tpae-wn__log" href="<?php echo esc_url( $log_url ); ?>" target="_blank" rel="noopener noreferrer">
-								<?php echo esc_html__( 'See the full changelog', 'tpebl' ); ?>
-							</a>
-						</li>
-					</ul>
+				<div class="tpae-wn__txt">
+					<p class="tpae-wn__title">
+						<?php echo esc_html__( 'Meet the New Dashboard', 'tpebl' ); ?>
+					</p>
+					<p class="tpae-wn__desc">
+						<?php echo esc_html__( 'Widgets, extensions, settings and the Theme Builder, rebuilt to be clearer and quicker to use.', 'tpebl' ); ?>
+					</p>
+					<p class="tpae-wn__links">
+						<a class="tpae-wn__btn" href="<?php echo esc_url( $dashboard_url ); ?>">
+							<?php echo esc_html__( 'Open Dashboard', 'tpebl' ); ?>
+						</a>
+						<a class="tpae-wn__link" href="<?php echo esc_url( $log_url ); ?>" target="_blank" rel="noopener noreferrer">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+							<?php echo esc_html__( 'What else changed', 'tpebl' ); ?>
+							<span class="screen-reader-text"><?php echo esc_html__( '(opens in a new tab)', 'tpebl' ); ?></span>
+						</a>
+					</p>
 				</div>
 			</div>
 			<script>
-				jQuery( document ).on( 'click', '.tpae-wn .notice-dismiss', function ( e ) {
-					e.preventDefault();
-
-					var $notice = jQuery( this ).closest( '.tpae-wn' );
-
-					$notice.addClass( 'tpae-wn--out' );
-					window.setTimeout( function () {
-						$notice.slideUp( 180, function () {
-							$notice.remove();
-						} );
-					}, 220 );
-
-					jQuery.ajax( {
-						url: ajaxurl,
-						type: 'POST',
-						data: {
-							action: 'theplus_whats_new_notice_dismiss',
-							security: "<?php echo esc_js( $nonce ); ?>"
-						}
-					} );
+				// WordPress fades and removes the notice itself; this only saves the dismissal.
+				jQuery( document ).on( 'click', '.tpae-wn .notice-dismiss', function () {
+					var d = new FormData();
+					d.append( 'action', 'theplus_whats_new_notice_dismiss' );
+					d.append( 'security', "<?php echo esc_js( $nonce ); ?>" );
+					// keepalive: an admin who dismisses and moves straight on must not
+					// cancel the request, or the notice is back on the next screen.
+					fetch( ajaxurl, { method: 'POST', credentials: 'same-origin', body: d, keepalive: true } );
 				} );
 			</script>
 			<?php
@@ -379,75 +301,51 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 		public function tp_styles() {
 			?>
 			<style>
-			.tpae-wn{position:relative;padding:0!important;border:0!important;border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,16,32,.07),0 10px 28px -16px rgba(79,70,214,.45);animation:tpaeWnIn .4s cubic-bezier(.21,1,.31,1) both}
-			.tpae-wn.tpae-wn--out{opacity:0;transform:translateY(-6px) scale(.99);transition:opacity .2s ease,transform .2s ease}
+			/* One card laid out like the other TPAE notices: logo, then heading, text and
+			   a row with the one button and two text links, in the brand violet they use
+			   for their left edge and button.
+			   Qualified with div.notice so the card's own border and padding outrank
+			   core's .notice and .notice.is-dismissible rules without !important. */
+			div.notice.tpae-wn{position:relative;display:flex;align-items:flex-start;gap:16px;margin:12px 0 10px;padding:20px 52px 20px 18px;background:#fff;border:1px solid #e2e0f0;border-left:4px solid #6660EF;border-radius:6px;box-shadow:0 1px 2px rgba(16,16,32,.05);animation:tpaeWnIn .35s cubic-bezier(.21,1,.31,1) both}
 
-			.tpae-wn__hero{position:relative;display:flex;align-items:center;gap:12px;padding:15px 46px 15px 20px;background:linear-gradient(105deg,#3f37c9,#6660EF 55%,#7c3aed);color:#fff;overflow:hidden;flex-wrap:wrap}
-			.tpae-wn__hero::after{content:"";position:absolute;top:-60%;left:-30%;width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);transform:skewX(-18deg);animation:tpaeWnSweep 4.5s ease-in-out infinite;pointer-events:none}
-			.tpae-wn__logo{position:relative;width:22px;height:22px;flex:0 0 auto;animation:tpaeWnPop .5s .1s cubic-bezier(.2,1.5,.4,1) both}
-			.tpae-wn__v{position:relative;flex:0 0 auto;font-size:15px;font-weight:700;letter-spacing:-.01em;padding:3px 10px;border-radius:6px;background:rgba(255,255,255,.18)}
-			.tpae-wn__ht{position:relative;flex:1 1 auto;font-size:14.5px;font-weight:600}
-			.tpae-wn__hs{position:relative;flex:0 0 auto;font-size:12px;color:#fff}
+			/* The logo on its own, top-aligned with the heading. */
+			.tpae-wn__mark{flex:0 0 auto;align-self:flex-start;display:flex}
+			.tpae-wn__logo{display:block;width:40px;height:40px;border-radius:9px}
+			.tpae-wn__txt{flex:1 1 auto;min-width:0}
 
-			.tpae-wn .notice-dismiss{top:8px;right:2px}
-			.tpae-wn .notice-dismiss:before{color:rgba(255,255,255,.82)}
-			.tpae-wn .notice-dismiss:hover:before,.tpae-wn .notice-dismiss:focus:before{color:#fff}
-
-			.tpae-wn__body{padding:14px 20px 15px;background:#fff}
-
-			/* Abilities callout. The thick left edge is wp-admin's own callout language,
-			   so it reads as "the important one" without a second gradient panel. */
-			.tpae-wn__call{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin:0 0 13px;padding:13px 15px;border:1px solid #e7e1fb;border-left:4px solid #6660EF;border-radius:8px;background:linear-gradient(120deg,#fbfaff,#fdf8ff)}
-			.tpae-wn__callic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:#f0edfe;border:1px solid #e2dafb;display:flex;align-items:center;justify-content:center}
-			.tpae-wn__callic svg{width:18px;height:18px;color:#6d28d9}
-			.tpae-wn__calltx{flex:1 1 290px;min-width:0}
-			.tpae-wn__callt{display:block;font-size:15px;font-weight:600;letter-spacing:-.018em;color:#191536;line-height:1.26}
-			.tpae-wn__callt em{font-style:normal;display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.06em;color:#fff;background:linear-gradient(96deg,#6660EF,#7c3aed);border-radius:20px;padding:2px 8px;margin-left:8px;vertical-align:2px}
-			.tpae-wn__calls{display:block;margin-top:3px;font-size:12px;color:#544e70;line-height:1.48;max-width:78ch}
-			.tpae-wn__callacts{flex:0 0 auto;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-
-			/* secondary release points as pills: a box holding only a short title reads
-			   as unfinished, a pill reads as deliberate */
-			.tpae-wn__grid{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;padding:0;list-style:none}
-			.tpae-wn__item{display:inline-flex;align-items:center;gap:7px;margin:0;padding:6px 11px;border:1px solid #e9e6f5;border-radius:20px;background:#f8f7fd;transition:border-color .18s ease,background .18s ease;animation:tpaeWnUp .4s ease both;animation-delay:calc(var(--tpae-i,1) * 45ms + 60ms)}
-			.tpae-wn__item:hover{border-color:#cfc9ef;background:#f3f1fb}
-			.tpae-wn__item svg{width:14px;height:14px;flex:0 0 auto;color:#5b52e0}
-			.tpae-wn__item strong{font-size:11.5px;font-weight:600;color:#3f3a5c}
-
-			.tpae-wn__logli{margin:0 0 0 auto;padding:0;border:0;background:none;display:inline-flex;align-items:center}
+			/* Core .notice p adds its own margin and padding; reset at (0,2,1). */
+			/* Heading matches the other TPAE notices' h3 (1.3em of 13px, wp-admin ink). */
+			.tpae-wn p.tpae-wn__title{margin:0;padding:0;font-size:17px;font-weight:600;line-height:1.35;color:#1d2327}
+			.tpae-wn p.tpae-wn__desc{margin:4px 0 14px;padding:0;font-size:13px;line-height:1.5;color:#3c434a}
+			.tpae-wn p.tpae-wn__links{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin:0;padding:0;font-size:13.5px;line-height:1.4}
 
 			/* Core common.css styles `div.notice a` at (0,1,2), stronger than a single
 			   class, and would force the theme link colour, an underline, its own focus
 			   ring and border-radius:2px. Every rule below is qualified with the tag name
-			   so it outranks core without needing !important. */
-			.tpae-wn a.tpae-wn__btn{display:inline-flex;align-items:center;justify-content:center;height:33px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-size:12.5px;font-weight:500;line-height:1;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .16s ease,box-shadow .16s ease,background .16s ease,border-color .16s ease}
-			.tpae-wn a.tpae-wn__btn:hover,.tpae-wn a.tpae-wn__btn:focus{text-decoration:none}
-			.tpae-wn a.tpae-wn__btn--on{background:linear-gradient(96deg,#6660EF,#7c3aed);color:#fff;box-shadow:0 2px 11px -3px rgba(124,58,237,.7)}
-			.tpae-wn a.tpae-wn__btn--on:hover{background:linear-gradient(96deg,#5a54e6,#6d28d9);color:#fff;transform:translateY(-1px);box-shadow:0 7px 18px -6px rgba(124,58,237,.85)}
-			.tpae-wn a.tpae-wn__btn--on:focus,.tpae-wn a.tpae-wn__btn--on:focus-visible{color:#fff;border-radius:8px;box-shadow:0 0 0 3px rgba(124,58,237,.5)}
-			.tpae-wn a.tpae-wn__btn--gh{background:#fff;border-color:#d9d6ea;color:#413c5e}
-			.tpae-wn a.tpae-wn__btn--gh:hover{background:#f7f6fc;border-color:#bfbada;color:#26234a}
-			.tpae-wn a.tpae-wn__btn--gh:focus,.tpae-wn a.tpae-wn__btn--gh:focus-visible{color:#413c5e;border-radius:8px;box-shadow:0 0 0 3px rgba(124,58,237,.35)}
-			.tpae-wn a.tpae-wn__log{font-size:11.5px;color:#524bcf;text-decoration:underline}
-			.tpae-wn a.tpae-wn__log:hover,.tpae-wn a.tpae-wn__log:focus{color:#3b35a6}
-			.tpae-wn__logsep{font-size:11.5px;color:#b8b3e0;margin:0 8px}
+			   so it outranks core without needing !important. Each link leads with a
+			   small icon in the brand colour; the text stays quiet until hovered. */
+			.tpae-wn a.tpae-wn__link{display:inline-flex;align-items:center;gap:6px;color:#3c434a;font-weight:500;text-decoration:none;transition:color .15s ease}
+			.tpae-wn a.tpae-wn__link svg{flex:0 0 auto;width:16px;height:16px;color:#6660EF}
+			.tpae-wn a.tpae-wn__link:hover{color:#3b35a6;text-decoration:underline;text-underline-offset:3px}
+			.tpae-wn a.tpae-wn__link:focus{color:#3b35a6;border-radius:3px;box-shadow:0 0 0 2px rgba(102,96,239,.45);outline:none}
 
-			@keyframes tpaeWnIn{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
-			@keyframes tpaeWnUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-			@keyframes tpaeWnPop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
-			@keyframes tpaeWnSweep{0%,100%{left:-30%}55%{left:120%}}
+			.tpae-wn a.tpae-wn__btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 20px;border:0;border-radius:8px;background:#6660EF;color:#fff;font-size:13px;font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;transition:background .15s ease}
+			.tpae-wn a.tpae-wn__btn:hover{color:#fff;background:#564ed2}
+			.tpae-wn a.tpae-wn__btn:focus{color:#fff;box-shadow:0 0 0 3px rgba(102,96,239,.45);outline:none}
+
+			/* Keep core's dismiss button, centred on the card's top-right corner. */
+			.tpae-wn .notice-dismiss{top:6px;right:4px}
+
+			@keyframes tpaeWnIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
 			@media screen and (max-width:782px){
-				.tpae-wn__hero{padding:13px 44px 13px 16px}
-				.tpae-wn__ht{flex:1 1 100%;order:3}
-				.tpae-wn__body{padding:13px 16px 14px}
-				.tpae-wn__call{padding:12px 13px}
-				.tpae-wn__callacts{flex:1 1 100%}
+				div.notice.tpae-wn{gap:14px;padding:18px 46px 18px 18px}
+				.tpae-wn__logo{width:34px;height:34px;border-radius:8px}
 			}
 
 			@media (prefers-reduced-motion:reduce){
-				.tpae-wn,.tpae-wn__item,.tpae-wn__logo,.tpae-wn__hero::after{animation:none!important}
-				.tpae-wn__item,.tpae-wn a.tpae-wn__btn{transition:none!important}
+				div.notice.tpae-wn{animation:none}
+				.tpae-wn a.tpae-wn__btn,.tpae-wn a.tpae-wn__link{transition:none}
 			}
 			</style>
 			<?php

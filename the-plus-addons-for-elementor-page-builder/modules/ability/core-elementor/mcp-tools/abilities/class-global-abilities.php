@@ -121,7 +121,7 @@ class Tpae_Elementor_MCP_Global_Abilities {
 				'meta'                => array(
 					'annotations'  => array(
 						'readonly'    => false,
-						'destructive' => false,
+						'destructive' => true,
 						'idempotent'  => true,
 					),
 					'show_in_rest' => true,
@@ -254,7 +254,7 @@ class Tpae_Elementor_MCP_Global_Abilities {
 				'meta'                => array(
 					'annotations'  => array(
 						'readonly'    => false,
-						'destructive' => false,
+						'destructive' => true,
 						'idempotent'  => true,
 					),
 					'show_in_rest' => true,

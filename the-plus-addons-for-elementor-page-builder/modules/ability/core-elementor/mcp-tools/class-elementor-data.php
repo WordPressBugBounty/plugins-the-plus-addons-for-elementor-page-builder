@@ -181,6 +181,53 @@ class Tpae_Elementor_MCP_Data {
 	}
 
 	/**
+	 * Whether the post is built with Elementor.
+	 *
+	 * @since 6.6.0
+	 *
+	 * @param int $post_id The post ID.
+	 * @return bool
+	 */
+	public function is_built_with_elementor( int $post_id ): bool {
+		return 'builder' === get_post_meta( $post_id, '_elementor_edit_mode', true );
+	}
+
+	/**
+	 * Whether the post already has a revision to restore from.
+	 *
+	 * @since 6.6.0
+	 *
+	 * @param int $post_id The post ID.
+	 * @return bool
+	 */
+	public function has_revision( int $post_id ): bool {
+		return ! empty( wp_get_post_revisions( $post_id, array( 'numberposts' => 1, 'fields' => 'ids' ) ) );
+	}
+
+	/**
+	 * Refuses a write that would replace content Elementor did not build.
+	 *
+	 * Saving Elementor data to a block-editor or classic-editor post that already
+	 * has content turns it into an Elementor page and drops that content. A blank
+	 * post, an Elementor page and an Elementor library template are all safe.
+	 *
+	 * @since 6.6.0
+	 *
+	 * @param int $post_id The post ID.
+	 * @return \WP_Error|null WP_Error when the write would overwrite, null when safe.
+	 */
+	public function get_overwrite_error( int $post_id ): ?\WP_Error {
+		// One copy of the rule, in widgets-ability/tp-text-block.php, loaded with the abilities.
+		if ( ! function_exists( 'tpae_mcp_get_overwrite_error' ) ) {
+			return null;
+		}
+
+		$error = tpae_mcp_get_overwrite_error( $post_id );
+
+		return ( $error instanceof \WP_Error ) ? $error : null;
+	}
+
+	/**
 	 * Saves page data using Elementor's native save mechanism.
 	 *
 	 * Tries document save() first (triggers CSS regeneration). If that fails
@@ -194,6 +241,12 @@ class Tpae_Elementor_MCP_Data {
 	 * @return bool|\WP_Error True on success, WP_Error on failure.
 	 */
 	public function save_page_data( int $post_id, array $data ) {
+		$overwrite_error = $this->get_overwrite_error( $post_id );
+
+		if ( $overwrite_error ) {
+			return $overwrite_error;
+		}
+
 		$document = $this->get_document( $post_id );
 
 		if ( is_wp_error( $document ) ) {

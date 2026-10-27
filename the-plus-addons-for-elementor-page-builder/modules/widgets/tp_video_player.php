@@ -1343,14 +1343,20 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 		$v_id = ! empty( $settings['vimeo_id'] ) ? $settings['vimeo_id'] : '';
 		$mp_4 = ! empty( $settings['mp4_link']['url'] ) ? $settings['mp4_link']['url'] : '';
 
+		/*
+		 * The IDs and the MP4 URL end up inside href/src attributes that lity.js
+		 * reads back (entity-decoded) and pastes into '<iframe src="...">' HTML.
+		 * esc_attr()/esc_url() keep entities such as &#34;, which decode to a
+		 * quote there, so strip anything that is not a plain URL character.
+		 */
 		if ( ! empty( $y_id ) ) {
-			$youtube_id = $y_id;
+			$youtube_id = preg_replace( '/[^A-Za-z0-9_\-?&=.:\/#%]/', '', tp_decode_all_entities( $y_id ) );
 		}
 		if ( ! empty( $v_id ) ) {
-			$vimeo_id = $v_id;
+			$vimeo_id = preg_replace( '/[^A-Za-z0-9_\-?&=.:\/#%]/', '', tp_decode_all_entities( $v_id ) );
 		}
 		if ( ! empty( $mp_4 ) ) {
-			$mp4_link = $mp_4;
+			$mp4_link = esc_url_raw( tp_decode_all_entities( $mp_4 ) );
 		}
 
 		$icon_effect = '';
