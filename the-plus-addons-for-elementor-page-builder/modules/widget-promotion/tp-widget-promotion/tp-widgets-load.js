@@ -4,7 +4,7 @@
     elementor.hooks.addFilter("panel/elements/regionViews", function (panel) {
 
         function tpae_applyTpPromotionClass() {
-            $('.elementor-element--promotion', parent.document).each(function () {
+            $('.elementor-element--promotion', document).each(function () {
                 const $promo = $(this);
                 const hasThePlusIcon = $promo.find('i[class^="theplus-"]').length > 0;
 
@@ -14,7 +14,7 @@
             });
         }
 
-        const observerTarget = parent.document.querySelector('#elementor-panel');
+        const observerTarget = document.querySelector('#elementor-panel');
 
         if (observerTarget) {
             const observer = new MutationObserver(() => {
@@ -67,14 +67,14 @@
     });
     jQuery(window).on('elementor:init', function () {
         elementor.on('preview:loaded', function () {
-            const parentDoc = parent.document;
+            const editorDoc = document;
             const targetSelector =
                 '#elementor-panel-category-tp-pro-widgets .elementor-panel-category-title .elementor-panel-heading-promotion a';
             const promoUrl =
                 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links';
 
             const setPromoUrl = () => {
-                const link = parentDoc.querySelector(targetSelector);
+                const link = editorDoc.querySelector(targetSelector);
                 if (link && !link.getAttribute('href')) {
                     link.setAttribute('href', promoUrl);
                     link.setAttribute('target', '_blank');
@@ -89,7 +89,7 @@
                 }
             }, 7500);
 
-            const panel = parentDoc.querySelector('#elementor-panel-categories');
+            const panel = editorDoc.querySelector('#elementor-panel-categories');
             if (panel) {
                 const observer = new MutationObserver(() => {
                     setPromoUrl();
@@ -104,14 +104,14 @@
     // capture phase for TPAE promo widgets so Elementor's handler never runs and only our
     // own dialog shows.
     const tpProPromoSelector = '#elementor-panel-category-tp-pro-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-widgets-promotion';
-    parent.document.addEventListener('mousedown', function (e) {
+    document.addEventListener('mousedown', function (e) {
         const promo = e.target.closest && e.target.closest(tpProPromoSelector);
         if (promo) {
             e.stopPropagation();
-            $('#elementor-element--promotion__dialog', parent.document).remove();
+            $('#elementor-element--promotion__dialog', document).remove();
         }
     }, true);
-    $(parent.document).on('click', '#elementor-panel-category-tp-pro-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-widgets-promotion', function (e) {
+    $(document).on('click', '#elementor-panel-category-tp-pro-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-widgets-promotion', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -122,7 +122,7 @@
         const matchedWidget = tpPanelSettings.tp_pro_widgets.find(item => item.title === widgetTitle);
         const demoUrl = matchedWidget?.demo_url || 'https://theplusaddons.com/';
 
-        $('#tp-custom-dialog', parent.document).remove();
+        $('#tp-custom-dialog', document).remove();
 
         const dialog = `
         <div id="tp-custom-dialog" class="tp-elem-dialog" style="position: absolute;top: ${offset.top - 50}px;left: ${offset.left + widget.outerWidth() + 10}px; height: 190px;display: flex;flex-direction: column;align-items: flex-start;">
@@ -141,7 +141,7 @@
                </div>
             </div>
             <div class="tp-dialog-content">
-                <p>${sprintf(__('Unlock this widget by upgrading to %1$s. Use Code %2$s to get FLAT 20%% OFF now.', 'tpebl'), 'The Plus Addons for Elementor Pro', 'FIRST20')}</p>
+                <p>${sprintf(/* translators: 1: Pro plugin name, 2: Coupon code. */ __('Unlock this widget by upgrading to %1$s. Use Code %2$s to get FLAT 20%% OFF now.', 'tpebl'), 'The Plus Addons for Elementor Pro', 'FIRST20')}</p>
             </div>
             <div class="tp-dialog-footer">
                 <a href="https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links" class="tp-widget-dwl" target="_blank">${__('Get Pro', 'tpebl')}</a>
@@ -149,32 +149,32 @@
             </div>
         </div>
     `;
-        $('body', parent.document).append(dialog);
+        $('body', document).append(dialog);
     });
-    $(parent.document).on('click', '#tp-dialog-close', function () {
-        $('#tp-custom-dialog', parent.document).remove();
+    $(document).on('click', '#tp-dialog-close', function () {
+        $('#tp-custom-dialog', document).remove();
     });
-    $(parent.document).on('keydown', function (e) {
+    $(document).on('keydown', function (e) {
         if (e.key === 'Escape' || e.keyCode === 27) {
-            const $dialog = $('#tp-custom-dialog', parent.document);
+            const $dialog = $('#tp-custom-dialog', document);
             if ($dialog.length) {
                 $dialog.remove();
             }
         }
     });
-    $(parent.document).on('mousedown', function (e) {
-        var $dialog = $('#tp-custom-dialog', parent.document);
+    $(document).on('mousedown', function (e) {
+        var $dialog = $('#tp-custom-dialog', document);
         if ($dialog.length && !$dialog.is(e.target) && $dialog.has(e.target).length === 0) {
             $dialog.remove();
         }
     });
-    const iframe = parent.document.querySelector('#elementor-preview-iframe');
+    const iframe = document.querySelector('#elementor-preview-iframe');
 
     if (iframe) {
         iframe.addEventListener('load', function () {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             $(iframeDoc).on('mousedown', function () {
-                const $dialog = $('#tp-custom-dialog', parent.document);
+                const $dialog = $('#tp-custom-dialog', document);
                 if ($dialog.length) {
                     $dialog.remove();
                 }

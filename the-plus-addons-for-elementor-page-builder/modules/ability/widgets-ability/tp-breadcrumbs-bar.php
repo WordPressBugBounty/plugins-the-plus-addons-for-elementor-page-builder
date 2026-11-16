@@ -119,14 +119,14 @@ function tpae_mcp_add_theplus_breadcrumbs_bar_ability(array $input) {
     if (isset($input['icon_fontawesome'])) { $settings['icon_fontawesome'] = sanitize_text_field($input['icon_fontawesome']); }
     if (isset($input['special_effect_options'])) { $settings['special_effect_options'] = sanitize_text_field($input['special_effect_options']); }
     if (isset($input['icon_img_options'])) { $settings['icon_img_options'] = sanitize_text_field($input['icon_img_options']); }
-    if (!empty($input['icons_image'])) { $settings['icons_image'] = ['id' => absint($input['icons_image'])]; }
+    if (!empty($input['icons_image'])) { $settings['icons_image'] = tpae_mcp_media_value($input['icons_image']); }
     if (isset($input['sep_select_icon'])) { $settings['sep_select_icon'] = sanitize_text_field($input['sep_select_icon']); }
     if (isset($input['sep_icon_font_style'])) { $settings['sep_icon_font_style'] = sanitize_text_field($input['sep_icon_font_style']); }
     if (isset($input['font_awesome_option'])) { $settings['font_awesome_option'] = sanitize_text_field($input['font_awesome_option']); }
     if (isset($input['sep_icon_fontawesome'])) { $settings['sep_icon_fontawesome'] = sanitize_text_field($input['sep_icon_fontawesome']); }
     if (isset($input['sep_icon_mind_options'])) { $settings['sep_icon_mind_options'] = sanitize_text_field($input['sep_icon_mind_options']); }
     if (isset($input['icon_image_options'])) { $settings['icon_image_options'] = sanitize_text_field($input['icon_image_options']); }
-    if (!empty($input['sep_icons_image'])) { $settings['sep_icons_image'] = ['id' => absint($input['sep_icons_image'])]; }
+    if (!empty($input['sep_icons_image'])) { $settings['sep_icons_image'] = tpae_mcp_media_value($input['sep_icons_image']); }
     if (isset($input['section_letter_limit'])) { $settings['section_letter_limit'] = sanitize_text_field($input['section_letter_limit']); }
     if (isset($input['letter_limit_parent_switch'])) { $settings['letter_limit_parent_switch'] = sanitize_text_field($input['letter_limit_parent_switch']); }
     if (isset($input['letter_limit_parent'])) { $settings['letter_limit_parent'] = sanitize_text_field($input['letter_limit_parent']); }

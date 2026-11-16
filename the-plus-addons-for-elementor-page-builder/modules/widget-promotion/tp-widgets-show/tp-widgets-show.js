@@ -4,7 +4,7 @@
     elementor.hooks.addFilter("panel/elements/regionViews", function (panel) {
 
         function tpae_apply_widget_Class() {
-            $('.elementor-element--promotion', parent.document).each(function () {
+            $('.elementor-element--promotion', document).each(function () {
                 const $promo = $(this);
                 const hasThePlusIcon = $promo.find('i[class^="tpae-editor-logo theplus-"]').length > 0;
 
@@ -14,7 +14,7 @@
             });
         }
 
-        const observerTarget = parent.document.querySelector('#elementor-panel');
+        const observerTarget = document.querySelector('#elementor-panel');
 
         if (observerTarget) {
             const observer = new MutationObserver(() => {
@@ -67,14 +67,14 @@
     });
     jQuery(window).on('elementor:init', function () {
         elementor.on('preview:loaded', function () {
-            const parentDoc = parent.document;
+            const editorDoc = document;
             const targetSelector =
                 '#elementor-panel-category-tp-inactive-widgets .elementor-panel-category-title .elementor-panel-heading-promotion a';
             const promoUrl =
                 'https://theplusaddons.com/pricing/?utm_source=wpbackend&utm_medium=elementoreditor&utm_campaign=links';
 
             const setPromoUrl = () => {
-                const link = parentDoc.querySelector(targetSelector);
+                const link = editorDoc.querySelector(targetSelector);
                 if (link && !link.getAttribute('href')) {
                     link.setAttribute('href', promoUrl);
                     link.setAttribute('target', '_blank');
@@ -89,7 +89,7 @@
                 }
             }, 7500);
 
-            const panel = parentDoc.querySelector('#elementor-panel-categories');
+            const panel = editorDoc.querySelector('#elementor-panel-categories');
             if (panel) {
                 const observer = new MutationObserver(() => {
                     setPromoUrl();
@@ -99,15 +99,14 @@
         });
     });
     const tpInactivePromoSelector = '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-inactive-widgets-list';
-    parent.document.addEventListener('mousedown', function (e) {
+    document.addEventListener('mousedown', function (e) {
         const promo = e.target.closest && e.target.closest(tpInactivePromoSelector);
         if (promo) {
             e.stopPropagation();
-            $('#elementor-element--promotion__dialog', parent.document).remove();
+            $('#elementor-element--promotion__dialog', document).remove();
         }
     }, true);
-    // $(parent.document).on('click', '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion', function (e) {
-    $(parent.document).on('click', '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-inactive-widgets-list', function (e) {
+    $(document).on('click', '#elementor-panel-category-tp-inactive-widgets .elementor-element--promotion, .elementor-element-wrapper.elementor-element--promotion.tp-inactive-widgets-list', function (e) {
 
         e.preventDefault();
         e.stopPropagation();
@@ -120,7 +119,7 @@
         const demoUrl = matchedWidget?.demo_url || '#';
         const widget_id = matchedWidget?.name || '';
 
-        $('#tp-widgets-custom-dialog', parent.document).remove();
+        $('#tp-widgets-custom-dialog', document).remove();
 
         let demoLinkHtml = '';
          var tp_hight = '112px';
@@ -159,31 +158,31 @@
             </div>
         </div>
                        `;
-        $('body', parent.document).append(dialog);
+        $('body', document).append(dialog);
     });
-    $(parent.document).on('click', '#tp-dialog-close', function () {
-        $('#tp-widgets-custom-dialog', parent.document).remove();
+    $(document).on('click', '#tp-dialog-close', function () {
+        $('#tp-widgets-custom-dialog', document).remove();
     });
-    $(parent.document).on('keydown', function (e) {
+    $(document).on('keydown', function (e) {
         if (e.key === 'Escape' || e.keyCode === 27) {
-            const $dialog = $('#tp-widgets-custom-dialog', parent.document);
+            const $dialog = $('#tp-widgets-custom-dialog', document);
             if ($dialog.length) {
                 $dialog.remove();
             }
         }
     });
-    $(parent.document).on('mousedown', function (e) {
-        var $dialog = $('#tp-widgets-custom-dialog', parent.document);
+    $(document).on('mousedown', function (e) {
+        var $dialog = $('#tp-widgets-custom-dialog', document);
         if ($dialog.length && !$dialog.is(e.target) && $dialog.has(e.target).length === 0) {
             $dialog.remove();
         }
     });
-    const iframe = parent.document.querySelector('#elementor-preview-iframe');
+    const iframe = document.querySelector('#elementor-preview-iframe');
     if (iframe) {
         iframe.addEventListener('load', function () {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
             $(iframeDoc).on('mousedown', function () {
-                const $dialog = $('#tp-widgets-custom-dialog', parent.document);
+                const $dialog = $('#tp-widgets-custom-dialog', document);
                 if ($dialog.length) {
                     $dialog.remove();
                 }
@@ -191,7 +190,7 @@
         });
     }
 
-    $(parent.document).on('click', '.tp-iaw-widget-dwl', function (e) {
+    $(document).on('click', '.tp-iaw-widget-dwl', function (e) {
         e.preventDefault();
 
         var $button = $(this);

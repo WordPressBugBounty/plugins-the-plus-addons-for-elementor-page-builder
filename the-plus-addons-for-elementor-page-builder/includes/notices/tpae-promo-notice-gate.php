@@ -25,15 +25,17 @@ if ( ! function_exists( 'tpae_promo_notice_allowed' ) ) {
 
 	/**
 	 * Whether the promotion $id may show on this site at all. With Pro active only the
-	 * review ask is left; UiChemy and Widget Recipes are not.
+	 * review ask and the Black Friday sale are left (the sale offers Pro users the
+	 * Lifetime upgrade); UiChemy and Widget Recipes are not.
 	 *
 	 * @since 6.6.0
+	 * @version 6.6.1
 	 *
 	 * @param string $id Promotion id.
 	 * @return bool
 	 */
 	function tpae_promo_notice_allowed( $id ) {
-		return ! defined( 'THEPLUS_VERSION' ) || 'ask-review' === $id;
+		return ! defined( 'THEPLUS_VERSION' ) || in_array( $id, array( 'ask-review', 'bf-sale' ), true );
 	}
 }
 

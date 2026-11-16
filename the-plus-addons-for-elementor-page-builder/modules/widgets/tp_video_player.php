@@ -1477,7 +1477,28 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 				$banner_image = L_THEPLUS_URL . 'assets/images/tp-placeholder.jpg';
 			}
 
-			$banner_url .= '<img class="ts-video-image-zoom set-image" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="" /><div class="tp-video-popup-icon"> <div class="tp-video-icon ' . esc_attr( $icon_effect ) . '"><img class="ts-video-caption" src="' . esc_url( $image_video ) . '" alt="' . esc_attr( $image_alt ) . '" /></div></div>' . $title;
+			$banner_tag = '';
+
+			// With Lazy Load on, render the banner through the lazy load helper, keeping its schema attributes.
+			if ( ! empty( $ban_om_id ) && tp_has_lazyload() ) {
+				$banner_attr = array(
+					'class'   => 'ts-video-image-zoom set-image',
+					'alt'     => '',
+					'content' => esc_url( $banner_image ),
+				);
+
+				if ( ! empty( $thumbsch ) ) {
+					$banner_attr['itemprop'] = 'thumbnailUrl';
+				}
+
+				$banner_tag = tp_get_image_rander( $ban_om_id, $settings['banner_image_thumbnail_size'], $banner_attr );
+			}
+
+			if ( empty( $banner_tag ) ) {
+				$banner_tag = '<img class="ts-video-image-zoom set-image" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="" />';
+			}
+
+			$banner_url .= $banner_tag . '<div class="tp-video-popup-icon"> <div class="tp-video-icon ' . esc_attr( $icon_effect ) . '"><img class="ts-video-caption" src="' . esc_url( $image_video ) . '" alt="' . esc_attr( $image_alt ) . '" /></div></div>' . $title;
 		}
 
 		$youtube_frame_attr = '';
@@ -1681,6 +1702,28 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 		$dis_banner_img = ! empty( $settings['display_banner_image'] ) ? $settings['display_banner_image'] : '';
 		$pop_vid        = ! empty( $settings['popup_video'] ) ? $settings['popup_video'] : '';
 
+		$thumb_tag = '';
+
+		// With Lazy Load on, the inline banner goes through the lazy load helper too, not only the popup one.
+		if ( ! empty( $ban_img ) && ! empty( $ban_om_id ) && tp_has_lazyload() ) {
+			$thumb_attr = array(
+				'class'           => 'ts-video-thumbnail',
+				'data-object-fit' => '',
+				'content'         => esc_url( $banner_image ),
+				'alt'             => esc_attr__( 'Video Thumbnail', 'tpebl' ),
+			);
+
+			if ( ! empty( $thumbsch ) ) {
+				$thumb_attr['itemprop'] = 'thumbnailUrl';
+			}
+
+			$thumb_tag = tp_get_image_rander( $ban_om_id, $settings['banner_image_thumbnail_size'], $thumb_attr );
+		}
+
+		if ( empty( $thumb_tag ) ) {
+			$thumb_tag = '<img class="ts-video-thumbnail" data-object-fit="" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="' . esc_attr__( 'Video Thumbnail', 'tpebl' ) . '">';
+		}
+
 		if ( 'banner_img' === $image_banner ) {
 
 			if ( 'yes' === $dis_banner_img ) {
@@ -1696,7 +1739,7 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 
 					$video_space = '';
 				} elseif ( 'youtube' === $video_type ) {
-					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-' . esc_attr( $this->get_id() ) . '" ' . $mainsch . ' data-grow=""><div class="ts-video-embed-container" ><img class="ts-video-thumbnail" data-object-fit="" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="' . esc_attr__( 'Video Thumbnail', 'tpebl' ) . '"><h5 class="ts-video-title">' . $title . '</h5><span class="ts-video-lazyload" data-allowfullscreen="" data-class="pt-plus-video-frame fitvidsignore" data-frameborder="0" data-scrolling="no" data-src="https://www.youtube' . esc_attr( $youtube_privacy ) . '.com/embed/' . esc_attr( $youtube_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1' . esc_attr( $youtube_frame_attr ) . '"  data-sandbox="allow-scripts allow-same-origin allow-presentation allow-forms" data-width="480" data-height="270"></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
+					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-' . esc_attr( $this->get_id() ) . '" ' . $mainsch . ' data-grow=""><div class="ts-video-embed-container" >' . $thumb_tag . '<h5 class="ts-video-title">' . $title . '</h5><span class="ts-video-lazyload" data-allowfullscreen="" data-class="pt-plus-video-frame fitvidsignore" data-frameborder="0" data-scrolling="no" data-src="https://www.youtube' . esc_attr( $youtube_privacy ) . '.com/embed/' . esc_attr( $youtube_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1' . esc_attr( $youtube_frame_attr ) . '"  data-sandbox="allow-scripts allow-same-origin allow-presentation allow-forms" data-width="480" data-height="270"></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
 
 					if ( ! empty( $markupsch ) ) {
 						$video_content .= '<div class="tp-video-upload" itemprop="uploadDate" content="' . esc_attr( $uploadate ) . '" style="display: none;"></div><div class="tp-video-upload" itemprop="contentUrl" content="https://www.youtube' . esc_attr( $youtube_privacy ) . '.com/embed/' . esc_attr( $youtube_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1' . esc_attr( $youtube_frame_attr ) . '" style="display: none;"></div>';
@@ -1704,7 +1747,7 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 
 					$video_content .= '</div></div>';
 				} elseif ( 'vimeo' === $video_type ) {
-					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-' . esc_attr( $this->get_id() ) . '" ' . $mainsch . ' data-grow=""><div class="ts-video-embed-container" ><img class="ts-video-thumbnail" data-object-fit="" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="' . esc_attr__( 'Video Thumbnail', 'tpebl' ) . '"><h5 class="ts-video-title">' . $title . '</h5><span class="ts-video-lazyload" data-allowfullscreen="" data-class="pt-plus-video-frame fitvidsignore" data-frameborder="0" data-scrolling="no" data-src="https://player.vimeo.com/video/' . esc_attr( $vimeo_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1" data-sandbox="allow-scripts allow-same-origin allow-presentation allow-forms" data-width="480" data-height="270"></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
+					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-' . esc_attr( $this->get_id() ) . '" ' . $mainsch . ' data-grow=""><div class="ts-video-embed-container" >' . $thumb_tag . '<h5 class="ts-video-title">' . $title . '</h5><span class="ts-video-lazyload" data-allowfullscreen="" data-class="pt-plus-video-frame fitvidsignore" data-frameborder="0" data-scrolling="no" data-src="https://player.vimeo.com/video/' . esc_attr( $vimeo_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1" data-sandbox="allow-scripts allow-same-origin allow-presentation allow-forms" data-width="480" data-height="270"></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
 
 					if ( ! empty( $markupsch ) ) {
 						$video_content .= '<div class="tp-video-upload" itemprop="uploadDate" content="' . esc_attr( $uploadate ) . '" style="display: none;"></div><div class="tp-video-upload" itemprop="contentUrl" content="https://player.vimeo.com/video/' . esc_attr( $vimeo_id ) . '?html5=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;autoplay=1" style="display: none;"></div>';
@@ -1712,7 +1755,7 @@ class ThePlus_Video_Player extends Plus_Widget_Base {
 
 					$video_content .= '</div></div>';
 				} elseif ( 'self-hosted' === $video_type ) {
-					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-' . esc_attr( $this->get_id() ) . '" ' . $mainsch . ' data-grow=""><div class="ts-video-embed-container" ><img class="ts-video-thumbnail" data-object-fit="" ' . $thumbsch . ' content="' . esc_url( $banner_image ) . '" src="' . esc_url( $banner_image ) . '" alt="' . esc_attr__( 'Video Thumbnail', 'tpebl' ) . '"><h5 class="ts-video-title">' . $title . '</h5><div class="video_container"><video class="ts-video-poster" width="100%" poster="' . esc_url( $banner_image ) . '" controls > <source src="' . esc_url( $mp4_link ) . '" type="video/mp4" ></video></div></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
+					$video_content .= '<div class="ts-video-wrapper ts-video-hover-effect-zoom ts-type-' . esc_attr( $video_type ) . '" data-mode="lazyload" data-provider="' . esc_attr( $video_type ) . '" id="ts-video-video-' . esc_attr( $this->get_id() ) . '" ' . $mainsch . ' data-grow=""><div class="ts-video-embed-container" >' . $thumb_tag . '<h5 class="ts-video-title">' . $title . '</h5><div class="video_container"><video class="ts-video-poster" width="100%" poster="' . esc_url( $banner_image ) . '" controls > <source src="' . esc_url( $mp4_link ) . '" type="video/mp4" ></video></div></span><button class="ts-video-play-btn ts-video-blay-btn-youtube" type="button">' . $image_video_url . '</button>';
 
 					if ( ! empty( $markupsch ) ) {
 						$video_content .= '<div class="tp-video-upload" itemprop="uploadDate" content="' . esc_attr( $uploadate ) . '" style="display: none;"></div><div class="tp-video-upload" itemprop="contentUrl" content="' . esc_url( $mp4_link ) . '" style="display: none;"></div>';

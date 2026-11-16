@@ -154,7 +154,7 @@ function tpae_mcp_add_theplus_blockquote_ability(array $input) {
     if (isset($input['quote_tweet_text'])) { $settings['quote_tweet_text'] = sanitize_text_field($input['quote_tweet_text']); }
     if (isset($input['quote_tweet_link'])) { $settings['quote_tweet_link'] = sanitize_text_field($input['quote_tweet_link']); }
     if (isset($input['quote_iamge_switch'])) { $settings['quote_iamge_switch'] = sanitize_text_field($input['quote_iamge_switch']); }
-    if (!empty($input['quote_image'])) { $settings['quote_image'] = ['id' => absint($input['quote_image'])]; }
+    if (!empty($input['quote_image'])) { $settings['quote_image'] = tpae_mcp_media_value($input['quote_image']); }
     if (isset($input['quote_dropcap'])) { $settings['quote_dropcap'] = sanitize_text_field($input['quote_dropcap']); }
     if (isset($input['border_layout'])) { $settings['border_layout'] = sanitize_text_field($input['border_layout']); }
     if (isset($input['quote_padding'])) { $settings['quote_padding'] = $input['quote_padding']; }

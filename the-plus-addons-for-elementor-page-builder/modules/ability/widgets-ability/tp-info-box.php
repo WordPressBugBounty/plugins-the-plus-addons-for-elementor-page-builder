@@ -204,7 +204,7 @@ function tpae_mcp_add_theplus_info_box_ability(array $input) {
     if (isset($input['image_icon'])) { $settings['image_icon'] = sanitize_text_field($input['image_icon']); }
     if (isset($input['tp_info_title'])) { $settings['tp_info_title'] = sanitize_text_field($input['tp_info_title']); }
     if (isset($input['svg_icon_options'])) { $settings['svg_icon_options'] = sanitize_text_field($input['svg_icon_options']); }
-    if (!empty($input['select_image'])) { $settings['select_image'] = ['id' => absint($input['select_image'])]; }
+    if (!empty($input['select_image'])) { $settings['select_image'] = tpae_mcp_media_value($input['select_image']); }
     if (isset($input['icon_font_style'])) { $settings['icon_font_style'] = sanitize_text_field($input['icon_font_style']); }
     if (isset($input['icon_fontawesome'])) { $settings['icon_fontawesome'] = sanitize_text_field($input['icon_fontawesome']); }
     if (isset($input['icon_fontawesome_5'])) { $settings['icon_fontawesome_5'] = tpae_mcp_sanitize_widget_setting_value($input['icon_fontawesome_5']); }

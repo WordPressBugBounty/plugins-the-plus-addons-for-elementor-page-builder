@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Plus Addons for Elementor 6.6.0\n"
+"Project-Id-Version: The Plus Addons for Elementor 6.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/the-plus-addons-for-elementor-page-builder\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-22T10:47:00+00:00\n"
+"POT-Creation-Date: 2026-11-13T10:46:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tpebl\n"
@@ -43,20 +43,20 @@ msgstr ""
 msgid "https://posimyth.com/"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:275
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:276
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:279
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:280
 msgid "success"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:708
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:783
 msgid "Rollback to Previous Version"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:770
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:845
 msgid "The rollback could not be completed. Please try again."
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:852
+#: includes/admin/dashboard/class-tpae-dashboard-ajax.php:927
 #: includes/admin/tpae-hooks/class-tpae-hooks.php:654
 #: includes/notices/class-tp-wdkit-preview-popup.php:185
 #: includes/preset/class-wdkit-preset.php:152
@@ -100,7 +100,6 @@ msgstr ""
 #: includes/admin/dashboard/class-tpae-dashboard-listing.php:152
 #: includes/admin/dashboard/class-tpae-dashboard-listing.php:296
 #: includes/admin/dashboard/class-tpae-dashboard-listing.php:443
-#: includes/nxt-ext/build/index.js:1
 msgid "Add New"
 msgstr ""
 
@@ -244,15 +243,15 @@ msgstr ""
 msgid "TP Team Member"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:206
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:213
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:230
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:237
 #: includes/notices/class-tp-widget-recipes-notice.php:190
 #: build/index.js:3
 #: build/index.js:8
 msgid "The Plus Addons"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:224
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:248
 #: modules/extensions/animation/class-tpae-gsap-controller.php:413
 #: modules/extensions/class-tpae-equal-height.php:197
 #: modules/extensions/global-control/class-tp-basic-global-controller.php:201
@@ -262,51 +261,49 @@ msgstr ""
 msgid "Widgets"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:225
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:249
 #: build/index.js:1
 #: build/index.js:8
 msgid "Extensions"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:230
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:232
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:254
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:256
 #: build/index.js:1
 #: build/index.js:7
 #: build/index.js:8
-#: includes/nxt-ext/build/index.js:1
 msgid "Theme Builder"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:237
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:261
 msgid "Starter Templates"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:259
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:266
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:283
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:290
 msgid "Submissions"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:261
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:285
 msgid "NEW"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:341
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:365
 #: includes/notices/class-tp-plugin-page.php:94
 #: build/index.js:6
 #: build/index.js:8
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:344
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:368
 #: includes/notices/class-tp-tpaepro-notice.php:117
 #: build/index.js:3
 #: build/index.js:6
 #: build/index.js:8
-#: includes/nxt-ext/build/index.js:1
 msgid "Upgrade Now"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:352
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:376
 #: build/index.js:1
 #: build/index.js:3
 #: build/index.js:7
@@ -314,13 +311,13 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:420
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:444
 #: build/index.js:3
 #: build/index.js:8
 msgid "Dashboard"
 msgstr ""
 
-#: includes/admin/dashboard/class-tpae-dashboard-meta.php:500
+#: includes/admin/dashboard/class-tpae-dashboard-meta.php:524
 msgid "Form Submissions"
 msgstr ""
 
@@ -444,13 +441,28 @@ msgid "All Unused Widgets Found!"
 msgstr ""
 
 #. translators: %d: Number of unused widgets
-#: includes/admin/tpae-hooks/class-tpae-widgets-scan.php:195
+#: includes/admin/tpae-hooks/class-tpae-widgets-scan.php:210
 #, php-format
 msgid "* %d Unused Widgets Found!"
 msgstr ""
 
+#: includes/admin/tpae-hooks/class-tpae-widgets-scan.php:233
+#: modules/widgets/tp_carousel_anything.php:138
+#: modules/widgets/tp_navigation_menu_lite.php:392
+#: modules/widgets/tp_switcher.php:131
+#: modules/widgets/tp_switcher.php:156
+#: modules/widgets/tp_switcher.php:293
+#: modules/widgets/tp_switcher.php:318
+#: modules/widgets/tp_tabs_tours.php:297
+msgid "Template"
+msgstr ""
+
+#: includes/admin/tpae-hooks/class-tpae-widgets-scan.php:250
+msgid "(no title)"
+msgstr ""
+
 #. translators: %d: Number of unused extensions
-#: includes/admin/tpae-hooks/class-tpae-widgets-scan.php:255
+#: includes/admin/tpae-hooks/class-tpae-widgets-scan.php:311
 #, php-format
 msgid "* %d Unused Extension Found!"
 msgstr ""
@@ -483,7 +495,7 @@ msgstr ""
 #: includes/notices/class-tp-ask-review-notice.php:194
 #: includes/notices/class-tp-expired-license-notice.php:305
 #: includes/notices/class-tp-tpaepro-notice.php:161
-#: includes/notices/class-tp-whats-new-notice.php:370
+#: includes/notices/class-tp-whats-new-notice.php:368
 #: includes/notices/class-tp-widget-recipes-notice.php:313
 #: includes/user-experience/update-popup/class-tp-update-popup.php:133
 msgid "You are not allowed to do this action"
@@ -507,6 +519,54 @@ msgstr ""
 
 #: includes/notices/class-tp-ask-review-notice.php:127
 msgid "Already Done"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:166
+msgid "Skip Multiple Plugin Subscriptions. Upgrade To The Plus Addons For Elementor Pro At 40% OFF"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:167
+msgid "Our Black Friday sale is live! Upgrade this season and get up to 40% OFF on the Pro version."
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:168
+msgid "Get offer"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:176
+msgid "Black Friday 40% OFF, Upgrade To The Lifetime Unlimited Sites Plan And Save $120 Today"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:177
+msgid "Upgrade now to the Lifetime plan for unlimited sites, continuous plugin updates, lifetime premium support and much more at an unbeatable price."
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:178
+#: build/index.js:8
+msgid "Upgrade now"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:190
+msgid "1,000+ Elementor Templates"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:191
+#: modules/widgets/theplus-profeatures.php:66
+#: build/index.js:3
+#: build/index.js:8
+msgid "120+ Elementor Widgets"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:192
+msgid "Theme Builder for Elementor & Code Snippets"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:193
+msgid "Trusted by 180K+ Users"
+msgstr ""
+
+#: includes/notices/class-tp-bf-banner.php:248
+msgid "You are not allowed to perform this action"
 msgstr ""
 
 #: includes/notices/class-tp-expired-license-notice.php:140
@@ -763,31 +823,31 @@ msgstr ""
 msgid "Learn More"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:253
+#: includes/notices/class-tp-whats-new-notice.php:251
 msgid "What is new in The Plus Addons for Elementor"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:263
-msgid "Meet the New Dashboard"
+#: includes/notices/class-tp-whats-new-notice.php:261
+msgid "Faster Pages with Lazy Load"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:266
-msgid "Widgets, extensions, settings and the Theme Builder, rebuilt to be clearer and quicker to use."
+#: includes/notices/class-tp-whats-new-notice.php:264
+msgid "Images on the first screen now load right away, and the rest no longer shift the layout as they appear."
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:270
-msgid "Open Dashboard"
+#: includes/notices/class-tp-whats-new-notice.php:268
+msgid "Open Lazy Load Settings"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:274
+#: includes/notices/class-tp-whats-new-notice.php:272
 msgid "What else changed"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:275
+#: includes/notices/class-tp-whats-new-notice.php:273
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: includes/notices/class-tp-whats-new-notice.php:366
+#: includes/notices/class-tp-whats-new-notice.php:364
 #: includes/notices/class-tp-widget-recipes-notice.php:309
 msgid "Security check failed"
 msgstr ""
@@ -848,8 +908,8 @@ msgid "Allow"
 msgstr ""
 
 #: includes/posimyth-sdk/class-posimyth-consent-notice.php:270
+#: build/index.js:3
 #: build/index.js:6
-#: build/index.js:7
 msgid "Dismiss"
 msgstr ""
 
@@ -1004,6 +1064,10 @@ msgstr ""
 
 #: modules/ability/class-tp-ability-main.php:129
 msgid "Abilities for The Plus Addons for Elementor widgets."
+msgstr ""
+
+#: modules/ability/class-tp-ability-main.php:237
+msgid "Read-only: on the REST run endpoint, call it with GET and pass the input as the \"input\" query parameter (POST returns 405)."
 msgstr ""
 
 #. translators: %s is the requested Angie tool id.
@@ -2389,14 +2453,7 @@ msgstr ""
 msgid "Elementor document not found for post ID %d."
 msgstr ""
 
-#. translators: %d: post ID
-#: modules/ability/core-elementor/mcp-tools/class-elementor-data.php:234
-#: modules/ability/widgets-ability/tp-text-block.php:261
-#, php-format
-msgid "Post %d was not built with Elementor and already has content; adding Elementor data would replace it. Duplicate it with tpae/duplicate-page or build on a new page instead."
-msgstr ""
-
-#: modules/ability/core-elementor/mcp-tools/class-elementor-data.php:292
+#: modules/ability/core-elementor/mcp-tools/class-elementor-data.php:288
 msgid "Failed to encode element data as JSON."
 msgstr ""
 
@@ -3455,11 +3512,17 @@ msgstr ""
 msgid "Elementor document not found for this post."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-text-block.php:270
+#. translators: %d: post ID
+#: modules/ability/widgets-ability/tp-text-block.php:263
+#, php-format
+msgid "Post %d was not built with Elementor and already has content; adding Elementor data would replace it. Duplicate it with tpae/duplicate-page or build on a new page instead."
+msgstr ""
+
+#: modules/ability/widgets-ability/tp-text-block.php:290
 msgid "Elementor document not found for save."
 msgstr ""
 
-#: modules/ability/widgets-ability/tp-text-block.php:292
+#: modules/ability/widgets-ability/tp-text-block.php:319
 msgid "Failed to encode Elementor data."
 msgstr ""
 
@@ -3665,23 +3728,23 @@ msgstr ""
 msgid "Enable Theme Builder"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:521
+#: modules/enqueue/plus-generator.php:592
 msgid "Pause automatic slideshow"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:522
+#: modules/enqueue/plus-generator.php:593
 msgid "Play automatic slideshow"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:979
+#: modules/enqueue/plus-generator.php:1062
 msgid "The Plus Performance"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:990
+#: modules/enqueue/plus-generator.php:1073
 msgid "Purge All Pages"
 msgstr ""
 
-#: modules/enqueue/plus-generator.php:1001
+#: modules/enqueue/plus-generator.php:1084
 msgid "Purge Current Page"
 msgstr ""
 
@@ -9183,12 +9246,6 @@ msgstr ""
 msgid "Go limitless with the premium version of The Plus Addons for Elementor to unlock more features and create unique websites."
 msgstr ""
 
-#: modules/widgets/theplus-profeatures.php:66
-#: build/index.js:3
-#: build/index.js:8
-msgid "120+ Elementor Widgets"
-msgstr ""
-
 #: modules/widgets/theplus-profeatures.php:67
 msgid "1000+ Ready to Use Elementor Templates"
 msgstr ""
@@ -10534,7 +10591,6 @@ msgstr ""
 #: modules/widgets/tp_tabs_tours.php:2009
 #: build/index.js:1
 #: build/index.js:8
-#: includes/nxt-ext/build/index.js:1
 msgid "Active"
 msgstr ""
 
@@ -13072,7 +13128,6 @@ msgstr ""
 
 #: modules/widgets/tp_blog_listout.php:1734
 #: modules/widgets/tp_dynamic_categories.php:647
-#: includes/nxt-ext/build/index.js:1
 msgid "Create Archive Page"
 msgstr ""
 
@@ -13876,16 +13931,6 @@ msgstr ""
 #: modules/widgets/tp_switcher.php:152
 #: modules/widgets/tp_switcher.php:314
 msgid "Content Type"
-msgstr ""
-
-#: modules/widgets/tp_carousel_anything.php:138
-#: modules/widgets/tp_navigation_menu_lite.php:392
-#: modules/widgets/tp_switcher.php:131
-#: modules/widgets/tp_switcher.php:156
-#: modules/widgets/tp_switcher.php:293
-#: modules/widgets/tp_switcher.php:318
-#: modules/widgets/tp_tabs_tours.php:297
-msgid "Template"
 msgstr ""
 
 #: modules/widgets/tp_carousel_anything.php:139
@@ -16755,7 +16800,7 @@ msgid "Add a custom CSS class to style or target this hover card."
 msgstr ""
 
 #: modules/widgets/tp_hovercard.php:198
-#: assets/js/admin/tpae-deactivation-design.js:21
+#: assets/js/admin/tpae-deactivation-design.js:32
 #: build/index.js:1
 #: build/index.js:3
 #: build/index.js:6
@@ -18006,7 +18051,6 @@ msgstr ""
 
 #: modules/widgets/tp_page_scroll.php:566
 #: build/index.js:7
-#: includes/nxt-ext/build/index.js:1
 msgid "Footer"
 msgstr ""
 
@@ -18848,13 +18892,11 @@ msgstr ""
 
 #: modules/widgets/tp_post_content.php:111
 #: modules/widgets/tp_post_title.php:108
-#: includes/nxt-ext/build/index.js:1
 msgid "Single Page"
 msgstr ""
 
 #: modules/widgets/tp_post_content.php:112
 #: modules/widgets/tp_post_title.php:109
-#: includes/nxt-ext/build/index.js:1
 msgid "Archive Page"
 msgstr ""
 
@@ -18926,7 +18968,6 @@ msgstr ""
 
 #: modules/widgets/tp_post_featured_image.php:122
 #: build/index.js:7
-#: includes/nxt-ext/build/index.js:1
 msgid "Section"
 msgstr ""
 
@@ -22089,7 +22130,6 @@ msgid "Copied Text"
 msgstr ""
 
 #: modules/widgets/tp_syntax_highlighter.php:278
-#: includes/nxt-ext/build/index.js:1
 msgid "Copied!"
 msgstr ""
 
@@ -23059,8 +23099,8 @@ msgid "Mobile Columns"
 msgstr ""
 
 #: modules/widgets/tp_video_player.php:107
-#: modules/widgets/tp_video_player.php:1733
-#: modules/widgets/tp_video_player.php:1739
+#: modules/widgets/tp_video_player.php:1776
+#: modules/widgets/tp_video_player.php:1782
 msgid "Video"
 msgstr ""
 
@@ -23225,6 +23265,7 @@ msgid "Intro Byline"
 msgstr ""
 
 #: modules/widgets/tp_video_player.php:478
+#: build/index.js:3
 msgid "View"
 msgstr ""
 
@@ -23374,17 +23415,16 @@ msgstr ""
 msgid "play-icon"
 msgstr ""
 
-#: modules/widgets/tp_video_player.php:1559
+#: modules/widgets/tp_video_player.php:1580
 msgid "Pause video"
 msgstr ""
 
-#: modules/widgets/tp_video_player.php:1559
+#: modules/widgets/tp_video_player.php:1580
 msgid "Play video"
 msgstr ""
 
-#: modules/widgets/tp_video_player.php:1699
-#: modules/widgets/tp_video_player.php:1707
-#: modules/widgets/tp_video_player.php:1715
+#: modules/widgets/tp_video_player.php:1713
+#: modules/widgets/tp_video_player.php:1724
 msgid "Video Thumbnail"
 msgstr ""
 
@@ -23487,8 +23527,7 @@ msgstr ""
 
 #: widgets_loader.php:225
 #: assets/js/admin/tp-elementor-install.js:14
-#: includes/nxt-ext/build/index.js:1
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:155
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:154
 msgid "Activate Now"
 msgstr ""
 
@@ -24392,6 +24431,16 @@ msgid "Not at all. Performance is our priority. WDesignKit will load assets of o
 msgstr ""
 
 #: build/index.js:3
+#: build/index.js:8
+msgid "Your change was not saved."
+msgstr ""
+
+#: build/index.js:3
+#: build/index.js:8
+msgid "The switch has been set back. Please check your connection and try again."
+msgstr ""
+
+#: build/index.js:3
 #: build/index.js:6
 #: build/index.js:8
 msgid "Free"
@@ -24406,6 +24455,18 @@ msgstr ""
 #: build/index.js:6
 #: build/index.js:8
 msgid "Pro"
+msgstr ""
+
+#. translators: %s: Widget name.
+#: build/index.js:3
+#, js-format
+msgid "See where %s is used"
+msgstr ""
+
+#. translators: %s: Number of pages, posts or templates the widget is on.
+#: build/index.js:3
+#, js-format
+msgid "Used · %s"
 msgstr ""
 
 #: build/index.js:3
@@ -24552,6 +24613,46 @@ msgstr ""
 msgid "%s Features"
 msgstr ""
 
+#. translators: %s: Widget name.
+#: build/index.js:3
+#, js-format
+msgid "Where %s is used"
+msgstr ""
+
+#: build/index.js:3
+msgid "Pages, posts and templates that have this widget, including drafts and items in the trash."
+msgstr ""
+
+#. translators: %s: Page, post or template title.
+#: build/index.js:3
+#, js-format
+msgid "View %s"
+msgstr ""
+
+#. translators: %s: Page, post or template title.
+#: build/index.js:3
+#, js-format
+msgid "Open %s in the trash"
+msgstr ""
+
+#. translators: %s: Page, post or template title.
+#: build/index.js:3
+#, js-format
+msgid "Edit %s with Elementor"
+msgstr ""
+
+#: build/index.js:3
+msgid "Open Trash"
+msgstr ""
+
+#: build/index.js:3
+msgid "Edit"
+msgstr ""
+
+#: build/index.js:3
+msgid "Only the first 50 are shown."
+msgstr ""
+
 #: build/index.js:3
 msgid "Free with The Plus Addons PRO"
 msgstr ""
@@ -24596,6 +24697,18 @@ msgid "AI Compatible"
 msgstr ""
 
 #: build/index.js:4
+msgid "Templates could not load"
+msgstr ""
+
+#: build/index.js:4
+msgid "We could not reach the template library. Please check your connection and try again."
+msgstr ""
+
+#: build/index.js:4
+msgid "Try again"
+msgstr ""
+
+#: build/index.js:4
 msgid "No templates found"
 msgstr ""
 
@@ -24631,7 +24744,6 @@ msgid "Download Now"
 msgstr ""
 
 #: build/index.js:5
-#: includes/nxt-ext/build/index.js:1
 msgid "Import"
 msgstr ""
 
@@ -24805,7 +24917,7 @@ msgid "If you do not plan to use Global CSS from Nexter Blocks and prefer to loa
 msgstr ""
 
 #: build/index.js:6
-msgid "We are adding Lazy Load Functionality in each of our widgets. It's in beta version at this moment but completely implemented very soon. It will help you drastically in Google Web Vitals."
+msgid "Images in our widgets load only when they come into view. Images on the first screen load right away, so pages show faster and score better in Core Web Vitals."
 msgstr ""
 
 #: build/index.js:6
@@ -25161,6 +25273,11 @@ msgid "Thank You Page"
 msgstr ""
 
 #: build/index.js:6
+#: build/index.js:8
+msgid "That did not work. Please try again."
+msgstr ""
+
+#: build/index.js:6
 msgid "Privacy"
 msgstr ""
 
@@ -25231,6 +25348,14 @@ msgid "*Keep Blank if you want to keep default Name"
 msgstr ""
 
 #: build/index.js:7
+msgid "Listing settings were not saved."
+msgstr ""
+
+#: build/index.js:7
+msgid "Please try again."
+msgstr ""
+
+#: build/index.js:7
 #: build/index.js:8
 msgid "Save settings"
 msgstr ""
@@ -25296,7 +25421,6 @@ msgid "The category taxonomy value your theme registers. E.g.: \"%s\"."
 msgstr ""
 
 #: build/index.js:7
-#: includes/nxt-ext/build/index.js:1
 msgid "Header"
 msgstr ""
 
@@ -25321,7 +25445,6 @@ msgid "Breadcrumb"
 msgstr ""
 
 #: build/index.js:7
-#: includes/nxt-ext/build/index.js:1
 msgid "Breadcrumbs"
 msgstr ""
 
@@ -25366,7 +25489,6 @@ msgid "Hook"
 msgstr ""
 
 #: build/index.js:7
-#: includes/nxt-ext/build/index.js:1
 msgid "Hooks"
 msgstr ""
 
@@ -25387,13 +25509,11 @@ msgid "What visitors see when a page does not exist."
 msgstr ""
 
 #: build/index.js:7
-#: includes/nxt-ext/build/index.js:1
 msgid "Activate Nexter Extension"
 msgstr ""
 
 #: build/index.js:7
 #: build/index.js:8
-#: includes/nxt-ext/build/index.js:1
 msgid "Install Nexter Extension"
 msgstr ""
 
@@ -25423,7 +25543,7 @@ msgstr ""
 
 #: build/index.js:7
 #: build/index.js:8
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:220
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:219
 msgid "Activated"
 msgstr ""
 
@@ -25488,10 +25608,6 @@ msgstr ""
 
 #: build/index.js:8
 msgid "All assets purged"
-msgstr ""
-
-#: build/index.js:8
-msgid "That did not work. Please try again."
 msgstr ""
 
 #: build/index.js:8
@@ -25772,7 +25888,6 @@ msgid "Enter your key"
 msgstr ""
 
 #: build/index.js:8
-#: includes/nxt-ext/build/index.js:1
 msgid "Deactivate"
 msgstr ""
 
@@ -25933,7 +26048,6 @@ msgid "Version"
 msgstr ""
 
 #: build/index.js:8
-#: includes/nxt-ext/build/index.js:1
 msgid "System Info"
 msgstr ""
 
@@ -26177,10 +26291,6 @@ msgid "Use code"
 msgstr ""
 
 #: build/index.js:8
-msgid "Upgrade now"
-msgstr ""
-
-#: build/index.js:8
 msgid "See every widget"
 msgstr ""
 
@@ -26246,6 +26356,7 @@ msgstr ""
 msgid "Guides for every widget, with examples you can copy."
 msgstr ""
 
+#. translators: %d: Number of enabled widgets.
 #: build/index.js:8
 #, js-format
 msgid "%d widget is enabled and ready in the editor."
@@ -26301,184 +26412,16 @@ msgstr ""
 msgid "Retry"
 msgstr ""
 
-#: includes/nxt-ext/build/index.js:1
-msgid "No Templates Found"
+#: build/index.js:8
+msgid "The dashboard could not load."
 msgstr ""
 
-#: includes/nxt-ext/build/index.js:1
-msgid "Looks like you don’t have any templates yet. Would you like to create one now?"
+#: build/index.js:8
+msgid "Your settings are safe. Please reload the page to try again."
 msgstr ""
 
-#: includes/nxt-ext/build/index.js:1
-msgid "Create "
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create Header"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Header"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create Footer"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Footer"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create Breadcrumb"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Breadcrumb"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create Section"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Section"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create Singular"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Singular"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Archive"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create Hooks"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add Hooks"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Create 404 Page"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Add 404 Page"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Import Pre-Designed Section"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Import Pre-Designed Templates for Theme Builder"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Build your website faster with ready-to-use templates"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Fully customizable to match your brand and style"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Save time by avoiding repetitive design work"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Flexible layouts for headers, footers, pages, and more"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Activate WDesignKit to Import Templates"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Install WDesignKit to Import Templates"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Click to Know How it Works"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "What is a Sections?"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Reusable content blocks that can be placed anywhere on your site, like a banner, promo strip, or CTA. They save time since you design once and reuse across multiple pages."
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Draft"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Updating..."
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Inactive"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Theme builder template"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Edit "
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Last Updated :"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "All Layout"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "404 Page"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Import Templates"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Choose a Nexter Theme Builder template XML file of Builder templates, and add them to the list of templates available in your builder."
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Choose Template"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Choose File"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Please Install Nexter Extension to Enable Theme Builder."
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Switch to table view"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Activated Now"
-msgstr ""
-
-#: includes/nxt-ext/build/index.js:1
-msgid "Version "
+#: build/index.js:8
+msgid "Reload"
 msgstr ""
 
 #: modules/controls/theme-builder/theplus-editor-theme-builder.js:5
@@ -26550,10 +26493,11 @@ msgid "We enable these widgets in your WordPress site"
 msgstr ""
 
 #: modules/widget-promotion/tp-widget-promotion/tp-widgets-load.js:120
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:117
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:116
 msgid "Pro Widget"
 msgstr ""
 
+#. translators: 1: Pro plugin name, 2: Coupon code.
 #: modules/widget-promotion/tp-widget-promotion/tp-widgets-load.js:144
 #, js-format
 msgid "Unlock this widget by upgrading to %1$s. Use Code %2$s to get FLAT 20%% OFF now."
@@ -26563,15 +26507,15 @@ msgstr ""
 msgid "Live Demos"
 msgstr ""
 
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:130
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:129
 msgid "View Demos"
 msgstr ""
 
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:151
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:150
 msgid "This widget is turned off in The Plus settings. Click Activate to turn it on."
 msgstr ""
 
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:233
-#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:239
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:232
+#: modules/widget-promotion/tp-widgets-show/tp-widgets-show.js:238
 msgid "Active Widget"
 msgstr ""

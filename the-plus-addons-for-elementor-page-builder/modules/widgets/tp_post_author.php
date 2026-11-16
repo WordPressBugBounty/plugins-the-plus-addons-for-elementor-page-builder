@@ -908,11 +908,8 @@ class ThePlus_Post_Author extends Plus_Widget_Base {
 			}
 		}
 		$output = '<div class="tp-post-author-info">';
-			/*
 			$ll_bg   = tp_bg_lazyLoad( $settings['boxBg_image'], $settings['boxBgHover_image'] );
-			$output .= '<div class="tp-author-details ' . esc_attr( $style ) . ' ' . $ll_bg . '">'; */
-
-			$output .= '<div class="tp-author-details ' . esc_attr( $style ) . ' ">';
+			$output .= '<div class="tp-author-details ' . esc_attr( $style . $ll_bg ) . ' ">';
 		if ( ! empty( $show_avatar ) ) {
 			$output .= $outputavatar;
 		}

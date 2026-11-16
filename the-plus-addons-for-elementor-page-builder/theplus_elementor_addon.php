@@ -3,7 +3,7 @@
  * Plugin Name: The Plus Addons for Elementor
  * Plugin URI: https://theplusaddons.com/
  * Description: Highly Customisable 120+ Advanced Elementor Widgets & Extensions for Performance Driven Website.
- * Version: 6.6.0
+ * Version: 6.6.1
  * Author: POSIMYTH
  * Author URI: https://posimyth.com/
  * Requires at least: 6.0
@@ -13,8 +13,8 @@
  * Domain Path: /languages
  * License: GPLv3
  * License URI: https://opensource.org/licenses/GPL-3.0
- * Elementor tested up to: 4.3
- * Elementor Pro tested up to: 4.3
+ * Elementor tested up to: 4.4
+ * Elementor Pro tested up to: 4.4
  *
  * @package the-plus-addons-for-elementor-page-builder
  */
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'L_THEPLUS_VERSION', '6.6.0' );
+define( 'L_THEPLUS_VERSION', '6.6.1' );
 
 /**
  * Minimum Elementor version.

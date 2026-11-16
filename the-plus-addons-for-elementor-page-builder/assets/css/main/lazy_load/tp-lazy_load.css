@@ -36,8 +36,11 @@
 	opacity: 0;
 	visibility:hidden;
 }
-.lazy-background {
-    background-image: none !important;
+/* Only the script removes .lazy-background, so hide the background only where scripts run. */
+@media (scripting: enabled) {
+    .lazy-background {
+        background-image: none !important;
+    }
 }
 
 /*double circle*/

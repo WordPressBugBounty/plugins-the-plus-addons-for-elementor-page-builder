@@ -187,8 +187,8 @@ if ( ! function_exists( 'theplus_free_uninstall_site' ) ) {
 				delete_option( 'tpae_version_active' );
 
 				// Remove per-post widget-detection meta (written on every Elementor page)
-				// + Pro form-submission meta.
-				$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ( 'tp_widgets', 'tpaep_submission_id' )" );
+				// + Pro form-submission meta + the lazy load blur placeholders.
+				$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ( 'tp_widgets', 'tpaep_submission_id', '_tp_lazy_blur' )" );
 
 				// Remove the generated CSS/JS cache directory (uploads/theplus-addons).
 				// L_THEPLUS_ASSET_PATH is NOT defined during uninstall, so derive the path

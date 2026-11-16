@@ -175,7 +175,7 @@ function tpae_mcp_add_theplus_gallery_listout_ability(array $input)
     if (isset($input['filter_category'])) { $settings['filter_category'] = sanitize_text_field($input['filter_category']); }
     if (isset($input['filter_category_options'])) { $settings['filter_category_options'] = sanitize_text_field($input['filter_category_options']); }
     if (isset($input['display_icon_zoom'])) { $settings['display_icon_zoom'] = sanitize_text_field($input['display_icon_zoom']); }
-    if (!empty($input['custom_icon_image'])) { $settings['custom_icon_image'] = ['id' => absint($input['custom_icon_image'])]; }
+    if (!empty($input['custom_icon_image'])) { $settings['custom_icon_image'] = tpae_mcp_media_value($input['custom_icon_image']); }
     if (isset($input['icon_size'])) { $settings['icon_size'] = $input['icon_size']; }
     if (isset($input['icon_bottom_space'])) { $settings['icon_bottom_space'] = $input['icon_bottom_space']; }
     if (isset($input['icon_color'])) { $settings['icon_color'] = sanitize_text_field($input['icon_color']); }

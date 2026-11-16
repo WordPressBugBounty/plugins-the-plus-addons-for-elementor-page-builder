@@ -161,6 +161,10 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				case 'tpae_whats_new_close':
 					$response = $this->tpae_whats_new_close();
 					break;
+				default:
+					// An unknown type used to reach wp_send_json() with $response unset: a PHP warning and a bare null.
+					$response = $this->tpae_set_response( false, 'Invalid type.', 'Something went wrong.' );
+					break;
 			}
 
 			wp_send_json( $response );
@@ -354,6 +358,11 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 				return $this->tpae_set_response( false, 'oops.', 'oops.' );
 			}
 
+			$base_raw = isset( $_POST['widget_base'] ) ? wp_unslash( $_POST['widget_base'] ) : '';
+			$base     = is_string( $base_raw ) && '' !== $base_raw ? json_decode( $base_raw, true ) : null;
+
+			$widget_data = $this->tpae_merge_widget_list( is_array( $data ) ? $data : array(), $widget_data, is_array( $base ) ? $base : null );
+
 			update_option( 'theplus_options', $widget_data );
 
 			// Remove Elementor Disable Widget.
@@ -377,6 +386,58 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$this->tpae_backend_catch_remove();
 
 			return $this->tpae_set_response( true, 'Successfully.', 'Successfully.' );
+		}
+
+		/**
+		 * Works out the widget and extension lists to store.
+		 *
+		 * Only the two lists the dashboard owns are taken from the request, each as a list of
+		 * names; anything else in the option is kept as it was, and anything else in the request
+		 * is ignored.
+		 *
+		 * The dashboard sends the list it changed (`$next`) and, from 6.6.1, the list it started
+		 * from (`$base`). With a base only this change is applied - names turned on are added,
+		 * names turned off are removed - so a second tab working from an older list no longer
+		 * undoes the first tab's changes. Without one (older screens, the reload re-save) the
+		 * list is replaced, as before.
+		 *
+		 * @since 6.6.1
+		 *
+		 * @param array      $current What is stored now.
+		 * @param array      $next    The list sent by the dashboard.
+		 * @param array|null $base    The list that change was made from, if sent.
+		 * @return array
+		 */
+		private function tpae_merge_widget_list( array $current, array $next, $base ) {
+			$names = static function ( $list ) {
+				if ( ! is_array( $list ) ) {
+					return array();
+				}
+				$list = array_filter( $list, 'is_string' );
+				return array_values( array_unique( array_map( 'sanitize_text_field', $list ) ) );
+			};
+
+			$result = $current;
+
+			foreach ( array( 'check_elements', 'extras_elements' ) as $key ) {
+				if ( ! array_key_exists( $key, $next ) ) {
+					continue;
+				}
+
+				$now = $names( $next[ $key ] );
+
+				if ( is_array( $base ) && array_key_exists( $key, $base ) ) {
+					$was        = $names( $base[ $key ] );
+					$turned_on  = array_diff( $now, $was );
+					$turned_off = array_diff( $was, $now );
+					$stored     = $names( isset( $current[ $key ] ) ? $current[ $key ] : array() );
+					$now        = array_values( array_unique( array_merge( array_diff( $stored, $turned_off ), $turned_on ) ) );
+				}
+
+				$result[ $key ] = $now;
+			}
+
+			return $result;
 		}
 
 		/**
@@ -572,8 +633,22 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		public function tpae_set_listing_data() {
 			$get_listing = get_option( 'post_type_options' );
 
-			$listing_data = isset( $_POST['listing_data'] ) ? sanitize_text_field( wp_unslash( $_POST['listing_data'] ) ) : '';
-			$listing_data = json_decode( $listing_data, true );
+			/**
+			 * Decode first, sanitize the values after. Running sanitize_text_field over the JSON
+			 * string could mangle it, and a missing, truncated or malformed body decoded to null -
+			 * which was then written over the option, erasing every Listing setting while the
+			 * screen reported success. The same fix 6.5.1 made for the Extra Options save.
+			 *
+			 * @since 6.6.1
+			 */
+			$listing_raw  = isset( $_POST['listing_data'] ) ? wp_unslash( $_POST['listing_data'] ) : '';
+			$listing_data = is_string( $listing_raw ) ? json_decode( $listing_raw, true ) : null;
+
+			if ( ! is_array( $listing_data ) ) {
+				return $this->tpae_set_response( false, 'Invalid data.', 'Could not read the submitted settings.' );
+			}
+
+			$listing_data = map_deep( $listing_data, 'sanitize_text_field' );
 
 			if ( false === $get_listing ) {
 				add_option( 'post_type_options', $listing_data, '', 'yes' );
@@ -1558,7 +1633,13 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 			$builder = array( 'nexter-blocks' );
 			do_action( 'wdkit_active_settings', $my_array, $builder );
 
-			if ( $onboarding ) {
+			/**
+			 * Judged by what is stored now, not by the value read before the write: on the first
+			 * real run that value was empty, so a successful setup was reported as a failure.
+			 *
+			 * @since 6.6.1
+			 */
+			if ( get_option( 'tpae_onbording_end' ) ) {
 				$response = $this->tpae_set_response( true, 'Onboarding Setup', 'Onboarding Setup');
 			} else {
 				$response = $this->tpae_set_response( false, 'Onboarding Setup Failed', 'Onboarding Setup Failed');
@@ -1578,16 +1659,22 @@ if ( ! class_exists( 'Tpae_Dashboard_Ajax' ) ) {
 		 */
 		public function tpae_whats_new_close() {
 
-			$updated = update_option( 'tpae_whats_new_notification', TPAE_WHATS_NEW_NOTIFICETIONS );
+			update_option( 'tpae_whats_new_notification', TPAE_WHATS_NEW_NOTIFICETIONS );
 			update_option( 'tpae_menu_notification', TPAE_MENU_NOTIFICETIONS );
 
-			if ( $updated ) {
+			/**
+			 * update_option() returns false when the value is already stored, so closing it a
+			 * second time (say, in another tab) was reported as a failure. Check the stored value.
+			 *
+			 * @since 6.6.1
+			 */
+			if ( (string) TPAE_WHATS_NEW_NOTIFICETIONS === (string) get_option( 'tpae_whats_new_notification' ) ) {
 				$response = $this->tpae_set_response( true, 'Whats New Closed', 'Whats New notification status updated successfully.');
 			} else {
-				$response = $this->tpae_set_response( false, 'Onboarding Setup Failed', 'Failed to update Whats New notification option.');
+				$response = $this->tpae_set_response( false, 'Whats New Close Failed', 'Failed to update Whats New notification option.');
 			}
 
-			wp_send_json( $response );
+			return $response;
 		}
 
 		/**

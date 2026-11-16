@@ -152,7 +152,7 @@ function tpae_mcp_add_theplus_age_gate_ability(array $input) {
     if (isset($input['age_gate_align'])) { $settings['age_gate_align'] = $input['age_gate_align']; }
     if (isset($input['age_icon_popover_toggle'])) { $settings['age_icon_popover_toggle'] = sanitize_text_field($input['age_icon_popover_toggle']); }
     if (isset($input['age_icon_img_type'])) { $settings['age_icon_img_type'] = sanitize_text_field($input['age_icon_img_type']); }
-    if (!empty($input['age_head_img'])) { $settings['age_head_img'] = ['id' => absint($input['age_head_img'])]; }
+    if (!empty($input['age_head_img'])) { $settings['age_head_img'] = tpae_mcp_media_value($input['age_head_img']); }
     if (isset($input['age_title_popover_toggle'])) { $settings['age_title_popover_toggle'] = sanitize_text_field($input['age_title_popover_toggle']); }
     if (isset($input['age_gate_title'])) { $settings['age_gate_title'] = sanitize_text_field($input['age_gate_title']); }
     if (isset($input['age_gate_title_input'])) { $settings['age_gate_title_input'] = sanitize_text_field($input['age_gate_title_input']); }
@@ -177,11 +177,11 @@ function tpae_mcp_add_theplus_age_gate_ability(array $input) {
     if (isset($input['age_cookies_days'])) { $settings['age_cookies_days'] = sanitize_text_field($input['age_cookies_days']); }
     if (isset($input['db_max_width'])) { $settings['db_max_width'] = $input['db_max_width']; }
     if (isset($input['age_sec_bg_image_switch'])) { $settings['age_sec_bg_image_switch'] = sanitize_text_field($input['age_sec_bg_image_switch']); }
-    if (!empty($input['age_sec_bg_image'])) { $settings['age_sec_bg_image'] = ['id' => absint($input['age_sec_bg_image'])]; }
+    if (!empty($input['age_sec_bg_image'])) { $settings['age_sec_bg_image'] = tpae_mcp_media_value($input['age_sec_bg_image']); }
     if (isset($input['age_bgImg_pos'])) { $settings['age_bgImg_pos'] = sanitize_text_field($input['age_bgImg_pos']); }
     if (isset($input['age_sec_bg_overlay_color'])) { $settings['age_sec_bg_overlay_color'] = sanitize_text_field($input['age_sec_bg_overlay_color']); }
     if (isset($input['age_side_image_show'])) { $settings['age_side_image_show'] = sanitize_text_field($input['age_side_image_show']); }
-    if (!empty($input['age_side_img'])) { $settings['age_side_img'] = ['id' => absint($input['age_side_img'])]; }
+    if (!empty($input['age_side_img'])) { $settings['age_side_img'] = tpae_mcp_media_value($input['age_side_img']); }
     if (isset($input['age_rightImg_pos'])) { $settings['age_rightImg_pos'] = sanitize_text_field($input['age_rightImg_pos']); }
     if (isset($input['age_gate_wrong_message'])) { $settings['age_gate_wrong_message'] = sanitize_text_field($input['age_gate_wrong_message']); }
     if (isset($input['logo_margin'])) { $settings['logo_margin'] = $input['logo_margin']; }

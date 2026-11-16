@@ -105,9 +105,19 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 		public function tpae_enqueue_scripts( $page ) {
 
 			if ( 'plugins.php' === $page ) {
-				wp_enqueue_style( 'tpae-deactivation-design-system', L_THEPLUS_URL . 'assets/css/admin/design-system.generated.css', array(), L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/css/admin/design-system.generated.css' ) );
-				wp_enqueue_style( 'tpae-deactivation-design', L_THEPLUS_URL . 'assets/css/admin/tpae-deactivation-design.css', array( 'tpae-deactivation-design-system' ), L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/css/admin/tpae-deactivation-design.css' ) );
+				/**
+				 * The survey's 119 KB of design-system styles are only needed if someone goes to
+				 * deactivate TPAE, so the small script below adds them the first time the pointer or
+				 * keyboard reaches TPAE's Deactivate link, instead of on every Plugins page visit.
+				 *
+				 * @since 6.6.1
+				 */
+				$tpae_deact_css = array(
+					L_THEPLUS_URL . 'assets/css/admin/design-system.generated.css?ver=' . L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/css/admin/design-system.generated.css' ),
+					L_THEPLUS_URL . 'assets/css/admin/tpae-deactivation-design.css?ver=' . L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/css/admin/tpae-deactivation-design.css' ),
+				);
 				wp_enqueue_script( 'tpae-deactivation-design', L_THEPLUS_URL . 'assets/js/admin/tpae-deactivation-design.js', array( 'jquery', 'wp-i18n' ), L_THEPLUS_VERSION . '.' . filemtime( L_THEPLUS_PATH . 'assets/js/admin/tpae-deactivation-design.js' ), true );
+				wp_add_inline_script( 'tpae-deactivation-design', 'window.tpaeDeactCss = ' . wp_json_encode( array_map( 'esc_url_raw', $tpae_deact_css ) ) . ';', 'before' );
 			}
 
 			wp_enqueue_style( 'tpae-db-icons-library', L_THEPLUS_ASSETS_URL . 'fonts/style.css', array(), L_THEPLUS_VERSION, false );
@@ -167,7 +177,18 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 					? $tpae_db_asset['dependencies']
 					: array( 'react', 'react-dom', 'react-jsx-runtime', 'wp-i18n', 'wp-element', 'wp-components' );
 
-				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', $tpae_db_deps, L_THEPLUS_VERSION . time(), true );
+				/**
+				 * The build's own content hash, so the 1.2 MB bundle is downloaded again only when it
+				 * changes. It was versioned with time(), which made every dashboard visit a fresh download.
+				 *
+				 * @since 6.6.1
+				 */
+				$tpae_db_hash = ( is_array( $tpae_db_asset ) && ! empty( $tpae_db_asset['version'] ) )
+					? $tpae_db_asset['version']
+					: (string) @filemtime( L_THEPLUS_PATH . 'build/index.js' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+				$tpae_db_ver  = L_THEPLUS_VERSION . '-' . $tpae_db_hash;
+
+				wp_enqueue_script( 'tpae-db-build', L_THEPLUS_URL . 'build/index.js', $tpae_db_deps, $tpae_db_ver, true );
 				wp_localize_script(
 					'tpae-db-build',
 					'tpae_db_object',
@@ -177,6 +198,9 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 						'tpae_nonce_old'       => wp_create_nonce( 'theplus-addons' ),
 						'tpae_url'             => L_THEPLUS_URL,
 						'tpae_version'         => defined( 'THEPLUS_VERSION' ) ? THEPLUS_VERSION : L_THEPLUS_VERSION,
+						// Both, so the sidebar can name each product rather than show Pro's number as "Version".
+						'tpae_free_version'    => L_THEPLUS_VERSION,
+						'tpae_pro_version'     => defined( 'THEPLUS_VERSION' ) ? THEPLUS_VERSION : '',
 						'tpae_wdkit_url'       => L_THEPLUS_WDKIT_URL,
 						'tpae_wp_version'      => get_bloginfo( 'version' ),
 						'tpae_pro'             => defined( 'THEPLUS_VERSION' ) ? 1 : 0,
@@ -191,7 +215,7 @@ if ( ! class_exists( 'Tpae_Dashboard_Meta' ) ) {
 
 				wp_set_script_translations( 'tpae-db-build', 'tpebl' );
 
-				wp_enqueue_style( 'tpae-db-build', L_THEPLUS_URL . 'build/index.css', array(), L_THEPLUS_VERSION . time(), 'all' );
+				wp_enqueue_style( 'tpae-db-build', L_THEPLUS_URL . 'build/index.css', array(), $tpae_db_ver, 'all' );
 
 			}
 		}

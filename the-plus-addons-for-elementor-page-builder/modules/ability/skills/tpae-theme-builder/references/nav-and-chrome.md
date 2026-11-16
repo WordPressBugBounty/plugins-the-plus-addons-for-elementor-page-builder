@@ -6,6 +6,8 @@ Notes for the TPAE navigation and site-chrome widgets. **`list-widgets`** is aut
 
 - **Navigation Menu Lite (`tpae-navigation-menu-lite`, free)** - a standard horizontal/vertical menu from a WP menu. The free header nav; good default when mega content isn't needed.
 - **Navigation Menu (`tpaep-navigation-menu`, Pro)** - mega menu: multi-column dropdowns that can hold saved templates/rich content, badges, icons. Use when submenus need layout, not just links. Read its source + layout keys carefully.
+  - **Mega menu structure (custom `ItemMenu`):** a mega menu is a *child*, never the top-level item. Add the top-level item with `depth: "0"`, then **directly after it** an item with `depth: "1"`, `SmenuType: "mega-menu"` and `blockTemp` set to a saved Elementor template ID (optional `megaMType`: `default` / `container` / `full-width`). `SmenuType: "mega-menu"` on a depth `0` item, a missing `blockTemp`, or a mega item that doesn't follow its parent is refused with an error.
+  - **Links:** send `LinkFilter: {url, is_external, nofollow}`. Missing `is_external` / `nofollow` are saved as off, so set them only when you want a new tab or `rel="nofollow"`.
 - **Mobile Menu (`tpaep-mobile-menu`, Pro)** - dedicated mobile/off-canvas menu with its own trigger and breakpoint. Pair with either menu above; declare where the trigger sits and the breakpoint it takes over.
 
 ## Header utilities

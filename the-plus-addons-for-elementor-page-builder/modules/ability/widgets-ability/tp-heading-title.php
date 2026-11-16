@@ -216,7 +216,7 @@ function tpae_mcp_add_theplus_heading_title_ability(array $input) {
     if (isset($input['text_stagger_sub_txt'])) { $settings['text_stagger_sub_txt'] = sanitize_text_field($input['text_stagger_sub_txt']); }
     if (isset($input['text_ease_sub_txt'])) { $settings['text_ease_sub_txt'] = sanitize_text_field($input['text_ease_sub_txt']); }
     if (isset($input['text_repeat_sub_txt'])) { $settings['text_repeat_sub_txt'] = sanitize_text_field($input['text_repeat_sub_txt']); }
-    if (!empty($input['sep_img'])) { $settings['sep_img'] = ['id' => absint($input['sep_img'])]; }
+    if (!empty($input['sep_img'])) { $settings['sep_img'] = tpae_mcp_media_value($input['sep_img']); }
     if (isset($input['input_margin'])) { $settings['input_margin'] = $input['input_margin']; }
     if (isset($input['double_color'])) { $settings['double_color'] = sanitize_text_field($input['double_color']); }
     if (isset($input['double_top'])) { $settings['double_top'] = sanitize_text_field($input['double_top']); }

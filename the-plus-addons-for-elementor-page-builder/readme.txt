@@ -4,7 +4,7 @@ Tags: elementor addons, elementor templates, mega menu, woocommerce, elementor w
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.6.0
+Stable tag: 6.6.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -561,6 +561,38 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 12. Unique 22+ Elementor Extensions
 
 == Changelog ==
+
+= 6.6.1 =
+Improvement : Lazy Load : Images in the first screen now load right away, for a faster first paint
+Improvement : Lazy Load : Images added after the page loads, such as by Load More, infinite scroll and filters, now load
+Improvement : Lazy Load : Blur effect now uses a tiny inline preview instead of an extra image request
+Improvement : Lazy Load : Now also covers the Video Player banner and the Post Author background
+Improvement : Assets : A rebuilt bundle file now gets a new URL, so browsers and CDNs fetch the update after clearing the cache
+Improvement : Assets : Pages without script-based widgets no longer rebuild their bundle on every visit in merged file mode
+Improvement : Assets : Per-widget styles in separate file caching are versioned with the plugin, so browsers cache them across pages
+Improvement : Assets : plus-extra-adv.min.css is versioned with the plugin, so browsers cache it across pages in Smart Optimized mode
+Improvement : Dashboard : What's New, Settings Configure and extension options now open as a side drawer on screens narrower than 1280px
+Improvement : Dashboard : Dashboard files now load from the browser cache between visits instead of downloading again each time
+Improvement : Dashboard : Shows an error with a retry button when its data fails to load
+Improvement : Dashboard : The sidebar now shows the Free and Pro versions separately
+Improvement : Dashboard : Accessibility and text contrast fixes, including keyboard focus in side panels
+Improvement : Widget Scan : Shows where each used widget is, including drafts, templates and trash, with Edit and View links
+Improvement : Plugins : The deactivation survey styles now load only when you go to deactivate, not on every Plugins page visit
+Improvement : Package : Removed unused bundled Theme Builder files
+Improvement : AI Abilities : Read-only abilities now tell REST clients to call them with GET
+Improvement : AI Abilities : The theme builder skill now explains how to set up a mega menu item and its link options
+Fix : Lazy Load : Turning Lazy Load on or off now refreshes the caches, so images no longer go missing after the switch
+Fix : Lazy Load : Images and backgrounds now show when JavaScript is turned off
+Fix : Lazy Load : Images keep their final size while loading, with no layout shift
+Fix : Lazy Load : Script error when a lazy image had no element after it
+Fix : Dashboard : A failed save now shows an error and sets the switch or setting back, instead of looking saved
+Fix : Dashboard : Two dashboard tabs open at once no longer undo each other's widget changes
+Fix : Listing : An empty or broken save can no longer erase the Listing settings
+Fix : Assets : Per-widget styles no longer load twice in separate file caching
+Fix : Widget Promotion : The Pro and inactive widgets panels no longer hang an Elementor editor opened inside an iframe, like JetMenu's mega menu
+Fix : AI Abilities : Pages created by AI are now marked as built with Elementor, so they open in the Elementor editor
+Fix : AI Abilities : Images set by AI now save with their media library ID and URL
+Fix : Minor Bug Fixes & Performance Improvements
 
 = 6.6.0 =
 Update : Dashboard : New design for the plugin dashboard

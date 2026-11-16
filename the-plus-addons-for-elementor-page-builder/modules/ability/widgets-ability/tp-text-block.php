@@ -291,6 +291,13 @@ if (!function_exists('tpae_mcp_save_elementor_page_data')) {
         }
 
         /*
+         * Document::save() writes the rendered HTML into post_content but leaves
+         * _elementor_edit_mode empty, so the next write to a new page would fail the
+         * overwrite check above. Mark the page as built with Elementor first.
+         */
+        $document->set_is_built_with_elementor(true);
+
+        /*
          * Elementor save hooks re-render widgets (TPAE regenerates its per-post CSS/JS
          * bundles here). A notice or warning raised during that render would be written
          * straight into this ability response, prefixing the JSON with HTML and breaking
@@ -323,6 +330,54 @@ if (!function_exists('tpae_mcp_save_elementor_page_data')) {
         }
 
         return true;
+    }
+}
+
+if (!function_exists('tpae_mcp_media_value')) {
+    /**
+     * Builds an Elementor media control value from ability input.
+     *
+     * Media inputs are declared as objects, so a client sends {id, url, alt}. Casting
+     * that array with absint() saved every image as attachment 1. This accepts an
+     * object or array, an attachment ID, or a plain URL, and fills a missing URL from
+     * the attachment.
+     *
+     * @since 6.6.1
+     *
+     * @param mixed $value Ability input for a media control.
+     * @return array{id:int,url:string,alt?:string}
+     */
+    function tpae_mcp_media_value($value): array
+    {
+        if (is_object($value)) {
+            $value = (array) $value;
+        }
+
+        $alt = null;
+        if (is_array($value)) {
+            $id  = absint($value['id'] ?? 0);
+            $url = esc_url_raw((string) ($value['url'] ?? ''));
+            if (isset($value['alt'])) {
+                $alt = sanitize_text_field((string) $value['alt']);
+            }
+        } elseif (is_string($value) && !is_numeric($value)) {
+            $id  = 0;
+            $url = esc_url_raw($value);
+        } else {
+            $id  = absint($value);
+            $url = '';
+        }
+
+        if ('' === $url && $id > 0) {
+            $url = (string) wp_get_attachment_url($id);
+        }
+
+        $media = ['id' => $id, 'url' => $url];
+        if (null !== $alt) {
+            $media['alt'] = $alt;
+        }
+
+        return $media;
     }
 }
 

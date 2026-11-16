@@ -243,8 +243,8 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 			);
 			$logo_url = defined( 'L_THEPLUS_ASSETS_URL' ) ? L_THEPLUS_ASSETS_URL . 'svg/navbox/tpae-logomark.svg' : '';
 
-			// The headline is the redesigned dashboard, so the one button opens it.
-			$dashboard_url = admin_url( 'admin.php?page=theplus_welcome_page' );
+			// The headline is Lazy Load, so the one button opens the dashboard tab that has its switch.
+			$dashboard_url = admin_url( 'admin.php?page=theplus_welcome_page#/settings' );
 
 			$this->tp_styles();
 			?>
@@ -258,14 +258,14 @@ if ( ! class_exists( 'Tp_Whats_New_Notice' ) ) {
 
 				<div class="tpae-wn__txt">
 					<p class="tpae-wn__title">
-						<?php echo esc_html__( 'Meet the New Dashboard', 'tpebl' ); ?>
+						<?php echo esc_html__( 'Faster Pages with Lazy Load', 'tpebl' ); ?>
 					</p>
 					<p class="tpae-wn__desc">
-						<?php echo esc_html__( 'Widgets, extensions, settings and the Theme Builder, rebuilt to be clearer and quicker to use.', 'tpebl' ); ?>
+						<?php echo esc_html__( 'Images on the first screen now load right away, and the rest no longer shift the layout as they appear.', 'tpebl' ); ?>
 					</p>
 					<p class="tpae-wn__links">
 						<a class="tpae-wn__btn" href="<?php echo esc_url( $dashboard_url ); ?>">
-							<?php echo esc_html__( 'Open Dashboard', 'tpebl' ); ?>
+							<?php echo esc_html__( 'Open Lazy Load Settings', 'tpebl' ); ?>
 						</a>
 						<a class="tpae-wn__link" href="<?php echo esc_url( $log_url ); ?>" target="_blank" rel="noopener noreferrer">
 							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>

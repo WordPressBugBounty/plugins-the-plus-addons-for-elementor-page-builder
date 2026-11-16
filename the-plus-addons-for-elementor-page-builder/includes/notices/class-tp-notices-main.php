@@ -203,6 +203,11 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 
 				$check_license = $license_data ? $license_data['expires'] : '';
 
+				/** Black Friday sale: Free sites, and Pro sites without a lifetime licence */
+				if ( ! defined( 'THEPLUS_VERSION' ) || empty( $check_license ) || 'lifetime' !== $check_license ) {
+					include L_THEPLUS_PATH . 'includes/notices/class-tp-bf-banner.php';
+				}
+
 				/** Install TPAE Pro notice*/
 				if ( ! get_option( 'tpae_pro_promo_notice' ) ) {
 					if ( ! empty( $tpae_pro_details[0]['status'] ) && 'unavailable' === $tpae_pro_details[0]['status'] ) {
@@ -225,12 +230,6 @@ if ( ! class_exists( 'Tp_Notices_Main' ) ) {
 					if ( ! empty( $license_data ) && 'lifetime' !== $license_data['expires'] ) {
 						include L_THEPLUS_PATH . 'includes/notices/class-tp-expired-license-notice.php';
 					}
-				}
-
-				/** What's New in this release*/
-				$tpae_wn_release = defined( 'L_THEPLUS_VERSION' ) ? preg_replace( '/[-+].*$/', '', L_THEPLUS_VERSION ) : '';
-				if ( $tpae_wn_release && get_option( 'tpae_whats_new_dismissed' ) !== $tpae_wn_release ) {
-					include L_THEPLUS_PATH . 'includes/notices/class-tp-whats-new-notice.php';
 				}
 
 				/** Widget Recipes feature announcement (6.5.1) */

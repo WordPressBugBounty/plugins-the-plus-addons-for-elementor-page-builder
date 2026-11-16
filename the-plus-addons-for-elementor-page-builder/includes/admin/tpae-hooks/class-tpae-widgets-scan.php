@@ -165,8 +165,8 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 				return $output;
 			}
 
-			$scan_post_ids = array();
-			$countwidgets  = array();
+			$countwidgets = array();
+			$used_in      = array();
 
 			foreach ( $post_ids as $post_id ) {
 				if ( 'revision' === get_post_type( $post_id ) ) {
@@ -175,15 +175,30 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 
 				$get_widgets = $this->tpae_check_elements_status_scan( $post_id, $tp_widgets_list );
 
-				$scan_post_ids[ $post_id ] = $get_widgets;
-
 				if ( ! empty( $get_widgets ) ) {
+					$post_info = null;
+
 					foreach ( $get_widgets as $value ) {
 						if ( ! empty( $value ) && in_array( $value, $tp_widgets_list, true ) ) {
 							$countwidgets[ $value ] = ( isset( $countwidgets[ $value ] ) ? absint( $countwidgets[ $value ] ) : 0 ) + 1;
+
+							/* Up to 51 places per widget: the dashboard shows 50 and reads the 51st as "50+". */
+							if ( isset( $used_in[ $value ][ $post_id ] ) || ( isset( $used_in[ $value ] ) && count( $used_in[ $value ] ) > 50 ) ) {
+								continue;
+							}
+
+							if ( null === $post_info ) {
+								$post_info = $this->tpae_scan_post_info( $post_id );
+							}
+
+							$used_in[ $value ][ $post_id ] = $post_info;
 						}
 					}
 				}
+			}
+
+			foreach ( $used_in as $widget => $posts ) {
+				$used_in[ $widget ] = array_values( $posts );
 			}
 
 			$output = array();
@@ -194,10 +209,51 @@ if ( ! class_exists( 'Tpae_Widgets_Scan' ) ) {
 			/* translators: %d: Number of unused widgets */
 			$output['message'] = sprintf( __( '* %d Unused Widgets Found!', 'tpebl' ), $val3 );
 			$output['widgets'] = $countwidgets;
+			$output['used_in'] = $used_in;
 
 			$this->countwidgets = $countwidgets;
 
 			return $output;
+		}
+
+		/**
+		 * Scan Widget : Where a widget is used, so the dashboard can link to it.
+		 *
+		 * @since 6.6.1
+		 *
+		 * @param int $post_id The page, post or template the widget is on.
+		 */
+		public function tpae_scan_post_info( $post_id ) {
+			$post_type = get_post_type( $post_id );
+			$status    = get_post_status( $post_id );
+			$type      = '';
+
+			if ( 'elementor_library' === $post_type ) {
+				$template_type = get_post_meta( $post_id, '_elementor_template_type', true );
+				$type          = ! empty( $template_type ) ? ucwords( str_replace( array( '-', '_' ), ' ', $template_type ) ) . ' ' . __( 'Template', 'tpebl' ) : __( 'Template', 'tpebl' );
+			} else {
+				$type_object = get_post_type_object( $post_type );
+				$type        = ! empty( $type_object->labels->singular_name ) ? $type_object->labels->singular_name : $post_type;
+			}
+
+			$status_object = get_post_status_object( $status );
+			$title         = get_the_title( $post_id );
+
+			if ( 'trash' === $status ) {
+				$edit_url = admin_url( 'edit.php?post_status=trash&post_type=' . $post_type );
+			} else {
+				$edit_url = admin_url( 'post.php?post=' . absint( $post_id ) . '&action=elementor' );
+			}
+
+			return array(
+				'id'           => absint( $post_id ),
+				'title'        => '' !== $title ? wp_strip_all_tags( $title ) : __( '(no title)', 'tpebl' ),
+				'type'         => $type,
+				'status'       => $status,
+				'status_label' => ! empty( $status_object->label ) ? $status_object->label : $status,
+				'edit_url'     => $edit_url,
+				'view_url'     => 'publish' === $status && is_post_type_viewable( $post_type ) ? get_permalink( $post_id ) : '',
+			);
 		}
 
 		/**

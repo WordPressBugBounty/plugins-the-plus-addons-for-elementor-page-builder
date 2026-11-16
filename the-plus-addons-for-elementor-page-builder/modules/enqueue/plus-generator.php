@@ -372,6 +372,77 @@ class L_Plus_Generator {
 		return $version;
 	}
 
+	/**
+	 * Version for a generated bundle in the asset folder: a hash of its contents.
+	 *
+	 * get_post_version() returns Elementor's CSS time for the post, which "Clear all"
+	 * does not change, so a rebuilt bundle kept its old ?ver= and browsers and CDNs went
+	 * on serving the old file. A content hash changes exactly when the bundle does, and
+	 * stays put when a bundle is rewritten with the same contents, so browser caching
+	 * keeps working. The stat cache is cleared because the bundle may have been written
+	 * earlier in this request.
+	 *
+	 * The hash is stored with the file's modified time and size, so the file is only
+	 * read again after it has been rewritten, not on every page view.
+	 *
+	 * @since 6.6.1
+	 *
+	 * @param string $file     File name inside the asset folder.
+	 * @param string $fallback Version to use when the file is missing.
+	 */
+	public function get_file_version( $file, $fallback = '' ) {
+		static $versions = array();
+
+		$path = L_THEPLUS_ASSET_PATH . DIRECTORY_SEPARATOR . $file;
+
+		clearstatcache( true, $path );
+
+		if ( ! is_readable( $path ) ) {
+			return $fallback;
+		}
+
+		$stamp = filemtime( $path ) . '-' . filesize( $path );
+
+		if ( isset( $versions[ $path ] ) && $stamp === $versions[ $path ]['stamp'] ) {
+			return $versions[ $path ]['hash'];
+		}
+
+		$cache_key = 'tpae_file_ver_' . md5( $path );
+		$cached    = get_transient( $cache_key );
+
+		if ( is_array( $cached ) && isset( $cached['stamp'], $cached['hash'] ) && $stamp === $cached['stamp'] ) {
+			$versions[ $path ] = $cached;
+
+			return $cached['hash'];
+		}
+
+		$hash = hash_file( 'md5', $path );
+
+		if ( ! $hash ) {
+			return $fallback;
+		}
+
+		$versions[ $path ] = array(
+			'stamp' => $stamp,
+			'hash'  => substr( $hash, 0, 12 ),
+		);
+
+		set_transient( $cache_key, $versions[ $path ], WEEK_IN_SECONDS );
+
+		return $versions[ $path ]['hash'];
+	}
+
+	/**
+	 * Combined Free (+ Pro) version key, so updating either plugin changes it.
+	 *
+	 * @since 6.6.1
+	 */
+	public function get_release_version() {
+		return defined( 'THEPLUS_VERSION' )
+			? L_THEPLUS_VERSION . '-pro-' . THEPLUS_VERSION
+			: L_THEPLUS_VERSION;
+	}
+
 	public function remove_post_metadata( $post_id = '', $meta_key = '', $get_key_val = '', $old_key = '' ) {
 		if ( ! empty( $old_key ) ) {
 			$value = get_option( $old_key );
@@ -457,7 +528,7 @@ class L_Plus_Generator {
 
 				$js_file = L_THEPLUS_ASSET_URL . '/theplus-' . self::$tpae_post_type . '-' . self::$tpae_post_id . '.min.js';
 				if ( $this->check_css_js_cache_files( self::$tpae_post_type, self::$tpae_post_id, 'js' ) ) {
-					wp_enqueue_script( 'theplus-front-js', $this->pathurl_security( $js_file ), array( 'jquery' ), $plus_version, true );
+					wp_enqueue_script( 'theplus-front-js', $this->pathurl_security( $js_file ), array( 'jquery' ), $this->get_file_version( basename( $js_file ), $plus_version ), true );
 				}
 			}
 		}
@@ -626,8 +697,20 @@ class L_Plus_Generator {
 			// browser fetches it. We deliberately do NOT sync the update marker or
 			// clear requires_update here — doing so would stop the footer detection
 			// and any newly added widget would never get its CSS built.
+			//
+			// A JS bundle is only written when the widgets have JS to merge. Asking for
+			// one regardless meant a page without JS widgets never passed this check, so
+			// its CSS bundle was deleted and rewritten on every view.
+			$needs_js = false;
+			foreach ( $this->plus_dependency_widgets( $elements, 'js' ) as $js_path ) {
+				if ( file_exists( l_theplus_library()->secure_path_url( $js_path ) ) ) {
+					$needs_js = true;
+					break;
+				}
+			}
+
 			if ( ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'css' )
-				|| ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'js' ) ) {
+				|| ( $needs_js && ! $this->check_css_js_cache_files( $post_type, $queried_obj, 'js' ) ) ) {
 				$this->plus_generate_scripts( $elements, 'theplus-' . $post_type . '-' . $queried_obj );
 			}
 		}
@@ -655,6 +738,25 @@ class L_Plus_Generator {
 		// Separate File Caching
 		if ( $this->get_caching_option() && ! empty( $elements ) && $in_footer == false ) {
 			$separate_path = $this->plus_load_separate_file( $elements );
+
+			/*
+			 * These per-widget styles and scripts are STATIC plugin files that only change on a
+			 * plugin release, so they are versioned with the active plugin versions,
+			 * not the per-post timestamp in $plus_version. get_post_version() returns
+			 * Elementor's own CSS time first, so a plugin update did not change the
+			 * ?ver= string and browsers kept serving a fixed script from their
+			 * one-year cache (reported with the 6.5.2 carousel dots fix), while each
+			 * post gave the same stylesheet a different ?ver= and it was downloaded
+			 * again on every page. Free and Pro are both part of the key, as in the
+			 * cache version gate, so updating either one changes the URL. The
+			 * generated per-post bundles keep $plus_version because their contents
+			 * genuinely change.
+			 *
+			 * @since 6.5.3
+			 * @since 6.6.1 Styles too.
+			 */
+			$tp_release_version = $this->get_release_version();
+
 			if ( isset( $separate_path['css'] ) && ! empty( $separate_path['css'] ) ) {
 				$iji = 1;
 				foreach ( $separate_path['css'] as $key => $path ) {
@@ -668,30 +770,13 @@ class L_Plus_Generator {
 						$lastFolder   = basename( dirname( $css_sep_url ) );
 						$enq_name     = 'theplus-' . $css_file_key . '-' . $lastFolder;
 
-						wp_enqueue_style( $enq_name, $this->pathurl_security( $css_sep_url ), false, $plus_version );
+						wp_enqueue_style( $enq_name, $this->pathurl_security( $css_sep_url ), false, $tp_release_version );
 						++$iji;
 					}
 				}
 			}
 			if ( isset( $separate_path['js'] ) && ! empty( $separate_path['js'] ) ) {
 				$iji = 0;
-
-				/*
-				 * These per-widget scripts are STATIC plugin files that only change on a
-				 * plugin release, so they are versioned with the active plugin versions,
-				 * not the per-post timestamp in $plus_version. get_post_version() returns
-				 * Elementor's own CSS time first, so a plugin update did not change the
-				 * ?ver= string and browsers kept serving a fixed script from their
-				 * one-year cache (reported with the 6.5.2 carousel dots fix). Free and Pro
-				 * are both part of the key, as in the cache version gate, so updating
-				 * either one changes the URL. The generated per-post bundles keep
-				 * $plus_version because their contents genuinely change.
-				 *
-				 * @since 6.5.3
-				 */
-				$tp_release_version = defined( 'THEPLUS_VERSION' )
-					? L_THEPLUS_VERSION . '-pro-' . THEPLUS_VERSION
-					: L_THEPLUS_VERSION;
 
 				foreach ( $separate_path['js'] as $key => $path ) {
 					if ( is_readable( l_theplus_library()->secure_path_url( $path ) ) ) {
@@ -712,14 +797,14 @@ class L_Plus_Generator {
 		} elseif ( $this->get_caching_option() == false ) {
 			if ( $this->check_css_js_cache_files( self::$tpae_post_type, self::$tpae_post_id, 'css' ) && $in_footer == false ) {
 				$css_file = L_THEPLUS_ASSET_URL . '/theplus-' . self::$tpae_post_type . '-' . self::$tpae_post_id . '.min.css';
-				wp_enqueue_style( 'theplus-front-css', $this->pathurl_security( $css_file ), false, $plus_version );
+				wp_enqueue_style( 'theplus-front-css', $this->pathurl_security( $css_file ), false, $this->get_file_version( basename( $css_file ), $plus_version ) );
 			}
 
 			$load_localize = 'tpgb-purge-js';
 			if ( $this->check_css_js_cache_files( self::$tpae_post_type, self::$tpae_post_id, 'js' ) ) {
 				$js_file = L_THEPLUS_ASSET_URL . '/theplus-' . self::$tpae_post_type . '-' . self::$tpae_post_id . '.min.js';
 
-				wp_enqueue_script( 'theplus-front-js', $this->pathurl_security( $js_file ), array( 'jquery' ), $plus_version, true );
+				wp_enqueue_script( 'theplus-front-js', $this->pathurl_security( $js_file ), array( 'jquery' ), $this->get_file_version( basename( $js_file ), $plus_version ), true );
 				$load_localize = 'theplus-front-js';
 			}
 		}
@@ -823,9 +908,7 @@ class L_Plus_Generator {
 		// a Pro-only upgrade must bust the cache too — keying on the Free
 		// version alone would leave the editor stale after a standalone Pro
 		// update.
-		$current_version = defined( 'THEPLUS_VERSION' )
-			? L_THEPLUS_VERSION . '-pro-' . THEPLUS_VERSION
-			: L_THEPLUS_VERSION;
+		$current_version = $this->get_release_version();
 
 		// Bust the generated cache whenever the ACTIVE version combination
 		// differs from the one recorded on the previous run — i.e. on fresh
@@ -1428,23 +1511,38 @@ class L_Plus_Generator {
 			if ( $this->get_caching_option() == false ) {
 				$plus_version = $this->get_post_version( $post_id );
 
+				/*
+				 * plus-extra-adv.min.css is a static plugin file, so it is versioned with
+				 * the plugin. The per-post $plus_version gave it a new ?ver= on every page
+				 * and browsers downloaded the same file again on each one.
+				 *
+				 * @since 6.6.1
+				 */
 				if ( ! empty( $this->tp_first_load ) ) {
-					wp_enqueue_style( 'theplus-general-preload', $this->pathurl_security( L_THEPLUS_URL . 'assets/css/main/plus-extra-adv/plus-extra-adv.min.css' ), array( 'elementor-frontend' ), $plus_version );
+					wp_enqueue_style( 'theplus-general-preload', $this->pathurl_security( L_THEPLUS_URL . 'assets/css/main/plus-extra-adv/plus-extra-adv.min.css' ), array( 'elementor-frontend' ), L_THEPLUS_VERSION );
 					$this->tp_first_load = false;
 				}
 				if ( $this->check_css_js_cache_files( $post_type, $preload, 'css', true ) ) {
 					$css_file = L_THEPLUS_ASSET_URL . '/theplus-preload-' . $post_type . '-' . $preload . '.min.css';
-					wp_enqueue_style( 'theplus-' . $preload . '-preload', $this->pathurl_security( $css_file ), array( 'elementor-frontend' ), $plus_version );
+					wp_enqueue_style( 'theplus-' . $preload . '-preload', $this->pathurl_security( $css_file ), array( 'elementor-frontend' ), $this->get_file_version( basename( $css_file ), $plus_version ) );
 				}
 			} elseif ( ! empty( $this->get_caching_option() ) && ! empty( $elements ) ) {
-				$tp_url     = L_THEPLUS_URL;
-				$tp_path    = L_THEPLUS_PATH . DIRECTORY_SEPARATOR;
-				$tp_version = L_THEPLUS_VERSION;
+				$tp_url  = L_THEPLUS_URL;
+				$tp_path = L_THEPLUS_PATH . DIRECTORY_SEPARATOR;
 				if ( defined( 'THEPLUS_VERSION' ) && defined( 'THEPLUS_URL' ) ) {
-					$tp_url     = THEPLUS_URL;
-					$tp_path    = THEPLUS_PATH . DIRECTORY_SEPARATOR;
-					$tp_version = THEPLUS_VERSION;
+					$tp_url  = THEPLUS_URL;
+					$tp_path = THEPLUS_PATH . DIRECTORY_SEPARATOR;
 				}
+
+				/*
+				 * Same handles and version as enqueue_css_js(), which enqueues these
+				 * files again for the same widgets. A different style handle here
+				 * printed every per-widget stylesheet twice, and a different version
+				 * made the browser download each one twice.
+				 *
+				 * @since 6.6.1
+				 */
+				$tp_version = $this->get_release_version();
 
 				if ( ! empty( $this->tp_first_load ) ) {
 					$this->tp_first_load = false;
@@ -1459,7 +1557,8 @@ class L_Plus_Generator {
 							}
 							$css_file_key = basename( $css_sep_url, '.css' );
 							$css_file_key = basename( $css_file_key, '.min' );
-							wp_enqueue_style( 'theplus-' . $css_file_key, $this->pathurl_security( $css_sep_url ), false, $tp_version );
+							$enq_name     = 'theplus-' . $css_file_key . '-' . basename( dirname( $css_sep_url ) );
+							wp_enqueue_style( $enq_name, $this->pathurl_security( $css_sep_url ), false, $tp_version );
 						}
 					}
 				}

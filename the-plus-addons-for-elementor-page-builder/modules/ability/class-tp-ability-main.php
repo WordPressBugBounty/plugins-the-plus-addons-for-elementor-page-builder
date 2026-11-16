@@ -228,6 +228,15 @@ if ( ! class_exists( 'Tp_Ability_Main' ) ) {
 
 			$args['meta']['annotations'] = $annotations;
 
+			/*
+			 * The WordPress REST run endpoint only accepts GET for read-only abilities and
+			 * answers POST with 405 rest_ability_invalid_method. Say so in the description
+			 * so REST clients call it the right way. MCP tool calls are not affected.
+			 */
+			if ( ! empty( $annotations['readonly'] ) && isset( $args['description'] ) && is_string( $args['description'] ) ) {
+				$args['description'] = rtrim( $args['description'] ) . ' ' . __( 'Read-only: on the REST run endpoint, call it with GET and pass the input as the "input" query parameter (POST returns 405).', 'tpebl' );
+			}
+
 			return $args;
 		}
 

@@ -253,6 +253,13 @@ class Tpae_Elementor_MCP_Data {
 			return $document;
 		}
 
+		/*
+		 * Document::save() writes the rendered HTML into post_content but leaves
+		 * _elementor_edit_mode empty, so the next write to a new page would fail the
+		 * overwrite check above. Mark the page as built with Elementor first.
+		 */
+		$document->set_is_built_with_elementor( true );
+
 		// Attempt native Elementor save (handles CSS regen, cache busting).
 		/*
 		 * Elementor save hooks re-render widgets (TPAE regenerates its per-post CSS/JS

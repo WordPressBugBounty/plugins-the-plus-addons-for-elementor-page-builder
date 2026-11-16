@@ -161,7 +161,7 @@ function tpae_mcp_add_theplus_flip_box_ability(array $input) {
     if (isset($input['title'])) { $settings['title'] = sanitize_text_field($input['title']); }
     if (isset($input['image_icon'])) { $settings['image_icon'] = sanitize_text_field($input['image_icon']); }
     if (isset($input['plus_pro_image_icon_svg_options'])) { $settings['plus_pro_image_icon_svg_options'] = sanitize_text_field($input['plus_pro_image_icon_svg_options']); }
-    if (!empty($input['select_image'])) { $settings['select_image'] = ['id' => absint($input['select_image'])]; }
+    if (!empty($input['select_image'])) { $settings['select_image'] = tpae_mcp_media_value($input['select_image']); }
     if (isset($input['select_image_size'])) { $settings['select_image_size'] = $input['select_image_size']; }
     if (isset($input['icon_font_style'])) { $settings['icon_font_style'] = sanitize_text_field($input['icon_font_style']); }
     if (isset($input['icon_fs_popover_toggle'])) { $settings['icon_fs_popover_toggle'] = sanitize_text_field($input['icon_fs_popover_toggle']); }

@@ -153,7 +153,7 @@ function tpae_mcp_add_theplus_clients_listout_ability(array $input)
     if (isset($input['clientContentFrom'])) { $settings['clientContentFrom'] = sanitize_text_field($input['clientContentFrom']); }
     if (isset($input['clientLinkMaskLabel'])) { $settings['clientLinkMaskLabel'] = sanitize_text_field($input['clientLinkMaskLabel']); }
     if (isset($input['clientlink'])) { $settings['clientlink'] = $input['clientlink']; }
-    if (!empty($input['clientImage'])) { $settings['clientImage'] = ['id' => absint($input['clientImage'])]; }
+    if (!empty($input['clientImage'])) { $settings['clientImage'] = tpae_mcp_media_value($input['clientImage']); }
     if (isset($input['clientLinkMaskList'])) { $settings['clientLinkMaskList'] = $input['clientLinkMaskList']; }
     if (isset($input['post_category'])) { $settings['post_category'] = tpae_mcp_sanitize_widget_setting_value($input['post_category']); }
     if (isset($input['display_posts'])) { $settings['display_posts'] = sanitize_text_field($input['display_posts']); }
